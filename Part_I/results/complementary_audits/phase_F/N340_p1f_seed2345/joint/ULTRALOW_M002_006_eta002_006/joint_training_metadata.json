@@ -1,0 +1,27 @@
+{
+  "anchor_eta_values": [
+    0.02,
+    0.03333333333333333,
+    0.04666666666666666,
+    0.06
+  ],
+  "anchor_mach_values": [
+    0.02,
+    0.03,
+    0.04,
+    0.05,
+    0.06
+  ],
+  "best_epoch": 35546,
+  "best_loss": 0.00047325095157550924,
+  "ci_anchor_linf_abs": 8.579141255071754e-06,
+  "ci_anchor_mae_abs": 6.970639129438849e-06,
+  "ci_anchor_rel_rmse_scaled": 7.762273742356461e-06,
+  "ci_detached": false,
+  "classical_modal_supervision_in_training": false,
+  "field_family": "pQscaled",
+  "init_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340_p1f_seed2345/modal/ULTRALOW_M002_006_eta002_006/model_best.pt",
+  "joint_physics_coupling": true,
+  "n_anchors_per_mach": null,
+  "output_dir": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340_p1f_seed2345/joint/ULTRALOW_M002_006_eta002_006"
+}

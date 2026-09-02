@@ -1,0 +1,13 @@
+{
+  "best_anchor_loss": 3.50159455469422e-17,
+  "best_epoch": 23305,
+  "chart_id": "HM2_NEUTRAL1",
+  "ci_lr": 0.0002,
+  "ci_prefit_steps": 3000,
+  "matched_epochs": 25000,
+  "n_local_anchors": 15,
+  "physics_gradient": false,
+  "seed": 1234,
+  "source_n340_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340/joint/HM2_NEUTRAL1/model_state.pt",
+  "w_ci": 1000.0
+}

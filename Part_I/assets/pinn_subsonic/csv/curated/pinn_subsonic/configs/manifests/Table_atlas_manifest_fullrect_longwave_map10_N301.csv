@@ -1,0 +1,7 @@
+chart_id,path,M_min,M_max,eta_min,eta_max,ymax,central_ymax,status,priority
+LMEDGE_VLOW,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_LMEDGE_VLOW_ciIDW_EVALFIX,0.02,0.06,0.05,0.13,320,80,ci_only,150
+ETAEDGE_LM,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_ETAEDGE_LM_ciIDW_EVALFIX,0.05,0.35,0.02,0.06,350,90,ci_only,150
+ETAEDGE_MM,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_ETAEDGE_MM_ciIDW_EVALFIX,0.3,0.7,0.02,0.06,450,110,ci_only,150
+ETAEDGE_HM1,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_ETAEDGE_HM1_ciIDW_EVALFIX,0.68,0.86,0.02,0.06,700,175,ci_only,150
+ETAEDGE_HM2A,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_ETAEDGE_HM2A_ciIDW_EVALFIX,0.84,0.93,0.02,0.06,900,225,ci_only,150
+ETAEDGE_HM2B,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_ETAEDGE_HM2B_ciIDW_EVALFIX,0.92,0.98,0.02,0.06,1600,400,ci_only,150

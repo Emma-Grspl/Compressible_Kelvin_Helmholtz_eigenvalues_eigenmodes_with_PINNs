@@ -1,0 +1,13 @@
+{
+  "best_anchor_loss": 2.244952228844819e-21,
+  "best_epoch": 22067,
+  "chart_id": "HM1_VLOW_MOD",
+  "ci_lr": 0.0002,
+  "ci_prefit_steps": 3000,
+  "matched_epochs": 30000,
+  "n_local_anchors": 11,
+  "physics_gradient": false,
+  "seed": 1234,
+  "source_n340_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340/joint/HM1_VLOW_MOD/model_state.pt",
+  "w_ci": 1000.0
+}

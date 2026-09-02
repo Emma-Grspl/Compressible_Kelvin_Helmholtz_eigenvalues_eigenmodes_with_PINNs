@@ -1,0 +1,37 @@
+{
+  "source_files": {
+    "HM2_VLOW_EXTREME": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/release_v1/audits/gep_HM2_VLOW_EXTREME_mapping_audit_summary.csv",
+    "ETAEDGE_HM2B": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/release_v1/audits/gep_fullrect_ETAEDGE_HM2B_mapping_audit.csv"
+  },
+  "run_counts": {
+    "HM2_VLOW_EXTREME": 6,
+    "ETAEDGE_HM2B": 6
+  },
+  "all_runs_successful": true,
+  "policy_conclusions": {
+    "HM2_VLOW_EXTREME": {
+      "recommended_policy": "N301_map10_xi099",
+      "best_reported_ci_run": "N301_map10_xi099",
+      "best_reported_ci_max": 0.0012748448014298,
+      "map5_N301_reported_ci_max": 0.3721531026880669,
+      "map5_N401_reported_ci_max": 0.3555222863349556,
+      "conclusion": "map10 minimizes the reported maximum c_i error among the N301 map10/map15/map20 candidates. Raising N from 301 to 401 does not repair the old map5 result."
+    },
+    "ETAEDGE_HM2B": {
+      "recommended_policy": "N301_map20_xi0995",
+      "best_ci_max_run": "map20_xi0995",
+      "best_ci_abs_max": 0.0018589380160369,
+      "best_u_max_run": "map20_xi0995",
+      "best_u_rel_max": 0.004658161568135,
+      "best_v_max_run": "map20_xi0995",
+      "best_v_rel_max": 0.0018750131472831,
+      "final_run": "map20_xi0995",
+      "final_ci_abs_max": 0.0018589380160369,
+      "final_p_rel_max": 0.0015260355645217,
+      "final_u_rel_max": 0.004658161568135,
+      "final_v_rel_max": 0.0018750131472831,
+      "final_overlap_min": 0.9999988356105002,
+      "conclusion": "map20 with xi=0.995 gives the lowest maximum absolute c_i error in the sweep and simultaneously the lowest maximum u and v modal errors, with near-unit overlap."
+    }
+  }
+}

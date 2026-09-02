@@ -1,0 +1,27 @@
+{
+  "anchor_eta_values": [
+    0.02,
+    0.03333333333333333,
+    0.04666666666666666,
+    0.06
+  ],
+  "anchor_mach_values": [
+    0.02,
+    0.03,
+    0.04,
+    0.05,
+    0.06
+  ],
+  "best_epoch": 41361,
+  "best_loss": 0.00046567090398866713,
+  "ci_anchor_linf_abs": 2.989452006718629e-06,
+  "ci_anchor_mae_abs": 1.1696623628432158e-06,
+  "ci_anchor_rel_rmse_scaled": 1.5799091480295058e-06,
+  "ci_detached": false,
+  "classical_modal_supervision_in_training": false,
+  "field_family": "pQscaled",
+  "init_checkpoint": "pinn_subsonic/models/ULTRALOW_M002_006_eta002_006/model_state.pt",
+  "joint_physics_coupling": true,
+  "n_anchors_per_mach": 4,
+  "output_dir": "assets/pinn_subsonic/joint_ci_mode_atlas_v2/ULTRALOW_M002_006_eta002_006"
+}

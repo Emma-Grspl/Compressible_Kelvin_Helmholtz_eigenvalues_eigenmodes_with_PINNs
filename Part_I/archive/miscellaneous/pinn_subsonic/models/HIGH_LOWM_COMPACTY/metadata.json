@@ -1,0 +1,11 @@
+{
+  "chart_id": "HIGH_LOWM_COMPACTY",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/seedGEP_pq2d_REPAIR_HIGH_LOWM_compactY_M010_040_eta055_065_ciIDW/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/seedGEP_pq2d_REPAIR_HIGH_LOWM_compactY_M010_040_eta055_065_ciIDW",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_manifest.csv",
+  "checkpoint_sha256": "f58c2210814a2ea0ef39384d9fd3718d0203f7d5827784c9a5954d442f3cade7",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

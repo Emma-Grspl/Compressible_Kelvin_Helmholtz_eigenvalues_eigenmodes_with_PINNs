@@ -1,0 +1,106 @@
+archive/code/scripts/run_kh_subsonic_riccati_lowalpha_repair.py:282:def evaluate_candidate(
+archive/code/scripts/run_kh_subsonic_highalpha_mode_repair_test.py:167:def evaluate_target(
+archive/code/scripts/run_kh_subsonic_highalpha_mode_repair_test.py:225:def evaluate_checkpoint(
+scripts/reconstruct_supersonic_blumen_ci_visual.py:148:def plot_shooting_overlay(df: pd.DataFrame, curves: list[dict], output_path: Path) -> None:
+code/src/scripts/evaluation/evaluate_subsonic_u_zone_errors.py:20:def infer_alpha(path):
+scripts/audit_supersonic_shooting_point_batch_branch_guided.py:357:def evaluate_point(
+archive/code/scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:179:def evaluate_target(
+archive/code/scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:237:def evaluate_checkpoint(
+scripts/audit_supersonic_shooting_ci_alpha_continuation.py:311:def evaluate_step(
+scripts/audit_supersonic_shooting_ci_alpha_continuation.py:814:def evaluate_line(line: LineSpec, cfg: dict[str, object]) -> tuple[list[dict[str, object]], list[dict[str, object]], list[dict[str, object]]]:
+archive/code/scripts/assets_v2/extract_mode_profiles_20.py:152:def solve_gep(alpha, mach, n_points, mapping_scale, xi_max, target_ci):
+archive/code/scripts/assets_v2/extract_mode_profiles_20.py:171:def interpolate_gep(solver, mode, mach, y_target):
+archive/code/scripts/assets_v2/extract_mode_profiles_20.py:196:def save_profile(path, y, ref, pred, extras, shooting=None):
+archive/code/scripts/assets_v2/build_exact4_article_modes.py:288:def solve_gep(
+archive/code/scripts/assets_v2/build_exact4_article_modes.py:316:def interpolate_gep(
+code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:54:def predict_ci_curve(run_dir: Path, alpha_values: np.ndarray, device: torch.device) -> tuple[pd.Series, np.ndarray]:
+archive/code/scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:253:def evaluate_target(*, model, cfg: KHSubsonicTrainingConfig, alpha_target: float, device: torch.device) -> dict[str, float]:
+archive/code/scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:301:def evaluate_checkpoint(
+scripts/audit_supersonic_shooting_point_batch.py:243:def infer_regimes(*, mach: float, cr: float, ci: float) -> dict[str, object]:
+scripts/audit_supersonic_shooting_point_batch.py:579:def evaluate_point(point: tuple[float, float], cfg: dict[str, object]) -> tuple[dict[str, object], list[dict[str, object]], list[dict[str, object]]]:
+scripts/diagnose_supersonic_modal_branch_selector.py:47:def solve_shooting(alpha: float, mach: float) -> tuple[float, float, float, bool]:
+scripts/audit_supersonic_shooting_complex_stitch.py:72:def split_shooting_branches(
+scripts/track_supersonic_shooting_multistart.py:62:def extract_shooting_profile(
+scripts/cluster_supersonic_mode_families.py:58:def solve_default_shooting(alpha: float, mach: float) -> tuple[float, float, float, bool]:
+scripts/cluster_supersonic_mode_families.py:167:def cluster_to_row(cluster: Cluster, shooting_guess: tuple[float, float], solver: NotebookStyleDenseGEPSolver) -> dict:
+scripts/compare_supersonic_gep_candidates_vs_shooting.py:89:def normalize_gep_mode(vector: np.ndarray, n_points: int, mach: float) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+scripts/compare_supersonic_gep_candidates_vs_shooting.py:107:def extract_shooting_mode(
+code/src/scripts/evaluation/audit_subsonic_near_neutral_gep_resolution_N401.py:17:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/benchmark_subsonic_pinn_ci_seeded_gep_modes.py:17:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/gep/selection/audit_mid_joint_pinn_full_gep.py:167:def split_gep_vector(
+code/src/scripts/gep/selection/audit_mid_joint_pinn_full_gep.py:209:def evaluate_pinn(
+scripts/dev/validate_subsonic_atlas_offgrid.py:251:    def predict(
+code/src/scripts/evaluation/benchmark_ETAEDGE_HM2B_map20_xi099.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/benchmark_ETAEDGE_HM2B_map30_xi0995.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/benchmark_HM2_VLOW_EXTREME_map15_xi099.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/benchmark_HM2_VLOW_EXTREME_map10_xi099.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/benchmark_ETAEDGE_HM2B_map20_xi0995.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/benchmark_ETAEDGE_HM2B_map30_xi099.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/benchmark_HM2_VLOW_EXTREME_map20_xi099.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/benchmark_ETAEDGE_HM2B_map15_xi099.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/benchmark_HM2_VLOW_EXTREME_map20_xi0995.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+archive/code/scripts/dev/train_subsonic_joint_spectral_modal_chart.py:62:def infer_field_family(
+archive/code/scripts/dev/train_subsonic_joint_spectral_modal_chart.py:106:class CiAtlasNet(nn.Module):
+archive/code/scripts/dev/joint_pinn_global_validation.py:941:def evaluate_direct_point(
+code/src/scripts/evaluation/benchmark_subsonic_classic_seeded_gep_modes_5alpha.py:17:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+scripts/dev/benchmark_subsonic_local_atlas_core_ci_seeded_gep_v2.py:18:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/audit_subsonic_near_neutral_gep_resolution.py:17:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+code/src/scripts/evaluation/evaluate_mid_old_vs_joint_full_gep.py:347:def summarize_gep_comparison(
+code/src/scripts/evaluation/benchmark_subsonic_classic_seeded_gep_modes.py:17:def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+scripts/build_supersonic_shooting_reference_package.py:211:def plot_shooting_overlay(summary_df: pd.DataFrame, curves: list[dict], quantity: str, output_path: Path) -> None:
+scripts/build_supersonic_shooting_reference_package.py:289:def compute_shooting_grid(args: argparse.Namespace, *, resume_path: Path | None = None) -> pd.DataFrame:
+scripts/track_supersonic_shooting_mach_continuation.py:58:def extract_shooting_profile(
+archive/code/scripts/run_kh_subsonic_targeted_regime_test.py:214:def evaluate_target(
+scripts/probe_supersonic_shooting_first_neutral.py:31:def nearest_gep_mode(alpha: float, mach: float, target_cr: float, target_ci: float, ci_weight: float = 4.0):
+scripts/diagnose_supersonic_mach_branch_tracking.py:110:def solve_shooting(alpha: float, mach: float) -> tuple[float, float, float, bool]:
+scripts/reconstruct_supersonic_blumen_cr_visual.py:152:def plot_shooting_overlay(df: pd.DataFrame, curves: list[dict], output_path: Path) -> None:
+scripts/diagnose_supersonic_candidate_modes_near_blumen.py:81:def normalize_gep_mode(vector: np.ndarray, n_points: int, mach: float) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+code/src/scripts/evaluation/evaluate_kh_subsonic_pinn_2d_ci_modes.py:144:def build_prediction_surface(
+code/src/scripts/evaluation/evaluate_kh_subsonic_pinn_2d_ci_modes.py:648:def evaluate_run(
+code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_pinn_results_2d.py:97:def build_prediction_surface(
+archive/code/scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py:159:def infer_warmstart_kind(args: argparse.Namespace, warm_config: pd.Series) -> str:
+scripts/audit_supersonic_cluster_families.py:79:def solve_default_shooting(alpha: float, mach: float) -> tuple[Mstab17SupersonicSolver, object]:
+scripts/diagnose_supersonic_local_mode_families.py:35:def solve_shooting(alpha: float, mach: float) -> tuple[float, float, float, bool]:
+archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py:188:def evaluate_target(
+archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py:248:def evaluate_checkpoint(
+scripts/audit_supersonic_shooting_visual_validation.py:37:def infer_summary_columns(df: pd.DataFrame) -> tuple[str, str, str]:
+scripts/audit_supersonic_shooting_visual_validation.py:108:def reconstruct_shooting_fields(
+archive/code/scripts/run_kh_subsonic_ci_window_ablation.py:337:def evaluate_models(
+scripts/audit_pinn_supersonic_fixedM_core_windows.py:40:def relative_l2(reference: np.ndarray, prediction: np.ndarray) -> float:
+scripts/train_pinn_supersonic_fixedM_pq_modal_anchors.py:81:def evaluate_modal(model: nn.Module, loader: DataLoader, device: torch.device):
+scripts/train_pinn_supersonic_fixedM_pq_modal_anchors.py:101:def evaluate_spectral(model: nn.Module, alpha_x: torch.Tensor, target: torch.Tensor, device: torch.device):
+archive/code/scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:178:def evaluate_target(
+archive/code/scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:236:def evaluate_checkpoint(
+scripts/run_supersonic_gep_blumen_guided_sweep.py:36:def solve_default_shooting(alpha: float, mach: float) -> dict:
+code/src/scripts/evaluation/audit_subsonic_scaledD_from_fields.py:95:def infer_alpha_mach(df, fallback_alpha=None, fallback_mach=None):
+archive/code/scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:194:def evaluate_target(
+archive/code/scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:252:def evaluate_checkpoint(
+scripts/finetune_pinn_supersonic_fixedM_qdef_ode.py:833:    def evaluate():
+scripts/validate_pinn_supersonic_offanchor_gep_shooting.py:369:    def predict(
+scripts/validate_pinn_supersonic_offanchor_gep_shooting.py:609:def run_gep(
+archive/code/scripts/run_kh_subsonic_highalpha_continuation_test.py:148:def evaluate_target(
+archive/code/scripts/run_kh_subsonic_highalpha_continuation_test.py:214:def evaluate_checkpoint(
+code/src/scripts/evaluation/audit_subsonic_u_profiles.py:26:def infer_alpha_from_path(p):
+scripts/track_supersonic_branch_beam_search.py:70:def solve_default_shooting(alpha: float, mach: float) -> tuple[float, float, float, bool]:
+scripts/audit_supersonic_shooting_mode_structure.py:44:def infer_summary_columns(df: pd.DataFrame) -> tuple[str, str, str]:
+scripts/plot_supersonic_ci_shooting_vs_blumen_FIXED.py:29:def infer_mach_from_path(path: Path):
+scripts/finetune_pinn_supersonic_fixedM_qdef.py:477:    def evaluate():
+scripts/track_supersonic_branch_continuation.py:57:def solve_default_shooting(alpha: float, mach: float) -> tuple[float, float, float, bool]:
+code/src/scripts/evaluation/audit_subsonic_classical_box_resolution_convergence.py:75:def shooting_residual_vec(x: np.ndarray, alpha: float, Mach: float, L: float, N: int) -> np.ndarray:
+scripts/build_supersonic_neutral_M180_M190_gep_shooting_extension.py:170:def normalize_gep_mode(vector: np.ndarray, n_points: int, mach: float) -> dict[str, np.ndarray]:
+scripts/build_supersonic_neutral_M180_M190_gep_shooting_extension.py:192:def run_gep_for_point(row: pd.Series, *, max_modes: int = 200) -> tuple[pd.DataFrame, dict[str, Any] | None]:
+scripts/build_supersonic_neutral_M180_M190_gep_shooting_extension.py:364:def run_shooting_validation(row: pd.Series, selected: dict[str, Any]) -> tuple[dict[str, Any], dict[str, np.ndarray] | None]:
+scripts/build_supersonic_neutral_M180_M190_gep_shooting_extension.py:598:def _post_filter_gep_selection_by_cr_prior(gep_df, selected, row, cr_window=0.35, allow_negative_cr=False):
+scripts/evaluate_pinn_supersonic_fixedM_checkpoint.py:41:def batched_predict(model, x, device, batch_size=65536):
+scripts/audit_supersonic_shooting_vs_gep_families.py:41:def default_shooting_boxes() -> list[tuple[str, float, float, float, float]]:
+scripts/audit_supersonic_shooting_vs_gep_families.py:50:def parse_shooting_boxes(
+scripts/audit_supersonic_shooting_vs_gep_families.py:62:def solve_shooting(
+scripts/diagnose_supersonic_local_spectrum.py:35:def solve_shooting(alpha: float, mach: float) -> tuple[float, float, float, bool]:
+code/src/training/kh_subsonic_trainer.py:336:def normalize_predicted_full_mode_torch(
+code/src/training/kh_subsonic_trainer.py:467:def load_shooting_classic_full_mode(alpha: float, mach: float) -> dict[str, np.ndarray]:
+code/src/training/kh_subsonic_trainer.py:519:def reconstruct_predicted_pressure_mode(
+code/src/training/kh_subsonic_trainer.py:535:def reconstruct_predicted_full_mode(
+code/src/physics/kh_subsonic_residual.py:451:def riccati_shooting_match_loss(
+code/src/physics/kh_subsonic_residual.py:481:def riccati_shooting_path_loss(
+code/src/physics/kh_subsonic_residual.py:555:def _riccati_shooting_path_loss_from_sample(
+code/src/physics/kh_subsonic_residual.py:633:def _riccati_shooting_match_loss_from_samples(

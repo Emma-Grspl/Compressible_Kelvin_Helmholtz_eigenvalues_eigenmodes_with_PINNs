@@ -1,0 +1,27 @@
+{
+  "anchor_eta_values": [
+    0.8,
+    0.8400000000000001,
+    0.88,
+    0.92
+  ],
+  "anchor_mach_values": [
+    0.02,
+    0.03,
+    0.04,
+    0.05,
+    0.06
+  ],
+  "best_epoch": 38410,
+  "best_loss": 1.2139721957324755e-06,
+  "ci_anchor_linf_abs": 1.8606103494023252e-07,
+  "ci_anchor_mae_abs": 1.1248452446155356e-07,
+  "ci_anchor_rel_rmse_scaled": 1.5397352710658852e-06,
+  "ci_detached": false,
+  "classical_modal_supervision_in_training": false,
+  "field_family": "pq_etaaware",
+  "init_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N224_p1f_seed3456/modal/LMEDGE_NEUTRAL2/model_best.pt",
+  "joint_physics_coupling": true,
+  "n_anchors_per_mach": null,
+  "output_dir": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N224_p1f_seed3456/joint/LMEDGE_NEUTRAL2"
+}

@@ -1,0 +1,2 @@
+n_points,success_rate,n_continuation_points,n_bidirectional,n_forward_classic_anchored,n_reference_corrections,p_rel_final_max,rho_rel_final_max,u_rel_final_max,v_rel_final_max,p_overlap_final_min,release_validated
+384,1.0,55,54,1,21,0.0040393507242365,0.0040393507242364,0.0091264492640856,0.0063546753967412,0.9999918434076852,True

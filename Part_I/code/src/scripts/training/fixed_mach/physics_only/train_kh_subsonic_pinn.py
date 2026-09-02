@@ -1,0 +1,288 @@
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+import sys
+
+ROOT_DIR = Path(__file__).resolve().parents[6]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR / "code"))
+
+from src.training.kh_subsonic_trainer import (
+    KHSubsonicTrainingConfig,
+    save_training_artifacts,
+    train_fixed_mach_subsonic_pinn,
+)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Prototype PINN subsonique a Mach fixe pour Kelvin-Helmholtz compressible.")
+    parser.add_argument("--mach", type=float, default=0.5)
+    parser.add_argument("--alpha-min", type=float, default=0.05)
+    parser.add_argument("--alpha-max", type=float, default=0.85)
+    parser.add_argument("--epochs", type=int, default=3000)
+    parser.add_argument("--learning-rate", type=float, default=1e-3)
+    parser.add_argument("--grad-clip-norm", type=float, default=1.0)
+    parser.add_argument("--hidden-dim", type=int, default=128)
+    parser.add_argument("--mode-hidden-dim", type=int, default=None)
+    parser.add_argument("--ci-hidden-dim", type=int, default=None)
+    parser.add_argument("--mode-depth", type=int, default=4)
+    parser.add_argument("--ci-depth", type=int, default=2)
+    parser.add_argument("--fixed-scalar-ci", action="store_true")
+    parser.add_argument("--freeze-ci", action="store_true")
+    parser.add_argument("--activation", type=str, default="tanh")
+    parser.add_argument("--fourier-features", type=int, default=0)
+    parser.add_argument("--fourier-scale", type=float, default=2.0)
+    parser.add_argument("--initial-ci", type=float, default=0.2)
+    parser.add_argument("--mapping-scale", type=float, default=3.0)
+    parser.add_argument("--trainable-mapping-scale", action="store_true")
+    parser.add_argument("--n-interior", type=int, default=512)
+    parser.add_argument("--n-boundary", type=int, default=64)
+    parser.add_argument("--n-alpha-supervision", type=int, default=128)
+    parser.add_argument("--ci-supervision-fixed-alphas", type=float, nargs="*", default=None)
+    parser.add_argument("--n-anchor-alpha", type=int, default=32)
+    parser.add_argument("--n-norm-interior", type=int, default=256)
+    parser.add_argument("--n-reference-alpha", type=int, default=81)
+    parser.add_argument("--n-audit-alpha", type=int, default=21)
+    parser.add_argument("--n-mode-audit-alpha", type=int, default=7)
+    parser.add_argument("--n-mode-audit-y", type=int, default=801)
+    parser.add_argument("--audit-every", type=int, default=250)
+    parser.add_argument("--checkpoint-every", type=int, default=500)
+    parser.add_argument("--disable-classic-ci-supervision", action="store_true")
+    parser.add_argument("--disable-classic-mode-audit", action="store_true")
+    parser.add_argument("--stage-split-epoch", type=int, default=0)
+    parser.add_argument("--stage2-freeze-ci", action="store_true")
+    parser.add_argument("--stage2-ci-lr-scale", type=float, default=1.0)
+    parser.add_argument("--separate-branch-optimizers", action="store_true")
+    parser.add_argument("--detach-ci-in-mode-branch", action="store_true")
+    parser.add_argument("--ci-branch-lr", type=float, default=None)
+    parser.add_argument("--mode-branch-lr", type=float, default=None)
+    parser.add_argument("--stage1-w-ci-supervision", type=float, default=None)
+    parser.add_argument("--stage2-w-ci-supervision", type=float, default=None)
+    parser.add_argument("--stage1-neutral-fraction", type=float, default=None)
+    parser.add_argument("--stage2-neutral-fraction", type=float, default=None)
+    parser.add_argument("--focus-fraction", type=float, default=0.6)
+    parser.add_argument("--focus-half-width", type=float, default=0.03)
+    parser.add_argument("--neutral-fraction", type=float, default=0.0)
+    parser.add_argument("--ci-supervision-neutral-boost", type=float, default=0.0)
+    parser.add_argument("--neutral-half-width", type=float, default=0.03)
+    parser.add_argument("--error-threshold", type=float, default=0.01)
+    parser.add_argument("--mode-error-threshold", type=float, default=0.12)
+    parser.add_argument("--max-focus-points", type=int, default=8)
+    parser.add_argument("--anchor-strategy", type=str, default="band", choices=["point", "band", "max", "point_max"])
+    parser.add_argument("--anchor-half-width", type=float, default=0.12)
+    parser.add_argument("--anchor-max-candidates", type=int, default=257)
+    parser.add_argument("--mode-center-fraction", type=float, default=0.5)
+    parser.add_argument("--mode-center-half-width", type=float, default=0.3)
+    parser.add_argument("--w-pde", type=float, default=1.0)
+    parser.add_argument("--w-bc", type=float, default=10.0)
+    parser.add_argument("--w-bc-kappa", type=float, default=10.0)
+    parser.add_argument("--w-bc-q", type=float, default=10.0)
+    parser.add_argument("--w-norm", type=float, default=1.0)
+    parser.add_argument("--w-integral-norm", type=float, default=1.0)
+    parser.add_argument("--w-phase", type=float, default=1.0)
+    parser.add_argument("--w-peak-slope", type=float, default=0.0)
+    parser.add_argument("--w-peak-curvature", type=float, default=0.0)
+    parser.add_argument("--w-loc-center", type=float, default=0.0)
+    parser.add_argument("--w-loc-spread", type=float, default=0.0)
+    parser.add_argument("--w-ci-supervision", type=float, default=5.0)
+    parser.add_argument("--w-ci-stability-outside", type=float, default=0.0)
+    parser.add_argument("--w-ci-neutrality", type=float, default=0.0)
+    parser.add_argument("--w-ci-low-alpha-zero", type=float, default=0.0)
+    parser.add_argument("--w-ci-smoothness", type=float, default=0.0)
+    parser.add_argument("--n-ci-spectral-grid", type=int, default=129)
+    parser.add_argument("--audit-ci-weight", type=float, default=10.0)
+    parser.add_argument("--audit-mode-weight", type=float, default=1.0)
+    parser.add_argument("--audit-env-weight", type=float, default=1.0)
+    parser.add_argument("--audit-phase-weight", type=float, default=0.5)
+    parser.add_argument("--audit-peak-weight", type=float, default=0.25)
+    parser.add_argument("--phase-mask-fraction", type=float, default=0.15)
+    parser.add_argument("--classic-n-points", type=int, default=561)
+    parser.add_argument("--classic-mapping-scale", type=float, default=3.0)
+    parser.add_argument("--classic-xi-max", type=float, default=0.99)
+    parser.add_argument("--enforce-mode-symmetry", action="store_true")
+    parser.add_argument(
+        "--mode-representation",
+        type=str,
+        default="cartesian",
+        choices=["cartesian", "amplitude_phase", "log_amplitude_phase", "riccati", "first_order_real"],
+    )
+    parser.add_argument("--mode-experts", type=int, default=1)
+    parser.add_argument("--alpha-split-threshold", type=float, default=0.4)
+    parser.add_argument("--riccati-anchor-supervision", action="store_true")
+    parser.add_argument("--riccati-anchor-n-xi", type=int, default=97)
+    parser.add_argument("--riccati-anchor-every", type=int, default=20)
+    parser.add_argument("--riccati-anchor-alphas", type=float, nargs="*", default=None)
+    parser.add_argument("--w-riccati-anchor", type=float, default=1.0)
+    parser.add_argument("--w-q-supervision", type=float, default=0.0)
+    parser.add_argument("--q-supervision-n-xi", type=int, default=97)
+    parser.add_argument("--q-supervision-every", type=int, default=20)
+    parser.add_argument("--q-supervision-alpha-count", type=int, default=6)
+    parser.add_argument("--w-riccati-center-kappa", type=float, default=0.0)
+    parser.add_argument("--w-riccati-center-peak", type=float, default=0.0)
+    parser.add_argument("--w-riccati-boundary-band-kappa", type=float, default=0.0)
+    parser.add_argument("--w-riccati-boundary-band-q", type=float, default=0.0)
+    parser.add_argument("--riccati-center-xi", type=float, default=0.0)
+    parser.add_argument("--riccati-boundary-band-points", type=int, default=0)
+    parser.add_argument("--riccati-boundary-band-start", type=float, default=0.94)
+    parser.add_argument("--riccati-boundary-band-end", type=float, default=0.995)
+    parser.add_argument("--w-riccati-shooting-match", type=float, default=0.0)
+    parser.add_argument("--w-riccati-shooting-path", type=float, default=0.0)
+    parser.add_argument("--w-riccati-ci-local-min", type=float, default=0.0)
+    parser.add_argument("--riccati-shooting-steps", type=int, default=256)
+    parser.add_argument("--riccati-shooting-xi-boundary", type=float, default=0.995)
+    parser.add_argument("--riccati-shooting-match-start-epoch", type=int, default=0)
+    parser.add_argument("--riccati-shooting-path-points", type=int, default=33)
+    parser.add_argument("--riccati-shooting-path-xi-boundary", type=float, default=0.94)
+    parser.add_argument("--riccati-shooting-path-start-epoch", type=int, default=0)
+    parser.add_argument("--riccati-shooting-path-every", type=int, default=1)
+    parser.add_argument("--riccati-ci-local-min-start-epoch", type=int, default=0)
+    parser.add_argument("--riccati-ci-local-min-delta-abs", type=float, default=0.005)
+    parser.add_argument("--riccati-ci-local-min-delta-rel", type=float, default=0.05)
+    parser.add_argument("--riccati-ci-local-min-margin", type=float, default=0.0)
+    parser.add_argument("--mode-low-alpha-threshold", type=float, default=0.25)
+    parser.add_argument("--mode-low-alpha-weight", type=float, default=1.0)
+    parser.add_argument("--mode-low-alpha-audit-fraction", type=float, default=0.6)
+    parser.add_argument("--initial-model-path", type=str, default=None)
+    parser.add_argument("--no-initial-model-strict", action="store_true")
+    parser.add_argument("--device", type=str, default="cpu")
+    parser.add_argument("--output-dir", type=Path, default=Path("model_saved/kh_subsonic_fixed_mach"))
+    return parser
+
+
+def main() -> None:
+    args = build_parser().parse_args()
+    cfg = KHSubsonicTrainingConfig(
+        mach=args.mach,
+        alpha_min=args.alpha_min,
+        alpha_max=args.alpha_max,
+        epochs=args.epochs,
+        learning_rate=args.learning_rate,
+        grad_clip_norm=args.grad_clip_norm,
+        hidden_dim=args.hidden_dim,
+        mode_hidden_dim=args.mode_hidden_dim,
+        ci_hidden_dim=args.ci_hidden_dim,
+        mode_depth=args.mode_depth,
+        ci_depth=args.ci_depth,
+        fixed_scalar_ci=args.fixed_scalar_ci,
+        freeze_ci=args.freeze_ci,
+        activation=args.activation,
+        fourier_features=args.fourier_features,
+        fourier_scale=args.fourier_scale,
+        initial_ci=args.initial_ci,
+        mapping_scale=args.mapping_scale,
+        trainable_mapping_scale=args.trainable_mapping_scale,
+        n_interior=args.n_interior,
+        n_boundary=args.n_boundary,
+        n_alpha_supervision=args.n_alpha_supervision,
+        ci_supervision_fixed_alphas=tuple(args.ci_supervision_fixed_alphas or []),
+        n_anchor_alpha=args.n_anchor_alpha,
+        n_norm_interior=args.n_norm_interior,
+        n_reference_alpha=args.n_reference_alpha,
+        n_audit_alpha=args.n_audit_alpha,
+        n_mode_audit_alpha=args.n_mode_audit_alpha,
+        n_mode_audit_y=args.n_mode_audit_y,
+        audit_every=args.audit_every,
+        checkpoint_every=args.checkpoint_every,
+        enable_classic_ci_supervision=not args.disable_classic_ci_supervision,
+        enable_classic_mode_audit=not args.disable_classic_mode_audit,
+        stage_split_epoch=args.stage_split_epoch,
+        stage2_freeze_ci=args.stage2_freeze_ci,
+        stage2_ci_lr_scale=args.stage2_ci_lr_scale,
+        separate_branch_optimizers=args.separate_branch_optimizers,
+        detach_ci_in_mode_branch=args.detach_ci_in_mode_branch,
+        ci_branch_lr=args.ci_branch_lr,
+        mode_branch_lr=args.mode_branch_lr,
+        stage1_w_ci_supervision=args.stage1_w_ci_supervision,
+        stage2_w_ci_supervision=args.stage2_w_ci_supervision,
+        stage1_neutral_fraction=args.stage1_neutral_fraction,
+        stage2_neutral_fraction=args.stage2_neutral_fraction,
+        focus_fraction=args.focus_fraction,
+        focus_half_width=args.focus_half_width,
+        neutral_fraction=args.neutral_fraction,
+        ci_supervision_neutral_boost=args.ci_supervision_neutral_boost,
+        neutral_half_width=args.neutral_half_width,
+        error_threshold=args.error_threshold,
+        mode_error_threshold=args.mode_error_threshold,
+        max_focus_points=args.max_focus_points,
+        anchor_strategy=args.anchor_strategy,
+        anchor_half_width=args.anchor_half_width,
+        anchor_max_candidates=args.anchor_max_candidates,
+        mode_center_fraction=args.mode_center_fraction,
+        mode_center_half_width=args.mode_center_half_width,
+        w_pde=args.w_pde,
+        w_bc=args.w_bc,
+        w_bc_kappa=args.w_bc_kappa,
+        w_bc_q=args.w_bc_q,
+        w_norm=args.w_norm,
+        w_integral_norm=args.w_integral_norm,
+        w_phase=args.w_phase,
+        w_peak_slope=args.w_peak_slope,
+        w_peak_curvature=args.w_peak_curvature,
+        w_loc_center=args.w_loc_center,
+        w_loc_spread=args.w_loc_spread,
+        w_ci_supervision=args.w_ci_supervision,
+        w_ci_stability_outside=args.w_ci_stability_outside,
+        w_ci_neutrality=args.w_ci_neutrality,
+        w_ci_low_alpha_zero=args.w_ci_low_alpha_zero,
+        w_ci_smoothness=args.w_ci_smoothness,
+        n_ci_spectral_grid=args.n_ci_spectral_grid,
+        audit_ci_weight=args.audit_ci_weight,
+        audit_mode_weight=args.audit_mode_weight,
+        audit_env_weight=args.audit_env_weight,
+        audit_phase_weight=args.audit_phase_weight,
+        audit_peak_weight=args.audit_peak_weight,
+        phase_mask_fraction=args.phase_mask_fraction,
+        classic_n_points=args.classic_n_points,
+        classic_mapping_scale=args.classic_mapping_scale,
+        classic_xi_max=args.classic_xi_max,
+        enforce_mode_symmetry=args.enforce_mode_symmetry,
+        mode_representation=args.mode_representation,
+        mode_experts=args.mode_experts,
+        alpha_split_threshold=args.alpha_split_threshold,
+        riccati_anchor_supervision=args.riccati_anchor_supervision,
+        riccati_anchor_n_xi=args.riccati_anchor_n_xi,
+        riccati_anchor_every=args.riccati_anchor_every,
+        riccati_anchor_alphas=tuple(args.riccati_anchor_alphas or []),
+        w_riccati_anchor=args.w_riccati_anchor,
+        w_q_supervision=args.w_q_supervision,
+        q_supervision_n_xi=args.q_supervision_n_xi,
+        q_supervision_every=args.q_supervision_every,
+        q_supervision_alpha_count=args.q_supervision_alpha_count,
+        w_riccati_center_kappa=args.w_riccati_center_kappa,
+        w_riccati_center_peak=args.w_riccati_center_peak,
+        w_riccati_boundary_band_kappa=args.w_riccati_boundary_band_kappa,
+        w_riccati_boundary_band_q=args.w_riccati_boundary_band_q,
+        riccati_center_xi=args.riccati_center_xi,
+        riccati_boundary_band_points=args.riccati_boundary_band_points,
+        riccati_boundary_band_start=args.riccati_boundary_band_start,
+        riccati_boundary_band_end=args.riccati_boundary_band_end,
+        w_riccati_shooting_match=args.w_riccati_shooting_match,
+        w_riccati_shooting_path=args.w_riccati_shooting_path,
+        w_riccati_ci_local_min=args.w_riccati_ci_local_min,
+        riccati_shooting_steps=args.riccati_shooting_steps,
+        riccati_shooting_xi_boundary=args.riccati_shooting_xi_boundary,
+        riccati_shooting_match_start_epoch=args.riccati_shooting_match_start_epoch,
+        riccati_shooting_path_points=args.riccati_shooting_path_points,
+        riccati_shooting_path_xi_boundary=args.riccati_shooting_path_xi_boundary,
+        riccati_shooting_path_start_epoch=args.riccati_shooting_path_start_epoch,
+        riccati_shooting_path_every=args.riccati_shooting_path_every,
+        riccati_ci_local_min_start_epoch=args.riccati_ci_local_min_start_epoch,
+        riccati_ci_local_min_delta_abs=args.riccati_ci_local_min_delta_abs,
+        riccati_ci_local_min_delta_rel=args.riccati_ci_local_min_delta_rel,
+        riccati_ci_local_min_margin=args.riccati_ci_local_min_margin,
+        mode_low_alpha_threshold=args.mode_low_alpha_threshold,
+        mode_low_alpha_weight=args.mode_low_alpha_weight,
+        mode_low_alpha_audit_fraction=args.mode_low_alpha_audit_fraction,
+        initial_model_path=args.initial_model_path,
+        initial_model_strict=not args.no_initial_model_strict,
+        output_dir=str(args.output_dir),
+        device=args.device,
+    )
+    model, history = train_fixed_mach_subsonic_pinn(cfg)
+    save_training_artifacts(model, history, cfg)
+    print(f"Modele et historique enregistres dans {args.output_dir}")
+
+
+if __name__ == "__main__":
+    main()

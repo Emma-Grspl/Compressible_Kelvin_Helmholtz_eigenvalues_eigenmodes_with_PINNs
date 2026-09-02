@@ -1,0 +1,13 @@
+{
+  "best_anchor_loss": 3.8251092084977168e-16,
+  "best_epoch": 21756,
+  "chart_id": "VLOW_EXTREME_CI_ONLY",
+  "ci_lr": 0.0002,
+  "ci_prefit_steps": 3000,
+  "matched_epochs": 22000,
+  "n_local_anchors": 15,
+  "physics_gradient": false,
+  "seed": 1234,
+  "source_n340_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340/joint/VLOW_EXTREME_CI_ONLY/model_state.pt",
+  "w_ci": 1000.0
+}

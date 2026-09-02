@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="900" viewBox="0 0 2200 900">
+  <defs>
+    <style>
+      .title { font: 700 34px 'Helvetica Neue', Arial, sans-serif; fill: #142235; }
+      .subtitle { font: 400 17px 'Helvetica Neue', Arial, sans-serif; fill: #5b6c7e; }
+      .section { font: 700 24px 'Helvetica Neue', Arial, sans-serif; fill: #142235; }
+      .label { font: 600 20px 'Helvetica Neue', Arial, sans-serif; fill: #223247; }
+      .text { font: 500 18px 'Helvetica Neue', Arial, sans-serif; fill: #223247; }
+      .small { font: 400 15px 'Helvetica Neue', Arial, sans-serif; fill: #617286; }
+      .eq { font: 500 22px 'Courier New', monospace; fill: #16283d; }
+      .eqsmall { font: 500 19px 'Courier New', monospace; fill: #16283d; }
+      .frame { stroke: #23384e; stroke-width: 2.2; }
+      .soft { stroke: #D5DDE7; stroke-width: 1.5; }
+      .arrow { stroke: #284761; stroke-width: 4.2; fill: none; stroke-linecap: round; }
+      .loop { stroke: #456684; stroke-width: 3; fill: none; stroke-dasharray: 10 8; stroke-linecap: round; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="8.5" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#284761"/>
+    </marker>
+    <linearGradient id="bgInputs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E7F2FF"/>
+      <stop offset="100%" stop-color="#D9EAFF"/>
+    </linearGradient>
+    <linearGradient id="bgNetwork" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF2DF"/>
+      <stop offset="100%" stop-color="#FFE4BE"/>
+    </linearGradient>
+    <linearGradient id="bgSpec" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE7EA"/>
+      <stop offset="100%" stop-color="#FAD5DC"/>
+    </linearGradient>
+    <linearGradient id="bgMode" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E7F8EC"/>
+      <stop offset="100%" stop-color="#D3F0DB"/>
+    </linearGradient>
+    <linearGradient id="bgAD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EEF4FB"/>
+      <stop offset="100%" stop-color="#DFEAF8"/>
+    </linearGradient>
+    <linearGradient id="bgPhysics" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDEEEE"/>
+      <stop offset="100%" stop-color="#F7DBDB"/>
+    </linearGradient>
+    <linearGradient id="bgLoss" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1EBFF"/>
+      <stop offset="100%" stop-color="#E0D5FF"/>
+    </linearGradient>
+    <linearGradient id="bgOpt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E4F8F8"/>
+      <stop offset="100%" stop-color="#D2EFF0"/>
+    </linearGradient>
+    <filter id="shadow" x="-8%" y="-8%" width="118%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#AAB8C8" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="2200" height="900" fill="#FAFCFE"/>
+
+  <text class="title" x="1100" y="56" text-anchor="middle">PINN workflow for the compressible Kelvin-Helmholtz spectral problem</text>
+  <text class="subtitle" x="1100" y="86" text-anchor="middle">Horizontal schematic with spectral branch, modal branch, explicit constraints, and optimizer</text>
+
+  <rect x="40" y="230" width="250" height="210" rx="28" ry="28" fill="url(#bgInputs)" class="frame" filter="url(#shadow)"/>
+  <text class="section" x="165" y="282" text-anchor="middle">Inputs</text>
+  <text class="eq" x="165" y="338" text-anchor="middle">(y, α, M)</text>
+  <text class="small" x="165" y="378" text-anchor="middle">transverse coordinate</text>
+  <text class="small" x="165" y="402" text-anchor="middle">wavenumber and Mach number</text>
+
+  <path class="arrow" marker-end="url(#arrowhead)" d="M292 335 L350 335"/>
+
+  <rect x="350" y="120" width="520" height="430" rx="30" ry="30" fill="url(#bgNetwork)" class="frame" filter="url(#shadow)"/>
+  <text class="section" x="610" y="166" text-anchor="middle">Neural network</text>
+  <text class="small" x="610" y="198" text-anchor="middle">shared trunk + two task-specific branches</text>
+
+  <rect x="390" y="240" width="440" height="120" rx="24" ry="24" fill="url(#bgSpec)" class="soft"/>
+  <text class="label" x="610" y="282" text-anchor="middle">Spectral branch</text>
+  <text class="eq" x="610" y="326" text-anchor="middle">c = c_r + i c_i</text>
+
+  <rect x="390" y="390" width="440" height="120" rx="24" ry="24" fill="url(#bgMode)" class="soft"/>
+  <text class="label" x="610" y="432" text-anchor="middle">Modal branch</text>
+  <text class="eq" x="610" y="476" text-anchor="middle">p_θ(y; α, M)</text>
+
+  <path class="arrow" marker-end="url(#arrowhead)" d="M872 300 L930 300"/>
+  <path class="arrow" marker-end="url(#arrowhead)" d="M872 450 L930 450"/>
+
+  <rect x="930" y="210" width="270" height="330" rx="28" ry="28" fill="url(#bgAD)" class="frame" filter="url(#shadow)"/>
+  <text class="section" x="1065" y="258" text-anchor="middle">Automatic differentiation</text>
+  <text class="eq" x="1065" y="332" text-anchor="middle">∂_y p_θ</text>
+  <text class="eq" x="1065" y="390" text-anchor="middle">∂²_y p_θ</text>
+  <text class="small" x="1065" y="448" text-anchor="middle">used together with c_r and c_i</text>
+
+  <path class="arrow" marker-end="url(#arrowhead)" d="M1202 375 L1260 375"/>
+
+  <rect x="1260" y="90" width="560" height="580" rx="30" ry="30" fill="url(#bgPhysics)" class="frame" filter="url(#shadow)"/>
+  <text class="section" x="1540" y="136" text-anchor="middle">Compressible KH equation and constraints</text>
+
+  <rect x="1300" y="178" width="480" height="138" rx="22" ry="22" fill="#FFF9F9" class="soft"/>
+  <text class="label" x="1540" y="214" text-anchor="middle">PDE residual</text>
+  <text class="eqsmall" x="1540" y="252" text-anchor="middle">R_θ(y, α, M) = L_KH[p_θ(y), c_r, c_i; α, M]</text>
+  <text class="eqsmall" x="1540" y="290" text-anchor="middle">L_res = (1/N_r) Σ_j |R_θ(y_j, α_j, M_j)|^2</text>
+
+  <rect x="1300" y="338" width="480" height="138" rx="22" ry="22" fill="#FFF9F9" class="soft"/>
+  <text class="label" x="1540" y="374" text-anchor="middle">Boundary conditions</text>
+  <text class="eqsmall" x="1540" y="412" text-anchor="middle">L_bc = (1/N_b) Σ_j ( |p_θ(-L_j)|^2 + |p_θ(L_j)|^2 )</text>
+  <text class="small" x="1540" y="448" text-anchor="middle">or asymptotic branch constraints in Riccati form</text>
+
+  <rect x="1300" y="498" width="480" height="138" rx="22" ry="22" fill="#FFF9F9" class="soft"/>
+  <text class="label" x="1540" y="534" text-anchor="middle">Normalization</text>
+  <text class="eqsmall" x="1540" y="572" text-anchor="middle">L_norm = |Re p_θ(y_0) - 1|^2 + |Im p_θ(y_0)|^2</text>
+
+  <path class="arrow" marker-end="url(#arrowhead)" d="M1822 375 L1880 375"/>
+
+  <rect x="1880" y="210" width="180" height="330" rx="28" ry="28" fill="url(#bgLoss)" class="frame" filter="url(#shadow)"/>
+  <text class="section" x="1970" y="256" text-anchor="middle">Loss</text>
+  <text class="eqsmall" x="1970" y="320" text-anchor="middle">L = λ_res L_res</text>
+  <text class="eqsmall" x="1970" y="356" text-anchor="middle">  + λ_bc L_bc</text>
+  <text class="eqsmall" x="1970" y="392" text-anchor="middle">  + λ_norm L_norm</text>
+  <text class="eqsmall" x="1970" y="428" text-anchor="middle">  + λ_spec L_spec</text>
+  <text class="small" x="1970" y="484" text-anchor="middle">optional sparse</text>
+  <text class="small" x="1970" y="506" text-anchor="middle">spectral guidance</text>
+
+  <path class="arrow" marker-end="url(#arrowhead)" d="M2062 375 L2140 375"/>
+
+  <rect x="1890" y="610" width="270" height="170" rx="28" ry="28" fill="url(#bgOpt)" class="frame" filter="url(#shadow)"/>
+  <text class="section" x="2025" y="656" text-anchor="middle">Optimization</text>
+  <text class="eqsmall" x="2025" y="704" text-anchor="middle">Adam</text>
+  <text class="eqsmall" x="2025" y="738" text-anchor="middle">θ_spec ← Adam(∇L)</text>
+  <text class="eqsmall" x="2025" y="772" text-anchor="middle">θ_mode ← Adam(∇L)</text>
+
+  <path class="loop" marker-end="url(#arrowhead)" d="M1985 610 C1700 760, 1010 820, 580 568 C500 520, 460 500, 435 490"/>
+  <text class="small" x="1210" y="822" text-anchor="middle">iterative weight update of the spectral and modal branches</text>
+</svg>

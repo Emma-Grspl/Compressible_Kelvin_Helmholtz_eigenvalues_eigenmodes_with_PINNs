@@ -1,0 +1,23 @@
+{
+  "input": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/releases/joint_subsonic_PINN_GEP_final_v1/assets/data/validation_pointwise_canonical.csv",
+  "input_rows": 387,
+  "valid_rows": 387,
+  "mach_column": "Mach",
+  "eta_column": "eta",
+  "alpha_column": "alpha",
+  "seed_error_source": {
+    "error_column": "ci_seed_abs_err",
+    "prediction_column": null,
+    "reference_column": null
+  },
+  "final_error_source": {
+    "error_column": "ci_final_abs_err",
+    "prediction_column": null,
+    "reference_column": null
+  },
+  "thresholds": {
+    "eta_long_wave_max": 0.25,
+    "eta_near_neutral_min": 0.9,
+    "mach_high_min": 0.9
+  }
+}

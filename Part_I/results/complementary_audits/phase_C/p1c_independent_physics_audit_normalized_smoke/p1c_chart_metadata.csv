@@ -1,0 +1,2 @@
+chart_id,field_family,mach_min,mach_max,eta_min,eta_max,ymax,central_ymax,sym_ymax,n_interior,n_constraints,n_parity,best_epoch,best_loss
+VLOW_EXTREME_CI_ONLY,pQscaled,0.1,0.7,0.05,0.12,220.0,55.0,55.0,512,128,128,21422,0.0008799721029786935

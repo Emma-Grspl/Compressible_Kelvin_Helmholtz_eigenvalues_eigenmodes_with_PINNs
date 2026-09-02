@@ -1,0 +1,94 @@
+category,subcategory,experiment,n_files,total_size_bytes,git_tracked,git_untracked,required_for_article,required_for_reproduction,historical_archive,proposed_exclusion
+ARCHIVE,historical checkpoints,atlas,31,115574814,0,31,0,0,31,0
+ARCHIVE,historical checkpoints,fixed_Mach,176,84551429,141,35,0,0,176,0
+ARCHIVE,historical checkpoints,near_neutral,91,195255724,55,36,0,0,91,0
+ARCHIVE,historical checkpoints,subsonic_general,60,119912778,29,31,0,0,60,0
+ARCHIVE,obsolete development outputs,Stage_0,6,164123,0,6,0,0,6,0
+ARCHIVE,obsolete development outputs,Stage_1,9,36326,0,9,0,0,9,0
+ARCHIVE,obsolete development outputs,atlas,4799,3651484576,0,4799,0,0,4799,0
+ARCHIVE,obsolete development outputs,atlas_overlap,7,408286,6,1,0,0,7,0
+ARCHIVE,obsolete development outputs,classical_Blumen_reference,11,117611,10,1,0,0,11,0
+ARCHIVE,obsolete development outputs,fixed_Mach,487,271301643,128,359,0,0,487,0
+ARCHIVE,obsolete development outputs,near_neutral,2662,2109420913,37,2625,0,0,2662,0
+ARCHIVE,obsolete development outputs,subsonic_general,1447,513970548,446,1001,0,0,1447,0
+CORE,article assets,article_current,1,8315,0,1,1,1,0,0
+CORE,atlas N340 production,atlas,128,125189699,0,128,0,128,0,0
+CORE,atlas N340 production,near_neutral,56,92329573,0,56,0,56,0,0
+CORE,classical generated assets,classical_Blumen_reference,16,2918458,4,12,0,16,0,0
+CORE,classical solver final,classical_Blumen_reference,10,75341,10,0,0,10,0,0
+CORE,classical source data,classical_Blumen_reference,11,104966,7,4,0,11,0,0
+CORE,final PINN implementation,fixed_Mach,7,19816,0,7,0,7,0,0
+CORE,final PINN implementation,subsonic_general,28,375103,9,19,0,28,0,0
+CORE,fixed-Mach four-anchor Stage 0,Stage_0,8,176653,1,7,0,8,0,0
+CORE,fixed-Mach four-anchor Stage 0,fixed_Mach,5,10024,5,0,0,5,0,0
+CORE,fixed-Mach four-anchor Stage 0,subsonic_general,5,22971,0,5,0,5,0,0
+CORE,fixed-Mach modal Stage 1,Stage_0,4,1095137,0,4,0,4,0,0
+CORE,fixed-Mach modal Stage 1,Stage_1,1,8524062,0,1,0,1,0,0
+CORE,fixed-Mach modal Stage 1,fixed_Mach,14,847273,8,6,0,14,0,0
+CORE,fixed-Mach physics-only,fixed_Mach,16,578738,16,0,0,16,0,0
+CORE,fixed-Mach physics-only,subsonic_general,8,841492,4,4,0,8,0,0
+EXCLUDE,Python caches,Stage_0,4,71927,0,4,0,0,0,4
+EXCLUDE,Python caches,Stage_1,9,221115,0,9,0,0,0,9
+EXCLUDE,Python caches,Stage_1bis,1,41437,0,1,0,0,0,1
+EXCLUDE,Python caches,atlas,6,153433,0,6,0,0,0,6
+EXCLUDE,Python caches,classical_Blumen_reference,14,174739,0,14,0,0,0,14
+EXCLUDE,Python caches,fixed_Mach,16,255570,0,16,0,0,0,16
+EXCLUDE,Python caches,holdout_384,1,10062,0,1,0,0,0,1
+EXCLUDE,Python caches,near_neutral,5,55816,0,5,0,0,0,5
+EXCLUDE,Python caches,runtime_benchmark,10,122695,0,10,0,0,0,10
+EXCLUDE,Python caches,subsonic_general,113,2484975,0,113,0,0,0,113
+EXCLUDE,duplicated outputs,Stage_0,16,5581416,0,16,0,0,0,16
+EXCLUDE,duplicated outputs,Stage_1,6,2097222,0,6,0,0,0,6
+EXCLUDE,duplicated outputs,atlas,70,231228506,0,70,0,0,0,70
+EXCLUDE,duplicated outputs,classical_Blumen_reference,4,24592,0,4,0,0,0,4
+EXCLUDE,duplicated outputs,fixed_Mach,22,10667141,10,12,0,0,0,22
+EXCLUDE,duplicated outputs,near_neutral,36,184355980,0,36,0,0,0,36
+EXCLUDE,duplicated outputs,runtime_benchmark,1,10176,0,1,0,0,0,1
+EXCLUDE,duplicated outputs,subsonic_general,30,2098202,8,22,0,0,0,30
+EXCLUDE,supersonic exclusion,subsonic_general,1,5232,0,1,0,0,0,1
+SUPPORTING,GEP,atlas,5,30155,0,5,0,5,0,0
+SUPPORTING,GEP,subsonic_general,5,109219,0,5,0,5,0,0
+SUPPORTING,active supporting software,atlas,35,186142,0,35,0,35,0,0
+SUPPORTING,active supporting software,fixed_Mach,88,310110,71,17,0,88,0,0
+SUPPORTING,active supporting software,near_neutral,26,122067,4,22,0,26,0,0
+SUPPORTING,active supporting software,subsonic_general,166,907916,35,131,0,166,0,0
+SUPPORTING,anchor-budget N96-N705,atlas,5,49884,0,5,0,5,0,0
+SUPPORTING,anchor-budget N96-N705,fixed_Mach,1,787,0,1,0,1,0,0
+SUPPORTING,anchors-only N340,atlas,186,39951116,0,186,0,186,0,0
+SUPPORTING,anchors-only N340,holdout_384,4,204777,2,2,0,4,0,0
+SUPPORTING,anchors-only N340,near_neutral,108,23154163,0,108,0,108,0,0
+SUPPORTING,article asset candidates,atlas,47,7005821,1,46,0,47,0,0
+SUPPORTING,article asset candidates,atlas_overlap,43,2379284,0,43,0,43,0,0
+SUPPORTING,article asset candidates,classical_Blumen_reference,12,2018569,0,12,0,12,0,0
+SUPPORTING,article asset candidates,fixed_Mach,17,4582699,4,13,0,17,0,0
+SUPPORTING,article asset candidates,holdout_384,7,403051,7,0,0,7,0,0
+SUPPORTING,article asset candidates,near_neutral,14,1265433,0,14,0,14,0,0
+SUPPORTING,article asset candidates,runtime_benchmark,12,298901,0,12,0,12,0,0
+SUPPORTING,article asset candidates,seed_sensitivity,6,140304,4,2,0,6,0,0
+SUPPORTING,article asset candidates,subsonic_general,200,41102070,0,200,0,200,0,0
+SUPPORTING,canonical validation 372,atlas,2,440281,0,2,0,2,0,0
+SUPPORTING,canonical validation 372,subsonic_general,3,474294,0,3,0,3,0,0
+SUPPORTING,dense audit 1000,runtime_benchmark,2,351060,0,2,0,2,0,0
+SUPPORTING,dense audit 1000,subsonic_general,1,17513,1,0,0,1,0,0
+SUPPORTING,fixed-Mach four-anchor Stage 0,Stage_0,16,5581416,0,16,0,16,0,0
+SUPPORTING,fixed-Mach four-anchor Stage 0,fixed_Mach,6,2094030,0,6,0,6,0,0
+SUPPORTING,fixed-Mach modal Stage 1,Stage_1,6,2097222,0,6,0,6,0,0
+SUPPORTING,fixed-Mach modal Stage 1,fixed_Mach,9,6856236,0,9,0,9,0,0
+SUPPORTING,holdout 384,atlas,1,334,0,1,0,1,0,0
+SUPPORTING,holdout 384,holdout_384,1,6296,1,0,0,1,0,0
+SUPPORTING,holdout 384,subsonic_general,7,908721,0,7,0,7,0,0
+SUPPORTING,modal 20,subsonic_general,3,19979,0,3,0,3,0,0
+SUPPORTING,near-neutral,near_neutral,21,2995924,0,21,0,21,0,0
+SUPPORTING,overlap 195,atlas_overlap,33,4388746,0,33,0,33,0,0
+SUPPORTING,overlap 195,fixed_Mach,3,419699,3,0,0,3,0,0
+SUPPORTING,runtime,runtime_benchmark,22,161389,0,22,0,22,0,0
+SUPPORTING,seed sensitivity,fixed_Mach,24,6830485,0,24,0,24,0,0
+SUPPORTING,seed sensitivity,seed_sensitivity,429,420302368,2,427,0,429,0,0
+SUPPORTING,supporting checkpoints,fixed_Mach,1,343775,1,0,0,1,0,0
+SUPPORTING,supporting checkpoints,subsonic_general,312,107128008,312,0,0,312,0,0
+SUPPORTING,anchor-budget N96,anchor-budget shared comparison evidence,10,710481,0,10,0,10,0,0
+SUPPORTING,anchor-budget N224,anchor-budget shared comparison evidence,10,710481,0,10,0,10,0,0
+SUPPORTING,anchor-budget N340,anchor-budget shared comparison evidence,10,710481,0,10,0,10,0,0
+SUPPORTING,anchor-budget N520,anchor-budget shared comparison evidence,10,710481,0,10,0,10,0,0
+SUPPORTING,anchor-budget N640,anchor-budget shared comparison evidence,10,710481,0,10,0,10,0,0
+SUPPORTING,anchor-budget N705,anchor-budget shared comparison evidence,10,710481,0,10,0,10,0,0

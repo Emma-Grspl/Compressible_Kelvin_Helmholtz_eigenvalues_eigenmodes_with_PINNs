@@ -1,0 +1,11 @@
+{
+  "chart_id": "LMEDGE_VLOW",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_LMEDGE_VLOW_ciIDW_EVALFIX/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_LMEDGE_VLOW_ciIDW_EVALFIX",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_manifest_fullrect_longwave_map10_N301.csv",
+  "checkpoint_sha256": "5d94f9cbf330d06f3f205201ce3f4cc9b249f78dcf6492abb50c71fd6de03783",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

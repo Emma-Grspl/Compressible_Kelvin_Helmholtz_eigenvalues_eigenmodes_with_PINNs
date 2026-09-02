@@ -1,0 +1,26 @@
+{
+  "anchor_eta_values": [
+    0.92,
+    0.9400000000000001,
+    0.96,
+    0.98
+  ],
+  "anchor_mach_values": [
+    0.7,
+    0.75,
+    0.8,
+    0.85
+  ],
+  "best_epoch": 23892,
+  "best_loss": 4.92932251426372e-06,
+  "ci_anchor_linf_abs": 4.704621108450602e-07,
+  "ci_anchor_mae_abs": 1.857615868489093e-07,
+  "ci_anchor_rel_rmse_scaled": 4.905066950646401e-06,
+  "ci_detached": false,
+  "classical_modal_supervision_in_training": false,
+  "field_family": "pq_etaaware",
+  "init_checkpoint": "pinn_subsonic/models/HM1_NEUTRAL3/model_state.pt",
+  "joint_physics_coupling": true,
+  "n_anchors_per_mach": 4,
+  "output_dir": "assets/pinn_subsonic/joint_ci_mode_atlas_v2/HM1_NEUTRAL3"
+}

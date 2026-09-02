@@ -1,0 +1,212 @@
+scripts/dev/test_mid_joint_pinn_full_gep.py:60:def parse_float_list(value: str) -> list[float]:
+scripts/dev/test_mid_joint_pinn_full_gep.py:68:def alpha_from_eta(eta: float, mach: float) -> float:
+scripts/dev/test_mid_joint_pinn_full_gep.py:72:def interp_complex(
+scripts/dev/test_mid_joint_pinn_full_gep.py:86:def trapz(values: np.ndarray, x: np.ndarray) -> complex:
+scripts/dev/test_mid_joint_pinn_full_gep.py:90:def weighted_norm(
+scripts/dev/test_mid_joint_pinn_full_gep.py:103:def overlap_complex(
+scripts/dev/test_mid_joint_pinn_full_gep.py:126:def phase_alignment(
+scripts/dev/test_mid_joint_pinn_full_gep.py:146:def rel_l2(
+scripts/dev/test_mid_joint_pinn_full_gep.py:167:def split_gep_vector(
+scripts/dev/test_mid_joint_pinn_full_gep.py:180:def make_match_mask(
+scripts/dev/test_mid_joint_pinn_full_gep.py:209:def evaluate_pinn(
+scripts/dev/test_mid_joint_pinn_full_gep.py:313:def call_pinn_profiles(
+scripts/dev/test_mid_joint_pinn_full_gep.py:344:def mode_overlap_with_pinn(
+scripts/dev/test_mid_joint_pinn_full_gep.py:364:    p_overlap = overlap_complex(
+scripts/dev/test_mid_joint_pinn_full_gep.py:370:    q_overlap = overlap_complex(
+scripts/dev/test_mid_joint_pinn_full_gep.py:377:        float(p_weight) * p_overlap
+scripts/dev/test_mid_joint_pinn_full_gep.py:378:        + (1.0 - float(p_weight)) * q_overlap
+scripts/dev/test_mid_joint_pinn_full_gep.py:380:    return p_overlap, q_overlap, combined
+scripts/dev/test_mid_joint_pinn_full_gep.py:383:def select_modes(
+scripts/dev/test_mid_joint_pinn_full_gep.py:387:    eigenvectors: np.ndarray,
+scripts/dev/test_mid_joint_pinn_full_gep.py:439:            "p_overlap_pinn": float("nan"),
+scripts/dev/test_mid_joint_pinn_full_gep.py:440:            "q_overlap_pinn": float("nan"),
+scripts/dev/test_mid_joint_pinn_full_gep.py:441:            "combined_overlap_pinn": float("nan"),
+scripts/dev/test_mid_joint_pinn_full_gep.py:449:            p_overlap, q_overlap, combined = mode_overlap_with_pinn(
+scripts/dev/test_mid_joint_pinn_full_gep.py:451:                vector=eigenvectors[:, raw_index],
+scripts/dev/test_mid_joint_pinn_full_gep.py:457:            row["p_overlap_pinn"] = p_overlap
+scripts/dev/test_mid_joint_pinn_full_gep.py:458:            row["q_overlap_pinn"] = q_overlap
+scripts/dev/test_mid_joint_pinn_full_gep.py:459:            row["combined_overlap_pinn"] = combined
+scripts/dev/test_mid_joint_pinn_full_gep.py:473:            -item["combined_overlap_pinn"],
+scripts/dev/test_mid_joint_pinn_full_gep.py:498:            item["combined_overlap_pinn"],
+scripts/dev/test_mid_joint_pinn_full_gep.py:499:            item["p_overlap_pinn"],
+scripts/dev/test_mid_joint_pinn_full_gep.py:535:def compare_mode_to_classic(
+scripts/dev/test_mid_joint_pinn_full_gep.py:604:        "p_overlap_classic": overlap_complex(
+scripts/dev/test_mid_joint_pinn_full_gep.py:622:def save_spectrum_plot(
+scripts/dev/test_mid_joint_pinn_full_gep.py:697:def point_tag(mach: float, eta: float, alpha: float) -> str:
+scripts/dev/test_mid_joint_pinn_full_gep.py:705:def main() -> None:
+scripts/dev/test_mid_joint_pinn_full_gep.py:748:    parser.add_argument("--p-overlap-weight", type=float, default=0.75)
+scripts/dev/test_mid_joint_pinn_full_gep.py:837:            eigenvalues, eigenvectors = solver.solve_all()
+scripts/dev/test_mid_joint_pinn_full_gep.py:847:                eigenvectors=eigenvectors,
+scripts/dev/test_mid_joint_pinn_full_gep.py:852:                p_weight=args.p_overlap_weight,
+scripts/dev/test_mid_joint_pinn_full_gep.py:882:                vector=eigenvectors[:, int(pinn_matched["raw_index"])],
+scripts/dev/test_mid_joint_pinn_full_gep.py:893:                vector=eigenvectors[:, int(most_unstable["raw_index"])],
+scripts/dev/test_mid_joint_pinn_full_gep.py:923:                    point_dir / "admissible_unstable_eigenvectors.npz",
+scripts/dev/test_mid_joint_pinn_full_gep.py:927:                    eigenvectors=eigenvectors[:, indices],
+scripts/dev/test_mid_joint_pinn_full_gep.py:975:                "pinn_matched_p_overlap": float(
+scripts/dev/test_mid_joint_pinn_full_gep.py:976:                    pinn_matched["p_overlap_pinn"]
+scripts/dev/test_mid_joint_pinn_full_gep.py:978:                "pinn_matched_q_overlap": float(
+scripts/dev/test_mid_joint_pinn_full_gep.py:979:                    pinn_matched["q_overlap_pinn"]
+scripts/dev/test_mid_joint_pinn_full_gep.py:981:                "pinn_matched_combined_overlap": float(
+scripts/dev/test_mid_joint_pinn_full_gep.py:982:                    pinn_matched["combined_overlap_pinn"]
+scripts/dev/test_mid_joint_pinn_full_gep.py:992:                "most_unstable_p_overlap": float(
+scripts/dev/test_mid_joint_pinn_full_gep.py:993:                    most_unstable["p_overlap_pinn"]
+scripts/dev/test_mid_joint_pinn_full_gep.py:995:                "most_unstable_q_overlap": float(
+scripts/dev/test_mid_joint_pinn_full_gep.py:996:                    most_unstable["q_overlap_pinn"]
+scripts/dev/test_mid_joint_pinn_full_gep.py:998:                "most_unstable_combined_overlap": float(
+scripts/dev/test_mid_joint_pinn_full_gep.py:999:                    most_unstable["combined_overlap_pinn"]
+scripts/dev/test_mid_joint_pinn_full_gep.py:1039:                f"O_p={pinn_matched['p_overlap_pinn']:.8f}",
+scripts/dev/test_mid_joint_pinn_full_gep.py:1040:                f"O_q={pinn_matched['q_overlap_pinn']:.8f}",
+scripts/dev/test_mid_joint_pinn_full_gep.py:1071:        "pinn_matched_p_overlap_classic",
+scripts/dev/test_mid_joint_pinn_full_gep.py:1072:        "pinn_matched_p_overlap",
+scripts/dev/test_mid_joint_pinn_full_gep.py:1073:        "pinn_matched_q_overlap",
+scripts/dev/test_mid_joint_pinn_full_gep.py:1114:            "pinn_matched_p_overlap",
+scripts/dev/test_mid_joint_pinn_full_gep.py:1115:            "pinn_matched_q_overlap",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:12:- for each PINN, c_i is the primary branch-identification signal and
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:14:- the classical solution is used only after branch selection, for validation.
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:60:def parse_float_list(value: str) -> list[float]:
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:68:def instantiate_field(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:136:def load_old_pinn(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:181:def load_new_pinn(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:215:def compare_direct_diagnostics(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:267:            continue
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:295:            continue
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:347:def summarize_gep_comparison(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:362:            "matched_p_overlap_pinn",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:363:            "old_matched_p_overlap_pinn",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:364:            "new_matched_p_overlap_pinn",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:367:            "matched_q_overlap_pinn",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:368:            "old_matched_q_overlap_pinn",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:369:            "new_matched_q_overlap_pinn",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:392:            continue
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:407:            continue
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:410:            "overlap" not in metric
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:447:def main() -> None:
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:508:    parser.add_argument("--p-overlap-weight", type=float, default=0.75)
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:598:            eigenvalues, eigenvectors = solver.solve_all()
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:656:                    eigenvectors=eigenvectors,
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:661:                    p_weight=args.p_overlap_weight,
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:689:                        vector=eigenvectors[
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:729:                    "matched_p_overlap_pinn": float(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:730:                        pinn_matched["p_overlap_pinn"]
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:732:                    "matched_q_overlap_pinn": float(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:733:                        pinn_matched["q_overlap_pinn"]
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:735:                    "matched_combined_overlap_pinn": float(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:737:                            "combined_overlap_pinn"
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:776:                    "matched_p_overlap_classic": float(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:777:                        matched_metrics["p_overlap_classic"]
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:788:                    f"O_p={pinn_matched['p_overlap_pinn']:.6f}; "
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:789:                    f"O_q={pinn_matched['q_overlap_pinn']:.6f}"
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:827:            row["new_p_overlap_higher"] = bool(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:828:                new_result["matched_p_overlap_pinn"]
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:829:                > old_result["matched_p_overlap_pinn"]
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:831:            row["new_q_overlap_higher"] = bool(
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:832:                new_result["matched_q_overlap_pinn"]
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:833:                > old_result["matched_q_overlap_pinn"]
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:909:                "old_matched_p_overlap_pinn",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:910:                "new_matched_p_overlap_pinn",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:911:                "old_matched_q_overlap_pinn",
+scripts/dev/compare_mid_old_vs_joint_full_gep.py:912:                "new_matched_q_overlap_pinn",
+scripts/dev/joint_pinn_global_validation.py:15:      - dense chart-overlap/seam points;
+scripts/dev/joint_pinn_global_validation.py:20:    shooting/modal reference. No GEP is used.
+scripts/dev/joint_pinn_global_validation.py:23:    Evaluate one shard of chart-pair overlap points. No classical solve is used;
+scripts/dev/joint_pinn_global_validation.py:24:    this measures atlas-to-atlas continuity directly.
+scripts/dev/joint_pinn_global_validation.py:30:    Re-run robust classical shooting with forced primary/secondary cross-check
+scripts/dev/joint_pinn_global_validation.py:64:from classical_solver.subsonic.robust_subsonic_shooting import (
+scripts/dev/joint_pinn_global_validation.py:74:    overlap_complex,
+scripts/dev/joint_pinn_global_validation.py:110:    "p_overlap",
+scripts/dev/joint_pinn_global_validation.py:111:    "q_overlap",
+scripts/dev/joint_pinn_global_validation.py:112:    "rho_overlap",
+scripts/dev/joint_pinn_global_validation.py:113:    "u_overlap",
+scripts/dev/joint_pinn_global_validation.py:114:    "v_overlap",
+scripts/dev/joint_pinn_global_validation.py:118:def read_table(path: Path) -> pd.DataFrame:
+scripts/dev/joint_pinn_global_validation.py:124:def write_json(path: Path, payload: Any) -> None:
+scripts/dev/joint_pinn_global_validation.py:132:def json_safe(value: Any) -> Any:
+scripts/dev/joint_pinn_global_validation.py:149:def as_bool(series: pd.Series) -> pd.Series:
+scripts/dev/joint_pinn_global_validation.py:161:def finite_series(frame: pd.DataFrame, column: str) -> pd.Series:
+scripts/dev/joint_pinn_global_validation.py:168:def metric_stats(frame: pd.DataFrame, column: str) -> dict[str, Any]:
+scripts/dev/joint_pinn_global_validation.py:193:def grouped_metric_report(
+scripts/dev/joint_pinn_global_validation.py:208:            continue
+scripts/dev/joint_pinn_global_validation.py:222:def normalize_plan(training_plan_path: Path) -> pd.DataFrame:
+scripts/dev/joint_pinn_global_validation.py:267:def route_chart(
+scripts/dev/joint_pinn_global_validation.py:316:def point_key(mach: float, eta: float) -> str:
+scripts/dev/joint_pinn_global_validation.py:320:def add_spectral_metrics(frame: pd.DataFrame) -> pd.DataFrame:
+scripts/dev/joint_pinn_global_validation.py:358:def find_historical_points(explicit: str | None) -> Path:
+scripts/dev/joint_pinn_global_validation.py:385:def mark_anchors(
+scripts/dev/joint_pinn_global_validation.py:405:            continue
+scripts/dev/joint_pinn_global_validation.py:429:def command_aggregate(args: argparse.Namespace) -> None:
+scripts/dev/joint_pinn_global_validation.py:519:                continue
+scripts/dev/joint_pinn_global_validation.py:541:    overlaps = consensus.loc[consensus["n_charts"] > 1].copy()
+scripts/dev/joint_pinn_global_validation.py:542:    overlaps.to_csv(
+scripts/dev/joint_pinn_global_validation.py:551:        "n_unique_points_with_multiple_charts": int(len(overlaps)),
+scripts/dev/joint_pinn_global_validation.py:606:def normalize_points_source(source: pd.DataFrame) -> pd.DataFrame:
+scripts/dev/joint_pinn_global_validation.py:652:def attach_route(
+scripts/dev/joint_pinn_global_validation.py:686:def build_targeted_points() -> pd.DataFrame:
+scripts/dev/joint_pinn_global_validation.py:749:def build_seam_points(plan: pd.DataFrame) -> pd.DataFrame:
+scripts/dev/joint_pinn_global_validation.py:764:                continue
+scripts/dev/joint_pinn_global_validation.py:766:                continue
+scripts/dev/joint_pinn_global_validation.py:802:                        "overlap_mach_min": float(m_low),
+scripts/dev/joint_pinn_global_validation.py:803:                        "overlap_mach_max": float(m_high),
+scripts/dev/joint_pinn_global_validation.py:804:                        "overlap_eta_min": float(e_low),
+scripts/dev/joint_pinn_global_validation.py:805:                        "overlap_eta_max": float(e_high),
+scripts/dev/joint_pinn_global_validation.py:813:def command_build_plans(args: argparse.Namespace) -> None:
+scripts/dev/joint_pinn_global_validation.py:863:def fields_from_pq(
+scripts/dev/joint_pinn_global_validation.py:899:def reference_q_from_fields(
+scripts/dev/joint_pinn_global_validation.py:916:def modal_mask(
+scripts/dev/joint_pinn_global_validation.py:941:def evaluate_direct_point(
+scripts/dev/joint_pinn_global_validation.py:1069:            result[f"{field_name}_overlap"] = overlap_complex(
+scripts/dev/joint_pinn_global_validation.py:1079:def shard_slice(
+scripts/dev/joint_pinn_global_validation.py:1091:def command_validate_points(args: argparse.Namespace) -> None:
+scripts/dev/joint_pinn_global_validation.py:1147:def seam_metrics(
+scripts/dev/joint_pinn_global_validation.py:1161:        result[f"{field_name}_overlap_ab"] = overlap_complex(
+scripts/dev/joint_pinn_global_validation.py:1170:def command_validate_seams(args: argparse.Namespace) -> None:
+scripts/dev/joint_pinn_global_validation.py:1294:def merge_shards(directory: Path) -> pd.DataFrame:
+scripts/dev/joint_pinn_global_validation.py:1301:            continue
+scripts/dev/joint_pinn_global_validation.py:1310:def outlier_flags(
+scripts/dev/joint_pinn_global_validation.py:1327:        (numeric("p_overlap") < args.p_overlap_threshold)
+scripts/dev/joint_pinn_global_validation.py:1328:        | (numeric("q_overlap") < args.q_overlap_threshold)
+scripts/dev/joint_pinn_global_validation.py:1339:def command_merge(args: argparse.Namespace) -> None:
+scripts/dev/joint_pinn_global_validation.py:1385:                seams.get("p_overlap_ab"),
+scripts/dev/joint_pinn_global_validation.py:1388:            < args.seam_p_overlap_threshold
+scripts/dev/joint_pinn_global_validation.py:1410:                        "p_overlap_ab",
+scripts/dev/joint_pinn_global_validation.py:1411:                        "q_overlap_ab",
+scripts/dev/joint_pinn_global_validation.py:1424:            continue
+scripts/dev/joint_pinn_global_validation.py:1469:                            outliers.get("p_overlap"),
+scripts/dev/joint_pinn_global_validation.py:1540:            "p_overlap": args.p_overlap_threshold,
+scripts/dev/joint_pinn_global_validation.py:1541:            "q_overlap": args.q_overlap_threshold,
+scripts/dev/joint_pinn_global_validation.py:1543:            "seam_p_overlap": args.seam_p_overlap_threshold,
+scripts/dev/joint_pinn_global_validation.py:1551:def robust_recheck(
+scripts/dev/joint_pinn_global_validation.py:1573:        "shoot_ci_recheck": float(result.ci),
+scripts/dev/joint_pinn_global_validation.py:1574:        "shoot_omega_recheck": float(result.omega_i),
+scripts/dev/joint_pinn_global_validation.py:1575:        "shoot_success_recheck": bool(result.success),
+scripts/dev/joint_pinn_global_validation.py:1576:        "shoot_source_recheck": str(result.source),
+scripts/dev/joint_pinn_global_validation.py:1614:def command_recheck_outliers(args: argparse.Namespace) -> None:
+scripts/dev/joint_pinn_global_validation.py:1685:                    - float(recheck["shoot_ci_recheck"])
+scripts/dev/joint_pinn_global_validation.py:1690:                        abs(float(recheck["shoot_ci_recheck"])),
+scripts/dev/joint_pinn_global_validation.py:1713:def plot_parity(
+scripts/dev/joint_pinn_global_validation.py:1744:def plot_metric_map(
+scripts/dev/joint_pinn_global_validation.py:1791:def git_text(arguments: list[str]) -> str:
+scripts/dev/joint_pinn_global_validation.py:1803:def copy_validation_file(
+scripts/dev/joint_pinn_global_validation.py:1815:def sha256_file(path: Path) -> str:
+scripts/dev/joint_pinn_global_validation.py:1825:def command_finalize(args: argparse.Namespace) -> None:
+scripts/dev/joint_pinn_global_validation.py:1932:                "p_overlap_ab",
+scripts/dev/joint_pinn_global_validation.py:1933:                "q_overlap_ab",
+scripts/dev/joint_pinn_global_validation.py:1977:                "p_overlap_ab",
+scripts/dev/joint_pinn_global_validation.py:1978:                "q_overlap_ab",
+scripts/dev/joint_pinn_global_validation.py:2002:        figures_dir / "ci_shooting_vs_PINN_parity",
+scripts/dev/joint_pinn_global_validation.py:2011:        figures_dir / "omega_shooting_vs_PINN_parity",
+scripts/dev/joint_pinn_global_validation.py:2022:        "p_overlap",
+scripts/dev/joint_pinn_global_validation.py:2023:        "Direct PINN pressure overlap",
+scripts/dev/joint_pinn_global_validation.py:2024:        figures_dir / "map_p_overlap",
+scripts/dev/joint_pinn_global_validation.py:2028:    if "p_overlap_ab" in seam_valid:
+scripts/dev/joint_pinn_global_validation.py:2030:        values = finite_series(seam_valid, "p_overlap_ab")
+scripts/dev/joint_pinn_global_validation.py:2033:            axis.set_xlabel(r"Chart-to-chart pressure overlap $\mathcal O_p$")
+scripts/dev/joint_pinn_global_validation.py:2035:            axis.set_title("Atlas seam continuity")
+scripts/dev/joint_pinn_global_validation.py:2039:                figures_dir / "seam_pressure_overlap_hist.pdf",
+scripts/dev/joint_pinn_global_validation.py:2043:                figures_dir / "seam_pressure_overlap_hist.png",
+scripts/dev/joint_pinn_global_validation.py:2138:            continue
+scripts/dev/joint_pinn_global_validation.py:2140:            continue
+scripts/dev/joint_pinn_global_validation.py:2153:def build_parser() -> argparse.ArgumentParser:
+scripts/dev/joint_pinn_global_validation.py:2224:    merge.add_argument("--p-overlap-threshold", type=float, default=0.90)
+scripts/dev/joint_pinn_global_validation.py:2225:    merge.add_argument("--q-overlap-threshold", type=float, default=0.80)
+scripts/dev/joint_pinn_global_validation.py:2228:        "--seam-p-overlap-threshold",
+scripts/dev/joint_pinn_global_validation.py:2268:def main() -> None:

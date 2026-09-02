@@ -1,0 +1,5 @@
+asset,status,source,note
+Fig_single_case_anchor_ablation,partial,results/subsonic_pinn_normalization_ablation_local/normalization_ablation_summary.csv,final main figure also needs aligned modal profiles for each configuration
+SuppFig_training_convergence,ready_or_partial,archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz/history.csv,
+SuppTable_multiseed_robustness,ready_or_partial,results/subsonic_pinn_normalization_ablation_local/normalization_ablation_summary.csv,
+SuppFig_chart_boundary_continuity,partial,candidate chart-prediction CSVs,

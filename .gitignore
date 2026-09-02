@@ -1,0 +1,26 @@
+.venv/
+.venv-*/
+__pycache__/
+*.py[cod]
+.DS_Store
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.log
+slurm-*.out
+slurm-*.err
+wandb/
+tmp/
+temp/
+
+# Large local archives intentionally excluded from the public Part I repository.
+Part_I/archive/csv/
+Part_I/archive/assets/
+Part_I/archive/miscellaneous/.jz_transfer_20260817/
+Part_I/models_saved/archive/
+Part_I/models_saved/imported/
+Part_I/models_saved/supporting/
+
+# Individual CSV above GitHub's 100 MiB limit; retained locally after hash-verified migration.
+Part_I/results/complementary_audits/phase_C/p1c_independent_physics_audit_normalized/p1c_pointwise_interior_residuals.csv

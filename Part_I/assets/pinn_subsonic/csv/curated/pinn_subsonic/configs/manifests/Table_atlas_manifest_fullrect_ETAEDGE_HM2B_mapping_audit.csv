@@ -1,0 +1,2 @@
+chart_id,path,M_min,M_max,eta_min,eta_max,ymax,central_ymax,status,priority
+ETAEDGE_HM2B,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_ETAEDGE_HM2B_ciIDW_EVALFIX,0.92,0.98,0.02,0.06,1600,400,ci_only,150

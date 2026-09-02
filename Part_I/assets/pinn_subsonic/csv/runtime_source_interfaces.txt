@@ -1,0 +1,557 @@
+====================================================================================================
+CLASSICAL + GEP SPECTRAL CALL
+====================================================================================================
+from __future__ import annotations
+
+from pathlib import Path
+import sys
+
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+
+
+def run_one(alpha: float, mach: float, n_points: int, mapping_kind: str, mapping_scale: float, xi_max: float):
+    classic = RobustSubsonicShootingSolver(alpha=alpha, Mach=mach).solve(force_cross_check=True)
+
+    target = (0.0, float(classic.ci))
+
+    solver = NotebookStyleDenseGEPSolver(
+        alpha=alpha,
+        Mach=mach,
+        n_points=n_points,
+        mapping_kind=mapping_kind,
+        mapping_scale=mapping_scale,
+        xi_max=xi_max,
+    )
+
+    mode, selection_source, n_modes = solver.get_nearest_mode_to_target(
+        target_guess=target,
+        prefer_positive_cr=False,
+        ci_weight=2.0,
+    )
+
+    if mode is None:
+        return {
+            "alpha": alpha,
+            "Mach": mach,
+            "N": n_points,
+            "classic_ci": float(classic.ci),
+            "classic_omega_i": float(classic.omega_i),
+            "classic_source": classic.source,
+            "classic_success": bool(classic.success),
+            "gep_cr": np.nan,
+            "gep_ci": np.nan,
+            "gep_omega_i": np.nan,
+            "ci_abs_err": np.nan,
+            "ci_rel_err": np.nan,
+            "distance_to_classic": np.nan,
+            "selection_source": selection_source,
+            "n_finite_modes": n_modes,
+            "success": False,
+        }
+
+    distance = solver.spectral_distance(mode, target, ci_weight=2.0)
+
+    return {
+        "alpha": alpha,
+        "Mach": mach,
+        "N": n_points,
+        "classic_ci": float(classic.ci),
+        "classic_omega_i": float(classic.omega_i),
+        "classic_source": classic.source,
+        "classic_success": bool(classic.success),
+        "gep_cr": float(mode["cr"]),
+        "gep_ci": float(mode["ci"]),
+        "gep_omega_i": float(mode["omega_i"]),
+        "ci_abs_err": abs(float(mode["ci"]) - float(classic.ci)),
+        "ci_rel_err": abs(float(mode["ci"]) - float(classic.ci)) / max(abs(float(classic.ci)), 1e-12),
+        "distance_to_classic": float(distance),
+        "selection_source": selection_source,
+        "n_finite_modes": n_modes,
+        "success": True,
+    }
+
+
+def main():
+    outdir = ROOT / "assets" / "gep_subsonic"
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    mach = 0.5
+    alphas = [0.3, 0.5, 0.7]
+
+    rows = []
+    for n_points in [181, 241, 301, 361]:
+        for alpha in alphas:
+            print(f"[RUN] M={mach:g} alpha={alpha:g} N={n_points}")
+            try:
+
+====================================================================================================
+PINN-SEEDED GEP MODAL CALL
+====================================================================================================
+from __future__ import annotations
+
+from pathlib import Path
+import sys
+
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+from scripts.compare_kh_subsonic_fixed_mach_modal_candidates import load_classic_full_mode
+
+
+def split_gep_vector(vector: np.ndarray, n_points: int, mach: float):
+    u = np.asarray(vector[0:n_points], dtype=np.complex128)
+    v = np.asarray(vector[n_points:2*n_points], dtype=np.complex128)
+    p = np.asarray(vector[2*n_points:3*n_points], dtype=np.complex128)
+    rho = p * mach**2
+    return {"u": u, "v": v, "p": p, "rho": rho}
+
+
+def interp_complex(y_src, f_src, y_dst):
+    return np.interp(y_dst, y_src, np.real(f_src)) + 1j * np.interp(y_dst, y_src, np.imag(f_src))
+
+
+def align_complex(pred, ref, mask):
+    den = np.vdot(pred[mask], pred[mask])
+    if abs(den) < 1e-30:
+        return 1.0 + 0.0j
+    return np.vdot(pred[mask], ref[mask]) / den
+
+
+def rel_l2(pred, ref, y, mask):
+    num = np.trapz(np.abs(pred[mask] - ref[mask]) ** 2, y[mask])
+    den = np.trapz(np.abs(ref[mask]) ** 2, y[mask])
+    return float(np.sqrt(num / max(den, 1e-30)))
+
+
+def overlap_complex(pred, ref, y, mask):
+    inner = np.trapz(np.conj(pred[mask]) * ref[mask], y[mask])
+    npred = np.sqrt(np.trapz(np.abs(pred[mask]) ** 2, y[mask]))
+    nref = np.sqrt(np.trapz(np.abs(ref[mask]) ** 2, y[mask]))
+    return float(abs(inner) / max(float(npred * nref), 1e-30))
+
+
+def run_one(fields_csv: Path, n_points: int = 301):
+    df = pd.read_csv(fields_csv)
+
+    alpha = float(df["alpha"].iloc[0])
+    mach = float(df["Mach"].iloc[0])
+    ci_pred = float(df["ci_pred"].iloc[0])
+
+    classic_fields, ci_classic = load_classic_full_mode(alpha, mach)
+
+    y_ref = np.asarray(classic_fields["y"], dtype=float)
+    p_ref = np.asarray(classic_fields["p"], dtype=np.complex128)
+    rho_ref = np.asarray(classic_fields["rho"], dtype=np.complex128)
+    u_ref = np.asarray(classic_fields["u"], dtype=np.complex128)
+    v_ref = np.asarray(classic_fields["v"], dtype=np.complex128)
+
+    solver = NotebookStyleDenseGEPSolver(
+        alpha=alpha,
+        Mach=mach,
+        n_points=n_points,
+        mapping_kind="pin",
+        mapping_scale=5.0,
+        xi_max=0.98,
+    )
+
+    mode, selection_source, n_modes = solver.get_nearest_mode_to_target(
+        target_guess=(0.0, ci_pred),
+        prefer_positive_cr=False,
+        ci_weight=2.0,
+    )
+
+    if mode is None:
+        return {
+            "alpha": alpha,
+            "Mach": mach,
+            "N": n_points,
+            "ci_classic": ci_classic,
+            "ci_pinn": ci_pred,
+            "gep_cr": np.nan,
+            "gep_ci": np.nan,
+            "ci_pinn_abs_err": abs(ci_pred - ci_classic),
+            "ci_pinn_rel_err": abs(ci_pred - ci_classic) / max(abs(ci_classic), 1e-12),
+            "ci_gep_abs_err": np.nan,
+            "ci_gep_rel_err": np.nan,
+            "p_rel": np.nan,
+            "rho_rel": np.nan,
+            "u_rel": np.nan,
+            "v_rel": np.nan,
+            "p_overlap": np.nan,
+            "selection_source": selection_source,
+            "n_finite_modes": n_modes,
+            "success": False,
+        }
+
+    gep = split_gep_vector(mode["vector"], solver.n_points, mach)
+
+    p_gep = interp_complex(solver.y, gep["p"], y_ref)
+    rho_gep = interp_complex(solver.y, gep["rho"], y_ref)
+    u_gep = interp_complex(solver.y, gep["u"], y_ref)
+    v_gep = interp_complex(solver.y, gep["v"], y_ref)
+
+    y_min = max(float(np.min(y_ref)), float(np.min(solver.y)), -12.0)
+    y_max = min(float(np.max(y_ref)), float(np.max(solver.y)), 12.0)
+    mask = (y_ref >= y_min) & (y_ref <= y_max)
+
+    scale = align_complex(p_gep, p_ref, mask)
+    p_gep *= scale
+    rho_gep *= scale
+    u_gep *= scale
+    v_gep *= scale
+
+    return {
+        "alpha": alpha,
+        "Mach": mach,
+        "N": n_points,
+        "ci_classic": float(ci_classic),
+        "ci_pinn": float(ci_pred),
+        "gep_cr": float(mode["cr"]),
+        "gep_ci": float(mode["ci"]),
+        "ci_pinn_abs_err": abs(ci_pred - ci_classic),
+        "ci_pinn_rel_err": abs(ci_pred - ci_classic) / max(abs(ci_classic), 1e-12),
+        "ci_gep_abs_err": abs(float(mode["ci"]) - ci_classic),
+        "ci_gep_rel_err": abs(float(mode["ci"]) - ci_classic) / max(abs(ci_classic), 1e-12),
+        "p_rel": rel_l2(p_gep, p_ref, y_ref, mask),
+        "rho_rel": rel_l2(rho_gep, rho_ref, y_ref, mask),
+        "u_rel": rel_l2(u_gep, u_ref, y_ref, mask),
+        "v_rel": rel_l2(v_gep, v_ref, y_ref, mask),
+        "p_overlap": overlap_complex(p_gep, p_ref, y_ref, mask),
+        "selection_source": selection_source,
+        "n_finite_modes": n_modes,
+        "success": True,
+    }
+
+
+def main():
+    run_dir = ROOT / "assets/pinn_subsonic/seedGEP_pq2d_M050_a030_a070_ci4_contalpha"
+    outdir = ROOT / "assets/gep_subsonic/pinn_ci_seeded_modes"
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    files = sorted(run_dir.glob("fields_vs_classic_*.csv"))
+    if not files:
+        raise SystemExit(f"No fields_vs_classic_*.csv found in {run_dir}")
+
+
+====================================================================================================
+ATLAS OFFGRID SYMBOLS
+====================================================================================================
+42:def find_column(
+53:def load_chart_catalog() -> pd.DataFrame:
+143:def resolve_chart(
+179:class SeedProvider:
+278:def atomic_write(
+299:def failure_row(
+353:def main() -> None:
+
+====================================================================================================
+ATLAS PREDICTOR IMPLEMENTATION
+====================================================================================================
+                "ci_idw_eta_scale",
+                0.25,
+            )
+        )
+
+        mach_scale = float(
+            arguments.get(
+                "ci_idw_mach_scale",
+                0.25,
+            )
+        )
+
+        power = float(
+            arguments.get(
+                "ci_idw_power",
+                4.0,
+            )
+        )
+
+        self.provider = CiGridIDW(
+            anchor_df=anchor_df,
+            eta_scale=eta_scale,
+            mach_scale=mach_scale,
+            power=power,
+            eps=1.0e-12,
+        )
+
+        self.provider = self.provider.to(
+            device="cpu",
+            dtype=torch.float64,
+        )
+        self.provider.eval()
+
+        self.metadata = {
+            "checkpoint_path": str(checkpoint_path),
+            "n_ci_anchors": len(anchor_df),
+            "ci_idw_eta_scale": eta_scale,
+            "ci_idw_mach_scale": mach_scale,
+            "ci_idw_power": power,
+        }
+
+    def predict(
+        self,
+        *,
+        alpha: float,
+        Mach: float,
+    ) -> float:
+        alpha_tensor = torch.tensor(
+            [[alpha]],
+            dtype=torch.float64,
+        )
+
+        mach_tensor = torch.tensor(
+            [[Mach]],
+            dtype=torch.float64,
+        )
+
+        with torch.no_grad():
+            value = self.provider(
+                alpha_tensor,
+                mach_tensor,
+            )
+
+        return float(
+            value.detach().cpu().reshape(-1)[0]
+        )
+
+
+def atomic_write(
+    frame: pd.DataFrame,
+    path: Path,
+) -> None:
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    temporary = path.with_suffix(
+        path.suffix + ".tmp"
+    )
+
+    frame.to_csv(
+        temporary,
+        index=False,
+    )
+
+    temporary.replace(path)
+
+
+def failure_row(
+    point: pd.Series,
+    *,
+    ci_seed: float | None,
+    chart_path: str | None,
+    error: Exception,
+) -> dict:
+    return {
+        "point_id": point["point_id"],
+        "sample_group": point["sample_group"],
+        "alpha": float(point["alpha"]),
+        "eta": float(point["eta"]),
+
+====================================================================================================
+GLOBAL VALIDATION SYMBOLS
+====================================================================================================
+118:def read_table(path: Path) -> pd.DataFrame:
+124:def write_json(path: Path, payload: Any) -> None:
+132:def json_safe(value: Any) -> Any:
+149:def as_bool(series: pd.Series) -> pd.Series:
+161:def finite_series(frame: pd.DataFrame, column: str) -> pd.Series:
+168:def metric_stats(frame: pd.DataFrame, column: str) -> dict[str, Any]:
+193:def grouped_metric_report(
+222:def normalize_plan(training_plan_path: Path) -> pd.DataFrame:
+267:def route_chart(
+316:def point_key(mach: float, eta: float) -> str:
+320:def add_spectral_metrics(frame: pd.DataFrame) -> pd.DataFrame:
+358:def find_historical_points(explicit: str | None) -> Path:
+385:def mark_anchors(
+429:def command_aggregate(args: argparse.Namespace) -> None:
+606:def normalize_points_source(source: pd.DataFrame) -> pd.DataFrame:
+652:def attach_route(
+686:def build_targeted_points() -> pd.DataFrame:
+749:def build_seam_points(plan: pd.DataFrame) -> pd.DataFrame:
+813:def command_build_plans(args: argparse.Namespace) -> None:
+863:def fields_from_pq(
+899:def reference_q_from_fields(
+916:def modal_mask(
+941:def evaluate_direct_point(
+1079:def shard_slice(
+1091:def command_validate_points(args: argparse.Namespace) -> None:
+1147:def seam_metrics(
+1170:def command_validate_seams(args: argparse.Namespace) -> None:
+1294:def merge_shards(directory: Path) -> pd.DataFrame:
+1310:def outlier_flags(
+1339:def command_merge(args: argparse.Namespace) -> None:
+1551:def robust_recheck(
+1614:def command_recheck_outliers(args: argparse.Namespace) -> None:
+1713:def plot_parity(
+1744:def plot_metric_map(
+1791:def git_text(arguments: list[str]) -> str:
+1803:def copy_validation_file(
+1815:def sha256_file(path: Path) -> str:
+1825:def command_finalize(args: argparse.Namespace) -> None:
+2153:def build_parser() -> argparse.ArgumentParser:
+2268:def main() -> None:
+
+====================================================================================================
+DIRECT PINN EVALUATOR
+====================================================================================================
+    y: np.ndarray,
+    v: np.ndarray,
+    alpha: float,
+    mach: float,
+    ci: float,
+) -> np.ndarray:
+    del mach
+    u_bar = np.tanh(np.asarray(y, dtype=float))
+    return (
+        -1j
+        * float(alpha)
+        * (u_bar - 1j * float(ci))
+        * np.asarray(v, dtype=np.complex128)
+    )
+
+
+def modal_mask(
+    y: np.ndarray,
+    p_reference: np.ndarray,
+    *,
+    y_max: float,
+    amplitude_floor: float,
+) -> np.ndarray:
+    y = np.asarray(y, dtype=float)
+    p_reference = np.asarray(p_reference, dtype=np.complex128)
+    mask = np.abs(y) <= float(y_max)
+
+    finite = np.abs(p_reference[np.isfinite(p_reference)])
+    if finite.size:
+        mask &= (
+            np.abs(p_reference)
+            >= float(amplitude_floor) * float(np.max(finite))
+        )
+
+    if int(np.count_nonzero(mask)) < 20:
+        mask = np.abs(y) <= float(y_max)
+    if int(np.count_nonzero(mask)) < 20:
+        mask = np.isfinite(y)
+    return mask
+
+
+def evaluate_direct_point(
+    point: pd.Series,
+    *,
+    model_cache: dict[str, tuple[Any, ...]],
+    device: torch.device,
+    y_max: float,
+    amplitude_floor: float,
+) -> dict[str, Any]:
+    chart_id = str(point["chart_id"])
+    checkpoint_path = Path(str(point["checkpoint"]))
+
+    if chart_id not in model_cache:
+        model_cache[chart_id] = evaluate_pinn(
+            checkpoint_path=checkpoint_path,
+            device=device,
+        )
+
+    field, ci_net, module, checkpoint_args, family = model_cache[chart_id]
+    mach = float(point["Mach"])
+    eta = float(point["eta"])
+    alpha = float(point.get("alpha", alpha_from_eta(eta, mach)))
+
+    classic_fields, ci_ref = load_classic_full_mode(alpha, mach)
+    y = np.asarray(classic_fields["y"], dtype=float)
+    p_ref = np.asarray(classic_fields["p"], dtype=np.complex128)
+    rho_ref = np.asarray(classic_fields["rho"], dtype=np.complex128)
+    u_ref = np.asarray(classic_fields["u"], dtype=np.complex128)
+    v_ref = np.asarray(classic_fields["v"], dtype=np.complex128)
+    q_ref = reference_q_from_fields(
+        y,
+        v_ref,
+        alpha,
+        mach,
+        float(ci_ref),
+    )
+    gamma_ref = q_ref / np.where(
+        np.abs(p_ref) > 1.0e-14,
+        p_ref,
+        np.nan + 1j * np.nan,
+    )
+
+    p_pred, q_pred, ci_pred = call_pinn_profiles(
+        field=field,
+        ci_net=ci_net,
+        module=module,
+        family=family,
+        y=y,
+        alpha=alpha,
+        mach=mach,
+        device=device,
+    )
+
+    mask = modal_mask(
+        y,
+        p_ref,
+        y_max=y_max,
+        amplitude_floor=amplitude_floor,
+    )
+    scale = phase_alignment(
+        p_pred,
+        p_ref,
+        y,
+        mask,
+    )
+    p_pred = scale * p_pred
+    q_pred = scale * q_pred
+
+    predicted = fields_from_pq(
+        y,
+        p_pred,
+        q_pred,
+        alpha,
+        mach,
+        ci_pred,
+    )
+    reference = {
+        "p": p_ref,
+        "q": q_ref,
+        "rho": rho_ref,
+        "u": u_ref,
+        "v": v_ref,
+        "gamma": gamma_ref,
+    }
+
+    result = point.to_dict()
+    result.update(
+        {
+            "field_family": family,
+            "checkpoint_ymax": float(
+                checkpoint_args.get("ymax", float("nan"))
+            ),
+            "ci_ref": float(ci_ref),
+            "ci_pred": float(ci_pred),
+            "ci_abs_err": abs(float(ci_pred) - float(ci_ref)),
+            "ci_rel_err": abs(float(ci_pred) - float(ci_ref))
+            / max(abs(float(ci_ref)), 1.0e-12),
+            "ci_rel_err_reg": abs(float(ci_pred) - float(ci_ref))
+            / max(abs(float(ci_ref)), CI_SCALE_FLOOR),
+            "omega_ref": alpha * float(ci_ref),
+            "omega_pred": alpha * float(ci_pred),
+            "omega_abs_err": abs(
+                alpha * float(ci_pred) - alpha * float(ci_ref)
+            ),
+            "omega_rel_err": abs(
+                alpha * float(ci_pred) - alpha * float(ci_ref)

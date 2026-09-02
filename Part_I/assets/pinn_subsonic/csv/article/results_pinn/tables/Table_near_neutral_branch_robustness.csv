@@ -1,0 +1,17 @@
+metric,n,value,interpretation
+technical_success,54,1.0,success_fraction
+reference_success,54,1.0,success_fraction
+central_branch_found,54,1.0,success_fraction
+central_mode_supported_by_pinn,54,1.0,success_fraction
+previous_pinn_match_is_central_max,54,0.9814814814814815,success_fraction
+pinn_matched_is_most_unstable,54,0.6851851851851852,success_fraction
+ci_pinn_abs_err_classic_median,54,0.00029306168144295,median
+ci_pinn_abs_err_classic_p95,54,0.006731098848209861,95th_percentile
+pinn_matched_ci_abs_err_classic_median,54,3.0310815483679254e-05,median
+pinn_matched_ci_abs_err_classic_p95,54,0.001532741566553,95th_percentile
+central_ci_abs_err_classic_median,54,3.03108154836515e-05,median
+central_ci_abs_err_classic_p95,54,0.0012951382608006828,95th_percentile
+pinn_matched_p_overlap_classic_median,54,0.9999999991288318,median
+pinn_matched_p_overlap_classic_p95,54,0.9999999993918066,95th_percentile
+central_p_overlap_pinn_median,54,0.9999950263823061,median
+central_p_overlap_pinn_p95,54,0.9999999563393935,95th_percentile

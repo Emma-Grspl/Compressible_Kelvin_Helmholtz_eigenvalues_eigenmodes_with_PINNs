@@ -1,0 +1,2 @@
+solver,alpha,Mach,min_ci_abs_error,min_omega_i_abs_error,max_L,max_n_scan
+secondary_mstab17,0.5,0.5,8.203392909689189e-06,4.1016964548445944e-06,80.0,161

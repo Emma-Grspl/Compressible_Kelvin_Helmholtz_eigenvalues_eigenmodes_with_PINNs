@@ -1,0 +1,4 @@
+regime,condition,N,mapping_scale,xi_max,selection
+standard,default,301,5.0,0.98,nearest_to_seed
+long_wave,alpha<0.06,301,10.0,0.99,nearest_to_seed
+near_neutral,eta>=0.96,401,5.0,0.98,modal_continuation

@@ -1,0 +1,30 @@
+{
+  "point_id": "OFFGRID_0189",
+  "Mach": 0.4670245613010852,
+  "eta": 0.4876037009806632,
+  "alpha": 0.4311608144976003,
+  "chart_id": "MID",
+  "checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/joint_ci_mode_atlas_v2/MID/model_state.pt",
+  "field_family": "pq_legacy",
+  "N": 301,
+  "checks": {
+    "pinn_ci": 0.339570816862841,
+    "gep_ci": 0.3396780872283897,
+    "classical_ci": 0.3396048620411646,
+    "classical_mode_ci": 0.33963225839969613
+  },
+  "training_included": false,
+  "checkpoint_load_separate": true,
+  "end_to_end_note": "The end-to-end PINN-seeded GEP row evaluates the full PINN profile to obtain the seed. It is therefore conservative.",
+  "hardware": {
+    "hostname": "r3i4n7",
+    "platform": "Linux-5.14.0-570.116.1.el9_6.x86_64-x86_64-with-glibc2.34",
+    "python": "3.11.6",
+    "torch": "2.1.1",
+    "cuda_device": "Tesla V100-SXM2-16GB",
+    "slurm_job_id": "340102",
+    "slurm_cpus_per_task": "10",
+    "omp_num_threads": "10",
+    "mkl_num_threads": "10"
+  }
+}

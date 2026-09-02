@@ -1,0 +1,335 @@
+{
+  "repo_root": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT",
+  "counts": {
+    "PRESENT": 29,
+    "MISSING": 5,
+    "PARTIAL": 1
+  },
+  "missing_asset_ids": [
+    "FIG01",
+    "FIG06",
+    "C1",
+    "C2",
+    "C4"
+  ],
+  "partial_asset_ids": [
+    "A5"
+  ],
+  "rows": [
+    {
+      "asset_id": "A1",
+      "family": "Atlas",
+      "title": "Carte des charts avec statut scientifique",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig02a_atlas_status_footprints.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/atlas_catalog_operational.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig02a_atlas_status_footprints.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/atlas_catalog_operational.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "A2",
+      "family": "Atlas",
+      "title": "Multiplicit\u00e9 de couverture",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig02b_coverage_multiplicity.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/coverage_and_assignment_grid.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig02b_coverage_multiplicity.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/coverage_and_assignment_grid.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "A3",
+      "family": "Atlas",
+      "title": "Assignation finale des charts",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig03_final_chart_assignment.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/coverage_and_assignment_grid.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig03_final_chart_assignment.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/coverage_and_assignment_grid.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "A4",
+      "family": "Atlas",
+      "title": "Carte du pipeline num\u00e9rique",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig02c_operational_pipeline_map.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig02c_operational_pipeline_map.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "A5",
+      "family": "Atlas",
+      "title": "Carte de supervision spectrale sparse",
+      "status": "PARTIAL",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig03_sparse_spectral_supervision.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/build_report.json",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig03_sparse_spectral_supervision.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/build_report.json",
+      "note": "Figure fond\u00e9e sur les points de validation faute de CSV explicite des ancres."
+    },
+    {
+      "asset_id": "D1",
+      "family": "Audits GEP",
+      "title": "Politique num\u00e9rique finale",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/gep_regime_policy_fullrect.csv | assets/pinn_subsonic/local_atlas_v1/publication_assets_fullrect_v1/data/gep_regime_policy.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/gep_regime_policy_fullrect.csv | assets/pinn_subsonic/local_atlas_v1/publication_assets_fullrect_v1/data/gep_regime_policy.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "D2",
+      "family": "Audits GEP",
+      "title": "Audit long-wave map5/map10/map15/map20",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig08_longwave_mapping_audit.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig08_longwave_mapping_audit.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "D3",
+      "family": "Audits GEP",
+      "title": "Audit near-neutral et continuation bidirectionnelle",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig09_near_neutral_continuation_audit.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig10_bidirectional_continuation_overlap.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig09_near_neutral_continuation_audit.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig10_bidirectional_continuation_overlap.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "D4",
+      "family": "Audits GEP",
+      "title": "Corrections de branche de r\u00e9f\u00e9rence",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_reference_branch_corrections.csv | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_0246_branch_resolution.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_reference_branch_corrections.csv | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_0246_branch_resolution.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "D5",
+      "family": "Audits GEP",
+      "title": "Convergence N=201/301/401",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig07_GEP_N_convergence.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/tables/GEP_N_convergence.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig07_GEP_N_convergence.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/tables/GEP_N_convergence.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "FIG01",
+      "family": "Figures article",
+      "title": "Sch\u00e9ma de m\u00e9thode",
+      "status": "MISSING",
+      "found_paths": "",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig01_method.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "FIG02",
+      "family": "Figures article",
+      "title": "Architecture et couverture",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig02_atlas_architecture_and_coverage.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig02_atlas_architecture_and_coverage.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "FIG03",
+      "family": "Figures article",
+      "title": "Supervision sparse",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig03_sparse_spectral_supervision.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig03_sparse_spectral_supervision.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "FIG04",
+      "family": "Figures article",
+      "title": "Validation c_i PINN/Blumen",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04_ci_direct_and_errors.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04a_Blumen_PINN_GEP_overlay.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04_ci_direct_and_errors.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04a_Blumen_PINN_GEP_overlay.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "FIG05",
+      "family": "Figures article",
+      "title": "Validation c_i apr\u00e8s GEP",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig05_ci_gep_parity_and_gain.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig05_ci_gep_parity_and_gain.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "FIG06",
+      "family": "Figures article",
+      "title": "Modes repr\u00e9sentatifs",
+      "status": "MISSING",
+      "found_paths": "",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig06_representative_modes.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "FIG07",
+      "family": "Figures article",
+      "title": "Erreurs modales finales",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig07_final_modal_error_heatmaps.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig07_final_modal_error_heatmaps.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "FIG08",
+      "family": "Figures article",
+      "title": "R\u00e9gimes difficiles",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig07_GEP_N_convergence.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig08_longwave_mapping_audit.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig09_near_neutral_continuation_audit.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig10_bidirectional_continuation_overlap.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig07_GEP_N_convergence.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig08_longwave_mapping_audit.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig09_near_neutral_continuation_audit.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig10_bidirectional_continuation_overlap.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "C1",
+      "family": "Modes",
+      "title": "PDF 20 points PINN direct vs classique",
+      "status": "MISSING",
+      "found_paths": "",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/supplement/supp_modes_direct_PINN_vs_classic_20_points.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "C2",
+      "family": "Modes",
+      "title": "PDF 20 points PINN+GEP vs classique+GEP",
+      "status": "MISSING",
+      "found_paths": "",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/supplement/supp_modes_PINN_GEP_vs_classic_GEP_20_points.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "C3",
+      "family": "Modes",
+      "title": "S\u00e9lection stratifi\u00e9e des 20 points",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/validation_mode_points_20.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/validation_mode_points_20.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "C4",
+      "family": "Modes",
+      "title": "Heatmaps modales PINN direct p/rho/u/v",
+      "status": "MISSING",
+      "found_paths": "",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig_direct_PINN_modal_error_heatmaps.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "C5",
+      "family": "Modes",
+      "title": "Heatmaps modales finales p/rho/u/v",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig07_final_modal_error_heatmaps.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig07_final_modal_error_heatmaps.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "C6",
+      "family": "Modes",
+      "title": "D\u00e9faut d\u2019overlap modal",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig_modal_overlap_defect.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig_modal_overlap_defect.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "E1",
+      "family": "Tables",
+      "title": "Catalogue des atlas",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/atlas_catalog_operational.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/atlas_catalog_operational.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "E2",
+      "family": "Tables",
+      "title": "M\u00e9triques par atlas",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/atlas_fullrect_gep_final_metrics_by_chart.csv | assets/pinn_subsonic/local_atlas_v1/publication_assets_fullrect_v1/data/atlas_fullrect_gep_final_metrics_by_chart.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/atlas_fullrect_gep_final_metrics_by_chart.csv | assets/pinn_subsonic/local_atlas_v1/publication_assets_fullrect_v1/data/atlas_fullrect_gep_final_metrics_by_chart.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "E3",
+      "family": "Tables",
+      "title": "R\u00e9sultats point par point",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/validation_pointwise_canonical.csv | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_results_384_release.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/validation_pointwise_canonical.csv | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_results_384_release.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "E4",
+      "family": "Tables",
+      "title": "Table de couverture et assignation",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/coverage_and_assignment_grid.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/coverage_and_assignment_grid.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "E5",
+      "family": "Tables",
+      "title": "Table des 20 points modaux",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/validation_mode_points_20.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/validation_mode_points_20.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "E6",
+      "family": "Tables",
+      "title": "R\u00e9sum\u00e9 global",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_fullrect_v1/data/release_summary.json | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_release_summary.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_fullrect_v1/data/release_summary.json | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_release_summary.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "B1",
+      "family": "c_i",
+      "title": "Blumen vs PINN/GEP",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04a_Blumen_PINN_GEP_overlay.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04b_Blumen_error_maps.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04c_Blumen_Mach_cuts.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/blumen_ci_datasets.csv | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/Blumen_interpolated_comparison.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04a_Blumen_PINN_GEP_overlay.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04b_Blumen_error_maps.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04c_Blumen_Mach_cuts.pdf | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/blumen_ci_datasets.csv | assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/Blumen_interpolated_comparison.csv",
+      "note": ""
+    },
+    {
+      "asset_id": "B2",
+      "family": "c_i",
+      "title": "Classique vs PINN direct",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04_ci_direct_and_errors.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig04_ci_direct_and_errors.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "B3",
+      "family": "c_i",
+      "title": "Classique+GEP vs PINN-seeded GEP",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig05_ci_gep_parity_and_gain.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig05_ci_gep_parity_and_gain.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "B4",
+      "family": "c_i",
+      "title": "Gain apport\u00e9 par le GEP",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig05_ci_gep_parity_and_gain.pdf",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/Fig05_ci_gep_parity_and_gain.pdf",
+      "note": ""
+    },
+    {
+      "asset_id": "B5",
+      "family": "c_i",
+      "title": "Validation hors grille",
+      "status": "PRESENT",
+      "found_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig_random_offgrid_validation.pdf | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_results_384_release.csv | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_release_summary.csv | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_release_checks.csv",
+      "expected_or_candidate_paths": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig_random_offgrid_validation.pdf | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_results_384_release.csv | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_release_summary.csv | assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_release_checks.csv",
+      "note": ""
+    }
+  ]
+}

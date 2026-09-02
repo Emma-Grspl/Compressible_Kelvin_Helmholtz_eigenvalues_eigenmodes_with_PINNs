@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""Compatibility entry point for `code/src/scripts/training/atlas/direct_pinn/train_subsonic_mini2d_pq_only_hard_reconstruct_uv.py`.
+
+Scientific logic remains in the original script so both entry points stay aligned.
+"""
+from __future__ import annotations
+
+from pathlib import Path
+import runpy
+import sys
+
+REPO_ROOT = Path(__file__).resolve().parents[6]
+SOURCE = REPO_ROOT / "code/src/scripts/training/atlas/direct_pinn/train_subsonic_mini2d_pq_only_hard_reconstruct_uv.py"
+
+
+def main() -> None:
+    repository_directory = str(REPO_ROOT / "code")
+    if repository_directory not in sys.path:
+        sys.path.insert(0, repository_directory)
+    source_directory = str(SOURCE.parent)
+    if source_directory not in sys.path:
+        sys.path.insert(0, source_directory)
+    runpy.run_path(str(SOURCE), run_name="__main__")
+
+
+if __name__ == "__main__":
+    main()

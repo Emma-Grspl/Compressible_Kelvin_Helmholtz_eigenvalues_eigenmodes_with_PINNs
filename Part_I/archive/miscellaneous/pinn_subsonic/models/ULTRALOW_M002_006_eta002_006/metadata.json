@@ -1,0 +1,11 @@
+{
+  "chart_id": "ULTRALOW_M002_006_eta002_006",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_M002_006_eta002_006/seedGEP_pQscaled2d_ULTRALOW_M002_006_eta002_006_ciIDW/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_M002_006_eta002_006/seedGEP_pQscaled2d_ULTRALOW_M002_006_eta002_006_ciIDW",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_manifest.csv",
+  "checkpoint_sha256": "a92e4fe6699938db7f0bcc95814e2bf9a0376a15e7e63993e5f5badd263a77b4",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

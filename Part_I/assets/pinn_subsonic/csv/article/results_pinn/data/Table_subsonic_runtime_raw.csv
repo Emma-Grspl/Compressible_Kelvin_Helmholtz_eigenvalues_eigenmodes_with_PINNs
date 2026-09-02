@@ -1,0 +1,146 @@
+method,repetition,latency_ms
+"PINN full mode, loaded",0,2.530414
+"PINN full mode, loaded",1,2.1149899999999997
+"PINN full mode, loaded",2,2.030917
+"PINN full mode, loaded",3,2.0180059999999997
+"PINN full mode, loaded",4,2.024489
+"PINN full mode, loaded",5,2.0290809999999997
+"PINN full mode, loaded",6,2.01525
+"PINN full mode, loaded",7,2.012899
+"PINN full mode, loaded",8,2.0240739999999997
+"PINN full mode, loaded",9,2.031036
+"PINN full mode, loaded",10,2.030717
+"PINN full mode, loaded",11,2.014777
+"PINN full mode, loaded",12,2.020906
+"PINN full mode, loaded",13,2.02905
+"PINN full mode, loaded",14,2.009131
+"PINN full mode, loaded",15,2.021009
+"PINN full mode, loaded",16,2.005451
+"PINN full mode, loaded",17,2.009874
+"PINN full mode, loaded",18,2.0083379999999997
+"PINN full mode, loaded",19,2.0083029999999997
+"PINN full mode, loaded",20,2.020896
+"PINN full mode, loaded",21,2.006516
+"PINN full mode, loaded",22,2.0087289999999998
+"PINN full mode, loaded",23,1.997842
+"PINN full mode, loaded",24,2.009249
+"PINN full mode, loaded",25,2.013646
+"PINN full mode, loaded",26,2.015586
+"PINN full mode, loaded",27,2.009103
+"PINN full mode, loaded",28,2.022531
+"PINN full mode, loaded",29,2.027854
+"PINN full mode, loaded",30,2.0189209999999997
+"PINN full mode, loaded",31,2.013276
+"PINN full mode, loaded",32,2.017301
+"PINN full mode, loaded",33,2.026754
+"PINN full mode, loaded",34,2.02113
+"PINN full mode, loaded",35,2.030757
+"PINN full mode, loaded",36,2.025139
+"PINN full mode, loaded",37,2.01125
+"PINN full mode, loaded",38,2.0169129999999997
+"PINN full mode, loaded",39,2.0122109999999997
+"PINN full mode, loaded",40,2.008579
+"PINN full mode, loaded",41,2.028041
+"PINN full mode, loaded",42,2.034818
+"PINN full mode, loaded",43,2.01441
+"PINN full mode, loaded",44,2.019379
+"PINN full mode, loaded",45,2.008618
+"PINN full mode, loaded",46,2.019686
+"PINN full mode, loaded",47,2.010502
+"PINN full mode, loaded",48,2.0021869999999997
+"PINN full mode, loaded",49,2.013665
+"PINN full mode, loaded",50,2.013764
+"PINN full mode, loaded",51,2.007435
+"PINN full mode, loaded",52,2.012549
+"PINN full mode, loaded",53,2.016008
+"PINN full mode, loaded",54,2.013652
+"PINN full mode, loaded",55,2.021568
+"PINN full mode, loaded",56,2.021733
+"PINN full mode, loaded",57,2.007097
+"PINN full mode, loaded",58,2.008928
+"PINN full mode, loaded",59,2.0093229999999997
+"PINN full mode, loaded",60,2.029012
+"PINN full mode, loaded",61,2.024394
+"PINN full mode, loaded",62,2.016264
+"PINN full mode, loaded",63,2.01227
+"PINN full mode, loaded",64,2.012346
+"PINN full mode, loaded",65,2.01056
+"PINN full mode, loaded",66,2.022038
+"PINN full mode, loaded",67,2.021498
+"PINN full mode, loaded",68,2.025174
+"PINN full mode, loaded",69,2.007576
+"PINN full mode, loaded",70,2.022372
+"PINN full mode, loaded",71,2.0207859999999997
+"PINN full mode, loaded",72,2.014214
+"PINN full mode, loaded",73,2.011892
+"PINN full mode, loaded",74,2.021616
+"PINN full mode, loaded",75,2.024642
+"PINN full mode, loaded",76,2.023348
+"PINN full mode, loaded",77,2.027659
+"PINN full mode, loaded",78,2.024479
+"PINN full mode, loaded",79,2.028915
+"PINN full mode, loaded",80,2.02214
+"PINN full mode, loaded",81,2.011678
+"PINN full mode, loaded",82,2.0153719999999997
+"PINN full mode, loaded",83,2.015002
+"PINN full mode, loaded",84,2.007129
+"PINN full mode, loaded",85,2.010507
+"PINN full mode, loaded",86,2.016313
+"PINN full mode, loaded",87,2.011764
+"PINN full mode, loaded",88,2.0107369999999998
+"PINN full mode, loaded",89,2.016189
+"PINN full mode, loaded",90,2.027987
+"PINN full mode, loaded",91,2.0235849999999997
+"PINN full mode, loaded",92,2.014452
+"PINN full mode, loaded",93,2.0157
+"PINN full mode, loaded",94,2.0186509999999998
+"PINN full mode, loaded",95,2.012145
+"PINN full mode, loaded",96,2.012189
+"PINN full mode, loaded",97,2.015335
+"PINN full mode, loaded",98,2.025264
+"PINN full mode, loaded",99,2.023166
+"GEP refinement, seed ready",0,3543.695522
+"GEP refinement, seed ready",1,3540.5861769999997
+"GEP refinement, seed ready",2,3570.290309
+"GEP refinement, seed ready",3,3520.1159789999997
+"GEP refinement, seed ready",4,3564.6235859999997
+"GEP refinement, seed ready",5,3535.178077
+"GEP refinement, seed ready",6,3613.7799619999996
+"GEP refinement, seed ready",7,3573.09924
+"GEP refinement, seed ready",8,3566.227012
+"GEP refinement, seed ready",9,3534.404647
+"PINN-seeded GEP, end to end",0,3577.004935
+"PINN-seeded GEP, end to end",1,3656.059788
+"PINN-seeded GEP, end to end",2,3592.3964579999997
+"PINN-seeded GEP, end to end",3,3570.010382
+"PINN-seeded GEP, end to end",4,3581.984226
+"PINN-seeded GEP, end to end",5,3561.8655999999996
+"PINN-seeded GEP, end to end",6,3538.4652149999997
+"PINN-seeded GEP, end to end",7,3565.645892
+"PINN-seeded GEP, end to end",8,3535.110906
+"PINN-seeded GEP, end to end",9,3609.563921
+Classical full mode,0,6179.417877
+Classical full mode,1,6181.403228
+Classical full mode,2,6182.264214
+Classical full mode,3,6180.342931
+Classical full mode,4,6167.904973
+Classical full mode,5,6175.7353029999995
+Classical full mode,6,6176.870626999999
+Classical full mode,7,6178.279495
+Classical full mode,8,6172.419129
+Classical full mode,9,6178.908116
+Classical shooting,0,6457.183403
+Classical shooting,1,6461.818128999999
+Classical shooting,2,6464.1096959999995
+Classical shooting,3,6460.2874919999995
+Classical shooting,4,6462.0454549999995
+Classical shooting,5,6468.250496
+Classical shooting,6,6462.606148999999
+Classical shooting,7,6460.188137
+Classical shooting,8,6457.601033999999
+Classical shooting,9,6457.457112
+PINN checkpoint load,0,17.52841
+PINN checkpoint load,1,14.425509
+PINN checkpoint load,2,14.143018
+PINN checkpoint load,3,14.526289
+PINN checkpoint load,4,14.11055

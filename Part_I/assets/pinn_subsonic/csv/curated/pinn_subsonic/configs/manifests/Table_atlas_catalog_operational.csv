@@ -1,0 +1,50 @@
+chart_id,M_min,M_max,eta_min,eta_max,priority,chart_status,pipeline_status,gep_regime,construction_family,area
+ULTRALOW_M002_006_eta002_006,0.02,0.06,0.02,0.06,200.0,longwave_gep,PINN seed + GEP long-wave,longwave_map10_N301,core,0.0015999999999999994
+VLOW_EXTREME_CI_ONLY,0.1,0.7,0.05,0.12,40.0,longwave_gep,PINN seed + GEP extreme long-wave,extreme_longwave_map20_N301,core,0.041999999999999996
+VLOW_MOD_QSCALED,0.1,0.7,0.12,0.25,65.0,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,core,0.078
+LOW,0.1,0.7,0.25,0.4,60.0,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,core,0.09000000000000001
+MID,0.1,0.7,0.35,0.55,70.0,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,core,0.12000000000000004
+HIGH_LOWM_COMPACTY,0.1,0.4,0.55,0.65,100.0,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,core,0.03
+NEUTRAL1_LOWM,0.1,0.4,0.65,0.8,110.0,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,core,0.04500000000000001
+NEUTRAL2_LOWM,0.1,0.4,0.8,0.92,120.0,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,core,0.036000000000000004
+NEUTRAL3_LOWM,0.1,0.4,0.92,0.98,130.0,near_neutral_continuation,PINN seed + GEP near-neutral N401 + modal continuation,near_neutral_N401,core,0.017999999999999985
+HIGH_HIM,0.35,0.7,0.5,0.65,50.0,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,core,0.052500000000000005
+NEUTRAL1_HIM,0.35,0.7,0.65,0.8,95.0,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,core,0.052500000000000005
+NEUTRAL2_HIM,0.35,0.7,0.8,0.92,105.0,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,core,0.041999999999999996
+NEUTRAL3_HIM,0.35,0.7,0.92,0.98,115.0,near_neutral_continuation,PINN seed + GEP near-neutral N401 + modal continuation,near_neutral_N401,core,0.020999999999999977
+LOWM_EXT_VLOW_EXTREME,0.05,0.1,0.05,0.12,,longwave_gep,PINN seed + GEP extreme long-wave,extreme_longwave_map20_N301,extension,0.0034999999999999996
+LOWM_EXT_VLOW_MOD,0.05,0.1,0.12,0.25,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.006500000000000001
+LOWM_EXT_LOW,0.05,0.1,0.25,0.4,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.0075000000000000015
+LOWM_EXT_MID,0.05,0.1,0.35,0.55,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.010000000000000004
+LOWM_EXT_HIGH,0.05,0.1,0.55,0.65,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.004999999999999999
+LOWM_EXT_NEUTRAL1,0.05,0.1,0.65,0.8,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.0075000000000000015
+LOWM_EXT_NEUTRAL2,0.05,0.1,0.8,0.92,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.006
+LOWM_EXT_NEUTRAL3,0.05,0.1,0.92,0.98,,near_neutral_continuation,PINN seed + GEP near-neutral N401 + modal continuation,near_neutral_N401,extension,0.0029999999999999975
+HM1_VLOW_EXTREME,0.7,0.85,0.05,0.12,,longwave_gep,PINN seed + GEP extreme long-wave,extreme_longwave_map20_N301,extension,0.0105
+HM1_VLOW_MOD,0.7,0.85,0.12,0.25,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.019500000000000003
+HM1_LOW,0.7,0.85,0.25,0.4,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.022500000000000006
+HM1_MID,0.7,0.85,0.35,0.55,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.030000000000000013
+HM1_HIGH,0.7,0.85,0.55,0.65,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.015
+HM1_NEUTRAL1,0.7,0.85,0.65,0.8,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.022500000000000006
+HM1_NEUTRAL2,0.7,0.85,0.8,0.92,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.018000000000000002
+HM1_NEUTRAL3,0.7,0.85,0.92,0.98,,near_neutral_continuation,PINN seed + GEP near-neutral N401 + modal continuation,near_neutral_N401,extension,0.008999999999999992
+HM2_VLOW_EXTREME,0.85,0.98,0.05,0.12,,longwave_gep,PINN seed + GEP extreme long-wave,extreme_longwave_map20_N301,extension,0.009099999999999999
+HM2_VLOW_MOD,0.85,0.98,0.12,0.25,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.016900000000000002
+HM2_LOW,0.85,0.98,0.25,0.4,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.019500000000000003
+HM2_MID,0.85,0.98,0.35,0.55,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.02600000000000001
+HM2_HIGH,0.85,0.98,0.55,0.65,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.012999999999999998
+HM2_NEUTRAL1,0.85,0.98,0.65,0.8,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.019500000000000003
+HM2_NEUTRAL2,0.85,0.98,0.8,0.92,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,extension,0.0156
+HM2_NEUTRAL3,0.85,0.98,0.92,0.98,,near_neutral_continuation,PINN seed + GEP near-neutral N401 + modal continuation,near_neutral_N401,extension,0.007799999999999993
+LMEDGE_VLOW,0.02,0.06,0.05,0.13,,longwave_gep,PINN seed + GEP long-wave,longwave_map10_N301,fullrect,0.0031999999999999997
+LMEDGE_LOW,0.02,0.06,0.12,0.4,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,fullrect,0.0112
+LMEDGE_MID,0.02,0.06,0.35,0.55,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,fullrect,0.008000000000000002
+LMEDGE_HIGH,0.02,0.06,0.55,0.65,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,fullrect,0.003999999999999998
+LMEDGE_NEUTRAL1,0.02,0.06,0.65,0.8,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,fullrect,0.006
+LMEDGE_NEUTRAL2,0.02,0.06,0.8,0.92,,ci_only_validated_with_gep,PINN seed + GEP standard,standard_N301,fullrect,0.004799999999999999
+LMEDGE_NEUTRAL3,0.02,0.06,0.92,0.98,,near_neutral_continuation,PINN seed + GEP near-neutral N401 + modal continuation,near_neutral_N401,fullrect,0.002399999999999997
+ETAEDGE_LM,0.05,0.35,0.02,0.06,,longwave_gep,PINN seed + GEP long-wave,longwave_map10_N301,fullrect,0.011999999999999999
+ETAEDGE_MM,0.3,0.7,0.02,0.06,,longwave_gep,PINN seed + GEP long-wave,longwave_map10_N301,fullrect,0.015999999999999997
+ETAEDGE_HM1,0.68,0.86,0.02,0.06,,longwave_gep,PINN seed + GEP long-wave,longwave_map10_N301,fullrect,0.007199999999999996
+ETAEDGE_HM2A,0.84,0.93,0.02,0.06,,longwave_gep,PINN seed + GEP long-wave,longwave_map10_N301,fullrect,0.0036000000000000025
+ETAEDGE_HM2B,0.92,0.98,0.02,0.06,,longwave_gep,PINN seed + GEP extreme long-wave,extreme_longwave_map20_N301,fullrect,0.002399999999999997

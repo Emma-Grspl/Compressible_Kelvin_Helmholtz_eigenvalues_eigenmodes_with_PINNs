@@ -1,0 +1,2 @@
+chart_id,field_family,best_epoch,total_epochs,n_holdout,prefit_loss_replay,prefit_loss_historical,prefit_loss_abs_diff,prefit_loss_rel_diff,anchor_continuation_clip_count,anchor_continuation_clip_fraction,anchor_continuation_max_grad_norm,max_joint_vs_release_abs
+LMEDGE_MID,pq_etaaware,39823,40000,1,1.0074328242794525e-07,1.007432824279611e-07,1.5855397981416434e-20,1.573841709272697e-13,1,2.5111116691359264e-05,13.104924297320194,0.008587041024218367

@@ -1,0 +1,5 @@
+regime,chart_ids,N,mapping_scale,xi_max,continuation_required,status,notes
+standard_N301,LMEDGE_LOW;LMEDGE_MID;LMEDGE_HIGH;LMEDGE_NEUTRAL1;LMEDGE_NEUTRAL2,301,5.0,0.98,False,validated,Standard interior and low-M charts
+longwave_map10_N301,LMEDGE_VLOW;ETAEDGE_LM;ETAEDGE_MM;ETAEDGE_HM1;ETAEDGE_HM2A,301,10.0,0.99,False,validated,Long-wave regime
+extreme_longwave_map20_N301,ETAEDGE_HM2B,301,20.0,0.995,False,validated,Extreme long-wave and high-M regime; mapping selected by dedicated audit
+near_neutral_N401,LMEDGE_NEUTRAL3,401,5.0,0.98,True,validated,"Near-neutral regime; use modal continuation, particularly for eta >= 0.96"

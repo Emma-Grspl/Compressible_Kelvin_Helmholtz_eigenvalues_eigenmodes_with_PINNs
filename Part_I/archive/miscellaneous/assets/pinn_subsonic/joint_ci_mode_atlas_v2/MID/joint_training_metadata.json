@@ -1,0 +1,29 @@
+{
+  "anchor_eta_values": [
+    0.35,
+    0.4166666666666667,
+    0.4833333333333334,
+    0.55
+  ],
+  "anchor_mach_values": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7
+  ],
+  "best_epoch": 17920,
+  "best_loss": 4.667237808955564e-05,
+  "ci_anchor_linf_abs": 2.7510375326222913e-05,
+  "ci_anchor_mae_abs": 8.927799235528792e-06,
+  "ci_anchor_rel_rmse_scaled": 3.249852054275991e-05,
+  "ci_detached": false,
+  "classical_modal_supervision_in_training": false,
+  "field_family": "pq_legacy",
+  "init_checkpoint": "pinn_subsonic/models/MID/model_state.pt",
+  "joint_physics_coupling": true,
+  "n_anchors_per_mach": 4,
+  "output_dir": "assets/pinn_subsonic/joint_ci_mode_atlas_v2/MID"
+}

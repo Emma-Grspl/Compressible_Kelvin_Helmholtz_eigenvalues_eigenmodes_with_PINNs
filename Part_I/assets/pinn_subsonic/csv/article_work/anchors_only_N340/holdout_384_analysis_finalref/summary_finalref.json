@@ -1,0 +1,33 @@
+{
+  "reference": "ci_final",
+  "physics_informed": {
+    "n": 384,
+    "mean": 0.014656730832479105,
+    "median": 0.002207498901147715,
+    "p95": 0.07448380111882248,
+    "p99": 0.11542455328505757,
+    "max": 0.14763592630712752,
+    "fraction_lt_1pct": 0.7291666666666666,
+    "fraction_gt_1pct": 0.2708333333333333,
+    "fraction_gt_5pct": 0.13020833333333334,
+    "fraction_gt_10pct": 0.013020833333333334
+  },
+  "anchors_only": {
+    "n": 384,
+    "mean": 0.011110112123787708,
+    "median": 0.0020505741881891616,
+    "p95": 0.06304831266830768,
+    "p99": 0.11733568977747653,
+    "max": 0.15039341030686146,
+    "fraction_lt_1pct": 0.7942708333333334,
+    "fraction_gt_1pct": 0.20572916666666666,
+    "fraction_gt_5pct": 0.08333333333333333,
+    "fraction_gt_10pct": 0.015625
+  },
+  "paired": {
+    "physics_better_count": 218,
+    "physics_better_fraction": 0.5677083333333334,
+    "median_error_ratio_physics_over_anchor": 0.9969895089659468,
+    "median_error_difference_physics_minus_anchor": -2.5785159390769854e-06
+  }
+}

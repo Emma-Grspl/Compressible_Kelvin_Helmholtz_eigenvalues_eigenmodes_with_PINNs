@@ -1,0 +1,2 @@
+chart_id,field_family,best_epoch,total_epochs,n_holdout,prefit_loss_replay,prefit_loss_historical,prefit_loss_abs_diff,prefit_loss_rel_diff,anchor_continuation_clip_count,anchor_continuation_clip_fraction,anchor_continuation_max_grad_norm,max_joint_vs_release_abs
+LOWM_EXT_LOW,pq_etaaware,24756,25000,1,1.1510993462219676e-09,1.1510993462172008e-09,4.76683507498996e-21,4.141115265728338e-12,1,4.039424785910486e-05,10.235884406150003,0.01432196534337582

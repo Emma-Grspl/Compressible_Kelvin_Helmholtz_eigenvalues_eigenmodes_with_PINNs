@@ -1,0 +1,20 @@
+Stage 0 subsonic 2D hybrid4ci: FAIL
+mach_values=[0.3, 0.5]
+alpha_range=[0.1, 0.8]
+anchor_alphas=[0.1, 0.3, 0.55, 0.8]
+epochs=5
+learning_rate=0.001
+weights: anchor=100.0 monotone_alpha=1.0 smooth_alpha=0.0 smooth_mach=0.0
+best_epoch=5
+best_anchor_mae_abs=1.46158054e-01
+best_anchor_max_abs=3.11156303e-01
+best_anchor_mae_rel=4.34681058e-01
+best_anchor_max_rel=1.21492839e+00
+final_anchor_mae_abs=1.46158054e-01
+final_anchor_max_abs=3.11156303e-01
+final_anchor_mae_rel=4.34681058e-01
+final_anchor_max_rel=1.21492839e+00
+
+Interpretation:
+- PASS: the spectral head is sufficiently locked on the sparse classical ci anchors.
+- FAIL: keep Stage 0 as a diagnostic and do not warm-start a physics stage from it.

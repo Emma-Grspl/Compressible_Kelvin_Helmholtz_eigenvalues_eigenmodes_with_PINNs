@@ -1,0 +1,13 @@
+{
+  "best_anchor_loss": 9.812931718422989e-21,
+  "best_epoch": 39239,
+  "chart_id": "LMEDGE_LOW",
+  "ci_lr": 0.0002,
+  "ci_prefit_steps": 3000,
+  "matched_epochs": 40000,
+  "n_local_anchors": 8,
+  "physics_gradient": false,
+  "seed": 1234,
+  "source_n340_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340/joint/LMEDGE_LOW/model_state.pt",
+  "w_ci": 1000.0
+}

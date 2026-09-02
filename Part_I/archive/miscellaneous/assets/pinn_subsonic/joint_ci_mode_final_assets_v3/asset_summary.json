@@ -1,0 +1,19 @@
+{
+  "fixed_mach": 0.5249999999999999,
+  "n_anchor_rows": 996,
+  "n_charts": 49,
+  "n_points": 387,
+  "resolved_columns": {
+    "Mach": "Mach",
+    "alpha": "alpha",
+    "ci_final": "pinn_matched_ci",
+    "ci_ref": "ci_classic",
+    "ci_seed": "ci_pinn",
+    "eta": "eta",
+    "p_overlap_final": "pinn_matched_p_overlap_classic",
+    "p_rel_final": "pinn_matched_p_rel_classic",
+    "rho_rel_final": "pinn_matched_rho_rel_classic",
+    "u_rel_final": "pinn_matched_u_rel_classic",
+    "v_rel_final": "pinn_matched_v_rel_classic"
+  }
+}

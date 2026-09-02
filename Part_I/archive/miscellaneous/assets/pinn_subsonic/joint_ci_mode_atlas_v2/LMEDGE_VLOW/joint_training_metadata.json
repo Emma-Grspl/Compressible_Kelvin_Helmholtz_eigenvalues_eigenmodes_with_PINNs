@@ -1,0 +1,27 @@
+{
+  "anchor_eta_values": [
+    0.05,
+    0.07666666666666667,
+    0.10333333333333333,
+    0.13
+  ],
+  "anchor_mach_values": [
+    0.02,
+    0.03,
+    0.04,
+    0.05,
+    0.06
+  ],
+  "best_epoch": 43102,
+  "best_loss": 3.1212912789247973e-06,
+  "ci_anchor_linf_abs": 1.085325904259804e-06,
+  "ci_anchor_mae_abs": 5.439012468633209e-07,
+  "ci_anchor_rel_rmse_scaled": 7.506704388658744e-07,
+  "ci_detached": false,
+  "classical_modal_supervision_in_training": false,
+  "field_family": "pQscaled",
+  "init_checkpoint": "pinn_subsonic/models/LMEDGE_VLOW/model_state.pt",
+  "joint_physics_coupling": true,
+  "n_anchors_per_mach": 4,
+  "output_dir": "assets/pinn_subsonic/joint_ci_mode_atlas_v2/LMEDGE_VLOW"
+}

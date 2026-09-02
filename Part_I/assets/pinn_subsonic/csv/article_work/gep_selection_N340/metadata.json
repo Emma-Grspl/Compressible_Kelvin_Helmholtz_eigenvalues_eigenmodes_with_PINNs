@@ -1,0 +1,8 @@
+{
+  "frozen_budget": 340,
+  "canonical_points": 372,
+  "ci_weight": 2.0,
+  "central_tolerance": 0.001,
+  "classical_information_used_for_selection": false,
+  "classical_information_used_for_scoring": true
+}

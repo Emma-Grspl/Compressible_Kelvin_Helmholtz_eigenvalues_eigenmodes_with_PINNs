@@ -1,0 +1,27 @@
+{
+  "anchor_eta_values": [
+    0.02,
+    0.03333333333333333,
+    0.04666666666666666,
+    0.06
+  ],
+  "anchor_mach_values": [
+    0.92,
+    0.935,
+    0.95,
+    0.965,
+    0.98
+  ],
+  "best_epoch": 44207,
+  "best_loss": 4.035787367515342e-05,
+  "ci_anchor_linf_abs": 1.335314643025054e-06,
+  "ci_anchor_mae_abs": 7.249581047585885e-07,
+  "ci_anchor_rel_rmse_scaled": 1.7011394278561924e-06,
+  "ci_detached": false,
+  "classical_modal_supervision_in_training": false,
+  "field_family": "pQscaled",
+  "init_checkpoint": "pinn_subsonic/models/ETAEDGE_HM2B/model_state.pt",
+  "joint_physics_coupling": true,
+  "n_anchors_per_mach": 4,
+  "output_dir": "assets/pinn_subsonic/joint_ci_mode_atlas_v2/ETAEDGE_HM2B"
+}

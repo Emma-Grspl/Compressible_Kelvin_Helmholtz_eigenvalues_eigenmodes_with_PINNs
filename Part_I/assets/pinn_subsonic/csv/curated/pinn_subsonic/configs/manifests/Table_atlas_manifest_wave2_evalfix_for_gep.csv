@@ -1,0 +1,17 @@
+chart_id,path,M_min,M_max,eta_min,eta_max,ymax,central_ymax,status,priority
+LOWM_EXT_LOW_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_LOWM_EXT_LOW_M0.05_0.10_eta0.25_0.40_ciIDW_EVALFIX,0.05,0.1,0.25,0.4,80,20,validated_with_gep,130
+LOWM_EXT_MID_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_LOWM_EXT_MID_M0.05_0.10_eta0.35_0.55_ciIDW_EVALFIX,0.05,0.1,0.35,0.55,80,20,validated_with_gep,130
+LOWM_EXT_HIGH_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_LOWM_EXT_HIGH_M0.05_0.10_eta0.55_0.65_ciIDW_EVALFIX,0.05,0.1,0.55,0.65,30,8,validated_with_gep,130
+LOWM_EXT_NEUTRAL1_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_LOWM_EXT_NEUTRAL1_M0.05_0.10_eta0.65_0.80_ciIDW_EVALFIX,0.05,0.1,0.65,0.8,30,8,validated_with_gep,130
+LOWM_EXT_NEUTRAL2_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_LOWM_EXT_NEUTRAL2_M0.05_0.10_eta0.80_0.92_ciIDW_EVALFIX,0.05,0.1,0.8,0.92,24,6,validated_with_gep,130
+LOWM_EXT_NEUTRAL3_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_LOWM_EXT_NEUTRAL3_M0.05_0.10_eta0.92_0.98_ciIDW_EVALFIX,0.05,0.1,0.92,0.98,18,5,validated_with_gep,130
+HM1_HIGH_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM1_HIGH_M0.70_0.85_eta0.55_0.65_ciIDW_EVALFIX,0.7,0.85,0.55,0.65,60,16,validated_with_gep,110
+HM1_NEUTRAL1_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM1_NEUTRAL1_M0.70_0.85_eta0.65_0.80_ciIDW_EVALFIX,0.7,0.85,0.65,0.8,60,16,validated_with_gep,110
+HM1_NEUTRAL2_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM1_NEUTRAL2_M0.70_0.85_eta0.80_0.92_ciIDW_EVALFIX,0.7,0.85,0.8,0.92,55,14,validated_with_gep,110
+HM1_NEUTRAL3_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM1_NEUTRAL3_M0.70_0.85_eta0.92_0.98_ciIDW_EVALFIX,0.7,0.85,0.92,0.98,50,14,validated_with_gep,110
+HM2_LOW_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM2_LOW_M0.85_0.98_eta0.25_0.40_ciIDW_EVALFIX,0.85,0.98,0.25,0.4,120,30,ci_only,90
+HM2_MID_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM2_MID_M0.85_0.98_eta0.35_0.55_ciIDW_EVALFIX,0.85,0.98,0.35,0.55,120,30,ci_only,90
+HM2_HIGH_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM2_HIGH_M0.85_0.98_eta0.55_0.65_ciIDW_EVALFIX,0.85,0.98,0.55,0.65,80,22,ci_only,90
+HM2_NEUTRAL1_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM2_NEUTRAL1_M0.85_0.98_eta0.65_0.80_ciIDW_EVALFIX,0.85,0.98,0.65,0.8,80,22,ci_only,90
+HM2_NEUTRAL2_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM2_NEUTRAL2_M0.85_0.98_eta0.80_0.92_ciIDW_EVALFIX,0.85,0.98,0.8,0.92,70,18,ci_only,90
+HM2_NEUTRAL3_EVALFIX,assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM2_NEUTRAL3_M0.85_0.98_eta0.92_0.98_ciIDW_EVALFIX,0.85,0.98,0.92,0.98,60,16,ci_only,90

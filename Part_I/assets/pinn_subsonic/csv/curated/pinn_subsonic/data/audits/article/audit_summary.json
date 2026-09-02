@@ -1,0 +1,91 @@
+{
+  "anchor_ablation_summary": "archive/csv/results/subsonic_pinn_normalization_ablation_local/normalization_ablation_summary.csv",
+  "assets": [
+    {
+      "asset": "Table_PINN_hyperparameters",
+      "source": "checkpoint_inventory.csv",
+      "status": "ready"
+    },
+    {
+      "asset": "Table_global_validation_metrics",
+      "source": "assets/pinn_subsonic/csv/curated/pinn_subsonic/data/scientific_outputs/release_v1/data/Table_validation_pointwise_canonical.csv",
+      "status": "ready"
+    },
+    {
+      "asset": "Fig_single_case_anchor_ablation",
+      "note": "final main figure also needs aligned modal profiles for each configuration",
+      "source": "archive/csv/results/subsonic_pinn_normalization_ablation_local/normalization_ablation_summary.csv",
+      "status": "partial"
+    },
+    {
+      "asset": "SuppFig_training_convergence",
+      "source": "archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz/history.csv",
+      "status": "ready_or_partial"
+    },
+    {
+      "asset": "SuppTable_multiseed_robustness",
+      "source": "archive/csv/results/subsonic_pinn_normalization_ablation_local/normalization_ablation_summary.csv",
+      "status": "ready_or_partial"
+    },
+    {
+      "asset": "SuppFig_chart_boundary_continuity",
+      "source": "candidate chart-prediction CSVs",
+      "status": "partial"
+    }
+  ],
+  "repo_root": "/Users/emma.grospellier/The\u0300se/These_PINN_KH_RT",
+  "torch_available": true,
+  "training_history_candidates": [
+    "archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz/history.csv",
+    "archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral/history.csv",
+    "archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral/history.csv",
+    "archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral/history.csv",
+    "archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral/history.csv",
+    "archive/old_runs/subsonique_pinn/kh_subsonic_fixed_mach_M05_modefocus/history.csv",
+    "archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch/history.csv",
+    "archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/history.csv",
+    "archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts/history.csv",
+    "archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts_light_anchor/history.csv",
+    "archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_modeaudit/history.csv",
+    "archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch/history.csv",
+    "archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined/history.csv",
+    "archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/runs_frozen/kh_subsonic_2d_local_m0008_jz_neutral_h160/history.csv",
+    "archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/runs_frozen/kh_subsonic_fixed_mach_M05_adaptive_jz/history.csv",
+    "archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/runs_frozen/kh_subsonic_singlecase_a050_m050/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/_smoke_first_order_real/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/_smoke_riccati_experts/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/_smoke_riccati_experts_anchor/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/_smoke_riccati_experts_light_anchor/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_2d_local_m0005_jz/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M00_adaptive/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M03_adaptive/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_adaptive_jz/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_budget/ci_supervision_budget_summary.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/physics_only/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_highalpha/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_modefocus_lowalpha/history.csv",
+    "archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M07_adaptive/history.csv",
+    "archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/1D/plot/experts_history.csv",
+    "archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/1D/plot/experts_light_anchor_history.csv",
+    "assets/pinn_supersonic/singlecase_pq_firstorder_M150_a01625_ASYMPTOTICENV_lowtail_ft/history.csv",
+    "assets/pinn_supersonic/singlecase_pq_firstorder_M160_a010/history.csv",
+    "assets/pinn_supersonic/singlecase_pq_firstorder_M160_a010_anchorP17/history.csv",
+    "assets/pinn_supersonic/singlecase_pq_firstorder_M160_a010_anchorP3/history.csv",
+    "assets/pinn_supersonic/singlecase_pq_firstorder_M160_a010_anchorP5/history.csv",
+    "assets/pinn_supersonic/singlecase_pq_firstorder_M160_a010_anchorP9/history.csv",
+    "archive/csv/model_saved/_smoke_kh_subsonic_2d_hybrid4ci_stage0/history.csv",
+    "archive/csv/model_saved/_smoke_kh_subsonic_2d_hybrid4ci_stage1/history.csv",
+    "archive/csv/model_saved/_smoke_kh_subsonic_2d_stage1ter_matching/history.csv",
+    "models_saved/imported/model_saved/kh_subsonic_2d_hybrid4ci_stage0_anchor_lock_no_monotone_lbfgs/history.csv",
+    "models_saved/imported/model_saved/kh_subsonic_2d_hybrid4ci_stage1_mode_from_ci_stage0/history.csv",
+    "models_saved/imported/model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1bis_physics_refined/hybrid_ci16/history.csv",
+    "models_saved/imported/model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1bis_physics_refined/hybrid_ci4/history.csv",
+    "models_saved/imported/model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1bis_physics_refined/hybrid_ci8/history.csv",
+    "archive/csv/model_saved/kh_subsonic_singlecase_phaseA_ter_a0650_m0600_stabilized/history.csv",
+    "results/_smoke_representation_ablation/alpha_0.500_cartesian/history.csv",
+    "archive/csv/results/subsonic_pinn_integral_norm_ablation_ampphase/alpha_0.200_amplitude_phase_max_wint_0.5/history.csv"
+  ],
+  "validation_pointwise": "assets/pinn_subsonic/csv/curated/pinn_subsonic/data/scientific_outputs/release_v1/data/Table_validation_pointwise_canonical.csv"
+}

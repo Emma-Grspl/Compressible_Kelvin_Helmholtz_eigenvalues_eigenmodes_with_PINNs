@@ -1,0 +1,25 @@
+{
+  "raw_isoline_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/KH_RT_Blumen/subsonic",
+  "release_csv": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/csv/joint_ci_mode_final_assets_v1/data/Table_validation_pointwise_canonical.csv",
+  "n_isolines": 5,
+  "ci_levels": [
+    0.0,
+    0.05,
+    0.1,
+    0.15,
+    0.175
+  ],
+  "n_digitized_points": 351,
+  "n_release_points": 387,
+  "n_release_points_inside_blumen_support": 304,
+  "alpha_range_digitized": [
+    0.0,
+    1.0044071400097443
+  ],
+  "Mach_range_digitized": [
+    0.05348363378659671,
+    0.9999704714237203
+  ],
+  "negative_alpha_values_snapped_to_zero": 1,
+  "relative_error_floor": 0.001
+}

@@ -1,0 +1,6 @@
+chart_id,path,M_min,M_max,eta_min,eta_max,ymax,central_ymax,status,priority
+LMEDGE_LOW,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pq2d_FULLRECT_LMEDGE_LOW_ciIDW_EVALFIX,0.02,0.06,0.12,0.4,100,25,ci_only,150
+LMEDGE_MID,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pq2d_FULLRECT_LMEDGE_MID_ciIDW_EVALFIX,0.02,0.06,0.35,0.55,80,20,ci_only,150
+LMEDGE_HIGH,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pq2d_FULLRECT_LMEDGE_HIGH_ciIDW_EVALFIX,0.02,0.06,0.55,0.65,40,10,ci_only,150
+LMEDGE_NEUTRAL1,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pq2d_FULLRECT_LMEDGE_NEUTRAL1_ciIDW_EVALFIX,0.02,0.06,0.65,0.8,35,9,ci_only,150
+LMEDGE_NEUTRAL2,assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pq2d_FULLRECT_LMEDGE_NEUTRAL2_ciIDW_EVALFIX,0.02,0.06,0.8,0.92,28,7,ci_only,150

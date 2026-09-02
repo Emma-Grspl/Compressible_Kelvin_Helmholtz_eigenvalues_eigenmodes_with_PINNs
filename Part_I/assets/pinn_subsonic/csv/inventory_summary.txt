@@ -1,0 +1,110 @@
+Repository: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT
+Total checkpoints: 2873
+Directories containing checkpoints: 660
+Relevant existing data/figure assets: 16844
+Files with anchor-related names: 2460
+Explicit 0/4/8/16 variants detected in names: 59
+Anchor-related configuration lines: 1086
+
+Top checkpoint directories:
+     18  model_saved/kh_subsonic_2d_hybrid4ci_stage1bis_dense_bc_no_normphase
+     12  model_saved/kh_subsonic_2d_hybrid4ci_stage1_mode_from_ci_stage0
+     11  model_saved/kh_subsonic_singlecase_pure_a050_m050
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined
+     11  model_saved/kh_subsonic_alphamach_ci_mode_campaign
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_neutral_bcq
+     11  model_saved/kh_subsonic_fixed_mach_M05_modefocus
+     11  model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci8_fixed
+     11  model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci4_fixed
+     11  model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci16_fixed
+     11  model_saved/kh_subsonic_fixed_mach_M05_anchor_max_ampphase_locloss
+     11  model_saved/kh_subsonic_singlecase_pure_a050_m050_scalar_ci
+     11  model_saved/kh_subsonic_2d_pilot_M05_M06
+     11  model_saved/kh_subsonic_singlecase_a050_m050_anchor_point
+     11  model_saved/kh_subsonic_singlecase_a050_m050_anchor_point_max
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_modeaudit
+     11  model_saved/kh_subsonic_fixed_mach_M05_modefocus_sym
+     11  model_saved/kh_subsonic_2d_local_m0009_jz_neutral_h160
+     11  model_saved/kh_subsonic_2d_local_m0005_jz_multibranch_targeted
+     11  model_saved/kh_subsonic_2d_local_m0005_jz_neutral
+     11  model_saved/kh_subsonic_fixed_mach_M05_anchor_max_h192_d6
+     11  model_saved/kh_subsonic_fixed_mach_M05_anchor_max
+     11  model_saved/kh_subsonic_2d_local_m0005_jz_multibranch_riccati
+     11  model_saved/kh_subsonic_singlecase_a050_m050_anchor_max
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_multibranch
+     11  model_saved/kh_subsonic_singlecase_a050_m050_anchor_band
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_twostage
+     11  model_saved/kh_subsonic_fixed_mach_M05_anchor_max_ampphase_modeaudit
+     11  model_saved/kh_subsonic_2d_local_m0005_jz_multibranch
+     11  model_saved/kh_subsonic_2d_local_m0008_jz_neutral_h160
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_experts_light_anchor
+     11  model_saved/kh_subsonic_fixed_mach_M05_modefocus_v2
+     11  model_saved/kh_subsonic_2d_local_m0008_jz_neutral
+     11  model_saved/kh_subsonic_2d_band_M05_M07
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_experts
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_twostage_soft
+     11  model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1_mode_from_ci_stage0/hybrid_ci4
+     11  model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1_mode_from_ci_stage0/hybrid_ci16
+     11  model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1_mode_from_ci_stage0/hybrid_ci8
+     11  model_saved/kh_subsonic_2d_local_m0007_jz_neutral
+
+Explicit anchor variants detected:
+   4 anchors  assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/smoke_4_points.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_mode_error_8pt_vs_first_order_real.slurm
+   8 anchors  These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_mode_error_8pt_vs_modefocus.slurm
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1000.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1500.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2000.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2500.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_3000.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_500.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/config.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/model_best.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.png
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.png
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1000.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1500.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2000.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2500.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_3000.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_500.pt
+   8 anchors  archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/config.csv
+   8 anchors  archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/model_best.pt
+   8 anchors  archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.png
+   8 anchors  archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+   8 anchors  archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_curve_vs_reference.csv
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_curve_vs_reference.png
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_error_heatmap.csv
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_error_heatmap.png
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/classic_vs_pinn_modes_overlay.csv
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/classic_vs_pinn_modes_overlay.pdf
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/mode_field_error_heatmaps.csv
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/mode_field_error_heatmaps.png
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/mode_field_error_summary.csv
+   8 anchors  archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.png
+   8 anchors  archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+   8 anchors  archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+   8 anchors  code/src/launch/slurm/jz_submit_kh_subsonic_mode_error_8pt_vs_first_order_real.slurm
+   8 anchors  code/src/launch/slurm/jz_submit_kh_subsonic_mode_error_8pt_vs_modefocus.slurm
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1000.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1500.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2000.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2500.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_3000.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_500.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/config.csv
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/model_best.pt
+   8 anchors  plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.png

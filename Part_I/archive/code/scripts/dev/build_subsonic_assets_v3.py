@@ -1,0 +1,559 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import math
+from pathlib import Path
+from typing import Iterable
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib.colors import LogNorm, Normalize
+from matplotlib.lines import Line2D
+import matplotlib.tri as mtri
+import numpy as np
+import pandas as pd
+
+FIELDS = ("p", "rho", "u", "v")
+
+
+def pick_column(frame: pd.DataFrame, names: Iterable[str], required: bool = True) -> str | None:
+    for name in names:
+        if name in frame.columns:
+            return name
+    if required:
+        raise KeyError(
+            f"None of {list(names)} found. Available columns:\n"
+            + "\n".join(f"  - {c}" for c in frame.columns)
+        )
+    return None
+
+
+def numeric(frame: pd.DataFrame, column: str | None) -> pd.Series:
+    if column is None:
+        return pd.Series(np.nan, index=frame.index, dtype=float)
+    return pd.to_numeric(frame[column], errors="coerce")
+
+
+def save_figure(fig: plt.Figure, stem: Path, dpi: int = 320) -> None:
+    stem.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(stem.with_suffix(".pdf"), bbox_inches="tight")
+    fig.savefig(stem.with_suffix(".png"), dpi=dpi, bbox_inches="tight")
+    plt.close(fig)
+
+
+def alpha_from_eta(mach, eta):
+    mach = np.asarray(mach, dtype=float)
+    eta = np.asarray(eta, dtype=float)
+    return eta * np.sqrt(np.clip(1.0 - mach**2, 0.0, None))
+
+
+def canonicalize_audit(raw: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, str | None]]:
+    aliases = {"M": "Mach", "mach": "Mach", "Eta": "eta"}
+    frame = raw.rename(
+        columns={old: new for old, new in aliases.items() if old in raw and new not in raw}
+    ).copy()
+
+    columns = {
+        "Mach": pick_column(frame, ["Mach"]),
+        "eta": pick_column(frame, ["eta"]),
+        "alpha": pick_column(frame, ["alpha"]),
+        "ci_ref": pick_column(
+            frame,
+            ["ci_classic", "ci_ref", "ci_classical", "shoot_ci", "ci_shooting"],
+        ),
+        "ci_seed": pick_column(
+            frame,
+            ["ci_pinn", "ci_pred", "ci_seed", "ci_pinn_direct", "direct_ci"],
+        ),
+        "ci_final": pick_column(
+            frame,
+            [
+                "central_ci", "central_max_ci", "central_gep_ci",
+                "pinn_matched_ci", "gep_ci", "selected_ci", "ci_final",
+            ],
+        ),
+        "p_rel_final": pick_column(
+            frame,
+            [
+                "central_p_rel_classic", "pinn_matched_p_rel_classic",
+                "p_rel_final", "p_rel_classic", "p_rel",
+            ],
+            required=False,
+        ),
+        "rho_rel_final": pick_column(
+            frame,
+            [
+                "central_rho_rel_classic", "pinn_matched_rho_rel_classic",
+                "rho_rel_final", "rho_rel_classic", "rho_rel",
+            ],
+            required=False,
+        ),
+        "u_rel_final": pick_column(
+            frame,
+            [
+                "central_u_rel_classic", "pinn_matched_u_rel_classic",
+                "u_rel_final", "u_rel_classic", "u_rel",
+            ],
+            required=False,
+        ),
+        "v_rel_final": pick_column(
+            frame,
+            [
+                "central_v_rel_classic", "pinn_matched_v_rel_classic",
+                "v_rel_final", "v_rel_classic", "v_rel",
+            ],
+            required=False,
+        ),
+        "p_overlap_final": pick_column(
+            frame,
+            [
+                "central_p_overlap_classic", "pinn_matched_p_overlap_classic",
+                "p_overlap_final", "p_overlap_classic", "p_overlap",
+            ],
+            required=False,
+        ),
+    }
+
+    out = pd.DataFrame({name: numeric(frame, column) for name, column in columns.items()})
+    for optional in ("point_id", "chart_id", "sample_group"):
+        if optional in frame:
+            out[optional] = frame[optional].astype(str)
+
+    out["ci_seed_abs_err"] = (out["ci_seed"] - out["ci_ref"]).abs()
+    out["ci_final_abs_err"] = (out["ci_final"] - out["ci_ref"]).abs()
+    out["omega_ref"] = out["alpha"] * out["ci_ref"]
+    out["omega_seed"] = out["alpha"] * out["ci_seed"]
+    out["omega_final"] = out["alpha"] * out["ci_final"]
+    out["omega_final_abs_err"] = (out["omega_final"] - out["omega_ref"]).abs()
+
+    modal = ["p_rel_final", "rho_rel_final", "u_rel_final", "v_rel_final"]
+    out["modal_error_mean"] = out[modal].mean(axis=1, skipna=False)
+    out["modal_error_max"] = out[modal].max(axis=1, skipna=False)
+
+    out = out.replace([np.inf, -np.inf], np.nan)
+    out = out.dropna(subset=["Mach", "eta", "alpha", "ci_ref", "ci_seed", "ci_final"])
+    out = (
+        out.sort_values(["Mach", "alpha"])
+        .drop_duplicates(["Mach", "eta"], keep="first")
+        .reset_index(drop=True)
+    )
+    return out, columns
+
+
+def plot_atlas(training: pd.DataFrame, figure_dir: Path) -> None:
+    fig, ax = plt.subplots(figsize=(10.4, 8.0))
+    for index, row in training.reset_index(drop=True).iterrows():
+        m = np.linspace(float(row.mach_min), float(row.mach_max), 80)
+        lo = alpha_from_eta(m, float(row.eta_min))
+        hi = alpha_from_eta(m, float(row.eta_max))
+        ax.plot(m, lo, lw=0.6, alpha=0.8)
+        ax.plot(m, hi, lw=0.6, alpha=0.8)
+        ax.plot([m[0], m[0]], [lo[0], hi[0]], lw=0.45, alpha=0.55)
+        ax.plot([m[-1], m[-1]], [lo[-1], hi[-1]], lw=0.45, alpha=0.55)
+        mc = 0.5 * (float(row.mach_min) + float(row.mach_max))
+        ec = 0.5 * (float(row.eta_min) + float(row.eta_max))
+        ax.text(mc, float(alpha_from_eta(mc, ec)), str(index + 1),
+                fontsize=5.0, ha="center", va="center")
+    m = np.linspace(0.0, 1.0, 500)
+    ax.plot(m, np.sqrt(np.clip(1.0 - m**2, 0.0, None)),
+            ls="--", lw=1.2, color="black", label=r"$\alpha^2+M^2=1$")
+    ax.set(xlabel=r"Mach number $M$", ylabel=r"Wavenumber $\alpha$",
+           title="Joint PINN atlas: 49 local charts",
+           xlim=(0, 1), ylim=(0, 1))
+    ax.grid(alpha=0.18)
+    ax.legend(frameon=False)
+    fig.tight_layout()
+    save_figure(fig, figure_dir / "Fig_atlas_49_charts_Mach_alpha")
+
+
+def read_anchors(training: pd.DataFrame) -> pd.DataFrame:
+    frames = []
+    for _, row in training.iterrows():
+        path = Path(str(row.output_dir)) / "ci_anchor_points.csv"
+        if not path.is_file():
+            continue
+        frame = pd.read_csv(path)
+        if "Mach" not in frame:
+            continue
+        if "alpha" not in frame:
+            if "eta" not in frame:
+                continue
+            frame["alpha"] = alpha_from_eta(
+                pd.to_numeric(frame["Mach"], errors="coerce"),
+                pd.to_numeric(frame["eta"], errors="coerce"),
+            )
+        frame["chart_id"] = str(row.chart_id)
+        frames.append(frame)
+    if not frames:
+        raise FileNotFoundError("No ci_anchor_points.csv found through training plan.")
+    out = pd.concat(frames, ignore_index=True, sort=False)
+    out["Mach"] = pd.to_numeric(out["Mach"], errors="coerce")
+    out["alpha"] = pd.to_numeric(out["alpha"], errors="coerce")
+    return out.dropna(subset=["Mach", "alpha"])
+
+
+def plot_anchors(training: pd.DataFrame, anchors: pd.DataFrame, figure_dir: Path) -> None:
+    fig, ax = plt.subplots(figsize=(10.4, 8.0))
+    for _, row in training.iterrows():
+        m = np.linspace(float(row.mach_min), float(row.mach_max), 50)
+        ax.plot(m, alpha_from_eta(m, float(row.eta_min)), lw=0.3, alpha=0.18)
+        ax.plot(m, alpha_from_eta(m, float(row.eta_max)), lw=0.3, alpha=0.18)
+    ax.scatter(anchors["Mach"], anchors["alpha"], s=12, alpha=0.65,
+               label=f"Chart-anchor rows: {len(anchors)}")
+    unique = anchors.drop_duplicates(["Mach", "alpha"])
+    ax.scatter(unique["Mach"], unique["alpha"], s=28, facecolors="none",
+               edgecolors="black", linewidths=0.5,
+               label=f"Unique physical locations: {len(unique)}")
+    m = np.linspace(0.0, 1.0, 500)
+    ax.plot(m, np.sqrt(np.clip(1.0 - m**2, 0.0, None)),
+            ls="--", lw=1.1, color="black")
+    ax.set(xlabel=r"Mach number $M$", ylabel=r"Wavenumber $\alpha$",
+           title=r"Sparse spectral supervision: $c_i$ anchors",
+           xlim=(0, 1), ylim=(0, 1))
+    ax.grid(alpha=0.18)
+    ax.legend(frameon=False)
+    fig.tight_layout()
+    save_figure(fig, figure_dir / "Fig_sparse_ci_anchor_map_Mach_alpha")
+
+
+def triangulation(frame: pd.DataFrame, value: str):
+    data = (
+        frame[["Mach", "alpha", value]].dropna()
+        .groupby(["Mach", "alpha"], as_index=False)[value].mean()
+    )
+    if len(data) < 3:
+        raise RuntimeError(f"Not enough points for {value}")
+    tri = mtri.Triangulation(data["Mach"].to_numpy(), data["alpha"].to_numpy())
+    # Mask triangles spanning unphysically large gaps.
+    x = data["Mach"].to_numpy()
+    y = data["alpha"].to_numpy()
+    triangles = tri.triangles
+    lengths = np.stack([
+        np.hypot(x[triangles[:, 0]] - x[triangles[:, 1]],
+                 y[triangles[:, 0]] - y[triangles[:, 1]]),
+        np.hypot(x[triangles[:, 1]] - x[triangles[:, 2]],
+                 y[triangles[:, 1]] - y[triangles[:, 2]]),
+        np.hypot(x[triangles[:, 2]] - x[triangles[:, 0]],
+                 y[triangles[:, 2]] - y[triangles[:, 0]]),
+    ], axis=1)
+    tri.set_mask(np.max(lengths, axis=1) > 0.20)
+    return data, tri
+
+
+def plot_ci_isolines(canonical: pd.DataFrame, figure_dir: Path) -> None:
+    levels = [0.05, 0.10, 0.15, 0.175]
+    ref, tri_ref = triangulation(canonical, "ci_ref")
+    final, tri_final = triangulation(canonical, "ci_final")
+
+    fig, ax = plt.subplots(figsize=(9.2, 7.3))
+    # Draw GEP first and classical second; the dashed orange line remains visible.
+    gep = ax.tricontour(
+        tri_final, final["ci_final"].to_numpy(),
+        levels=levels, colors="tab:orange", linestyles="--",
+        linewidths=2.6, zorder=2,
+    )
+    classic = ax.tricontour(
+        tri_ref, ref["ci_ref"].to_numpy(),
+        levels=levels, colors="black", linestyles="-",
+        linewidths=1.15, zorder=3,
+    )
+    ax.clabel(classic, fmt=lambda x: f"{x:g}", fontsize=8)
+    ax.clabel(gep, fmt=lambda x: f"{x:g}", fontsize=8)
+
+    m = np.linspace(0.0, 1.0, 500)
+    ax.plot(m, np.sqrt(np.clip(1.0 - m**2, 0.0, None)),
+            ls=":", lw=1.2, color="tab:blue")
+    ax.legend(handles=[
+        Line2D([0], [0], color="black", lw=1.4, label="Classical shooting"),
+        Line2D([0], [0], color="tab:orange", lw=2.4, ls="--", label="PINN + GEP"),
+        Line2D([0], [0], color="tab:blue", lw=1.2, ls=":", label="Neutral boundary"),
+    ], frameon=False, loc="upper right")
+    ax.set(xlabel=r"Mach number $M$", ylabel=r"Wavenumber $\alpha$",
+           title=r"Constant-$c_i$ isolines: classical shooting versus PINN + GEP",
+           xlim=(0, 1), ylim=(0, 1))
+    ax.grid(alpha=0.18)
+    fig.tight_layout()
+    save_figure(fig, figure_dir / "Fig_ci_isolines_classical_vs_PINN_GEP")
+
+
+def pointwise_error_map(
+    canonical: pd.DataFrame,
+    column: str,
+    title: str,
+    label: str,
+    stem: Path,
+) -> None:
+    data = canonical[["Mach", "alpha", column]].dropna().copy()
+    values = pd.to_numeric(data[column], errors="coerce").to_numpy()
+    positive = values[np.isfinite(values) & (values > 0)]
+    if positive.size == 0:
+        raise RuntimeError(f"No positive finite values for {column}")
+    vmin = max(float(np.min(positive)), 1.0e-14)
+    vmax = max(float(np.max(positive)), vmin * 1.01)
+
+    fig, ax = plt.subplots(figsize=(9.0, 7.2))
+    scatter = ax.scatter(
+        data["Mach"], data["alpha"], c=np.clip(values, vmin, None),
+        s=42, marker="s", linewidths=0,
+        norm=LogNorm(vmin=vmin, vmax=vmax), cmap="viridis",
+    )
+    cb = fig.colorbar(scatter, ax=ax)
+    cb.set_label(label)
+    m = np.linspace(0.0, 1.0, 500)
+    ax.plot(m, np.sqrt(np.clip(1.0 - m**2, 0.0, None)),
+            ls="--", lw=1.0, color="black")
+    ax.set(xlabel=r"Mach number $M$", ylabel=r"Wavenumber $\alpha$",
+           title=title, xlim=(0, 1), ylim=(0, 1))
+    ax.grid(alpha=0.12)
+    ax.text(0.02, 0.02, "Logarithmic colour scale",
+            transform=ax.transAxes, fontsize=8)
+    fig.tight_layout()
+    save_figure(fig, stem)
+
+
+def select_fixed_mach(
+    canonical: pd.DataFrame,
+    requested: float,
+    minimum_points: int = 5,
+) -> tuple[float, pd.DataFrame]:
+    counts = canonical.groupby("Mach", dropna=True).size().sort_index()
+
+    if counts.empty:
+        raise RuntimeError(
+            "No Mach values are available for the fixed-Mach cut."
+        )
+
+    maximum_count = int(counts.max())
+
+    # Use an exact sampled Mach line. Prefer lines with enough alpha coverage;
+    # otherwise use the best-sampled exact Mach instead of interpolating.
+    eligible = counts.loc[counts >= int(minimum_points)]
+    if eligible.empty:
+        eligible = counts.loc[counts == maximum_count]
+
+    available = eligible.index.to_numpy(dtype=float)
+    selected = float(
+        available[np.argmin(np.abs(available - float(requested)))]
+    )
+
+    cut = (
+        canonical.loc[np.isclose(canonical["Mach"], selected)]
+        .sort_values("alpha")
+        .drop_duplicates("alpha", keep="first")
+        .reset_index(drop=True)
+    )
+
+    if len(cut) < 3:
+        raise RuntimeError(
+            "The central audit contains no exact fixed-Mach line with at "
+            "least three distinct alpha values. "
+            f"Best available Mach={selected} has {len(cut)} values."
+        )
+
+    return selected, cut
+
+def plot_fixed_mach(canonical: pd.DataFrame, requested: float, figure_dir: Path) -> float:
+    mach, cut = select_fixed_mach(canonical, requested)
+    if len(cut) < 4:
+        raise RuntimeError(f"Only {len(cut)} points available at selected Mach={mach}")
+
+    fig, ax = plt.subplots(figsize=(9.0, 5.8))
+    ax.plot(cut["alpha"], cut["ci_ref"], color="black", lw=1.8,
+            marker="o", ms=4.0, label="Classical shooting", zorder=4)
+    ax.plot(cut["alpha"], cut["ci_seed"], color="tab:blue", lw=1.4,
+            ls="--", marker="s", ms=3.8, markerfacecolor="white",
+            label="Direct PINN", zorder=3)
+    ax.plot(cut["alpha"], cut["ci_final"], color="tab:orange", lw=1.5,
+            ls="-.", marker="^", ms=4.0, markerfacecolor="white",
+            label="PINN + GEP", zorder=5)
+    ax.set(
+        xlabel=r"Wavenumber $\alpha$",
+        ylabel=r"$c_i$",
+        title=(
+            fr"Exact fixed-Mach cut: $M={mach:.6g}$ "
+            fr"({len(cut)} sampled $\alpha$ values)"
+        ),
+    )
+    ax.grid(alpha=0.2)
+    ax.legend(frameon=False, ncol=3, loc="best")
+    fig.tight_layout()
+    save_figure(fig, figure_dir / "Fig_ci_cut_fixed_Mach")
+    cut.to_csv(figure_dir.parent / "data" / "ci_cut_fixed_Mach.csv", index=False)
+    return mach
+
+
+def load_npz(path: str | Path) -> dict[str, np.ndarray]:
+    with np.load(path) as z:
+        return {key: np.asarray(z[key]) for key in z.files}
+
+
+def mode_figure(row: pd.Series, profile: dict[str, np.ndarray]) -> plt.Figure:
+    y = profile["y"].astype(float)
+    mask = np.abs(y) <= 12.0
+    if mask.sum() < 20:
+        mask = np.ones_like(y, dtype=bool)
+    y = y[mask]
+
+    fig, axes = plt.subplots(4, 2, figsize=(11.2, 12.5), sharex=True)
+    for i, field in enumerate(FIELDS):
+        classic = profile[f"{field}_classic"][mask]
+        direct = profile[f"{field}_direct"][mask]
+        gep = profile[f"{field}_gep"][mask]
+        for j, (component, operator) in enumerate((("Re", np.real), ("Im", np.imag))):
+            ax = axes[i, j]
+            ax.plot(y, operator(classic), color="black", lw=1.8, label="Classical")
+            ax.plot(y, operator(direct), color="tab:blue", lw=1.35, ls="--",
+                    label="Direct PINN")
+            ax.plot(y, operator(gep), color="tab:orange", lw=1.45, ls="-.",
+                    label="PINN + GEP")
+            ax.set_title(fr"{component}$({field})$")
+            ax.grid(alpha=0.2)
+            if j == 0:
+                ax.set_ylabel("Amplitude")
+    axes[-1, 0].set_xlabel(r"$y$")
+    axes[-1, 1].set_xlabel(r"$y$")
+
+    title = (
+        fr"$M={float(row['Mach']):.5f}$, "
+        fr"$\eta={float(row['eta']):.5f}$, "
+        fr"$\alpha={float(row['alpha']):.6f}$, "
+        fr"$N={int(row['N'])}$"
+    )
+    fig.suptitle(title, y=0.995, fontsize=13)
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(0.5, 0.972),
+               ncol=3, frameon=False)
+    fig.tight_layout(rect=(0.0, 0.0, 1.0, 0.945))
+    return fig
+
+
+def command_base(args: argparse.Namespace) -> None:
+    output = Path(args.output_dir)
+    data_dir = output / "data"
+    fig_dir = output / "figures"
+    table_dir = output / "tables"
+    for path in (data_dir, fig_dir, table_dir):
+        path.mkdir(parents=True, exist_ok=True)
+
+    training = pd.read_csv(args.training_plan, sep="\t")
+    required = {"chart_id", "output_dir", "mach_min", "mach_max", "eta_min", "eta_max"}
+    missing = sorted(required.difference(training.columns))
+    if missing:
+        raise KeyError(f"Training plan missing {missing}")
+
+    canonical, resolved = canonicalize_audit(pd.read_csv(args.central_audit))
+    canonical.to_csv(data_dir / "validation_pointwise_canonical.csv", index=False)
+    training.to_csv(data_dir / "atlas_catalog_49_charts.tsv", sep="\t", index=False)
+    anchors = read_anchors(training)
+    anchors.to_csv(data_dir / "spectral_supervision_anchors_explicit.csv", index=False)
+
+    plot_atlas(training, fig_dir)
+    plot_anchors(training, anchors, fig_dir)
+    plot_ci_isolines(canonical, fig_dir)
+    pointwise_error_map(
+        canonical, "ci_final_abs_err",
+        r"Pointwise absolute $c_i$ error: PINN + GEP versus classical shooting",
+        r"$|c_i^{PINN+GEP}-c_i^{shoot}|$",
+        fig_dir / "Fig_ci_error_heatmap_PINN_GEP_vs_classical",
+    )
+    if canonical["modal_error_mean"].notna().sum() >= 3:
+        pointwise_error_map(
+            canonical, "modal_error_mean",
+            r"Pointwise mean modal error over $p,\rho,u,v$",
+            r"$\frac{1}{4}\sum_{f\in\{p,\rho,u,v\}}\varepsilon_f$",
+            fig_dir / "Fig_modal_error_mean_heatmap_PINN_GEP_vs_classical",
+        )
+    selected_mach = plot_fixed_mach(canonical, args.fixed_mach, fig_dir)
+
+    summary = {
+        "n_charts": int(training["chart_id"].nunique()),
+        "n_points": int(len(canonical)),
+        "n_anchor_rows": int(len(anchors)),
+        "fixed_mach": selected_mach,
+        "resolved_columns": resolved,
+    }
+    (output / "asset_summary.json").write_text(
+        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    print(json.dumps(summary, indent=2, sort_keys=True))
+
+
+def command_modes(args: argparse.Namespace) -> None:
+    convergence = Path(args.convergence_root)
+    output = Path(args.output_dir)
+    fig_dir = output / "figures"
+    supplement = output / "supplement"
+    data_dir = output / "data"
+    for path in (fig_dir, supplement, data_dir):
+        path.mkdir(parents=True, exist_ok=True)
+
+    points_path = convergence / "validation_mode_points_20_finest.csv"
+    if not points_path.is_file():
+        raise FileNotFoundError(points_path)
+    points = pd.read_csv(points_path)
+    required = {"profile_path", "Mach", "eta", "alpha", "N"}
+    missing = sorted(required.difference(points.columns))
+    if missing:
+        raise KeyError(f"{points_path} missing {missing}")
+
+    points.to_csv(data_dir / "validation_mode_points_20_finest.csv", index=False)
+
+    pdf_path = supplement / "supp_modes_classical_direct_PINN_PINN_GEP_20_points.pdf"
+    with PdfPages(pdf_path) as pdf:
+        for _, row in points.sort_values(["Mach", "eta"]).iterrows():
+            profile = load_npz(row["profile_path"])
+            fig = mode_figure(row, profile)
+            pdf.savefig(fig, bbox_inches="tight")
+            plt.close(fig)
+
+    interior = points.loc[
+        points["Mach"].between(0.30, 0.75)
+        & points["eta"].between(0.25, 0.75)
+    ].copy()
+    if interior.empty:
+        interior = points.copy()
+    score = (
+        ((pd.to_numeric(interior["Mach"]) - 0.50) / 0.20) ** 2
+        + ((pd.to_numeric(interior["eta"]) - 0.50) / 0.20) ** 2
+    )
+    representative = interior.loc[score.idxmin()]
+    profile = load_npz(representative["profile_path"])
+    fig = mode_figure(representative, profile)
+    save_figure(fig, fig_dir / "Fig_representative_modes_p_rho_u_v_Re_Im")
+
+    pd.DataFrame([representative]).to_csv(
+        data_dir / "representative_mode_point.csv", index=False
+    )
+    print(pdf_path)
+    print(fig_dir / "Fig_representative_modes_p_rho_u_v_Re_Im.pdf")
+
+
+def parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser()
+    sub = p.add_subparsers(dest="command", required=True)
+
+    base = sub.add_parser("base")
+    base.add_argument("--training-plan", required=True)
+    base.add_argument("--central-audit", required=True)
+    base.add_argument("--output-dir", required=True)
+    base.add_argument("--fixed-mach", type=float, default=0.50)
+    base.set_defaults(func=command_base)
+
+    modes = sub.add_parser("modes")
+    modes.add_argument("--convergence-root", required=True)
+    modes.add_argument("--output-dir", required=True)
+    modes.set_defaults(func=command_modes)
+    return p
+
+
+def main() -> None:
+    args = parser().parse_args()
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()

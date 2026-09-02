@@ -1,0 +1,26 @@
+{
+  "anchor_eta_values": [
+    0.05,
+    0.07333333333333333,
+    0.09666666666666666,
+    0.12
+  ],
+  "anchor_mach_values": [
+    0.85,
+    0.9,
+    0.94,
+    0.98
+  ],
+  "best_epoch": 29076,
+  "best_loss": 0.0004109198426252113,
+  "ci_anchor_linf_abs": 1.2607802201691776e-06,
+  "ci_anchor_mae_abs": 4.7385900518032154e-07,
+  "ci_anchor_rel_rmse_scaled": 1.3017454752708e-06,
+  "ci_detached": false,
+  "classical_modal_supervision_in_training": false,
+  "field_family": "pQscaled",
+  "init_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340_p1f_seed1234/modal/HM2_VLOW_EXTREME/model_best.pt",
+  "joint_physics_coupling": true,
+  "n_anchors_per_mach": null,
+  "output_dir": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340_p1f_seed1234/joint/HM2_VLOW_EXTREME"
+}

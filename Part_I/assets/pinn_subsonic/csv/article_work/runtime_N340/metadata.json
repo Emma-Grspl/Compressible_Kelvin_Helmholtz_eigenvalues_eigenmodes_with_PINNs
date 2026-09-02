@@ -1,0 +1,18 @@
+{
+  "frozen_budget": 340,
+  "training_included": false,
+  "checkpoint_loading_included": false,
+  "checkpoint_load_time_s": 2.009319062810391,
+  "single_query_definition": "grid point nearest (Mach,eta)=(0.5,0.5)",
+  "map_definition": "40x25 regular grid in (Mach,eta), 1000 points",
+  "output_definition": "ci plus complete mode (p,rho,u,v)",
+  "hybrid_note": "PINN profiles are evaluated conservatively although only scalar ci seeds GEP selection.",
+  "classical_note": "Each classical query calls Mstab17SubsonicSolver.solve() and reconstructs the full mode. No cached classical solution is used.",
+  "hardware": {
+    "hostname": "r6i3n5",
+    "platform": "Linux-5.14.0-570.116.1.el9_6.x86_64-x86_64-with-glibc2.34",
+    "python": "3.11.6",
+    "torch": "2.1.1",
+    "cuda_device": "Tesla V100-SXM2-32GB"
+  }
+}

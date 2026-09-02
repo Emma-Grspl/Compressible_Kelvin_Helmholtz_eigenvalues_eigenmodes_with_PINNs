@@ -1,0 +1,29 @@
+{
+  "anchor_eta_values": [
+    0.12,
+    0.16333333333333333,
+    0.20666666666666667,
+    0.25
+  ],
+  "anchor_mach_values": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7
+  ],
+  "best_epoch": 17957,
+  "best_loss": 0.0003102648135150834,
+  "ci_anchor_linf_abs": 4.340447655193369e-05,
+  "ci_anchor_mae_abs": 1.4717762679738217e-05,
+  "ci_anchor_rel_rmse_scaled": 3.161202152657444e-05,
+  "ci_detached": false,
+  "classical_modal_supervision_in_training": false,
+  "field_family": "pQscaled",
+  "init_checkpoint": "pinn_subsonic/models/VLOW_MOD_QSCALED/model_state.pt",
+  "joint_physics_coupling": true,
+  "n_anchors_per_mach": 4,
+  "output_dir": "assets/pinn_subsonic/joint_ci_mode_atlas_v2/VLOW_MOD_QSCALED"
+}

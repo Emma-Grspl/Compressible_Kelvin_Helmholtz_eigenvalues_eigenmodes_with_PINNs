@@ -1,0 +1,13 @@
+{
+  "best_anchor_loss": 7.63686808740046e-10,
+  "best_epoch": 17997,
+  "chart_id": "LOW",
+  "ci_lr": 0.0002,
+  "ci_prefit_steps": 3000,
+  "matched_epochs": 18000,
+  "n_local_anchors": 23,
+  "physics_gradient": false,
+  "seed": 1234,
+  "source_n340_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340/joint/LOW/model_state.pt",
+  "w_ci": 1000.0
+}

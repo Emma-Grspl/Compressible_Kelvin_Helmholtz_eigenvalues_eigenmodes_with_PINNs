@@ -1,0 +1,11 @@
+{
+  "chart_id": "ETAEDGE_HM2B",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_ETAEDGE_HM2B_ciIDW_EVALFIX/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pQscaled2d_FULLRECT_ETAEDGE_HM2B_ciIDW_EVALFIX",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_manifest_fullrect_ETAEDGE_HM2B_mapping_audit.csv",
+  "checkpoint_sha256": "9db38cc8ad09564ae0af8b75350ad70a121b5d5f6cccbe73841ff97bd794596d",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

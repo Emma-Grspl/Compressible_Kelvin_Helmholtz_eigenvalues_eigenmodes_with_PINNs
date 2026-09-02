@@ -1,0 +1,10 @@
+source_path,size_kib,decision,reason
+archive/csv,5135432,EXCLUDED_FROM_PUBLIC_GIT,Large historical CSV archive duplicated by curated public tables
+archive/assets,652560,EXCLUDED_FROM_PUBLIC_GIT,Historical asset archive duplicated by canonical public assets
+archive/miscellaneous/.jz_transfer_20260817,295112,EXCLUDED_FROM_PUBLIC_GIT,Local transfer bundle including an individual file above the GitHub 100 MB limit
+models_saved/archive,503876,EXCLUDED_FROM_PUBLIC_GIT,Historical checkpoints not required by the supported production workflow
+models_saved/supporting,255108,EXCLUDED_FROM_PUBLIC_GIT,Ablation checkpoints documented in provenance but not required by the supported production workflow
+models_saved/imported,2272,EXCLUDED_FROM_PUBLIC_GIT,Imported checkpoint copies outside the production checkpoint set
+complementary_phase/.venv-kh-subsonic,308032,EXCLUDED_FROM_PUBLIC_GIT,Local virtual environment
+complementary_phase/logs,16,EXCLUDED_FROM_PUBLIC_GIT,Transient execution logs
+results/complementary_audits/phase_C/p1c_independent_physics_audit_normalized/p1c_pointwise_interior_residuals.csv,98880,EXCLUDED_FROM_PUBLIC_GIT,101251075-byte audit CSV exceeds the GitHub 100 MiB file limit and remains locally available

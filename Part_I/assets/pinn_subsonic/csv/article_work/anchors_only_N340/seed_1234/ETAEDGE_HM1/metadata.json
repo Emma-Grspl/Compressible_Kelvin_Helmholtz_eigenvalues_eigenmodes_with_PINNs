@@ -1,0 +1,13 @@
+{
+  "best_anchor_loss": 9.516716163078904e-25,
+  "best_epoch": 1429,
+  "chart_id": "ETAEDGE_HM1",
+  "ci_lr": 0.0002,
+  "ci_prefit_steps": 3000,
+  "matched_epochs": 45000,
+  "n_local_anchors": 7,
+  "physics_gradient": false,
+  "seed": 1234,
+  "source_n340_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340/joint/ETAEDGE_HM1/model_state.pt",
+  "w_ci": 1000.0
+}

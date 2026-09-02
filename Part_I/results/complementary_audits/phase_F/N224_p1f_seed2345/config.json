@@ -1,0 +1,14 @@
+{
+  "anchor_csv": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N224_p1f_seed2345/anchors.csv",
+  "anchor_hash": "55218ba241af3c14c2c7ae3a92660cc087d3c76aae7ab91817ddb64746e4b11d",
+  "anchor_source": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_study_union1236_cover4/global_anchors_N224.csv",
+  "budget": 224,
+  "label": "N224_p1f_seed2345",
+  "max_anchors_per_chart": 27,
+  "median_anchors_per_chart": 7.0,
+  "min_anchors_per_chart": 4,
+  "n_charts": 49,
+  "n_unique_anchors": 224,
+  "selection": "geometry-only nested cover4 + maximin",
+  "tag": "p1f_seed2345"
+}

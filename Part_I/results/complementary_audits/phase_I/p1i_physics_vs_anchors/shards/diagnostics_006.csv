@@ -1,0 +1,2 @@
+chart_id,field_family,best_epoch,total_epochs,n_holdout,prefit_loss_replay,prefit_loss_historical,prefit_loss_abs_diff,prefit_loss_rel_diff,anchor_continuation_clip_count,anchor_continuation_clip_fraction,anchor_continuation_max_grad_norm,max_joint_vs_release_abs
+HIGH_LOWM_COMPACTY,pq_legacy,21155,22000,10,3.721642353917054e-08,3.7216423539160585e-08,9.952637130238029e-21,2.67425942199026e-13,1,4.7270148900969035e-05,12.715153313263864,0.003932873990285912

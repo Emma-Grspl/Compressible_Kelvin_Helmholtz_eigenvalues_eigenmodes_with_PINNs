@@ -1,0 +1,4 @@
+configuration,seed,median_abs,mean_abs,p95_abs,p99_abs,max_abs,fraction_lt_2e-2,provenance
+physics_only,1234,0.285976,0.303773,0.618241,0.654663,0.663944,0.007481,Jean_Zay_model_best_evaluation
+physics_only,2345,0.287200,0.304398,0.618180,0.654272,0.663505,0.009975,Jean_Zay_model_best_evaluation
+physics_only,3456,0.287982,0.305036,0.617988,0.653464,0.662558,0.007481,Jean_Zay_model_best_evaluation

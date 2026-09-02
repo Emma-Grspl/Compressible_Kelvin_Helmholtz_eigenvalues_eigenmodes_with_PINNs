@@ -1,0 +1,20 @@
+{
+  "anchor_files": [],
+  "ci_final_abs_max": 0.0026204364608141996,
+  "ci_seed_abs_max": 0.03096611048070999,
+  "coverage_max": 4,
+  "coverage_min": 1,
+  "generated": [],
+  "missing": [
+    "Direct PINN modal errors are absent from the release CSV; C4 requires a direct-mode extraction campaign.",
+    "Blumen comparison: blumen_ci_datasets.csv was not found. Supply --blumen-csv PATH."
+  ],
+  "modal_final_max": 0.0091264492640856,
+  "n_charts": 49,
+  "n_points": 384,
+  "p_overlap_final_min": 0.9999918434076852,
+  "release_csv": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/offgrid_validation_results_384_release.csv",
+  "warnings": [
+    "No explicit anchor CSV was found; sparse-supervision figure uses chart-validation locations as a fallback."
+  ]
+}

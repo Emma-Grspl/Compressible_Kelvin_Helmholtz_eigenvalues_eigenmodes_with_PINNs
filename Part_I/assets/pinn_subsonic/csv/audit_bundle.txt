@@ -1,0 +1,899 @@
+################ INVENTORY SUMMARY ################
+Repository: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT
+Total checkpoints: 2873
+Directories containing checkpoints: 660
+Relevant existing data/figure assets: 16844
+Files with anchor-related names: 2460
+Explicit 0/4/8/16 variants detected in names: 59
+Anchor-related configuration lines: 1086
+
+Top checkpoint directories:
+     18  model_saved/kh_subsonic_2d_hybrid4ci_stage1bis_dense_bc_no_normphase
+     12  model_saved/kh_subsonic_2d_hybrid4ci_stage1_mode_from_ci_stage0
+     11  model_saved/kh_subsonic_singlecase_pure_a050_m050
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined
+     11  model_saved/kh_subsonic_alphamach_ci_mode_campaign
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_neutral_bcq
+     11  model_saved/kh_subsonic_fixed_mach_M05_modefocus
+     11  model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci8_fixed
+     11  model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci4_fixed
+     11  model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci16_fixed
+     11  model_saved/kh_subsonic_fixed_mach_M05_anchor_max_ampphase_locloss
+     11  model_saved/kh_subsonic_singlecase_pure_a050_m050_scalar_ci
+     11  model_saved/kh_subsonic_2d_pilot_M05_M06
+     11  model_saved/kh_subsonic_singlecase_a050_m050_anchor_point
+     11  model_saved/kh_subsonic_singlecase_a050_m050_anchor_point_max
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_modeaudit
+     11  model_saved/kh_subsonic_fixed_mach_M05_modefocus_sym
+     11  model_saved/kh_subsonic_2d_local_m0009_jz_neutral_h160
+     11  model_saved/kh_subsonic_2d_local_m0005_jz_multibranch_targeted
+     11  model_saved/kh_subsonic_2d_local_m0005_jz_neutral
+     11  model_saved/kh_subsonic_fixed_mach_M05_anchor_max_h192_d6
+     11  model_saved/kh_subsonic_fixed_mach_M05_anchor_max
+     11  model_saved/kh_subsonic_2d_local_m0005_jz_multibranch_riccati
+     11  model_saved/kh_subsonic_singlecase_a050_m050_anchor_max
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_multibranch
+     11  model_saved/kh_subsonic_singlecase_a050_m050_anchor_band
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_twostage
+     11  model_saved/kh_subsonic_fixed_mach_M05_anchor_max_ampphase_modeaudit
+     11  model_saved/kh_subsonic_2d_local_m0005_jz_multibranch
+     11  model_saved/kh_subsonic_2d_local_m0008_jz_neutral_h160
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_experts_light_anchor
+     11  model_saved/kh_subsonic_fixed_mach_M05_modefocus_v2
+     11  model_saved/kh_subsonic_2d_local_m0008_jz_neutral
+     11  model_saved/kh_subsonic_2d_band_M05_M07
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_experts
+     11  model_saved/kh_subsonic_fixed_mach_M05_riccati_twostage_soft
+     11  model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1_mode_from_ci_stage0/hybrid_ci4
+     11  model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1_mode_from_ci_stage0/hybrid_ci16
+     11  model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1_mode_from_ci_stage0/hybrid_ci8
+     11  model_saved/kh_subsonic_2d_local_m0007_jz_neutral
+
+Explicit anchor variants detected:
+   4 anchors  assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/smoke_4_points.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_mode_error_8pt_vs_first_order_real.slurm
+   8 anchors  These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_mode_error_8pt_vs_modefocus.slurm
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1000.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1500.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2000.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2500.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_3000.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_500.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/config.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/model_best.pt
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.png
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.png
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+   8 anchors  These_PINN_KH_RT_stage1ter_render/archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1000.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1500.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2000.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2500.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_3000.pt
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_500.pt
+   8 anchors  archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/config.csv
+   8 anchors  archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv
+   8 anchors  models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/model_best.pt
+   8 anchors  archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.png
+   8 anchors  archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+   8 anchors  archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_curve_vs_reference.csv
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_curve_vs_reference.png
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_error_heatmap.csv
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_error_heatmap.png
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/classic_vs_pinn_modes_overlay.csv
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/classic_vs_pinn_modes_overlay.pdf
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/mode_field_error_heatmaps.csv
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/mode_field_error_heatmaps.png
+   8 anchors  assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/mode_field_error_summary.csv
+   8 anchors  archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.png
+   8 anchors  archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+   8 anchors  archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+   8 anchors  code/src/launch/slurm/jz_submit_kh_subsonic_mode_error_8pt_vs_first_order_real.slurm
+   8 anchors  code/src/launch/slurm/jz_submit_kh_subsonic_mode_error_8pt_vs_modefocus.slurm
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1000.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1500.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2000.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2500.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_3000.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_500.pt
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/config.csv
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv
+   8 anchors  model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/model_best.pt
+   8 anchors  plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.csv
+   8 anchors  plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.png
+
+################ CHECKPOINT DIRECTORIES ################
+directory,checkpoint_count
+model_saved/kh_subsonic_2d_hybrid4ci_stage1bis_dense_bc_no_normphase,18
+model_saved/kh_subsonic_2d_hybrid4ci_stage1_mode_from_ci_stage0,12
+model_saved/kh_subsonic_singlecase_pure_a050_m050,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined,11
+model_saved/kh_subsonic_alphamach_ci_mode_campaign,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_neutral_bcq,11
+model_saved/kh_subsonic_fixed_mach_M05_modefocus,11
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci8_fixed,11
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci4_fixed,11
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci16_fixed,11
+model_saved/kh_subsonic_fixed_mach_M05_anchor_max_ampphase_locloss,11
+model_saved/kh_subsonic_singlecase_pure_a050_m050_scalar_ci,11
+model_saved/kh_subsonic_2d_pilot_M05_M06,11
+model_saved/kh_subsonic_singlecase_a050_m050_anchor_point,11
+model_saved/kh_subsonic_singlecase_a050_m050_anchor_point_max,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_modeaudit,11
+model_saved/kh_subsonic_fixed_mach_M05_modefocus_sym,11
+model_saved/kh_subsonic_2d_local_m0009_jz_neutral_h160,11
+model_saved/kh_subsonic_2d_local_m0005_jz_multibranch_targeted,11
+model_saved/kh_subsonic_2d_local_m0005_jz_neutral,11
+model_saved/kh_subsonic_fixed_mach_M05_anchor_max_h192_d6,11
+model_saved/kh_subsonic_fixed_mach_M05_anchor_max,11
+model_saved/kh_subsonic_2d_local_m0005_jz_multibranch_riccati,11
+model_saved/kh_subsonic_singlecase_a050_m050_anchor_max,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_multibranch,11
+model_saved/kh_subsonic_singlecase_a050_m050_anchor_band,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_twostage,11
+model_saved/kh_subsonic_fixed_mach_M05_anchor_max_ampphase_modeaudit,11
+model_saved/kh_subsonic_2d_local_m0005_jz_multibranch,11
+model_saved/kh_subsonic_2d_local_m0008_jz_neutral_h160,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_experts_light_anchor,11
+model_saved/kh_subsonic_fixed_mach_M05_modefocus_v2,11
+model_saved/kh_subsonic_2d_local_m0008_jz_neutral,11
+model_saved/kh_subsonic_2d_band_M05_M07,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_experts,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_twostage_soft,11
+model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1_mode_from_ci_stage0/hybrid_ci4,11
+model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1_mode_from_ci_stage0/hybrid_ci16,11
+model_saved/kh_subsonic_M05_alpha010_080_hybrid_stage1_mode_from_ci_stage0/hybrid_ci8,11
+model_saved/kh_subsonic_2d_local_m0007_jz_neutral,11
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_riccati_pure_physics_reference,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_spectral_alpha_sweep,11
+model_saved/kh_subsonic_2d_local_m0005_jz_edge_neutral,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_pure_physics,11
+model_saved/kh_subsonic_fixed_mach_M05_ampphase_multibranch,11
+model_saved/kh_subsonic_singlecase_pure_a050_m050_centered,11
+model_saved/kh_subsonic_fixed_mach_M05_riccati_exp1_q_lowalpha,11
+model_saved/kh_subsonic_fixed_mach_M05_anchor_max_ampphase_peakloss,11
+model_saved/kh_subsonic_singlecase_a050_m050,11
+model_saved/kh_subsonic_fixed_mach_M05_anchor_max_ampphase,11
+model_saved/kh_subsonic_fixed_mach_M06_riccati_spectral_alpha_sweep,11
+model_saved/kh_subsonic_fixed_mach_M05_anchor_max_logampphase,11
+archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined,11
+archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_modeaudit,11
+archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati,11
+archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch,11
+archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch,11
+archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts_light_anchor,11
+archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts,11
+archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/runs_frozen/kh_subsonic_2d_local_m0008_jz_neutral_h160,11
+archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/runs_frozen/kh_subsonic_singlecase_a050_m050,11
+archive/old_runs/subsonique_pinn/kh_subsonic_fixed_mach_M05_modefocus,11
+archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral,11
+archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral,11
+archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral,11
+archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral,11
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined,11
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_modeaudit,11
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati,11
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch,11
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch,11
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts_light_anchor,11
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts,11
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/runs_frozen/kh_subsonic_2d_local_m0008_jz_neutral_h160,11
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/runs_frozen/kh_subsonic_singlecase_a050_m050,11
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_fixed_mach_M05_modefocus,11
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral,11
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral,11
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral,11
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral,11
+model_saved/kh_subsonic_fixed_mach_M05_modefocus_lowalpha,9
+model_saved/kh_subsonic_fixed_mach_M05_lowalpha_targeted,9
+model_saved/kh_subsonic_fixed_mach_M05_highalpha_targeted,9
+archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_modefocus_lowalpha,9
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_modefocus_lowalpha,9
+model_saved/kh_supersonic_singlecase_pressure_fixed_c_modalclean_M160_a010_pde10_center01,8
+model_saved/kh_supersonic_singlecase_pressure_fixed_c_a026_M18_ref_no_center,8
+model_saved/kh_supersonic_singlecase_pressure_fixed_c_a026_M18_ref,8
+model_saved/kh_supersonic_singlecase_pressure_fixed_c_a026_M18_ref_y60_center01,8
+model_saved/kh_supersonic_singlecase_pressure_fixed_c,8
+model_saved/kh_supersonic_singlecase_pressure_fixed_c_a026_M18_ref_pde10_center01,8
+model_saved/kh_subsonic_fixed_mach_M06_riccati_mode_repair_edges,7
+model_saved/kh_subsonic_fixed_mach_M05_highalpha_continuation,7
+model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt,7
+model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/physics_only,7
+model_saved/kh_subsonic_2d_local_m0005_jz,7
+model_saved/kh_subsonic_fixed_mach_M03_adaptive,7
+model_saved/kh_subsonic_fixed_mach_M05_first_order_real,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.450_mid_alpha_amplitude_phase_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.750_high_alpha_amplitude_phase_max_wint_2,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.650_mid_alpha_amplitude_phase_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.150_low_alpha_cartesian_point_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.550_mid_alpha_amplitude_phase_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.700_high_alpha_amplitude_phase_max_wint_2,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.850_high_alpha_amplitude_phase_max_wint_2,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.500_mid_alpha_amplitude_phase_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.400_mid_alpha_amplitude_phase_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.300_low_alpha_cartesian_point_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.250_low_alpha_cartesian_point_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.050_low_alpha_cartesian_point_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.350_low_alpha_cartesian_point_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.600_mid_alpha_amplitude_phase_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.800_high_alpha_amplitude_phase_max_wint_2,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.100_low_alpha_cartesian_point_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_hybrid_alpha_sweep/alpha_0.200_low_alpha_cartesian_point_max_wint_0.5,7
+model_saved/kh_subsonic_fixed_mach_M05_riccati_mode_repair_edges,7
+model_saved/kh_subsonic_fixed_mach_M00_adaptive,7
+model_saved/kh_subsonic_fixed_mach_M05_first_order_real_stabilized,7
+model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_budget/n_alpha_supervision_008,7
+
+################ ANCHOR VARIANTS ################
+anchor_count,path
+4,assets/pinn_subsonic/local_atlas_v1/offgrid_validation_384/smoke_4_points.csv
+8,These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_mode_error_8pt_vs_first_order_real.slurm
+8,These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_mode_error_8pt_vs_modefocus.slurm
+8,These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1000.pt
+8,These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1500.pt
+8,These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2000.pt
+8,These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2500.pt
+8,These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_3000.pt
+8,These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_500.pt
+8,These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/config.csv
+8,These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv
+8,These_PINN_KH_RT_stage1ter_render/models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/model_best.pt
+8,These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.csv
+8,These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.png
+8,These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+8,These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+8,These_PINN_KH_RT_stage1ter_render/archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.csv
+8,These_PINN_KH_RT_stage1ter_render/archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.png
+8,These_PINN_KH_RT_stage1ter_render/archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+8,These_PINN_KH_RT_stage1ter_render/archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+8,models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1000.pt
+8,models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1500.pt
+8,models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2000.pt
+8,models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2500.pt
+8,models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_3000.pt
+8,models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_500.pt
+8,archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/config.csv
+8,archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv
+8,models_saved/archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/model_best.pt
+8,archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.csv
+8,archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.png
+8,archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+8,archive/repo_cleanup_2026-04-24/plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+8,assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_curve_vs_reference.csv
+8,assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_curve_vs_reference.png
+8,assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_error_heatmap.csv
+8,assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/ci/ci_error_heatmap.png
+8,assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/classic_vs_pinn_modes_overlay.csv
+8,assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/classic_vs_pinn_modes_overlay.pdf
+8,assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/mode_field_error_heatmaps.csv
+8,assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/mode_field_error_heatmaps.png
+8,assets/pinn_subsonic/mach_fixed_candidates/hybrid_8pt/modes/mode_field_error_summary.csv
+8,archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.csv
+8,archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus.png
+8,archive/csv/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.csv
+8,archive/assets/assets/pinn_subsonic/modes/mode_error_vs_alpha_8pt_vs_modefocus_upto_080.png
+8,code/src/launch/slurm/jz_submit_kh_subsonic_mode_error_8pt_vs_first_order_real.slurm
+8,code/src/launch/slurm/jz_submit_kh_subsonic_mode_error_8pt_vs_modefocus.slurm
+8,model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1000.pt
+8,model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_1500.pt
+8,model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2000.pt
+8,model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_2500.pt
+8,model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_3000.pt
+8,model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/checkpoint_epoch_500.pt
+8,model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/config.csv
+8,model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/history.csv
+8,model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt/model_best.pt
+8,plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.csv
+8,plot_presentation/subsonic_pinn/modefocus_comparison/mode_error_vs_alpha_8pt_vs_modefocus.png
+
+################ ANCHOR CONFIG HITS ################
+path,line,content
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_mode_error_8pt_vs_first_order_real.slurm,33,"export RUN_A_DIR=""${RUN_A_DIR:-model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_mode_error_8pt_vs_modefocus.slurm,33,"export RUN_A_DIR=""${RUN_A_DIR:-model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_2d_band_M05_M07.slurm,65,"--n-reference-alpha ""${N_REFERENCE_ALPHA:-31}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_2d_band_M05_M07.slurm,91,"--w-ci-supervision ""${W_CI_SUPERVISION:-5.0}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_2d_ci_mode_campaign.slurm,58,"--n-reference-alpha ""${N_REFERENCE_ALPHA:-41}"" \"
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_2d_ci_mode_campaign.slurm,79,"--w-ci-supervision ""${W_CI_SUPERVISION:-5.0}"" \"
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_2d_pilot_M05_M06.slurm,63,"--n-reference-alpha ""${N_REFERENCE_ALPHA:-31}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_2d_pilot_M05_M06.slurm,89,"--w-ci-supervision ""${W_CI_SUPERVISION:-5.0}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_ci_supervision_budget.slurm,41,export OUTPUT_DIR=model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_budget
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_ci_supervision_budget.slurm,51,srun bash archive/code/scripts/run_kh_subsonic_ci_supervision_budget.sh
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_highalpha_stepwise.slurm,36,"export ANCHOR_ALPHA=""${ANCHOR_ALPHA:-0.80}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_highalpha_stepwise.slurm,47,"echo ""anchor_alpha=${ANCHOR_ALPHA} global_band=[${GLOBAL_ALPHA_MIN}, ${GLOBAL_ALPHA_MAX}]"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_highalpha_stepwise.slurm,57,"--anchor-alpha ""${ANCHOR_ALPHA}"" \"
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_core1d.slurm,40,"echo ""Weights: ci=${CI_SUPERVISION_WEIGHT:-5.0} q=${Q_SUPERVISION_WEIGHT:-5.0} gamma=${GAMMA_SUPERVISION_WEIGHT:-3.0} anchor=${RICCATI_ANCHOR_WEIGHT:-2.0} bc_q=${BOUNDARY_Q_WEIGHT:-10.0} shoot=${SHOOTING_MATCH_WEIGHT:-12.0}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_core1d.slurm,78,"--ci-supervision-weight ""${CI_SUPERVISION_WEIGHT:-5.0}"" \"
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_core1d.slurm,88,--anchor-alphas ${ANCHOR_ALPHAS:-0.05 0.10 0.15 0.20 0.30 0.40 0.50 0.65 0.80} \
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_core1d_windowed_sparse.slurm,40,"echo ""Guide: n_ref=${N_GUIDE_REFERENCE_ALPHA:-81} n_anchor=${N_GUIDE_ANCHOR_ALPHA:-9} epochs=${GUIDE_EPOCHS:-3000}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_core1d_windowed_sparse.slurm,88,--anchor-alphas ${ANCHOR_ALPHAS:-0.05 0.10 0.15 0.20 0.30 0.40 0.50 0.65 0.80} \
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_core1d_windowed_sparse.slurm,91,"--n-guide-reference-alpha ""${N_GUIDE_REFERENCE_ALPHA:-81}"" \"
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_core1d_windowed_sparse.slurm,92,"--n-guide-anchor-alpha ""${N_GUIDE_ANCHOR_ALPHA:-9}"" \"
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_lowalpha_gamma_repair.slurm,65,--anchor-alphas ${ANCHOR_ALPHAS:-0.05 0.10 0.15 0.20 0.30 0.50} \
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_lowalpha_repair.slurm,63,--anchor-alphas ${ANCHOR_ALPHAS:-0.05 0.10 0.20 0.30 0.40 0.50} \
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M05_riccati_mode_repair_edges.slurm,103,--anchor-alphas ${ANCHOR_ALPHAS:-0.20 0.25 0.30 0.50 0.70 0.75 0.80} \
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M06_riccati_core1d.slurm,41,"echo ""Weights: ci=${CI_SUPERVISION_WEIGHT:-5.0} q=${Q_SUPERVISION_WEIGHT:-5.0} gamma=${GAMMA_SUPERVISION_WEIGHT:-3.0} anchor=${RICCATI_ANCHOR_WEIGHT:-2.0} bc_q=${BOUNDARY_Q_WEIGHT:-10.0} shoot=${SHOOTING_MATCH_WEIGHT:-12.0}"""
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M06_riccati_core1d.slurm,80,"--ci-supervision-weight ""${CI_SUPERVISION_WEIGHT:-5.0}"" \"
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M06_riccati_core1d.slurm,90,--anchor-alphas ${ANCHOR_ALPHAS:-0.05 0.10 0.16 0.23 0.30 0.44 0.58 0.65 0.72} \
+These_PINN_KH_RT_stage1ter_render/_quarantine/launch_historical/jz_submit_kh_subsonic_pinn_M06_riccati_mode_repair_edges.slurm,103,--anchor-alphas ${ANCHOR_ALPHAS:-0.20 0.23 0.30 0.44 0.58 0.65 0.72 0.75} \
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py,87,"n_anchor_alpha=16,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py,89,"n_reference_alpha=11,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py,95,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py,105,"ci_supervision_neutral_boost=0.0,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py,127,"w_ci_supervision=0.0,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py,205,"num_alpha=max(int(cfg.n_reference_alpha), 5),"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py,80,"n_anchor_alpha=16,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py,82,"n_reference_alpha=11,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py,88,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py,98,"ci_supervision_neutral_boost=0.0,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py,120,"w_ci_supervision=0.0,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py,190,"num_alpha=max(int(cfg.n_reference_alpha), 5),"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_mode_supervision_test.py,80,"n_anchor_alpha=16,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_mode_supervision_test.py,82,"n_reference_alpha=11,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_mode_supervision_test.py,88,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_mode_supervision_test.py,98,"ci_supervision_neutral_boost=0.0,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_mode_supervision_test.py,120,"w_ci_supervision=0.0,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_mode_supervision_test.py,189,"num_alpha=max(int(cfg.n_reference_alpha), 5),"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py,97,"""n_anchor_alpha"": 16,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py,99,"""n_reference_alpha"": 11,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py,105,"""enable_classic_ci_supervision"": True,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py,114,"""ci_supervision_neutral_boost"": 0.0,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py,136,"""w_ci_supervision"": 0.0,"
+These_PINN_KH_RT_stage1ter_render/_quarantine/modal_supervision_experiments/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py,258,"num_alpha=max(int(cfg.n_reference_alpha), 5),"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_pinn_results.py,124,"for key in (""loss_pde"", ""loss_bc"", ""loss_norm"", ""loss_phase"", ""loss_ci_supervision""):"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_pinn_results_2d.py,54,"for key in (""loss_pde"", ""loss_bc"", ""loss_norm"", ""loss_phase"", ""loss_ci_supervision""):"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_pinn_results_2d.py,82,"num_alpha=int(config[""n_reference_alpha""]),"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/scripts/training/fixed_mach/physics_only/train_kh_subsonic_pinn.py,93,"n_anchor_alpha=args.n_anchor_alpha,"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/scripts/training/fixed_mach/physics_only/train_kh_subsonic_pinn.py,95,"n_reference_alpha=args.n_reference_alpha,"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/scripts/training/fixed_mach/physics_only/train_kh_subsonic_pinn.py,116,"w_ci_supervision=args.w_ci_supervision,"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/scripts/training/atlas/direct_pinn/train_kh_subsonic_pinn_2d.py,84,"n_reference_alpha=args.n_reference_alpha,"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/scripts/training/atlas/direct_pinn/train_kh_subsonic_pinn_2d.py,103,"w_ci_supervision=args.w_ci_supervision,"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer.py,48,n_anchor_alpha: int = 32
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer.py,50,n_reference_alpha: int = 81
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer.py,71,w_ci_supervision: float = 5.0
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer.py,266,"num_alpha=cfg.n_reference_alpha,"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer.py,325,"cfg.n_anchor_alpha,"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer.py,379,+ cfg.w_ci_supervision * loss_ci
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer.py,392,"""loss_ci_supervision"": float(loss_ci.item()),"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer_2d.py,47,n_reference_alpha: int = 41
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer_2d.py,66,w_ci_supervision: float = 5.0
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer_2d.py,119,"num_alpha=cfg.n_reference_alpha,"
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer_2d.py,230,+ cfg.w_ci_supervision * loss_ci
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/code/src/training/kh_subsonic_trainer_2d.py,242,"""loss_ci_supervision"": float(loss_ci.item()),"
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_kh_subsonic_2d_hybrid4ci_stage0.slurm,37,"export ANCHOR_ALPHAS=""${ANCHOR_ALPHAS:-0.10 0.30 0.55 0.80}"""
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_kh_subsonic_2d_hybrid4ci_stage0.slurm,51,"echo ""Anchor alphas=${ANCHOR_ALPHAS}"""
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_kh_subsonic_2d_hybrid4ci_stage1.slurm,38,"export ANCHOR_ALPHAS=""${ANCHOR_ALPHAS:-0.10 0.30 0.55 0.80}"""
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_kh_subsonic_2d_hybrid4ci_stage1.slurm,52,"echo ""Anchor alphas=${ANCHOR_ALPHAS}"""
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_kh_subsonic_2d_hybrid4ci_stage1quater_pressure.slurm,41,"export ANCHOR_ALPHAS=""${ANCHOR_ALPHAS:-0.10 0.30 0.55 0.80}"""
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_kh_subsonic_2d_hybrid4ci_stage1quater_pressure.slurm,71,"echo ""Anchor alphas=${ANCHOR_ALPHAS}"""
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_kh_subsonic_2d_hybrid4ci_stage1ter_matching.slurm,38,"export ANCHOR_ALPHAS=""${ANCHOR_ALPHAS:-0.10 0.30 0.55 0.80}"""
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_kh_subsonic_2d_hybrid4ci_stage1ter_matching.slurm,68,"echo ""Anchor alphas=${ANCHOR_ALPHAS}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_mode_error_vs_alpha.slurm,33,"export BASE_DIR=""${BASE_DIR:-model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_mode_error_vs_alpha.slurm,34,"export OUTPUT_DIR=""${OUTPUT_DIR:-plot_presentation/subsonic_pinn/ci_supervision_vs_physics}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_alpha010_080_hybrid_ci16_reference.slurm,42,"export W_CI_SUPERVISION=""${W_CI_SUPERVISION:-5.0}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_alpha010_080_hybrid_ci16_reference.slurm,48,"echo ""Epochs=${EPOCHS} LR=${LEARNING_RATE} w_ci=${W_CI_SUPERVISION}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_alpha010_080_hybrid_ci4_reference.slurm,42,"export W_CI_SUPERVISION=""${W_CI_SUPERVISION:-5.0}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_alpha010_080_hybrid_ci4_reference.slurm,48,"echo ""Epochs=${EPOCHS} LR=${LEARNING_RATE} w_ci=${W_CI_SUPERVISION}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_alpha010_080_hybrid_ci8_reference.slurm,42,"export W_CI_SUPERVISION=""${W_CI_SUPERVISION:-5.0}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_alpha010_080_hybrid_ci8_reference.slurm,48,"echo ""Epochs=${EPOCHS} LR=${LEARNING_RATE} w_ci=${W_CI_SUPERVISION}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_ci_supervision_vs_physics.slurm,30,"export OUTPUT_DIR=""${OUTPUT_DIR:-model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_ci_supervision_vs_physics.slurm,39,srun python3 archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py \
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_ci_window_ablation.slurm,36,"echo ""n_reference_alpha=${N_REFERENCE_ALPHA:-81} n_anchor_alpha=${N_ANCHOR_ALPHA:-9}"""
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_ci_window_ablation.slurm,47,"--n-reference-alpha ""${N_REFERENCE_ALPHA:-81}"" \"
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_ci_window_ablation.slurm,48,"--n-anchor-alpha ""${N_ANCHOR_ALPHA:-9}"" \"
+These_PINN_KH_RT_stage1ter_render/code/src/launch/slurm/jz_submit_kh_subsonic_pinn_M05_ci_window_ablation.slurm,59,"--main-anchor-weight ""${MAIN_ANCHOR_WEIGHT:-6.0}"" \"
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_supersonic_shooting_intermediate_mach_spectral.slurm,36,"export ANCHOR_ALPHA_TOLERANCE=""${ANCHOR_ALPHA_TOLERANCE:-5e-4}"""
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_supersonic_shooting_intermediate_mach_spectral.slurm,66,"echo ""anchor-alpha-tolerance=${ANCHOR_ALPHA_TOLERANCE}"""
+These_PINN_KH_RT_stage1ter_render/launch/jz_submit_supersonic_shooting_intermediate_mach_spectral.slurm,81,"--anchor-alpha-tolerance ""${ANCHOR_ALPHA_TOLERANCE}"" \"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/ablate_kh_subsonic_ci_supervision_budget.py,50,"default=Path(""model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_budget""),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/ablate_kh_subsonic_ci_supervision_budget.py,75,"n_anchor_alpha=16,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/ablate_kh_subsonic_ci_supervision_budget.py,77,"n_reference_alpha=81,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/ablate_kh_subsonic_ci_supervision_budget.py,83,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/ablate_kh_subsonic_ci_supervision_budget.py,97,"w_ci_supervision=5.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/ablate_kh_subsonic_ci_supervision_budget.py,102,"riccati_anchor_alphas=(0.20, 0.65),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/ablate_kh_subsonic_ci_supervision_budget.py,193,"summary_path = output_dir / ""ci_supervision_budget_summary.csv"""
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/ablate_kh_subsonic_ci_supervision_budget.py,205,"report_path = output_dir / ""ci_supervision_budget_report.txt"""
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_blumen_local_reference.py,166,"""n_anchor_levels"": int(len(anchors)),"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,48,anchor_alpha: float
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,53,"return f""M{self.mach:.2f}_anchor{self.anchor_alpha:.3f}"""
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,69,"""Spec de ligne sous la forme mach:anchor_alpha:alpha1,alpha2,... """
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,111,anchor_alpha = float(parts[1])
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,115,"if not any(np.isclose(alpha, anchor_alpha) for alpha in alpha_values):"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,116,"raise ValueError(f""anchor_alpha={anchor_alpha:.6f} absent de la liste {raw!r}"")"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,117,"return LineSpec(mach=mach, anchor_alpha=anchor_alpha, alphas=alpha_values)"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,295,"""anchor_alpha"": float(line.anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,525,"""continuation_anchor"": bool(np.isclose(alpha, line.anchor_alpha)),"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,669,"""continuation_anchor"": bool(np.isclose(alpha, line.anchor_alpha)),"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,724,"alpha=float(line.anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,737,"alpha=float(line.anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,754,"""best_shooting_omega_i"": float(source_row.get(""best_shooting_omega_i"", float(line.anchor_alpha) * float(source_row[""best_shooting_ci""]))),"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,804,"""continuation_anchor"": True,"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,824,"anchor_index = next(idx for idx, alpha in enumerate(alpha_values) if np.isclose(alpha, line.anchor_alpha))"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,825,"anchor_override = dict(cfg.get(""anchor_overrides"", {})).get(line_anchor_key(line.mach, line.anchor_alpha))"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,829,"target=targets[float(line.anchor_alpha)],"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,836,"alpha=float(line.anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,837,"target=targets[float(line.anchor_alpha)],"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,867,"previous_alpha=float(line.anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,881,previous_alpha = float(line.anchor_alpha)
+These_PINN_KH_RT_stage1ter_render/scripts/audit_supersonic_shooting_ci_alpha_continuation.py,1062,"f""line={line.line_id} mach={line.mach:.3f} anchor={line.anchor_alpha:.3f} """
+These_PINN_KH_RT_stage1ter_render/scripts/build_supersonic_reference_tables.py,106,"""anchor_alpha"","
+These_PINN_KH_RT_stage1ter_render/scripts/build_supersonic_reference_tables.py,109,"""continuation_anchor"","
+These_PINN_KH_RT_stage1ter_render/scripts/build_supersonic_reference_tables.py,164,"""anchor_alpha"","
+These_PINN_KH_RT_stage1ter_render/scripts/build_supersonic_reference_tables.py,167,"""continuation_anchor"","
+These_PINN_KH_RT_stage1ter_render/code/src/scripts/evaluation/evaluate_kh_subsonic_fixed_mach_modal_candidates.py,32,"""hybrid_8pt"": Path(""archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt""),"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,51,"""Spec de ligne sous la forme mach:anchor_alpha:alpha1,alpha2,... """
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,93,"f""{line.mach:.2f}:{line.anchor_alpha:.6f}:{','.join(f'{alpha:.6f}' for alpha in line.alphas)}"""
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,171,"""alpha"": float(line.anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,174,"""reference_omega_i"": float(line.anchor_alpha) * float(best_ci),"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,178,"""best_shooting_omega_i"": float(line.anchor_alpha) * float(best_ci),"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,270,"target_df = build_blumen_targets([float(line.mach)], float(line.anchor_alpha), cr_points, ci_points)"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,275,"target_alpha=float(line.anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,307,"reference_fields.loc[:, ""alpha""] = float(line.anchor_alpha)"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,313,"target_alpha=float(line.anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,326,"overrides[line_anchor_key(line.mach, line.anchor_alpha)] = {"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,334,"""anchor_alpha"": float(line.anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,344,"report_df = pd.DataFrame(report_rows).sort_values([""target_mach"", ""anchor_alpha""]).reset_index(drop=True)"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,364,"alpha_tolerance=float(args.anchor_alpha_tolerance),"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_intermediate_mach_spectral.py,375,"print(f""anchor_alpha_tolerance={float(args.anchor_alpha_tolerance):.3e}"")"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_modal_front_spectral.py,181,anchor_alpha = float(alphas[anchor_index])
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_modal_front_spectral.py,182,"line_specs.append(LineSpec(mach=float(mach), anchor_alpha=anchor_alpha, alphas=dense_alphas))"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_modal_front_spectral.py,187,"""anchor_alpha"": float(anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_modal_front_spectral.py,201,"key = (round(float(line.mach), 8), round(float(line.anchor_alpha), 8), tuple(round(float(v), 8) for v in line.alphas))"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_modal_front_spectral.py,206,"frontier_df = pd.DataFrame(frontier_rows).sort_values([""Mach"", ""anchor_alpha"", ""frontier_direction""]).reset_index(drop=True)"
+These_PINN_KH_RT_stage1ter_render/scripts/densify_supersonic_modal_front_spectral.py,212,"f""{line.mach:.2f}:{line.anchor_alpha:.6f}:{','.join(f'{alpha:.6f}' for alpha in line.alphas)}"""
+These_PINN_KH_RT_stage1ter_render/scripts/diagnose_supersonic_mach_branch_tracking.py,275,"anchor_mode, anchor_source, n_anchor_modes = anchor_solver.get_branch_mode("
+These_PINN_KH_RT_stage1ter_render/scripts/diagnose_supersonic_mach_branch_tracking.py,319,"""n_finite_modes"": n_anchor_modes,"
+These_PINN_KH_RT_stage1ter_render/code/src/scripts/evaluation/evaluate_kh_subsonic_pinn_2d_ci_modes.py,174,"for key in (""loss_pde"", ""loss_bc"", ""loss_norm"", ""loss_phase"", ""loss_ci_supervision""):"
+These_PINN_KH_RT_stage1ter_render/scripts/merge_supersonic_pointwise_strict_reference.py,36,"""anchor_alpha"","
+These_PINN_KH_RT_stage1ter_render/scripts/merge_supersonic_pointwise_strict_reference.py,39,"""continuation_anchor"","
+These_PINN_KH_RT_stage1ter_render/scripts/merge_supersonic_pointwise_strict_reference.py,172,"accepted[""anchor_alpha""] = accepted[""alpha""]"
+These_PINN_KH_RT_stage1ter_render/scripts/merge_supersonic_pointwise_strict_reference.py,175,"accepted[""continuation_anchor""] = True"
+These_PINN_KH_RT_stage1ter_render/scripts/merge_supersonic_reference_dense_run.py,36,"""anchor_alpha"","
+These_PINN_KH_RT_stage1ter_render/scripts/merge_supersonic_reference_dense_run.py,39,"""continuation_anchor"","
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_budget_summary.py,18,"default=Path(""model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_budget/ci_supervision_budget_summary.csv""),"
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_budget_summary.py,23,"default=Path(""plot_presentation/subsonic_pinn/ci_supervision_budget""),"
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_budget_summary.py,28,"default=Path(""model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/comparison_summary.csv""),"
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_budget_summary.py,146,"path = output_dir / ""ci_supervision_budget_metrics_panel.png"""
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_budget_summary.py,161,"""- ci_supervision_budget_metrics_panel.png"","
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_budget_summary.py,168,"""- model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_budget/n_alpha_supervision_*/history.csv"","
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_budget_summary.py,169,"""- model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_budget/n_alpha_supervision_*/config.csv"","
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_budget_summary.py,170,"""- model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_budget/n_alpha_supervision_*/model_best.pt"","
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_vs_physics.py,29,"default=Path(""model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics""),"
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_vs_physics.py,34,"default=Path(""plot_presentation/subsonic_pinn/ci_supervision_vs_physics""),"
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_ci_supervision_vs_physics.py,356,"path = output_dir / ""ci_supervision_needed_barplot.png"""
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_mode_error_vs_alpha.py,26,"default=Path(""model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics""),"
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_mode_error_vs_alpha.py,31,"default=Path(""plot_presentation/subsonic_pinn/ci_supervision_vs_physics""),"
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_pinn_results.py,117,"for key in (""loss_pde"", ""loss_bc"", ""loss_norm"", ""loss_phase"", ""loss_ci_supervision""):"
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_pinn_results_2d.py,63,"for key in (""loss_pde"", ""loss_bc"", ""loss_norm"", ""loss_phase"", ""loss_ci_supervision""):"
+These_PINN_KH_RT_stage1ter_render/code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/plot_kh_subsonic_pinn_results_2d.py,91,"num_alpha=int(config[""n_reference_alpha""]),"
+These_PINN_KH_RT_stage1ter_render/scripts/prepare_supersonic_modal_surface_branch_guided_inputs.py,47,"""anchor_alpha"","
+These_PINN_KH_RT_stage1ter_render/scripts/prepare_supersonic_modal_surface_branch_guided_inputs.py,50,"""continuation_anchor"","
+These_PINN_KH_RT_stage1ter_render/scripts/prepare_supersonic_modal_surface_branch_guided_inputs.py,211,"work[""anchor_alpha""] = work[""alpha""].astype(float)"
+These_PINN_KH_RT_stage1ter_render/scripts/prepare_supersonic_modal_surface_branch_guided_inputs.py,214,"work[""continuation_anchor""] = trusted_modal"
+These_PINN_KH_RT_stage1ter_render/scripts/prepare_supersonic_modal_surface_branch_guided_inputs.py,315,"merged_anchor_ref, n_anchor_added = merge_reference("
+These_PINN_KH_RT_stage1ter_render/scripts/prepare_supersonic_modal_surface_branch_guided_inputs.py,320,"merged_anchor_fields, n_anchor_field_keys_added = merge_fields("
+These_PINN_KH_RT_stage1ter_render/scripts/prepare_supersonic_modal_surface_branch_guided_inputs.py,359,"print(f""anchors_added={n_anchor_added} total_anchors={len(merged_anchor_ref)}"")"
+These_PINN_KH_RT_stage1ter_render/scripts/prepare_supersonic_modal_surface_branch_guided_inputs.py,360,"print(f""anchor_field_keys_added={n_anchor_field_keys_added} total_anchor_field_rows={len(merged_anchor_fields)}"")"
+These_PINN_KH_RT_stage1ter_render/scripts/run_kh_subsonic_2d_hybrid4ci_stage0_anchor_lock.sh,10,": ""${ANCHOR_ALPHAS:=0.10 0.30 0.55 0.80}"""
+These_PINN_KH_RT_stage1ter_render/scripts/run_kh_subsonic_2d_hybrid4ci_stage0_anchor_lock.sh,32,"read -r -a ANCHOR_ARRAY <<< ""${ANCHOR_ALPHAS}"""
+These_PINN_KH_RT_stage1ter_render/scripts/run_kh_subsonic_2d_hybrid4ci_stage1_mode_from_ci_stage0.sh,11,": ""${ANCHOR_ALPHAS:=0.10 0.30 0.55 0.80}"""
+These_PINN_KH_RT_stage1ter_render/scripts/run_kh_subsonic_2d_hybrid4ci_stage1_mode_from_ci_stage0.sh,35,"read -r -a ANCHOR_ARRAY <<< ""${ANCHOR_ALPHAS}"""
+These_PINN_KH_RT_stage1ter_render/scripts/run_kh_subsonic_2d_hybrid4ci_stage1quater_pressure.sh,14,"ANCHOR_ALPHAS=""${ANCHOR_ALPHAS:-0.1 0.3 0.55 0.8}"""
+These_PINN_KH_RT_stage1ter_render/scripts/run_kh_subsonic_2d_hybrid4ci_stage1quater_pressure.sh,65,--anchor-alphas ${ANCHOR_ALPHAS}
+These_PINN_KH_RT_stage1ter_render/scripts/run_kh_subsonic_2d_hybrid4ci_stage1ter_matching.sh,11,": ""${ANCHOR_ALPHAS:=0.10 0.30 0.55 0.80}"""
+These_PINN_KH_RT_stage1ter_render/scripts/run_kh_subsonic_2d_hybrid4ci_stage1ter_matching.sh,44,"read -r -a ANCHOR_ARRAY <<< ""${ANCHOR_ALPHAS}"""
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_M05_alpha010_080_ci_sparse_reference.sh,15,"W_CI_SUPERVISION=""${W_CI_SUPERVISION:-5.0}"""
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_M05_alpha010_080_ci_sparse_reference.sh,68,"--w-ci-supervision ""${W_CI_SUPERVISION}"" \"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_budget.sh,4,python3 archive/code/scripts/ablate_kh_subsonic_ci_supervision_budget.py \
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_budget.sh,13,"--output-dir ""${OUTPUT_DIR:-model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_budget}"""
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,33,"default=Path(""model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics""),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,53,"n_anchor_alpha=16,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,55,"n_reference_alpha=81,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,78,"riccati_anchor_alphas=(0.20, 0.65),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,135,"""enable_classic_ci_supervision"": True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,136,"""w_ci_supervision"": 5.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,142,"""enable_classic_ci_supervision"": False,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,143,"""w_ci_supervision"": 0.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,153,"cfg.enable_classic_ci_supervision = bool(profile[""enable_classic_ci_supervision""])"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,154,"cfg.w_ci_supervision = float(profile[""w_ci_supervision""])"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_supervision_vs_physics.py,162,"row[""enable_classic_ci_supervision""] = bool(profile[""enable_classic_ci_supervision""])"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,99,n_reference_alpha: int = 81
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,100,n_anchor_alpha: int = 9
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,113,main_anchor_weight: float = 6.0
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,182,"def build_anchor_indices(n_points: int, n_anchors: int) -> np.ndarray:"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,183,if n_anchors < 2:
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,184,"raise ValueError(""n_anchor_alpha must be at least 2."")"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,185,"return np.linspace(0, n_points - 1, n_anchors, dtype=int)"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,279,cfg.main_anchor_weight * loss_anchor
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,379,"anchor_alpha: np.ndarray,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,391,"axes[0].scatter(anchor_alpha, anchor_ci, label=""Ancres clairsemees"", color=""#ff7f0e"", zorder=5)"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,416,"n_reference_alpha=int(args.n_reference_alpha),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,417,"n_anchor_alpha=int(args.n_anchor_alpha),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,430,"main_anchor_weight=float(args.main_anchor_weight),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,446,"alpha_ref = np.linspace(cfg.alpha_min, cfg.alpha_max, cfg.n_reference_alpha, dtype=float)"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,448,"anchor_indices = build_anchor_indices(len(alpha_ref), cfg.n_anchor_alpha)"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,449,anchor_alpha = alpha_ref[anchor_indices]
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,454,"alpha_anchor_t = torch.tensor(anchor_alpha, dtype=torch.float32, device=device).view(-1, 1)"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,459,"print(f""n_reference_alpha={cfg.n_reference_alpha} n_anchor_alpha={cfg.n_anchor_alpha}"")"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,465,"f""anchor_weight={cfg.main_anchor_weight:.2f}"""
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,520,"anchor_df = pd.DataFrame({""alpha"": anchor_alpha, ""ci_reference"": anchor_ci})"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_ci_window_ablation.py,543,"anchor_alpha=anchor_alpha,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_edge_repair_sweep.py,122,"n_anchor_alpha=64,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_edge_repair_sweep.py,124,"n_reference_alpha=1,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_edge_repair_sweep.py,130,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_edge_repair_sweep.py,149,"w_ci_supervision=2.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_first_order_real.py,54,"n_anchor_alpha=16,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_first_order_real.py,56,"n_reference_alpha=81,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_first_order_real.py,62,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_first_order_real.py,84,"w_ci_supervision=5.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_first_order_real_stabilized.py,54,"n_anchor_alpha=24,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_first_order_real_stabilized.py,56,"n_reference_alpha=81,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_first_order_real_stabilized.py,62,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_first_order_real_stabilized.py,87,"w_ci_supervision=5.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_continuation_test.py,67,"n_anchor_alpha=32,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_continuation_test.py,69,"n_reference_alpha=41,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_continuation_test.py,75,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_continuation_test.py,85,"ci_supervision_neutral_boost=0.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_continuation_test.py,100,"w_ci_supervision=8.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_continuation_test.py,159,"num_alpha=max(int(cfg.n_reference_alpha), 11),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_mode_repair_test.py,77,"n_anchor_alpha=16,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_mode_repair_test.py,79,"n_reference_alpha=21,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_mode_repair_test.py,85,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_mode_repair_test.py,95,"ci_supervision_neutral_boost=0.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_mode_repair_test.py,117,"w_ci_supervision=0.5,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_mode_repair_test.py,178,"num_alpha=max(int(cfg.n_reference_alpha), 11),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py,107,"n_anchor_alpha=24,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py,109,"n_reference_alpha=25,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py,115,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py,125,"ci_supervision_neutral_boost=0.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py,140,"w_ci_supervision=10.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py,201,"num_alpha=max(int(cfg.n_reference_alpha), 11),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py,283,if any(alpha <= float(args.anchor_alpha) for alpha in stage_alphas):
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py,288,previous_anchor = float(args.anchor_alpha)
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_highalpha_stepwise_test.py,295,"f""anchor_alpha={float(args.anchor_alpha):.3f} """
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_hybrid_alpha_sweep.py,105,"n_anchor_alpha=64,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_hybrid_alpha_sweep.py,107,"n_reference_alpha=1,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_hybrid_alpha_sweep.py,113,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_hybrid_alpha_sweep.py,132,"w_ci_supervision=2.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_modefocus_lowalpha.py,50,"n_anchor_alpha=16,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_modefocus_lowalpha.py,52,"n_reference_alpha=81,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_modefocus_lowalpha.py,58,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_modefocus_lowalpha.py,77,"w_ci_supervision=5.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_modefocus_lowalpha.py,96,"riccati_anchor_alphas=(0.10, 0.20, 0.35, 0.50),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_normalization_ablation_local.py,102,"n_anchor_alpha=64,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_normalization_ablation_local.py,104,"n_reference_alpha=1,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_normalization_ablation_local.py,110,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_normalization_ablation_local.py,129,"w_ci_supervision=2.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_pinn_2d_ci_mode_campaign.py,120,"n_reference_alpha=args.n_reference_alpha,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_pinn_2d_ci_mode_campaign.py,151,"w_ci_supervision=args.w_ci_supervision,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py,196,"n_reference_alpha=int(args.n_reference_alpha),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py,227,"w_ci_supervision=float(args.w_ci_supervision),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_representation_ablation_local.py,81,"n_anchor_alpha=64,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_representation_ablation_local.py,83,"n_reference_alpha=1,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_representation_ablation_local.py,89,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_representation_ablation_local.py,108,"w_ci_supervision=2.0,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d.py,83,q_supervision_alphas = args.anchor_alphas
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d.py,86,gamma_supervision_alphas = args.anchor_alphas
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d.py,117,"n_anchor_alpha=32,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d.py,119,"n_reference_alpha=41,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d.py,125,"enable_classic_ci_supervision=True,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d.py,156,"w_ci_supervision=float(args.ci_supervision_weight),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d.py,173,"riccati_anchor_alphas=tuple(float(alpha) for alpha in args.anchor_alphas),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d.py,240,"f""weights: ci={cfg.w_ci_supervision:.2f} q_sup={cfg.w_q_supervision:.2f} """
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d.py,322,"""w_ci_supervision"": float(cfg.w_ci_supervision),"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py,94,"def build_anchor_indices(n_points: int, n_anchors: int) -> np.ndarray:"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py,95,if n_anchors < 2:
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py,97,"return np.linspace(0, n_points - 1, n_anchors, dtype=int)"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py,164,"anchor_alpha: np.ndarray,"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py,173,"axes[0].scatter(anchor_alpha, anchor_ci, label=""Ancres"", color=""#ff7f0e"", zorder=5)"
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py,255,q_supervision_alphas = args.q_supervision_alphas if args.q_supervision_alphas is not None else args.anchor_alphas
+These_PINN_KH_RT_stage1ter_render/archive/code/scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py,256,gamma_supervision_alphas = args.gamma_supervision_alphas if args.gamma_supervision_alphas is not None else args.anchor_alphas
+
+################ EXISTING RESULT ASSETS ################
+path,extension,size_bytes
+KH_RT_Blumen/supersonic/ci_datasets.csv,.csv,7785
+These_PINN_KH_RT_stage1ter_render/KH_RT_Blumen/supersonic/ci_datasets.csv,.csv,7785
+These_PINN_KH_RT_stage1ter_render/archive/legacy_classical_solver/blumen_comparison.png,.png,25304
+These_PINN_KH_RT_stage1ter_render/archive/legacy_classical_solver/blumen_ref.csv,.csv,109
+These_PINN_KH_RT_stage1ter_render/archive/legacy_classical_solver/convergence_study.png,.png,52746
+These_PINN_KH_RT_stage1ter_render/archive/legacy_classical_solver/eigenfunction_Michalke_alpha=0.5.png,.png,52901
+These_PINN_KH_RT_stage1ter_render/archive/legacy_classical_solver/subsonic_limit.png,.png,49941
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_m120_highalpha_w03_mach_1.200.png,.png,211655
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_m120_highalpha_w03_mach_1.200_attempts.csv,.csv,4629
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_m120_highalpha_w03_mach_1.200_summary.csv,.csv,1334
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_m120_mach_1.200.png,.png,214379
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_m120_mach_1.200_attempts.csv,.csv,5448
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_m120_mach_1.200_summary.csv,.csv,1328
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_m120_w04_mach_1.200.png,.png,214614
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_m120_w04_mach_1.200_attempts.csv,.csv,6750
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_m120_w04_mach_1.200_summary.csv,.csv,1588
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_mach_1.100.png,.png,210354
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_mach_1.100_attempts.csv,.csv,3287
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_blended_mach_1.100_summary.csv,.csv,1343
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_overlap_m120_mach_1.200.png,.png,182697
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_overlap_m120_mach_1.200_attempts.csv,.csv,4896
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_overlap_m120_mach_1.200_summary.csv,.csv,1416
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_overlap_m120_v2_mach_1.200.png,.png,182697
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_overlap_m120_v2_mach_1.200_attempts.csv,.csv,4896
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_overlap_m120_v2_mach_1.200_summary.csv,.csv,1416
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_pin3_xi099_m120_mach_1.200.png,.png,223787
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_pin3_xi099_m120_mach_1.200_attempts.csv,.csv,2023
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_pin3_xi099_m120_mach_1.200_summary.csv,.csv,1417
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_pin3_xi099_m130_mach_1.300.png,.png,224916
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_pin3_xi099_m130_mach_1.300_attempts.csv,.csv,3150
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_pin3_xi099_m130_mach_1.300_summary.csv,.csv,1670
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_pin3_xi099_m140_mach_1.400.png,.png,215403
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_pin3_xi099_m140_mach_1.400_attempts.csv,.csv,4653
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_pin3_xi099_m140_mach_1.400_summary.csv,.csv,1705
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_test_mach_1.100.png,.png,198202
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_test_mach_1.100_attempts.csv,.csv,1471
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_continuation_sweep_gep_test_mach_1.100_summary.csv,.csv,1224
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_gep_guided_a018_m110_a_0.180_m_1.100.csv,.csv,463
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_gep_guided_a022_m110_a_0.220_m_1.100.csv,.csv,630
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_gep_guided_a022_m110_n401_a_0.220_m_1.100.csv,.csv,298
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_gep_guided_a024_m120_a_0.240_m_1.200.csv,.csv,627
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_gep_guided_a024_m120_hiN_a_0.240_m_1.200.csv,.csv,463
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_gep_guided_test_a_0.180_m_1.100.csv,.csv,629
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/adaptive_gep_guided_test_short_a_0.180_m_1.100.csv,.csv,463
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/audit_gep_parameter_grid_a018_m170_a_0.180_m_1.700.csv,.csv,5567
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/audit_gep_parameter_grid_a018_m180_a_0.180_m_1.800.csv,.csv,5573
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/audit_gep_parameter_grid_a_0.240_m_1.200.csv,.csv,5528
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/audit_local_supersonic_spectrum_a_0.240_m_1.200_N_481.csv,.csv,2984
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/audit_local_supersonic_spectrum_cubic_a_0.240_m_1.200_N_481.csv,.csv,3457
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/audit_local_supersonic_spectrum_pin_a_0.240_m_1.200_N_481.csv,.csv,3370
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_from_existing_mach_1.100.csv,.csv,941
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_from_existing_mach_1.100.png,.png,197465
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_local_fast_mach_1.100.csv,.csv,1184
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_local_fast_mach_1.100.png,.png,185668
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_local_mach_1.100.csv,.csv,1383
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_local_mach_1.100.png,.png,214661
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_n301_mach_1.100.csv,.csv,984
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_n301_mach_1.100.png,.png,198532
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_smoke_mach_1.100.csv,.csv,686
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/compare_sweep_gep_vs_shooting_smoke_mach_1.100.png,.png,161649
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/scan_gep_validity_frontier_pin3_xi099_frontier.csv,.csv,219
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/scan_gep_validity_frontier_pin3_xi099_frontier.png,.png,108193
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/scan_gep_validity_frontier_pin3_xi099_m110_160_frontier.csv,.csv,312
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/scan_gep_validity_frontier_pin3_xi099_m110_160_frontier.png,.png,102326
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/scan_gep_validity_frontier_pin3_xi099_m110_160_summary.csv,.csv,9011
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/scan_gep_validity_frontier_pin3_xi099_m110_200_frontier.csv,.csv,435
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/scan_gep_validity_frontier_pin3_xi099_m110_200_frontier.png,.png,102326
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/scan_gep_validity_frontier_pin3_xi099_m110_200_summary.csv,.csv,14933
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/scan_gep_validity_frontier_pin3_xi099_summary.csv,.csv,6000
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/subsonic_mode_like_thesis_a050_m050.png,.png,183822
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/subsonic_single_mode_gep_a050_m050_all_data.npz,.npz,43054
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/subsonic_single_mode_gep_a050_m050_growth_curve.png,.png,90199
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/subsonic_single_mode_gep_a050_m050_growth_map.csv,.csv,154
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/subsonic_single_mode_gep_a050_m050_modes.pdf,.pdf,25599
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_limit_schematic.png,.png,167089
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_4x4_cont_growth_map.csv,.csv,3803
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_4x4_cont_vs_blumen.png,.png,302219
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_4x4_growth_map.csv,.csv,1744
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_4x4_guided_growth_map.csv,.csv,2878
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_4x4_guided_vs_blumen.png,.png,298778
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_4x4_vs_blumen.png,.png,284355
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_pin3_xi099_growth_map.csv,.csv,5679
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_pin3_xi099_m130_150_growth_map.csv,.csv,5526
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_pin3_xi099_m130_150_vs_blumen.png,.png,347970
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_local_pin3_xi099_vs_blumen.png,.png,347435
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/supersonic_gep_vs_shooting.csv,.csv,1855
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/sweep_alpha_gep_local_n301_all_data.npz,.npz,97310
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/sweep_alpha_gep_local_n301_growth_curve.png,.png,150521
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/sweep_alpha_gep_local_n301_growth_map.csv,.csv,462
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/sweep_alpha_gep_local_n301_modes.pdf,.pdf,104834
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/test_reconstructed_eigenmodes.csv,.csv,273
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/test_reconstructed_eigenmodes.pdf,.pdf,53583
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/test_reconstructed_eigenmodes_fast.csv,.csv,270
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/test_reconstructed_eigenmodes_fast.pdf,.pdf,36376
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/test_sweep_alpha_gep_local_all_data.npz,.npz,80030
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/test_sweep_alpha_gep_local_growth_curve.png,.png,143657
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/test_sweep_alpha_gep_local_growth_map.csv,.csv,463
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_gep/test_sweep_alpha_gep_local_modes.pdf,.pdf,92853
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/mstab17_subsonic_mode_a030_m030.png,.png,322947
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/mstab17_subsonic_mode_a070_m050.png,.png,320155
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_ci_visualization.png,.png,241761
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_shooting_error_by_level.csv,.csv,614
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_shooting_error_by_point.csv,.csv,28455
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_shooting_error_map.png,.png,620100
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_shooting_error_summary.json,.json,466
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_shooting_growth_map.csv,.csv,22273
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_shooting_vs_blumen.png,.png,516234
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_solver_comparison_blumen_points.csv,.csv,3357
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_solver_comparison_grid.csv,.csv,822
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting/subsonic_solver_comparison_summary.json,.json,254
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_hybrid/subsonic_hybrid_error_by_level.csv,.csv,373
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_hybrid/subsonic_hybrid_error_by_point.csv,.csv,28421
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_hybrid/subsonic_hybrid_error_summary.json,.json,182
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_hybrid/subsonic_hybrid_growth_map.csv,.csv,30403
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_hybrid/subsonic_hybrid_vs_blumen.png,.png,512805
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_supersonic/mstab17_supersonic_local_4x4_cont_growth_map.csv,.csv,2477
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_supersonic/mstab17_supersonic_local_4x4_cont_vs_blumen.png,.png,137233
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_supersonic/mstab17_supersonic_local_4x4_growth_map.csv,.csv,2456
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_supersonic/mstab17_supersonic_local_4x4_vs_blumen.png,.png,137967
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_supersonic/mstab17_supersonic_point_checks.csv,.csv,1257
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/assets_snapshot_2026-04-08/blumen_shooting_supersonic/mstab17_supersonic_point_checks.png,.png,311057
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_classical/subsonic_classical_vs_blumen.png,.png,554197
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_classical/subsonic_growth_map.csv,.csv,3598
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_classical/supersonic_classical_vs_blumen.png,.png,201014
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_classical/supersonic_growth_map.csv,.csv,4475
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_robust/subsonic_robust_error_by_level.csv,.csv,374
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_robust/subsonic_robust_error_by_point.csv,.csv,28407
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_robust/subsonic_robust_error_summary.json,.json,171
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_robust/subsonic_robust_growth_map.csv,.csv,41046
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_robust/subsonic_robust_vs_blumen.png,.png,513501
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_supersonic/supersonic_local_3x3_tw002_growth_map.csv,.csv,965
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_supersonic/supersonic_local_3x3_tw002_vs_blumen.png,.png,364370
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_supersonic/supersonic_local_tw0005_growth_map.csv,.csv,2954
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_supersonic/supersonic_local_tw0005_vs_blumen.png,.png,364370
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_supersonic/supersonic_local_tw002_growth_map.csv,.csv,2941
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/blumen_shooting_supersonic/supersonic_local_tw002_vs_blumen.png,.png,364370
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/mode_snapshot_2026-04-08/mode_reconstruction/classic_gep_subsonic_mode_like_thesis_a050_m050.png,.png,183822
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/mode_snapshot_2026-04-08/mode_reconstruction/classic_shooting_mstab17_subsonic_mode_a030_m030.png,.png,322947
+These_PINN_KH_RT_stage1ter_render/archive/old_assets/mode_snapshot_2026-04-08/mode_reconstruction/classic_shooting_mstab17_subsonic_mode_a070_m050.png,.png,320155
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz/ci_error_map.png,.png,54246
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz/ci_surface_top_errors.csv,.csv,1525
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz/ci_surface_vs_reference.csv,.csv,99470
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz/ci_surface_vs_reference.png,.png,107476
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral/ci_error_map.png,.png,60075
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral/ci_surface_top_errors.csv,.csv,1582
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral/ci_surface_vs_reference.csv,.csv,99530
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral/ci_surface_vs_reference.png,.png,113052
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral/config.csv,.csv,752
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral/history.csv,.csv,799590
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_edge_neutral/history_diagnostics_2d.png,.png,345107
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral/ci_error_map.png,.png,60239
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral/ci_surface_top_errors.csv,.csv,1401
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral/ci_surface_vs_reference.csv,.csv,99612
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral/ci_surface_vs_reference.png,.png,113319
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral/config.csv,.csv,697
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral/history.csv,.csv,799525
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0005_jz_neutral/history_diagnostics_2d.png,.png,348079
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral/ci_error_map.png,.png,65950
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral/ci_surface_top_errors.csv,.csv,1968
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral/ci_surface_vs_reference.csv,.csv,129716
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral/ci_surface_vs_reference.png,.png,121346
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral/config.csv,.csv,746
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral/history.csv,.csv,802982
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0007_jz_neutral/history_diagnostics_2d.png,.png,341953
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral/ci_error_map.png,.png,72203
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral/ci_surface_top_errors.csv,.csv,2174
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral/ci_surface_vs_reference.csv,.csv,152433
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral/ci_surface_vs_reference.png,.png,127085
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral/config.csv,.csv,746
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral/history.csv,.csv,804494
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_2d_local_m0008_jz_neutral/history_diagnostics_2d.png,.png,358277
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_fixed_mach_M05_modefocus/config.csv,.csv,858
+These_PINN_KH_RT_stage1ter_render/archive/old_runs/subsonique_pinn/kh_subsonic_fixed_mach_M05_modefocus/history.csv,.csv,1034146
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen/supersonic_ci_digitized_points.csv,.csv,8477
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen/supersonic_ci_digitized_points.png,.png,207834
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_beam_561_candidates.csv,.csv,2684
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_beam_561_isolines.png,.png,162842
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_beam_561_paths.csv,.csv,5351
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_beam_561_surface.csv,.csv,1145
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_beam_candidates.csv,.csv,1092
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_beam_isolines.png,.png,141777
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_beam_paths.csv,.csv,1975
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_beam_surface.csv,.csv,1109
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_blumen_guided_candidates.csv,.csv,3547
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_blumen_guided_surface.csv,.csv,921
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_blumen_guided_surface.png,.png,170210
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_branch_cont_561_candidates.csv,.csv,14222
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_branch_cont_561_isolines.png,.png,162842
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_branch_cont_561_surface.csv,.csv,1124
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_branch_cont_candidates.csv,.csv,7189
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_branch_cont_isolines.png,.png,136925
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_branch_cont_surface.csv,.csv,1121
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_cluster2_clusters.csv,.csv,3457
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_cluster2_isolines.png,.png,149221
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_cluster2_matches.csv,.csv,905
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_cluster2_surface.csv,.csv,737
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_cluster_clusters.csv,.csv,8053
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_cluster_isolines.png,.png,181877
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_cluster_matches.csv,.csv,2026
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_smoke_sup_cluster_surface.csv,.csv,730
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_tmp_supersonic_raw_spectrum_smoke.png,.png,94736
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_tmp_supersonic_raw_spectrum_smoke_nearest.csv,.csv,2494
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_tmp_supersonic_raw_spectrum_smoke_raw_modes.csv,.csv,15218
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/_tmp_supersonic_raw_spectrum_smoke_summary.csv,.csv,302
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_alpha_bidirectional_m140_isolines.png,.png,172686
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_alpha_bidirectional_m140_surface.csv,.csv,8942
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_alpha_sweep_m140_checkpoint_summary.csv,.csv,9252
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_alpha_sweep_m140_isolines.png,.png,169864
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_alpha_sweep_m140_surface.csv,.csv,8903
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_mach_bidirectional_a020_isolines.png,.png,149740
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_mach_bidirectional_a020_surface.csv,.csv,8686
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_mach_sweep_a020_checkpoint_summary.csv,.csv,9112
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_mach_sweep_a020_isolines.png,.png,149740
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_1d_mach_sweep_a020_surface.csv,.csv,8762
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_blumen_cr_ci_family_audit_a020_m120_130_candidates.csv,.csv,10672
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_blumen_cr_ci_family_audit_a020_m120_130_comparison.png,.png,279191
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_blumen_cr_ci_family_audit_a020_m120_130_summary.csv,.csv,1796
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_blumen_cr_ci_family_audit_a020_m120_130_targets.csv,.csv,225
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_gep_blumen_guided_a020_m120_130_candidates.csv,.csv,15881
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_global_m10_18_a00_03_chunk00_surface.csv,.csv,80483
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_global_m10_18_a00_03_chunk01_surface.csv,.csv,71409
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_global_m10_18_a00_03_chunk02_surface.csv,.csv,72770
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_global_m10_18_a00_03_chunk03_surface.csv,.csv,73027
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_global_m10_18_a00_03_isolines.png,.png,451057
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_global_m10_18_a00_03_modes.csv,.csv,1
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_global_m10_18_a00_03_progress.json,.json,314
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_global_m10_18_a00_03_surface.csv,.csv,284612
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_local_mode_families_a020_m120_130_comparison.csv,.csv,1643
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_local_mode_families_a020_m120_130_profiles.npz,.npz,274406
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_local_mode_families_a020_m120_130_summary.csv,.csv,5019
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_local_spectrum_a020_m120_130.png,.png,247086
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_local_spectrum_a020_m120_130_modes.csv,.csv,99684
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_local_spectrum_a020_m120_130_summary.csv,.csv,1587
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor120_candidates.csv,.csv,9240
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor120_surface.csv,.csv,11119
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor130_candidates.csv,.csv,9106
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor130_surface.csv,.csv,10878
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor135_candidates.csv,.csv,9183
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor135_surface.csv,.csv,11011
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor140_candidates.csv,.csv,9201
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor140_isolines.png,.png,152757
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor140_k12_candidates.csv,.csv,28114
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor140_k12_surface.csv,.csv,3791
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor140_n801_candidates.csv,.csv,11853
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor140_n801_surface.csv,.csv,3798
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor140_surface.csv,.csv,11058
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor145_candidates.csv,.csv,8006
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor145_isolines.png,.png,152757
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_mach_branch_tracking_a020_anchor145_surface.csv,.csv,11016
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_pin15_xi090_mode_database_isolines.png,.png,269918
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_pin15_xi090_mode_database_modes.csv,.csv,7201
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_pin15_xi090_mode_database_modes.npz,.npz,2560749
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_pin15_xi090_mode_database_surface.csv,.csv,127106
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_shooting_vs_gep_families_a020_m120_130_families.csv,.csv,4862
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_shooting_vs_gep_families_a020_m120_130_shooting_sensitivity.csv,.csv,2605
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/blumen_gep/supersonic_shooting_vs_gep_families_a020_m120_130_summary.csv,.csv,1369
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch/ci_error_map.png,.png,63048
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch/ci_surface_top_errors.csv,.csv,2300
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch/ci_surface_vs_reference.csv,.csv,99585
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch/ci_surface_vs_reference.png,.png,116878
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/ci_error_map.png,.png,62082
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/ci_surface_top_errors.csv,.csv,2300
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/ci_surface_vs_reference.csv,.csv,99583
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/ci_surface_vs_reference.png,.png,116242
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/config.csv,.csv,1087
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/history.csv,.csv,841286
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/history_diagnostics_2d.png,.png,346072
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/mode_error_heatmaps_2d_best.csv,.csv,5079
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_2d_local_m0005_jz_multibranch_riccati/mode_error_heatmaps_2d_best.png,.png,113071
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts/config.csv,.csv,1678
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts/history.csv,.csv,1191544
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts_light_anchor/config.csv,.csv,1750
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_experts_light_anchor/history.csv,.csv,1195256
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_modeaudit/ci_error_heatmap.csv,.csv,5417
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_modeaudit/ci_error_heatmap.png,.png,148016
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_modeaudit/classic_vs_pinn_mode_amp_phase_a050_m050.png,.png,169450
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_modeaudit/config.csv,.csv,1156
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_modeaudit/history.csv,.csv,883852
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch/ci_error_heatmap_epoch4000.csv,.csv,5418
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch/ci_error_heatmap_epoch4000.png,.png,155282
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch/classic_vs_pinn_mode_amp_phase_a050_m050_epoch4000.png,.png,172754
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch/config.csv,.csv,1499
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch/history.csv,.csv,1151555
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined/ci_error_heatmap_epoch4000.csv,.csv,5408
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined/ci_error_heatmap_epoch4000.png,.png,150730
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined/classic_vs_pinn_mode_amp_phase_a050_m050_epoch4000.png,.png,174151
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined/config.csv,.csv,1578
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch_refined/history.csv,.csv,1174868
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/comparisons/kh_subsonic_ci_multibranch_vs_refined_epoch4000.csv,.csv,8046
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/comparisons/kh_subsonic_ci_multibranch_vs_refined_epoch4000.png,.png,210946
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/assets_blumen/subsonic_ci_visualization.png,.png,241761
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/assets_blumen/subsonic_shooting_error_map.png,.png,620100
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/assets_blumen/subsonic_shooting_growth_map.csv,.csv,22273
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/assets_blumen/subsonic_shooting_vs_blumen.png,.png,516234
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/assets_blumen/subsonic_single_mode_gep_a050_m050_growth_curve.png,.png,90199
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/assets_blumen/subsonic_single_mode_gep_a050_m050_growth_map.csv,.csv,154
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/mode/classic_gep_subsonic_mode_like_thesis_a050_m050.png,.png,183822
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/mode/classic_shooting_mstab17_subsonic_mode_a030_m030.png,.png,322947
+These_PINN_KH_RT_stage1ter_render/archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/mode/classic_shooting_mstab17_subsonic_mode_a070_m050.png,.png,320155

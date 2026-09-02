@@ -1,0 +1,13 @@
+{
+  "best_anchor_loss": 8.66620506258312e-28,
+  "best_epoch": 23043,
+  "chart_id": "LOWM_EXT_NEUTRAL3",
+  "ci_lr": 0.0002,
+  "ci_prefit_steps": 3000,
+  "matched_epochs": 25000,
+  "n_local_anchors": 5,
+  "physics_gradient": false,
+  "seed": 1234,
+  "source_n340_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/anchor_budget_runs/N340/joint/LOWM_EXT_NEUTRAL3/model_state.pt",
+  "w_ci": 1000.0
+}

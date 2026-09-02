@@ -1,0 +1,23 @@
+2D hybrid4ci Stage 1 — physics-only modal reconstruction from sparse spectral supervision
+stage0_checkpoint=model_saved/kh_subsonic_2d_hybrid4ci_stage0_anchor_lock_no_monotone_lbfgs/model_best.pt
+freeze_ci_default=True
+direct_modal_supervision=False
+mach_values=[0.3, 0.5]
+alpha_range=[0.1, 0.8]
+anchor_alphas=[0.1, 0.3, 0.55, 0.8]
+epochs=5
+learning_rate=0.0001
+loss_weights: pde=1.0 bc_kappa=10.0 bc_q=25.0 norm=1.0 phase=1.0 shooting=0.0 ci_anchor=1.0
+best_epoch=5
+best_loss_total=3.08400965e+00
+best_ci_anchor_max_abs=2.91664442e-04
+best_ci_anchor_max_rel_unstable=8.24203460e-04
+best_ci_neutral_max_abs=1.09884772e-04
+
+Implemented physical losses:
+- pressure PDE residual
+- Riccati far-field boundary loss
+- modal normalization
+- phase constraint
+- shooting placeholder logged but disabled by default in this first Stage 1 implementation
+- spectral anchor preservation only when freeze_ci is disabled

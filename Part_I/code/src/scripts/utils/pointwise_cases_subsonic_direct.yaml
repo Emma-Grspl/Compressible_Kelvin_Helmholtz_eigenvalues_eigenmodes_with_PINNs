@@ -1,0 +1,273 @@
+version: 1
+selection_rule: maximum alpha*ci on the canonical alpha grid after Mach-only interpolation
+cases:
+- case_id: subsonic_M010
+  regime: subsonic
+  Mach: 0.1
+  alpha: 0.4399999999999999
+  reference_cr: 0.0
+  reference_ci: 0.4257926842134761
+  reference_omega_i: 0.18734878105392944
+  validation_status: canonical_M_interpolation_spectral_modal_reconstructible
+  spectral_source: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
+  modal_source: classical_solver.subsonic.mstab17_subsonic_solver:Mstab17SubsonicSolver
+  branch_identifier: subsonic_cr0_M0.10_from_M0.07_M0.14
+  selection_rank: 1
+  seed_cr: 0.0
+  seed_ci: 0.4257926842134761
+  branch_provenance_status: canonical_M_interpolation_seed
+  allowed_solvers:
+  - subsonic_mstab17
+  branch_check:
+    max_absolute_distance: 0.04
+    max_relative_distance: 0.35
+  nominal:
+    subsonic_mstab17:
+      Ly: 80.0
+      matching_y: 1.0
+      rtol: 1.0e-10
+      atol: 1.0e-12
+      max_step: null
+      n_scan: 61
+      ci_min: 0.001
+      ci_max: 1.0
+- case_id: subsonic_M020
+  regime: subsonic
+  Mach: 0.2
+  alpha: 0.4399999999999999
+  reference_cr: 0.0
+  reference_ci: 0.4119913847378497
+  reference_omega_i: 0.18127620928465382
+  validation_status: canonical_M_interpolation_spectral_modal_reconstructible
+  spectral_source: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
+  modal_source: classical_solver.subsonic.mstab17_subsonic_solver:Mstab17SubsonicSolver
+  branch_identifier: subsonic_cr0_M0.20_from_M0.14_M0.21
+  selection_rank: 1
+  seed_cr: 0.0
+  seed_ci: 0.4119913847378497
+  branch_provenance_status: canonical_M_interpolation_seed
+  allowed_solvers:
+  - subsonic_mstab17
+  branch_check:
+    max_absolute_distance: 0.04
+    max_relative_distance: 0.35
+  nominal:
+    subsonic_mstab17:
+      Ly: 80.0
+      matching_y: 1.0
+      rtol: 1.0e-10
+      atol: 1.0e-12
+      max_step: null
+      n_scan: 61
+      ci_min: 0.001
+      ci_max: 1.0
+- case_id: subsonic_M030
+  regime: subsonic
+  Mach: 0.3
+  alpha: 0.4399999999999999
+  reference_cr: 0.0
+  reference_ci: 0.38881944709462846
+  reference_omega_i: 0.17108055672163647
+  validation_status: canonical_M_interpolation_spectral_modal_reconstructible
+  spectral_source: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
+  modal_source: classical_solver.subsonic.mstab17_subsonic_solver:Mstab17SubsonicSolver
+  branch_identifier: subsonic_cr0_M0.30_from_M0.28_M0.35
+  selection_rank: 1
+  seed_cr: 0.0
+  seed_ci: 0.38881944709462846
+  branch_provenance_status: canonical_M_interpolation_seed
+  allowed_solvers:
+  - subsonic_mstab17
+  branch_check:
+    max_absolute_distance: 0.04
+    max_relative_distance: 0.35
+  nominal:
+    subsonic_mstab17:
+      Ly: 80.0
+      matching_y: 1.0
+      rtol: 1.0e-10
+      atol: 1.0e-12
+      max_step: null
+      n_scan: 61
+      ci_min: 0.001
+      ci_max: 1.0
+- case_id: subsonic_M040
+  regime: subsonic
+  Mach: 0.4
+  alpha: 0.4399999999999999
+  reference_cr: 0.0
+  reference_ci: 0.3572856693078423
+  reference_omega_i: 0.15720569449545058
+  validation_status: canonical_M_interpolation_spectral_modal_reconstructible
+  spectral_source: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
+  modal_source: classical_solver.subsonic.mstab17_subsonic_solver:Mstab17SubsonicSolver
+  branch_identifier: subsonic_cr0_M0.40_from_M0.35_M0.42
+  selection_rank: 1
+  seed_cr: 0.0
+  seed_ci: 0.3572856693078423
+  branch_provenance_status: canonical_M_interpolation_seed
+  allowed_solvers:
+  - subsonic_mstab17
+  branch_check:
+    max_absolute_distance: 0.04
+    max_relative_distance: 0.35
+  nominal:
+    subsonic_mstab17:
+      Ly: 80.0
+      matching_y: 1.0
+      rtol: 1.0e-10
+      atol: 1.0e-12
+      max_step: null
+      n_scan: 61
+      ci_min: 0.001
+      ci_max: 1.0
+- case_id: subsonic_M050
+  regime: subsonic
+  Mach: 0.5
+  alpha: 0.37
+  reference_cr: 0.0
+  reference_ci: 0.37981033959024507
+  reference_omega_i: 0.14052982564839067
+  validation_status: canonical_M_interpolation_spectral_modal_reconstructible
+  spectral_source: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
+  modal_source: classical_solver.subsonic.mstab17_subsonic_solver:Mstab17SubsonicSolver
+  branch_identifier: subsonic_cr0_M0.50_from_M0.49_M0.56
+  selection_rank: 1
+  seed_cr: 0.0
+  seed_ci: 0.37981033959024507
+  branch_provenance_status: canonical_M_interpolation_seed
+  allowed_solvers:
+  - subsonic_mstab17
+  branch_check:
+    max_absolute_distance: 0.04
+    max_relative_distance: 0.35
+  nominal:
+    subsonic_mstab17:
+      Ly: 80.0
+      matching_y: 1.0
+      rtol: 1.0e-10
+      atol: 1.0e-12
+      max_step: null
+      n_scan: 61
+      ci_min: 0.001
+      ci_max: 1.0
+- case_id: subsonic_M060
+  regime: subsonic
+  Mach: 0.6
+  alpha: 0.37
+  reference_cr: 0.0
+  reference_ci: 0.3289439965954024
+  reference_omega_i: 0.1217092787402989
+  validation_status: canonical_M_interpolation_spectral_modal_reconstructible
+  spectral_source: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
+  modal_source: classical_solver.subsonic.mstab17_subsonic_solver:Mstab17SubsonicSolver
+  branch_identifier: subsonic_cr0_M0.60_from_M0.56_M0.63
+  selection_rank: 1
+  seed_cr: 0.0
+  seed_ci: 0.3289439965954024
+  branch_provenance_status: canonical_M_interpolation_seed
+  allowed_solvers:
+  - subsonic_mstab17
+  branch_check:
+    max_absolute_distance: 0.04
+    max_relative_distance: 0.35
+  nominal:
+    subsonic_mstab17:
+      Ly: 80.0
+      matching_y: 1.0
+      rtol: 1.0e-10
+      atol: 1.0e-12
+      max_step: null
+      n_scan: 61
+      ci_min: 0.001
+      ci_max: 1.0
+- case_id: subsonic_M070
+  regime: subsonic
+  Mach: 0.7
+  alpha: 0.3
+  reference_cr: 0.0
+  reference_ci: 0.3329231859904993
+  reference_omega_i: 0.0998769557971498
+  validation_status: canonical_M_interpolation_spectral_modal_reconstructible
+  spectral_source: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
+  modal_source: classical_solver.subsonic.mstab17_subsonic_solver:Mstab17SubsonicSolver
+  branch_identifier: subsonic_cr0_M0.70_from_M0.70_M0.70
+  selection_rank: 1
+  seed_cr: 0.0
+  seed_ci: 0.3329231859904993
+  branch_provenance_status: canonical_M_interpolation_seed
+  allowed_solvers:
+  - subsonic_mstab17
+  branch_check:
+    max_absolute_distance: 0.04
+    max_relative_distance: 0.35
+  nominal:
+    subsonic_mstab17:
+      Ly: 80.0
+      matching_y: 1.0
+      rtol: 1.0e-10
+      atol: 1.0e-12
+      max_step: null
+      n_scan: 61
+      ci_min: 0.001
+      ci_max: 1.0
+- case_id: subsonic_M080
+  regime: subsonic
+  Mach: 0.8
+  alpha: 0.3
+  reference_cr: 0.0
+  reference_ci: 0.25613685136053216
+  reference_omega_i: 0.07684105540815965
+  validation_status: canonical_M_interpolation_spectral_modal_reconstructible
+  spectral_source: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
+  modal_source: classical_solver.subsonic.mstab17_subsonic_solver:Mstab17SubsonicSolver
+  branch_identifier: subsonic_cr0_M0.80_from_M0.77_M0.84
+  selection_rank: 1
+  seed_cr: 0.0
+  seed_ci: 0.25613685136053216
+  branch_provenance_status: canonical_M_interpolation_seed
+  allowed_solvers:
+  - subsonic_mstab17
+  branch_check:
+    max_absolute_distance: 0.04
+    max_relative_distance: 0.35
+  nominal:
+    subsonic_mstab17:
+      Ly: 80.0
+      matching_y: 1.0
+      rtol: 1.0e-10
+      atol: 1.0e-12
+      max_step: null
+      n_scan: 61
+      ci_min: 0.001
+      ci_max: 1.0
+- case_id: subsonic_M090
+  regime: subsonic
+  Mach: 0.9
+  alpha: 0.2299999999999999
+  reference_cr: 0.0
+  reference_ci: 0.233962031877509
+  reference_omega_i: 0.05381126733182705
+  validation_status: canonical_M_interpolation_spectral_modal_reconstructible
+  spectral_source: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
+  modal_source: classical_solver.subsonic.mstab17_subsonic_solver:Mstab17SubsonicSolver
+  branch_identifier: subsonic_cr0_M0.90_from_M0.84_M0.91
+  selection_rank: 1
+  seed_cr: 0.0
+  seed_ci: 0.233962031877509
+  branch_provenance_status: canonical_M_interpolation_seed
+  allowed_solvers:
+  - subsonic_mstab17
+  branch_check:
+    max_absolute_distance: 0.04
+    max_relative_distance: 0.35
+  nominal:
+    subsonic_mstab17:
+      Ly: 80.0
+      matching_y: 1.0
+      rtol: 1.0e-10
+      atol: 1.0e-12
+      max_step: null
+      n_scan: 61
+      ci_min: 0.001
+      ci_max: 1.0

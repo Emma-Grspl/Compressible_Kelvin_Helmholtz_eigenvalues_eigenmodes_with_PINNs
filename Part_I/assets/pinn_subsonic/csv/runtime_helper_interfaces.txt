@@ -1,0 +1,287 @@
+====================================================================================================
+HELPER SIGNATURES
+====================================================================================================
+
+evaluate_pinn
+module: scripts.dev.test_mid_joint_pinn_full_gep
+signature: (*, checkpoint_path: 'Path', device: 'torch.device') -> 'tuple[torch.nn.Module, torch.nn.Module, Any, dict[str, Any], str]'
+
+call_pinn_profiles
+module: scripts.dev.test_mid_joint_pinn_full_gep
+signature: (*, field: 'torch.nn.Module', ci_net: 'torch.nn.Module', module: 'Any', family: 'str', y: 'np.ndarray', alpha: 'float', mach: 'float', device: 'torch.device') -> 'tuple[np.ndarray, np.ndarray, float]'
+
+fields_from_pq
+module: scripts.dev.joint_pinn_global_validation
+signature: (y: 'np.ndarray', p: 'np.ndarray', q: 'np.ndarray', alpha: 'float', mach: 'float', ci: 'float') -> 'dict[str, np.ndarray]'
+
+load_classic_full_mode
+module: scripts.compare_kh_subsonic_fixed_mach_modal_candidates
+signature: (alpha: 'float', mach: 'float') -> 'tuple[dict[str, np.ndarray], float]'
+
+RobustSubsonicShootingSolver.solve
+module: classical_solver.subsonic.robust_subsonic_shooting
+signature: (self, *, primary_ci_max: 'float' = 1.0, primary_n_scan: 'int' = 81, secondary_ci_min: 'float' = 0.001, secondary_ci_max: 'float' = 1.0, secondary_n_scan: 'int' = 41, force_cross_check: 'bool' = False) -> 'RobustSubsonicResult'
+
+NotebookStyleDenseGEPSolver.__init__
+module: classical_solver.gep.dense_gep_notebook_style
+signature: (self, *, alpha: 'float', Mach: 'float', n_points: 'int' = 301, mapping_kind: 'str' = 'pin', mapping_scale: 'float' = 5.0, cubic_delta: 'float' = 0.2, xi_max: 'float' = 0.98, box_y_min: 'float | None' = None, box_y_max: 'float | None' = None, rho_bar: 'float' = 1.0)
+
+NotebookStyleDenseGEPSolver.get_nearest_mode_to_target
+module: classical_solver.gep.dense_gep_notebook_style
+signature: (self, *, target_guess: 'tuple[float, float]', prefer_positive_cr: 'bool' = True, ci_weight: 'float' = 2.0) -> 'tuple[dict | None, str, int]'
+
+====================================================================================================
+evaluate_pinn
+====================================================================================================
+def evaluate_pinn(
+    *,
+    checkpoint_path: Path,
+    device: torch.device,
+) -> tuple[
+    torch.nn.Module,
+    torch.nn.Module,
+    Any,
+    dict[str, Any],
+    str,
+]:
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    args = dict(checkpoint.get("args", {}))
+
+    family = args.get("field_family_resolved")
+    if not family:
+        family = infer_field_family(
+            "auto",
+            checkpoint_path,
+            checkpoint,
+        )
+
+    if family not in MODULES:
+        raise RuntimeError(
+            f"Unsupported field family {family!r}. "
+            f"Known families: {sorted(MODULES)}"
+        )
+
+    module = importlib.import_module(MODULES[family])
+
+    required_ranges = ("mach_min", "mach_max", "eta_min", "eta_max")
+    missing = [name for name in required_ranges if args.get(name) is None]
+    if missing:
+        raise RuntimeError(
+            f"Checkpoint missing chart bounds: {missing}"
+        )
+
+    mach_min = float(args["mach_min"])
+    mach_max = float(args["mach_max"])
+    eta_min = float(args["eta_min"])
+    eta_max = float(args["eta_max"])
+
+    alpha_corners = [
+        eta * math.sqrt(max(1.0 - mach**2, 1.0e-14))
+        for eta in (eta_min, eta_max)
+        for mach in (mach_min, mach_max)
+    ]
+
+    field = call_supported(
+        module.FieldPQNet,
+        ymax=float(args.get("ymax", 100.0)),
+        alpha_min=min(alpha_corners),
+        alpha_max=max(alpha_corners),
+        mach_min=mach_min,
+        mach_max=mach_max,
+        eta_min=eta_min,
+        eta_max=eta_max,
+        width=int(args.get("width", 256)),
+        depth=int(args.get("depth", 7)),
+        n_freq=int(args.get("n_freq", 12)),
+    ).to(device=device, dtype=torch.float64)
+
+    load_field = field.load_state_dict(
+        checkpoint["field_state_dict"],
+        strict=True,
+    )
+
+    anchor_df = pd.DataFrame(checkpoint.get("anchor_df", {}))
+    if anchor_df.empty:
+        raise RuntimeError(
+            "Joint checkpoint has no anchor_df; cannot reconstruct CiAtlasNet."
+        )
+
+    ci_net = CiAtlasNet(
+        mach_min=mach_min,
+        mach_max=mach_max,
+        eta_min=eta_min,
+        eta_max=eta_max,
+        ci_init=float(anchor_df["ci"].mean()),
+        width=int(args.get("ci_width", 96)),
+        depth=int(args.get("ci_depth", 3)),
+    ).to(device=device, dtype=torch.float64)
+
+    load_ci = ci_net.load_state_dict(
+        checkpoint["ci_state_dict"],
+        strict=True,
+    )
+
+    field.eval()
+    ci_net.eval()
+
+    print("PINN checkpoint:", checkpoint_path)
+    print("Resolved family:", family)
+    print("Field load:", load_field)
+    print("c_i load:", load_ci)
+    print(
+        "Chart bounds:",
+        f"M=[{mach_min}, {mach_max}]",
+        f"eta=[{eta_min}, {eta_max}]",
+    )
+
+    return field, ci_net, module, args, family
+
+
+====================================================================================================
+call_pinn_profiles
+====================================================================================================
+def call_pinn_profiles(
+    *,
+    field: torch.nn.Module,
+    ci_net: torch.nn.Module,
+    module: Any,
+    family: str,
+    y: np.ndarray,
+    alpha: float,
+    mach: float,
+    device: torch.device,
+) -> tuple[np.ndarray, np.ndarray, float]:
+    if family == "pQscaled":
+        function = getattr(module, "eval_model_scaledQ")
+    else:
+        function = getattr(module, "eval_model")
+
+    p, q, ci = function(
+        field,
+        ci_net,
+        np.asarray(y, dtype=float),
+        float(alpha),
+        float(mach),
+        device,
+    )
+    return (
+        np.asarray(p, dtype=np.complex128),
+        np.asarray(q, dtype=np.complex128),
+        float(ci),
+    )
+
+
+====================================================================================================
+fields_from_pq
+====================================================================================================
+def fields_from_pq(
+    y: np.ndarray,
+    p: np.ndarray,
+    q: np.ndarray,
+    alpha: float,
+    mach: float,
+    ci: float,
+) -> dict[str, np.ndarray]:
+    c = 1j * float(ci)
+    y = np.asarray(y, dtype=float)
+    p = np.asarray(p, dtype=np.complex128)
+    q = np.asarray(q, dtype=np.complex128)
+    u_bar = np.tanh(y)
+    du_bar = 1.0 - u_bar**2
+    denom = u_bar - c
+
+    rho = float(mach) ** 2 * p
+    v = -q / (1j * float(alpha) * denom)
+    u = -(du_bar * v + 1j * float(alpha) * p) / (
+        1j * float(alpha) * denom
+    )
+    gamma = q / np.where(
+        np.abs(p) > 1.0e-14,
+        p,
+        np.nan + 1j * np.nan,
+    )
+    return {
+        "p": p,
+        "q": q,
+        "rho": rho,
+        "u": u,
+        "v": v,
+        "gamma": gamma,
+    }
+
+
+====================================================================================================
+load_classic_full_mode
+====================================================================================================
+def load_classic_full_mode(alpha: float, mach: float) -> tuple[dict[str, np.ndarray], float]:
+    solver = Mstab17SubsonicSolver(alpha=float(alpha), Mach=float(mach))
+    result = solver.solve()
+    sol_left, sol_right, _ = solver.get_trajectories(result.ci, ln_p_start_right=result.ln_p_start_right)
+
+    y_left = np.asarray(sol_left.t)
+    y_right = np.asarray(sol_right.t)
+    k_left = np.asarray(sol_left.y[0])
+    q_left = np.asarray(sol_left.y[1])
+    ln_p_left = np.asarray(sol_left.y[2])
+    phi_left = np.asarray(sol_left.y[3])
+    k_right = np.asarray(sol_right.y[0])
+    q_right = np.asarray(sol_right.y[1])
+    ln_p_right = np.asarray(sol_right.y[2])
+    phi_right = np.asarray(sol_right.y[3])
+
+    abs_p_left = np.exp(ln_p_left)
+    abs_p_right = np.exp(ln_p_right)
+    phi_left_0 = solver._interp_component(0.0, sol_left, 3)
+    phi_right_0 = solver._interp_component(0.0, sol_right, 3)
+    phase_shift = phi_left_0 - phi_right_0
+
+    p_left = abs_p_left * np.exp(1j * phi_left)
+    p_right = abs_p_right * np.exp(1j * (phi_right + phase_shift))
+    gamma_left = k_left + 1j * q_left
+    gamma_right = k_right + 1j * q_right
+
+    mask_left = y_left < 0.0
+    y = np.concatenate([y_left[mask_left], y_right[::-1]])
+    p = np.concatenate([p_left[mask_left], p_right[::-1]])
+    gamma = np.concatenate([gamma_left[mask_left], gamma_right[::-1]])
+
+    p_y = gamma * p
+    c = 1j * float(result.ci)
+    u_bar = np.tanh(y)
+    du_bar = 1.0 / np.cosh(y) ** 2
+    i_alpha = 1j * float(alpha)
+    v = -p_y / (i_alpha * (u_bar - c))
+    u = -(du_bar * v + i_alpha * p) / (i_alpha * (u_bar - c))
+    rho = p * (float(mach) ** 2)
+    return normalize_full_mode(y, u, v, p, rho), float(result.ci)
+
+
+====================================================================================================
+REPRESENTATIVE ATLAS POINT
+====================================================================================================
+path: assets/pinn_subsonic/joint_ci_mode_global_validation_v1/plans/offgrid_384_plan.csv
+shape: (384, 21)
+columns: ['point_id', 'sample_group', 'Mach', 'eta', 'alpha', 'coverage_count', 'covering_charts', 'selected_chart', 'selected_source', 'gep_regime', 'N', 'mapping_scale', 'xi_max', 'continuation_required', 'chart_id', 'checkpoint', 'chart_mach_min', 'chart_mach_max', 'chart_eta_min', 'chart_eta_max', 'field_family_plan']
+
+Point le plus proche de M=0.5, eta=0.5 :
+point_id                                                      OFFGRID_0189
+sample_group                                           uniform_full_domain
+Mach                                                              0.467025
+eta                                                               0.487604
+alpha                                                             0.431161
+coverage_count                                                           1
+covering_charts                                                        MID
+selected_chart                                                         MID
+selected_source                                                       core
+gep_regime                                                   standard_N301
+N                                                                      301
+mapping_scale                                                          5.0
+xi_max                                                                0.98
+continuation_required                                                False
+chart_id                                                               MID
+checkpoint               assets/pinn_subsonic/joint_ci_mode_atlas_v2/MI...
+chart_mach_min                                                         0.1
+chart_mach_max                                                         0.7
+chart_eta_min                                                         0.35
+chart_eta_max                                                         0.55
+field_family_plan                                                pq_legacy

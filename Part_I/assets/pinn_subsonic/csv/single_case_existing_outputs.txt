@@ -1,0 +1,16 @@
+
+################ model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_riccati_pure_physics_reference ################
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_riccati_pure_physics_reference/config.csv
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_riccati_pure_physics_reference/history.csv
+
+################ model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci4_fixed ################
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci4_fixed/config.csv
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci4_fixed/history.csv
+
+################ model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci8_fixed ################
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci8_fixed/config.csv
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci8_fixed/history.csv
+
+################ model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci16_fixed ################
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci16_fixed/config.csv
+model_saved/kh_subsonic_fixed_mach_M05_alpha010_080_ci_sparse_reference/hybrid_ci16_fixed/history.csv
