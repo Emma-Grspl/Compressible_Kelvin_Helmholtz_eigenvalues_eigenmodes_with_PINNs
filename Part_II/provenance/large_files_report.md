@@ -27,10 +27,10 @@ The source supersonic workspace contains the files below. They were not copied i
 | `experiments/modal_reconstruction/legacy_outputs/final_44pts_safe_20260708_121115/table_supersonic_modal_fields_p_rho_u_v_44pts_filtered.csv` | 127.4 | tracked | excluded: >=100 MiB GitHub limit |
 | `experiments/supersonic_general/support/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FREEZE.tar.gz` | 124.5 | tracked | excluded: >=100 MiB GitHub limit |
 | `experiments/modal_reconstruction/legacy_outputs/final_44pts_validated_only/table_supersonic_modal_fields_p_rho_u_v_44pts_validated_only.csv` | 110.6 | tracked | excluded: >=100 MiB GitHub limit |
-| `experiments/generic_shooting/legacy_outputs/reports/table_KH_shoot_candidates_vs_FINAL23_reject.csv` | 98.9 | tracked | not copied: >50 MiB legacy/local output |
-| `experiments/modal_reconstruction/legacy_outputs/campaign_smallM_low_high_alpha_scan/table_campaign_smallM_modal_fields_reconstructed.csv` | 93.7 | tracked | not copied: >50 MiB legacy/local output |
-| `experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_raw.parquet` | 67.1 | untracked/local | not copied: >50 MiB legacy/local output |
-| `experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_tail_polished.parquet` | 67.0 | untracked/local | not copied: >50 MiB legacy/local output |
-| `experiments/modal_reconstruction/legacy_outputs/shooting/table_supersonic_reference_core_local_modal_fields_079656f8aa.csv` | 57.5 | tracked | not copied: >50 MiB legacy/local output |
+| `experiments/generic_shooting/legacy_outputs/reports/table_KH_shoot_candidates_vs_FINAL23_reject.csv` | 98.9 | tracked | copied: >50 MiB, below GitHub limit |
+| `experiments/modal_reconstruction/legacy_outputs/campaign_smallM_low_high_alpha_scan/table_campaign_smallM_modal_fields_reconstructed.csv` | 93.7 | tracked | copied: >50 MiB, below GitHub limit |
+| `experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_raw.parquet` | 67.1 | untracked/local | copied: >50 MiB, below GitHub limit |
+| `experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_tail_polished.parquet` | 67.0 | untracked/local | copied: >50 MiB, below GitHub limit |
+| `experiments/modal_reconstruction/legacy_outputs/shooting/table_supersonic_reference_core_local_modal_fields_079656f8aa.csv` | 57.5 | tracked | copied: >50 MiB, below GitHub limit |
 
 All `models_saved/` checkpoint binaries are retained only in the original local workspace and documented by `models_saved/README.md`.
