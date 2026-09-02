@@ -1,0 +1,21 @@
+name: Part I lightweight checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install CPU-only test dependencies
+        run: python -m pip install -r Part_I/requirements-ci.txt
+      - name: Compile public Python entry points
+        run: python -m compileall -q Part_I/code/src Part_I/scripts Part_I/examples Part_I/tests
+      - name: Run lightweight CPU tests
+        working-directory: Part_I
+        run: python -m pytest -q tests
