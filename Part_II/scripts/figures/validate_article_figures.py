@@ -22,6 +22,7 @@ EXPECTED_COLUMNS = [
     "sha256",
     "notes",
 ]
+NO_SCRIPT_FOUND = "NO_SCRIPT_FOUND"
 
 
 def sha256(path: Path) -> str:
@@ -49,8 +50,12 @@ def main() -> None:
         asset = ASSETS / row["filename"]
         source = PART_II_ROOT / row["canonical_source"]
         data = PART_II_ROOT / row["source_data"]
-        script = PART_II_ROOT / row["plot_script"]
-        for label, path in (("asset", asset), ("canonical source", source), ("source data", data), ("plot script", script)):
+        plot_script = row["plot_script"]
+        script = None if plot_script == NO_SCRIPT_FOUND else PART_II_ROOT / plot_script
+        required_paths = [("asset", asset), ("canonical source", source), ("source data", data)]
+        if script is not None:
+            required_paths.append(("plot script", script))
+        for label, path in required_paths:
             if not path.exists():
                 raise FileNotFoundError(f"Missing {label}: {path}")
         if sha256(asset) != row["sha256"] or sha256(source) != row["sha256"]:
