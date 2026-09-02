@@ -1,0 +1,168 @@
+modal chunk 1: selected rows=15204
+modal chunk 2: selected rows=15204
+modal chunk 3: selected rows=11403
+modal chunk 4: selected rows=15204
+modal chunk 5: selected rows=15204
+modal chunk 6: selected rows=15204
+modal chunk 7: selected rows=19005
+modal chunk 8: selected rows=15204
+modal chunk 9: selected rows=19005
+modal chunk 10: selected rows=19005
+modal chunk 11: selected rows=19005
+modal chunk 12: selected rows=20574
+modal chunk 13: selected rows=21237
+modal chunk 14: selected rows=22806
+modal chunk 15: selected rows=19005
+modal chunk 16: selected rows=15204
+modal chunk 17: selected rows=11403
+modal chunk 18: selected rows=0
+{
+  "spectral_reference": "assets/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/classical_supersonic_final_reference.csv",
+  "modal_reference": "assets/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/classical_supersonic_final_modes_long.csv.gz",
+  "modal_index": "assets/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/classical_supersonic_final_modes_index.csv",
+  "n_spectral_points": 895,
+  "n_mach": 19,
+  "mach_min": 1.0,
+  "mach_max": 1.9,
+  "anchor_quantiles": [
+    0.1,
+    0.4,
+    0.7,
+    0.9
+  ],
+  "n_spectral_anchors_all": 76,
+  "n_spectral_anchors_train_machsplit": 52,
+  "n_modal_anchors_s4m2_all": 38,
+  "n_modal_anchors_s4m4_all": 76,
+  "n_modal_anchors_s4m2_train_machsplit": 26,
+  "n_modal_anchors_s4m4_train_machsplit": 52,
+  "validation_mach": [
+    1.15,
+    1.45,
+    1.75
+  ],
+  "test_mach": [
+    1.25,
+    1.55,
+    1.85
+  ],
+  "neutral_source_counts": {
+    "max_available_alpha_proxy": 17,
+    "neutral_alpha_estimate": 2
+  },
+  "modal_extraction_skipped": false,
+  "center_safe_threshold": 1e-06,
+  "center_gauge_unsafe_ids": [],
+  "modal_banks": {
+    "modal_anchors_2_per_mach_all.npz": {
+      "path": "assets/pinn_supersonic/datasets/sparse_v1/modal_anchors_2_per_mach_all.npz",
+      "n_modes": 38,
+      "n_modal_rows": 144438,
+      "n_center_gauge_unsafe": 0,
+      "center_amplitude_ratio_min": 0.9666818007424683
+    },
+    "modal_anchors_4_per_mach_all.npz": {
+      "path": "assets/pinn_supersonic/datasets/sparse_v1/modal_anchors_4_per_mach_all.npz",
+      "n_modes": 76,
+      "n_modal_rows": 288876,
+      "n_center_gauge_unsafe": 0,
+      "center_amplitude_ratio_min": 0.9666818007424683
+    },
+    "modal_anchors_2_per_mach_train_machsplit.npz": {
+      "path": "assets/pinn_supersonic/datasets/sparse_v1/modal_anchors_2_per_mach_train_machsplit.npz",
+      "n_modes": 26,
+      "n_modal_rows": 98826,
+      "n_center_gauge_unsafe": 0,
+      "center_amplitude_ratio_min": 0.9666818007424683
+    },
+    "modal_anchors_4_per_mach_train_machsplit.npz": {
+      "path": "assets/pinn_supersonic/datasets/sparse_v1/modal_anchors_4_per_mach_train_machsplit.npz",
+      "n_modes": 52,
+      "n_modal_rows": 197652,
+      "n_center_gauge_unsafe": 0,
+      "center_amplitude_ratio_min": 0.9666818007424683
+    }
+  },
+  "checks": {
+    "spectral_anchor_count_ok": true,
+    "modal_s4m2_count_ok": true,
+    "modal_s4m4_count_ok": true,
+    "no_neutral_proxy": false
+  }
+}
+
+===== DATASET REPORT =====
+{
+  "spectral_reference": "assets/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/classical_supersonic_final_reference.csv",
+  "modal_reference": "assets/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/classical_supersonic_final_modes_long.csv.gz",
+  "modal_index": "assets/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/classical_supersonic_final_modes_index.csv",
+  "n_spectral_points": 895,
+  "n_mach": 19,
+  "mach_min": 1.0,
+  "mach_max": 1.9,
+  "anchor_quantiles": [
+    0.1,
+    0.4,
+    0.7,
+    0.9
+  ],
+  "n_spectral_anchors_all": 76,
+  "n_spectral_anchors_train_machsplit": 52,
+  "n_modal_anchors_s4m2_all": 38,
+  "n_modal_anchors_s4m4_all": 76,
+  "n_modal_anchors_s4m2_train_machsplit": 26,
+  "n_modal_anchors_s4m4_train_machsplit": 52,
+  "validation_mach": [
+    1.15,
+    1.45,
+    1.75
+  ],
+  "test_mach": [
+    1.25,
+    1.55,
+    1.85
+  ],
+  "neutral_source_counts": {
+    "max_available_alpha_proxy": 17,
+    "neutral_alpha_estimate": 2
+  },
+  "modal_extraction_skipped": false,
+  "center_safe_threshold": 1e-06,
+  "center_gauge_unsafe_ids": [],
+  "modal_banks": {
+    "modal_anchors_2_per_mach_all.npz": {
+      "path": "assets/pinn_supersonic/datasets/sparse_v1/modal_anchors_2_per_mach_all.npz",
+      "n_modes": 38,
+      "n_modal_rows": 144438,
+      "n_center_gauge_unsafe": 0,
+      "center_amplitude_ratio_min": 0.9666818007424683
+    },
+    "modal_anchors_4_per_mach_all.npz": {
+      "path": "assets/pinn_supersonic/datasets/sparse_v1/modal_anchors_4_per_mach_all.npz",
+      "n_modes": 76,
+      "n_modal_rows": 288876,
+      "n_center_gauge_unsafe": 0,
+      "center_amplitude_ratio_min": 0.9666818007424683
+    },
+    "modal_anchors_2_per_mach_train_machsplit.npz": {
+      "path": "assets/pinn_supersonic/datasets/sparse_v1/modal_anchors_2_per_mach_train_machsplit.npz",
+      "n_modes": 26,
+      "n_modal_rows": 98826,
+      "n_center_gauge_unsafe": 0,
+      "center_amplitude_ratio_min": 0.9666818007424683
+    },
+    "modal_anchors_4_per_mach_train_machsplit.npz": {
+      "path": "assets/pinn_supersonic/datasets/sparse_v1/modal_anchors_4_per_mach_train_machsplit.npz",
+      "n_modes": 52,
+      "n_modal_rows": 197652,
+      "n_center_gauge_unsafe": 0,
+      "center_amplitude_ratio_min": 0.9666818007424683
+    }
+  },
+  "checks": {
+    "spectral_anchor_count_ok": true,
+    "modal_s4m2_count_ok": true,
+    "modal_s4m4_count_ok": true,
+    "no_neutral_proxy": false
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "n_requested_mach": 4,
+  "n_base_seeds": 4,
+  "n_neutral_estimates": 4,
+  "status_counts": {
+    "local_continuation_failed": 4
+  },
+  "scientific_note": "alpha_n(M) is extrapolated from positive-ci shooting solutions on the unstable side; ci=0 is not imposed in the solver."
+}

@@ -1,0 +1,35 @@
+SUPERSONIC ATLAS — FROZEN BUDGET SELECTION
+==========================================
+
+Development validation set:
+    V64
+
+Candidate nested unique-anchor budgets:
+    N76, N60, N48, N36, N24
+
+Frozen selection criterion:
+    A lower budget is admissible only if, on every validation point
+    recovered by N76, PINN-seeded shooting has spectral success,
+    modal success, and
+
+        |c_shoot - c_reference| <= 1e-4.
+
+N76 baseline:
+    64 / 64 technical shooting successes
+    63 / 64 points within spectral tolerance 1e-4
+
+The single N76-excluded branch-sensitive point is:
+    Mach  = 1.10
+    alpha = 0.09
+
+Results on the 63-point N76-recoverable subset:
+    N76 : 63 / 63
+    N60 : 62 / 63
+    N48 : 62 / 63
+    N36 : 61 / 63
+    N24 : 59 / 63
+
+Selected budget:
+    N76
+
+No T401 result was used for this selection.

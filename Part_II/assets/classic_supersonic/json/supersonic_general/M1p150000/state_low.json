@@ -1,0 +1,11 @@
+{
+  "Mach": 1.15,
+  "direction": "low",
+  "last_accepted_alpha": 0.059980468749999995,
+  "last_accepted_ci": 0.19994995138517946,
+  "last_accepted_cr": -7.868179355852493e-10,
+  "last_success": false,
+  "last_target": 0.055,
+  "neutral_fit": null,
+  "updated": "2026-07-23T11:43:26.554072+00:00"
+}

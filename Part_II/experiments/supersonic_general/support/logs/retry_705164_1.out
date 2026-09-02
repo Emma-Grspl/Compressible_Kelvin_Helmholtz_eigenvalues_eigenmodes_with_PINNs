@@ -1,0 +1,41 @@
+============================================================
+POWELL WIDE RETRY
+Mach   = 1.15
+tag    = 115
+alphas = 0.06 0.065 0.07 0.075
+start  = Fri Aug  7 08:40:24 PM CEST 2026
+============================================================
+[01/04] alpha=0.06000 |dc_pinn|=5.774e-02 |dc_corr|=5.503e-07 mismatch=8.421e-09 nfev=240 time=37.22s
+[02/04] alpha=0.06500 |dc_pinn|=6.623e-02 |dc_corr|=3.773e-05 mismatch=2.833e-07 nfev=240 time=38.07s
+[03/04] alpha=0.07000 |dc_pinn|=3.532e-02 |dc_corr|=8.696e-10 mismatch=2.473e-12 nfev=240 time=38.72s
+[04/04] alpha=0.07500 |dc_pinn|=2.212e-02 |dc_corr|=5.963e-10 mismatch=9.343e-12 nfev=151 time=24.53s
+
+{
+  "status": "COMPLETED",
+  "Mach": 1.15,
+  "n_requested": 4,
+  "n_successful": 4,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M115_S4M0_v1/pinn_powell_retry_wide/pinn_powell_spectral_results.csv",
+  "pinn_spectral_error_mean": 0.04535081556744445,
+  "pinn_spectral_error_max": 0.06623050783151567,
+  "corrected_spectral_error_mean": 9.571448902313918e-06,
+  "corrected_spectral_error_max": 3.773402385234906e-05,
+  "delta_c_from_pinn_mean": 0.04535077622148025,
+  "delta_c_from_pinn_max": 0.06623032107680121,
+  "initial_mismatch_mean": 0.00126215788922411,
+  "initial_mismatch_max": 0.0015159946667097602,
+  "corrected_mismatch_mean": 7.292688670912473e-08,
+  "corrected_mismatch_max": 2.832748915593652e-07,
+  "mismatch_reduction_mean": 146452134.78342035,
+  "mismatch_reduction_max": 481885109.10874873,
+  "optimization_seconds_mean": 34.6359801243525,
+  "optimization_seconds_max": 38.71664632111788,
+  "nfev_reported_mean": 217.75,
+  "nfev_reported_max": 240.0
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M115_S4M0_v1/pinn_powell_retry_wide/pinn_powell_spectral_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M115_S4M0_v1/pinn_powell_retry_wide/pinn_powell_spectral_summary.json
+
+end = Fri Aug  7 08:42:51 PM CEST 2026

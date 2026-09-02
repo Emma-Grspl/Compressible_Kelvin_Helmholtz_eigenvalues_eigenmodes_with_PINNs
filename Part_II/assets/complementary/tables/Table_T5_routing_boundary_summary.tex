@@ -1,0 +1,34 @@
+\begin{table*}[t]
+\centering
+\caption{
+Routing-boundary discontinuity audit over 17 neighboring chart interfaces
+and 85 representative boundary locations. Same-point discrepancies compare
+the two adjacent chart predictions at the identical parameter coordinate.
+Routed discrepancies compare predictions at parameter points displaced by
+$\pm\varepsilon$ across the routing boundary. Persistence of the routed
+jump as $\varepsilon\rightarrow0$ indicates a genuine chart-switching
+discontinuity rather than a finite-offset artifact.
+}
+\label{tab:routing_boundary_summary}
+\small
+\setlength{\tabcolsep}{4.2pt}
+\begin{tabular}{llccccccc}
+\toprule
+Evaluation
+& $\varepsilon$
+& $N$
+& Route changes
+& Med. $|\Delta c|$
+& $P_{95}$ $|\Delta c|$
+& Max $|\Delta c|$
+& Med. $|\Delta c_r|$
+& Med. $|\Delta c_i|$ \\
+\midrule
+Same point & -- & 85 & -- & 8.682e-03 & 4.016e-02 & 7.511e-02 & 6.716e-03 & 2.227e-03 \\
+\midrule
+Routed & $1e-06$ & 85 & 85 & 8.683e-03 & 4.016e-02 & 7.512e-02 & 6.711e-03 & 2.228e-03 \\
+Routed & $1e-05$ & 85 & 85 & 8.683e-03 & 4.017e-02 & 7.513e-02 & 6.665e-03 & 2.233e-03 \\
+Routed & $1e-04$ & 85 & 85 & 8.689e-03 & 4.028e-02 & 7.528e-02 & 6.373e-03 & 2.267e-03 \\
+\bottomrule
+\end{tabular}
+\end{table*}

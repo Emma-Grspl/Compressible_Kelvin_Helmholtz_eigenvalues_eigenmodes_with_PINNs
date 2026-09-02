@@ -1,0 +1,34 @@
+\begin{table*}[t]
+\centering
+\caption{
+Matched branch-localization controls for the classical Riccati corrector.
+The PINN-seeded and generic conditions use the same external local-search
+policy and search budget. Technical convergence denotes successful
+completion of the classical correction and must therefore be distinguished
+from recovery of the intended spectral branch. For V64, target-branch
+statistics are evaluated over the 63 branch-labelled coordinates after
+excluding the predeclared multibranch case; T401 uses all 401 sealed test
+coordinates.
+}
+\label{tab:matched_branch_localization}
+\small
+\setlength{\tabcolsep}{4.2pt}
+\begin{tabular}{llcccccc}
+\toprule
+Benchmark
+& Initialization
+& Technical
+& Target recovery
+& Median error
+& $P_{95}$ error
+& $\leq 10^{-5}$
+& $\leq 10^{-4}$ \\
+\midrule
+V64 & \textbf{PINN-seeded} & 64/64 & \textbf{63/63} & \textbf{3.502e-06} & \textbf{7.257e-06} & \textbf{62/63} & \textbf{63/63} \\
+ & Matched generic & 64/64 & 0/63 & 4.526e-01 & 7.586e-01 & 0/63 & 0/63 \\
+\midrule
+T401 & \textbf{PINN-seeded} & 401/401 & \textbf{400/401} & \textbf{3.647e-06} & \textbf{8.117e-06} & \textbf{396/401} & \textbf{400/401} \\
+ & Matched generic & 401/401 & 1/401 & 4.520e-01 & 7.615e-01 & 1/401 & 1/401 \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -1,0 +1,46 @@
+[01/04] mode=pinn_local alpha=0.07000 |dc_pinn|=2.030e-06 |dc_shoot|=6.320e-06 p40=3.606e-05 time=37.53s
+[02/04] mode=pinn_local alpha=0.14000 |dc_pinn|=1.715e-06 |dc_shoot|=6.557e-06 p40=1.543e-04 time=41.84s
+[03/04] mode=pinn_local alpha=0.20500 |dc_pinn|=6.147e-06 |dc_shoot|=3.222e-06 p40=3.619e-04 time=52.45s
+[04/04] mode=pinn_local alpha=0.25000 |dc_pinn|=7.783e-06 |dc_shoot|=1.716e-06 p40=5.935e-04 time=60.77s
+
+{
+  "status": "COMPLETED",
+  "mode": "pinn_local",
+  "alpha_set": "anchors",
+  "Mach": 1.5,
+  "n_requested": 4,
+  "n_successful": 4,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_local_corrected_anchors/full_shooting_results.csv",
+  "pinn_complex_spectral_error_mean": 4.418918077521511e-06,
+  "pinn_complex_spectral_error_max": 7.783173053010471e-06,
+  "shooting_complex_spectral_error_mean": 4.453686960958364e-06,
+  "shooting_complex_spectral_error_max": 6.5572679042457585e-06,
+  "delta_c_from_pinn_mean": 7.544769985304106e-06,
+  "delta_c_from_pinn_max": 8.13802083337034e-06,
+  "stage1_mismatch_mean": 9.930473256724134e-07,
+  "stage1_mismatch_max": 1.5221959868127544e-06,
+  "stage2_mismatch_mean": 2.6051829817701473e-16,
+  "stage2_mismatch_max": 5.881164012881393e-16,
+  "p_rel_l2_core20_mean": 2.360723352894911e-05,
+  "p_rel_l2_core20_max": 3.5792372194998114e-05,
+  "p_rel_l2_core40_mean": 0.0002864477280834822,
+  "p_rel_l2_core40_max": 0.0005935361724931295,
+  "rho_rel_l2_core40_mean": 0.000286447728083485,
+  "rho_rel_l2_core40_max": 0.0005935361724931295,
+  "u_rel_l2_core40_mean": 0.00016917024209906227,
+  "u_rel_l2_core40_max": 0.0003805898872260687,
+  "v_rel_l2_core40_mean": 0.0003130944491946037,
+  "v_rel_l2_core40_max": 0.000632257070249254,
+  "p_overlap_error_core40_mean": 5.014190707086641e-08,
+  "p_overlap_error_core40_max": 1.3703542089960052e-07,
+  "solve_seconds_mean": 47.89637902050163,
+  "solve_seconds_max": 60.51277064002352,
+  "reconstruction_seconds_mean": 0.25187033975089435,
+  "reconstruction_seconds_max": 0.307374132971745,
+  "total_seconds_mean": 48.14824936025252,
+  "total_seconds_max": 60.77388993103523
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_local_corrected_anchors/full_shooting_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_local_corrected_anchors/full_shooting_summary.json

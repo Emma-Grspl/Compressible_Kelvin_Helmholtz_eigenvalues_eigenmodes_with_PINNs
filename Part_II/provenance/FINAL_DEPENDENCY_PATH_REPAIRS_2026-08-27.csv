@@ -1,0 +1,5 @@
+date,path,replacement_count,reason,sha256_destination
+2026-08-27,code/scripts/data_preparation/prepare_build_article_assets_primary133.py,4,Replace active pre-migration path with existing manifest destination; no scientific logic changed,39d58a22787bd6d75031327eabe54c0cb0e66b44f822bc45635267996d336151
+2026-08-27,code/scripts/data_preparation/prepare_build_supersonic_article_assets_final.py,1,Replace active pre-migration path with existing manifest destination; no scientific logic changed,ead1892c9c36807924c8642a2f97e824ea4da78a6a0ee8e0546c8b0af9c55858
+2026-08-27,code/scripts/evaluation/run_N76_cost_shooting.py,1,Replace active pre-migration path with existing manifest destination; no scientific logic changed,6fa27157a1b63e674d4d66a291d4fe8a27d865122b6bce2fe4678bda8e061394
+2026-08-27,experiments/supersonic_general/support/classic_supersonic/Makefile,1,Normalize terminal whitespace after preserving the pre-existing article-assets target; no scientific logic changed,01a3a78f4fc879e7bfe970ad22f79f687f9cd327f4fc29c7fe317e62c85a6cc8

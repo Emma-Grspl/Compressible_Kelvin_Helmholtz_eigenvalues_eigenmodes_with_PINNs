@@ -1,0 +1,21 @@
+Using nearest stored shooting case:
+alpha                          0.12125
+shooting_cr                   0.457495
+shooting_ci                   0.024586
+shooting_ln_p_start_right   -14.999993
+Name: 3, dtype: object
+
+RETURN TYPE
+<class 'dict'>
+
+RETURNED KEYS
+y                                shape=(4418,)            dtype=float64         
+  min=-1.033782e+03 max=1.033782e+03
+rho                              shape=(4418,)            dtype=complex128      
+  |.| min=1.725290e-15 max=1.000000e+00
+u                                shape=(4418,)            dtype=complex128      
+  |.| min=9.805459e-16 max=3.131368e+00
+v                                shape=(4418,)            dtype=complex128      
+  |.| min=3.086060e-16 max=1.686794e-01
+p                                shape=(4418,)            dtype=complex128      
+  |.| min=5.324971e-16 max=3.086420e-01

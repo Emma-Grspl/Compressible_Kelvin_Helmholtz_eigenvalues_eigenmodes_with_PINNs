@@ -1,0 +1,2 @@
+Mach,alpha,cr,ci,omega_i,validation_status,active_threshold,modal_source
+1.4,0.18125,0.3153193678544234,0.0427209194542578,0.0077431666510842,modal_spectral_validated_with_exported_fields,0.0001,classic_supersonic/data/modal/supersonic_reference_v2_modal_raw.parquet

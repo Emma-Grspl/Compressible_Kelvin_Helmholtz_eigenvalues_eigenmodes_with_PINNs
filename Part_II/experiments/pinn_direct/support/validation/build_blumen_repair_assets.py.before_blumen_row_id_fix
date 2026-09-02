@@ -1,0 +1,279 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import shutil
+import tarfile
+from datetime import datetime, timezone
+from pathlib import Path
+
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+
+POSITIVE_OK = {
+    'converged_center', 'converged_bracket_endpoint',
+    'converged_root', 'converged_repair',
+}
+NEUTRAL_OK = {
+    'converged_neutral_bracket', 'converged_neutral_at_alpha_zero',
+}
+
+
+def load_many(paths: list[Path]) -> pd.DataFrame:
+    frames = []
+    for path in paths:
+        if path.is_file():
+            frame = pd.read_csv(path)
+            if not frame.empty:
+                frames.append(frame)
+    return pd.concat(frames, ignore_index=True, sort=False) if frames else pd.DataFrame()
+
+
+def numeric(frame: pd.DataFrame, columns: tuple[str, ...]) -> pd.DataFrame:
+    out = frame.copy()
+    for column in columns:
+        if column in out.columns:
+            out[column] = pd.to_numeric(out[column], errors='coerce')
+    return out
+
+
+def replace_rows(original: pd.DataFrame, repair: pd.DataFrame, key: str) -> pd.DataFrame:
+    if repair.empty:
+        return original.copy()
+    original = original.copy()
+    repair = repair.copy()
+    original[key] = pd.to_numeric(original[key], errors='coerce').astype('Int64')
+    repair[key] = pd.to_numeric(repair[key], errors='coerce').astype('Int64')
+    repaired_keys = set(repair[key].dropna().tolist())
+    kept = original.loc[~original[key].isin(repaired_keys)].copy()
+    return pd.concat([kept, repair], ignore_index=True, sort=False)
+
+
+def curve_order(frame: pd.DataFrame) -> pd.DataFrame:
+    if 'blumen_row_id' in frame.columns:
+        return frame.sort_values('blumen_row_id')
+    return frame.sort_values(['Mach', 'alpha_blumen'])
+
+
+def plot_overlay(combined: pd.DataFrame, output: Path) -> None:
+    fig, ax = plt.subplots(figsize=(9.2, 7.2), constrained_layout=True)
+    positive = combined.loc[combined['target_ci'] > 0].copy()
+    levels = sorted(positive['target_ci'].dropna().unique())
+    cmap = plt.get_cmap('viridis')
+    colors = {
+        level: cmap(0.12 + 0.80 * index / max(1, len(levels) - 1))
+        for index, level in enumerate(levels)
+    }
+    for level in levels:
+        level_frame = positive.loc[
+            np.isclose(positive['target_ci'], level, atol=1e-12)
+        ]
+        first_key = level_frame['curve_key'].iloc[0] if not level_frame.empty else None
+        for curve_key, segment in level_frame.groupby('curve_key', sort=False):
+            segment = curve_order(segment)
+            color = colors[level]
+            ax.plot(
+                segment['alpha_blumen'], segment['Mach'],
+                linestyle='--', linewidth=1.0, color=color, alpha=0.75,
+            )
+            good = segment['status'].astype(str).isin(POSITIVE_OK)
+            ax.plot(
+                segment.loc[good, 'alpha_classical'], segment.loc[good, 'Mach'],
+                linestyle='-', linewidth=1.8, color=color,
+                label=rf'$c_i={level:.4g}$' if curve_key == first_key else None,
+            )
+
+    neutral = combined.loc[
+        np.isclose(combined['target_ci'], 0.0, atol=1e-14)
+    ].copy()
+    for curve_index, (_, segment) in enumerate(
+        neutral.groupby('curve_key', sort=False)
+    ):
+        segment = curve_order(segment)
+        ax.plot(
+            segment['alpha_blumen'], segment['Mach'],
+            linestyle='--', linewidth=1.2,
+            label=f'Blumen neutral branch {curve_index + 1}',
+        )
+        good = segment['status'].astype(str).isin(NEUTRAL_OK)
+        ax.plot(
+            segment.loc[good, 'alpha_classical'], segment.loc[good, 'Mach'],
+            linestyle='-', linewidth=2.0,
+            label=f'Classical neutral branch {curve_index + 1}',
+        )
+
+    ax.set_xlabel(r'$\alpha$')
+    ax.set_ylabel(r'Mach number $M$')
+    ax.set_title(
+        'Blumen digitization and reconstructed classical isolines\n'
+        'dashed: Blumen; solid: classical'
+    )
+    ax.grid(True, alpha=0.22)
+    ax.legend(frameon=False, fontsize=8, ncols=2)
+    fig.savefig(output, bbox_inches='tight')
+    plt.close(fig)
+
+
+def plot_heatmap(combined: pd.DataFrame, output: Path) -> None:
+    good = combined.loc[
+        combined['status'].astype(str).isin(POSITIVE_OK | NEUTRAL_OK)
+    ].copy()
+    good = numeric(
+        good, ('Mach', 'alpha_blumen', 'delta_alpha', 'target_ci'),
+    ).dropna(subset=['Mach', 'alpha_blumen', 'delta_alpha'])
+    if good.empty:
+        raise RuntimeError('No converged points available for the heatmap.')
+    limit = float(np.nanmax(np.abs(good['delta_alpha'])))
+    if not np.isfinite(limit) or limit == 0.0:
+        limit = 1e-12
+    fig, ax = plt.subplots(figsize=(8.9, 6.9), constrained_layout=True)
+    scatter = ax.scatter(
+        good['alpha_blumen'], good['Mach'], c=good['delta_alpha'],
+        cmap='coolwarm', vmin=-limit, vmax=limit,
+        s=36, linewidths=0.25, edgecolors='black',
+    )
+    fig.colorbar(
+        scatter, ax=ax,
+        label=r'$\Delta\alpha=\alpha_{\rm classique}-\alpha_{\rm Blumen}$',
+    )
+    ax.set_xlabel(r'$\alpha_{\rm Blumen}$')
+    ax.set_ylabel(r'Mach number $M$')
+    ax.set_title('Geometric error of the Blumen isolines')
+    ax.grid(True, alpha=0.20)
+    fig.savefig(output, bbox_inches='tight')
+    plt.close(fig)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--old-asset-root', type=Path, required=True)
+    parser.add_argument('--repair-root', type=Path, required=True)
+    parser.add_argument('--output-root', type=Path, required=True)
+    parser.add_argument('--overwrite', action='store_true')
+    args = parser.parse_args()
+
+    old_root = args.old_asset_root.resolve()
+    repair_root = args.repair_root.resolve()
+    output_root = args.output_root.resolve()
+    if output_root.exists() and args.overwrite:
+        shutil.rmtree(output_root)
+    output_root.mkdir(parents=True, exist_ok=True)
+
+    positive_old = pd.read_csv(
+        old_root / 'blumen_positive_true_classical_isolines.csv'
+    )
+    neutral_old = pd.read_csv(
+        old_root / 'blumen_neutral_true_classical_line.csv'
+    )
+    positive_repair = load_many(
+        sorted(repair_root.glob('positive/point_*/result.csv'))
+    )
+    neutral_repair = load_many(
+        sorted(repair_root.glob('neutral/point_*/result.csv'))
+    )
+
+    positive = replace_rows(positive_old, positive_repair, 'blumen_row_id')
+    neutral = replace_rows(neutral_old, neutral_repair, 'blumen_row_id')
+    combined = pd.concat([positive, neutral], ignore_index=True, sort=False)
+    combined = numeric(
+        combined,
+        (
+            'Mach', 'target_ci', 'alpha_blumen', 'alpha_classical',
+            'classical_cr', 'classical_ci', 'delta_alpha', 'delta_ci',
+            'residual_norm', 'blumen_row_id',
+        ),
+    )
+
+    positive.to_csv(
+        output_root / 'blumen_positive_true_classical_isolines.csv', index=False
+    )
+    neutral.to_csv(
+        output_root / 'blumen_neutral_true_classical_line.csv', index=False
+    )
+    combined.to_csv(
+        output_root / 'blumen_true_classical_all_isolines.csv', index=False
+    )
+
+    positive_ok = positive['status'].astype(str).isin(POSITIVE_OK)
+    neutral_ok = neutral['status'].astype(str).isin(NEUTRAL_OK)
+    failures = pd.concat(
+        [positive.loc[~positive_ok], neutral.loc[~neutral_ok]],
+        ignore_index=True, sort=False,
+    )
+    failures.to_csv(
+        output_root / 'blumen_true_classical_failures.csv', index=False
+    )
+
+    combined['converged'] = combined['status'].astype(str).isin(
+        POSITIVE_OK | NEUTRAL_OK
+    )
+    summary = (
+        combined.groupby(['target_ci', 'curve_key'], dropna=False)
+        .agg(
+            n_points=('Mach', 'size'),
+            n_converged=('converged', 'sum'),
+            mean_abs_delta_alpha=(
+                'delta_alpha',
+                lambda x: float(np.nanmean(np.abs(pd.to_numeric(x, errors='coerce'))))
+                if np.isfinite(pd.to_numeric(x, errors='coerce')).any() else np.nan,
+            ),
+            max_abs_delta_alpha=(
+                'delta_alpha',
+                lambda x: float(np.nanmax(np.abs(pd.to_numeric(x, errors='coerce'))))
+                if np.isfinite(pd.to_numeric(x, errors='coerce')).any() else np.nan,
+            ),
+        )
+        .reset_index()
+    )
+    summary['completion'] = summary['n_converged'] / summary['n_points']
+    summary.to_csv(
+        output_root / 'blumen_true_classical_isolines_summary.csv', index=False
+    )
+
+    overlay = output_root / 'blumen_true_classical_isolines_overlay.pdf'
+    heatmap = output_root / 'blumen_true_classical_delta_alpha_heatmap.pdf'
+    plot_overlay(combined, overlay)
+    plot_heatmap(combined, heatmap)
+
+    n_total = int(len(combined))
+    n_converged = int(positive_ok.sum() + neutral_ok.sum())
+    status = 'PASS' if n_converged == n_total else 'INCOMPLETE'
+    metadata = {
+        'generated_at': datetime.now(timezone.utc).isoformat(),
+        'n_positive': int(len(positive)),
+        'n_positive_converged': int(positive_ok.sum()),
+        'n_neutral': int(len(neutral)),
+        'n_neutral_converged': int(neutral_ok.sum()),
+        'n_total': n_total,
+        'n_converged': n_converged,
+        'n_failed': int(n_total - n_converged),
+        'status': status,
+    }
+    (output_root / 'metadata.json').write_text(
+        json.dumps(metadata, indent=2, sort_keys=True) + '\n',
+        encoding='utf-8',
+    )
+
+    archive = output_root.with_suffix('.tar.gz')
+    with tarfile.open(archive, 'w:gz') as handle:
+        handle.add(output_root, arcname=output_root.name)
+
+    print('=== BLUMEN TRUE-ISOLINE REPAIR ASSETS ===')
+    print(f'Positive              : {int(positive_ok.sum())}/{len(positive)}')
+    print(f'Neutral               : {int(neutral_ok.sum())}/{len(neutral)}')
+    print(f'Total                 : {n_converged}/{n_total}')
+    print(f'Failures CSV          : {output_root / "blumen_true_classical_failures.csv"}')
+    print(f'Overlay               : {overlay}')
+    print(f'Heatmap               : {heatmap}')
+    print(f'Archive               : {archive}')
+    print(f'ASSET STATUS          : {status}')
+    return 0 if status == 'PASS' else 2
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

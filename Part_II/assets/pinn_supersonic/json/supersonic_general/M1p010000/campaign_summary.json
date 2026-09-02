@@ -1,0 +1,12 @@
+{
+  "Mach": 1.01,
+  "alpha_max_converged": 0.075,
+  "alpha_min_converged": 0.005,
+  "n_converged": 11,
+  "n_rejected": 0,
+  "n_rows": 11,
+  "n_stable_beyond_neutral": 0,
+  "n_target_rows": 11,
+  "neutral_alpha_estimate": null,
+  "updated": "2026-07-24T10:23:04.316963+00:00"
+}

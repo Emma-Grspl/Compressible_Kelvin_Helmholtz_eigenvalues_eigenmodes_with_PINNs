@@ -1,0 +1,13 @@
+{
+  "n_cases": 8,
+  "n_modal_stitch_validated": 0,
+  "n_improved_p": 3,
+  "n_improved_q": 6,
+  "median_pressure_jump_before": 8.347525797139208e-08,
+  "median_pressure_jump_after": 9.032679870824573e-17,
+  "median_q_jump_after": 3.4432897498992247e-06,
+  "median_p_overlap": 0.6189844290273754,
+  "median_p_rel_after_fit": 0.7852912262850592,
+  "median_q_rel_after_fit": 70.78472456131038,
+  "interpretation": "The right shooting half is multiplied by the complex pressure matching factor p_left/p_right. Pressure continuity is imposed by construction; q continuity remains an independent diagnostic."
+}

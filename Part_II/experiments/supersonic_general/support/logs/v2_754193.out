@@ -1,0 +1,306 @@
+============================================================
+GLOBAL SUPERSONIC G52-v2
+52 spectral anchors
+0 modal anchors
+full-batch spectral supervision
+round-robin Mach physics
+test split sealed
+start=Sat Aug  8 08:18:46 PM CEST 2026
+node=r10i0n3
+============================================================
+train Mach: 1.00 1.05 1.10 1.20 1.30 1.35 1.40 1.50 1.60 1.65 1.70 1.80 1.90
+n train Mach: 13
+
+INITIAL VALIDATION SPECTRAL MEAN = 0.0033723218623783876
+
+================================================================================
+MODAL FROZEN-SPECTRUM
+================================================================================
+[modal] cycle=   1 step=    13 mean=7.007463e-02 best=7.007463e-02
+[modal] cycle=  10 step=   130 mean=1.627050e-01 best=3.248818e-02
+[modal] cycle=  20 step=   260 mean=7.899514e-02 best=3.248818e-02
+[modal] cycle=  30 step=   390 mean=9.545810e-02 best=3.248818e-02
+[modal] cycle=  40 step=   520 mean=2.294147e-02 best=2.294147e-02
+[modal] cycle=  50 step=   650 mean=2.859300e-02 best=2.020535e-02
+[modal] cycle=  60 step=   780 mean=1.954481e-02 best=1.443787e-02
+[modal] cycle=  70 step=   910 mean=2.671611e-02 best=1.443787e-02
+[modal] cycle=  80 step=  1040 mean=5.076803e-02 best=1.443787e-02
+[modal] cycle=  90 step=  1170 mean=2.195543e-02 best=1.443787e-02
+[modal] cycle= 100 step=  1300 mean=8.036902e-02 best=1.443787e-02
+[modal] cycle= 110 step=  1430 mean=2.642176e-02 best=1.443787e-02
+[modal] cycle= 120 step=  1560 mean=2.034617e-02 best=1.443787e-02
+[modal] cycle= 130 step=  1690 mean=2.073937e-02 best=1.443787e-02
+[modal] cycle= 140 step=  1820 mean=2.011013e-02 best=1.443787e-02
+[modal] cycle= 150 step=  1950 mean=3.221265e-02 best=1.443787e-02
+[modal] cycle= 160 step=  2080 mean=3.052883e-02 best=1.443787e-02
+[modal] cycle= 170 step=  2210 mean=9.254691e-03 best=9.254691e-03
+[modal] cycle= 180 step=  2340 mean=1.153488e-02 best=8.844755e-03
+[modal] cycle= 190 step=  2470 mean=2.432225e-02 best=8.844755e-03
+[modal] cycle= 200 step=  2600 mean=3.799864e-02 best=8.844755e-03
+[modal] cycle= 210 step=  2730 mean=3.662657e-02 best=8.844755e-03
+[modal] cycle= 220 step=  2860 mean=1.298615e-02 best=8.844755e-03
+[modal] cycle= 230 step=  2990 mean=1.224313e-02 best=8.507072e-03
+[modal] cycle= 240 step=  3120 mean=1.720812e-02 best=8.507072e-03
+[modal] cycle= 250 step=  3250 mean=2.687319e-02 best=8.507072e-03
+[modal] cycle= 260 step=  3380 mean=1.772993e-02 best=8.507072e-03
+[modal] cycle= 270 step=  3510 mean=1.433945e-02 best=8.507072e-03
+[modal] cycle= 280 step=  3640 mean=2.265914e-02 best=8.507072e-03
+[modal] cycle= 290 step=  3770 mean=1.614216e-02 best=8.507072e-03
+[modal] cycle= 300 step=  3900 mean=1.311284e-02 best=8.507072e-03
+[modal] cycle= 310 step=  4030 mean=2.033827e-02 best=8.507072e-03
+[modal] cycle= 320 step=  4160 mean=2.518677e-02 best=8.507072e-03
+[modal] cycle= 330 step=  4290 mean=1.764942e-02 best=8.507072e-03
+[modal] cycle= 340 step=  4420 mean=1.245849e-02 best=8.507072e-03
+[modal] cycle= 350 step=  4550 mean=1.336175e-02 best=8.130917e-03
+[modal] cycle= 360 step=  4680 mean=1.227372e-02 best=8.130917e-03
+[modal] cycle= 370 step=  4810 mean=1.849713e-02 best=8.130917e-03
+[modal] cycle= 380 step=  4940 mean=1.908310e-02 best=8.130917e-03
+[modal] cycle= 390 step=  5070 mean=1.408534e-02 best=8.130917e-03
+[modal] cycle= 400 step=  5200 mean=1.104264e-02 best=8.130917e-03
+[modal] cycle= 410 step=  5330 mean=1.456719e-02 best=8.130917e-03
+[modal] cycle= 420 step=  5460 mean=1.222392e-02 best=8.130917e-03
+[modal] cycle= 430 step=  5590 mean=1.702429e-02 best=8.130917e-03
+[modal] cycle= 440 step=  5720 mean=1.675467e-02 best=8.130917e-03
+[modal] cycle= 450 step=  5850 mean=1.606145e-02 best=8.130917e-03
+[modal] cycle= 460 step=  5980 mean=1.477328e-02 best=8.130917e-03
+[modal] cycle= 470 step=  6110 mean=9.625013e-03 best=8.087495e-03
+[modal] cycle= 480 step=  6240 mean=1.116921e-02 best=8.087495e-03
+[modal] cycle= 490 step=  6370 mean=1.273301e-02 best=8.087495e-03
+[modal] cycle= 500 step=  6500 mean=1.331282e-02 best=8.087495e-03
+[modal] cycle= 510 step=  6630 mean=2.240401e-02 best=8.087495e-03
+[modal] cycle= 520 step=  6760 mean=9.445414e-03 best=8.087495e-03
+[modal] cycle= 530 step=  6890 mean=1.196417e-02 best=8.087495e-03
+[modal] cycle= 540 step=  7020 mean=8.842309e-03 best=8.087495e-03
+[modal] cycle= 550 step=  7150 mean=9.468490e-03 best=8.087495e-03
+[modal] cycle= 560 step=  7280 mean=1.376030e-02 best=7.634941e-03
+[modal] cycle= 570 step=  7410 mean=9.551502e-03 best=7.634941e-03
+[modal] cycle= 580 step=  7540 mean=1.487357e-02 best=7.634941e-03
+[modal] cycle= 590 step=  7670 mean=1.107722e-02 best=6.282113e-03
+[modal] cycle= 600 step=  7800 mean=1.494020e-02 best=6.282113e-03
+[modal] cycle= 610 step=  7930 mean=1.039686e-02 best=6.282113e-03
+[modal] cycle= 620 step=  8060 mean=9.133619e-03 best=6.282113e-03
+[modal] cycle= 630 step=  8190 mean=1.194036e-02 best=6.282113e-03
+[modal] cycle= 640 step=  8320 mean=8.729745e-03 best=6.282113e-03
+[modal] cycle= 650 step=  8450 mean=1.180158e-02 best=6.282113e-03
+[modal] cycle= 660 step=  8580 mean=1.675141e-02 best=6.282113e-03
+[modal] cycle= 670 step=  8710 mean=1.574435e-02 best=6.282113e-03
+[modal] cycle= 680 step=  8840 mean=1.116211e-02 best=6.282113e-03
+[modal] cycle= 690 step=  8970 mean=8.459687e-03 best=6.282113e-03
+[modal] cycle= 700 step=  9100 mean=1.026231e-02 best=5.835993e-03
+[modal] cycle= 710 step=  9230 mean=1.124613e-02 best=5.835993e-03
+[modal] cycle= 720 step=  9360 mean=9.390148e-03 best=5.835993e-03
+[modal] cycle= 730 step=  9490 mean=1.021273e-02 best=5.771826e-03
+[modal] cycle= 740 step=  9620 mean=1.244922e-02 best=5.771826e-03
+[modal] cycle= 750 step=  9750 mean=1.074164e-02 best=5.771826e-03
+[modal] cycle= 760 step=  9880 mean=1.275863e-02 best=5.771826e-03
+[modal] cycle= 770 step= 10010 mean=1.004752e-02 best=5.771826e-03
+[modal] cycle= 780 step= 10140 mean=8.219086e-03 best=5.235545e-03
+[modal] cycle= 790 step= 10270 mean=9.591443e-03 best=5.235545e-03
+[modal] cycle= 800 step= 10400 mean=1.573446e-02 best=5.235545e-03
+[modal] cycle= 810 step= 10530 mean=8.133305e-03 best=5.235545e-03
+[modal] cycle= 820 step= 10660 mean=1.572051e-02 best=5.235545e-03
+[modal] cycle= 830 step= 10790 mean=1.013158e-02 best=5.235545e-03
+[modal] cycle= 840 step= 10920 mean=1.128953e-02 best=5.235545e-03
+[modal] cycle= 850 step= 11050 mean=8.947574e-03 best=5.235545e-03
+[modal] cycle= 860 step= 11180 mean=8.737859e-03 best=5.235545e-03
+[modal] cycle= 870 step= 11310 mean=9.536311e-03 best=5.235545e-03
+[modal] cycle= 880 step= 11440 mean=7.193299e-03 best=5.235545e-03
+[modal] cycle= 890 step= 11570 mean=1.546445e-02 best=5.235545e-03
+[modal] cycle= 900 step= 11700 mean=9.485373e-03 best=5.235545e-03
+[modal] cycle= 910 step= 11830 mean=7.759442e-03 best=5.235545e-03
+[modal] cycle= 920 step= 11960 mean=8.856820e-03 best=5.235545e-03
+[modal] cycle= 930 step= 12090 mean=6.943203e-03 best=5.235545e-03
+[modal] cycle= 940 step= 12220 mean=8.517277e-03 best=5.235545e-03
+[modal] cycle= 950 step= 12350 mean=9.634124e-03 best=5.235545e-03
+[modal] cycle= 960 step= 12480 mean=1.197060e-02 best=5.235545e-03
+[modal] cycle= 970 step= 12610 mean=7.802314e-03 best=5.235545e-03
+[modal] cycle= 980 step= 12740 mean=1.944970e-02 best=5.235545e-03
+[modal] cycle= 990 step= 12870 mean=6.827410e-03 best=5.235545e-03
+[modal] cycle=1000 step= 13000 mean=6.086494e-03 best=5.235545e-03
+
+================================================================================
+JOINT: PHYSICS + GLOBAL 52-ANCHOR LOSS
+================================================================================
+[joint] cycle=   1 step=    13 total=9.630264e-03 spec52=6.744097e-05 train_spec=4.487764e-03 val_spec=3.405420e-03 best_val=3.405420e-03
+[joint] cycle=  10 step=   130 total=4.668344e-03 spec52=5.570600e-05 train_spec=4.454541e-03 val_spec=3.372957e-03 best_val=3.370525e-03
+[joint] cycle=  20 step=   260 total=6.410608e-03 spec52=4.615670e-05 train_spec=4.448012e-03 val_spec=3.377321e-03 best_val=3.370306e-03
+[joint] cycle=  30 step=   390 total=7.322023e-03 spec52=3.808947e-05 train_spec=4.439799e-03 val_spec=3.396002e-03 best_val=3.370306e-03
+[joint] cycle=  40 step=   520 total=5.887911e-03 spec52=3.264299e-05 train_spec=4.445933e-03 val_spec=3.432439e-03 best_val=3.370306e-03
+[joint] cycle=  50 step=   650 total=3.084856e-03 spec52=2.758796e-05 train_spec=4.442573e-03 val_spec=3.466865e-03 best_val=3.370306e-03
+[joint] cycle=  60 step=   780 total=3.266187e-03 spec52=2.433753e-05 train_spec=4.438985e-03 val_spec=3.499254e-03 best_val=3.370306e-03
+[joint] cycle=  70 step=   910 total=7.064513e-03 spec52=2.188210e-05 train_spec=4.440808e-03 val_spec=3.535393e-03 best_val=3.370306e-03
+[joint] cycle=  80 step=  1040 total=3.821503e-03 spec52=2.028052e-05 train_spec=4.436986e-03 val_spec=3.553526e-03 best_val=3.370306e-03
+[joint] cycle=  90 step=  1170 total=4.758740e-03 spec52=1.916071e-05 train_spec=4.436379e-03 val_spec=3.572854e-03 best_val=3.370306e-03
+[joint] cycle= 100 step=  1300 total=5.042948e-03 spec52=1.833980e-05 train_spec=4.428878e-03 val_spec=3.571388e-03 best_val=3.370306e-03
+[joint] cycle= 110 step=  1430 total=4.956271e-03 spec52=1.773060e-05 train_spec=4.424002e-03 val_spec=3.593369e-03 best_val=3.370306e-03
+[joint] cycle= 120 step=  1560 total=6.301777e-03 spec52=1.685744e-05 train_spec=4.415510e-03 val_spec=3.587745e-03 best_val=3.370306e-03
+[joint] cycle= 130 step=  1690 total=4.579109e-03 spec52=1.654089e-05 train_spec=4.410605e-03 val_spec=3.599370e-03 best_val=3.370306e-03
+[joint] cycle= 140 step=  1820 total=3.553268e-03 spec52=1.619485e-05 train_spec=4.403784e-03 val_spec=3.589451e-03 best_val=3.370306e-03
+[joint] cycle= 150 step=  1950 total=3.229676e-03 spec52=1.557195e-05 train_spec=4.392870e-03 val_spec=3.581720e-03 best_val=3.370306e-03
+[joint] cycle= 160 step=  2080 total=3.743158e-03 spec52=1.534169e-05 train_spec=4.384673e-03 val_spec=3.583237e-03 best_val=3.370306e-03
+[joint] cycle= 170 step=  2210 total=4.648746e-03 spec52=1.521540e-05 train_spec=4.372699e-03 val_spec=3.569756e-03 best_val=3.370306e-03
+[joint] cycle= 180 step=  2340 total=4.140554e-03 spec52=1.568074e-05 train_spec=4.371451e-03 val_spec=3.590054e-03 best_val=3.370306e-03
+[joint] cycle= 190 step=  2470 total=4.719335e-03 spec52=1.463287e-05 train_spec=4.355493e-03 val_spec=3.565003e-03 best_val=3.370306e-03
+[joint] cycle= 200 step=  2600 total=5.692069e-03 spec52=1.439359e-05 train_spec=4.348179e-03 val_spec=3.568981e-03 best_val=3.370306e-03
+[joint] cycle= 210 step=  2730 total=4.178330e-03 spec52=1.432816e-05 train_spec=4.338405e-03 val_spec=3.550846e-03 best_val=3.370306e-03
+[joint] cycle= 220 step=  2860 total=2.804605e-03 spec52=1.377120e-05 train_spec=4.325914e-03 val_spec=3.543791e-03 best_val=3.370306e-03
+[joint] cycle= 230 step=  2990 total=3.131667e-03 spec52=1.365022e-05 train_spec=4.317670e-03 val_spec=3.541195e-03 best_val=3.370306e-03
+[joint] cycle= 240 step=  3120 total=5.405891e-03 spec52=1.369957e-05 train_spec=4.304825e-03 val_spec=3.529014e-03 best_val=3.370306e-03
+[joint] cycle= 250 step=  3250 total=4.322270e-03 spec52=1.344260e-05 train_spec=4.300758e-03 val_spec=3.537521e-03 best_val=3.370306e-03
+[joint] cycle= 260 step=  3380 total=4.578049e-03 spec52=1.320423e-05 train_spec=4.288309e-03 val_spec=3.520935e-03 best_val=3.370306e-03
+[joint] cycle= 270 step=  3510 total=4.598296e-03 spec52=1.314497e-05 train_spec=4.284586e-03 val_spec=3.527210e-03 best_val=3.370306e-03
+[joint] cycle= 280 step=  3640 total=4.181914e-03 spec52=1.295616e-05 train_spec=4.271392e-03 val_spec=3.507400e-03 best_val=3.370306e-03
+[joint] cycle= 290 step=  3770 total=3.956294e-03 spec52=1.259083e-05 train_spec=4.264079e-03 val_spec=3.508665e-03 best_val=3.370306e-03
+[joint] cycle= 300 step=  3900 total=3.893988e-03 spec52=1.260660e-05 train_spec=4.254646e-03 val_spec=3.498707e-03 best_val=3.370306e-03
+[joint] cycle= 310 step=  4030 total=3.290443e-03 spec52=1.258416e-05 train_spec=4.246381e-03 val_spec=3.499177e-03 best_val=3.370306e-03
+[joint] cycle= 320 step=  4160 total=3.369414e-03 spec52=1.220427e-05 train_spec=4.239701e-03 val_spec=3.498798e-03 best_val=3.370306e-03
+[joint] cycle= 330 step=  4290 total=3.777882e-03 spec52=1.225208e-05 train_spec=4.230750e-03 val_spec=3.491923e-03 best_val=3.370306e-03
+[joint] cycle= 340 step=  4420 total=3.389289e-03 spec52=1.214529e-05 train_spec=4.229267e-03 val_spec=3.493787e-03 best_val=3.370306e-03
+[joint] cycle= 350 step=  4550 total=3.487630e-03 spec52=1.184894e-05 train_spec=4.215417e-03 val_spec=3.479413e-03 best_val=3.370306e-03
+[joint] cycle= 360 step=  4680 total=4.734695e-03 spec52=1.174424e-05 train_spec=4.212713e-03 val_spec=3.484404e-03 best_val=3.370306e-03
+[joint] cycle= 370 step=  4810 total=4.788379e-03 spec52=1.184902e-05 train_spec=4.200812e-03 val_spec=3.473642e-03 best_val=3.370306e-03
+[joint] cycle= 380 step=  4940 total=3.356459e-03 spec52=1.153898e-05 train_spec=4.198458e-03 val_spec=3.479458e-03 best_val=3.370306e-03
+[joint] cycle= 390 step=  5070 total=4.848210e-03 spec52=1.145615e-05 train_spec=4.187610e-03 val_spec=3.471866e-03 best_val=3.370306e-03
+[joint] cycle= 400 step=  5200 total=3.834564e-03 spec52=1.179403e-05 train_spec=4.189527e-03 val_spec=3.475259e-03 best_val=3.370306e-03
+[joint] cycle= 410 step=  5330 total=3.145256e-03 spec52=1.136280e-05 train_spec=4.179665e-03 val_spec=3.467606e-03 best_val=3.370306e-03
+[joint] cycle= 420 step=  5460 total=3.634053e-03 spec52=1.101315e-05 train_spec=4.171938e-03 val_spec=3.466804e-03 best_val=3.370306e-03
+[joint] cycle= 430 step=  5590 total=3.220063e-03 spec52=1.131287e-05 train_spec=4.171489e-03 val_spec=3.457796e-03 best_val=3.370306e-03
+[joint] cycle= 440 step=  5720 total=2.672730e-03 spec52=1.095019e-05 train_spec=4.158093e-03 val_spec=3.462910e-03 best_val=3.370306e-03
+[joint] cycle= 450 step=  5850 total=2.959369e-03 spec52=1.079018e-05 train_spec=4.158766e-03 val_spec=3.461216e-03 best_val=3.370306e-03
+[joint] cycle= 460 step=  5980 total=3.452337e-03 spec52=1.069800e-05 train_spec=4.148686e-03 val_spec=3.463937e-03 best_val=3.370306e-03
+[joint] cycle= 470 step=  6110 total=3.902347e-03 spec52=1.077533e-05 train_spec=4.149850e-03 val_spec=3.457648e-03 best_val=3.370306e-03
+[joint] cycle= 480 step=  6240 total=3.030292e-03 spec52=1.051916e-05 train_spec=4.137690e-03 val_spec=3.452690e-03 best_val=3.370306e-03
+[joint] cycle= 490 step=  6370 total=2.994779e-03 spec52=1.033993e-05 train_spec=4.137391e-03 val_spec=3.456932e-03 best_val=3.370306e-03
+[joint] cycle= 500 step=  6500 total=4.403991e-03 spec52=1.057500e-05 train_spec=4.126990e-03 val_spec=3.452411e-03 best_val=3.370306e-03
+[joint] cycle= 510 step=  6630 total=3.730671e-03 spec52=1.058360e-05 train_spec=4.131936e-03 val_spec=3.458988e-03 best_val=3.370306e-03
+[joint] cycle= 520 step=  6760 total=3.797355e-03 spec52=1.015871e-05 train_spec=4.119295e-03 val_spec=3.451677e-03 best_val=3.370306e-03
+[joint] cycle= 530 step=  6890 total=5.103523e-03 spec52=1.034522e-05 train_spec=4.123089e-03 val_spec=3.452635e-03 best_val=3.370306e-03
+[joint] cycle= 540 step=  7020 total=3.223356e-03 spec52=1.016039e-05 train_spec=4.111112e-03 val_spec=3.445092e-03 best_val=3.370306e-03
+[joint] cycle= 550 step=  7150 total=3.268172e-03 spec52=9.863697e-06 train_spec=4.110222e-03 val_spec=3.454310e-03 best_val=3.370306e-03
+[joint] cycle= 560 step=  7280 total=4.876883e-03 spec52=1.014814e-05 train_spec=4.101953e-03 val_spec=3.446087e-03 best_val=3.370306e-03
+[joint] cycle= 570 step=  7410 total=3.686322e-03 spec52=9.928192e-06 train_spec=4.105453e-03 val_spec=3.454127e-03 best_val=3.370306e-03
+[joint] cycle= 580 step=  7540 total=4.379924e-03 spec52=9.700510e-06 train_spec=4.093723e-03 val_spec=3.450786e-03 best_val=3.370306e-03
+[joint] cycle= 590 step=  7670 total=4.837553e-03 spec52=9.832368e-06 train_spec=4.097620e-03 val_spec=3.450491e-03 best_val=3.370306e-03
+[joint] cycle= 600 step=  7800 total=3.691735e-03 spec52=9.692177e-06 train_spec=4.087088e-03 val_spec=3.443275e-03 best_val=3.370306e-03
+[joint] cycle= 610 step=  7930 total=3.304765e-03 spec52=9.378426e-06 train_spec=4.086125e-03 val_spec=3.449251e-03 best_val=3.370306e-03
+[joint] cycle= 620 step=  8060 total=4.757388e-03 spec52=9.592181e-06 train_spec=4.078849e-03 val_spec=3.444793e-03 best_val=3.370306e-03
+[joint] cycle= 630 step=  8190 total=2.803518e-03 spec52=9.472283e-06 train_spec=4.080707e-03 val_spec=3.458051e-03 best_val=3.370306e-03
+[joint] cycle= 640 step=  8320 total=3.734254e-03 spec52=9.355643e-06 train_spec=4.073060e-03 val_spec=3.443828e-03 best_val=3.370306e-03
+[joint] cycle= 650 step=  8450 total=4.723661e-03 spec52=9.334282e-06 train_spec=4.074778e-03 val_spec=3.450153e-03 best_val=3.370306e-03
+[joint] cycle= 660 step=  8580 total=4.136068e-03 spec52=9.347815e-06 train_spec=4.065851e-03 val_spec=3.441611e-03 best_val=3.370306e-03
+[joint] cycle= 670 step=  8710 total=3.512451e-03 spec52=9.262235e-06 train_spec=4.068897e-03 val_spec=3.444454e-03 best_val=3.370306e-03
+[joint] cycle= 680 step=  8840 total=3.637955e-03 spec52=9.241625e-06 train_spec=4.060452e-03 val_spec=3.441704e-03 best_val=3.370306e-03
+[joint] cycle= 690 step=  8970 total=2.930100e-03 spec52=8.931875e-06 train_spec=4.060631e-03 val_spec=3.454798e-03 best_val=3.370306e-03
+[joint] cycle= 700 step=  9100 total=3.712630e-03 spec52=8.878103e-06 train_spec=4.052770e-03 val_spec=3.444610e-03 best_val=3.370306e-03
+[joint] cycle= 710 step=  9230 total=5.349117e-03 spec52=8.806423e-06 train_spec=4.053980e-03 val_spec=3.450853e-03 best_val=3.370306e-03
+[joint] cycle= 720 step=  9360 total=3.727069e-03 spec52=8.787310e-06 train_spec=4.045373e-03 val_spec=3.447392e-03 best_val=3.370306e-03
+[joint] cycle= 730 step=  9490 total=3.479736e-03 spec52=8.574495e-06 train_spec=4.047665e-03 val_spec=3.450575e-03 best_val=3.370306e-03
+[joint] cycle= 740 step=  9620 total=4.132782e-03 spec52=8.657757e-06 train_spec=4.038919e-03 val_spec=3.452149e-03 best_val=3.370306e-03
+[joint] cycle= 750 step=  9750 total=3.122476e-03 spec52=8.746927e-06 train_spec=4.044880e-03 val_spec=3.449226e-03 best_val=3.370306e-03
+[joint] cycle= 760 step=  9880 total=3.492990e-03 spec52=8.345709e-06 train_spec=4.033802e-03 val_spec=3.450567e-03 best_val=3.370306e-03
+[joint] cycle= 770 step= 10010 total=5.402392e-03 spec52=8.374630e-06 train_spec=4.035423e-03 val_spec=3.452203e-03 best_val=3.370306e-03
+[joint] cycle= 780 step= 10140 total=3.030234e-03 spec52=8.347972e-06 train_spec=4.027505e-03 val_spec=3.451767e-03 best_val=3.370306e-03
+[joint] cycle= 790 step= 10270 total=2.665823e-03 spec52=8.129198e-06 train_spec=4.029221e-03 val_spec=3.455270e-03 best_val=3.370306e-03
+[joint] cycle= 800 step= 10400 total=4.659922e-03 spec52=8.296657e-06 train_spec=4.022162e-03 val_spec=3.455843e-03 best_val=3.370306e-03
+[joint] cycle= 810 step= 10530 total=3.518925e-03 spec52=8.361567e-06 train_spec=4.028140e-03 val_spec=3.452235e-03 best_val=3.370306e-03
+[joint] cycle= 820 step= 10660 total=3.282800e-03 spec52=7.971956e-06 train_spec=4.017565e-03 val_spec=3.451875e-03 best_val=3.370306e-03
+[joint] cycle= 830 step= 10790 total=4.646859e-03 spec52=8.201404e-06 train_spec=4.021239e-03 val_spec=3.449976e-03 best_val=3.370306e-03
+[joint] cycle= 840 step= 10920 total=3.169459e-03 spec52=7.953726e-06 train_spec=4.011647e-03 val_spec=3.451339e-03 best_val=3.370306e-03
+[joint] cycle= 850 step= 11050 total=2.426406e-03 spec52=7.743777e-06 train_spec=4.012847e-03 val_spec=3.456868e-03 best_val=3.370306e-03
+[joint] cycle= 860 step= 11180 total=4.603538e-03 spec52=7.850389e-06 train_spec=4.007392e-03 val_spec=3.451672e-03 best_val=3.370306e-03
+[joint] cycle= 870 step= 11310 total=3.727748e-03 spec52=7.778694e-06 train_spec=4.010733e-03 val_spec=3.461229e-03 best_val=3.370306e-03
+[joint] cycle= 880 step= 11440 total=2.889360e-03 spec52=7.691908e-06 train_spec=4.002709e-03 val_spec=3.451806e-03 best_val=3.370306e-03
+[joint] cycle= 890 step= 11570 total=4.397555e-03 spec52=8.083131e-06 train_spec=4.008319e-03 val_spec=3.450722e-03 best_val=3.370306e-03
+[joint] cycle= 900 step= 11700 total=3.201254e-03 spec52=7.683765e-06 train_spec=3.997492e-03 val_spec=3.451695e-03 best_val=3.370306e-03
+[joint] cycle= 910 step= 11830 total=2.290036e-03 spec52=7.371360e-06 train_spec=3.998188e-03 val_spec=3.460370e-03 best_val=3.370306e-03
+[joint] cycle= 920 step= 11960 total=4.820802e-03 spec52=7.398526e-06 train_spec=3.992900e-03 val_spec=3.462990e-03 best_val=3.370306e-03
+[joint] cycle= 930 step= 12090 total=4.045109e-03 spec52=7.835598e-06 train_spec=3.997736e-03 val_spec=3.455280e-03 best_val=3.370306e-03
+[joint] cycle= 940 step= 12220 total=2.746575e-03 spec52=7.277516e-06 train_spec=3.988365e-03 val_spec=3.455732e-03 best_val=3.370306e-03
+[joint] cycle= 950 step= 12350 total=3.435751e-03 spec52=7.155812e-06 train_spec=3.988554e-03 val_spec=3.459203e-03 best_val=3.370306e-03
+[joint] cycle= 960 step= 12480 total=3.583672e-03 spec52=7.243786e-06 train_spec=3.982773e-03 val_spec=3.461441e-03 best_val=3.370306e-03
+[joint] cycle= 970 step= 12610 total=2.793288e-03 spec52=7.119337e-06 train_spec=3.986524e-03 val_spec=3.461030e-03 best_val=3.370306e-03
+[joint] cycle= 980 step= 12740 total=3.484752e-03 spec52=6.941957e-06 train_spec=3.979916e-03 val_spec=3.459849e-03 best_val=3.370306e-03
+[joint] cycle= 990 step= 12870 total=3.994304e-03 spec52=7.078826e-06 train_spec=3.979343e-03 val_spec=3.461850e-03 best_val=3.370306e-03
+[joint] cycle=1000 step= 13000 total=2.362419e-03 spec52=6.840866e-06 train_spec=3.974737e-03 val_spec=3.465012e-03 best_val=3.370306e-03
+
+====================================================================================================
+G52-v2 COMPLETE
+====================================================================================================
+best validation step = 156
+best validation      = 3.37030635e-03
+
+BY SPLIT
+
+TRAIN
+{
+  "n": 621,
+  "n_mach": 13,
+  "cr_mae": 0.0031311601773025654,
+  "cr_max_abs": 0.0416231149834127,
+  "ci_mae": 0.002736538853906775,
+  "ci_max_abs": 0.06748165306965076,
+  "omega_i_mae": 0.00045480214093349326,
+  "spectral_error_mean": 0.0044506430471827774,
+  "spectral_error_max": 0.07717104242605878
+}
+
+VALIDATION
+{
+  "n": 141,
+  "n_mach": 3,
+  "cr_mae": 0.002099423910021283,
+  "cr_max_abs": 0.044315072628191135,
+  "ci_mae": 0.002437001438221589,
+  "ci_max_abs": 0.08629366321338072,
+  "omega_i_mae": 0.00028966559826276104,
+  "spectral_error_mean": 0.003370306348387974,
+  "spectral_error_max": 0.0939552206914917
+}
+
+VALIDATION BY MACH
+
+M=1.15
+{
+  "split": "validation",
+  "n": 57,
+  "n_mach": 1,
+  "cr_mae": 0.004318458738967376,
+  "cr_max_abs": 0.044315072628191135,
+  "ci_mae": 0.005338280142795986,
+  "ci_max_abs": 0.08629366321338072,
+  "omega_i_mae": 0.0006263190684343665,
+  "spectral_error_mean": 0.0071352299839494825,
+  "spectral_error_max": 0.0939552206914917
+}
+
+M=1.45
+{
+  "split": "validation",
+  "n": 46,
+  "n_mach": 1,
+  "cr_mae": 0.000547131804170875,
+  "cr_max_abs": 0.005536623297144994,
+  "ci_mae": 0.0004957947596766971,
+  "ci_max_abs": 0.0039261157889304565,
+  "omega_i_mae": 6.759041466294066e-05,
+  "spectral_error_mean": 0.0008277874341057638,
+  "spectral_error_max": 0.006054715961410481
+}
+
+M=1.75
+{
+  "split": "validation",
+  "n": 38,
+  "n_mach": 1,
+  "cr_mae": 0.0006499621105263215,
+  "cr_max_abs": 0.00549283217257901,
+  "ci_mae": 0.00043496515012486246,
+  "ci_max_abs": 0.0028906236380286214,
+  "omega_i_mae": 5.351324683671414e-05,
+  "spectral_error_mean": 0.0008007069491768076,
+  "spectral_error_max": 0.005850100865594947
+}
+
+TEST SPLIT REMAINS SEALED.
+
+end=Sat Aug  8 08:45:14 PM CEST 2026

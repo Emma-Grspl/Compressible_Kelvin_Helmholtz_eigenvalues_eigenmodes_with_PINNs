@@ -1,0 +1,54 @@
+PHASE 6 — BUDGET-MATCHED SEEDED VS GENERIC V64
+================================================
+
+Protocol
+--------
+64 identical V64 coordinates.
+12 multistart_single_box calls per point and condition.
+Same window set, solver, retry policy, grid size and optimizer settings.
+Only the search-center policy differs.
+Target recovery assessed on 63 predeclared non-ambiguous points.
+Target tolerance: |c_shoot - c_ref| <= 1.0e-04.
+
+Target branch recovery
+----------------------
+Seeded : 63/63
+Generic: 0/63
+
+Paired target discordances
+--------------------------
+Both recover       : 0
+Seeded only        : 63
+Generic only       : 0
+Neither            : 0
+Exact paired p     : 2.16840434e-19
+
+Technical success
+-----------------
+Seeded : 64/64
+Generic: 64/64
+
+Cost
+----
+Seeded total box solves :
+768
+
+Generic total box solves:
+989
+
+Seeded total measured seconds :
+23835.980
+
+Generic total measured seconds:
+36890.770
+
+Interpretation
+--------------
+The matched-budget comparison descriptively supports a branch-localization advantage from PINN seeding: the seeded condition recovers more target branches than the generic condition under the same 12-box classical search budget.
+
+Important limitation
+--------------------
+If any candidate box failed by exception, the reconstructed
+total_box_solves is a lower bound for that box because the worker
+does not retain the retry index reached before the exception.
+See n_failed_boxes in condition_summary.csv.

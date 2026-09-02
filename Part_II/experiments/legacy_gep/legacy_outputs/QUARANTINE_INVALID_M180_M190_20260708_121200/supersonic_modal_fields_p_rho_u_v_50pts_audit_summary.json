@@ -1,0 +1,17 @@
+{
+  "dataset": "supersonic_modal_fields_p_rho_u_v_50pts",
+  "base_fields_source": "assets/classic_supersonic/validated_modal_points/rebuilt_aggregates_latest/supersonic_reference_core_local_modal_fields_REBUILT.csv",
+  "extension_fields_source": "assets/classic_supersonic/extension_neutral_M180_M190_gep_shooting/supersonic_neutral_M180_M190_fixed_ci_shooting_modal_fields.csv",
+  "output_fields": "assets/classic_supersonic/supersonic_modal_fields_p_rho_u_v_50pts.csv",
+  "selection_audit_csv": "assets/classic_supersonic/supersonic_modal_fields_p_rho_u_v_50pts_selection_audit.csv",
+  "n_base_spectral_points": 44,
+  "n_base_selected_field_points": 44,
+  "n_extension_field_points": 6,
+  "n_total_field_points": 50,
+  "n_base_selected_rows": 220486,
+  "n_extension_rows": 27570,
+  "n_total_rows": 248056,
+  "max_field_selection_abs_dcr": 0.3798105790421235,
+  "max_field_selection_abs_dci": 0.037213234034898006,
+  "note": "44 base fields selected from REBUILT by nearest (reference_cr, reference_ci) to spectral validated c; 6 extension fields from fixed-ci shooting exact-amplitude reconstruction."
+}

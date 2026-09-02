@@ -1,0 +1,13 @@
+budget,chart,mach_min,mach_max,alpha_min,alpha_max,n_anchors_seen_by_chart,n_unique_mach,dataset,config,output
+76,C00,1.0,1.25,0.05,0.13,10,6,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C00_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C00.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C00
+76,C01,1.0,1.25,0.1,0.22,15,6,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C01_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C01.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C01
+76,C02,1.0,1.25,0.19,0.36,15,6,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C02_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C02.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C02
+76,C10,1.15,1.45,0.05,0.13,12,6,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C10_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C10.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C10
+76,C11,1.15,1.45,0.1,0.22,17,7,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C11_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C11.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C11
+76,C12,1.15,1.45,0.19,0.36,14,7,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C12_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C12.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C12
+76,C20,1.35,1.65,0.05,0.13,12,6,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C20_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C20.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C20
+76,C21,1.35,1.65,0.1,0.22,14,7,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C21_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C21.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C21
+76,C22,1.35,1.65,0.19,0.36,9,7,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C22_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C22.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C22
+76,C30,1.55,1.9,0.05,0.13,13,7,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C30_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C30.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C30
+76,C31,1.55,1.9,0.1,0.22,14,8,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C31_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C31.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C31
+76,C32,1.55,1.9,0.19,0.36,7,7,assets/pinn_supersonic/datasets/atlas2d_v1/generated/N76/C32_anchors.csv,configs/pinn_supersonic/atlas2d_v1/N76/C32.json,assets/pinn_supersonic/atlas2d_v1/N76/runs/C32

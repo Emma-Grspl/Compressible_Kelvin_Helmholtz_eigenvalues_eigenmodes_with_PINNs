@@ -1,0 +1,15 @@
+{
+  "source_files": [
+    "assets/pinn_supersonic/csv/classical_convergence/supersonic_neutral_boundary_lowM_M100_120/table_alpha_traces.csv",
+    "assets/pinn_supersonic/csv/classical_convergence/supersonic_neutral_boundary_dense_M120_160/table_alpha_traces.csv",
+    "assets/pinn_supersonic/csv/classical_convergence/supersonic_neutral_boundary_dense_M160_200/table_alpha_traces.csv"
+  ],
+  "n_source_files": 3,
+  "n_rows_raw": 290,
+  "n_rows_deduplicated": 265,
+  "n_duplicates_removed": 25,
+  "n_mach": 22,
+  "mach_min": 1.0,
+  "mach_max": 2.0,
+  "n_accepted": 265
+}

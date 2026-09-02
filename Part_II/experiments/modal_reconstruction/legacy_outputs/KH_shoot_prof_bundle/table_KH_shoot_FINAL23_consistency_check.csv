@@ -1,0 +1,4 @@
+file,status,rows,merged_rows,max_abs_dcr,max_abs_dci,max_abs_domega_i,nonmatching_rows
+assets/classic_supersonic/validated_modal_points/supersonic_validated_modal_points.csv,ok,23,23,0.0,0.0,0.0,0
+assets/classic_supersonic/shooting/supersonic_reference_core_local_modal.csv,ok,23,23,0.0,0.0,0.0,0
+assets/classic_supersonic/shooting/supersonic_reference_core_local_spectral.csv,ok,23,23,0.0,0.0,0.0,0

@@ -1,0 +1,10 @@
+{
+  "dataset": "supersonic_modal_spectral_validated_50pts",
+  "base_file": "assets/classic_supersonic/supersonic_modal_spectral_validated.csv",
+  "extension_file": "assets/classic_supersonic/extension_neutral_M180_M190_gep_shooting/supersonic_neutral_M180_M190_fixed_ci_shooting_anchors_exact_amplitude.csv",
+  "output_file": "assets/classic_supersonic/supersonic_modal_spectral_validated_50pts.csv",
+  "n_base": 44,
+  "n_extension": 6,
+  "n_total": 50,
+  "overlap": []
+}

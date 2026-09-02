@@ -1,0 +1,19 @@
+{
+  "Mach": 1.1,
+  "n_reference_rows": 201453,
+  "n_reference_modes": 53,
+  "spectral_anchor_alphas": [
+    0.115,
+    0.19,
+    0.265,
+    0.32
+  ],
+  "S4M2_modal_anchor_alphas": [
+    0.115,
+    0.19,
+    0.265,
+    0.32
+  ],
+  "y_max": 80.0,
+  "amplitude_floor": 1e-06
+}

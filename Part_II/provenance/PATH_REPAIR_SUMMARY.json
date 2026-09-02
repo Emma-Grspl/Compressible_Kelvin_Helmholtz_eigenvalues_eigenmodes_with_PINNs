@@ -1,0 +1,12 @@
+{
+  "files_changed": 940,
+  "operations": {
+    "COPY": 5934,
+    "DEDUPLICATE": 2386,
+    "GIT_MV": 334,
+    "HARDLINK": 579
+  },
+  "path_replacements": 13622,
+  "tracked_duplicate_paths_removed": 103,
+  "unrelated_tracked_removed_from_target": 1428
+}

@@ -1,0 +1,71 @@
+{
+  "gep_defaults": {
+    "alpha": null,
+    "mach_values": null,
+    "n_points": 1001,
+    "mapping_kind": "pin",
+    "mapping_scale": 1.5,
+    "cubic_delta": 0.2,
+    "xi_max": 0.9,
+    "max_abs_c": 10.0,
+    "positive_ci_only": true,
+    "top_k_cr": 6,
+    "ci_weight": 2.0,
+    "shoot_cr_window": 0.08,
+    "shoot_ci_window": 0.03,
+    "shooting_max_iter": 10,
+    "shooting_grid_size": 4,
+    "output_stem": null
+  },
+  "shooting_defaults": {
+    "alpha": null,
+    "mach_values": null,
+    "anchor_mach": null,
+    "match_y": 1.0,
+    "use_mapping": true,
+    "mapping_scale": 5.0,
+    "min_y_limit": 10.0,
+    "max_y_limit": 80.0,
+    "y_limit_factor": 4.0,
+    "amp_lower_bound": -15.0,
+    "amp_upper_bound": 5.0,
+    "cr_half_windows": [
+      0.015,
+      0.03,
+      0.06,
+      0.1
+    ],
+    "ci_half_windows": [
+      0.008,
+      0.015,
+      0.03
+    ],
+    "retry_growth": 1.75,
+    "max_retries": 3,
+    "max_iter": 10,
+    "grid_size": 4,
+    "ci_weight": 2.0,
+    "output_stem": null
+  },
+  "powell_defaults": {
+    "mach": 1.5,
+    "alpha_values": null,
+    "cr_half_width": 0.04,
+    "ci_half_width": 0.03,
+    "maxiter": 20,
+    "maxfev": 80,
+    "xtol": 1e-07,
+    "ftol": 1e-10,
+    "match_y": 1.0,
+    "mapping_scale": 5.0,
+    "min_y_limit": 10.0,
+    "max_y_limit": 1200.0,
+    "y_limit_factor": 10.0
+  },
+  "selection_policy": {
+    "GEP": "positive-ci finite mode with smallest weighted distance to PINN seed",
+    "shooting": "technical-success candidate with smallest stage1+stage2 mismatch; seed distance as tie-breaker",
+    "Powell": "bounded stage1 mismatch minimization initialized exactly at PINN seed",
+    "reference_used_for_selection": false
+  }
+}

@@ -1,0 +1,42 @@
+[01/04] source=oracle alpha=0.07000 |dc|=0.000e+00 stage2=6.367e+00 p40=3.061e-05 ov40=4.048e-10 time=6.24s
+[02/04] source=oracle alpha=0.14000 |dc|=0.000e+00 stage2=5.532e+02 p40=1.394e-04 ov40=8.269e-09 time=7.27s
+[03/04] source=oracle alpha=0.20500 |dc|=0.000e+00 stage2=5.850e+03 p40=3.489e-04 ov40=4.967e-08 time=10.18s
+[04/04] source=oracle alpha=0.25000 |dc|=0.000e+00 stage2=1.329e+04 p40=6.000e-04 ov40=1.396e-07 time=13.57s
+
+{
+  "status": "COMPLETED",
+  "source": "oracle",
+  "alpha_set": "anchors",
+  "Mach": 1.5,
+  "n_requested": 4,
+  "n_successful": 4,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/fixed_c_oracle_anchors/fixed_c_modal_results.csv",
+  "complex_spectral_error_mean": 0.0,
+  "complex_spectral_error_max": 0.0,
+  "stage2_mismatch_mean": 4925.726941902671,
+  "stage2_mismatch_max": 13293.609733759646,
+  "p_rel_l2_core20_mean": 1.8467774691724708e-05,
+  "p_rel_l2_core20_max": 3.8181668724916614e-05,
+  "p_rel_l2_core40_mean": 0.00027973552483312404,
+  "p_rel_l2_core40_max": 0.0006000408932203545,
+  "rho_rel_l2_core40_mean": 0.0002797355248331276,
+  "rho_rel_l2_core40_max": 0.0006000408932203605,
+  "u_rel_l2_core40_mean": 0.00016386552955072805,
+  "u_rel_l2_core40_max": 0.0003848317512446413,
+  "v_rel_l2_core40_mean": 0.000305611319924857,
+  "v_rel_l2_core40_max": 0.0006392893544099309,
+  "p_overlap_error_core20_mean": 2.644675589635881e-10,
+  "p_overlap_error_core20_max": 7.289200354421155e-10,
+  "p_overlap_error_core40_mean": 4.948734375065378e-08,
+  "p_overlap_error_core40_max": 1.396081952265149e-07,
+  "stage2_seconds_mean": 9.008757201241679,
+  "stage2_seconds_max": 13.103627795004286,
+  "reconstruction_seconds_mean": 0.3042718234937638,
+  "reconstruction_seconds_max": 0.46286779397632927,
+  "fixed_c_total_seconds_mean": 9.313029024735442,
+  "fixed_c_total_seconds_max": 13.566495588980615
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/fixed_c_oracle_anchors/fixed_c_modal_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/fixed_c_oracle_anchors/fixed_c_modal_summary.json

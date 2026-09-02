@@ -1,0 +1,4 @@
+setting,level,median_complex_error,max_complex_error,median_ci_error,max_ci_error
+accuracy_nominal,0.25,0.0,8.609015267563155e-07,0.0,8.335606343999851e-07
+accuracy_coarse,0.5,0.0,1.2636942502354444e-05,0.0,7.013442869199994e-06
+strict_L40_y1,40.0,0.0,0.0,0.0,0.0

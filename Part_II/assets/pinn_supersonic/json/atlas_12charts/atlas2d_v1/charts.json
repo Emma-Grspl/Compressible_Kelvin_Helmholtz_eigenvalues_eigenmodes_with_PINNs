@@ -1,0 +1,110 @@
+[
+  {
+    "chart": "C00",
+    "mach_band": "M0",
+    "alpha_band": "A0",
+    "mach_min": 1.0,
+    "mach_max": 1.25,
+    "alpha_min": 0.05,
+    "alpha_max": 0.13
+  },
+  {
+    "chart": "C01",
+    "mach_band": "M0",
+    "alpha_band": "A1",
+    "mach_min": 1.0,
+    "mach_max": 1.25,
+    "alpha_min": 0.1,
+    "alpha_max": 0.22
+  },
+  {
+    "chart": "C02",
+    "mach_band": "M0",
+    "alpha_band": "A2",
+    "mach_min": 1.0,
+    "mach_max": 1.25,
+    "alpha_min": 0.19,
+    "alpha_max": 0.36
+  },
+  {
+    "chart": "C10",
+    "mach_band": "M1",
+    "alpha_band": "A0",
+    "mach_min": 1.15,
+    "mach_max": 1.45,
+    "alpha_min": 0.05,
+    "alpha_max": 0.13
+  },
+  {
+    "chart": "C11",
+    "mach_band": "M1",
+    "alpha_band": "A1",
+    "mach_min": 1.15,
+    "mach_max": 1.45,
+    "alpha_min": 0.1,
+    "alpha_max": 0.22
+  },
+  {
+    "chart": "C12",
+    "mach_band": "M1",
+    "alpha_band": "A2",
+    "mach_min": 1.15,
+    "mach_max": 1.45,
+    "alpha_min": 0.19,
+    "alpha_max": 0.36
+  },
+  {
+    "chart": "C20",
+    "mach_band": "M2",
+    "alpha_band": "A0",
+    "mach_min": 1.35,
+    "mach_max": 1.65,
+    "alpha_min": 0.05,
+    "alpha_max": 0.13
+  },
+  {
+    "chart": "C21",
+    "mach_band": "M2",
+    "alpha_band": "A1",
+    "mach_min": 1.35,
+    "mach_max": 1.65,
+    "alpha_min": 0.1,
+    "alpha_max": 0.22
+  },
+  {
+    "chart": "C22",
+    "mach_band": "M2",
+    "alpha_band": "A2",
+    "mach_min": 1.35,
+    "mach_max": 1.65,
+    "alpha_min": 0.19,
+    "alpha_max": 0.36
+  },
+  {
+    "chart": "C30",
+    "mach_band": "M3",
+    "alpha_band": "A0",
+    "mach_min": 1.55,
+    "mach_max": 1.9,
+    "alpha_min": 0.05,
+    "alpha_max": 0.13
+  },
+  {
+    "chart": "C31",
+    "mach_band": "M3",
+    "alpha_band": "A1",
+    "mach_min": 1.55,
+    "mach_max": 1.9,
+    "alpha_min": 0.1,
+    "alpha_max": 0.22
+  },
+  {
+    "chart": "C32",
+    "mach_band": "M3",
+    "alpha_band": "A2",
+    "mach_min": 1.55,
+    "mach_max": 1.9,
+    "alpha_min": 0.19,
+    "alpha_max": 0.36
+  }
+]

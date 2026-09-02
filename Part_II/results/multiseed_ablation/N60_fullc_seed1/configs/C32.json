@@ -1,0 +1,62 @@
+{
+  "experiment": "reviewer_N60_fullc_seed1_C32",
+  "seed": 12356,
+  "dataset_file": "assets/pinn_supersonic/datasets/atlas2d_v1/generated/N60/C32_anchors.csv",
+  "output_dir": "assets/pinn_supersonic/reviewer_runs/N60_fullc_seed1/runs/C32",
+  "alpha_min": 0.19,
+  "alpha_max": 0.36,
+  "mach_min": 1.55,
+  "mach_max": 1.9,
+  "use_spectral_supervision": true,
+  "use_modal_supervision": false,
+  "n_spectral_anchors": 7,
+  "n_modal_anchors": 0,
+  "model": {
+    "xi_max": 0.985,
+    "mapping_scale": 3.0,
+    "spectral_width": 96,
+    "spectral_depth": 3,
+    "modal_width": 256,
+    "modal_depth": 7,
+    "n_frequencies": 12,
+    "mode_experts": 2,
+    "alpha_split": 0.275,
+    "alpha_gate_width": 0.02,
+    "cr_min": -0.1,
+    "cr_max": 0.65,
+    "ci_floor": 1e-06,
+    "ci_max": 0.25
+  },
+  "loss_weights": {
+    "riccati_kappa": 1.0,
+    "riccati_q": 1.0,
+    "log_amp_compatibility": 5.0,
+    "boundary_kappa": 10.0,
+    "boundary_q": 10.0,
+    "spectral": 50.0,
+    "modal_kappa": 1.0,
+    "modal_q": 1.0,
+    "modal_log_amp": 1.0
+  },
+  "split_policy": {
+    "train": [
+      1.55,
+      1.6,
+      1.65,
+      1.7,
+      1.75,
+      1.85,
+      1.9
+    ],
+    "validation": [],
+    "test": []
+  },
+  "coordinate_policy": {
+    "network_inputs": [
+      "Mach",
+      "alpha"
+    ],
+    "s_used_as_network_input": false,
+    "s_used_for_anchor_selection": false
+  }
+}

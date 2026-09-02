@@ -1,0 +1,25 @@
+{
+  "input_fields": "assets/classic_supersonic/supersonic_modal_fields_p_rho_u_v_50pts.csv",
+  "output_fields_dedup": "assets/classic_supersonic/supersonic_modal_fields_p_rho_u_v_50pts_dedup.csv",
+  "point_audit_csv": "assets/classic_supersonic/supersonic_modal_fields_p_rho_u_v_50pts_dedup_point_audit.csv",
+  "before_rows": 248056,
+  "after_rows": 229698,
+  "before_points": 50,
+  "after_points": 50,
+  "rows_per_point_describe": {
+    "count": 50.0,
+    "mean": 4593.96,
+    "std": 1.4563022785571036,
+    "min": 4585.0,
+    "25%": 4594.0,
+    "50%": 4594.0,
+    "75%": 4595.0,
+    "max": 4595.0
+  },
+  "status_counts": {
+    "base_fields_match_spectral": 28,
+    "base_fields_spectral_mismatch_requires_review": 16,
+    "extension_exact_shooting_fields": 6
+  },
+  "note": "Deduplicated by (Mach, alpha, rounded y). Extension fixed-ci fields are trusted; base 44 fields retain audit flags when reference c differs from spectral validated c."
+}

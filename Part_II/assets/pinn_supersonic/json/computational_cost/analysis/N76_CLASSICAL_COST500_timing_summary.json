@@ -1,0 +1,16 @@
+{
+  "n": 500,
+  "total_seconds": 134618.31210174458,
+  "total_hours": 37.39397558381794,
+  "mean_seconds": 269.23662420348916,
+  "median_seconds": 273.0200932470034,
+  "p25_seconds": 246.50605905373234,
+  "p75_seconds": 293.7091734055721,
+  "p90_seconds": 313.8570106231491,
+  "p95_seconds": 327.1224809647828,
+  "p99_seconds": 355.60271640128224,
+  "min_seconds": 126.16876639705151,
+  "max_seconds": 449.3475836169673,
+  "technical_success": 420,
+  "technical_failure": 80
+}

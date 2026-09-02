@@ -1,0 +1,237 @@
+{
+  "name": "classical-supersonic-kelvin-helmholtz-reference",
+  "version": "2.0.0",
+  "scientific_reference": {
+    "n_spectral_points": 183,
+    "n_modal_rows_raw": 838847,
+    "n_modal_rows_tail_polished": 838847,
+    "mach_min": 1.1,
+    "mach_max": 1.9,
+    "fields": [
+      "p",
+      "rho",
+      "u",
+      "v"
+    ],
+    "primary_modal_dataset": "raw_confirmed",
+    "tail_polished_is_derived": true,
+    "counts_by_mach": {
+      "1.10": 9,
+      "1.20": 14,
+      "1.25": 11,
+      "1.30": 13,
+      "1.33": 9,
+      "1.40": 14,
+      "1.50": 12,
+      "1.60": 6,
+      "1.70": 6,
+      "1.80": 49,
+      "1.90": 40
+    },
+    "validation_status_counts": {
+      "validated_core_stable_tail_sensitive": 89,
+      "modal_spectral_validated_with_exported_fields": 44,
+      "validated_visual_smallM_strict": 33,
+      "validated_visual_smallM_tail_sensitive": 12,
+      "validated_visual_smallM_strict_boundary_flag": 5
+    }
+  },
+  "blumen": {
+    "data_path": "article/tables/table_blumen_ci_digitized_points.csv",
+    "representation": "scatter",
+    "connect_points": false
+  },
+  "paths": {
+    "package": "classic_supersonic",
+    "showcase": "assets/classic_supersonic/reference_v2",
+    "spectral": "assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_reference_v2_spectral.csv"
+  },
+  "showcase_files": [
+    {
+      "path": "experiments/supersonic_general/support/reference_v2/.gitignore",
+      "size_bytes": 16
+    },
+    {
+      "path": "experiments/pinn_direct/support/reference_v2/README.md",
+      "size_bytes": 1445
+    },
+    {
+      "path": "assets/classic_supersonic/pdf/blumen_validation/ci/Fig_blumen_ci_digitized_only.pdf",
+      "size_bytes": 17189,
+      "pdf_pages": 1
+    },
+    {
+      "path": "assets/classic_supersonic/png/blumen_validation/ci/Fig_blumen_ci_digitized_only.png",
+      "size_bytes": 97580
+    },
+    {
+      "path": "assets/classic_supersonic/pdf/blumen_validation/ci/Fig_blumen_ci_with_reference_points.pdf",
+      "size_bytes": 37005,
+      "pdf_pages": 1
+    },
+    {
+      "path": "assets/classic_supersonic/png/blumen_validation/ci/Fig_blumen_ci_with_reference_points.png",
+      "size_bytes": 374447
+    },
+    {
+      "path": "assets/classic_supersonic/png/supersonic_general/ci/Fig_supersonic_reference_v2_ci_validated_50pts.png",
+      "size_bytes": 270365
+    },
+    {
+      "path": "assets/classic_supersonic/pdf/modal_reconstruction/modes/Fig_supersonic_reference_v2_modes_full_y.pdf",
+      "size_bytes": 1875263,
+      "pdf_pages": 184
+    },
+    {
+      "path": "assets/classic_supersonic/pdf/modal_reconstruction/modes/Fig_supersonic_reference_v2_modes_validated_50pts.pdf",
+      "size_bytes": 669885,
+      "pdf_pages": 36
+    },
+    {
+      "path": "assets/classic_supersonic/pdf/modal_reconstruction/modes/Report_supersonic_reference_v2_tail_polish_review_full_y.pdf",
+      "size_bytes": 1680526,
+      "pdf_pages": 184
+    },
+    {
+      "path": "assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_reference_v2_spectral.csv",
+      "size_bytes": 168317
+    },
+    {
+      "path": "assets/classic_supersonic/csv/pinn_direct/tables/table_supersonic_reference_v2_spectral_validated_50pts.csv",
+      "size_bytes": 33966
+    },
+    {
+      "path": "experiments/legacy_gep/legacy_outputs/tables/supersonic_reference_v2_spectral_validated_50pts_summary.json",
+      "size_bytes": 471
+    }
+  ],
+  "git": {
+    "branch": "feature/supersonic-neutral-M180-M190-gep-shooting-clean",
+    "head": "b6ff04e89fc2679659b4fc53a073dd42b921cfd4"
+  },
+  "known_limitations": [
+    "Raw confirmed modal fields are the primary scientific reference.",
+    "Tail-polished fields are a documented derived export.",
+    "Weak oscillatory tails remain sensitive for selected points.",
+    "Five points retain an explicit boundary flag.",
+    "Digitized Blumen points are discrete and are not connected."
+  ],
+  "reproducibility_witness": {
+    "name": "witness_M150_a01625",
+    "point": {
+      "Mach": 1.5,
+      "alpha": 0.1625
+    },
+    "spectral": {
+      "cr": 0.3680825090907056,
+      "ci": 0.0380056534011514,
+      "omega_i": 0.0061759186776871,
+      "validation_status": "modal_spectral_validated_with_exported_fields"
+    },
+    "modal_sample": {
+      "path": "experiments/supersonic_general/support/samples/witness_M150_a01625_raw.parquet",
+      "sha256": "af94eafbc0da2d84f4a59d74917227462bf9946bd5d97ac4e74a94bf5d55fc8a",
+      "n_rows": 4594,
+      "y_min": -500.0000000000052,
+      "y_max": 500.0000000000052
+    },
+    "numerical_reproduction": {
+      "status": "spectral_and_modal_reproduction_calibrated",
+      "selected_configuration": "unmapped_y80",
+      "observed": {
+        "cr_solved": 0.3680880042790627,
+        "ci_solved": 0.0380067406402456,
+        "omega_i_solved": 0.0061760953540399,
+        "abs_cr_error": 5.495188357129699e-06,
+        "abs_ci_error": 1.087239094275938e-06,
+        "abs_omega_i_error": 1.7667635281940625e-07,
+        "stage1_mismatch_at_reference": 1.5637739022447838e-06,
+        "stage1_mismatch_solved": 5.103536689850155e-10,
+        "elapsed_seconds": 21.226955124991942
+      },
+      "acceptance": {
+        "abs_cr_error_max": 1e-05,
+        "abs_ci_error_max": 2e-06,
+        "abs_omega_i_error_max": 5e-07,
+        "stage1_mismatch_max": 1e-08
+      },
+      "acceptance_checks": {
+        "abs_cr_error": true,
+        "abs_ci_error": true,
+        "abs_omega_i_error": true,
+        "stage1_mismatch": true
+      },
+      "modal_tolerances": null,
+      "note": "The unmapped y_max=80 configuration was retained because all three calibration configurations converged to the same spectral root while this configuration had the lowest runtime.",
+      "modal_reproduction": {
+        "status": "calibrated",
+        "calibration_runs": 3,
+        "acceptance": {
+          "calibration_runs": 3,
+          "safety_factor": 2.0,
+          "variants_required": [
+            "frozen_spectral_values",
+            "solved_spectral_root"
+          ],
+          "min_overlap_points": 4400,
+          "complex_correlation_core_min": 0.99999,
+          "alignment_abs_deviation_max": 0.0002,
+          "fields": {
+            "rho": {
+              "relative_l2_core_amp_ge_5pct_max": 0.0002,
+              "relative_l2_full_overlap_max": 0.0002,
+              "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0004
+            },
+            "u": {
+              "relative_l2_core_amp_ge_5pct_max": 0.004,
+              "relative_l2_full_overlap_max": 0.004,
+              "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0002
+            },
+            "v": {
+              "relative_l2_core_amp_ge_5pct_max": 0.0002,
+              "relative_l2_full_overlap_max": 0.0002,
+              "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0002
+            },
+            "p": {
+              "relative_l2_core_amp_ge_5pct_max": 0.0002,
+              "relative_l2_full_overlap_max": 0.0002,
+              "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0004
+            }
+          }
+        },
+        "observed_extrema": {
+          "minimum_overlap_points": 4474,
+          "minimum_complex_correlation_core": 0.9999988489166037,
+          "maximum_alignment_abs_deviation": 9.347876443244196e-05,
+          "fields": {
+            "rho": {
+              "relative_l2_core_amp_ge_5pct": 8.901568277028416e-05,
+              "relative_l2_full_overlap": 8.901574016358963e-05,
+              "relative_l2_tail_amp_0p1pct_to_2pct": 0.00016024232629728403
+            },
+            "u": {
+              "relative_l2_core_amp_ge_5pct": 0.0015197498169878994,
+              "relative_l2_full_overlap": 0.0015196097686187226,
+              "relative_l2_tail_amp_0p1pct_to_2pct": 9.454798264243417e-05
+            },
+            "v": {
+              "relative_l2_core_amp_ge_5pct": 9.627857132586294e-05,
+              "relative_l2_full_overlap": 9.627720625747247e-05,
+              "relative_l2_tail_amp_0p1pct_to_2pct": 9.457357328089429e-05
+            },
+            "p": {
+              "relative_l2_core_amp_ge_5pct": 8.901568277036038e-05,
+              "relative_l2_full_overlap": 8.901574016366589e-05,
+              "relative_l2_tail_amp_0p1pct_to_2pct": 0.00016024232629594266
+            }
+          }
+        },
+        "comparison_variants": [
+          "frozen_spectral_values",
+          "solved_spectral_root"
+        ],
+        "note": "Thresholds were derived from three repeated modal reconstructions. A factor of two was applied to the largest observed relative errors before rounding upward."
+      }
+    }
+  }
+}

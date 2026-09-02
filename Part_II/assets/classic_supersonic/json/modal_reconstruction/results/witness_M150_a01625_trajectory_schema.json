@@ -1,0 +1,127 @@
+{
+  "case": {
+    "name": "witness_M150_a01625",
+    "Mach": 1.5,
+    "alpha": 0.1625
+  },
+  "solve_result": {
+    "cr": 0.36808800427906274,
+    "ci": 0.03800674064024567,
+    "omega_i": 0.006176095354039922,
+    "stage1_mismatch": 5.103536689850155e-10,
+    "stage2_mismatch": 3.1554436208840472e-30,
+    "y_limit": 80.0,
+    "ln_p_start_right": -8.741267873014248,
+    "spectral_success": true,
+    "mode_success": true,
+    "success": true
+  },
+  "get_trajectories": {
+    "return_type": "tuple",
+    "length": 4,
+    "items": [
+      {
+        "index": 0,
+        "class": "OdeResult",
+        "module": "scipy.integrate._ivp.ivp",
+        "t": {
+          "shape": [
+            2500
+          ],
+          "dtype": "float64",
+          "size": 2500,
+          "all_finite": true,
+          "min": -80.0,
+          "max": 1.0
+        },
+        "y": {
+          "shape": [
+            4,
+            2500
+          ],
+          "dtype": "float64",
+          "size": 10000,
+          "all_finite": true,
+          "min": -23.07206971746539,
+          "max": 0.010607314220262261
+        },
+        "success": true,
+        "status": 0,
+        "message": "The solver successfully reached the end of the integration interval.",
+        "nfev": 1916,
+        "njev": 0,
+        "nlu": 0
+      },
+      {
+        "index": 1,
+        "class": "OdeResult",
+        "module": "scipy.integrate._ivp.ivp",
+        "t": {
+          "shape": [
+            1
+          ],
+          "dtype": "float64",
+          "size": 1,
+          "all_finite": true,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "y": {
+          "shape": [
+            4,
+            1
+          ],
+          "dtype": "float64",
+          "size": 4,
+          "all_finite": true,
+          "min": -4.170517351479751,
+          "max": 1.9319348449432596
+        },
+        "success": true,
+        "status": 0,
+        "message": "The solver successfully reached the end of the integration interval.",
+        "nfev": 506,
+        "njev": 0,
+        "nlu": 0
+      },
+      {
+        "index": 2,
+        "class": "OdeResult",
+        "module": "scipy.integrate._ivp.ivp",
+        "t": {
+          "shape": [
+            2500
+          ],
+          "dtype": "float64",
+          "size": 2500,
+          "all_finite": true,
+          "min": 0.0,
+          "max": 80.0
+        },
+        "y": {
+          "shape": [
+            4,
+            2500
+          ],
+          "dtype": "float64",
+          "size": 10000,
+          "all_finite": true,
+          "min": -8.741267873014248,
+          "max": 1.935795298874593
+        },
+        "success": true,
+        "status": 0,
+        "message": "The solver successfully reached the end of the integration interval.",
+        "nfev": 1484,
+        "njev": 0,
+        "nlu": 0
+      },
+      {
+        "index": 3,
+        "class": "float",
+        "value": 80.0
+      }
+    ]
+  },
+  "elapsed_seconds": 24.418452249956317
+}

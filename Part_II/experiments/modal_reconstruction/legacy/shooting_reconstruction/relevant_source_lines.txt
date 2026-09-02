@@ -1,0 +1,107 @@
+10:        match_y: float = 1.0,
+11:        ln_p_start_left: float = -5.0,
+18:        amplitude_match_y: float | None = None,
+21:        ln_p_right_min: float = -15.0,
+22:        ln_p_right_max: float = 5.0,
+26:        self.match_y = float(match_y)
+27:        self.ln_p_start_left = float(ln_p_start_left)
+34:        self.amplitude_match_y = self.match_y if amplitude_match_y is None else float(amplitude_match_y)
+37:        self.ln_p_right_min = float(ln_p_right_min)
+38:        self.ln_p_right_max = float(ln_p_right_max)
+44:        if self.ln_p_right_min >= self.ln_p_right_max:
+45:            raise ValueError("ln_p_right_min doit etre < ln_p_right_max.")
+48:    def base_velocity(y: np.ndarray | float) -> np.ndarray | float:
+49:        return np.tanh(y)
+52:    def base_velocity_derivative(y: np.ndarray | float) -> np.ndarray | float:
+59:    def asymptotic_gammas(self, cr: float, ci: float) -> tuple[complex, complex]:
+67:        gamma_left = self.alpha * _principal_sqrt(r_inf_left)
+68:        if gamma_left.real < 0:
+69:            gamma_left = -gamma_left
+71:        gamma_right = -self.alpha * _principal_sqrt(r_inf_right)
+72:        if gamma_right.real > 0:
+73:            gamma_right = -gamma_right
+75:        return gamma_left, gamma_right
+78:        gamma_left, gamma_right = self.asymptotic_gammas(cr, ci)
+79:        decay_left = max(gamma_left.real, 1e-8)
+80:        decay_right = max(-gamma_right.real, 1e-8)
+104:        Etat = [kappa, q, ln|p|, phi] avec gamma = p'/p = kappa + i q.
+106:        kappa, q, ln_p, phi = state
+107:        gamma = kappa + 1j * q
+110:        u = self.base_velocity(y)
+111:        up = self.base_velocity_derivative(y)
+116:        rhs_complex = -(gamma**2) - p_term * gamma + (self.alpha**2) * r_term
+136:        ln_p_start_right: float = -5.0,
+140:        - branche gauche jusqu'a match_y
+141:        - branche droite evaluee a match_y
+145:        gamma_left_inf, gamma_right_inf = self.asymptotic_gammas(cr, ci)
+148:        init_left = [gamma_left_inf.real, gamma_left_inf.imag, self.ln_p_start_left, 0.0]
+149:        init_right = [gamma_right_inf.real, gamma_right_inf.imag, ln_p_start_right, 0.0]
+154:            xi_match = self.y_to_xi(self.match_y)
+156:            xi_eval_left = np.linspace(xi_left, xi_match, 2500)
+161:                (xi_left, xi_match),
+170:            sol_right_match = solve_ivp(
+172:                (xi_right, xi_match),
+174:                t_eval=np.array([xi_match]),
+193:            sol_right_match.t = self.xi_to_y(sol_right_match.t)
+196:            y_eval_left = np.linspace(-y_limit, self.match_y, 2500)
+201:                (-y_limit, self.match_y),
+210:            sol_right_match = solve_ivp(
+212:                (y_limit, self.match_y),
+214:                t_eval=np.array([self.match_y]),
+232:        return sol_left, sol_right_match, sol_right_full, y_limit
+243:    def stage1_mismatch(self, cr: float, ci: float) -> float:
+246:        sol_left, sol_right_match, _, _ = self.get_trajectories(cr, ci)
+247:        if not (sol_left.success and sol_right_match.success):
+250:        kappa_left = self._interp_component(self.match_y, sol_left, 0)
+251:        q_left = self._interp_component(self.match_y, sol_left, 1)
+252:        kappa_right = float(sol_right_match.y[0, 0])
+253:        q_right = float(sol_right_match.y[1, 0])
+269:        Raffinement par boites successives, comme dans mstab17.py.
+292:                    local_errors[i, j] = self.stage1_mismatch(float(cr), float(ci))
+321:    def stage2_objective(self, ln_p_start_right: float, cr: float, ci: float) -> float:
+322:        sol_left, _, sol_right_full, _ = self.get_trajectories(cr, ci, ln_p_start_right=ln_p_start_right)
+323:        if not (sol_left.success and sol_right_full.success):
+325:        target_y = self.amplitude_match_y
+326:        ln_p_left_target = self._interp_component(target_y, sol_left, 2)
+327:        ln_p_right_target = self._interp_component(target_y, sol_right_full, 2)
+328:        return float((ln_p_left_target - ln_p_right_target) ** 2)
+342:        cr_star, ci_star, stage1_err = self.solve_eigenvalue(
+353:            lambda ln_p_right: self.stage2_objective(ln_p_right, cr_star, ci_star),
+354:            bounds=(self.ln_p_right_min, self.ln_p_right_max),
+357:        stage2_err = float(amp_opt.fun)
+358:        _, _, _, y_limit = self.get_trajectories(cr_star, ci_star, ln_p_start_right=float(amp_opt.x))
+359:        spectral_success = bool(stage1_err < 5e-2)
+360:        mode_success = bool(stage2_err < 1e-2)
+361:        success = bool(spectral_success and mode_success)
+368:            stage1_mismatch=stage1_err,
+369:            stage2_mismatch=stage2_err,
+371:            ln_p_start_right=float(amp_opt.x),
+372:            spectral_success=spectral_success,
+373:            mode_success=mode_success,
+374:            success=success,
+383:            ln_p_start_right=result.ln_p_start_right,
+388:        k_left, q_left, ln_p_left, phi_left = sol_left.y
+389:        k_right, q_right, ln_p_right, phi_right = sol_right_full.y
+391:        abs_p_left = np.exp(ln_p_left)
+392:        abs_p_right = np.exp(ln_p_right)
+423:        axes[1, 1].plot(yy, np.tanh(yy), label=r"$U(y)=\tanh(y)$")
+439:            fig.savefig(output_path, dpi=200, bbox_inches="tight")
+452:    ln_p_start_right: float,
+453:    match_y: float,
+464:        match_y=match_y,
+472:    sol_left, _, sol_right_full, _ = solver.get_trajectories(cr, ci, ln_p_start_right=ln_p_start_right)
+473:    if not (sol_left.success and sol_right_full.success):
+481:    k_left, q_left, ln_p_left, phi_left = sol_left.y
+482:    k_right, q_right, ln_p_right, phi_right = sol_right_full.y
+484:    abs_p_left = np.exp(ln_p_left)
+485:    abs_p_right = np.exp(ln_p_right)
+492:    gamma_left = k_left + 1j * q_left
+493:    gamma_right = k_right + 1j * q_right
+498:    gamma = np.concatenate([gamma_left[left_mask], gamma_right[::-1]])
+500:    u_bar = solver.base_velocity(y)
+501:    du_bar = solver.base_velocity_derivative(y)
+505:    p_y = gamma * p
+506:    v = -p_y / (i_alpha * (u_bar - c))
+508:    rho = (float(mach) ** 2) * p
+510:    u, v, p, rho = normalize_fields(y=y, u=u, v=v, p=p, rho=rho)
+511:    return {"y": y, "rho": rho, "u": u, "v": v, "p": p}

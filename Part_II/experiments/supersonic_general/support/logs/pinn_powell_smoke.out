@@ -1,0 +1,32 @@
+[01/04] alpha=0.05000 |dc_pinn|=2.261e-02 |dc_corr|=3.658e-04 mismatch=1.851e-05 nfev=80 time=15.46s
+[02/04] alpha=0.14000 |dc_pinn|=1.715e-06 |dc_corr|=1.863e-08 mismatch=4.288e-09 nfev=80 time=17.29s
+[03/04] alpha=0.25000 |dc_pinn|=7.783e-06 |dc_corr|=1.779e-08 mismatch=7.745e-09 nfev=78 time=25.27s
+[04/04] alpha=0.27000 |dc_pinn|=8.705e-03 |dc_corr|=1.909e-06 mismatch=1.045e-08 nfev=80 time=30.80s
+
+{
+  "status": "COMPLETED",
+  "Mach": 1.5,
+  "n_requested": 4,
+  "n_successful": 4,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_powell_smoke/pinn_powell_spectral_results.csv",
+  "pinn_spectral_error_mean": 0.007830586705974554,
+  "pinn_spectral_error_max": 0.022607780316684097,
+  "corrected_spectral_error_mean": 9.193576500423028e-05,
+  "corrected_spectral_error_max": 0.0003657973618690409,
+  "delta_c_from_pinn_mean": 0.007747130062188712,
+  "delta_c_from_pinn_max": 0.022272825999337876,
+  "initial_mismatch_mean": 0.0013384229177088802,
+  "initial_mismatch_max": 0.004204431937312093,
+  "corrected_mismatch_mean": 4.633691379784039e-06,
+  "corrected_mismatch_max": 1.851228643216854e-05,
+  "mismatch_reduction_mean": 100778.58665157121,
+  "mismatch_reduction_max": 402520.34308902937,
+  "optimization_seconds_mean": 22.20652013493236,
+  "optimization_seconds_max": 30.799941747915,
+  "nfev_reported_mean": 79.5,
+  "nfev_reported_max": 80.0
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_powell_smoke/pinn_powell_spectral_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_powell_smoke/pinn_powell_spectral_summary.json

@@ -1,0 +1,5 @@
+multiplier,stage1_threshold,stage2_threshold,n_total,n_stage1_success,stage1_success_rate,n_stage2_success,stage2_success_rate,n_technical_success,technical_success_rate,n_fail_stage1_only,n_fail_stage2_only,n_fail_both
+0.25,0.0125,0.0025,500,472,0.944,500,1.0,472,0.944,28,0,0
+0.5,0.025,0.005,500,500,1.0,500,1.0,500,1.0,0,0,0
+1.0,0.05,0.01,500,500,1.0,500,1.0,500,1.0,0,0,0
+2.0,0.1,0.02,500,500,1.0,500,1.0,500,1.0,0,0,0

@@ -1,0 +1,168 @@
+
+==========================================================================================
+scripts/dev/train_subsonic_joint_spectral_modal_chart.py
+==========================================================================================
+FUNCTION line=38: parse_float_list(value)
+FUNCTION line=46: call_supported(function)
+FUNCTION line=52: first_linear_input_dimension(state_dict)
+FUNCTION line=62: infer_field_family(requested, checkpoint_path, checkpoint)
+FUNCTION line=94: checkpoint_value(cli_value, checkpoint_args, name, default)
+CLASS line=106: CiAtlasNet
+  METHOD line=115: __init__(self)
+  METHOD line=155: forward(self, alpha, mach)
+FUNCTION line=179: ci_anchor_loss(ci_net, anchor_df, device)
+FUNCTION line=201: gradient_norm(gradients)
+FUNCTION line=214: parameter_gradient_norm(module)
+FUNCTION line=218: anchor_metrics(ci_net, anchor_df, device)
+FUNCTION line=249: build_parser()
+FUNCTION line=306: main()
+
+==========================================================================================
+scripts/run_kh_subsonic_riccati_core1d.py
+==========================================================================================
+FUNCTION line=31: build_parser()
+FUNCTION line=80: build_config(args, warm_config, checkpoint)
+FUNCTION line=206: main()
+
+==========================================================================================
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py
+==========================================================================================
+FUNCTION line=39: build_mlp(in_dim, out_dim)
+CLASS line=55: GuideWindowNet
+  METHOD line=56: __init__(self)
+  METHOD line=63: normalize_alpha(self, alpha)
+  METHOD line=67: forward(self, alpha)
+FUNCTION line=74: set_seed(seed)
+FUNCTION line=82: smoothness_loss(values, alpha)
+FUNCTION line=87: build_reference_ci_grid(alpha_values, mach)
+FUNCTION line=94: build_anchor_indices(n_points, n_anchors)
+FUNCTION line=100: train_guide()
+FUNCTION line=157: plot_guide_window()
+FUNCTION line=188: build_parser()
+FUNCTION line=248: build_config(args, warm_config, checkpoint, guide_supervision_csv, guide_window_csv)
+FUNCTION line=379: main()
+
+==========================================================================================
+src/models/kh_subsonic_pinn.py
+==========================================================================================
+CLASS line=11: FourierEncoding
+  METHOD line=12: __init__(self, in_features, num_frequencies, scale)
+  METHOD line=19: forward(self, x)
+FUNCTION line=26: build_mlp(in_dim, out_dim)
+CLASS line=57: KHSubsonicFixedMachPINN
+  METHOD line=67: __init__(self)
+  METHOD line=142: normalize_alpha(self, alpha)
+  METHOD line=147: encode_mode_inputs(self, xi, alpha)
+  METHOD line=154: _forward_mode_raw(self, features, alpha)
+  METHOD line=169: decode_mode_outputs(self, xi, raw_outputs)
+  METHOD line=204: forward(self, xi, alpha)
+  METHOD line=210: get_ci(self, alpha)
+  METHOD line=217: get_mapping_scale(self)
+FUNCTION line=221: _config_get(config, key, default)
+FUNCTION line=238: build_fixed_mach_model_from_config(config)
+FUNCTION line=263: load_fixed_mach_state_dict_compat(model, state_dict)
+FUNCTION line=287: _linear_layers_from_sequential(net)
+FUNCTION line=295: _copy_linear_stack_with_padded_first_layer(src_net, dst_net)
+CLASS line=336: KHSubsonicMultiMachPINN
+  METHOD line=344: __init__(self)
+  METHOD line=402: normalize_alpha(self, alpha)
+  METHOD line=406: normalize_mach(self, mach)
+  METHOD line=410: encode_mode_inputs(self, xi, alpha, mach)
+  METHOD line=416: forward(self, xi, alpha, mach)
+  METHOD line=430: get_ci(self, alpha, mach)
+  METHOD line=435: get_mapping_scale(self)
+FUNCTION line=439: initialize_multimach_from_fixed_mach(multimach_model, fixed_model)
+
+==========================================================================================
+src/physics/kh_subsonic_residual.py
+==========================================================================================
+FUNCTION line=9: xi_to_y(xi, mapping_scale)
+FUNCTION line=13: dy_dxi(xi, mapping_scale)
+FUNCTION line=17: d2y_dxi2(xi, mapping_scale)
+FUNCTION line=21: base_velocity(y)
+FUNCTION line=25: base_velocity_derivative(y)
+FUNCTION line=32: _finite_complex(z)
+FUNCTION line=38: _clamp_complex_abs(z)
+FUNCTION line=45: _differentiate(values, x)
+FUNCTION line=55: _principal_sqrt_torch(z)
+FUNCTION line=61: asymptotic_riccati_gammas(alpha, mach, ci)
+FUNCTION line=75: riccati_gamma_rhs(y, gamma, alpha, mach, ci)
+FUNCTION line=98: _reconstruct_riccati_pressure_core(outputs, xi, mapping_scale)
+FUNCTION line=144: reconstruct_pressure_from_riccati(model, xi, alpha)
+FUNCTION line=161: reconstruct_pressure_p_y_from_riccati(model, xi, alpha)
+FUNCTION line=177: extract_pressure_components(outputs)
+FUNCTION line=181: reconstruct_pressure_from_riccati_2d(model, xi, alpha, mach)
+FUNCTION line=199: reconstruct_pressure_p_y_from_riccati_2d(model, xi, alpha, mach)
+FUNCTION line=216: pressure_ode_residual(model, xi, alpha, mach)
+FUNCTION line=335: boundary_decay_loss(model, xi_left, xi_right, alpha)
+FUNCTION line=361: riccati_boundary_loss_components(model, xi_left, xi_right, alpha)
+FUNCTION line=385: riccati_boundary_band_loss_components(model, alpha)
+FUNCTION line=431: riccati_center_constraints(model, alpha)
+FUNCTION line=451: riccati_shooting_match_loss(model, alpha, mach)
+FUNCTION line=481: riccati_shooting_path_loss(model, alpha, mach)
+FUNCTION line=518: _riccati_rk4_step(y_val, gamma_val, h, alpha_val, mach, ci_val)
+FUNCTION line=534: _riccati_segment_integrate(y_start, y_end, gamma_start, alpha_val, mach, ci_val)
+FUNCTION line=555: _riccati_shooting_path_loss_from_sample(model, mapping_scale, alpha_scalar, ci_scalar, mach)
+FUNCTION line=633: _riccati_shooting_match_loss_from_samples(mapping_scale, alpha_samples, ci_samples, mach)
+FUNCTION line=684: riccati_ci_local_min_loss(model, alpha, mach)
+FUNCTION line=739: normalization_loss(model, xi_ref, alpha)
+FUNCTION line=754: integral_normalization_loss(model, xi, alpha)
+FUNCTION line=768: phase_loss(model, xi_ref, alpha)
+FUNCTION line=776: localization_moment_losses(model, xi, alpha)
+FUNCTION line=792: local_peak_envelope_losses(model, xi_ref, alpha)
+FUNCTION line=809: first_order_stabilization_losses(model, xi, alpha)
+FUNCTION line=831: pressure_ode_residual_2d(model, xi, alpha, mach, ci_override)
+FUNCTION line=908: boundary_decay_loss_2d(model, xi_left, xi_right, alpha, mach)
+FUNCTION line=914: riccati_boundary_loss_components_2d(model, xi_left, xi_right, alpha, mach)
+FUNCTION line=949: normalization_loss_2d(model, xi_ref, alpha, mach)
+FUNCTION line=963: phase_loss_2d(model, xi_ref, alpha, mach)
+
+==========================================================================================
+src/training/kh_subsonic_trainer.py
+==========================================================================================
+CLASS line=46: KHSubsonicTrainingConfig
+CLASS line=229: KingOfTheHill
+  METHOD line=230: __init__(self, model)
+  METHOD line=234: update(self, model, metric)
+FUNCTION line=242: _grads_are_finite(parameters)
+FUNCTION line=250: _clip_gradients(parameters, max_norm)
+FUNCTION line=257: sampling_alpha_bounds(cfg)
+FUNCTION line=266: audit_alpha_bounds(cfg)
+FUNCTION line=274: build_fixed_ci_supervision_alphas(cfg)
+FUNCTION line=295: safe_torch_save(state_dict, path)
+FUNCTION line=300: anchor_pressure_mode(y, p)
+FUNCTION line=307: normalize_classic_full_mode(y, u, v, p, rho, gamma)
+FUNCTION line=336: normalize_predicted_full_mode_torch(y, u, v, p, rho)
+FUNCTION line=374: build_anchor_points(model, alpha_ref, cfg)
+CLASS line=436: PressureModeReferenceCache
+  METHOD line=437: __init__(self)
+  METHOD line=444: get(self, alpha)
+CLASS line=452: FullModeReferenceCache
+  METHOD line=453: __init__(self)
+  METHOD line=460: get(self, alpha)
+FUNCTION line=467: load_shooting_classic_full_mode(alpha, mach)
+FUNCTION line=519: reconstruct_predicted_pressure_mode(model, xi, alpha)
+FUNCTION line=535: reconstruct_predicted_full_mode(model, xi, alpha)
+FUNCTION line=575: riccati_anchor_supervision_loss(model, alpha_samples, reference_cache)
+FUNCTION line=607: build_classic_mode_supervision_alphas(cfg, alpha_ref)
+FUNCTION line=619: classic_mode_supervision_loss(model, alpha_samples, reference_cache)
+FUNCTION line=676: build_classic_full_mode_supervision_alphas(cfg, alpha_ref)
+FUNCTION line=688: build_classic_balanced_full_mode_supervision_alphas(cfg, alpha_ref)
+FUNCTION line=700: classic_full_mode_supervision_loss(model, alpha_samples, reference_cache)
+FUNCTION line=754: _complex_rms_torch(field, eps)
+FUNCTION line=758: _complex_relative_l2_loss(pred, target, eps)
+FUNCTION line=764: _complex_overlap_loss(pred, target, eps)
+FUNCTION line=775: classic_balanced_full_mode_supervision_loss(model, alpha_samples, reference_cache)
+FUNCTION line=852: build_riccati_anchor_alphas(cfg, alpha_ref)
+FUNCTION line=864: build_mode_audit_alphas(cfg)
+FUNCTION line=918: mode_alpha_weights(alphas, cfg)
+FUNCTION line=929: weighted_mean(values, weights)
+FUNCTION line=936: compute_reference_q(y, p)
+FUNCTION line=942: build_q_supervision_alphas(cfg, alpha_ref)
+FUNCTION line=977: build_gamma_supervision_alphas(cfg, alpha_ref)
+FUNCTION line=1012: riccati_q_supervision_loss(model, alpha_samples, reference_cache)
+FUNCTION line=1058: riccati_gamma_supervision_loss(model, alpha_samples, reference_cache)
+FUNCTION line=1114: compute_mode_diagnostics(model)
+FUNCTION line=1176: audit_ci_and_mode(model, reference_cache, mode_reference_cache, cfg)
+FUNCTION line=1244: train_fixed_mach_subsonic_pinn(cfg)
+FUNCTION line=2204: save_training_artifacts(model, history, cfg)

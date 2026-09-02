@@ -1,0 +1,4 @@
+setting,level,median_complex_error,max_complex_error,median_ci_error,max_ci_error
+matching_y0p5,0.5,0.0,1.2637451371352585e-05,0.0,7.013325746799999e-06
+matching_y1p5,1.5,0.0,8.548827722847001e-10,0.0,8.378535000129125e-10
+strict_L40_y1,40.0,0.0,0.0,0.0,0.0

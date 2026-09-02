@@ -1,0 +1,8 @@
+*.csv
+*.parquet
+*.h5
+*.hdf5
+!README.md
+!SHA256SUMS.txt
+!modal_sample_for_tests.parquet
+source/*.csv

@@ -1,0 +1,12 @@
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in scalar power
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in scalar power
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in scalar power
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in square
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in square
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in square
+  return 1.0 / np.cosh(y) ** 2

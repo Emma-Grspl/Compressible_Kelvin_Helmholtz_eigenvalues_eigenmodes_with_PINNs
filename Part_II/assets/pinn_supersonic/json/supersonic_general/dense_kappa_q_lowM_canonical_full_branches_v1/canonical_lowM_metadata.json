@@ -1,0 +1,27 @@
+{
+  "M100_alpha_max": 0.36,
+  "M100_alpha_min": 0.05,
+  "M105_alpha_max": 0.355,
+  "M105_alpha_min": 0.05,
+  "generated_at": "2026-07-27T08:12:31.633409+00:00",
+  "n_M100": 63,
+  "n_M105": 62,
+  "n_points": 125,
+  "neutral_M100": {
+    "neutral_alpha_estimate": 0.36315956921142056,
+    "neutral_alpha_lower": 0.3613191384228412,
+    "neutral_alpha_uncertainty": 0.0018404307885794002,
+    "neutral_alpha_upper": 0.365,
+    "neutral_last_positive_ci": 1.5778549245007186e-05
+  },
+  "neutral_M105": {
+    "neutral_alpha_estimate": 0.35857579880042634,
+    "neutral_alpha_lower": 0.3571515976008527,
+    "neutral_alpha_uncertainty": 0.0014242011995736492,
+    "neutral_alpha_upper": 0.36,
+    "neutral_last_positive_ci": 8.367744770129213e-05
+  },
+  "source_M100": "classic_supersonic/reproducibility/results/dense_kappa_q_lowM_full_branches_v1",
+  "source_M105": "classic_supersonic/reproducibility/results/dense_kappa_q_M105_full_branch_repair_v1",
+  "status": "PASS"
+}

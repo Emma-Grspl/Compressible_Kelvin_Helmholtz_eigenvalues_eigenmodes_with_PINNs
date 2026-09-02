@@ -1,0 +1,4 @@
+task_index,blumen_row_id,source_row_id,curve_id,curve_label,curve_key,family,Mach,alpha,blumen_ci,status,accepted_seed_source,n_attempts,classical_cr,classical_ci,classical_omega_i,delta_ci,residual_norm,settings_name,spectral_extent,matching_y,max_step,rtol,atol,mode_status,has_root,delta_ci_recomputed
+75,75,85,4,ci=0.05,4__ci=0.05__ci_0.05,ci_level,1.4052558782849238,1.9103948404e-05,0.05,no_accepted_root,,75,,,,,,,,,,,,not_reconstructed,False,
+101,101,113,5,ci=0.07,5__ci=0.07__ci_0.07,ci_level,1.3928077455048409,0.002712760673376,0.07,no_accepted_root,,75,,,,,,,,,,,,not_reconstructed,False,
+119,119,131,6,ci=0.10,6__ci=0.10__ci_0.1,ci_level,1.351313969571231,0.0038647287621406,0.1,no_accepted_root,,75,,,,,,,,,,,,not_reconstructed,False,

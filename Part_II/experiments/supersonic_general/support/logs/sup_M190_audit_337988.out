@@ -1,0 +1,60 @@
+===== DENSE MODAL AUDIT S4 VS S4M4 =====
+job       : 337988
+job name  : sup_M190_audit
+node      : r6i0n3
+pilot     : assets/pinn_supersonic/pilots/local_M190_sparse_v1
+tag       : M190
+Mach      : 1.90
+output    : assets/pinn_supersonic/pilots/local_M190_sparse_v1/runs/dense_modal_audit_S4_vs_S4M4
+start     : Tue Jul 28 01:52:35 PM CEST 2026
+
+Tue Jul 28 13:52:35 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.03             Driver Version: 580.159.03     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-SXM2-16GB           On  |   00000000:1C:00.0 Off |                    0 |
+| N/A   46C    P0             42W /  300W |       0MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[read] chunk=12 selected=129234
+
+REFERENCE
+  rows : 129234
+  modes: 34
+  alpha: 0.05 0.215
+
+[S4] mode=1/34 alpha=0.050000 p_rel=5.590e-01 overlap=4.742e-02
+[S4] mode=10/34 alpha=0.095000 p_rel=8.232e-01 overlap=2.062e-01
+[S4] mode=20/34 alpha=0.145000 p_rel=8.683e-01 overlap=2.531e-01
+[S4] mode=30/34 alpha=0.195000 p_rel=6.297e-01 overlap=1.214e-01
+[S4] mode=34/34 alpha=0.215000 p_rel=6.845e-01 overlap=1.470e-01
+[S4M2] mode=1/34 alpha=0.050000 p_rel=1.032e-01 overlap=2.340e-03
+[S4M2] mode=10/34 alpha=0.095000 p_rel=6.835e-02 overlap=9.226e-04
+[S4M2] mode=20/34 alpha=0.145000 p_rel=1.263e-01 overlap=3.620e-03
+[S4M2] mode=30/34 alpha=0.195000 p_rel=3.942e-02 overlap=3.146e-04
+[S4M2] mode=34/34 alpha=0.215000 p_rel=2.330e-01 overlap=8.795e-03
+
+DENSE MODAL SUMMARY
+model            subset  n_modes  kappa_nrmse_mean  q_nrmse_mean  log_amp_rmse_mean  pressure_rel_l2_mean  pressure_overlap_error_mean
+   S4               all       34          1.182780      0.167804           0.671178              0.755629                     0.177193
+   S4        off_anchor       30          1.183827      0.169375           0.666677              0.758359                     0.178831
+   S4 S4M2_modal_anchor        4          1.174931      0.156018           0.704940              0.735152                     0.164908
+ S4M2               all       34          0.140631      0.016649           0.015436              0.068057                     0.001317
+ S4M2        off_anchor       30          0.150728      0.018296           0.016167              0.076113                     0.001491
+ S4M2 S4M2_modal_anchor        4          0.064905      0.004297           0.009955              0.007639                     0.000017
+
+LOCAL SUPERSONIC DENSE MODAL AUDIT: COMPLETED
+
+end: Tue Jul 28 01:53:11 PM CEST 2026

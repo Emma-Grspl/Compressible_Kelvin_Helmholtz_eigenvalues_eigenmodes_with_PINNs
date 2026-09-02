@@ -1,0 +1,101 @@
+Resume: 64 points already available.
+==============================================================================================================
+PINN-SEEDED SHOOTING — CONTINUOUS-M N76
+==============================================================================================================
+points: 64
+[01/64] id=00 SKIP existing
+[02/64] id=01 SKIP existing
+[03/64] id=02 SKIP existing
+[04/64] id=03 SKIP existing
+[05/64] id=04 SKIP existing
+[06/64] id=05 SKIP existing
+[07/64] id=06 SKIP existing
+[08/64] id=07 SKIP existing
+[09/64] id=08 SKIP existing
+[10/64] id=09 SKIP existing
+[11/64] id=10 SKIP existing
+[12/64] id=11 SKIP existing
+[13/64] id=12 SKIP existing
+[14/64] id=13 SKIP existing
+[15/64] id=14 SKIP existing
+[16/64] id=15 SKIP existing
+[17/64] id=16 SKIP existing
+[18/64] id=17 SKIP existing
+[19/64] id=18 SKIP existing
+[20/64] id=19 SKIP existing
+[21/64] id=20 SKIP existing
+[22/64] id=21 SKIP existing
+[23/64] id=22 SKIP existing
+[24/64] id=23 SKIP existing
+[25/64] id=24 SKIP existing
+[26/64] id=25 SKIP existing
+[27/64] id=26 SKIP existing
+[28/64] id=27 SKIP existing
+[29/64] id=28 SKIP existing
+[30/64] id=29 SKIP existing
+[31/64] id=30 SKIP existing
+[32/64] id=31 SKIP existing
+[33/64] id=32 SKIP existing
+[34/64] id=33 SKIP existing
+[35/64] id=34 SKIP existing
+[36/64] id=35 SKIP existing
+[37/64] id=36 SKIP existing
+[38/64] id=37 SKIP existing
+[39/64] id=38 SKIP existing
+[40/64] id=39 SKIP existing
+[41/64] id=40 SKIP existing
+[42/64] id=41 SKIP existing
+[43/64] id=42 SKIP existing
+[44/64] id=43 SKIP existing
+[45/64] id=44 SKIP existing
+[46/64] id=45 SKIP existing
+[47/64] id=46 SKIP existing
+[48/64] id=47 SKIP existing
+[49/64] id=48 SKIP existing
+[50/64] id=49 SKIP existing
+[51/64] id=50 SKIP existing
+[52/64] id=51 SKIP existing
+[53/64] id=52 SKIP existing
+[54/64] id=53 SKIP existing
+[55/64] id=54 SKIP existing
+[56/64] id=55 SKIP existing
+[57/64] id=56 SKIP existing
+[58/64] id=57 SKIP existing
+[59/64] id=58 SKIP existing
+[60/64] id=59 SKIP existing
+[61/64] id=60 SKIP existing
+[62/64] id=61 SKIP existing
+[63/64] id=62 SKIP existing
+[64/64] id=63 SKIP existing
+
+==============================================================================================================
+FINAL SUMMARY
+==============================================================================================================
+{
+  "n_total": 64,
+  "n_shoot_completed": 64,
+  "n_spectral_success": 64,
+  "n_mode_success": 64,
+  "spectral_error_mean": 0.0011877278516281293,
+  "spectral_error_median": 3.503851621961698e-06,
+  "spectral_error_p90": 5.849711501858484e-06,
+  "spectral_error_p95": 8.262503058708108e-06,
+  "spectral_error_p99": 0.028047353007535074,
+  "spectral_error_max": 0.0757860722211095,
+  "n_error_le_1e-6": 4,
+  "n_error_le_1e-5": 62,
+  "n_error_le_1e-4": 63,
+  "n_error_le_1e-3": 63,
+  "n_error_le_5e-3": 63,
+  "n_error_le_1e-2": 63,
+  "n_improved_vs_pinn": 64,
+  "n_worsened_vs_pinn": 0,
+  "mean_seconds": 351.4142857206573,
+  "median_seconds": 345.36613042950194,
+  "total_seconds": 22490.514286122067
+}
+
+written: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1_continuousM/N76/shooting_validation/shooting_validation_64.csv
+written: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1_continuousM/N76/shooting_validation/shooting_summary.json
+
+CORRECTOR_BENCHMARK_FINISHED

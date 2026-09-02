@@ -1,0 +1,4 @@
+method,completed,spectral_success,mode_success,optimizer_success
+GEP,64,,,
+Shooting,64,64.0,64.0,
+Powell,64,,,0.0

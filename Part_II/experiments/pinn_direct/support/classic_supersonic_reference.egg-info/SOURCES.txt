@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/classic_supersonic_reference/__init__.py
+src/classic_supersonic_reference.egg-info/PKG-INFO
+src/classic_supersonic_reference.egg-info/SOURCES.txt
+src/classic_supersonic_reference.egg-info/dependency_links.txt
+src/classic_supersonic_reference.egg-info/requires.txt
+src/classic_supersonic_reference.egg-info/top_level.txt
+src/classic_supersonic_reference/io/__init__.py
+src/classic_supersonic_reference/io/blumen_reference.py
+src/classic_supersonic_reference/plotting/__init__.py
+src/classic_supersonic_reference/solver/__init__.py
+src/classic_supersonic_reference/solver/mstab17_supersonic_solver.py
+src/classic_supersonic_reference/validation/__init__.py
+src/classic_supersonic_reference/validation/modal_reconstruction.py

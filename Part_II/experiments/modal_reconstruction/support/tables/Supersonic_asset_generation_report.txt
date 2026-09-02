@@ -1,0 +1,94 @@
+CLASSICAL SUPERSONIC ARTICLE-ASSET AUDIT REPORT
+================================================
+
+No spectral solve or new numerical campaign was launched.
+Scientific figure text is in English.
+Mach values used for convergence assets: 1.8 and 1.9 only.
+Canonical M=1.4 is used only for the representative modal assets.
+Asset 5 generated from raw modes: True.
+No path matching QUARANTINE_INVALID/QUARANTINE was read.
+
+INPUT FILES USED
+----------------
+- assets/classic_supersonic/csv/modal_reconstruction/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/table_classical_supersonic_final_modes_index.csv
+- experiments/modal_reconstruction/support/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/classical_supersonic_final_modes_long.csv.gz
+- assets/classic_supersonic/csv/computational_cost/errors/table_convergence_errors_spectral_b1818272d8.csv
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_box__6fa283880d9a/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_box__6fa283880d9a/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_box__6fa283880d9a/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_box__6fa283880d9a/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_accuracy__fc3ce002b218/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_box__6fa283880d9a/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_box__6fa283880d9a/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_box__4088df6303d7/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_box__8b3771c9166a/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M180__supersonic_shooting__shooting_box__b56ae48fb973/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_box__6ceaf7b997ea/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_box__6ceaf7b997ea/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_box__6ceaf7b997ea/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_box__6ceaf7b997ea/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_accuracy__d311852247ba/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_box__6ceaf7b997ea/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_box__0f6350e42f91/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_box__bdbedb30ed32/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_box__6ceaf7b997ea/mode.npz
+- assets/classic_supersonic/data/modal_reconstruction/supersonic_M190__supersonic_shooting__shooting_box__9bd8a707d365/mode.npz
+
+EXCLUDED CONFIGURATIONS / DATA
+------------------------------
+- All M=1.4 convergence rows excluded because branch provenance is not accepted for these figures.
+- Modal curve reference run excluded from errors: supersonic_M180__supersonic_shooting__shooting_accuracy__3fe75b9d98f0.
+- Modal curve reference run excluded from errors: supersonic_M180__supersonic_shooting__shooting_box__4088df6303d7.
+- Modal curve reference run excluded from errors: supersonic_M190__supersonic_shooting__shooting_accuracy__30bfafd55e43.
+- Modal curve reference run excluded from errors: supersonic_M190__supersonic_shooting__shooting_box__bdbedb30ed32.
+
+REFERENCE CONFIGURATIONS
+------------------------
+- Canonical mode: M1.400000_a0.18000000, M=1.4, alpha=0.18, cr=0.3329061267127761, ci=0.0431021730901373
+- Spectral shooting_accuracy, M=1.8: reference run(s)=['supersonic_M180__supersonic_shooting__shooting_accuracy__3fe75b9d98f0'].
+- Spectral shooting_box, M=1.8: reference run(s)=['supersonic_M180__supersonic_shooting__shooting_box__4088df6303d7'].
+- Spectral shooting_accuracy, M=1.9: reference run(s)=['supersonic_M190__supersonic_shooting__shooting_accuracy__30bfafd55e43'].
+- Spectral shooting_box, M=1.9: reference run(s)=['supersonic_M190__supersonic_shooting__shooting_box__bdbedb30ed32'].
+
+UPPER-BOUND POLICY
+------------------
+- Eigenvalue differences <= 1e-14 are reported and plotted as upper bounds <1e-14, not as measured values.
+
+NUMERICAL DIAGNOSTICS
+---------------------
+- Canonical max|u|=5.476407502190063 at y=0.1000000000000014; u=2.465542676588479+4.890003930465141i.
+- Canonical mode contains no duplicate y coordinates; local spacings around max|u| are (0.024999999999998593, 0.024999999999998607).
+- rho=M^2 p relative L2=1.381576e-16; relative Linf=3.466732e-16.
+- left asymptotic fit y=[-1074.87886, -540.191449], n=156, kappa_theory=0.012861151314, kappa_fit=0.012861151314, relative_difference=3.142725e-14.
+- right asymptotic fit y=[99.9579843, 197.784169], n=187, kappa_theory=-0.0702394742486, kappa_fit=-0.0702394742486, relative_difference=2.805610e-14.
+- Reconstruction p_y=(kappa+i q)p: relative L2=9.552742e-03, relative Linf=9.127758e-02, n=3561.
+- Reconstruction rho=M^2 p: relative L2=1.369281e-16, relative Linf=3.466732e-16, n=3561.
+- Reconstruction v=i p_y/[alpha(U-c)]: relative L2=9.211857e-03, relative Linf=9.086229e-02, n=3561.
+- Reconstruction u=-p/(U-c)+i Uprime v/[alpha(U-c)]: relative L2=5.143872e-16, relative Linf=1.946192e-15, n=3561.
+- Eigenvalue delta_cr resolved range (>1e-14): (3.435974282872678e-10, 5.153961701864773e-10); upper-bound rows=18.
+- Eigenvalue delta_ci resolved range (>1e-14): (1.7265768016694327e-09, 2.319282401547218e-09); upper-bound rows=18.
+- Modal core_relative_L2_p range: (0.0, 0.5523248241111627).
+- Modal tail_contribution_p range: (0.0, 1.3584956912365568e-05).
+- Modal phase_mismatch_p range: (0.0, 0.16637101257779374).
+
+WARNINGS / UNAVAILABLE PANELS
+-----------------------------
+- Asset 4 matching-position panel not computable: all validated M=1.8/M=1.9 rows have matching_y=[1.0].
+
+OUTPUT FILES
+------------
+- article/figures/Fig_supersonic_representative_mode_M140_a018.pdf
+- article/figures/Fig_supersonic_representative_mode_M140_a018.png
+- article/tables/table_Tab_supersonic_modal_reconstruction_residuals_M140_a018.csv
+- article/tables/table_Tab_supersonic_asymptotic_decay_M140_a018.csv
+- article/figures/Fig_supersonic_modal_reconstruction_residuals_M140_a018.pdf
+- article/figures/Fig_supersonic_modal_reconstruction_residuals_M140_a018.png
+- article/figures/Fig_supersonic_eigenvalue_convergence.pdf
+- article/figures/Fig_supersonic_eigenvalue_convergence.png
+- article/tables/table_Tab_supersonic_eigenvalue_convergence.csv
+- article/figures/Fig_supersonic_box_and_matching_robustness.pdf
+- article/figures/Fig_supersonic_box_and_matching_robustness.png
+- article/tables/table_Tab_supersonic_box_and_matching_robustness.csv
+- article/tables/table_Tab_supersonic_core_tail_phase_convergence.csv
+- article/figures/Fig_supersonic_core_tail_phase_convergence.pdf
+- article/figures/Fig_supersonic_core_tail_phase_convergence.png

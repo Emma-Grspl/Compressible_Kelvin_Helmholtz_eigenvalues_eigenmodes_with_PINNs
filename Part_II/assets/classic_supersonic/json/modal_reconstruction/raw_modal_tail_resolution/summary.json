@@ -1,0 +1,7 @@
+{
+  "n_points":95,
+  "n_flagged":66,
+  "metrics_csv":"classic_supersonic\/reproducibility\/results\/highM_gt15_audit\/raw_modal_tail_resolution\/highM_tail_resolution_metrics.csv",
+  "worst_csv":"classic_supersonic\/reproducibility\/results\/highM_gt15_audit\/raw_modal_tail_resolution\/highM_tail_resolution_worst_points.csv",
+  "review_pdf":"classic_supersonic\/reproducibility\/results\/highM_gt15_audit\/raw_modal_tail_resolution\/highM_tail_resolution_review.pdf"
+}

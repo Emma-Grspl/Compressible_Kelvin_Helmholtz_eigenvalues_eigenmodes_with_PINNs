@@ -1,0 +1,85 @@
+====================================================================================================
+PHASE 8 — INPUT FILES
+====================================================================================================
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/basin_T401_failure/basin_0000_0097.csv: 97 rows
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/basin_T401_failure/basin_0097_0194.csv: 97 rows
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/basin_T401_failure/basin_0194_0291.csv: 97 rows
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/basin_T401_failure/basin_0291_0388.csv: 97 rows
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/basin_T401_failure/basin_0388_0485.csv: 97 rows
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/basin_T401_failure/basin_0485_0582.csv: 97 rows
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/basin_T401_failure/basin_0582_0679.csv: 97 rows
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/basin_T401_failure/basin_0679_0775.csv: 96 rows
+
+====================================================================================================
+PHASE 8 — GRID INTEGRITY
+====================================================================================================
+unique centers = 775
+unique cr0 = 25
+unique ci0 = 31
+grid = 25 x 31 = 775
+
+====================================================================================================
+PHASE 8 — OUTCOMES
+====================================================================================================
+technical success = 775 / 775
+target recovery   = 35 / 775
+
+====================================================================================================
+PHASE 8 — PINN SEED LOCATION
+====================================================================================================
+historical PINN seed ~ (0.026089, 0.115581)
+           cr0            ci0       shoot_cr       shoot_ci  technical_success_norm   target_error  failure_branch_error  target_recovery_recomputed worker_class  distance_to_pinn_seed  total_mismatch
+2.50000000e-02 1.14000000e-01 0.00000000e+00 1.02062500e-01                    True 9.77847245e-02        2.56500000e-06                       False  UNAVAILABLE         1.91976092e-03  5.15854156e-08
+
+====================================================================================================
+PHASE 8 — TARGET BASIN EXTENT
+====================================================================================================
+cr0 min/max = 0.0 0.03
+ci0 min/max = 0.186 0.21
+target fraction = 0.045161
+
+====================================================================================================
+PHASE 8 SUMMARY
+====================================================================================================
+{
+  "coordinate": {
+    "Mach": 1.15,
+    "alpha": 0.06
+  },
+  "grid": {
+    "n": 775,
+    "n_cr": 25,
+    "n_ci": 31,
+    "cr_min": 0.0,
+    "cr_max": 0.12,
+    "ci_min": 0.06,
+    "ci_max": 0.24
+  },
+  "technical_success": {
+    "n": 775,
+    "fraction": 1.0
+  },
+  "target_recovery": {
+    "n": 35,
+    "fraction": 0.04516129032258064
+  },
+  "target_error": {
+    "median": 0.07926939964057184,
+    "p95": 0.12645148443310109,
+    "min": 1.7338515903818274e-06
+  },
+  "historical_seed": {
+    "pinn_cr": 0.026089,
+    "pinn_ci": 0.115581
+  },
+  "historical_target": {
+    "cr": -2.549736936302885e-09,
+    "ci": 0.1998472244836177
+  },
+  "historical_failure_solution": {
+    "cr": 0.0,
+    "ci": 0.102065065
+  }
+}
+
+WROTE: assets/pinn_supersonic/atlas2d_v1_continuousM/N76/t401_failure_basin_analysis

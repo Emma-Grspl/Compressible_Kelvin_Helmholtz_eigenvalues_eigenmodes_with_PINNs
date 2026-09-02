@@ -1,0 +1,39 @@
+\begin{table*}[t]
+\centering
+\caption{
+Multi-seed ablation of the physics-informed terms at fixed $N=76$
+spectral-anchor information. Three independent realizations are reported
+for each condition. Direct errors refer to the neural spectral prediction
+before classical correction; corrected errors are evaluated after
+PINN-seeded Riccati shooting. Technical convergence is reported over all
+64 validation coordinates. Target-branch recovery is reported over the
+63 non-ambiguous coordinates after excluding the predeclared multibranch
+case. The aggregate rows report the mean $\pm$ sample standard deviation
+over the three seeds.
+}
+\label{tab:multiseed_physics_anchors_ablation}
+\small
+\setlength{\tabcolsep}{4.0pt}
+\begin{tabular}{llcccccc}
+\toprule
+Condition
+& Seed
+& Direct mean
+& Direct $P_{95}$
+& Corrected median
+& Corrected $P_{95}$
+& Technical
+& Target recovery \\
+\midrule
+Physics-informed & 1 & 8.765e-03 & 2.459e-02 & 3.502e-06 & 7.257e-06 & 64/64 & 63/63 \\
+Physics-informed & 2 & 8.768e-03 & 3.102e-02 & 3.368e-06 & 8.485e-06 & 64/64 & 63/63 \\
+Physics-informed & 3 & 8.732e-03 & 2.836e-02 & 3.255e-06 & 7.436e-06 & 64/64 & 63/63 \\
+\textbf{Physics-informed} & \textbf{Mean $\pm$ SD} & $8.755e-03 \pm 2.014e-05$ & $2.799e-02 \pm 3.230e-03$ & $3.375e-06 \pm 1.238e-07$ & $7.726e-06 \pm 6.632e-07$ & \textbf{192/192} & \textbf{189/189} \\
+\midrule
+Anchors-only & 1 & 8.801e-03 & 2.446e-02 & 3.702e-06 & 7.295e-06 & 64/64 & 63/63 \\
+Anchors-only & 2 & 8.682e-03 & 3.104e-02 & 3.283e-06 & 9.658e-06 & 64/64 & 63/63 \\
+Anchors-only & 3 & 8.864e-03 & 2.832e-02 & 3.496e-06 & 7.931e-06 & 64/64 & 63/63 \\
+\textbf{Anchors-only} & \textbf{Mean $\pm$ SD} & $8.782e-03 \pm 9.278e-05$ & $2.794e-02 \pm 3.304e-03$ & $3.494e-06 \pm 2.097e-07$ & $8.294e-06 \pm 1.223e-06$ & \textbf{192/192} & \textbf{189/189} \\
+\bottomrule
+\end{tabular}
+\end{table*}

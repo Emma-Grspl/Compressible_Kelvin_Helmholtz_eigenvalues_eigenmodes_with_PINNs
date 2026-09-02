@@ -1,0 +1,11 @@
+matplotlib
+numpy
+pandas
+Pillow
+pyarrow
+PyPDF2
+pypdf
+pytest
+PyYAML
+scipy
+torch

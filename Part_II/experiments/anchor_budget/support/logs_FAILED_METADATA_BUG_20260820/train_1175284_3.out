@@ -1,0 +1,146 @@
+====================================================================================================
+SUPERSONIC ATLAS2D V1 — N48
+====================================================================================================
+job          = 1175301
+array task   = 3
+chart        = C10
+config       = configs/pinn_supersonic/atlas2d_v1_continuousM/N48/C10.json
+output       = assets/pinn_supersonic/atlas2d_v1_continuousM/N48/runs/C10
+node         = r9i0n0
+start        = Thu Aug 20 11:49:41 AM CEST 2026
+====================================================================================================
+train Mach: 1.15 1.20 1.25 1.35 1.40 1.45
+validation Mach: 
+test Mach (sealed): 
+[spectral_prefit] 1/2000 M=1.35 loss=5.418636e+00
+[spectral_prefit] 100/2000 M=1.20 loss=3.833898e-03
+[spectral_prefit] 200/2000 M=1.40 loss=4.861913e-03
+[spectral_prefit] 300/2000 M=1.35 loss=2.836127e-02
+[spectral_prefit] 400/2000 M=1.25 loss=6.356522e-02
+[spectral_prefit] 500/2000 M=1.15 loss=1.887281e-03
+[spectral_prefit] 600/2000 M=1.15 loss=5.253507e-04
+[spectral_prefit] 700/2000 M=1.35 loss=4.863061e-04
+[spectral_prefit] 800/2000 M=1.25 loss=2.627650e-02
+[spectral_prefit] 900/2000 M=1.25 loss=2.056794e-02
+[spectral_prefit] 1000/2000 M=1.35 loss=2.670982e-05
+[spectral_prefit] 1100/2000 M=1.35 loss=2.872949e-05
+[spectral_prefit] 1200/2000 M=1.45 loss=4.646135e-04
+[spectral_prefit] 1300/2000 M=1.20 loss=7.716909e-04
+[spectral_prefit] 1400/2000 M=1.20 loss=1.279257e-03
+[spectral_prefit] 1500/2000 M=1.35 loss=1.384342e-05
+[spectral_prefit] 1600/2000 M=1.35 loss=7.819055e-06
+[spectral_prefit] 1700/2000 M=1.40 loss=9.443968e-04
+[spectral_prefit] 1800/2000 M=1.35 loss=6.529277e-06
+[spectral_prefit] 1900/2000 M=1.20 loss=6.648559e-05
+[spectral_prefit] 2000/2000 M=1.35 loss=2.539888e-06
+[modal_frozen] 1/4000 M=1.16 loss=9.049523e+00 rk=8.960e-02 rq=8.072e-02
+[modal_frozen] 100/4000 M=1.16 loss=1.949517e-01 rk=3.331e-02 rq=3.597e-02
+[modal_frozen] 200/4000 M=1.27 loss=7.106847e-02 rk=1.194e-02 rq=1.315e-02
+[modal_frozen] 300/4000 M=1.27 loss=6.186540e-02 rk=7.159e-03 rq=7.254e-03
+[modal_frozen] 400/4000 M=1.37 loss=4.663710e-02 rk=5.143e-03 rq=6.255e-03
+[modal_frozen] 500/4000 M=1.43 loss=3.350117e-02 rk=6.982e-03 rq=6.722e-03
+[modal_frozen] 600/4000 M=1.21 loss=3.932703e-02 rk=3.864e-03 rq=4.300e-03
+[modal_frozen] 700/4000 M=1.21 loss=2.196475e-02 rk=3.482e-03 rq=3.989e-03
+[modal_frozen] 800/4000 M=1.15 loss=2.718665e-01 rk=6.848e-03 rq=7.415e-03
+[modal_frozen] 900/4000 M=1.32 loss=3.323708e-02 rk=2.429e-03 rq=2.838e-03
+[modal_frozen] 1000/4000 M=1.33 loss=7.927178e-03 rk=1.861e-03 rq=2.100e-03
+[modal_frozen] 1100/4000 M=1.37 loss=1.540595e-02 rk=1.704e-03 rq=1.695e-03
+[modal_frozen] 1200/4000 M=1.16 loss=1.208823e-02 rk=2.842e-03 rq=3.214e-03
+[modal_frozen] 1300/4000 M=1.39 loss=7.251384e-03 rk=1.476e-03 rq=1.544e-03
+[modal_frozen] 1400/4000 M=1.33 loss=5.730441e-03 rk=1.162e-03 rq=1.249e-03
+[modal_frozen] 1500/4000 M=1.39 loss=8.860834e-03 rk=1.113e-03 rq=1.067e-03
+[modal_frozen] 1600/4000 M=1.27 loss=5.011969e-03 rk=8.874e-04 rq=9.449e-04
+[modal_frozen] 1700/4000 M=1.25 loss=4.248228e-03 rk=7.856e-04 rq=1.039e-03
+[modal_frozen] 1800/4000 M=1.32 loss=1.819565e-02 rk=8.587e-04 rq=9.100e-04
+[modal_frozen] 1900/4000 M=1.26 loss=2.233906e-02 rk=7.692e-04 rq=1.321e-03
+[modal_frozen] 2000/4000 M=1.39 loss=3.067180e-02 rk=9.796e-04 rq=9.889e-04
+[modal_frozen] 2100/4000 M=1.30 loss=6.653643e-03 rk=6.693e-04 rq=8.598e-04
+[modal_frozen] 2200/4000 M=1.36 loss=5.075763e-03 rk=6.943e-04 rq=7.349e-04
+[modal_frozen] 2300/4000 M=1.30 loss=2.977539e-03 rk=4.423e-04 rq=5.463e-04
+[modal_frozen] 2400/4000 M=1.40 loss=2.923127e-03 rk=6.356e-04 rq=6.779e-04
+[modal_frozen] 2500/4000 M=1.21 loss=2.096470e-02 rk=5.879e-04 rq=5.773e-04
+[modal_frozen] 2600/4000 M=1.35 loss=5.877481e-03 rk=5.651e-04 rq=6.556e-04
+[modal_frozen] 2700/4000 M=1.35 loss=9.281871e-02 rk=7.451e-04 rq=6.541e-04
+[modal_frozen] 2800/4000 M=1.22 loss=1.503125e-02 rk=7.571e-04 rq=8.359e-04
+[modal_frozen] 2900/4000 M=1.27 loss=3.363293e-03 rk=4.913e-04 rq=5.220e-04
+[modal_frozen] 3000/4000 M=1.35 loss=4.099609e-03 rk=4.400e-04 rq=5.230e-04
+[modal_frozen] 3100/4000 M=1.41 loss=2.274433e-03 rk=4.826e-04 rq=4.484e-04
+[modal_frozen] 3200/4000 M=1.26 loss=2.408061e-03 rk=3.380e-04 rq=4.017e-04
+[modal_frozen] 3300/4000 M=1.39 loss=1.655532e-03 rk=3.295e-04 rq=3.579e-04
+[modal_frozen] 3400/4000 M=1.31 loss=2.523881e-03 rk=3.266e-04 rq=3.444e-04
+[modal_frozen] 3500/4000 M=1.38 loss=1.609617e-03 rk=3.029e-04 rq=2.725e-04
+[modal_frozen] 3600/4000 M=1.44 loss=4.145460e-03 rk=7.947e-04 rq=6.906e-04
+[modal_frozen] 3700/4000 M=1.43 loss=7.178109e-03 rk=6.409e-04 rq=6.744e-04
+[modal_frozen] 3800/4000 M=1.20 loss=5.414505e-03 rk=3.228e-04 rq=3.843e-04
+[modal_frozen] 3900/4000 M=1.28 loss=5.665615e-03 rk=3.048e-04 rq=2.757e-04
+[modal_frozen] 4000/4000 M=1.20 loss=4.969380e-03 rk=2.832e-04 rq=4.063e-04
+[joint] 1/4000 Mphys=1.241 Manchor=1.25 loss=1.036351e-01 spec=1.975e-03
+[joint] 100/4000 Mphys=1.299 Manchor=1.15 loss=5.701596e-02 spec=1.077e-03
+[joint] 200/4000 Mphys=1.232 Manchor=1.35 loss=2.570631e-02 spec=4.747e-04
+[joint] 300/4000 Mphys=1.242 Manchor=1.35 loss=3.595854e-03 spec=4.543e-05
+[joint] 400/4000 Mphys=1.415 Manchor=1.40 loss=6.522322e-02 spec=1.260e-03
+[joint] 500/4000 Mphys=1.314 Manchor=1.40 loss=1.246070e-01 spec=2.243e-03
+[joint] 600/4000 Mphys=1.379 Manchor=1.40 loss=1.623349e-01 spec=3.203e-03
+[joint] 700/4000 Mphys=1.393 Manchor=1.15 loss=3.777912e-03 spec=4.873e-05
+[joint] 800/4000 Mphys=1.280 Manchor=1.15 loss=2.279221e-03 spec=4.766e-08
+[joint] 900/4000 Mphys=1.173 Manchor=1.15 loss=7.145733e-03 spec=3.305e-06
+[joint] 1000/4000 Mphys=1.358 Manchor=1.45 loss=2.736178e-01 spec=5.438e-03
+[joint] 1100/4000 Mphys=1.272 Manchor=1.40 loss=1.531629e-03 spec=1.934e-06
+[joint] 1200/4000 Mphys=1.186 Manchor=1.20 loss=2.505143e-03 spec=1.251e-05
+[joint] 1300/4000 Mphys=1.389 Manchor=1.15 loss=3.268724e-03 spec=2.602e-05
+[joint] 1400/4000 Mphys=1.445 Manchor=1.35 loss=7.291244e-03 spec=8.034e-05
+[joint] 1500/4000 Mphys=1.222 Manchor=1.25 loss=1.862869e-03 spec=6.118e-06
+[joint] 1600/4000 Mphys=1.258 Manchor=1.45 loss=1.251477e-03 spec=9.701e-07
+[joint] 1700/4000 Mphys=1.295 Manchor=1.45 loss=4.245829e-03 spec=1.971e-06
+[joint] 1800/4000 Mphys=1.170 Manchor=1.25 loss=1.727298e-03 spec=6.213e-06
+[joint] 1900/4000 Mphys=1.430 Manchor=1.25 loss=7.805592e-03 spec=1.057e-04
+[joint] 2000/4000 Mphys=1.180 Manchor=1.45 loss=3.313354e-03 spec=1.814e-05
+[joint] 2100/4000 Mphys=1.437 Manchor=1.20 loss=1.246120e-01 spec=2.464e-03
+[joint] 2200/4000 Mphys=1.346 Manchor=1.20 loss=6.753531e-01 spec=1.348e-02
+[joint] 2300/4000 Mphys=1.211 Manchor=1.35 loss=1.303113e-03 spec=7.329e-06
+[joint] 2400/4000 Mphys=1.344 Manchor=1.35 loss=7.922228e-03 spec=4.598e-05
+[joint] 2500/4000 Mphys=1.265 Manchor=1.25 loss=1.338326e-02 spec=9.676e-05
+[joint] 2600/4000 Mphys=1.215 Manchor=1.25 loss=2.135326e-03 spec=1.974e-05
+[joint] 2700/4000 Mphys=1.208 Manchor=1.35 loss=6.400508e-04 spec=5.049e-07
+[joint] 2800/4000 Mphys=1.409 Manchor=1.20 loss=4.807656e-04 spec=7.029e-08
+[joint] 2900/4000 Mphys=1.411 Manchor=1.15 loss=5.364752e-03 spec=4.592e-08
+[joint] 3000/4000 Mphys=1.307 Manchor=1.35 loss=1.022429e-03 spec=6.686e-08
+[joint] 3100/4000 Mphys=1.220 Manchor=1.40 loss=5.101974e-04 spec=8.138e-09
+[joint] 3200/4000 Mphys=1.164 Manchor=1.25 loss=1.061759e-03 spec=5.076e-08
+[joint] 3300/4000 Mphys=1.159 Manchor=1.40 loss=1.176634e-03 spec=2.781e-09
+[joint] 3400/4000 Mphys=1.446 Manchor=1.25 loss=1.345639e-02 spec=2.646e-09
+[joint] 3500/4000 Mphys=1.283 Manchor=1.45 loss=1.013245e-03 spec=8.924e-09
+[joint] 3600/4000 Mphys=1.257 Manchor=1.20 loss=2.684218e-03 spec=2.304e-07
+[joint] 3700/4000 Mphys=1.186 Manchor=1.40 loss=1.028070e-03 spec=6.912e-06
+[joint] 3800/4000 Mphys=1.436 Manchor=1.40 loss=2.752886e-03 spec=7.266e-07
+[joint] 3900/4000 Mphys=1.357 Manchor=1.45 loss=5.161002e-02 spec=1.025e-03
+[joint] 4000/4000 Mphys=1.151 Manchor=1.25 loss=1.488267e-03 spec=1.150e-05
+
+================================================================================
+GLOBAL S4M0 TRAINING COMPLETE
+================================================================================
+selected: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1_continuousM/N48/runs/C10/best_joint_checkpoint.pt
+
+{
+  "train": {
+    "n": 8,
+    "n_mach": 6,
+    "cr_mae": 4.099056222475056e-06,
+    "cr_max_abs": 1.4827201005762625e-05,
+    "ci_mae": 6.534617161746067e-07,
+    "ci_max_abs": 2.3638863688724143e-06,
+    "omega_i_mae": 5.32009534360417e-08,
+    "spectral_error_mean": 4.409775921929937e-06,
+    "spectral_error_max": 1.4827207804253301e-05
+  }
+}
+
+TEST SPLIT REMAINS SEALED.
+
+output: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1_continuousM/N48/runs/C10
+
+====================================================================================================
+FINISHED
+chart = C10
+end   = Thu Aug 20 11:58:22 AM CEST 2026
+====================================================================================================

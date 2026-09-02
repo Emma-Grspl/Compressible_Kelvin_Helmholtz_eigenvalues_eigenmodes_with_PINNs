@@ -1,0 +1,32 @@
+Loading working solver modules...
+
+==============================================================================================================
+[01/01] id=00 C00 M=1.050 alpha=0.105
+PINN seed = (0.00943872, 0.05187592)
+PINN validation error = 1.225455e-02
+  GEP...
+    status=COMPLETED err=6.027549e-02
+  shooting multistart...
+    success=True/True err=2.047468e-06 mismatch=3.168e-07
+  Powell...
+    optimizer_success=False err=1.013687e-04 mismatch=1.567e-05
+
+==================================================================================================================================
+FINAL CORRECTOR SUMMARY
+==================================================================================================================================
+method  n  n_completed   mean_error  median_error    p95_error    max_error  n_le_1e-4  n_le_5e-4  n_le_1e-3  n_le_5e-3  n_le_1e-2  mean_improvement_factor  median_improvement_factor  n_improved  n_worsened  mean_seconds
+   gep  1            1 6.027549e-02  6.027549e-02 6.027549e-02 6.027549e-02          0          0          0          0          0             2.033091e-01               2.033091e-01           0           1  8.920619e+02
+ shoot  1            1 2.047468e-06  2.047468e-06 2.047468e-06 2.047468e-06          1          1          1          1          1             5.985221e+03               5.985221e+03           1           0  2.760210e+02
+powell  1            1 1.013687e-04  1.013687e-04 1.013687e-04 1.013687e-04          0          1          1          1          1             1.208909e+02               1.208909e+02           1           0  1.438674e+01
+
+==================================================================================================================================
+WORST PINN POINTS AFTER CORRECTION
+==================================================================================================================================
+ benchmark_id atlas_chart         Mach        alpha  pinn_spectral_error  gep_spectral_error  shoot_spectral_error  powell_spectral_error gep_status shoot_status  shoot_spectral_success  shoot_mode_success  powell_optimizer_success
+            0         C00 1.050000e+00 1.050000e-01         1.225455e-02        6.027549e-02          2.047468e-06           1.013687e-04  COMPLETED    COMPLETED                    True                True                     False
+
+written:
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1/N76/corrector_benchmark/corrector_benchmark_64.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1/N76/corrector_benchmark/corrector_summary.csv
+
+CORRECTOR_SMOKE_FINISHED

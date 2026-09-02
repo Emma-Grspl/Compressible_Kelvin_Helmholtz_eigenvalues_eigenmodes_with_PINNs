@@ -1,0 +1,64 @@
+===== DENSE MODAL AUDIT S4 VS S4M4 =====
+job       : 337987
+job name  : sup_M110_audit
+node      : r6i0n3
+pilot     : assets/pinn_supersonic/pilots/local_M110_sparse_v1
+tag       : M110
+Mach      : 1.10
+output    : assets/pinn_supersonic/pilots/local_M110_sparse_v1/runs/dense_modal_audit_S4_vs_S4M4
+start     : Tue Jul 28 01:52:35 PM CEST 2026
+
+Tue Jul 28 13:52:35 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.03             Driver Version: 580.159.03     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-SXM2-16GB           On  |   00000000:88:00.0 Off |                    0 |
+| N/A   44C    P0             46W /  300W |       0MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[read] chunk=1 selected=201453
+
+REFERENCE
+  rows : 201453
+  modes: 53
+  alpha: 0.09 0.345
+
+[S4] mode=1/53 alpha=0.090000 p_rel=1.175e+00 overlap=1.404e-01
+[S4] mode=10/53 alpha=0.135000 p_rel=1.172e+00 overlap=1.891e-01
+[S4] mode=20/53 alpha=0.185000 p_rel=1.422e+00 overlap=3.316e-01
+[S4] mode=30/53 alpha=0.230000 p_rel=1.243e+00 overlap=2.575e-01
+[S4] mode=40/53 alpha=0.280000 p_rel=1.060e+00 overlap=2.221e-01
+[S4] mode=50/53 alpha=0.330000 p_rel=9.756e-01 overlap=2.622e-01
+[S4] mode=53/53 alpha=0.345000 p_rel=9.899e-01 overlap=2.848e-01
+[S4M2] mode=1/53 alpha=0.090000 p_rel=8.310e-02 overlap=2.778e-03
+[S4M2] mode=10/53 alpha=0.135000 p_rel=4.743e-02 overlap=6.589e-04
+[S4M2] mode=20/53 alpha=0.185000 p_rel=1.830e-02 overlap=9.782e-05
+[S4M2] mode=30/53 alpha=0.230000 p_rel=1.129e-01 overlap=3.475e-03
+[S4M2] mode=40/53 alpha=0.280000 p_rel=5.756e-02 overlap=7.399e-04
+[S4M2] mode=50/53 alpha=0.330000 p_rel=7.616e-02 overlap=1.073e-03
+[S4M2] mode=53/53 alpha=0.345000 p_rel=2.289e-01 overlap=9.345e-03
+
+DENSE MODAL SUMMARY
+model            subset  n_modes  kappa_nrmse_mean  q_nrmse_mean  log_amp_rmse_mean  pressure_rel_l2_mean  pressure_overlap_error_mean
+   S4               all       53          0.999407      0.354947           2.162488              1.172556                     0.240532
+   S4        off_anchor       49          0.999378      0.357435           2.154470              1.174650                     0.241077
+   S4 S4M2_modal_anchor        4          0.999755      0.324468           2.260712              1.146910                     0.233853
+ S4M2               all       53          0.045766      0.038271           0.084335              0.059423                     0.001255
+ S4M2        off_anchor       49          0.048758      0.041165           0.085143              0.063900                     0.001357
+ S4M2 S4M2_modal_anchor        4          0.009107      0.002810           0.074438              0.004571                     0.000010
+
+LOCAL SUPERSONIC DENSE MODAL AUDIT: COMPLETED
+
+end: Tue Jul 28 01:53:11 PM CEST 2026

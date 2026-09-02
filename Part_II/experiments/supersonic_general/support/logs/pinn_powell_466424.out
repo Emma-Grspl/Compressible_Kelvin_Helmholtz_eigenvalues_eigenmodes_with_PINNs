@@ -1,0 +1,75 @@
+START=Fri Jul 31 09:49:47 AM CEST 2026
+[01/45] alpha=0.05000 |dc_pinn|=2.261e-02 |dc_corr|=3.658e-04 mismatch=1.851e-05 nfev=80 time=15.87s
+[02/45] alpha=0.05500 |dc_pinn|=1.548e-02 |dc_corr|=1.648e-08 mismatch=9.822e-10 nfev=80 time=16.03s
+[03/45] alpha=0.06000 |dc_pinn|=9.374e-03 |dc_corr|=1.798e-08 mismatch=1.218e-09 nfev=80 time=16.14s
+[04/45] alpha=0.06500 |dc_pinn|=4.234e-03 |dc_corr|=2.634e-08 mismatch=2.016e-09 nfev=80 time=16.34s
+[05/45] alpha=0.07000 |dc_pinn|=2.030e-06 |dc_corr|=1.870e-08 mismatch=1.586e-09 nfev=74 time=15.17s
+[06/45] alpha=0.07500 |dc_pinn|=3.409e-03 |dc_corr|=1.462e-06 mismatch=1.382e-07 nfev=80 time=16.53s
+[07/45] alpha=0.08000 |dc_pinn|=6.064e-03 |dc_corr|=4.279e-07 mismatch=4.469e-08 nfev=80 time=16.73s
+[08/45] alpha=0.08500 |dc_pinn|=8.038e-03 |dc_corr|=7.164e-06 mismatch=8.194e-07 nfev=80 time=17.15s
+[09/45] alpha=0.09000 |dc_pinn|=9.394e-03 |dc_corr|=1.403e-05 mismatch=1.748e-06 nfev=80 time=17.12s
+[10/45] alpha=0.09500 |dc_pinn|=1.018e-02 |dc_corr|=1.584e-05 mismatch=2.139e-06 nfev=80 time=17.37s
+[11/45] alpha=0.10000 |dc_pinn|=1.046e-02 |dc_corr|=1.079e-05 mismatch=1.571e-06 nfev=80 time=17.54s
+[12/45] alpha=0.10500 |dc_pinn|=1.026e-02 |dc_corr|=1.019e-06 mismatch=1.594e-07 nfev=80 time=17.57s
+[13/45] alpha=0.11000 |dc_pinn|=9.633e-03 |dc_corr|=9.305e-06 mismatch=1.555e-06 nfev=80 time=17.76s
+[14/45] alpha=0.11500 |dc_pinn|=8.630e-03 |dc_corr|=1.829e-08 mismatch=3.290e-09 nfev=80 time=18.05s
+[15/45] alpha=0.12000 |dc_pinn|=7.302e-03 |dc_corr|=1.146e-08 mismatch=2.134e-09 nfev=80 time=17.92s
+[16/45] alpha=0.12500 |dc_pinn|=5.708e-03 |dc_corr|=8.164e-09 mismatch=1.784e-09 nfev=80 time=17.83s
+[17/45] alpha=0.13000 |dc_pinn|=3.910e-03 |dc_corr|=2.205e-08 mismatch=4.652e-09 nfev=80 time=18.45s
+[18/45] alpha=0.13500 |dc_pinn|=1.982e-03 |dc_corr|=1.163e-08 mismatch=2.561e-09 nfev=80 time=18.78s
+[19/45] alpha=0.14000 |dc_pinn|=1.715e-06 |dc_corr|=1.863e-08 mismatch=4.288e-09 nfev=80 time=18.83s
+[20/45] alpha=0.14500 |dc_pinn|=1.947e-03 |dc_corr|=1.839e-08 mismatch=4.424e-09 nfev=80 time=18.61s
+[21/45] alpha=0.15000 |dc_pinn|=3.771e-03 |dc_corr|=2.211e-08 mismatch=5.617e-09 nfev=80 time=18.61s
+[22/45] alpha=0.15500 |dc_pinn|=5.380e-03 |dc_corr|=9.730e-09 mismatch=2.573e-09 nfev=80 time=18.88s
+[23/45] alpha=0.16000 |dc_pinn|=6.687e-03 |dc_corr|=2.175e-08 mismatch=5.983e-09 nfev=80 time=19.35s
+[24/45] alpha=0.16500 |dc_pinn|=7.612e-03 |dc_corr|=1.662e-08 mismatch=4.793e-09 nfev=80 time=19.70s
+[25/45] alpha=0.17000 |dc_pinn|=8.092e-03 |dc_corr|=1.905e-08 mismatch=5.639e-09 nfev=80 time=20.05s
+[26/45] alpha=0.17500 |dc_pinn|=8.089e-03 |dc_corr|=1.344e-08 mismatch=4.102e-09 nfev=80 time=20.41s
+[27/45] alpha=0.18000 |dc_pinn|=7.592e-03 |dc_corr|=4.072e-09 mismatch=1.303e-09 nfev=80 time=20.66s
+[28/45] alpha=0.18500 |dc_pinn|=6.629e-03 |dc_corr|=1.662e-08 mismatch=5.350e-09 nfev=80 time=21.12s
+[29/45] alpha=0.19000 |dc_pinn|=5.267e-03 |dc_corr|=1.120e-08 mismatch=3.721e-09 nfev=80 time=22.28s
+[30/45] alpha=0.19500 |dc_pinn|=3.613e-03 |dc_corr|=1.259e-08 mismatch=4.236e-09 nfev=80 time=21.99s
+[31/45] alpha=0.20000 |dc_pinn|=1.804e-03 |dc_corr|=1.372e-08 mismatch=4.777e-09 nfev=80 time=21.71s
+[32/45] alpha=0.20500 |dc_pinn|=6.147e-06 |dc_corr|=8.854e-09 mismatch=3.173e-09 nfev=80 time=23.15s
+[33/45] alpha=0.21000 |dc_pinn|=1.655e-03 |dc_corr|=1.463e-08 mismatch=5.364e-09 nfev=80 time=23.53s
+[34/45] alpha=0.21500 |dc_pinn|=3.017e-03 |dc_corr|=1.828e-08 mismatch=6.933e-09 nfev=80 time=23.21s
+[35/45] alpha=0.22000 |dc_pinn|=3.985e-03 |dc_corr|=1.731e-08 mismatch=6.627e-09 nfev=80 time=24.39s
+[36/45] alpha=0.22500 |dc_pinn|=4.492e-03 |dc_corr|=1.207e-08 mismatch=4.782e-09 nfev=80 time=24.28s
+[37/45] alpha=0.23000 |dc_pinn|=4.505e-03 |dc_corr|=1.445e-08 mismatch=5.858e-09 nfev=80 time=25.49s
+[38/45] alpha=0.23500 |dc_pinn|=4.024e-03 |dc_corr|=1.886e-08 mismatch=7.872e-09 nfev=80 time=26.00s
+[39/45] alpha=0.24000 |dc_pinn|=3.075e-03 |dc_corr|=8.278e-09 mismatch=3.335e-09 nfev=80 time=27.74s
+[40/45] alpha=0.24500 |dc_pinn|=1.712e-03 |dc_corr|=1.971e-08 mismatch=8.392e-09 nfev=80 time=27.70s
+[41/45] alpha=0.25000 |dc_pinn|=7.783e-06 |dc_corr|=1.779e-08 mismatch=7.745e-09 nfev=78 time=26.09s
+[42/45] alpha=0.25500 |dc_pinn|=1.963e-03 |dc_corr|=6.772e-09 mismatch=2.392e-09 nfev=80 time=29.28s
+[43/45] alpha=0.26000 |dc_pinn|=4.115e-03 |dc_corr|=1.238e-08 mismatch=4.873e-09 nfev=80 time=29.76s
+[44/45] alpha=0.26500 |dc_pinn|=6.380e-03 |dc_corr|=9.378e-09 mismatch=3.798e-09 nfev=80 time=30.22s
+[45/45] alpha=0.27000 |dc_pinn|=8.705e-03 |dc_corr|=1.909e-06 mismatch=1.045e-08 nfev=80 time=29.86s
+
+{
+  "status": "COMPLETED",
+  "Mach": 1.5,
+  "n_requested": 45,
+  "n_successful": 45,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_powell_all/pinn_powell_spectral_results.csv",
+  "pinn_spectral_error_mean": 0.0057955390940505605,
+  "pinn_spectral_error_max": 0.022607780316684097,
+  "corrected_spectral_error_mean": 9.516927378392199e-06,
+  "corrected_spectral_error_max": 0.0003657973618690409,
+  "delta_c_from_pinn_mean": 0.005787271682508494,
+  "delta_c_from_pinn_max": 0.022272825999337876,
+  "initial_mismatch_mean": 0.0012911307174016781,
+  "initial_mismatch_max": 0.004204431937312093,
+  "corrected_mismatch_mean": 5.965636838925707e-07,
+  "corrected_mismatch_max": 1.851228643216854e-05,
+  "mismatch_reduction_mean": 295204.8404540002,
+  "mismatch_reduction_max": 1819720.8229837515,
+  "optimization_seconds_mean": 20.916966573997506,
+  "optimization_seconds_max": 30.216361274942756,
+  "nfev_reported_mean": 79.82222222222222,
+  "nfev_reported_max": 80.0
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_powell_all/pinn_powell_spectral_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_powell_all/pinn_powell_spectral_summary.json
+END=Fri Jul 31 10:05:49 AM CEST 2026

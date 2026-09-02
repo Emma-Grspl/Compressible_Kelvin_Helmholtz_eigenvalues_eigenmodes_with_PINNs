@@ -1,0 +1,46 @@
+Supersonic atlas2d continuous-M — N76 frozen baseline v1
+
+Domain:
+  Mach  = [1.00, 1.90]
+  alpha = [0.05, 0.36]
+
+Atlas:
+  12 overlapping charts
+  4 Mach bands x 3 alpha bands
+  raw coordinates; no s network input
+
+Training:
+  continuous Mach sampling for physics/PDE
+  spectral supervision only at classical anchors
+  independent deterministic initialization per chart
+  no warm-start between budgets
+
+Validation:
+  fixed V64
+  disjoint from all anchor budgets and sealed test set
+
+N76 PINN raw spectral validation:
+  mean spectral error ~8.7654e-3
+
+PINN-seeded shooting:
+  technical convergence = 64/64
+  target reference branch = 63/64
+  unique identified branch ambiguity:
+      M=1.10, alpha=0.09
+
+At that point:
+  direct shooting -> ci ~0.1092
+  PINN modal fingerprint does not distinguish the target branch
+  continuation from an N76 classical training anchor
+      (M=1.05, alpha=0.09, direction=high)
+  also continuously reaches ci ~0.1092
+
+Therefore:
+  M=1.10, alpha=0.09 is treated as a pre-identified
+  classical multibranch ambiguity and not as a budget-induced failure.
+
+Budget-selection criterion:
+  a lower budget must introduce no NEW target-branch failures
+  on the 63 V64 points successfully recovered by frozen N76.
+
+This freeze must not be modified after lower-budget experiments begin.

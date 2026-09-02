@@ -1,0 +1,9 @@
+curve_id,curve_label,family,ci_level,include_in_quantitative_comparison
+0,ci=0,ci_special,0.0,false
+1,cr=0,cr_special,,false
+2,ci_sup=0,ci_special,0.0,false
+3,ci=0.01,ci_level,0.01,true
+4,ci=0.05,ci_level,0.05,true
+5,ci=0.07,ci_level,0.07,true
+6,ci=0.10,ci_level,0.10,true
+7,ci=0.03,ci_level,0.03,true

@@ -1,0 +1,478 @@
+FILE: scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py
+
+16-import torch.nn as nn
+17-import torch.nn.functional as F
+18-
+19-ROOT_DIR = Path(__file__).resolve().parents[1]
+20-if str(ROOT_DIR) not in sys.path:
+21-    sys.path.insert(0, str(ROOT_DIR))
+22-
+23-from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver  # noqa: E402
+24:from scripts.run_kh_subsonic_riccati_lowalpha_repair import (  # noqa: E402
+25-    _maybe_bool,
+26-    _maybe_float,
+27-    _maybe_int,
+28-    evaluate_candidate,
+29-    load_warmstart_checkpoint,
+30-    prepare_warmstart_eval_run_dir,
+31-)
+32-from src.training.kh_subsonic_trainer import (  # noqa: E402
+33-    KHSubsonicTrainingConfig,
+34-    save_training_artifacts,
+35-    train_fixed_mach_subsonic_pinn,
+36-)
+37-
+38-
+39:def build_mlp(in_dim: int, out_dim: int, *, hidden_dim: int, depth: int) -> nn.Sequential:
+40-    layers: list[nn.Module] = []
+41-    current_dim = in_dim
+42-    for _ in range(depth):
+43-        layers.append(nn.Linear(current_dim, hidden_dim))
+44-        layers.append(nn.Tanh())
+45-        current_dim = hidden_dim
+46-    layers.append(nn.Linear(current_dim, out_dim))
+47-    net = nn.Sequential(*layers)
+48-    for module in net.modules():
+49-        if isinstance(module, nn.Linear):
+50-            nn.init.xavier_normal_(module.weight)
+51-            nn.init.zeros_(module.bias)
+52-    return net
+53-
+54-
+55:class GuideWindowNet(nn.Module):
+56:    def __init__(self, *, alpha_min: float, alpha_max: float, hidden_dim: int, depth: int, min_width: float):
+57-        super().__init__()
+58-        self.alpha_min = float(alpha_min)
+59-        self.alpha_max = float(alpha_max)
+60-        self.min_width = float(min_width)
+61-        self.net = build_mlp(1, 2, hidden_dim=hidden_dim, depth=depth)
+62-
+63:    def normalize_alpha(self, alpha: torch.Tensor) -> torch.Tensor:
+64-        span = max(self.alpha_max - self.alpha_min, 1.0e-8)
+65-        return 2.0 * (alpha - self.alpha_min) / span - 1.0
+66-
+67:    def forward(self, alpha: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+68-        raw = self.net(self.normalize_alpha(alpha))
+69-        mu = F.softplus(raw[:, 0:1]) + 1.0e-6
+70-        width = self.min_width + F.softplus(raw[:, 1:2])
+71-        return mu, width
+72-
+73-
+74:def set_seed(seed: int) -> None:
+75-    random.seed(seed)
+76-    np.random.seed(seed)
+77-    torch.manual_seed(seed)
+78-    if torch.cuda.is_available():
+79-        torch.cuda.manual_seed_all(seed)
+80-
+81-
+82:def smoothness_loss(values: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
+83-    grad = torch.autograd.grad(values.sum(), alpha, create_graph=True)[0]
+84-    return torch.mean(grad.pow(2))
+85-
+86-
+87:def build_reference_ci_grid(alpha_values: np.ndarray, mach: float) -> np.ndarray:
+88-    return np.asarray(
+89-        [RobustSubsonicShootingSolver(alpha=float(alpha), Mach=float(mach)).solve().ci for alpha in alpha_values],
+90-        dtype=float,
+91-    )
+92-
+93-
+94:def build_anchor_indices(n_points: int, n_anchors: int) -> np.ndarray:
+95-    if n_anchors < 2:
+96-        raise ValueError("n-guide-anchor-alpha must be at least 2.")
+97-    return np.linspace(0, n_points - 1, n_anchors, dtype=int)
+98-
+99-
+100:def train_guide(
+101-    *,
+102-    alpha_ref_t: torch.Tensor,
+103-    alpha_anchor_t: torch.Tensor,
+104-    ci_anchor_t: torch.Tensor,
+105-    alpha_min: float,
+106-    alpha_max: float,
+107-    hidden_dim: int,
+108-    depth: int,
+109-    epochs: int,
+110-    lr: float,
+111-    min_width: float,
+112-    sigma_penalty: float,
+113-    mu_smoothness: float,
+114-    width_smoothness: float,
+115-    device: torch.device,
+116-) -> tuple[GuideWindowNet, pd.DataFrame]:
+117-    guide = GuideWindowNet(
+118-        alpha_min=alpha_min,
+119-        alpha_max=alpha_max,
+120-        hidden_dim=hidden_dim,
+121-        depth=depth,
+122-        min_width=min_width,
+123-    ).to(device)
+124-    optimizer = torch.optim.Adam(guide.parameters(), lr=lr)
+125-    history: list[dict[str, float | int]] = []
+126-
+127-    for epoch in range(1, epochs + 1):
+128-        optimizer.zero_grad()
+129-        mu_anchor, width_anchor = guide(alpha_anchor_t)
+130:        loss_anchor = torch.mean((mu_anchor - ci_anchor_t).pow(2))
+131-
+132-        alpha_smooth = alpha_ref_t.detach().clone().requires_grad_(True)
+133-        mu_full, width_full = guide(alpha_smooth)
+134:        loss_mu_smooth = smoothness_loss(mu_full, alpha_smooth)
+135:        loss_width_smooth = smoothness_loss(width_full, alpha_smooth)
+136:        loss_width_penalty = torch.mean(width_full.pow(2))
+137-
+138:        loss = loss_anchor + sigma_penalty * loss_width_penalty + mu_smoothness * loss_mu_smooth + width_smoothness * loss_width_smooth
+139:        loss.backward()
+140-        optimizer.step()
+141-
+142-        if epoch == 1 or epoch % 250 == 0 or epoch == epochs:
+143-            history.append(
+144-                {
+145-                    "epoch": int(epoch),
+146:                    "loss": float(loss.item()),
+147:                    "anchor_mse": float(loss_anchor.item()),
+148-                    "width_mean": float(width_full.mean().item()),
+149:                    "mu_smoothness": float(loss_mu_smooth.item()),
+150:                    "width_smoothness": float(loss_width_smooth.item()),
+151-                }
+152-            )
+153-
+154-    return guide, pd.DataFrame(history)
+155-
+156-
+157:def plot_guide_window(
+158-    *,
+159-    output_path: Path,
+160-    alpha_ref: np.ndarray,
+161-    ci_ref: np.ndarray,
+162-    guide_mu: np.ndarray,
+163-    guide_width: np.ndarray,
+164-    anchor_alpha: np.ndarray,
+165-    anchor_ci: np.ndarray,
+166-) -> None:
+167-    low = np.clip(guide_mu - guide_width, a_min=0.0, a_max=None)
+168-    high = guide_mu + guide_width
+169-    fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
+170-    axes[0].plot(alpha_ref, ci_ref, label="Classique dense", linewidth=2.0, color="black")
+171-    axes[0].plot(alpha_ref, guide_mu, label="Guide mu", linewidth=2.0, color="#1f77b4")
+172-    axes[0].fill_between(alpha_ref, low, high, alpha=0.18, color="#1f77b4", label="Fenetre guide")
+173-    axes[0].scatter(anchor_alpha, anchor_ci, label="Ancres", color="#ff7f0e", zorder=5)
+174-    axes[0].set_xlabel(r"$\alpha$")
+175-    axes[0].set_ylabel(r"$c_i$")
+176-    axes[0].grid(alpha=0.25)
+177-    axes[0].legend()
+178-
+179-    axes[1].plot(alpha_ref, np.abs(guide_mu - ci_ref), linewidth=2.0, color="#d62728")
+180-    axes[1].set_xlabel(r"$\alpha$")
+181-    axes[1].set_ylabel(r"$| \mu - c_i^{ref} |$")
+182-    axes[1].grid(alpha=0.25)
+183-    fig.tight_layout()
+184-    fig.savefig(output_path, dpi=250, bbox_inches="tight")
+185-    plt.close(fig)
+186-
+187-
+188:def build_parser() -> argparse.ArgumentParser:
+189-    parser = argparse.ArgumentParser(
+190-        description=(
+191-            "Core-only 1D subsonic Riccati training with sparse spectral guide-window: "
+192-            "few classical ci anchors build a guide curve, then the main PINN trains "
+193-            "against the guide instead of dense classical ci supervision."
+194-        )
+195-    )
+196-    parser.add_argument("--warmstart-run-dir", type=Path, required=True)
+197-    parser.add_argument("--warmstart-checkpoint", type=Path, default=None)
+198-    parser.add_argument("--target-mach", type=float, default=None)
+199-    parser.add_argument("--output-dir", type=Path, required=True)
+200-    parser.add_argument("--skip-training", action="store_true")
+201-    parser.add_argument("--epochs", type=int, default=1800)
+202-    parser.add_argument("--checkpoint-every", type=int, default=250)
+203-    parser.add_argument("--learning-rate", type=float, default=2e-4)
+204-    parser.add_argument("--ci-branch-lr", type=float, default=5e-5)
+205-    parser.add_argument("--mode-branch-lr", type=float, default=2e-4)
+206-    parser.add_argument("--device", type=str, default="cpu")
+207-    parser.add_argument("--alpha-min", type=float, default=0.05)
+208-    parser.add_argument("--alpha-max", type=float, default=0.8)
+209-    parser.add_argument("--num-alpha-ci", type=int, default=41)
+210-    parser.add_argument("--num-alpha-modes", type=int, default=21)
+211-    parser.add_argument("--n-y-pinn", type=int, default=1001)
+212-    parser.add_argument("--y-max", type=float, default=10.0)
+213-    parser.add_argument("--y-common", type=int, default=801)
+214-    parser.add_argument("--overlay-alphas", type=float, nargs="+", default=[0.05, 0.10, 0.20, 0.35, 0.50, 0.65, 0.80])
+215-    parser.add_argument("--low-alpha-threshold", type=float, default=0.5)
+216-    parser.add_argument("--low-alpha-weight", type=float, default=8.0)
+217-    parser.add_argument("--low-alpha-sample-fraction", type=float, default=0.30)
+218-    parser.add_argument("--focus-fraction", type=float, default=0.50)
+219-    parser.add_argument("--focus-half-width", type=float, default=0.04)
+220-    parser.add_argument("--mode-error-threshold", type=float, default=0.05)
+221-    parser.add_argument("--guide-supervision-weight", type=float, default=1.0)
+222-    parser.add_argument("--guide-window-weight", type=float, default=8.0)
+223-    parser.add_argument("--q-supervision-weight", type=float, default=5.0)
+224:    parser.add_argument("--gamma-supervision-weight", type=float, default=3.0)
+225:    parser.add_argument("--riccati-anchor-weight", type=float, default=2.0)
+226:    parser.add_argument("--boundary-kappa-weight", type=float, default=5.0)
+227-    parser.add_argument("--boundary-q-weight", type=float, default=10.0)
+228-    parser.add_argument("--shooting-match-weight", type=float, default=12.0)
+229:    parser.add_argument("--center-kappa-weight", type=float, default=0.5)
+230-    parser.add_argument("--center-peak-weight", type=float, default=0.5)
+231-    parser.add_argument("--anchor-alphas", type=float, nargs="*", default=[0.05, 0.10, 0.15, 0.20, 0.30, 0.40, 0.50, 0.65, 0.80])
+232-    parser.add_argument("--q-supervision-alphas", type=float, nargs="*", default=None)
+233:    parser.add_argument("--gamma-supervision-alphas", type=float, nargs="*", default=None)
+234-    parser.add_argument("--n-guide-reference-alpha", type=int, default=81)
+235-    parser.add_argument("--n-guide-anchor-alpha", type=int, default=9)
+236-    parser.add_argument("--guide-hidden-dim", type=int, default=48)
+237-    parser.add_argument("--guide-depth", type=int, default=2)
+238-    parser.add_argument("--guide-epochs", type=int, default=3000)
+239-    parser.add_argument("--guide-lr", type=float, default=2.0e-3)
+240-    parser.add_argument("--guide-min-width", type=float, default=2.5e-3)
+241-    parser.add_argument("--guide-sigma-penalty", type=float, default=3.0e-2)
+242-    parser.add_argument("--guide-mu-smoothness", type=float, default=1.0e-2)
+243-    parser.add_argument("--guide-width-smoothness", type=float, default=1.0e-2)
+244-    parser.add_argument("--seed", type=int, default=0)
+245-    return parser
+246-
+247-
+248:def build_config(
+249-    args: argparse.Namespace,
+250-    warm_config: pd.Series,
+251-    checkpoint: Path,
+252-    guide_supervision_csv: Path,
+253-    guide_window_csv: Path,
+254-) -> KHSubsonicTrainingConfig:
+255-    q_supervision_alphas = args.q_supervision_alphas if args.q_supervision_alphas is not None else args.anchor_alphas
+256:    gamma_supervision_alphas = args.gamma_supervision_alphas if args.gamma_supervision_alphas is not None else args.anchor_alphas
+257-    target_mach = float(warm_config["mach"]) if args.target_mach is None else float(args.target_mach)
+258-    model_alpha_min = float(warm_config["alpha_min"])
+259-    model_alpha_max = float(warm_config["alpha_max"])
+260-
+261-    return KHSubsonicTrainingConfig(
+262-        mach=float(target_mach),
+263-        alpha_min=float(model_alpha_min),
+264-        alpha_max=float(model_alpha_max),
+265-        sampling_alpha_min=float(args.alpha_min),
+266-        sampling_alpha_max=float(args.alpha_max),
+267-        audit_alpha_min=float(args.alpha_min),
+268-        audit_alpha_max=float(args.alpha_max),
+269-        epochs=int(args.epochs),
+270-        learning_rate=float(args.learning_rate),
+271-        hidden_dim=int(warm_config["hidden_dim"]),
+272-        mode_hidden_dim=_maybe_int(warm_config.get("mode_hidden_dim")),
+273-        ci_hidden_dim=_maybe_int(warm_config.get("ci_hidden_dim")),
+274-        mode_depth=int(warm_config["mode_depth"]),
+275-        ci_depth=int(warm_config["ci_depth"]),
+276-        fixed_scalar_ci=_maybe_bool(warm_config.get("fixed_scalar_ci", False)),
+277-        freeze_ci=False,
+278-        activation=str(warm_config["activation"]),
+279-        fourier_features=int(warm_config.get("fourier_features", 0)),
+280-        fourier_scale=float(warm_config.get("fourier_scale", 2.0)),
+281-        initial_ci=float(warm_config.get("initial_ci", 0.2)),
+282:        mapping_scale=float(warm_config["mapping_scale"]),
+283:        trainable_mapping_scale=False,
+284-        n_interior=512,
+285-        n_boundary=64,
+286-        n_alpha_supervision=64,
+287-        n_anchor_alpha=32,
+288-        n_norm_interior=256,
+289-        n_reference_alpha=41,
+290-        n_audit_alpha=int(args.num_alpha_ci),
+291-        n_mode_audit_alpha=int(args.num_alpha_modes),
+292-        n_mode_audit_y=801,
+293-        audit_every=250,
+294-        checkpoint_every=int(args.checkpoint_every),
+295-        enable_classic_ci_supervision=False,
+296-        external_ci_supervision_csv=str(guide_supervision_csv),
+297-        ci_window_csv=str(guide_window_csv),
+298-        enable_classic_mode_audit=True,
+299-        separate_branch_optimizers=True,
+300-        detach_ci_in_mode_branch=True,
+301-        ci_branch_lr=float(args.ci_branch_lr),
+302-        mode_branch_lr=float(args.mode_branch_lr),
+303-        focus_fraction=float(args.focus_fraction),
+304-        focus_half_width=float(args.focus_half_width),
+305-        low_alpha_sample_fraction=float(args.low_alpha_sample_fraction),
+306-        low_alpha_sample_threshold=float(args.low_alpha_threshold),
+307-        neutral_fraction=0.0,
+308-        neutral_half_width=float(warm_config.get("neutral_half_width", 0.04)),
+309-        error_threshold=0.01,
+310-        mode_error_threshold=float(args.mode_error_threshold),
+311-        max_focus_points=12,
+312-        anchor_strategy=str(warm_config.get("anchor_strategy", "point")),
+313-        anchor_half_width=float(warm_config.get("anchor_half_width", 0.12)),
+314-        anchor_max_candidates=int(warm_config.get("anchor_max_candidates", 257)),
+315-        mode_center_fraction=float(warm_config.get("mode_center_fraction", 0.5)),
+316-        mode_center_half_width=float(warm_config.get("mode_center_half_width", 0.3)),
+317-        w_pde=float(warm_config.get("w_pde", 1.0)),
+318-        w_bc=float(warm_config.get("w_bc", 10.0)),
+319:        w_bc_kappa=float(warm_config.get("w_bc_kappa", 10.0)),
+320-        w_bc_q=float(warm_config.get("w_bc_q", 20.0)),
+321-        w_norm=float(warm_config.get("w_norm", 1.0)),
+322-        w_integral_norm=float(warm_config.get("w_integral_norm", 1.0)),
+323-        w_phase=float(warm_config.get("w_phase", 1.0)),
+324-        w_peak_slope=float(warm_config.get("w_peak_slope", 0.0)),
+325-        w_peak_curvature=float(warm_config.get("w_peak_curvature", 0.0)),
+326-        w_loc_center=float(warm_config.get("w_loc_center", 0.0)),
+327-        w_loc_spread=float(warm_config.get("w_loc_spread", 0.0)),
+328-        w_ci_supervision=float(args.guide_supervision_weight),
+329-        w_ci_window=float(args.guide_window_weight),
+330-        audit_ci_weight=1.0,
+331-        audit_mode_weight=8.0,
+332-        audit_env_weight=2.0,
+333-        audit_phase_weight=2.0,
+334-        audit_peak_weight=1.0,
+335-        phase_mask_fraction=float(warm_config.get("phase_mask_fraction", 0.15)),
+336-        classic_n_points=int(warm_config.get("classic_n_points", 561)),
+337:        classic_mapping_scale=float(warm_config.get("classic_mapping_scale", 3.0)),
+338-        classic_xi_max=float(warm_config.get("classic_xi_max", 0.99)),
+339-        enforce_mode_symmetry=_maybe_bool(warm_config.get("enforce_mode_symmetry", False)),
+340-        mode_representation=str(warm_config["mode_representation"]),
+341-        mode_experts=int(warm_config.get("mode_experts", 1)),
+342-        alpha_split_threshold=_maybe_float(warm_config.get("alpha_split_threshold")),
+343:        riccati_anchor_supervision=True,
+344:        riccati_anchor_n_xi=97,
+345:        riccati_anchor_every=20,
+346:        riccati_anchor_alphas=tuple(float(alpha) for alpha in args.anchor_alphas),
+347:        w_riccati_anchor=float(args.riccati_anchor_weight),
+348-        w_q_supervision=float(args.q_supervision_weight),
+349-        q_supervision_n_xi=129,
+350-        q_supervision_every=10,
+351-        q_supervision_alpha_count=len(q_supervision_alphas),
+352-        q_supervision_alphas=tuple(float(alpha) for alpha in q_supervision_alphas),
+353:        w_riccati_gamma_supervision=float(args.gamma_supervision_weight),
+354:        riccati_gamma_n_xi=129,
+355:        riccati_gamma_every=10,
+356:        riccati_gamma_alpha_count=len(gamma_supervision_alphas),
+357:        riccati_gamma_alphas=tuple(float(alpha) for alpha in gamma_supervision_alphas),
+358:        w_riccati_center_kappa=float(args.center_kappa_weight),
+359:        w_riccati_center_peak=float(args.center_peak_weight),
+360:        w_riccati_boundary_band_kappa=float(args.boundary_kappa_weight),
+361:        w_riccati_boundary_band_q=float(args.boundary_q_weight),
+362:        riccati_center_xi=0.0,
+363:        riccati_boundary_band_points=64,
+364:        riccati_boundary_band_start=0.94,
+365:        riccati_boundary_band_end=0.995,
+366:        w_riccati_shooting_match=float(args.shooting_match_weight),
+367:        riccati_shooting_steps=256,
+368:        riccati_shooting_xi_boundary=0.995,
+369-        mode_low_alpha_threshold=float(args.low_alpha_threshold),
+370-        mode_low_alpha_weight=float(args.low_alpha_weight),
+371-        mode_low_alpha_audit_fraction=0.75,
+372-        initial_model_path=str(checkpoint),
+373-        initial_model_strict=True,
+374-        output_dir=str(args.output_dir),
+375-        device=str(args.device),
+376-    )
+377-
+378-
+379:def main() -> None:
+380-    args = build_parser().parse_args()
+381-    set_seed(int(args.seed))
+382-    checkpoint = load_warmstart_checkpoint(args)
+383-    args.output_dir.mkdir(parents=True, exist_ok=True)
+384-
+385-    warm_config_path = Path(args.warmstart_run_dir) / "config.csv"
+386-    if not warm_config_path.exists():
+387-        raise FileNotFoundError(f"Warm-start config not found: {warm_config_path}")
+388-    warm_config_df = pd.read_csv(warm_config_path)
+389-    if warm_config_df.empty:
+390-        raise RuntimeError(f"Warm-start config is empty: {warm_config_path}")
+391-    warm_config = warm_config_df.iloc[0]
+392-
+393-    target_mach = float(warm_config["mach"]) if args.target_mach is None else float(args.target_mach)
+394-    device = torch.device(args.device)
+395-    guide_root = args.output_dir / "guide"
+396-    guide_root.mkdir(parents=True, exist_ok=True)
+397-
+398-    alpha_ref = np.linspace(float(args.alpha_min), float(args.alpha_max), int(args.n_guide_reference_alpha), dtype=float)
+399-    ci_ref = build_reference_ci_grid(alpha_ref, target_mach)
+400-    anchor_indices = build_anchor_indices(len(alpha_ref), int(args.n_guide_anchor_alpha))
+401-    anchor_alpha = alpha_ref[anchor_indices]
+402-    anchor_ci = ci_ref[anchor_indices]
+403-
+404-    alpha_ref_t = torch.tensor(alpha_ref, dtype=torch.float32, device=device).view(-1, 1)
+405-    alpha_anchor_t = torch.tensor(anchor_alpha, dtype=torch.float32, device=device).view(-1, 1)
+406-    ci_anchor_t = torch.tensor(anchor_ci, dtype=torch.float32, device=device).view(-1, 1)
+407-
+408-    guide_model, guide_history = train_guide(
+409-        alpha_ref_t=alpha_ref_t,
+--
+476-        f"active=[{args.alpha_min:.3f}, {args.alpha_max:.3f}]"
+477-    )
+478-    print(
+479-        f"guide: n_ref={int(args.n_guide_reference_alpha)} n_anchor={int(args.n_guide_anchor_alpha)} "
+480-        f"epochs={int(args.guide_epochs)}"
+481-    )
+482-    print(
+483-        f"weights: guide_sup={cfg.w_ci_supervision:.2f} ci_window={cfg.w_ci_window:.2f} "
+484:        f"q_sup={cfg.w_q_supervision:.2f} gamma_sup={cfg.w_riccati_gamma_supervision:.2f} "
+485:        f"anchor={cfg.w_riccati_anchor:.2f} bc_k={cfg.w_riccati_boundary_band_kappa:.2f} "
+486:        f"bc_q={cfg.w_riccati_boundary_band_q:.2f} shoot={cfg.w_riccati_shooting_match:.2f}"
+487-    )
+488-
+489-    if args.skip_training:
+490-        model_best_path = Path(cfg.output_dir) / "model_best.pt"
+491-        if not model_best_path.exists():
+492-            raise FileNotFoundError(f"Skip-training requested but post-train model is missing: {model_best_path}")
+493-        print(f"Skip training enabled; reusing existing post-train model at {model_best_path}")
+494-    else:
+495-        model, history = train_fixed_mach_subsonic_pinn(cfg)
+496-        save_training_artifacts(model, history, cfg)
+497-
+498-    eval_root = Path(cfg.output_dir)
+499-    warm_eval_root = eval_root / "warmstart_eval"
+500-    post_eval_root = eval_root / "posttrain_eval"
+501-    warm_eval_run_dir = prepare_warmstart_eval_run_dir(
+502-        base_run_dir=Path(args.warmstart_run_dir),
+503-        checkpoint=checkpoint if args.warmstart_checkpoint is not None else None,
+504-        eval_root=eval_root,
+505-        eval_config=cfg,
+506-    )
+507-
+508-    warm_summary, warm_regimes_df = evaluate_candidate(
+509-        name="warmstart",
+510-        run_dir=warm_eval_run_dir,
+511-        device=device,
+512-        output_root=warm_eval_root,
+513-        num_alpha_ci=args.num_alpha_ci,
+514-        num_alpha_modes=args.num_alpha_modes,
+515-        overlay_alphas=list(args.overlay_alphas),
+516-        n_y_pinn=args.n_y_pinn,
+--
+534-        low_alpha_threshold=args.low_alpha_threshold,
+535-        alpha_min_override=args.alpha_min,
+536-        alpha_max_override=args.alpha_max,
+537-    )
+538-
+539-    summary_df = pd.DataFrame(
+540-        [
+541-            {
+542:                "regime": "riccati_core1d_windowed_sparse",
+543-                "warmstart_run_dir": str(args.warmstart_run_dir),
+544-                "warmstart_checkpoint": str(checkpoint),
+545-                "guide_curve_csv": str(guide_curve_csv),
+546-                "output_dir": str(cfg.output_dir),
+547-                "model_alpha_min": float(cfg.alpha_min),
+548-                "model_alpha_max": float(cfg.alpha_max),
+549-                "active_alpha_min": float(args.alpha_min),
+550-                "active_alpha_max": float(args.alpha_max),
+551-                "target_mach": float(cfg.mach),
+552-                "n_guide_reference_alpha": int(args.n_guide_reference_alpha),
+553-                "n_guide_anchor_alpha": int(args.n_guide_anchor_alpha),
+554-                "guide_epochs": int(args.guide_epochs),
+555-                "guide_hidden_dim": int(args.guide_hidden_dim),
+556-                "guide_depth": int(args.guide_depth),
+557-                "guide_supervision_weight": float(cfg.w_ci_supervision),
+558-                "guide_window_weight": float(cfg.w_ci_window),
+559-                **{f"warm_{k}": v for k, v in warm_summary.items()},
+560-                **{f"post_{k}": v for k, v in post_summary.items()},
+561-            }
+562-        ]
+563-    )
+564-    improvement_df = pd.DataFrame(
+565-        [
+566-            {
+567-                "delta_ci_mae": float(post_summary["ci_mae"] - warm_summary["ci_mae"]),
+568-                "delta_low_alpha_p_rel_mean": float(post_summary["low_alpha_p_rel_mean"] - warm_summary["low_alpha_p_rel_mean"]),
+569-                "delta_low_alpha_u_rel_mean": float(post_summary["low_alpha_u_rel_mean"] - warm_summary["low_alpha_u_rel_mean"]),
+570-                "delta_low_alpha_v_rel_mean": float(post_summary["low_alpha_v_rel_mean"] - warm_summary["low_alpha_v_rel_mean"]),
+571-                "delta_high_alpha_p_rel_mean": float(post_summary["high_alpha_p_rel_mean"] - warm_summary["high_alpha_p_rel_mean"]),
+572-            }

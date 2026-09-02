@@ -1,0 +1,15 @@
+{
+  "name": "supersonic_cost_benchmark_COST500",
+  "n": 500,
+  "grid": "25 Mach cell centres x 20 alpha cell centres",
+  "Mach_domain": [
+    1.0,
+    1.9
+  ],
+  "alpha_domain": [
+    0.05,
+    0.36
+  ],
+  "purpose": "Performance benchmark only: same coordinates for classical and PINN+shooting workflows.",
+  "primary_chart_rule": "Containing chart with maximum normalized interior margin; lexicographic tie break."
+}

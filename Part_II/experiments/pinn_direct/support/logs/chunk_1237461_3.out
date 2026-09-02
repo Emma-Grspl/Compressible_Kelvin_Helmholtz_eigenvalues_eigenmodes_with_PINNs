@@ -1,0 +1,17 @@
+============================================================
+N76 PINN-SEEDED SHOOTING — T401
+============================================================
+job   = 1237466
+task  = 3
+node  = r6i7n2
+start = Fri Aug 21 11:40:23 AM CEST 2026
+
+================================================================================
+T401 N76 SHOOTING WORKER
+================================================================================
+chunk        : 3
+input global : PREDICTIONS
+input        : /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1_continuousM/N76/shooting_T401/chunks/T401_chunk_03.csv
+output global: OUTPUT_ROOT
+output       : /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1_continuousM/N76/shooting_T401/results/chunk_03
+

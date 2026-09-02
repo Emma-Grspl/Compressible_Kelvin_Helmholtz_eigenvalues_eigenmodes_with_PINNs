@@ -1,0 +1,2 @@
+alpha,Mach,n_candidates_discovered,n_candidates_tested,n_accepted,candidate_source_mode,branch_guided_available,existing_candidates_found,branch_guided_candidates_found,blumen_perturb_candidates_found,best_status,best_reject_reason,best_ci_abs_err,best_ci_rel_err,best_box_robustness,best_peak_shift,best_stage1_mismatch,best_stage2_mismatch,accepted_candidate_id,accepted_candidate_source,accepted_cr_final,accepted_ci_final,best_candidate_id,best_candidate_source
+0.15,1.4,6,6,0,auto,True,4,10,72,dry_run,dry_run,,,,,,,,,,,a0.150000_M1.400000__cand001,anchor_anchor_nearest_2

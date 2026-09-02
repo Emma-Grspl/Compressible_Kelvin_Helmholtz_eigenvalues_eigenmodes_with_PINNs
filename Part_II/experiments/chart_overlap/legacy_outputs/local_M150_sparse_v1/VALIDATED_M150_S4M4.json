@@ -1,0 +1,42 @@
+{
+  "status": "VALIDATED",
+  "selected_model": "S4M4",
+  "Mach": 1.5,
+  "spectral_anchors": 4,
+  "modal_anchors": 4,
+  "modal_anchor_alphas": [
+    0.07,
+    0.14,
+    0.205,
+    0.25
+  ],
+  "n_dense_modes": 45,
+  "n_off_anchor_modes": 41,
+  "n_off_anchor_improved_vs_S4M2": 41,
+  "n_off_anchor_degraded_vs_S4M2": 0,
+  "spectral_metrics": {
+    "cr_mae": 0.0022796194875616964,
+    "cr_max_abs": 0.008903751423115835,
+    "ci_mae": 0.005251006239948632,
+    "ci_max_abs": 0.02074032869722397,
+    "omega_i_mae": 0.0006877192095961489
+  },
+  "off_anchor_modal_metrics": {
+    "kappa_nrmse_mean": 0.0923868901168845,
+    "q_nrmse_mean": 0.0263688823936609,
+    "log_amp_rmse_mean": 0.029296992664049,
+    "amplitude_rel_l2_mean": 0.0165270854149337,
+    "phase_rmse_mean": 0.1301840822951228,
+    "pressure_rel_l2_mean": 0.0699437991700401,
+    "pressure_overlap_error_mean": 0.001252251397882
+  },
+  "checkpoint_selection": {
+    "selected_stage": "joint",
+    "selected_checkpoint": "models_saved/supersonic_general/long_S4M4/best_joint_checkpoint_baee09989f.pt",
+    "best_stage_losses": {
+      "modal_frozen_spectrum": 0.006666987203061581,
+      "joint": 0.0012607809621840715
+    },
+    "global_step": 10000
+  }
+}

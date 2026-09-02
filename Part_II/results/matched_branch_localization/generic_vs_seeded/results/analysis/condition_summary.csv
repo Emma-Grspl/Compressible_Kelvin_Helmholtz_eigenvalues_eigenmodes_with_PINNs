@@ -1,0 +1,3 @@
+condition,technical_success,technical_total,target_recovery,target_total,target_error_median,target_error_p95,target_error_max,target_error_le_1e5,target_error_le_1e4,n_boxes,n_technical_boxes,n_failed_boxes,total_box_solves,box_solves_per_point_median,box_solves_per_point_p95,total_seconds,seconds_per_point_median,seconds_per_point_p95
+seeded,64,64,63,63,3.502006412582551e-06,7.256830752933359e-06,1.0327437658335198e-05,62,63,768,768,0,768.0,12.0,12.0,23835.98013244092,376.4566250969656,462.7880821336526
+generic,64,64,0,63,0.452563628632111,0.7586371773181947,0.7641531924747299,0,0,768,759,0,989.0,13.0,22.849999999999994,36890.77031159587,514.1259674748871,911.0372627786186

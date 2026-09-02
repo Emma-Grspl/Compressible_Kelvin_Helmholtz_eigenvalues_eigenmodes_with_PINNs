@@ -1,0 +1,37 @@
+{
+  "predictions": "assets/classic_supersonic/csv/pinn_direct/chunks/table_T401_chunk_04.csv",
+  "method": "PINN-seeded shooting only",
+  "pinn_training": "atlas2d_v1 continuous-M N76",
+  "reference_used_for_selection": false,
+  "selection_policy": "technical spectral+mode success; then minimum stage1+stage2 mismatch; PINN-seed displacement as tie-breaker",
+  "shooting_defaults": {
+    "alpha": null,
+    "mach_values": null,
+    "anchor_mach": null,
+    "match_y": 1.0,
+    "use_mapping": true,
+    "mapping_scale": 5.0,
+    "min_y_limit": 10.0,
+    "max_y_limit": 80.0,
+    "y_limit_factor": 4.0,
+    "amp_lower_bound": -15.0,
+    "amp_upper_bound": 5.0,
+    "cr_half_windows": [
+      0.015,
+      0.03,
+      0.06,
+      0.1
+    ],
+    "ci_half_windows": [
+      0.008,
+      0.015,
+      0.03
+    ],
+    "retry_growth": 1.75,
+    "max_retries": 3,
+    "max_iter": 10,
+    "grid_size": 4,
+    "ci_weight": 2.0,
+    "output_stem": null
+  }
+}

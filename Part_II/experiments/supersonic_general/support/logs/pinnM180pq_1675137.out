@@ -1,0 +1,83 @@
+[info] dataset: assets/pinn_supersonic/datasets/fixedM_M180_alpha_branch_pq_modal_anchors_tail_polished.npz
+[info] run dir: assets/pinn_supersonic/runs/pinn_chart_M180_alpha_070_190_pq_supervised_tail_polished
+[info] device: cuda
+[info] n train rows: 216482
+[info] n val rows: 216482
+[info] n spectral anchors: 49
+[epoch 000001] train=1.9732e+00 modal=9.9122e-01 spec=9.8194e-01 val=1.9034e+00
+[epoch 000050] train=6.5240e-02 modal=6.5187e-02 spec=5.2988e-05 val=6.4911e-02
+[epoch 000100] train=5.4812e-02 modal=5.4808e-02 spec=4.1539e-06 val=5.4538e-02
+[epoch 000150] train=4.8565e-02 modal=4.8563e-02 spec=1.9697e-06 val=4.8278e-02
+[epoch 000200] train=4.4337e-02 modal=4.4336e-02 spec=1.1287e-06 val=4.4064e-02
+[epoch 000250] train=4.2126e-02 modal=4.2125e-02 spec=5.5805e-07 val=4.1787e-02
+[epoch 000300] train=3.9810e-02 modal=3.9810e-02 spec=2.7244e-07 val=3.8909e-02
+[epoch 000350] train=3.8888e-02 modal=3.8888e-02 spec=1.6032e-07 val=3.7934e-02
+[epoch 000400] train=3.6502e-02 modal=3.6502e-02 spec=1.3003e-07 val=3.7084e-02
+[epoch 000450] train=3.5274e-02 modal=3.5274e-02 spec=1.2314e-07 val=3.5520e-02
+[epoch 000500] train=3.4767e-02 modal=3.4767e-02 spec=1.2118e-07 val=3.5512e-02
+[epoch 000550] train=3.4114e-02 modal=3.4114e-02 spec=1.2023e-07 val=3.3519e-02
+[epoch 000600] train=3.3951e-02 modal=3.3950e-02 spec=9.0761e-07 val=3.4160e-02
+[epoch 000650] train=3.3507e-02 modal=3.3507e-02 spec=1.1900e-07 val=3.3009e-02
+[epoch 000700] train=3.3185e-02 modal=3.3185e-02 spec=1.1851e-07 val=3.7497e-02
+[epoch 000750] train=3.2091e-02 modal=3.2091e-02 spec=1.1851e-07 val=3.3042e-02
+[epoch 000800] train=3.1880e-02 modal=3.1880e-02 spec=1.1856e-07 val=3.2612e-02
+[epoch 000850] train=3.2836e-02 modal=3.2836e-02 spec=1.1787e-07 val=3.0988e-02
+[epoch 000900] train=3.2682e-02 modal=3.2682e-02 spec=2.1906e-07 val=3.2248e-02
+[epoch 000950] train=3.1718e-02 modal=3.1718e-02 spec=1.1837e-07 val=3.0480e-02
+[epoch 001000] train=3.0608e-02 modal=3.0607e-02 spec=1.3813e-07 val=3.2454e-02
+[epoch 001050] train=3.0545e-02 modal=3.0545e-02 spec=1.1582e-07 val=2.9685e-02
+[epoch 001100] train=3.1170e-02 modal=3.1169e-02 spec=1.3597e-07 val=2.9891e-02
+[epoch 001150] train=3.1381e-02 modal=3.1380e-02 spec=6.0340e-07 val=2.9458e-02
+[epoch 001200] train=2.9545e-02 modal=2.9544e-02 spec=6.6428e-07 val=2.9686e-02
+[epoch 001250] train=2.9978e-02 modal=2.9977e-02 spec=9.9929e-07 val=3.5361e-02
+[epoch 001300] train=2.9004e-02 modal=2.9002e-02 spec=1.4773e-06 val=3.0039e-02
+[epoch 001350] train=2.9106e-02 modal=2.9106e-02 spec=1.1387e-07 val=3.0177e-02
+[epoch 001400] train=2.8623e-02 modal=2.8623e-02 spec=1.1574e-07 val=3.0615e-02
+[epoch 001450] train=2.8555e-02 modal=2.8555e-02 spec=1.1334e-07 val=2.8358e-02
+[epoch 001500] train=2.8638e-02 modal=2.8638e-02 spec=1.1375e-07 val=2.9315e-02
+[epoch 001550] train=2.8266e-02 modal=2.8266e-02 spec=2.0261e-07 val=2.8842e-02
+[epoch 001600] train=2.8370e-02 modal=2.8370e-02 spec=1.1247e-07 val=2.9806e-02
+[epoch 001650] train=2.7492e-02 modal=2.7492e-02 spec=1.2528e-07 val=2.7791e-02
+[epoch 001700] train=2.7972e-02 modal=2.7971e-02 spec=2.8520e-07 val=2.8901e-02
+[epoch 001750] train=2.7074e-02 modal=2.7073e-02 spec=6.6106e-07 val=2.8108e-02
+[epoch 001800] train=2.8808e-02 modal=2.8808e-02 spec=1.1134e-07 val=2.7599e-02
+[epoch 001850] train=3.0596e-02 modal=3.0595e-02 spec=1.1437e-07 val=2.9495e-02
+[epoch 001900] train=2.7415e-02 modal=2.7413e-02 spec=1.9664e-06 val=2.9302e-02
+[epoch 001950] train=2.6656e-02 modal=2.6652e-02 spec=3.0711e-06 val=2.5906e-02
+[epoch 002000] train=2.6784e-02 modal=2.6784e-02 spec=1.1034e-07 val=2.6641e-02
+[epoch 002050] train=2.6169e-02 modal=2.6169e-02 spec=1.1162e-07 val=2.5653e-02
+[epoch 002100] train=3.2176e-02 modal=3.2176e-02 spec=1.0986e-07 val=3.1064e-02
+[epoch 002150] train=2.5707e-02 modal=2.5707e-02 spec=1.0979e-07 val=2.5484e-02
+[epoch 002200] train=2.5759e-02 modal=2.5757e-02 spec=2.1435e-06 val=2.5973e-02
+[epoch 002250] train=2.5743e-02 modal=2.5742e-02 spec=3.2737e-07 val=2.4687e-02
+[epoch 002300] train=2.6421e-02 modal=2.6420e-02 spec=4.1114e-07 val=2.5456e-02
+[epoch 002350] train=2.7306e-02 modal=2.7303e-02 spec=3.1197e-06 val=2.5977e-02
+[epoch 002400] train=2.5278e-02 modal=2.5278e-02 spec=2.3749e-07 val=2.5775e-02
+[epoch 002450] train=2.9611e-02 modal=2.9611e-02 spec=1.3820e-07 val=3.5856e-02
+[epoch 002500] train=2.6053e-02 modal=2.6053e-02 spec=1.0821e-07 val=2.4318e-02
+[epoch 002550] train=2.6882e-02 modal=2.6882e-02 spec=1.8941e-07 val=2.8097e-02
+[epoch 002600] train=2.9659e-02 modal=2.9659e-02 spec=1.7786e-07 val=2.8113e-02
+[epoch 002650] train=3.1742e-02 modal=3.1741e-02 spec=1.0361e-06 val=2.7711e-02
+[epoch 002700] train=2.6161e-02 modal=2.6161e-02 spec=2.1110e-07 val=2.4205e-02
+[epoch 002750] train=2.6283e-02 modal=2.6283e-02 spec=1.0717e-07 val=2.8316e-02
+[epoch 002800] train=2.4500e-02 modal=2.4499e-02 spec=1.3907e-07 val=2.5259e-02
+[epoch 002850] train=2.7306e-02 modal=2.7306e-02 spec=1.0679e-07 val=2.4247e-02
+[epoch 002900] train=2.4886e-02 modal=2.4886e-02 spec=1.0661e-07 val=2.4900e-02
+[epoch 002950] train=2.4404e-02 modal=2.4404e-02 spec=1.0709e-07 val=2.4518e-02
+[epoch 003000] train=2.4868e-02 modal=2.4868e-02 spec=1.0632e-07 val=2.3339e-02
+[done] metrics
+{
+  "best_val": 0.023338559311864047,
+  "global_p_rel_l2": 0.08888026677368857,
+  "global_q_rel_l2": 0.13951457088009234,
+  "cr_abs_mean": 3.7056945777083797e-06,
+  "cr_abs_max": 1.0113993403892962e-05,
+  "ci_abs_mean": 1.3756762322789262e-06,
+  "ci_abs_max": 3.3797663790066657e-06
+}
+[done] wrote:
+  assets/pinn_supersonic/runs/pinn_chart_M180_alpha_070_190_pq_supervised_tail_polished/best_model.pt
+  assets/pinn_supersonic/runs/pinn_chart_M180_alpha_070_190_pq_supervised_tail_polished/history.csv
+  assets/pinn_supersonic/runs/pinn_chart_M180_alpha_070_190_pq_supervised_tail_polished/metrics.json
+  assets/pinn_supersonic/runs/pinn_chart_M180_alpha_070_190_pq_supervised_tail_polished/spectral_predictions.csv
+  assets/pinn_supersonic/runs/pinn_chart_M180_alpha_070_190_pq_supervised_tail_polished/modal_predictions_all_rows.npz

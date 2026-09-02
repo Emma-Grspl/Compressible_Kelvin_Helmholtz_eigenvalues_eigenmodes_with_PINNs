@@ -1,0 +1,967 @@
+FILE: src/physics/kh_subsonic_residual.py
+
+1-from __future__ import annotations
+2-
+3-import torch
+4-
+5-RICCATI_STATE_CLAMP = 1.0e3
+6-RICCATI_RHS_CLAMP = 1.0e4
+7-
+8-
+9:def xi_to_y(xi: torch.Tensor, mapping_scale: torch.Tensor | float) -> torch.Tensor:
+10:    return mapping_scale * xi / (1.0 - xi.pow(2) + 1e-8)
+11-
+12-
+13:def dy_dxi(xi: torch.Tensor, mapping_scale: torch.Tensor | float) -> torch.Tensor:
+14:    return mapping_scale * (1.0 + xi.pow(2)) / (1.0 - xi.pow(2) + 1e-8).pow(2)
+15-
+16-
+17:def d2y_dxi2(xi: torch.Tensor, mapping_scale: torch.Tensor | float) -> torch.Tensor:
+18:    return 2.0 * mapping_scale * xi * (3.0 + xi.pow(2)) / (1.0 - xi.pow(2) + 1e-8).pow(3)
+19-
+20-
+21:def base_velocity(y: torch.Tensor) -> torch.Tensor:
+22-    return torch.tanh(y)
+23-
+24-
+25:def base_velocity_derivative(y: torch.Tensor) -> torch.Tensor:
+26-    # Stable sech^2(y). torch.cosh overflows in float32 for the far-field
+27:    # compactified points used by the shooting losses.
+28-    exp_term = torch.exp(-2.0 * torch.abs(y))
+29-    return 4.0 * exp_term / (1.0 + exp_term).pow(2)
+30-
+31-
+32:def _finite_complex(z: torch.Tensor, *, limit: float) -> torch.Tensor:
+33-    real = torch.nan_to_num(z.real, nan=0.0, posinf=float(limit), neginf=-float(limit))
+34-    imag = torch.nan_to_num(z.imag, nan=0.0, posinf=float(limit), neginf=-float(limit))
+35-    return torch.complex(real, imag)
+36-
+37-
+38:def _clamp_complex_abs(z: torch.Tensor, *, max_abs: float) -> torch.Tensor:
+39-    z = _finite_complex(z, limit=float(max_abs))
+40-    magnitude = torch.abs(z).clamp_min(1.0)
+41-    scale = torch.clamp(float(max_abs) / magnitude, max=1.0)
+42-    return z * scale
+43-
+44-
+45:def _differentiate(values: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
+46-    return torch.autograd.grad(
+47-        values,
+48-        x,
+49-        grad_outputs=torch.ones_like(values),
+50-        create_graph=True,
+51-        retain_graph=True,
+52-    )[0]
+53-
+54-
+55:def _principal_sqrt_torch(z: torch.Tensor) -> torch.Tensor:
+56-    root = torch.sqrt(z)
+57-    flip = (root.real < 0) | ((torch.abs(root.real) < 1e-12) & (root.imag < 0))
+58-    return torch.where(flip, -root, root)
+59-
+60-
+61:def asymptotic_riccati_gammas(alpha: torch.Tensor, mach: float, ci: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+62-    one = torch.ones_like(ci)
+63-    c = torch.complex(torch.zeros_like(ci), ci)
+64-    mach_t = torch.as_tensor(float(mach), dtype=ci.dtype, device=ci.device)
+65-
+66-    r_inf_left = one - mach_t**2 * ((-one - c) ** 2)
+67-    r_inf_right = one - mach_t**2 * ((one - c) ** 2)
+68-
+69-    alpha_c = torch.complex(alpha, torch.zeros_like(alpha))
+70:    gamma_left = alpha_c * _principal_sqrt_torch(r_inf_left)
+71:    gamma_right = -alpha_c * _principal_sqrt_torch(r_inf_right)
+72:    return gamma_left, gamma_right
+73-
+74-
+75:def riccati_gamma_rhs(
+76-    y: torch.Tensor,
+77:    gamma: torch.Tensor,
+78-    alpha: torch.Tensor,
+79-    mach: float,
+80-    ci: torch.Tensor,
+81-) -> torch.Tensor:
+82:    gamma = _clamp_complex_abs(gamma, max_abs=RICCATI_STATE_CLAMP)
+83-    ci = torch.clamp(ci, min=1e-5)
+84-    one = torch.ones_like(ci)
+85-    c = torch.complex(torch.zeros_like(ci), ci)
+86-    u = torch.complex(base_velocity(y), torch.zeros_like(y))
+87-    du = torch.complex(base_velocity_derivative(y), torch.zeros_like(y))
+88-    alpha_c = torch.complex(alpha, torch.zeros_like(alpha))
+89-    mach_t = torch.as_tensor(float(mach), dtype=ci.dtype, device=ci.device)
+90-
+91-    u_diff = u - c
+92-    p_term = -2.0 * du / u_diff
+93-    r_term = one - mach_t**2 * (u_diff**2)
+94:    rhs = -(gamma**2) - p_term * gamma + (alpha_c**2) * r_term
+95-    return _clamp_complex_abs(rhs, max_abs=RICCATI_RHS_CLAMP)
+96-
+97-
+98:def _reconstruct_riccati_pressure_core(
+99-    outputs: torch.Tensor,
+100-    xi: torch.Tensor,
+101:    mapping_scale: torch.Tensor,
+102-    *,
+103-    anchor_xi: float = 0.0,
+104-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+105:    kappa = outputs[:, 0:1]
+106-    q = outputs[:, 1:2]
+107-
+108:    y = xi_to_y(xi, mapping_scale)
+109-
+110-    order = torch.argsort(y[:, 0])
+111-    y_sorted = y[order, 0]
+112:    kappa_sorted = kappa[order, 0]
+113-    q_sorted = q[order, 0]
+114-
+115:    anchor_index = int(torch.argmin(torch.abs(y_sorted - xi_to_y(torch.tensor([[anchor_xi]], dtype=xi.dtype, device=xi.device), mapping_scale)[0, 0])).item())
+116-
+117-    ln_amp_sorted = torch.zeros_like(y_sorted)
+118-    phi_sorted = torch.zeros_like(y_sorted)
+119-
+120-    for idx in range(anchor_index + 1, y_sorted.shape[0]):
+121-        dy = y_sorted[idx] - y_sorted[idx - 1]
+122:        ln_amp_sorted[idx] = ln_amp_sorted[idx - 1] + 0.5 * (kappa_sorted[idx] + kappa_sorted[idx - 1]) * dy
+123-        phi_sorted[idx] = phi_sorted[idx - 1] + 0.5 * (q_sorted[idx] + q_sorted[idx - 1]) * dy
+124-
+125-    for idx in range(anchor_index - 1, -1, -1):
+126-        dy = y_sorted[idx + 1] - y_sorted[idx]
+127:        ln_amp_sorted[idx] = ln_amp_sorted[idx + 1] - 0.5 * (kappa_sorted[idx] + kappa_sorted[idx + 1]) * dy
+128-        phi_sorted[idx] = phi_sorted[idx + 1] - 0.5 * (q_sorted[idx] + q_sorted[idx + 1]) * dy
+129-
+130-    amp_sorted = torch.exp(torch.clamp(ln_amp_sorted, min=-20.0, max=20.0))
+131-    pr_sorted = amp_sorted * torch.cos(phi_sorted)
+132-    pi_sorted = amp_sorted * torch.sin(phi_sorted)
+133-
+134-    inverse = torch.empty_like(order)
+135-    inverse[order] = torch.arange(order.shape[0], device=order.device)
+136-    pr = pr_sorted[inverse].view(-1, 1)
+137-    pi = pi_sorted[inverse].view(-1, 1)
+138:    gamma = torch.complex(kappa, q)
+139-    p = torch.complex(pr, pi)
+140:    p_y = gamma * p
+141:    return pr, pi, p_y, gamma, y
+142-
+143-
+144:def reconstruct_pressure_from_riccati(
+145-    model,
+146-    xi: torch.Tensor,
+147-    alpha: torch.Tensor,
+148-    *,
+149-    anchor_xi: float = 0.0,
+150-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+151-    outputs = model(xi, alpha)
+152:    pr, pi, _, _, y = _reconstruct_riccati_pressure_core(
+153-        outputs,
+154-        xi,
+155:        model.get_mapping_scale(),
+156-        anchor_xi=anchor_xi,
+157-    )
+158-    return pr, pi, y
+159-
+160-
+161:def reconstruct_pressure_p_y_from_riccati(
+162-    model,
+163-    xi: torch.Tensor,
+164-    alpha: torch.Tensor,
+165-    *,
+166-    anchor_xi: float = 0.0,
+167-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+168-    outputs = model(xi, alpha)
+169:    return _reconstruct_riccati_pressure_core(
+170-        outputs,
+171-        xi,
+172:        model.get_mapping_scale(),
+173-        anchor_xi=anchor_xi,
+174-    )
+175-
+176-
+177:def extract_pressure_components(outputs: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+178-    return outputs[:, 0:1], outputs[:, 1:2]
+179-
+180-
+181:def reconstruct_pressure_from_riccati_2d(
+182-    model,
+183-    xi: torch.Tensor,
+184-    alpha: torch.Tensor,
+185-    mach: torch.Tensor,
+186-    *,
+187-    anchor_xi: float = 0.0,
+188-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+189-    outputs = model(xi, alpha, mach)
+190:    pr, pi, _, _, y = _reconstruct_riccati_pressure_core(
+191-        outputs,
+192-        xi,
+193:        model.get_mapping_scale(),
+194-        anchor_xi=anchor_xi,
+195-    )
+196-    return pr, pi, y
+197-
+198-
+199:def reconstruct_pressure_p_y_from_riccati_2d(
+200-    model,
+201-    xi: torch.Tensor,
+202-    alpha: torch.Tensor,
+203-    mach: torch.Tensor,
+204-    *,
+205-    anchor_xi: float = 0.0,
+206-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+207-    outputs = model(xi, alpha, mach)
+208:    return _reconstruct_riccati_pressure_core(
+209-        outputs,
+210-        xi,
+211:        model.get_mapping_scale(),
+212-        anchor_xi=anchor_xi,
+213-    )
+214-
+215-
+216:def pressure_ode_residual(
+217-    model,
+218-    xi: torch.Tensor,
+219-    alpha: torch.Tensor,
+220-    mach: float,
+221-    *,
+222-    ci_override: torch.Tensor | None = None,
+223-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+224-    """
+225-    Equation modale de pression en subsonique, avec c = i c_i(alpha).
+226-    """
+227-    if not xi.requires_grad:
+228-        xi.requires_grad_(True)
+229-
+230-    mode_representation = getattr(model, "mode_representation", "cartesian")
+231:    if mode_representation == "riccati":
+232-        outputs = model(xi, alpha)
+233:        kappa = outputs[:, 0:1]
+234-        q = outputs[:, 1:2]
+235-
+236:        kappa_xi = _differentiate(kappa, xi)
+237-        q_xi = _differentiate(q, xi)
+238-
+239:        mapping_scale = model.get_mapping_scale()
+240:        y = xi_to_y(xi, mapping_scale)
+241:        y_xi = dy_dxi(xi, mapping_scale)
+242-
+243:        kappa_y = kappa_xi / y_xi
+244-        q_y = q_xi / y_xi
+245-
+246-        u = base_velocity(y)
+247-        du = base_velocity_derivative(y)
+248-        ci = model.get_ci(alpha) if ci_override is None else ci_override
+249-
+250:        gamma = torch.complex(kappa, q)
+251-        c = torch.complex(torch.zeros_like(ci), ci)
+252-        u_complex = torch.complex(u, torch.zeros_like(u))
+253-        du_complex = torch.complex(du, torch.zeros_like(du))
+254-        alpha_complex = torch.complex(alpha, torch.zeros_like(alpha))
+255-        mach_t = torch.as_tensor(float(mach), dtype=xi.dtype, device=xi.device)
+256-
+257-        u_diff = u_complex - c
+258-        p_term = -2.0 * du_complex / u_diff
+259-        r_term = 1.0 - mach_t**2 * (u_diff**2)
+260:        gamma_rhs = -(gamma**2) - p_term * gamma + (alpha_complex**2) * r_term
+261:        gamma_y = torch.complex(kappa_y, q_y)
+262:        residual = gamma_y - gamma_rhs
+263:        return residual.real, residual.imag, y
+264-
+265-    outputs = model(xi, alpha)
+266-    if mode_representation == "first_order_real":
+267-        p_r = outputs[:, 0:1]
+268-        p_i = outputs[:, 1:2]
+269-        v_r = outputs[:, 2:3]
+270-        v_i = outputs[:, 3:4]
+271-
+272-        p_r_xi = _differentiate(p_r, xi)
+273-        p_i_xi = _differentiate(p_i, xi)
+274-        v_r_xi = _differentiate(v_r, xi)
+275-        v_i_xi = _differentiate(v_i, xi)
+276-
+277:        mapping_scale = model.get_mapping_scale()
+278:        y = xi_to_y(xi, mapping_scale)
+279:        y_xi = dy_dxi(xi, mapping_scale)
+280-
+281-        u = base_velocity(y)
+282-        du = base_velocity_derivative(y)
+283-        ci = model.get_ci(alpha) if ci_override is None else ci_override
+284-
+285-        p = torch.complex(p_r, p_i)
+286-        v = torch.complex(v_r, v_i)
+287-        c = torch.complex(torch.zeros_like(ci), ci)
+288-        u_complex = torch.complex(u, torch.zeros_like(u))
+289-        du_complex = torch.complex(du, torch.zeros_like(du))
+290-        alpha_complex = torch.complex(alpha, torch.zeros_like(alpha))
+291-        mach_t = torch.as_tensor(float(mach), dtype=xi.dtype, device=xi.device)
+292-
+293-        u_diff = u_complex - c
+294-        r_term = 1.0 - mach_t**2 * (u_diff**2)
+295-        f = (2.0 * du_complex * v - (alpha_complex**2) * r_term * p) / u_diff
+296-
+297-        res_state_r = p_r_xi - y_xi * v_r
+298-        res_state_i = p_i_xi - y_xi * v_i
+299-        res_dyn_r = v_r_xi - y_xi * f.real
+300-        res_dyn_i = v_i_xi - y_xi * f.imag
+301-        return torch.cat([res_state_r, res_dyn_r], dim=0), torch.cat([res_state_i, res_dyn_i], dim=0), y
+302-
+303-    p_r = outputs[:, 0:1]
+304-    p_i = outputs[:, 1:2]
+305-
+306-    p_r_xi = _differentiate(p_r, xi)
+307-    p_i_xi = _differentiate(p_i, xi)
+308-    p_r_xixi = _differentiate(p_r_xi, xi)
+309-    p_i_xixi = _differentiate(p_i_xi, xi)
+310-
+311:    mapping_scale = model.get_mapping_scale()
+312:    y = xi_to_y(xi, mapping_scale)
+313:    y_xi = dy_dxi(xi, mapping_scale)
+314:    y_xixi = d2y_dxi2(xi, mapping_scale)
+315-
+316-    p_r_y = p_r_xi / y_xi
+317-    p_i_y = p_i_xi / y_xi
+318-    p_r_yy = p_r_xixi / y_xi.pow(2) - p_r_xi * y_xixi / y_xi.pow(3)
+319-    p_i_yy = p_i_xixi / y_xi.pow(2) - p_i_xi * y_xixi / y_xi.pow(3)
+320-
+321-    u = base_velocity(y)
+322-    du = base_velocity_derivative(y)
+323-    ci = model.get_ci(alpha) if ci_override is None else ci_override
+324-
+325-    ur = u
+326-    ui = -ci
+327-    q_r = mach**2 * (ur.pow(2) - ui.pow(2)) - 1.0
+328-    q_i = 2.0 * mach**2 * ur * ui
+329-
+330-    res_r = ur * p_r_yy - ui * p_i_yy - 2.0 * du * p_r_y + alpha.pow(2) * (q_r * p_r - q_i * p_i)
+331-    res_i = ur * p_i_yy + ui * p_r_yy - 2.0 * du * p_i_y + alpha.pow(2) * (q_r * p_i + q_i * p_r)
+332-    return res_r, res_i, y
+333-
+334-
+335:def boundary_decay_loss(model, xi_left: torch.Tensor, xi_right: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
+336-    mode_representation = getattr(model, "mode_representation", "cartesian")
+337:    if mode_representation == "riccati":
+338:        loss_kappa, loss_q = riccati_boundary_loss_components(model, xi_left, xi_right, alpha)
+339:        return loss_kappa + loss_q
+340-    if mode_representation == "first_order_real":
+341-        pred_left = model(xi_left, alpha)
+342-        pred_right = model(xi_right, alpha)
+343-        p_left_r, p_left_i = extract_pressure_components(pred_left)
+344-        p_right_r, p_right_i = extract_pressure_components(pred_right)
+345-        v_left_r = pred_left[:, 2:3]
+346-        v_left_i = pred_left[:, 3:4]
+347-        v_right_r = pred_right[:, 2:3]
+348-        v_right_i = pred_right[:, 3:4]
+349-        ci = model.get_ci(alpha)
+350:        gamma_left, gamma_right = asymptotic_riccati_gammas(alpha, float(getattr(model, "mach", 0.5)), ci)
+351:        target_left = gamma_left * torch.complex(p_left_r, p_left_i)
+352:        target_right = gamma_right * torch.complex(p_right_r, p_right_i)
+353:        loss_left = (v_left_r - target_left.real).pow(2).mean() + (v_left_i - target_left.imag).pow(2).mean()
+354:        loss_right = (v_right_r - target_right.real).pow(2).mean() + (v_right_i - target_right.imag).pow(2).mean()
+355:        return loss_left + loss_right
+356-    pred_left = model(xi_left, alpha)
+357-    pred_right = model(xi_right, alpha)
+358-    return pred_left.pow(2).mean() + pred_right.pow(2).mean()
+359-
+360-
+361:def riccati_boundary_loss_components(
+362-    model,
+363-    xi_left: torch.Tensor,
+364-    xi_right: torch.Tensor,
+365-    alpha: torch.Tensor,
+366-    *,
+367-    ci_override: torch.Tensor | None = None,
+368-) -> tuple[torch.Tensor, torch.Tensor]:
+369-    pred_left = model(xi_left, alpha)
+370-    pred_right = model(xi_right, alpha)
+371-    ci = model.get_ci(alpha) if ci_override is None else ci_override
+372:    gamma_left, gamma_right = asymptotic_riccati_gammas(alpha, float(getattr(model, "mach", 0.5)), ci)
+373-
+374:    loss_kappa = (
+375:        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+376:        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+377-    )
+378:    loss_q = (
+379:        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+380:        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+381-    )
+382:    return loss_kappa, loss_q
+383-
+384-
+385:def riccati_boundary_band_loss_components(
+386-    model,
+387-    alpha: torch.Tensor,
+388-    *,
+389-    n_points: int,
+390-    xi_start: float,
+391-    xi_end: float,
+392-    ci_override: torch.Tensor | None = None,
+393-) -> tuple[torch.Tensor, torch.Tensor]:
+394-    if n_points <= 0:
+395-        zero = torch.zeros(1, device=alpha.device, dtype=alpha.dtype).mean()
+396-        return zero, zero
+397-
+398-    xi_left = torch.linspace(-float(xi_end), -float(xi_start), int(n_points), device=alpha.device, dtype=alpha.dtype).view(-1, 1)
+399-    xi_right = torch.linspace(float(xi_start), float(xi_end), int(n_points), device=alpha.device, dtype=alpha.dtype).view(-1, 1)
+400-    xi_left.requires_grad_(True)
+401-    xi_right.requires_grad_(True)
+402-
+403-    if alpha.shape[0] == 1:
+404-        alpha_left = alpha.repeat(xi_left.shape[0], 1)
+405-        alpha_right = alpha.repeat(xi_right.shape[0], 1)
+406-    else:
+407-        alpha_left = alpha[: xi_left.shape[0]]
+408-        alpha_right = alpha[: xi_right.shape[0]]
+409-
+410-    pred_left = model(xi_left, alpha_left)
+411-    pred_right = model(xi_right, alpha_right)
+412-    if ci_override is None:
+413-        ci = model.get_ci(alpha_left)
+414-    elif ci_override.shape[0] == 1:
+415-        ci = ci_override.repeat(alpha_left.shape[0], 1)
+416-    else:
+417-        ci = ci_override[: alpha_left.shape[0]]
+418:    gamma_left, gamma_right = asymptotic_riccati_gammas(alpha_left, float(getattr(model, "mach", 0.5)), ci)
+419-
+420:    loss_kappa = (
+421:        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+422:        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+423-    )
+424:    loss_q = (
+425:        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+426:        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+427-    )
+428:    return loss_kappa, loss_q
+429-
+430-
+431:def riccati_center_constraints(
+432-    model,
+433-    alpha: torch.Tensor,
+434-    *,
+435-    center_xi: float = 0.0,
+436-) -> tuple[torch.Tensor, torch.Tensor]:
+437-    xi_center = torch.full_like(alpha, float(center_xi), requires_grad=True)
+438-    pred = model(xi_center, alpha)
+439:    kappa = pred[:, 0:1]
+440-
+441:    kappa_xi = _differentiate(kappa, xi_center)
+442:    mapping_scale = model.get_mapping_scale()
+443:    y_xi = dy_dxi(xi_center, mapping_scale)
+444:    kappa_y = kappa_xi / y_xi
+445-
+446:    loss_center = kappa.pow(2).mean()
+447:    loss_peak = torch.relu(kappa_y).pow(2).mean()
+448:    return loss_center, loss_peak
+449-
+450-
+451:def riccati_shooting_match_loss(
+452-    model,
+453-    alpha: torch.Tensor,
+454-    mach: float,
+455-    *,
+456-    n_steps: int,
+457-    xi_boundary: float,
+458-) -> torch.Tensor:
+459-    if n_steps <= 0:
+460-        return torch.zeros(1, device=alpha.device, dtype=alpha.dtype).mean()
+461-
+462:    mapping_scale = model.get_mapping_scale()
+463-    xi_edge = torch.tensor([[float(xi_boundary)]], dtype=alpha.dtype, device=alpha.device)
+464:    y_max = torch.abs(xi_to_y(xi_edge, mapping_scale))[0, 0]
+465-    if not torch.isfinite(y_max) or float(torch.abs(y_max).detach().cpu()) <= 0.0:
+466-        return torch.zeros(1, device=alpha.device, dtype=alpha.dtype).mean()
+467-
+468-    alpha_samples = alpha[:, 0]
+469-    ci_samples = model.get_ci(alpha)[:, 0]
+470-
+471:    return _riccati_shooting_match_loss_from_samples(
+472:        mapping_scale,
+473-        alpha_samples,
+474-        ci_samples,
+475-        mach,
+476-        n_steps=n_steps,
+477-        xi_boundary=xi_boundary,
+478-    ).mean()
+479-
+480-
+481:def riccati_shooting_path_loss(
+482-    model,
+483-    alpha: torch.Tensor,
+484-    mach: float,
+485-    *,
+486-    n_steps: int,
+487-    xi_boundary: float,
+488-    n_points: int,
+489-) -> torch.Tensor:
+490-    if n_steps <= 0 or n_points < 2:
+491-        return torch.zeros(1, device=alpha.device, dtype=alpha.dtype).mean()
+492-
+493-    alpha_samples = alpha[:, 0]
+494-    ci_samples = model.get_ci(alpha).detach()[:, 0]
+495:    mapping_scale = model.get_mapping_scale().detach()
+496-
+497:    losses: list[torch.Tensor] = []
+498-    for alpha_val, ci_val in zip(alpha_samples, ci_samples):
+499-        alpha_scalar = alpha_val.view(1)
+500-        ci_scalar = ci_val.view(1)
+501:        sample_loss = _riccati_shooting_path_loss_from_sample(
+502-            model,
+503:            mapping_scale,
+504-            alpha_scalar,
+505-            ci_scalar,
+506-            mach,
+507-            n_steps=n_steps,
+508-            xi_boundary=xi_boundary,
+509-            n_points=n_points,
+510-        )
+511:        losses.append(sample_loss)
+512-
+513:    if not losses:
+514-        return torch.zeros(1, device=alpha.device, dtype=alpha.dtype).mean()
+515:    return torch.stack(losses).mean()
+516-
+517-
+518:def _riccati_rk4_step(
+519-    y_val: torch.Tensor,
+520:    gamma_val: torch.Tensor,
+521-    h: torch.Tensor,
+522-    alpha_val: torch.Tensor,
+523-    mach: float,
+524-    ci_val: torch.Tensor,
+525-) -> torch.Tensor:
+526:    k1 = riccati_gamma_rhs(y_val, gamma_val, alpha_val, mach, ci_val)
+527:    k2 = riccati_gamma_rhs(y_val + 0.5 * h, gamma_val + 0.5 * h * k1, alpha_val, mach, ci_val)
+528:    k3 = riccati_gamma_rhs(y_val + 0.5 * h, gamma_val + 0.5 * h * k2, alpha_val, mach, ci_val)
+529:    k4 = riccati_gamma_rhs(y_val + h, gamma_val + h * k3, alpha_val, mach, ci_val)
+530:    gamma_next = gamma_val + (h / 6.0) * (k1 + 2.0 * k2 + 2.0 * k3 + k4)
+531:    return _clamp_complex_abs(gamma_next, max_abs=RICCATI_STATE_CLAMP)
+532-
+533-
+534:def _riccati_segment_integrate(
+535-    y_start: torch.Tensor,
+536-    y_end: torch.Tensor,
+537:    gamma_start: torch.Tensor,
+538-    alpha_val: torch.Tensor,
+539-    mach: float,
+540-    ci_val: torch.Tensor,
+541-    *,
+542-    n_substeps: int,
+543-) -> torch.Tensor:
+544-    if n_substeps <= 0:
+545:        return gamma_start
+546:    gamma_curr = gamma_start
+547-    y_curr = y_start
+548-    h = (y_end - y_start) / float(n_substeps)
+549-    for _ in range(int(n_substeps)):
+550:        gamma_curr = _riccati_rk4_step(y_curr, gamma_curr, h, alpha_val, mach, ci_val)
+551-        y_curr = y_curr + h
+552:    return gamma_curr
+553-
+554-
+555:def _riccati_shooting_path_loss_from_sample(
+556-    model,
+557:    mapping_scale: torch.Tensor,
+558-    alpha_scalar: torch.Tensor,
+559-    ci_scalar: torch.Tensor,
+560-    mach: float,
+561-    *,
+562-    n_steps: int,
+563-    xi_boundary: float,
+564-    n_points: int,
+565-) -> torch.Tensor:
+566-    device = alpha_scalar.device
+567-    dtype = alpha_scalar.dtype
+568-
+569-    xi_left = torch.linspace(-float(xi_boundary), 0.0, int(n_points), device=device, dtype=dtype).view(-1, 1)
+570-    xi_right = torch.linspace(0.0, float(xi_boundary), int(n_points), device=device, dtype=dtype).view(-1, 1)
+571-
+572-    alpha_left = alpha_scalar.view(1, 1).repeat(xi_left.shape[0], 1)
+573-    alpha_right = alpha_scalar.view(1, 1).repeat(xi_right.shape[0], 1)
+574-
+575-    pred_left = model(xi_left, alpha_left)
+576-    pred_right = model(xi_right, alpha_right)
+577:    gamma_left_pred = torch.complex(pred_left[:, 0], pred_left[:, 1])
+578:    gamma_right_pred = torch.complex(pred_right[:, 0], pred_right[:, 1])
+579-
+580-    with torch.no_grad():
+581:        y_left = xi_to_y(xi_left, mapping_scale)[:, 0]
+582:        y_right = xi_to_y(xi_right, mapping_scale)[:, 0]
+583-
+584:        gamma_left_0, gamma_right_0 = asymptotic_riccati_gammas(alpha_scalar, mach, ci_scalar)
+585:        gamma_left_curr = gamma_left_0[0]
+586:        gamma_right_curr = gamma_right_0[0]
+587-
+588:        left_path = [gamma_left_curr]
+589:        right_desc_path = [gamma_right_curr]
+590-
+591-        n_segments = max(int(n_points) - 1, 1)
+592-        n_substeps = max(int(n_steps) // n_segments, 1)
+593-
+594-        for idx in range(1, y_left.shape[0]):
+595:            gamma_left_curr = _riccati_segment_integrate(
+596-                y_left[idx - 1],
+597-                y_left[idx],
+598:                gamma_left_curr,
+599-                alpha_scalar[0],
+600-                mach,
+601-                ci_scalar[0],
+602-                n_substeps=n_substeps,
+603-            )
+604:            left_path.append(gamma_left_curr)
+605-
+606-        y_right_desc = torch.flip(y_right, dims=[0])
+607-        for idx in range(1, y_right_desc.shape[0]):
+608:            gamma_right_curr = _riccati_segment_integrate(
+609-                y_right_desc[idx - 1],
+610-                y_right_desc[idx],
+611:                gamma_right_curr,
+612-                alpha_scalar[0],
+613-                mach,
+614-                ci_scalar[0],
+615-                n_substeps=n_substeps,
+616-            )
+617:            right_desc_path.append(gamma_right_curr)
+618-
+619:        gamma_left_target = torch.stack(left_path)
+620:        gamma_right_target = torch.flip(torch.stack(right_desc_path), dims=[0])
+621-
+622:    gamma_left_target = _clamp_complex_abs(gamma_left_target, max_abs=RICCATI_STATE_CLAMP)
+623:    gamma_right_target = _clamp_complex_abs(gamma_right_target, max_abs=RICCATI_STATE_CLAMP)
+624:    gamma_left_pred = _clamp_complex_abs(gamma_left_pred, max_abs=RICCATI_STATE_CLAMP)
+625:    gamma_right_pred = _clamp_complex_abs(gamma_right_pred, max_abs=RICCATI_STATE_CLAMP)
+626-
+627:    left_loss = (gamma_left_pred.real - gamma_left_target.real).pow(2) + (gamma_left_pred.imag - gamma_left_target.imag).pow(2)
+628:    right_loss = (gamma_right_pred.real - gamma_right_target.real).pow(2) + (gamma_right_pred.imag - gamma_right_target.imag).pow(2)
+629:    loss = 0.5 * (left_loss.mean() + right_loss.mean())
+630:    return torch.nan_to_num(loss, nan=RICCATI_STATE_CLAMP**2, posinf=RICCATI_STATE_CLAMP**2, neginf=RICCATI_STATE_CLAMP**2)
+631-
+632-
+633:def _riccati_shooting_match_loss_from_samples(
+634:    mapping_scale: torch.Tensor,
+635-    alpha_samples: torch.Tensor,
+636-    ci_samples: torch.Tensor,
+637-    mach: float,
+638-    *,
+639-    n_steps: int,
+640-    xi_boundary: float,
+641-) -> torch.Tensor:
+642-    if n_steps <= 0:
+643-        return torch.zeros(alpha_samples.shape[0], device=alpha_samples.device, dtype=alpha_samples.dtype)
+644-
+645-    xi_edge = torch.tensor([[float(xi_boundary)]], dtype=alpha_samples.dtype, device=alpha_samples.device)
+646:    y_max = torch.abs(xi_to_y(xi_edge, mapping_scale))[0, 0]
+647-    if not torch.isfinite(y_max) or float(torch.abs(y_max).detach().cpu()) <= 0.0:
+648-        return torch.zeros(alpha_samples.shape[0], device=alpha_samples.device, dtype=alpha_samples.dtype)
+649-
+650:    def rk4_step(y_val: torch.Tensor, gamma_val: torch.Tensor, h: torch.Tensor, alpha_val: torch.Tensor, ci_val: torch.Tensor) -> torch.Tensor:
+651:        return _riccati_rk4_step(y_val, gamma_val, h, alpha_val, mach, ci_val)
+652-
+653:    losses: list[torch.Tensor] = []
+654-    for alpha_val, ci_val in zip(alpha_samples, ci_samples):
+655-        alpha_scalar = alpha_val.view(1)
+656-        ci_scalar = ci_val.view(1)
+657:        gamma_left_0, gamma_right_0 = asymptotic_riccati_gammas(alpha_scalar, mach, ci_scalar)
+658:        gamma_left = gamma_left_0[0]
+659:        gamma_right = gamma_right_0[0]
+660-
+661-        y_left = -y_max
+662-        y_right = y_max
+663-        h_left = (torch.zeros_like(y_left) - y_left) / float(n_steps)
+664-        h_right = (torch.zeros_like(y_right) - y_right) / float(n_steps)
+665-
+666-        y_curr = y_left
+667-        for _ in range(int(n_steps)):
+668:            gamma_left = rk4_step(y_curr, gamma_left, h_left, alpha_scalar[0], ci_scalar[0])
+669-            y_curr = y_curr + h_left
+670-
+671-        y_curr = y_right
+672-        for _ in range(int(n_steps)):
+673:            gamma_right = rk4_step(y_curr, gamma_right, h_right, alpha_scalar[0], ci_scalar[0])
+674-            y_curr = y_curr + h_right
+675-
+676:        mismatch = torch.abs(gamma_left - gamma_right) ** 2
+677:        losses.append(torch.nan_to_num(mismatch.real, nan=RICCATI_STATE_CLAMP**2, posinf=RICCATI_STATE_CLAMP**2, neginf=RICCATI_STATE_CLAMP**2))
+678-
+679:    if not losses:
+680-        return torch.zeros(alpha_samples.shape[0], device=alpha_samples.device, dtype=alpha_samples.dtype)
+681:    return torch.stack(losses)
+682-
+683-
+684:def riccati_ci_local_min_loss(
+685-    model,
+686-    alpha: torch.Tensor,
+687-    mach: float,
+688-    *,
+689-    n_steps: int,
+690-    xi_boundary: float,
+691-    delta_abs: float,
+692-    delta_rel: float,
+693-    margin: float = 0.0,
+694-) -> torch.Tensor:
+695-    if n_steps <= 0:
+696-        return torch.zeros(1, device=alpha.device, dtype=alpha.dtype).mean()
+697-
+698-    ci_center = model.get_ci(alpha)[:, 0]
+699-    delta = torch.clamp(
+700-        float(delta_abs) + float(delta_rel) * torch.abs(ci_center),
+701-        min=max(float(delta_abs), 1e-6),
+702-    )
+703-    ci_minus = torch.clamp(ci_center - delta, min=1e-6)
+704-    ci_plus = ci_center + delta
+705-
+706:    mapping_scale = model.get_mapping_scale()
+707-    alpha_samples = alpha[:, 0]
+708:    mismatch_center = _riccati_shooting_match_loss_from_samples(
+709:        mapping_scale,
+710-        alpha_samples,
+711-        ci_center,
+712-        mach,
+713-        n_steps=n_steps,
+714-        xi_boundary=xi_boundary,
+715-    )
+716:    mismatch_minus = _riccati_shooting_match_loss_from_samples(
+717:        mapping_scale,
+718-        alpha_samples,
+719-        ci_minus,
+720-        mach,
+721-        n_steps=n_steps,
+722-        xi_boundary=xi_boundary,
+723-    )
+724:    mismatch_plus = _riccati_shooting_match_loss_from_samples(
+725:        mapping_scale,
+726-        alpha_samples,
+727-        ci_plus,
+728-        mach,
+729-        n_steps=n_steps,
+730-        xi_boundary=xi_boundary,
+731-    )
+732-
+733-    margin_t = torch.as_tensor(float(margin), dtype=alpha.dtype, device=alpha.device)
+734-    penalty_minus = torch.relu(mismatch_center - mismatch_minus + margin_t).pow(2)
+735-    penalty_plus = torch.relu(mismatch_center - mismatch_plus + margin_t).pow(2)
+736-    return 0.5 * (penalty_minus.mean() + penalty_plus.mean())
+737-
+738-
+739:def normalization_loss(
+740-    model,
+741-    xi_ref: torch.Tensor,
+742-    alpha: torch.Tensor,
+743-    *,
+744-    target_pr: float = 1.0,
+745-    target_pi: float = 0.0,
+746-) -> torch.Tensor:
+747-    pred = model(xi_ref, alpha)
+748-    pred_pr, pred_pi = extract_pressure_components(pred)
+749-    pred_mode = torch.cat([pred_pr, pred_pi], dim=-1)
+750-    target = torch.tensor([target_pr, target_pi], dtype=pred.dtype, device=pred.device).view(1, 2)
+751-    return torch.mean((pred_mode - target) ** 2)
+752-
+753-
+754:def integral_normalization_loss(
+755-    model,
+756-    xi: torch.Tensor,
+757-    alpha: torch.Tensor,
+758-    *,
+759-    target_energy: float = 1.0,
+760-) -> torch.Tensor:
+761-    pred = model(xi, alpha)
+762-    pred_pr, pred_pi = extract_pressure_components(pred)
+763-    energy = torch.mean(pred_pr.pow(2) + pred_pi.pow(2))
+764-    target = torch.tensor(float(target_energy), dtype=pred.dtype, device=pred.device)
+765-    return (energy - target).pow(2)
+766-
+767-
+768:def phase_loss(model, xi_ref: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
+769-    pred = model(xi_ref, alpha)
+770-    pred_pr, pred_pi = extract_pressure_components(pred)
+771-    imag_penalty = torch.mean(pred_pi.pow(2))
+772-    sign_penalty = torch.mean(torch.relu(-pred_pr).pow(2))
+773-    return imag_penalty + sign_penalty
+774-
+775-
+776:def localization_moment_losses(
+777-    model,
+778-    xi: torch.Tensor,
+779-    alpha: torch.Tensor,
+780-) -> tuple[torch.Tensor, torch.Tensor]:
+781-    pred = model(xi, alpha)
+782-    pred_pr, pred_pi = extract_pressure_components(pred)
+783:    mapping_scale = model.get_mapping_scale()
+784:    y = xi_to_y(xi, mapping_scale)
+785-    weight = pred_pr.pow(2) + pred_pi.pow(2) + 1e-12
+786-    weight_sum = torch.mean(weight) + 1e-12
+787-    y_bar = torch.mean(y * weight) / weight_sum
+788-    spread = torch.mean((y - y_bar).pow(2) * weight) / weight_sum
+789-    return y_bar.pow(2), spread
+790-
+791-
+792:def local_peak_envelope_losses(
+793-    model,
+794-    xi_ref: torch.Tensor,
+795-    alpha: torch.Tensor,
+796-) -> tuple[torch.Tensor, torch.Tensor]:
+797-    if not xi_ref.requires_grad:
+798-        xi_ref.requires_grad_(True)
+799-    pred = model(xi_ref, alpha)
+800-    pred_pr, pred_pi = extract_pressure_components(pred)
+801-    env2 = pred_pr.pow(2) + pred_pi.pow(2)
+802-    env2_xi = _differentiate(env2, xi_ref)
+803-    env2_xixi = _differentiate(env2_xi, xi_ref)
+804:    slope_loss = torch.mean(env2_xi.pow(2))
+805:    curvature_loss = torch.mean(torch.relu(env2_xixi).pow(2))
+806:    return slope_loss, curvature_loss
+807-
+808-
+809:def first_order_stabilization_losses(
+810-    model,
+811-    xi: torch.Tensor,
+812-    alpha: torch.Tensor,
+813-    *,
+814-    amp_cap: float = 2.0,
+815-) -> tuple[torch.Tensor, torch.Tensor]:
+816-    if getattr(model, "mode_representation", "cartesian") != "first_order_real":
+817-        zero = torch.zeros(1, device=xi.device, dtype=xi.dtype).mean()
+818-        return zero, zero
+819-
+820-    pred = model(xi, alpha)
+821-    pr = pred[:, 0:1]
+822-    pi = pred[:, 1:2]
+823-    vr = pred[:, 2:3]
+824-    vi = pred[:, 3:4]
+825-    amp2 = pr.pow(2) + pi.pow(2)
+826-    v_energy = torch.mean(vr.pow(2) + vi.pow(2))
+827:    amp_cap_loss = torch.mean(torch.relu(amp2 - float(amp_cap) ** 2).pow(2))
+828:    return v_energy, amp_cap_loss
+829-
+830-
+831:def pressure_ode_residual_2d(
+832-    model,
+833-    xi: torch.Tensor,
+834-    alpha: torch.Tensor,
+835-    mach: torch.Tensor,
+836-    ci_override: torch.Tensor | None = None,
+837-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+838-    if not xi.requires_grad:
+839-        xi.requires_grad_(True)
+840-
+841:    if getattr(model, "mode_representation", "cartesian") == "riccati":
+842-        outputs = model(xi, alpha, mach)
+843:        kappa = outputs[:, 0:1]
+844-        q = outputs[:, 1:2]
+845-
+846:        kappa_xi = _differentiate(kappa, xi)
+847-        q_xi = _differentiate(q, xi)
+848-
+849:        mapping_scale = model.get_mapping_scale()
+850:        y = xi_to_y(xi, mapping_scale)
+851:        y_xi = dy_dxi(xi, mapping_scale)
+852-
+853:        kappa_y = kappa_xi / y_xi
+854-        q_y = q_xi / y_xi
+855-
+856-        u = base_velocity(y)
+857-        du = base_velocity_derivative(y)
+858-        ci = ci_override if ci_override is not None else model.get_ci(alpha, mach)
+859-
+860:        gamma = torch.complex(kappa, q)
+861-        c = torch.complex(torch.zeros_like(ci), ci)
+862-        u_complex = torch.complex(u, torch.zeros_like(u))
+863-        du_complex = torch.complex(du, torch.zeros_like(du))
+864-        alpha_complex = torch.complex(alpha, torch.zeros_like(alpha))
+865-        mach_c = torch.complex(mach, torch.zeros_like(mach))
+866-
+867-        u_diff = u_complex - c
+868-        p_term = -2.0 * du_complex / u_diff
+869-        r_term = 1.0 - mach_c.pow(2) * (u_diff**2)
+870:        gamma_rhs = -(gamma**2) - p_term * gamma + (alpha_complex**2) * r_term
+871:        gamma_y = torch.complex(kappa_y, q_y)
+872:        residual = gamma_y - gamma_rhs
+873:        return residual.real, residual.imag, y
+874-
+875-    outputs = model(xi, alpha, mach)
+876-    p_r = outputs[:, 0:1]
+877-    p_i = outputs[:, 1:2]
+878-
+879-    p_r_xi = _differentiate(p_r, xi)
+880-    p_i_xi = _differentiate(p_i, xi)
+881-    p_r_xixi = _differentiate(p_r_xi, xi)
+882-    p_i_xixi = _differentiate(p_i_xi, xi)
+883-
+884:    mapping_scale = model.get_mapping_scale()
+885:    y = xi_to_y(xi, mapping_scale)
+886:    y_xi = dy_dxi(xi, mapping_scale)
+887:    y_xixi = d2y_dxi2(xi, mapping_scale)
+888-
+889-    p_r_y = p_r_xi / y_xi
+890-    p_i_y = p_i_xi / y_xi
+891-    p_r_yy = p_r_xixi / y_xi.pow(2) - p_r_xi * y_xixi / y_xi.pow(3)
+892-    p_i_yy = p_i_xixi / y_xi.pow(2) - p_i_xi * y_xixi / y_xi.pow(3)
+893-
+894-    u = base_velocity(y)
+895-    du = base_velocity_derivative(y)
+896-    ci = ci_override if ci_override is not None else model.get_ci(alpha, mach)
+897-
+898-    ur = u
+899-    ui = -ci
+900-    q_r = mach.pow(2) * (ur.pow(2) - ui.pow(2)) - 1.0
+901-    q_i = 2.0 * mach.pow(2) * ur * ui
+902-
+903-    res_r = ur * p_r_yy - ui * p_i_yy - 2.0 * du * p_r_y + alpha.pow(2) * (q_r * p_r - q_i * p_i)
+904-    res_i = ur * p_i_yy + ui * p_r_yy - 2.0 * du * p_i_y + alpha.pow(2) * (q_r * p_i + q_i * p_r)
+905-    return res_r, res_i, y
+906-
+907-
+908:def boundary_decay_loss_2d(model, xi_left: torch.Tensor, xi_right: torch.Tensor, alpha: torch.Tensor, mach: torch.Tensor) -> torch.Tensor:
+909-    pred_left = model(xi_left, alpha, mach)
+910-    pred_right = model(xi_right, alpha, mach)
+911-    return pred_left.pow(2).mean() + pred_right.pow(2).mean()
+912-
+913-
+914:def riccati_boundary_loss_components_2d(
+915-    model,
+916-    xi_left: torch.Tensor,
+917-    xi_right: torch.Tensor,
+918-    alpha: torch.Tensor,
+919-    mach: torch.Tensor,
+920-    *,
+921-    ci_override: torch.Tensor | None = None,
+922-) -> tuple[torch.Tensor, torch.Tensor]:
+923-    pred_left = model(xi_left, alpha, mach)
+924-    pred_right = model(xi_right, alpha, mach)
+925-    ci = ci_override if ci_override is not None else model.get_ci(alpha, mach)
+926-
+927-    one = torch.ones_like(ci)
+928-    c = torch.complex(torch.zeros_like(ci), ci)
+929-    alpha_c = torch.complex(alpha, torch.zeros_like(alpha))
+930-    mach_c = torch.complex(mach, torch.zeros_like(mach))
+931-
+932-    r_inf_left = one - mach_c.pow(2) * ((-one - c) ** 2)
+933-    r_inf_right = one - mach_c.pow(2) * ((one - c) ** 2)
+934-
+935:    gamma_left = alpha_c * _principal_sqrt_torch(r_inf_left)
+936:    gamma_right = -alpha_c * _principal_sqrt_torch(r_inf_right)
+937-
+938:    loss_kappa = (
+939:        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+940:        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+941-    )
+942:    loss_q = (
+943:        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+944:        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+945-    )
+946:    return loss_kappa, loss_q
+947-
+948-
+949:def normalization_loss_2d(
+950-    model,
+951-    xi_ref: torch.Tensor,
+952-    alpha: torch.Tensor,
+953-    mach: torch.Tensor,
+954-    *,
+955-    target_pr: float = 1.0,
+956-    target_pi: float = 0.0,
+957-) -> torch.Tensor:
+958-    pred = model(xi_ref, alpha, mach)
+959-    target = torch.tensor([target_pr, target_pi], dtype=pred.dtype, device=pred.device).view(1, 2)
+960-    return torch.mean((pred - target) ** 2)
+961-
+962-
+963:def phase_loss_2d(model, xi_ref: torch.Tensor, alpha: torch.Tensor, mach: torch.Tensor) -> torch.Tensor:
+964-    pred = model(xi_ref, alpha, mach)
+965-    return torch.mean(pred[:, 1:2].pow(2))

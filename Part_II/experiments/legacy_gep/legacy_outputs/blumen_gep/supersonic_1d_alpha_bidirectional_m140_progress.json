@@ -1,0 +1,9 @@
+{
+  "completed_points": 31,
+  "stored_modes": 30,
+  "chunk_stems": [
+    "supersonic_1d_alpha_bidirectional_m140_down",
+    "supersonic_1d_alpha_bidirectional_m140_up"
+  ],
+  "output_stem": "supersonic_1d_alpha_bidirectional_m140"
+}

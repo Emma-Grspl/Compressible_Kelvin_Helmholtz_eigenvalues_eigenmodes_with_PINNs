@@ -1,0 +1,13 @@
+key,110,150,190
+Mach,1.1,1.5,1.9
+alpha_max,0.345,0.27,0.215
+alpha_min,0.09,0.05,0.05
+experiment_family,'local_supersonic_M110_sparse_v1','local_supersonic_M150_sparse_v1','local_supersonic_M190_sparse_v1'
+model.alpha_gate_width,0.0204,0.02,0.013199999999999998
+model.alpha_split,0.2275,0.17,0.14
+model.ci_max,0.2874878683316643,0.15,0.15
+model.cr_max,0.3541753238627558,0.5,0.61185864489249
+model.cr_min,-0.11805843887026102,0.2,0.35750130330964924
+output_dir,'assets/pinn_supersonic/pilots/local_M110_sparse_v1/runs/S4','assets/pinn_supersonic/pilots/local_M150_sparse_v1/runs/S4','assets/pinn_supersonic/pilots/local_M190_sparse_v1/runs/S4'
+spectral_anchor_file,'assets/pinn_supersonic/pilots/local_M110_sparse_v1/data/spectral_anchors_S4_M110.csv','assets/pinn_supersonic/pilots/local_M150_sparse_v1/data/spectral_anchors_S4_M150.csv','assets/pinn_supersonic/pilots/local_M190_sparse_v1/data/spectral_anchors_S4_M190.csv'
+spectral_reference,'assets/pinn_supersonic/pilots/local_M110_sparse_v1/data/spectral_full_M110.csv','assets/pinn_supersonic/pilots/local_M150_sparse_v1/data/spectral_full_M150.csv','assets/pinn_supersonic/pilots/local_M190_sparse_v1/data/spectral_full_M190.csv'

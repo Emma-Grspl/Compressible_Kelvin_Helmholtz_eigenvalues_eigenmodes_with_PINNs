@@ -1,0 +1,31 @@
+{
+  "branches": [
+    {
+      "Mach": 1.0,
+      "alpha_max": 0.36,
+      "alpha_min": 0.05,
+      "max_residual_norm": 2.675991931448228e-09,
+      "n_retained": 63,
+      "neutral_alpha_estimate": NaN
+    },
+    {
+      "Mach": 1.05,
+      "alpha_max": 0.355,
+      "alpha_min": 0.125,
+      "max_residual_norm": 7.718806904113757e-09,
+      "n_retained": 47,
+      "neutral_alpha_estimate": NaN
+    }
+  ],
+  "failures": [
+    "M=1.0: no neutral-alpha estimate",
+    "M=1.05: missing retained alpha in [0.05,0.10]: [0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08, 0.085, 0.09, 0.095, 0.1]",
+    "M=1.05: gaps before neutral boundary: [0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08, 0.085, 0.09, 0.095, 0.1, 0.105, 0.11, 0.115, 0.12]",
+    "M=1.05: no neutral-alpha estimate"
+  ],
+  "missing_modes": 0,
+  "n_modes": 110,
+  "n_retained": 110,
+  "root": "classic_supersonic/reproducibility/results/dense_kappa_q_lowM_full_branches_v1",
+  "status": "FAIL"
+}

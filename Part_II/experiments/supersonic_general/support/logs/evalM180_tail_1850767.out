@@ -1,0 +1,11 @@
+{
+  "checkpoint": "assets/pinn_supersonic/runs/pinn_chart_M180_alpha_070_190_pq_supervised_tail_polished_asinh_w192_d6/best_model.pt",
+  "best_val": 8.578641290276163e-05,
+  "global_p_rel_l2": 0.00740126795205901,
+  "global_q_rel_l2": 0.003030244487560212,
+  "cr_abs_mean": 3.7503346024281746e-06,
+  "cr_abs_max": 9.903502857788737e-06,
+  "ci_abs_mean": 1.357152288970035e-06,
+  "ci_abs_max": 3.033596383483772e-06
+}
+[done] wrote metrics/predictions in assets/pinn_supersonic/runs/pinn_chart_M180_alpha_070_190_pq_supervised_tail_polished_asinh_w192_d6

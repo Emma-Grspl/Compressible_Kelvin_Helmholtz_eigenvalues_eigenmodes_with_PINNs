@@ -1,0 +1,74 @@
+{
+  "case": {
+    "name": "witness_M150_a01625",
+    "Mach": 1.5,
+    "alpha": 0.1625
+  },
+  "result_class": {
+    "name": "Mstab17SupersonicResult",
+    "module": "classic_supersonic_reference.solver.mstab17_supersonic_solver",
+    "is_dataclass": true,
+    "dataclass_fields": [
+      "alpha",
+      "Mach",
+      "cr",
+      "ci",
+      "omega_i",
+      "stage1_mismatch",
+      "stage2_mismatch",
+      "y_limit",
+      "ln_p_start_right",
+      "spectral_success",
+      "mode_success",
+      "success",
+      "use_mapping",
+      "mapping_scale"
+    ]
+  },
+  "elapsed_seconds": 21.908042834023945,
+  "public_attributes": [
+    "Mach",
+    "alpha",
+    "ci",
+    "cr",
+    "ln_p_start_right",
+    "mapping_scale",
+    "mode_success",
+    "omega_i",
+    "spectral_success",
+    "stage1_mismatch",
+    "stage2_mismatch",
+    "success",
+    "use_mapping",
+    "y_limit"
+  ],
+  "candidate_modal_attributes": [
+    "alpha",
+    "ci",
+    "cr",
+    "ln_p_start_right",
+    "mapping_scale",
+    "mode_success",
+    "omega_i",
+    "spectral_success",
+    "success",
+    "use_mapping",
+    "y_limit"
+  ],
+  "attributes": {
+    "Mach": 1.5,
+    "alpha": 0.1625,
+    "ci": 0.03800674064024567,
+    "cr": 0.36808800427906274,
+    "ln_p_start_right": -8.741267873014248,
+    "mapping_scale": 5.0,
+    "mode_success": true,
+    "omega_i": 0.006176095354039922,
+    "spectral_success": true,
+    "stage1_mismatch": 5.103536689850155e-10,
+    "stage2_mismatch": 3.1554436208840472e-30,
+    "success": true,
+    "use_mapping": false,
+    "y_limit": 80.0
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "selected_checkpoint": "assets/pinn_supersonic/atlas2d_v1_continuousM_fullc_v1/N76/runs/C01/best_joint_checkpoint.pt",
+  "best_stage_losses": {
+    "spectral_prefit": 0.00026789490948431194,
+    "modal_frozen_spectrum": 0.0011953877983614802,
+    "joint": 0.001005866564810276
+  },
+  "test_audited": false
+}

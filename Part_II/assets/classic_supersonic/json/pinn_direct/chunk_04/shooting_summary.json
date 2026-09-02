@@ -1,0 +1,23 @@
+{
+  "n_total": 50,
+  "n_shoot_completed": 50,
+  "n_spectral_success": 50,
+  "n_mode_success": 50,
+  "spectral_error_mean": 3.7952706720593798e-06,
+  "spectral_error_median": 3.7905002715036087e-06,
+  "spectral_error_p90": 5.9122271129083175e-06,
+  "spectral_error_p95": 8.052491988276577e-06,
+  "spectral_error_p99": 8.348782100568398e-06,
+  "spectral_error_max": 8.353336445997231e-06,
+  "n_error_le_1e-6": 3,
+  "n_error_le_1e-5": 50,
+  "n_error_le_1e-4": 50,
+  "n_error_le_1e-3": 50,
+  "n_error_le_5e-3": 50,
+  "n_error_le_1e-2": 50,
+  "n_improved_vs_pinn": 50,
+  "n_worsened_vs_pinn": 0,
+  "mean_seconds": 356.6748242796969,
+  "median_seconds": 333.5789332205022,
+  "total_seconds": 17833.741213984846
+}

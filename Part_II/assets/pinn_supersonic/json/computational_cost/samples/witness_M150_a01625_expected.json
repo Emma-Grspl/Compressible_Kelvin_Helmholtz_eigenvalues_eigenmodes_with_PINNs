@@ -1,0 +1,177 @@
+{
+  "name": "witness_M150_a01625",
+  "reference_version": "2.0.0",
+  "point": {
+    "Mach": 1.5,
+    "alpha": 0.1625
+  },
+  "spectral": {
+    "cr": 0.3680825090907056,
+    "ci": 0.0380056534011514,
+    "omega_i": 0.0061759186776871,
+    "validation_status": "modal_spectral_validated_with_exported_fields"
+  },
+  "modal": {
+    "variant": "raw_confirmed",
+    "sample_path": "experiments/supersonic_general/support/samples/witness_M150_a01625_raw.parquet",
+    "sample_sha256": "af94eafbc0da2d84f4a59d74917227462bf9946bd5d97ac4e74a94bf5d55fc8a",
+    "n_rows": 4594,
+    "y_min": -500.0000000000052,
+    "y_max": 500.0000000000052,
+    "columns": [
+      "alpha",
+      "Mach",
+      "y",
+      "p_real",
+      "p_imag",
+      "line_id",
+      "rho_real",
+      "rho_imag",
+      "u_real",
+      "u_imag",
+      "v_real",
+      "v_imag",
+      "source_fields_csv",
+      "source_label",
+      "source_group",
+      "reference_cr",
+      "reference_ci",
+      "reference_omega_i",
+      "trusted_spectral",
+      "trusted_modal",
+      "best_status",
+      "source_csv",
+      "validation_status",
+      "source",
+      "reference_role",
+      "cr",
+      "ci",
+      "omega_i",
+      "ln_p_start_right_exact",
+      "max_y_limit_used",
+      "setting",
+      "cr_range",
+      "ci_range",
+      "max_stage1",
+      "max_edge_frac",
+      "max_center_jump",
+      "max_modal_rel_l2",
+      "convergence_status",
+      "max_core_rel_l2_amp_ge_5pct",
+      "max_tail_rel_l2_amp_0p1pct_to_2pct",
+      "campaign_target_status",
+      "stage1_mismatch",
+      "stage2_mismatch_exact",
+      "y_limit",
+      "campaign_target_status_meta",
+      "selected_setting",
+      "touches_ci_upper_0p12",
+      "touches_cr_lower_0",
+      "boundary_flag",
+      "note"
+    ]
+  },
+  "source_modal_dataset": {
+    "path": "experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_raw.parquet",
+    "sha256": "48ad2aa9930f8d0607ac905b7654d13f01bb8756e2e58666acc3b4a7a7ced6cf",
+    "row_count": 838847
+  },
+  "numerical_reproduction": {
+    "status": "spectral_and_modal_reproduction_calibrated",
+    "selected_configuration": "unmapped_y80",
+    "observed": {
+      "cr_solved": 0.3680880042790627,
+      "ci_solved": 0.0380067406402456,
+      "omega_i_solved": 0.0061760953540399,
+      "abs_cr_error": 5.495188357129699e-06,
+      "abs_ci_error": 1.087239094275938e-06,
+      "abs_omega_i_error": 1.7667635281940625e-07,
+      "stage1_mismatch_at_reference": 1.5637739022447838e-06,
+      "stage1_mismatch_solved": 5.103536689850155e-10,
+      "elapsed_seconds": 21.226955124991942
+    },
+    "acceptance": {
+      "abs_cr_error_max": 1e-05,
+      "abs_ci_error_max": 2e-06,
+      "abs_omega_i_error_max": 5e-07,
+      "stage1_mismatch_max": 1e-08
+    },
+    "acceptance_checks": {
+      "abs_cr_error": true,
+      "abs_ci_error": true,
+      "abs_omega_i_error": true,
+      "stage1_mismatch": true
+    },
+    "modal_tolerances": null,
+    "note": "The unmapped y_max=80 configuration was retained because all three calibration configurations converged to the same spectral root while this configuration had the lowest runtime.",
+    "modal_reproduction": {
+      "status": "calibrated",
+      "calibration_runs": 3,
+      "acceptance": {
+        "calibration_runs": 3,
+        "safety_factor": 2.0,
+        "variants_required": [
+          "frozen_spectral_values",
+          "solved_spectral_root"
+        ],
+        "min_overlap_points": 4400,
+        "complex_correlation_core_min": 0.99999,
+        "alignment_abs_deviation_max": 0.0002,
+        "fields": {
+          "rho": {
+            "relative_l2_core_amp_ge_5pct_max": 0.0002,
+            "relative_l2_full_overlap_max": 0.0002,
+            "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0004
+          },
+          "u": {
+            "relative_l2_core_amp_ge_5pct_max": 0.004,
+            "relative_l2_full_overlap_max": 0.004,
+            "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0002
+          },
+          "v": {
+            "relative_l2_core_amp_ge_5pct_max": 0.0002,
+            "relative_l2_full_overlap_max": 0.0002,
+            "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0002
+          },
+          "p": {
+            "relative_l2_core_amp_ge_5pct_max": 0.0002,
+            "relative_l2_full_overlap_max": 0.0002,
+            "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0004
+          }
+        }
+      },
+      "observed_extrema": {
+        "minimum_overlap_points": 4474,
+        "minimum_complex_correlation_core": 0.9999988489166037,
+        "maximum_alignment_abs_deviation": 9.347876443244196e-05,
+        "fields": {
+          "rho": {
+            "relative_l2_core_amp_ge_5pct": 8.901568277028416e-05,
+            "relative_l2_full_overlap": 8.901574016358963e-05,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 0.00016024232629728403
+          },
+          "u": {
+            "relative_l2_core_amp_ge_5pct": 0.0015197498169878994,
+            "relative_l2_full_overlap": 0.0015196097686187226,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 9.454798264243417e-05
+          },
+          "v": {
+            "relative_l2_core_amp_ge_5pct": 9.627857132586294e-05,
+            "relative_l2_full_overlap": 9.627720625747247e-05,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 9.457357328089429e-05
+          },
+          "p": {
+            "relative_l2_core_amp_ge_5pct": 8.901568277036038e-05,
+            "relative_l2_full_overlap": 8.901574016366589e-05,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 0.00016024232629594266
+          }
+        }
+      },
+      "comparison_variants": [
+        "frozen_spectral_values",
+        "solved_spectral_root"
+      ],
+      "note": "Thresholds were derived from three repeated modal reconstructions. A factor of two was applied to the largest observed relative errors before rounding upward."
+    }
+  }
+}

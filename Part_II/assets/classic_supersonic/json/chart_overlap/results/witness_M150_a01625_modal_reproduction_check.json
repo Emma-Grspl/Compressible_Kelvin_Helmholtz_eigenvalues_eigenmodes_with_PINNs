@@ -1,0 +1,83 @@
+{
+  "case": {
+    "name": "witness_M150_a01625",
+    "Mach": 1.5,
+    "alpha": 0.1625
+  },
+  "calibration_path": "assets/classic_supersonic/json/chart_overlap/results/witness_M150_a01625_modal_calibration.json",
+  "acceptance": {
+    "calibration_runs": 3,
+    "safety_factor": 2.0,
+    "variants_required": [
+      "frozen_spectral_values",
+      "solved_spectral_root"
+    ],
+    "min_overlap_points": 4400,
+    "complex_correlation_core_min": 0.99999,
+    "alignment_abs_deviation_max": 0.0002,
+    "fields": {
+      "rho": {
+        "relative_l2_core_amp_ge_5pct_max": 0.0002,
+        "relative_l2_full_overlap_max": 0.0002,
+        "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0004
+      },
+      "u": {
+        "relative_l2_core_amp_ge_5pct_max": 0.004,
+        "relative_l2_full_overlap_max": 0.004,
+        "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0002
+      },
+      "v": {
+        "relative_l2_core_amp_ge_5pct_max": 0.0002,
+        "relative_l2_full_overlap_max": 0.0002,
+        "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0002
+      },
+      "p": {
+        "relative_l2_core_amp_ge_5pct_max": 0.0002,
+        "relative_l2_full_overlap_max": 0.0002,
+        "relative_l2_tail_amp_0p1pct_to_2pct_max": 0.0004
+      }
+    }
+  },
+  "checks": {
+    "variant:frozen_spectral_values:present": true,
+    "variant:solved_spectral_root:present": true,
+    "variant:frozen_spectral_values:overlap": true,
+    "variant:frozen_spectral_values:alignment": true,
+    "frozen_spectral_values:rho:core_l2": true,
+    "frozen_spectral_values:rho:full_l2": true,
+    "frozen_spectral_values:rho:tail_l2": true,
+    "frozen_spectral_values:rho:core_correlation": true,
+    "frozen_spectral_values:u:core_l2": true,
+    "frozen_spectral_values:u:full_l2": true,
+    "frozen_spectral_values:u:tail_l2": true,
+    "frozen_spectral_values:u:core_correlation": true,
+    "frozen_spectral_values:v:core_l2": true,
+    "frozen_spectral_values:v:full_l2": true,
+    "frozen_spectral_values:v:tail_l2": true,
+    "frozen_spectral_values:v:core_correlation": true,
+    "frozen_spectral_values:p:core_l2": true,
+    "frozen_spectral_values:p:full_l2": true,
+    "frozen_spectral_values:p:tail_l2": true,
+    "frozen_spectral_values:p:core_correlation": true,
+    "variant:solved_spectral_root:overlap": true,
+    "variant:solved_spectral_root:alignment": true,
+    "solved_spectral_root:rho:core_l2": true,
+    "solved_spectral_root:rho:full_l2": true,
+    "solved_spectral_root:rho:tail_l2": true,
+    "solved_spectral_root:rho:core_correlation": true,
+    "solved_spectral_root:u:core_l2": true,
+    "solved_spectral_root:u:full_l2": true,
+    "solved_spectral_root:u:tail_l2": true,
+    "solved_spectral_root:u:core_correlation": true,
+    "solved_spectral_root:v:core_l2": true,
+    "solved_spectral_root:v:full_l2": true,
+    "solved_spectral_root:v:tail_l2": true,
+    "solved_spectral_root:v:core_correlation": true,
+    "solved_spectral_root:p:core_l2": true,
+    "solved_spectral_root:p:full_l2": true,
+    "solved_spectral_root:p:tail_l2": true,
+    "solved_spectral_root:p:core_correlation": true
+  },
+  "failed_checks": [],
+  "passed": true
+}

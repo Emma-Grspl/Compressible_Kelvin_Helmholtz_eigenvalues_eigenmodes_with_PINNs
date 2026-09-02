@@ -1,0 +1,46 @@
+
+alpha=0.07000
+  spectral distance shooting/ref = 7.620066e-06
+  PINN/ref: overlap=1.000000, p_rel=2.604255e-04
+  shooting/ref: overlap=0.748997, p_rel=6.625733e-01
+
+alpha=0.10000
+  spectral distance shooting/ref = 6.393798e-06
+  PINN/ref: overlap=1.000000, p_rel=1.960358e-04
+  shooting/ref: overlap=0.739750, p_rel=6.728817e-01
+
+alpha=0.13000
+  spectral distance shooting/ref = 6.555055e-06
+  PINN/ref: overlap=1.000000, p_rel=2.175103e-04
+  shooting/ref: overlap=0.731953, p_rel=6.813549e-01
+
+alpha=0.16000
+  spectral distance shooting/ref = 6.405267e-06
+  PINN/ref: overlap=1.000000, p_rel=1.714754e-04
+  shooting/ref: overlap=0.722815, p_rel=6.910416e-01
+
+alpha=0.19000
+  spectral distance shooting/ref = 5.583937e-06
+  PINN/ref: overlap=1.000000, p_rel=3.343358e-04
+  shooting/ref: overlap=0.712155, p_rel=7.020220e-01
+
+SUMMARY
+ Mach  alpha   cr_ref   ci_ref  pinn_cr  pinn_ci  shooting_cr  shooting_ci  shooting_stage1_mismatch  shooting_stage2_mismatch  shooting_spectral_distance_to_reference  pinn_reference_p_overlap  pinn_reference_p_rel_after_fit  shooting_reference_p_overlap  shooting_reference_p_rel_after_fit  pinn_reference_modal_valid  shooting_reference_modal_valid
+  1.8   0.07 0.434397 0.027511 0.434392 0.027512     0.434390     0.027513              8.325311e-08                 27.427835                                 0.000008                       1.0                        0.000260                      0.748997                            0.662573                        True                           False
+  1.8   0.10 0.448800 0.027004 0.448797 0.027003     0.448794     0.027003              3.805591e-08                130.995172                                 0.000006                       1.0                        0.000196                      0.739750                            0.672882                        True                           False
+  1.8   0.13 0.460761 0.023242 0.460766 0.023240     0.460767     0.023240              9.191729e-08                463.878023                                 0.000007                       1.0                        0.000218                      0.731953                            0.681355                        True                           False
+  1.8   0.16 0.470816 0.017479 0.470820 0.017480     0.470821     0.017481              3.709705e-08               1638.182026                                 0.000006                       1.0                        0.000171                      0.722815                            0.691042                        True                           False
+  1.8   0.19 0.479409 0.010449 0.479409 0.010449     0.479404     0.010450              6.280982e-08               7807.696188                                 0.000006                       1.0                        0.000334                      0.712155                            0.702022                        True                           False
+
+REPORT
+{
+  "n_cases": 5,
+  "n_pinn_reference_modal_valid": 5,
+  "n_shooting_reference_modal_valid": 0,
+  "median_pinn_reference_p_rel": 0.0002175103319269385,
+  "median_shooting_reference_p_rel": 0.6813548648973065,
+  "interpretation": {
+    "shooting_bad_at_anchors": "The shooting modal reconstruction is incompatible with the classical modal dataset.",
+    "shooting_good_at_anchors_only": "The shooting reconstruction is valid, but the PINN modal interpolation must be investigated off-anchor."
+  }
+}

@@ -1,0 +1,5 @@
+relation,relative_L2,relative_Linf,normalization,n_valid_points
+p_y=(kappa+i q)p,0.009552742473683724,0.09127758335974155,||gamma p|| on |y|<=250,3561
+rho=M^2 p,1.369281082694741e-16,3.4667315738602897e-16,||rho|| on |y|<=250,3561
+v=i p_y/[alpha(U-c)],0.009211856788023437,0.09086229400029225,||v|| on |y|<=250,3561
+u=-p/(U-c)+i Uprime v/[alpha(U-c)],5.143871586937516e-16,1.9461921035166246e-15,||u|| on |y|<=250,3561

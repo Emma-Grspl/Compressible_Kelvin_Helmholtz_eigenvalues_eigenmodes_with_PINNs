@@ -1,0 +1,11 @@
+{
+  "Mach": 1.65,
+  "alpha": 0.05,
+  "completed_at": "2026-07-24T08:34:21+00:00",
+  "modal_runs": 3,
+  "modal_success": 3,
+  "role": "low_alpha",
+  "spectral_accepted": 8,
+  "spectral_runs": 8,
+  "task_index": 33
+}

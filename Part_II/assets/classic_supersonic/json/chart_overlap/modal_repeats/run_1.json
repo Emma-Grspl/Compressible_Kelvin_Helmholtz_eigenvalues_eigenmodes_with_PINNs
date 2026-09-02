@@ -1,0 +1,169 @@
+{
+  "case": {
+    "name": "witness_M150_a01625",
+    "Mach": 1.5,
+    "alpha": 0.1625
+  },
+  "status": "calibration_only",
+  "reference_modal_variant": "raw_confirmed",
+  "reference_path": "experiments/supersonic_general/support/samples/witness_M150_a01625_raw.parquet",
+  "solve_result": {
+    "cr": 0.36808800427906274,
+    "ci": 0.03800674064024567,
+    "omega_i": 0.006176095354039922,
+    "stage1_mismatch": 5.103536689850155e-10,
+    "stage2_mismatch": 3.1554436208840472e-30,
+    "y_limit": 80.0,
+    "ln_p_start_right": -8.741267873014248,
+    "success": true
+  },
+  "frozen_spectral_reconstruction": {
+    "cr": 0.3680825090907056,
+    "ci": 0.0380056534011514,
+    "omega_i": 0.0061759186776871,
+    "ln_p_start_right": -8.741037601919768
+  },
+  "comparison": {
+    "alignment": "single global complex least-squares factor",
+    "core_definition": "field amplitude >= 5% of its reference peak",
+    "tail_definition": "0.1% <= field amplitude <= 2% of its reference peak",
+    "outside_overlap": "not evaluated",
+    "variants": [
+      {
+        "variant": "solved_spectral_root",
+        "reconstructed_y_min": -80.0,
+        "reconstructed_y_max": 80.0,
+        "reference_y_min": -500.0000000000052,
+        "reference_y_max": 500.0000000000052,
+        "overlap_y_min": -79.05141356907998,
+        "overlap_y_max": 79.71996167468761,
+        "n_reference_total": 4594,
+        "n_overlap": 4474,
+        "alignment": {
+          "real": 1.0000858376414872,
+          "imag": -1.3261987147434352e-06,
+          "absolute": 1.0000858376423665,
+          "phase_radians": -1.326084886743568e-06
+        },
+        "fields": {
+          "rho": {
+            "reference_peak": 1.0,
+            "n_full": 4474,
+            "n_core_amp_ge_5pct": 4435,
+            "n_tail_amp_0p1pct_to_2pct": 13,
+            "relative_l2_full_overlap": 7.88183503119519e-05,
+            "relative_l2_core_amp_ge_5pct": 7.881787728588733e-05,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 0.00016024232629728403,
+            "complex_correlation_full": 0.9999999999303382,
+            "complex_correlation_core": 0.9999999999305063,
+            "max_abs_error_over_peak": 8.958509114905032e-05
+          },
+          "u": {
+            "reference_peak": 2.8794675789978283,
+            "n_full": 4474,
+            "n_core_amp_ge_5pct": 4338,
+            "n_tail_amp_0p1pct_to_2pct": 61,
+            "relative_l2_full_overlap": 0.0015188994813266224,
+            "relative_l2_core_amp_ge_5pct": 0.0015190398347099273,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 8.552607628201691e-05,
+            "complex_correlation_full": 0.9999988494282301,
+            "complex_correlation_core": 0.999998849216093,
+            "max_abs_error_over_peak": 0.007591874633313054
+          },
+          "v": {
+            "reference_peak": 0.5682429381047497,
+            "n_full": 4474,
+            "n_core_amp_ge_5pct": 4399,
+            "n_tail_amp_0p1pct_to_2pct": 33,
+            "relative_l2_full_overlap": 9.627720625747247e-05,
+            "relative_l2_core_amp_ge_5pct": 9.627857132586294e-05,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 6.814849432596556e-05,
+            "complex_correlation_full": 0.9999999978951141,
+            "complex_correlation_core": 0.9999999978951523,
+            "max_abs_error_over_peak": 0.0003495703658370164
+          },
+          "p": {
+            "reference_peak": 0.4444444444444443,
+            "n_full": 4474,
+            "n_core_amp_ge_5pct": 4435,
+            "n_tail_amp_0p1pct_to_2pct": 13,
+            "relative_l2_full_overlap": 7.881835031202708e-05,
+            "relative_l2_core_amp_ge_5pct": 7.881787728596253e-05,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 0.00016024232629594266,
+            "complex_correlation_full": 0.9999999999303387,
+            "complex_correlation_core": 0.9999999999305077,
+            "max_abs_error_over_peak": 8.958509114909334e-05
+          }
+        }
+      },
+      {
+        "variant": "frozen_spectral_values",
+        "reconstructed_y_min": -80.0,
+        "reconstructed_y_max": 80.0,
+        "reference_y_min": -500.0000000000052,
+        "reference_y_max": 500.0000000000052,
+        "overlap_y_min": -79.05141356907998,
+        "overlap_y_max": 79.71996167468761,
+        "n_reference_total": 4594,
+        "n_overlap": 4474,
+        "alignment": {
+          "real": 1.0000934787352478,
+          "imag": -7.640344857624002e-06,
+          "absolute": 1.0000934787644324,
+          "phase_radians": -7.639630714458414e-06
+        },
+        "fields": {
+          "rho": {
+            "reference_peak": 1.0,
+            "n_full": 4474,
+            "n_core_amp_ge_5pct": 4435,
+            "n_tail_amp_0p1pct_to_2pct": 13,
+            "relative_l2_full_overlap": 8.901574016358963e-05,
+            "relative_l2_core_amp_ge_5pct": 8.901568277028416e-05,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 9.452959812537397e-05,
+            "complex_correlation_full": 0.9999999999685042,
+            "complex_correlation_core": 0.9999999999685041,
+            "max_abs_error_over_peak": 9.565236752649577e-05
+          },
+          "u": {
+            "reference_peak": 2.8794675789978283,
+            "n_full": 4474,
+            "n_core_amp_ge_5pct": 4338,
+            "n_tail_amp_0p1pct_to_2pct": 61,
+            "relative_l2_full_overlap": 0.0015196097686187226,
+            "relative_l2_core_amp_ge_5pct": 0.0015197498169878994,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 9.454798264243417e-05,
+            "complex_correlation_full": 0.9999988491265485,
+            "complex_correlation_core": 0.9999988489166037,
+            "max_abs_error_over_peak": 0.00761877535858206
+          },
+          "v": {
+            "reference_peak": 0.5682429381047497,
+            "n_full": 4474,
+            "n_core_amp_ge_5pct": 4399,
+            "n_tail_amp_0p1pct_to_2pct": 33,
+            "relative_l2_full_overlap": 9.502867700547814e-05,
+            "relative_l2_core_amp_ge_5pct": 9.502869071335686e-05,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 9.457357328089429e-05,
+            "complex_correlation_full": 0.999999998121515,
+            "complex_correlation_core": 0.9999999981214638,
+            "max_abs_error_over_peak": 0.00034507418054657607
+          },
+          "p": {
+            "reference_peak": 0.4444444444444443,
+            "n_full": 4474,
+            "n_core_amp_ge_5pct": 4435,
+            "n_tail_amp_0p1pct_to_2pct": 13,
+            "relative_l2_full_overlap": 8.901574016366589e-05,
+            "relative_l2_core_amp_ge_5pct": 8.901568277036038e-05,
+            "relative_l2_tail_amp_0p1pct_to_2pct": 9.452959812621777e-05,
+            "complex_correlation_full": 0.9999999999685061,
+            "complex_correlation_core": 0.9999999999685061,
+            "max_abs_error_over_peak": 9.565236752647536e-05
+          }
+        }
+      }
+    ]
+  },
+  "elapsed_seconds": 25.929389249999076
+}

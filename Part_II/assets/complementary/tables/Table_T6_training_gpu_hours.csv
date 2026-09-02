@@ -1,0 +1,2 @@
+model,gpu_type,n_charts,gpus_per_chart,prefit_steps,modal_steps,joint_steps,total_steps_per_chart,total_gpu_seconds,total_gpu_hours,mean_seconds_per_chart,median_seconds_per_chart,min_seconds_per_chart,max_seconds_per_chart,scope
+N76 FULLC production atlas,NVIDIA V100,12,1,2000,4000,4000,10000,7719.0,2.1441666666666666,643.25,652.0,559.0,694.0,"Retained 12-chart N76 FULLC production training only; post-training classical shooting, validation, anchor-budget experiments and reviewer ablations excluded."

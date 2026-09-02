@@ -1,0 +1,33 @@
+{
+  "n_catalog_files": 22,
+  "n_catalog_points": 242,
+  "n_mach": 22,
+  "n_s": 11,
+  "n_modal_certified": 242,
+  "n_not_modal_certified": 0,
+  "complete_input": true,
+  "n_assembled": 242,
+  "tail_energy_fraction_min": 6.406909330595726e-08,
+  "tail_energy_fraction_mean": 0.007955789218790307,
+  "tail_energy_fraction_max": 0.3495396950235903,
+  "cross_mach_overlap_min": 0.9674870968786214,
+  "cross_mach_overlap_mean": 0.9957848616081897,
+  "complete": true
+}
+{
+  "n_catalog_files": 22,
+  "n_catalog_points": 242,
+  "n_mach": 22,
+  "n_s": 11,
+  "n_modal_certified": 242,
+  "n_not_modal_certified": 0,
+  "complete_input": true,
+  "n_assembled": 242,
+  "tail_energy_fraction_min": 6.406909330595726e-08,
+  "tail_energy_fraction_mean": 0.007955789218790307,
+  "tail_energy_fraction_max": 0.3495396950235903,
+  "cross_mach_overlap_min": 0.9674870968786214,
+  "cross_mach_overlap_mean": 0.9957848616081897,
+  "complete": true
+}
+ASSEMBLED ATLAS V2: COMPLETE

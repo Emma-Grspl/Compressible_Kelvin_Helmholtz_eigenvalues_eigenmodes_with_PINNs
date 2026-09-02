@@ -1,0 +1,10 @@
+Audit pointwise shooting supersonique sur r1i1n2
+points: 0.180000:1.80 0.190000:1.80 0.200000:1.80 0.210000:1.80 0.220000:1.80
+workers=16
+box: min=10 max=1400 factor=12 amp=[-30,5]
+Sun Jun 21 01:35:23 PM CEST 2026
+Supersonic shooting point audit
+points: 0.180:1.800 0.190:1.800 0.200:1.800 0.210:1.800 0.220:1.800
+workers=16
+box: min=10.0 max=1400.0 factor=12.00 amp=[-30.0,5.0]
+box robustness: factors=1.50,2.00 relL2<=0.150 peak<=0.750 center8<=0.100 edge_growth<=1.250

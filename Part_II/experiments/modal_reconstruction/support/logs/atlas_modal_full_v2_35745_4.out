@@ -1,0 +1,20 @@
+reconstruct signature: (*, alpha: 'float', mach: 'float', cr: 'float', ci: 'float', ln_p_start_right: 'float', match_y: 'float', use_mapping: 'bool', mapping_scale: 'float', min_y_limit: 'float', max_y_limit: 'float', y_limit_factor: 'float', max_step: 'float' = inf) -> 'dict[str, np.ndarray]'
+M=1.1500 s=0.3500 alpha=0.11851306 quality=modal_certified reason=all_checks_passed
+M=1.1500 s=0.2000 alpha=0.06772175 quality=modal_certified reason=all_checks_passed
+M=1.1500 s=0.1000 alpha=0.03386088 quality=modal_certified reason=all_checks_passed
+M=1.1500 s=0.0500 alpha=0.01693044 quality=modal_certified reason=all_checks_passed
+M=1.1500 s=0.5000 alpha=0.16930438 quality=modal_certified reason=all_checks_passed
+M=1.1500 s=0.6500 alpha=0.22009569 quality=modal_certified reason=all_checks_passed
+M=1.1500 s=0.7800 alpha=0.26411483 quality=modal_certified reason=all_checks_passed
+M=1.1500 s=0.8700 alpha=0.29458961 quality=modal_certified reason=all_checks_passed
+M=1.1500 s=0.9300 alpha=0.31490614 quality=modal_certified reason=all_checks_passed
+M=1.1500 s=0.9700 alpha=0.32845049 quality=modal_certified reason=all_operator_checks_passed;slow_decay_tail
+M=1.1500 s=0.9850 alpha=0.33352962 quality=modal_certified reason=all_operator_checks_passed;slow_decay_tail
+{
+  "Mach": 1.15,
+  "n_requested": 11,
+  "n_completed": 11,
+  "quality_counts": {
+    "modal_certified": 11
+  }
+}

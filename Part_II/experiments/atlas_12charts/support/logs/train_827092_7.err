@@ -1,0 +1,12 @@
+Loading pytorch-gpu/py3/2.1.1
+  Loading requirement: cuda/11.8.0 nccl/2.18.5-1-cuda cudnn/8.7.0.84-cuda
+    gcc/8.5.0 openmpi/4.1.5-cuda intel-mkl/2020.4 magma/2.7.1-cuda sox/14.4.2
+    sparsehash/2.0.3 libjpeg-turbo/2.1.3 ffmpeg/4.4.4
+Traceback (most recent call last):
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/pinn_supersonic/train_global_supersonic_kappa_q_logamp.py", line 1311, in <module>
+    main()
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/pinn_supersonic/train_global_supersonic_kappa_q_logamp.py", line 698, in main
+    raise RuntimeError(
+RuntimeError: Expected exactly 13 training Mach, got 5.
+srun: error: r6i1n3: task 0: Exited with exit code 1
+srun: Terminating StepId=827104.0

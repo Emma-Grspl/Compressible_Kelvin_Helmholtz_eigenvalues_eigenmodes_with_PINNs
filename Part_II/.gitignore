@@ -1,0 +1,8 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+slurm/log/
+
+# Complete modal exports are reproducible packaging outputs kept locally.
+/assets/classic_supersonic/csv/modal_reconstruction/source/table_supersonic_sparse_PINN_reference_v2_FINAL_modal_fields_raw_confirmed.csv
+/assets/classic_supersonic/csv/modal_reconstruction/source/table_supersonic_sparse_PINN_reference_v2_FINAL_modal_fields_tail_polished_v1.csv

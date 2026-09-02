@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/Users/emma.grospellier/Thèse/These_PINN_KH_RT/classic_supersonic/scripts/article/compute_supersonic_blumen_true_isoline_point.py", line 580, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/emma.grospellier/Thèse/These_PINN_KH_RT/classic_supersonic/scripts/article/compute_supersonic_blumen_true_isoline_point.py", line 458, in main
+    pool = load_seed_pool(args.reference_csv.resolve(), targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/emma.grospellier/Thèse/These_PINN_KH_RT/classic_supersonic/scripts/article/compute_supersonic_blumen_true_isoline_point.py", line 111, in load_seed_pool
+    pool = pd.concat(
+           ^^^^^^^^^^
+  File "/Users/emma.grospellier/Thèse/These_PINN_KH_RT/.venv-kh-local/lib/python3.11/site-packages/pandas/core/reshape/concat.py", line 466, in concat
+    result = _get_result(
+             ^^^^^^^^^^^^
+  File "/Users/emma.grospellier/Thèse/These_PINN_KH_RT/.venv-kh-local/lib/python3.11/site-packages/pandas/core/reshape/concat.py", line 653, in _get_result
+    indexers[ax] = obj_labels.get_indexer(new_labels)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/emma.grospellier/Thèse/These_PINN_KH_RT/.venv-kh-local/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3728, in get_indexer
+    raise InvalidIndexError(self._requires_unique_msg)
+pandas.errors.InvalidIndexError: Reindexing only valid with uniquely valued Index objects

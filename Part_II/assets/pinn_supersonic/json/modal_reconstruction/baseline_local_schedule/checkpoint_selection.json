@@ -1,0 +1,9 @@
+{
+  "selected_checkpoint": "models_saved/supersonic_general/baseline_local_schedule/best_joint_checkpoint.pt",
+  "best_stage_losses": {
+    "spectral_prefit": 0.008104516193270683,
+    "modal_frozen_spectrum": 0.0024396455846726894,
+    "joint": 0.030761752277612686
+  },
+  "test_audited": false
+}

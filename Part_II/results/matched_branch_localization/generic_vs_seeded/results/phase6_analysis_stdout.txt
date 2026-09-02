@@ -1,0 +1,136 @@
+
+==============================================================================================================
+INTEGRITY — SEEDED
+==============================================================================================================
+summary rows     : 64/64
+candidate boxes  : 768/768
+boxes per point  : 12/12
+window pairs     : 12 unique/point
+center policy    : OK
+
+==============================================================================================================
+INTEGRITY — GENERIC
+==============================================================================================================
+summary rows     : 64/64
+candidate boxes  : 768/768
+boxes per point  : 12/12
+window pairs     : 12 unique/point
+center policy    : OK
+
+==============================================================================================================
+PAIRED COORDINATE INTEGRITY
+==============================================================================================================
+64/64 coordinates identical: OK
+references identical          : OK
+one ambiguous point           : OK
+
+==============================================================================================================
+PHASE 6 — CONDITION SUMMARY
+==============================================================================================================
+condition  technical_success  technical_total  target_recovery  target_total  target_error_median  target_error_p95  target_error_max  target_error_le_1e5  target_error_le_1e4  n_boxes  n_technical_boxes  n_failed_boxes  total_box_solves  box_solves_per_point_median  box_solves_per_point_p95  total_seconds  seconds_per_point_median  seconds_per_point_p95
+   seeded                 64               64               63            63       3.50200641e-06    7.25683075e-06    1.03274377e-05                   62                   63      768                768               0    7.68000000e+02               1.20000000e+01            1.20000000e+01 2.38359801e+04            3.76456625e+02         4.62788082e+02
+  generic                 64               64                0            63       4.52563629e-01    7.58637177e-01    7.64153192e-01                    0                    0      768                759               0    9.89000000e+02               1.30000000e+01            2.28500000e+01 3.68907703e+04            5.14125967e+02         9.11037263e+02
+
+==============================================================================================================
+PHASE 6 — PAIRED DISCORDANCES
+==============================================================================================================
+           metric  both_success  seeded_only_success  generic_only_success  neither_success  exact_paired_p
+  target_recovery             0                   63                     0                0  2.16840434e-19
+technical_success            64                    0                     0                0  1.00000000e+00
+
+==============================================================================================================
+PHASE 6 — PAIRED CONTINUOUS DIFFERENCES
+==============================================================================================================
+                           metric  n   median_delta     mean_delta      p95_delta  positive_count_seeded_better  negative_count_generic_better
+target_error_generic_minus_seeded 63 4.52559299e-01 4.70490986e-01 7.58633496e-01                            63                              0
+  box_solves_generic_minus_seeded 64 1.00000000e+00 3.45312500e+00 1.08500000e+01                            58                              0
+     seconds_generic_minus_seeded 64 1.59200669e+02 2.03981097e+02 4.46056763e+02                            62                              2
+
+==============================================================================================================
+NON-AMBIGUOUS TARGET FAILURES
+==============================================================================================================
+ benchmark_id atlas_chart           Mach          alpha  seeded_target_recovery  generic_target_recovery  seeded_target_error  generic_target_error  seeded_technical  generic_technical
+            0         C00 1.05000000e+00 1.05000000e-01                    True                    False       1.72686491e-06        7.63794317e-01              True               True
+            2         C00 1.10000000e+00 1.05000000e-01                    True                    False       1.03274377e-05        7.13406245e-01              True               True
+            3         C00 1.10000000e+00 1.15000000e-01                    True                    False       3.86281629e-06        6.90110557e-01              True               True
+            4         C00 1.20000000e+00 7.50000000e-02                    True                    False       7.39686172e-06        6.48764266e-01              True               True
+            5         C01 1.00000000e+00 1.45000000e-01                    True                    False       3.50569683e-06        7.62010940e-01              True               True
+            6         C01 1.00000000e+00 1.55000000e-01                    True                    False       2.07450695e-06        7.62285580e-01              True               True
+            7         C01 1.00000000e+00 1.80000000e-01                    True                    False       9.62301221e-07        7.64153192e-01              True               True
+            8         C01 1.05000000e+00 1.40000000e-01                    True                    False       5.26534008e-06        7.28273310e-01              True               True
+            9         C01 1.15000000e+00 1.75000000e-01                    True                    False       3.70306973e-06        5.74726306e-01              True               True
+           10         C01 1.15000000e+00 2.00000000e-01                    True                    False       4.07256943e-06        5.57547634e-01              True               True
+           11         C01 1.20000000e+00 1.90000000e-01                    True                    False       5.54444893e-06        5.31353001e-01              True               True
+           12         C02 1.00000000e+00 2.50000000e-01                    True                    False       2.48990422e-06        6.53300479e-01              True               True
+           13         C02 1.00000000e+00 3.15000000e-01                    True                    False       3.44232949e-06        6.09549838e-01              True               True
+           14         C02 1.05000000e+00 2.20000000e-01                    True                    False       1.35915581e-06        6.22780902e-01              True               True
+           15         C02 1.05000000e+00 2.25000000e-01                    True                    False       3.72774585e-06        6.19003206e-01              True               True
+           16         C02 1.05000000e+00 3.50000000e-01                    True                    False       3.91702151e-06        5.56185762e-01              True               True
+           17         C02 1.10000000e+00 2.15000000e-01                    True                    False       5.61817848e-06        5.83918471e-01              True               True
+           18         C02 1.10000000e+00 2.65000000e-01                    True                    False       2.72941343e-06        5.56057573e-01              True               True
+           19         C02 1.15000000e+00 2.30000000e-01                    True                    False       2.79773349e-06        5.40335168e-01              True               True
+           20         C02 1.20000000e+00 2.85000000e-01                    True                    False       8.49170685e-07        4.87383324e-01              True               True
+           21         C02 1.20000000e+00 3.15000000e-01                    True                    False       3.46720017e-06        4.77977653e-01              True               True
+           22         C10 1.30000000e+00 8.50000000e-02                    True                    False       5.15549059e-06        5.56499667e-01              True               True
+           23         C10 1.35000000e+00 5.50000000e-02                    True                    False       5.99655203e-06        5.64409745e-01              True               True
+           24         C10 1.35000000e+00 9.00000000e-02                    True                    False       4.38406746e-06        5.19741072e-01              True               True
+           25         C10 1.40000000e+00 7.50000000e-02                    True                    False       4.66577641e-06        5.06478432e-01              True               True
+           26         C11 1.25000000e+00 1.60000000e-01                    True                    False       3.89356750e-06        5.20378131e-01              True               True
+           27         C11 1.25000000e+00 1.70000000e-01                    True                    False       1.18714617e-06        5.13780882e-01              True               True
+           28         C11 1.25000000e+00 1.95000000e-01                    True                    False       3.49159418e-06        4.99097891e-01              True               True
+           29         C11 1.35000000e+00 1.55000000e-01                    True                    False       4.17510279e-06        4.68513906e-01              True               True
+           30         C11 1.40000000e+00 1.90000000e-01                    True                    False       5.04171375e-06        4.26054918e-01              True               True
+           31         C12 1.25000000e+00 2.35000000e-01                    True                    False       5.94893994e-06        4.79856754e-01              True               True
+           32         C12 1.25000000e+00 2.85000000e-01                    True                    False       1.42482035e-06        4.61247472e-01              True               True
+           33         C12 1.25000000e+00 3.15000000e-01                    True                    False       4.32923624e-06        4.52563629e-01              True               True
+           34         C12 1.40000000e+00 2.10000000e-01                    True                    False       2.45696079e-06        4.17546311e-01              True               True
+           35         C12 1.40000000e+00 2.55000000e-01                    True                    False       3.50200641e-06        4.01632526e-01              True               True
+           36         C20 1.45000000e+00 1.05000000e-01                    True                    False       4.93774999e-07        4.52120875e-01              True               True
+           37         C20 1.50000000e+00 8.50000000e-02                    True                    False       9.26831827e-06        4.43280534e-01              True               True
+           38         C20 1.55000000e+00 6.00000000e-02                    True                    False       1.17650689e-06        4.40567449e-01              True               True
+           39         C20 1.60000000e+00 1.10000000e-01                    True                    False       3.63826201e-06        3.81358428e-01              True               True
+           40         C21 1.45000000e+00 1.20000000e-01                    True                    False       5.17685656e-06        4.41367307e-01              True               True
+           41         C21 1.50000000e+00 2.05000000e-01                    True                    False       3.24565592e-06        3.77698602e-01              True               True
+           42         C21 1.55000000e+00 1.20000000e-01                    True                    False       4.21661390e-06        3.96318325e-01              True               True
+           43         C21 1.55000000e+00 2.00000000e-01                    True                    False       4.27456159e-06        3.60352171e-01              True               True
+           44         C21 1.60000000e+00 1.20000000e-01                    True                    False       1.60688339e-06        3.75841631e-01              True               True
+           45         C22 1.45000000e+00 2.35000000e-01                    True                    False       4.36648065e-06        3.87321889e-01              True               True
+           46         C22 1.55000000e+00 2.60000000e-01                    True                    False       1.66267482e-06        3.42488702e-01              True               True
+           47         C22 1.60000000e+00 2.20000000e-01                    True                    False       2.30200871e-06        3.36054608e-01              True               True
+           48         C30 1.70000000e+00 6.00000000e-02                    True                    False       4.27446749e-06        3.71880013e-01              True               True
+           49         C30 1.70000000e+00 7.50000000e-02                    True                    False       2.75040016e-06        3.62298866e-01              True               True
+           50         C30 1.75000000e+00 5.50000000e-02                    True                    False       3.41572338e-06        3.55096744e-01              True               True
+           51         C30 1.75000000e+00 1.15000000e-01                    True                    False       1.24829675e-06        3.23642197e-01              True               True
+           52         C30 1.80000000e+00 1.15000000e-01                    True                    False       2.87035602e-06        3.07455327e-01              True               True
+           53         C30 1.90000000e+00 7.50000000e-02                    True                    False       2.15601581e-06        2.93418911e-01              True               True
+           54         C31 1.70000000e+00 1.20000000e-01                    True                    False       4.77109314e-06        3.38518827e-01              True               True
+           55         C31 1.75000000e+00 1.40000000e-01                    True                    False       8.41526329e-06        3.13444885e-01              True               True
+           56         C31 1.80000000e+00 1.40000000e-01                    True                    False       9.16463191e-07        2.97927349e-01              True               True
+           57         C31 1.85000000e+00 1.20000000e-01                    True                    False       2.53103944e-06        2.90309121e-01              True               True
+           58         C31 1.85000000e+00 1.25000000e-01                    True                    False       5.07923803e-06        2.88481735e-01              True               True
+           59         C31 1.85000000e+00 1.80000000e-01                    True                    False       4.41740702e-06        2.71137258e-01              True               True
+           60         C31 1.85000000e+00 2.00000000e-01                    True                    False       1.50941945e-06        2.65931813e-01              True               True
+           61         C31 1.90000000e+00 1.45000000e-01                    True                    False       3.08881825e-06        2.67825231e-01              True               True
+           62         C32 1.75000000e+00 2.10000000e-01                    True                    False       1.79653059e-06        2.91275009e-01              True               True
+           63         C32 1.80000000e+00 2.10000000e-01                    True                    False       3.34841187e-06        2.77027775e-01              True               True
+
+==============================================================================================================
+VERDICT
+==============================================================================================================
+The matched-budget comparison descriptively supports a branch-localization advantage from PINN seeding: the seeded condition recovers more target branches than the generic condition under the same 12-box classical search budget.
+
+==============================================================================================================
+WRITTEN
+==============================================================================================================
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/condition_summary.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/generic_candidates_combined.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/generic_point_costs.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/generic_summary_combined.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/paired_continuous_summary.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/paired_discordances.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/paired_point_results.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/phase6_verdict.txt
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/seeded_candidates_combined.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/seeded_point_costs.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/seeded_summary_combined.csv
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/budget_matched_v64/analysis/target_failures.csv

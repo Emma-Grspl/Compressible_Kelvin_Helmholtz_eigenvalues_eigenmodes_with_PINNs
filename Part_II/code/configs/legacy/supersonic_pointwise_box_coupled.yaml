@@ -1,0 +1,25 @@
+version: 1
+sweep:
+  name: supersonic_pointwise_box_coupled
+  type: shooting_box
+  cases:
+  - supersonic_M110
+  - supersonic_M120
+  - supersonic_M130
+  - supersonic_M140
+  - supersonic_M150
+  - supersonic_M160
+  - supersonic_M170
+  - supersonic_M180
+  - supersonic_M190
+  Ly_multipliers:
+  - 0.25
+  - 0.5
+  - 0.75
+  - 1.0
+  fixed_accuracy:
+    rtol: 1.0e-10
+    atol: 1.0e-12
+    max_step: 0.25
+  reference_policy: largest_Ly_same_case_at_fixed_max_step
+  produce_modes: true

@@ -1,0 +1,95 @@
+============================================================
+GLOBAL G52-v2 -> POWELL
+Mach=1.15
+audit=assets/pinn_supersonic/global/machsplit_G52_v1/hybrid_validation/M115_G52_v2_audit.csv
+output=assets/pinn_supersonic/global/machsplit_G52_v1/hybrid_validation/M115_powell_pass1
+start=Mon Aug 10 08:15:51 PM CEST 2026
+node=r3i5n7
+============================================================
+[01/57] alpha=0.06000 |dc_pinn|=9.396e-02 |dc_corr|=9.778e-02 mismatch=8.449e-07 nfev=80 time=13.70s
+[02/57] alpha=0.06500 |dc_pinn|=5.996e-02 |dc_corr|=2.338e-02 mismatch=3.248e-05 nfev=80 time=13.46s
+[03/57] alpha=0.07000 |dc_pinn|=2.215e-02 |dc_corr|=8.048e-04 mismatch=2.248e-05 nfev=80 time=13.40s
+[04/57] alpha=0.07500 |dc_pinn|=1.407e-02 |dc_corr|=5.158e-06 mismatch=2.146e-07 nfev=80 time=13.46s
+[05/57] alpha=0.08000 |dc_pinn|=9.677e-03 |dc_corr|=2.542e-08 mismatch=7.323e-10 nfev=80 time=13.54s
+[06/57] alpha=0.08500 |dc_pinn|=6.535e-03 |dc_corr|=1.425e-08 mismatch=7.679e-10 nfev=80 time=13.62s
+[07/57] alpha=0.09000 |dc_pinn|=3.947e-03 |dc_corr|=3.168e-08 mismatch=2.322e-09 nfev=80 time=13.73s
+[08/57] alpha=0.09500 |dc_pinn|=2.156e-03 |dc_corr|=9.316e-09 mismatch=7.769e-10 nfev=80 time=13.82s
+[09/57] alpha=0.10000 |dc_pinn|=2.684e-03 |dc_corr|=1.286e-08 mismatch=1.253e-09 nfev=80 time=13.89s
+[10/57] alpha=0.10500 |dc_pinn|=4.567e-03 |dc_corr|=1.176e-08 mismatch=1.221e-09 nfev=80 time=13.98s
+[11/57] alpha=0.11000 |dc_pinn|=6.477e-03 |dc_corr|=2.864e-08 mismatch=3.300e-09 nfev=80 time=14.08s
+[12/57] alpha=0.11500 |dc_pinn|=8.094e-03 |dc_corr|=1.514e-08 mismatch=1.897e-09 nfev=80 time=14.16s
+[13/57] alpha=0.12000 |dc_pinn|=9.293e-03 |dc_corr|=1.617e-08 mismatch=2.193e-09 nfev=80 time=14.25s
+[14/57] alpha=0.12500 |dc_pinn|=1.001e-02 |dc_corr|=8.956e-09 mismatch=1.328e-09 nfev=80 time=14.28s
+[15/57] alpha=0.13000 |dc_pinn|=1.025e-02 |dc_corr|=9.796e-09 mismatch=1.538e-09 nfev=80 time=14.40s
+[16/57] alpha=0.13500 |dc_pinn|=1.003e-02 |dc_corr|=2.041e-08 mismatch=3.437e-09 nfev=80 time=14.49s
+[17/57] alpha=0.14000 |dc_pinn|=9.395e-03 |dc_corr|=1.942e-08 mismatch=3.484e-09 nfev=80 time=14.57s
+[18/57] alpha=0.14500 |dc_pinn|=8.413e-03 |dc_corr|=1.281e-08 mismatch=2.411e-09 nfev=80 time=14.65s
+[19/57] alpha=0.15000 |dc_pinn|=7.149e-03 |dc_corr|=2.092e-08 mismatch=4.194e-09 nfev=80 time=14.74s
+[20/57] alpha=0.15500 |dc_pinn|=5.678e-03 |dc_corr|=8.867e-09 mismatch=1.979e-09 nfev=80 time=14.83s
+[21/57] alpha=0.16000 |dc_pinn|=4.082e-03 |dc_corr|=9.252e-09 mismatch=2.029e-09 nfev=80 time=14.93s
+[22/57] alpha=0.16500 |dc_pinn|=2.464e-03 |dc_corr|=1.701e-08 mismatch=3.957e-09 nfev=80 time=15.06s
+[23/57] alpha=0.17000 |dc_pinn|=1.060e-03 |dc_corr|=1.221e-08 mismatch=2.877e-09 nfev=80 time=15.17s
+[24/57] alpha=0.17500 |dc_pinn|=1.202e-03 |dc_corr|=1.613e-08 mismatch=4.102e-09 nfev=71 time=13.50s
+[25/57] alpha=0.18000 |dc_pinn|=2.398e-03 |dc_corr|=3.848e-09 mismatch=1.098e-09 nfev=80 time=15.37s
+[26/57] alpha=0.18500 |dc_pinn|=3.493e-03 |dc_corr|=8.047e-09 mismatch=2.131e-09 nfev=80 time=15.53s
+[27/57] alpha=0.18750 |dc_pinn|=3.952e-03 |dc_corr|=9.551e-09 mismatch=2.786e-09 nfev=80 time=15.55s
+[28/57] alpha=0.19000 |dc_pinn|=4.342e-03 |dc_corr|=1.238e-08 mismatch=3.546e-09 nfev=80 time=15.55s
+[29/57] alpha=0.19500 |dc_pinn|=4.904e-03 |dc_corr|=1.465e-08 mismatch=4.314e-09 nfev=80 time=15.72s
+[30/57] alpha=0.20000 |dc_pinn|=5.172e-03 |dc_corr|=1.152e-08 mismatch=3.558e-09 nfev=80 time=15.73s
+[31/57] alpha=0.20500 |dc_pinn|=5.161e-03 |dc_corr|=5.259e-09 mismatch=1.656e-09 nfev=80 time=15.83s
+[32/57] alpha=0.21000 |dc_pinn|=4.904e-03 |dc_corr|=1.445e-08 mismatch=4.766e-09 nfev=80 time=16.00s
+[33/57] alpha=0.21500 |dc_pinn|=4.452e-03 |dc_corr|=2.672e-08 mismatch=9.001e-09 nfev=80 time=16.15s
+[34/57] alpha=0.22000 |dc_pinn|=3.865e-03 |dc_corr|=2.143e-08 mismatch=7.434e-09 nfev=80 time=16.22s
+[35/57] alpha=0.22500 |dc_pinn|=3.216e-03 |dc_corr|=2.117e-08 mismatch=7.639e-09 nfev=80 time=16.37s
+[36/57] alpha=0.23000 |dc_pinn|=2.575e-03 |dc_corr|=1.008e-08 mismatch=3.698e-09 nfev=80 time=16.56s
+[37/57] alpha=0.23500 |dc_pinn|=2.009e-03 |dc_corr|=1.476e-08 mismatch=5.559e-09 nfev=80 time=16.68s
+[38/57] alpha=0.24000 |dc_pinn|=1.558e-03 |dc_corr|=1.526e-08 mismatch=5.990e-09 nfev=80 time=16.78s
+[39/57] alpha=0.24500 |dc_pinn|=1.222e-03 |dc_corr|=1.570e-08 mismatch=6.170e-09 nfev=80 time=17.09s
+[40/57] alpha=0.25000 |dc_pinn|=9.655e-04 |dc_corr|=2.071e-08 mismatch=8.380e-09 nfev=80 time=17.17s
+[41/57] alpha=0.25500 |dc_pinn|=7.504e-04 |dc_corr|=1.903e-09 mismatch=7.278e-10 nfev=80 time=17.50s
+[42/57] alpha=0.26000 |dc_pinn|=5.980e-04 |dc_corr|=1.417e-08 mismatch=6.199e-09 nfev=80 time=17.67s
+[43/57] alpha=0.26500 |dc_pinn|=6.082e-04 |dc_corr|=1.512e-08 mismatch=6.739e-09 nfev=80 time=18.03s
+[44/57] alpha=0.27000 |dc_pinn|=8.000e-04 |dc_corr|=1.781e-08 mismatch=8.018e-09 nfev=80 time=18.53s
+[45/57] alpha=0.27500 |dc_pinn|=1.059e-03 |dc_corr|=1.682e-08 mismatch=7.814e-09 nfev=80 time=18.80s
+[46/57] alpha=0.28000 |dc_pinn|=1.287e-03 |dc_corr|=1.742e-08 mismatch=8.192e-09 nfev=80 time=19.42s
+[47/57] alpha=0.28500 |dc_pinn|=1.420e-03 |dc_corr|=1.470e-08 mismatch=7.069e-09 nfev=80 time=20.23s
+[48/57] alpha=0.29000 |dc_pinn|=1.408e-03 |dc_corr|=2.860e-08 mismatch=1.410e-08 nfev=80 time=20.98s
+[49/57] alpha=0.29500 |dc_pinn|=1.209e-03 |dc_corr|=2.099e-08 mismatch=1.050e-08 nfev=80 time=22.38s
+[50/57] alpha=0.30000 |dc_pinn|=7.901e-04 |dc_corr|=1.527e-08 mismatch=7.810e-09 nfev=80 time=23.74s
+[51/57] alpha=0.30500 |dc_pinn|=1.445e-04 |dc_corr|=6.242e-09 mismatch=3.251e-09 nfev=80 time=24.37s
+[52/57] alpha=0.31000 |dc_pinn|=8.336e-04 |dc_corr|=6.605e-09 mismatch=3.505e-09 nfev=80 time=25.66s
+[53/57] alpha=0.31500 |dc_pinn|=2.058e-03 |dc_corr|=6.448e-09 mismatch=3.701e-09 nfev=80 time=25.40s
+[54/57] alpha=0.32000 |dc_pinn|=3.575e-03 |dc_corr|=3.350e-09 mismatch=2.030e-09 nfev=80 time=26.27s
+[55/57] alpha=0.32500 |dc_pinn|=5.381e-03 |dc_corr|=1.100e-08 mismatch=6.164e-09 nfev=80 time=27.16s
+[56/57] alpha=0.33000 |dc_pinn|=7.469e-03 |dc_corr|=2.498e-08 mismatch=1.252e-08 nfev=80 time=27.51s
+[57/57] alpha=0.33500 |dc_pinn|=9.822e-03 |dc_corr|=2.014e-07 mismatch=1.573e-08 nfev=80 time=28.42s
+
+{
+  "status": "COMPLETED",
+  "Mach": 1.15,
+  "n_requested": 57,
+  "n_successful": 57,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/global/machsplit_G52_v1/hybrid_validation/M115_powell_pass1/pinn_powell_spectral_results.csv",
+  "pinn_spectral_error_mean": 0.007135230162014259,
+  "pinn_spectral_error_max": 0.09395522171089084,
+  "corrected_spectral_error_mean": 0.0021398827817913787,
+  "corrected_spectral_error_max": 0.09778293307184677,
+  "delta_c_from_pinn_mean": 0.005880395645638555,
+  "delta_c_from_pinn_max": 0.04362297336826695,
+  "initial_mismatch_mean": 0.0010460486268553694,
+  "initial_mismatch_max": 0.005630093952893201,
+  "corrected_mismatch_mean": 9.870353537389774e-07,
+  "corrected_mismatch_max": 3.247895168919261e-05,
+  "mismatch_reduction_mean": 308618.95278773847,
+  "mismatch_reduction_max": 1101964.2888232954,
+  "optimization_seconds_mean": 17.194965935393906,
+  "optimization_seconds_max": 28.42262001335621,
+  "nfev_reported_mean": 79.84210526315789,
+  "nfev_reported_max": 80.0
+}
+
+written: assets/pinn_supersonic/global/machsplit_G52_v1/hybrid_validation/M115_powell_pass1/pinn_powell_spectral_results.csv
+written: assets/pinn_supersonic/global/machsplit_G52_v1/hybrid_validation/M115_powell_pass1/pinn_powell_spectral_summary.json
+
+end=Mon Aug 10 08:32:30 PM CEST 2026

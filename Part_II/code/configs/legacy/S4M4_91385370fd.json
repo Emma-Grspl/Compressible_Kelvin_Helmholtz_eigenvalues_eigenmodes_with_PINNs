@@ -1,0 +1,47 @@
+{
+  "experiment_family": "local_supersonic_M160_sparse_v1",
+  "Mach": 1.6,
+  "alpha_min": 0.05,
+  "alpha_max": 0.255,
+  "spectral_reference": "experiments/modal_reconstruction/legacy_outputs/data/table_spectral_full_M160.csv",
+  "spectral_anchor_file": "experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M160.csv",
+  "seed": 12345,
+  "model": {
+    "xi_max": 0.985,
+    "mapping_scale": 3.0,
+    "spectral_width": 96,
+    "spectral_depth": 3,
+    "modal_width": 256,
+    "modal_depth": 7,
+    "n_frequencies": 12,
+    "mode_experts": 2,
+    "alpha_split": 0.1625,
+    "alpha_gate_width": 0.0164,
+    "cr_min": 0.2386982234532665,
+    "cr_max": 0.5347990673571785,
+    "ci_floor": 1e-06,
+    "ci_max": 0.15
+  },
+  "loss_weights": {
+    "riccati_kappa": 1.0,
+    "riccati_q": 1.0,
+    "log_amp_compatibility": 5.0,
+    "boundary_kappa": 10.0,
+    "boundary_q": 10.0,
+    "spectral": 50.0,
+    "modal_kappa": 1.0,
+    "modal_q": 1.0,
+    "modal_log_amp": 1.0
+  },
+  "modal_representation": [
+    "kappa",
+    "q",
+    "logabs_p_center_gauge"
+  ],
+  "predict_phase": false,
+  "use_spectral_supervision": true,
+  "use_modal_supervision": true,
+  "modal_anchor_file": "assets/pinn_supersonic/pilots/local_M160_sparse_v1/data/modal_bank_S4M4_M160.npz",
+  "experiment": "S4M4",
+  "output_dir": "assets/pinn_supersonic/pilots/local_M160_sparse_v1/runs/S4M4"
+}

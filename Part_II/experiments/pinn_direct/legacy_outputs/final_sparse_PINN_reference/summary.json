@@ -1,0 +1,34 @@
+{
+  "status": "sparse_PINN_reference_built",
+  "spectral_file": "assets/classic_supersonic/final_sparse_PINN_reference/supersonic_sparse_PINN_reference_spectral.csv",
+  "modal_fields_file": "assets/classic_supersonic/final_sparse_PINN_reference/supersonic_sparse_PINN_reference_modal_fields.csv",
+  "overlay_png": "assets/classic_supersonic/final_sparse_PINN_reference/blumen_ci_overlay_sparse_PINN_reference.png",
+  "overlay_pdf": "assets/classic_supersonic/final_sparse_PINN_reference/blumen_ci_overlay_sparse_PINN_reference.pdf",
+  "coverage_file": "assets/classic_supersonic/final_sparse_PINN_reference/coverage_by_Mach.csv",
+  "suggested_next_targets_file": "assets/classic_supersonic/final_sparse_PINN_reference/suggested_next_targets.csv",
+  "base_spectral_source": "assets/classic_supersonic/supersonic_modal_spectral_validated.csv",
+  "base_fields_source": "assets/classic_supersonic/final_44pts_validated_only/supersonic_modal_fields_p_rho_u_v_44pts_validated_only.csv",
+  "M18_M19_selected_setting": "ms3_y2000",
+  "n_base_spectral_points": 44,
+  "n_extension_spectral_points": 89,
+  "n_total_spectral_points": 133,
+  "n_total_modal_rows": 609107,
+  "point_counts_by_Mach": {
+    "1.1": 2,
+    "1.2": 6,
+    "1.25": 1,
+    "1.3": 9,
+    "1.33": 1,
+    "1.4": 11,
+    "1.5": 8,
+    "1.6": 2,
+    "1.7": 4,
+    "1.8": 49,
+    "1.9": 40
+  },
+  "validation_status_counts": {
+    "validated_core_stable_tail_sensitive": 89,
+    "modal_spectral_validated_with_exported_fields": 44
+  },
+  "important_note": "M=1.8/1.9 modes are accepted as core-stable/tail-sensitive reference candidates. Weak oscillatory tails remain mapping-sensitive and should be improved later."
+}

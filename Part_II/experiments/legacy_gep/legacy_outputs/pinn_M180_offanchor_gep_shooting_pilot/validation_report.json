@@ -1,0 +1,9 @@
+{
+  "n_cases": 8,
+  "n_pinn_seed_validated_by_shooting": 8,
+  "n_full_pipeline_consistent": 0,
+  "status_counts": {
+    "pinn_shooting_fully_consistent_gep_disagrees_or_missing": 8
+  },
+  "scientific_note": "These are off-anchor consistency checks. No pre-existing classical reference values were used at the tested alpha values."
+}

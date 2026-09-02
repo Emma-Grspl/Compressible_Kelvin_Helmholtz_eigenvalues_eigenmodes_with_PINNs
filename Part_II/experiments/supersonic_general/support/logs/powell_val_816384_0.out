@@ -1,0 +1,8 @@
+============================================================
+GLOBAL G52-v2 -> POWELL
+Mach=1.15
+audit=assets/pinn_supersonic/global/machsplit_G52_v1/hybrid_validation/M115_G52_v2_audit.csv
+output=assets/pinn_supersonic/global/machsplit_G52_v1/hybrid_validation/M115_powell_pass1
+start=Mon Aug 10 01:10:02 PM CEST 2026
+node=r6i6n5
+============================================================

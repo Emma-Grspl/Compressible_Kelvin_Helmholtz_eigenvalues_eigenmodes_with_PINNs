@@ -1,0 +1,839 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import re
+import warnings
+from pathlib import Path
+from typing import Iterable
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+mpl.rcParams.update(
+    {
+        "font.size": 11,
+        "axes.labelsize": 11,
+        "axes.titlesize": 12,
+        "legend.fontsize": 9,
+        "xtick.labelsize": 10,
+        "ytick.labelsize": 10,
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+        "savefig.bbox": "tight",
+        "figure.dpi": 160,
+    }
+)
+
+QUARANTINE_RE = re.compile(r"quarantine", re.IGNORECASE)
+
+
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="Build supersonic article assets.")
+    p.add_argument("--repo-root", type=Path, default=None)
+    p.add_argument("--dpi", type=int, default=300)
+    return p.parse_args()
+
+
+def find_repo_root(explicit: Path | None) -> Path:
+    if explicit is not None:
+        return explicit.expanduser().resolve()
+    here = Path.cwd().resolve()
+    for cand in [here, *here.parents]:
+        if (cand / "assets").is_dir():
+            return cand
+    raise FileNotFoundError("Could not locate repo root containing assets/.")
+
+
+def read_csv_auto(path: Path) -> pd.DataFrame:
+    return pd.read_csv(path, compression="infer")
+
+
+def lower_map(df: pd.DataFrame) -> dict[str, str]:
+    return {str(c).strip().lower(): str(c) for c in df.columns}
+
+
+def pick_col(df: pd.DataFrame, candidates: Iterable[str], required: bool = True, label: str = "") -> str | None:
+    lmap = lower_map(df)
+    cols = list(df.columns)
+    for cand in candidates:
+        cand_low = cand.lower()
+        if cand_low in lmap:
+            return lmap[cand_low]
+    for cand in candidates:
+        cand_low = cand.lower()
+        for c in cols:
+            cl = str(c).lower()
+            if cl == cand_low or cl.replace(" ", "_") == cand_low:
+                return str(c)
+    if required:
+        raise KeyError(f"Missing column for {label or candidates}. Available: {cols}")
+    return None
+
+
+def find_matching_cols(df: pd.DataFrame, patterns: list[str]) -> list[str]:
+    out = []
+    for c in df.columns:
+        cl = str(c).lower()
+        if all(p in cl for p in patterns):
+            out.append(str(c))
+    return out
+
+
+def pick_complex_cols(df: pd.DataFrame, name: str) -> tuple[str, str]:
+    aliases_re = [
+        [f"re_{name}"], [name, "re"], [name, "real"], [f"{name}_r"], [f"{name}r"],
+    ]
+    aliases_im = [
+        [f"im_{name}"], [name, "im"], [name, "imag"], [f"{name}_i"], [f"{name}i"],
+    ]
+    re_col = None
+    im_col = None
+    for pats in aliases_re:
+        m = find_matching_cols(df, pats)
+        if m:
+            re_col = m[0]
+            break
+    for pats in aliases_im:
+        m = find_matching_cols(df, pats)
+        if m:
+            im_col = m[0]
+            break
+    if re_col is None or im_col is None:
+        raise KeyError(f"Could not resolve complex columns for {name}. Columns={list(df.columns)}")
+    return re_col, im_col
+
+
+def savefig_both(fig: plt.Figure, pdf_path: Path, dpi: int = 300) -> None:
+    pdf_path.parent.mkdir(parents=True, exist_ok=True)
+    png_path = pdf_path.with_suffix(".png")
+    fig.savefig(pdf_path)
+    fig.savefig(png_path, dpi=dpi)
+    plt.close(fig)
+    print(f"Saved: {pdf_path}")
+    print(f"Saved: {png_path}")
+
+
+def numeric_or_nan(s: pd.Series) -> pd.Series:
+    return pd.to_numeric(s, errors="coerce")
+
+
+def find_non_quarantine_file(
+    root: Path,
+    patterns: list[str],
+    preferred_fragments: tuple[str, ...] = (),
+) -> Path:
+    """Find one relevant file recursively, excluding every quarantine path."""
+    candidates: list[Path] = []
+
+    for file_pattern in patterns:
+        for path in root.rglob(file_pattern):
+            if not path.is_file():
+                continue
+            if QUARANTINE_RE.search(str(path)):
+                continue
+            candidates.append(path.resolve())
+
+    candidates = sorted(set(candidates))
+
+    if not candidates:
+        raise FileNotFoundError(
+            "No non-quarantine file found.
+"
+            f"Search root: {root}
+"
+            f"Patterns: {patterns}"
+        )
+
+    def score(path: Path) -> tuple[int, int, str]:
+        path_lower = str(path).lower()
+        preferred_score = sum(
+            fragment.lower() in path_lower
+            for fragment in preferred_fragments
+        )
+
+        # Among equally preferred candidates, favor the shortest path.
+        return (
+            preferred_score,
+            -len(path.parts),
+            str(path),
+        )
+
+    candidates.sort(key=score, reverse=True)
+    chosen = candidates[0]
+
+    if len(candidates) > 1:
+        warnings.warn(
+            "Several non-quarantine candidates were found for "
+            f"{patterns}. Selected:
+  {chosen}
+"
+            "Other candidates:
+  "
+            + "
+  ".join(str(path) for path in candidates[1:])
+        )
+
+    print(f"Using input: {chosen}")
+    return chosen
+
+
+def discover_files(repo: Path) -> dict[str, object]:
+    assets = repo / "assets" / "classic_supersonic"
+    article_dir = repo / "assets" / "article" / "classical_supersonic"
+
+    if not assets.is_dir():
+        raise FileNotFoundError(f"Missing asset directory: {assets}")
+
+    files: dict[str, object] = {
+        "modes_long": find_non_quarantine_file(
+            assets,
+            [
+                "classical_supersonic_final_modes_long.csv.gz",
+                "*supersonic*final*modes*long*.csv.gz",
+            ],
+            (
+                "dense_kappa_q_campaign_v1_final_full_branch_assets",
+            ),
+        ),
+        "modes_index": find_non_quarantine_file(
+            assets,
+            [
+                "classical_supersonic_final_modes_index.csv",
+                "*supersonic*final*modes*index*.csv",
+            ],
+            (
+                "dense_kappa_q_campaign_v1_final_full_branch_assets",
+            ),
+        ),
+        "conv_point": find_non_quarantine_file(
+            assets,
+            [
+                "convergence_audit_by_point.csv",
+                "*convergence*audit*by*point*.csv",
+                "*convergence*by_point*.csv",
+                "*audit*point*.csv",
+            ],
+            (
+                "scan_m18_m19_alpha_0_03_strict",
+                "refined_near_valid_branch",
+                "convergence_audit_full",
+            ),
+        ),
+        "conv_setting": find_non_quarantine_file(
+            assets,
+            [
+                "convergence_audit_by_setting.csv",
+                "*convergence*audit*by*setting*.csv",
+                "*convergence*by_setting*.csv",
+                "*audit*setting*.csv",
+            ],
+            (
+                "scan_m18_m19_alpha_0_03_strict",
+                "refined_near_valid_branch",
+                "convergence_audit_full",
+            ),
+        ),
+        "core_tail": find_non_quarantine_file(
+            assets,
+            [
+                "core_vs_tail_phase_convergence.csv",
+                "*core*tail*phase*convergence*.csv",
+                "*core*tail*phase*.csv",
+            ],
+            (
+                "scan_m18_m19_alpha_0_03_strict",
+                "refined_near_valid_branch",
+                "convergence_audit_full",
+            ),
+        ),
+        "box_summary": find_non_quarantine_file(
+            assets,
+            [
+                "supersonic_shooting_core_band_M140_boxrobust_summary.csv",
+                "*M140*boxrobust*summary*.csv",
+                "*boxrobust*summary*.csv",
+            ],
+            (
+                "shooting",
+                "m140",
+            ),
+        ),
+        "out_fig": article_dir / "figures",
+        "out_tab": article_dir / "source_data",
+    }
+
+    shooting_dir = assets / "shooting"
+    robustness_files: list[Path] = []
+
+    if shooting_dir.is_dir():
+        patterns = [
+            "*branch_guided*.csv",
+            "*bigbox*.csv",
+            "*match05*.csv",
+            "*reconfirm*.csv",
+            "*boxrobust*.csv",
+        ]
+
+        for file_pattern in patterns:
+            for path in shooting_dir.rglob(file_pattern):
+                if not path.is_file():
+                    continue
+                if QUARANTINE_RE.search(str(path)):
+                    continue
+                robustness_files.append(path.resolve())
+
+    robustness_files = sorted(set(robustness_files))
+    files["robustness_files"] = robustness_files
+
+    print(
+        f"Using {len(robustness_files)} non-quarantine "
+        "robustness CSV file(s)."
+    )
+
+    return files
+
+
+def maybe_merge_modes_with_index(df_modes: pd.DataFrame, df_index: pd.DataFrame) -> pd.DataFrame:
+    common_ids = []
+    for cand in ["mode_id", "point_id", "case_id", "id", "index", "row_id"]:
+        cm = next((c for c in df_modes.columns if str(c).lower() == cand), None)
+        ci = next((c for c in df_index.columns if str(c).lower() == cand), None)
+        if cm and ci:
+            common_ids.append((cm, ci))
+    if common_ids:
+        cm, ci = common_ids[0]
+        merged = df_modes.merge(df_index, left_on=cm, right_on=ci, how="left", suffixes=("", "_idx"))
+        return merged
+    return df_modes.copy()
+
+
+def load_mode_case(files: dict[str, object], target_m: float, target_a: float) -> tuple[pd.DataFrame, dict[str, float], dict[str, str]]:
+    df_modes = read_csv_auto(files["modes_long"])
+    df_index = read_csv_auto(files["modes_index"])
+    dfm = maybe_merge_modes_with_index(df_modes, df_index)
+
+    mach_col = pick_col(dfm, ["Mach", "mach", "M", "mach_number"], True, "Mach")
+    alpha_col = pick_col(dfm, ["alpha", "Alpha", "wavenumber"], True, "alpha")
+    y_col = pick_col(dfm, ["y", "Y", "eta"], True, "y")
+    cr_col = pick_col(dfm, ["cr", "classical_cr", "c_r", "real_c"], True, "cr")
+    ci_col = pick_col(dfm, ["ci", "classical_ci", "c_i", "imag_c"], True, "ci")
+    kappa_col = pick_col(dfm, ["kappa", "k", "kap"], True, "kappa")
+    q_col = pick_col(dfm, ["q"], True, "q")
+    p_re, p_im = pick_complex_cols(dfm, "p")
+    rho_re, rho_im = pick_complex_cols(dfm, "rho")
+    u_re, u_im = pick_complex_cols(dfm, "u")
+    v_re, v_im = pick_complex_cols(dfm, "v")
+
+    for c in [mach_col, alpha_col, y_col, cr_col, ci_col, kappa_col, q_col, p_re, p_im, rho_re, rho_im, u_re, u_im, v_re, v_im]:
+        dfm[c] = numeric_or_nan(dfm[c])
+
+    meta = (
+        dfm[[mach_col, alpha_col, cr_col, ci_col]]
+        .dropna()
+        .drop_duplicates()
+        .copy()
+    )
+    meta["dist2"] = (meta[mach_col] - target_m) ** 2 + (meta[alpha_col] - target_a) ** 2
+    if meta.empty:
+        raise ValueError("No modal metadata rows found.")
+    best = meta.sort_values("dist2", kind="mergesort").iloc[0]
+
+    tol_m = max(1e-10, 5e-4)
+    tol_a = max(1e-10, 5e-4)
+    sub = dfm.loc[
+        np.isclose(dfm[mach_col], float(best[mach_col]), atol=tol_m, rtol=0.0)
+        & np.isclose(dfm[alpha_col], float(best[alpha_col]), atol=tol_a, rtol=0.0)
+    ].copy()
+    if sub.empty:
+        raise ValueError(f"Could not extract modal rows near M={target_m}, alpha={target_a}")
+
+    sub = sub.sort_values(y_col, kind="mergesort").reset_index(drop=True)
+    meta_out = {
+        "Mach": float(best[mach_col]),
+        "alpha": float(best[alpha_col]),
+        "cr": float(best[cr_col]),
+        "ci": float(best[ci_col]),
+    }
+    cols = {
+        "mach": mach_col, "alpha": alpha_col, "y": y_col, "cr": cr_col, "ci": ci_col,
+        "kappa": kappa_col, "q": q_col,
+        "p_re": p_re, "p_im": p_im,
+        "rho_re": rho_re, "rho_im": rho_im,
+        "u_re": u_re, "u_im": u_im,
+        "v_re": v_re, "v_im": v_im,
+    }
+    return sub, meta_out, cols
+
+
+def compute_modal_quantities(df: pd.DataFrame, cols: dict[str, str], meta: dict[str, float]) -> dict[str, np.ndarray | float]:
+    y = df[cols["y"]].to_numpy(dtype=float)
+    p = df[cols["p_re"]].to_numpy(dtype=float) + 1j * df[cols["p_im"]].to_numpy(dtype=float)
+    rho = df[cols["rho_re"]].to_numpy(dtype=float) + 1j * df[cols["rho_im"]].to_numpy(dtype=float)
+    u = df[cols["u_re"]].to_numpy(dtype=float) + 1j * df[cols["u_im"]].to_numpy(dtype=float)
+    v = df[cols["v_re"]].to_numpy(dtype=float) + 1j * df[cols["v_im"]].to_numpy(dtype=float)
+    kappa = df[cols["kappa"]].to_numpy(dtype=float)
+    q = df[cols["q"]].to_numpy(dtype=float)
+
+    norm = float(np.nanmax(np.abs(p)))
+    if not np.isfinite(norm) or norm == 0:
+        norm = 1.0
+
+    p = p / norm
+    rho = rho / norm
+    u = u / norm
+    v = v / norm
+
+    M = float(meta["Mach"])
+    alpha = float(meta["alpha"])
+    c = complex(meta["cr"], meta["ci"])
+    U = np.tanh(y)
+    Up = 1.0 / np.cosh(y) ** 2
+    py = np.gradient(p, y, edge_order=2)
+    gamma = kappa + 1j * q
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        rho_rhs = (M**2) * p
+        v_rhs = 1j * py / (alpha * (U - c))
+        u_rhs = -p / (U - c) + 1j * Up * v / (alpha * (U - c))
+
+    res_p = py - gamma * p
+    res_rho = rho - rho_rhs
+    res_v = v - v_rhs
+    res_u = u - u_rhs
+
+    return {
+        "y": y, "p": p, "rho": rho, "u": u, "v": v,
+        "kappa": kappa, "q": q,
+        "res_p": np.abs(res_p), "res_rho": np.abs(res_rho), "res_v": np.abs(res_v), "res_u": np.abs(res_u),
+        "U": U,
+    }
+
+
+def plot_representative_mode(out_pdf: Path, modal: dict[str, np.ndarray | float], meta: dict[str, float], dpi: int) -> None:
+    fig, axes = plt.subplots(2, 2, figsize=(11.0, 8.2), sharex=True, constrained_layout=True)
+    items = [("p", r"$p$"), ("rho", r"$\rho$"), ("u", r"$u$"), ("v", r"$v$")]
+    for ax, (key, label) in zip(axes.ravel(), items):
+        z = modal[key]
+        ax.plot(modal["y"], np.real(z), lw=2.0, label=rf"Re({label})")
+        ax.plot(modal["y"], np.imag(z), lw=2.0, ls="--", label=rf"Im({label})")
+        ax.set_ylabel(label)
+        ax.grid(alpha=0.25)
+        ax.legend(loc="best", frameon=True)
+    axes[1, 0].set_xlabel(r"Transverse coordinate $y$")
+    axes[1, 1].set_xlabel(r"Transverse coordinate $y$")
+    fig.suptitle(
+        rf"Representative supersonic mode (normalized with $\max_y |p|=1$): "
+        rf"$M={meta['Mach']:.3f}$, $\alpha={meta['alpha']:.3f}$, "
+        rf"$c_r={meta['cr']:.6f}$, $c_i={meta['ci']:.6f}$",
+        fontsize=14,
+    )
+    savefig_both(fig, out_pdf, dpi)
+
+
+def plot_modal_residuals(out_pdf: Path, modal: dict[str, np.ndarray | float], meta: dict[str, float], dpi: int) -> None:
+    fig, axes = plt.subplots(1, 2, figsize=(12.8, 4.8), constrained_layout=True)
+    ax0, ax1 = axes
+    floor = 1e-16
+    ax0.semilogy(modal["y"], np.maximum(modal["res_p"], floor), lw=2, label=r"$|p_y-(\kappa+i q)p|$")
+    ax0.semilogy(modal["y"], np.maximum(modal["res_rho"], floor), lw=2, label=r"$|\rho-M^2p|$")
+    ax0.semilogy(modal["y"], np.maximum(modal["res_v"], floor), lw=2, label=r"$|v-i p_y/[\alpha(U-c)]|$")
+    ax0.semilogy(modal["y"], np.maximum(modal["res_u"], floor), lw=2, label=r"$|u + p/(U-c) - iU'v/[\alpha(U-c)]|$")
+    ax0.set_xlabel(r"Transverse coordinate $y$")
+    ax0.set_ylabel("Absolute reconstruction residual")
+    ax0.set_title("Reconstruction residuals")
+    ax0.grid(alpha=0.25)
+    ax0.legend(loc="best", frameon=True)
+
+    ax1.semilogy(modal["y"], np.maximum(np.abs(modal["p"]), floor), lw=2.2, color="black", label=r"$|p|$")
+    ax1.set_xlabel(r"Transverse coordinate $y$")
+    ax1.set_ylabel(r"$|p|$")
+    ax1.set_title("Asymptotic decay of the normalized pressure mode")
+    ax1.grid(alpha=0.25)
+    ax1.legend(loc="best", frameon=True)
+    fig.suptitle(
+        rf"Modal reconstruction checks: $M={meta['Mach']:.3f}$, $\alpha={meta['alpha']:.3f}$, "
+        rf"$c_r={meta['cr']:.6f}$, $c_i={meta['ci']:.6f}$",
+        fontsize=14,
+    )
+    savefig_both(fig, out_pdf, dpi)
+
+
+def resolve_conv_cols(df: pd.DataFrame) -> dict[str, str | None]:
+    cols = {
+        "mach": pick_col(df, ["Mach", "mach", "M", "mach_number"], True, "Mach"),
+        "alpha": pick_col(df, ["alpha", "Alpha", "wavenumber"], True, "alpha"),
+        "cr": pick_col(df, ["cr", "classical_cr", "c_r", "real_c"], True, "cr"),
+        "ci": pick_col(df, ["ci", "classical_ci", "c_i", "imag_c"], True, "ci"),
+        "setting": pick_col(df, ["setting", "setting_name", "config", "configuration", "case", "label"], False, "setting"),
+        "status": pick_col(df, ["status", "solver_status", "flag", "state"], False, "status"),
+        "residual": pick_col(df, ["residual", "spectral_residual", "max_residual", "res_max", "resid_max"], False, "residual"),
+    }
+    return cols
+
+
+def prepare_convergence_point_df(path: Path) -> tuple[pd.DataFrame, dict[str, str | None]]:
+    df = read_csv_auto(path)
+    cols = resolve_conv_cols(df)
+    for k in ["mach", "alpha", "cr", "ci", "residual"]:
+        c = cols.get(k)
+        if c is not None:
+            df[c] = numeric_or_nan(df[c])
+    if cols["setting"] is None:
+        df["__setting__"] = np.arange(len(df)).astype(str)
+        cols["setting"] = "__setting__"
+    if cols["status"] is None:
+        df["__status__"] = "ok"
+        cols["status"] = "__status__"
+    df[cols["setting"]] = df[cols["setting"]].astype(str)
+
+    grp = [cols["mach"], cols["alpha"]]
+    df["__ok__"] = ~df[cols["status"]].astype(str).str.contains("fail|reject|invalid|nan", case=False, na=False)
+    df_for_ref = df.loc[df["__ok__"]].copy()
+    sort_cols = [cols["mach"], cols["alpha"]]
+    if cols["residual"] is not None:
+        sort_cols.append(cols["residual"])
+    else:
+        sort_cols.append(cols["setting"])
+    ref = (
+        df_for_ref.sort_values(sort_cols, kind="mergesort")
+        .groupby(grp, as_index=False)
+        .first()[[*grp, cols["cr"], cols["ci"]]]
+        .rename(columns={cols["cr"]: "__cr_ref__", cols["ci"]: "__ci_ref__"})
+    )
+    df = df.merge(ref, on=grp, how="left")
+    df["delta_cr"] = np.abs(df[cols["cr"]] - df["__cr_ref__"])
+    df["delta_ci"] = np.abs(df[cols["ci"]] - df["__ci_ref__"])
+    return df, cols
+
+
+def build_setting_summary(df: pd.DataFrame, cols: dict[str, str | None]) -> pd.DataFrame:
+    setting_col = cols["setting"]
+    residual_col = cols["residual"]
+    agg = df.groupby(setting_col, as_index=False).agg(
+        max_delta_cr=("delta_cr", "max"),
+        max_delta_ci=("delta_ci", "max"),
+        med_delta_cr=("delta_cr", "median"),
+        med_delta_ci=("delta_ci", "median"),
+        n_points=(cols["mach"], "size"),
+    )
+    if residual_col is not None:
+        tmp = df.groupby(setting_col, as_index=False)[residual_col].agg(["median", "max"]).reset_index()
+        tmp = tmp.rename(columns={"median": "residual_median", "max": "residual_max"})
+        agg = agg.merge(tmp, on=setting_col, how="left")
+    else:
+        agg["residual_median"] = np.nan
+        agg["residual_max"] = np.nan
+    agg = agg.sort_values(["residual_median", "residual_max", "max_delta_ci", "max_delta_cr"], kind="mergesort").reset_index(drop=True)
+    agg["strict_rank"] = np.arange(1, len(agg) + 1)
+    return agg
+
+
+def plot_eigenvalue_convergence(out_pdf: Path, setting_summary: pd.DataFrame, setting_col: str, dpi: int) -> None:
+    fig, axes = plt.subplots(1, 3, figsize=(15.5, 5.2), constrained_layout=True)
+    x = np.arange(1, len(setting_summary) + 1)
+    labels = setting_summary[setting_col].astype(str).tolist()
+    floor = 1e-16
+
+    axes[0].semilogy(x, np.maximum(setting_summary["max_delta_cr"], floor), marker="o", lw=2)
+    axes[0].set_title(r"Eigenvalue convergence in $c_r$")
+    axes[0].set_ylabel(r"$\max |\Delta c_r|$")
+
+    axes[1].semilogy(x, np.maximum(setting_summary["max_delta_ci"], floor), marker="o", lw=2)
+    axes[1].set_title(r"Eigenvalue convergence in $c_i$")
+    axes[1].set_ylabel(r"$\max |\Delta c_i|$")
+
+    axes[2].semilogy(x, np.maximum(setting_summary["residual_median"], floor), marker="o", lw=2, label="median")
+    axes[2].semilogy(x, np.maximum(setting_summary["residual_max"], floor), marker="s", lw=2, ls="--", label="max")
+    axes[2].set_title("Spectral residual convergence")
+    axes[2].set_ylabel("Residual")
+    axes[2].legend(loc="best", frameon=True)
+
+    for ax in axes:
+        ax.set_xlabel("Configuration rank (strictest on the left)")
+        ax.grid(alpha=0.25)
+        ax.set_xticks(x)
+        ax.set_xticklabels([str(i) for i in x], rotation=0)
+
+    if labels:
+        y0 = setting_summary["residual_median"].iloc[0]
+        y0 = max(float(y0), floor) if pd.notna(y0) else 1.0
+        axes[2].annotate(
+            f"strictest = {labels[0]}",
+            xy=(1, y0),
+            xytext=(1.5, y0 * 2.5),
+            arrowprops=dict(arrowstyle="->", lw=1.0),
+            fontsize=9,
+        )
+
+    fig.suptitle("Supersonic eigenvalue convergence toward the strictest numerical configuration", fontsize=14)
+    savefig_both(fig, out_pdf, dpi)
+
+
+def read_robustness_tables(paths: list[Path]) -> pd.DataFrame:
+    frames = []
+    for p in paths:
+        if QUARANTINE_RE.search(str(p)):
+            continue
+        try:
+            df = read_csv_auto(p)
+        except Exception as exc:
+            warnings.warn(f"Skipping unreadable robustness file {p}: {exc}")
+            continue
+        df["__source_file__"] = p.name
+        frames.append(df)
+    if not frames:
+        raise FileNotFoundError("No non-quarantine robustness CSVs found.")
+    return pd.concat(frames, ignore_index=True, sort=False)
+
+
+def prepare_robustness_df(df: pd.DataFrame) -> pd.DataFrame:
+    mach_col = pick_col(df, ["Mach", "mach", "M", "mach_number"], False, "Mach")
+    alpha_col = pick_col(df, ["alpha", "Alpha", "wavenumber"], False, "alpha")
+    cr_col = pick_col(df, ["cr", "classical_cr", "c_r"], False, "cr")
+    ci_col = pick_col(df, ["ci", "classical_ci", "c_i"], False, "ci")
+    status_col = pick_col(df, ["status", "solver_status", "flag", "state"], False, "status")
+
+    domain_col = pick_col(df, ["ymax", "y_max", "box", "box_half_width", "domain_size", "y_right"], False, "domain")
+    match_col = pick_col(df, ["match", "match_y", "matching_y", "y_match", "matching_position"], False, "match")
+
+    if cr_col is None or ci_col is None:
+        raise KeyError("Robustness tables must contain cr and ci columns.")
+
+    work = df.copy()
+    for c in [mach_col, alpha_col, cr_col, ci_col, domain_col, match_col]:
+        if c is not None:
+            work[c] = numeric_or_nan(work[c])
+
+    if mach_col is not None:
+        work = work[np.isclose(work[mach_col], 1.4, atol=5e-3, rtol=0.0) | work[mach_col].isna()].copy()
+    if alpha_col is not None and work[alpha_col].notna().any():
+        work = work[np.isclose(work[alpha_col], 0.18, atol=2e-2, rtol=0.0) | work[alpha_col].isna()].copy()
+
+    if status_col is not None:
+        work = work[~work[status_col].astype(str).str.contains("fail|reject|invalid|nan", case=False, na=False)].copy()
+
+    work["domain_param"] = work[domain_col] if domain_col is not None else np.nan
+    work["match_param"] = work[match_col] if match_col is not None else np.nan
+    ref_cr = work[cr_col].median()
+    ref_ci = work[ci_col].median()
+    work["delta_cr"] = np.abs(work[cr_col] - ref_cr)
+    work["delta_ci"] = np.abs(work[ci_col] - ref_ci)
+    return work
+
+
+def aggregate_robustness(work: pd.DataFrame, param_col: str) -> pd.DataFrame:
+    sub = work.loc[np.isfinite(work[param_col])].copy()
+    if sub.empty:
+        return pd.DataFrame(columns=[param_col, "max_delta_cr", "max_delta_ci", "n"])
+    return (
+        sub.groupby(param_col, as_index=False)
+        .agg(max_delta_cr=("delta_cr", "max"), max_delta_ci=("delta_ci", "max"), n=(param_col, "size"))
+        .sort_values(param_col, kind="mergesort")
+        .reset_index(drop=True)
+    )
+
+
+def plot_robustness(out_pdf: Path, work: pd.DataFrame, dpi: int) -> None:
+    fig, axes = plt.subplots(1, 2, figsize=(13.5, 5.0), constrained_layout=True)
+    floor = 1e-16
+
+    agg_dom = aggregate_robustness(work, "domain_param")
+    ax = axes[0]
+    if not agg_dom.empty:
+        ax.semilogy(agg_dom["domain_param"], np.maximum(agg_dom["max_delta_cr"], floor), marker="o", lw=2, label=r"$\max|\Delta c_r|$")
+        ax.semilogy(agg_dom["domain_param"], np.maximum(agg_dom["max_delta_ci"], floor), marker="s", lw=2, ls="--", label=r"$\max|\Delta c_i|$")
+    ax.set_title("Domain-size robustness")
+    ax.set_xlabel("Domain-size parameter")
+    ax.set_ylabel("Deviation from reference")
+    ax.grid(alpha=0.25)
+    ax.legend(loc="best", frameon=True)
+
+    agg_match = aggregate_robustness(work, "match_param")
+    ax = axes[1]
+    if not agg_match.empty:
+        ax.semilogy(agg_match["match_param"], np.maximum(agg_match["max_delta_cr"], floor), marker="o", lw=2, label=r"$\max|\Delta c_r|$")
+        ax.semilogy(agg_match["match_param"], np.maximum(agg_match["max_delta_ci"], floor), marker="s", lw=2, ls="--", label=r"$\max|\Delta c_i|$")
+    ax.set_title("Matching-position robustness")
+    ax.set_xlabel("Matching-position parameter")
+    ax.set_ylabel("Deviation from reference")
+    ax.grid(alpha=0.25)
+    ax.legend(loc="best", frameon=True)
+
+    fig.suptitle("Supersonic box-size and matching-position robustness (non-quarantine data only)", fontsize=14)
+    savefig_both(fig, out_pdf, dpi)
+
+
+def prepare_core_tail_df(path: Path) -> tuple[pd.DataFrame, str]:
+    df = read_csv_auto(path)
+    setting_col = pick_col(df, ["setting", "setting_name", "config", "configuration", "case", "label"], False, "setting")
+    if setting_col is None:
+        df["__setting__"] = np.arange(len(df)).astype(str)
+        setting_col = "__setting__"
+
+    def pick_metric(aliases: list[list[str]]) -> str:
+        for pats in aliases:
+            m = find_matching_cols(df, pats)
+            if m:
+                return m[0]
+        raise KeyError(f"Could not find expected metric in columns {list(df.columns)}")
+
+    core_col = pick_metric([["core", "rel"], ["core", "error"], ["core"]])
+    tail_col = pick_metric([["tail", "rel"], ["tail", "error"], ["tail"]])
+    phase_col = pick_metric([["phase", "rel"], ["phase", "error"], ["phase"]])
+
+    for c in [core_col, tail_col, phase_col]:
+        df[c] = numeric_or_nan(df[c])
+
+    out = (
+        df.groupby(setting_col, as_index=False)
+        .agg(core_median=(core_col, "median"), core_max=(core_col, "max"), tail_median=(tail_col, "median"), tail_max=(tail_col, "max"), phase_median=(phase_col, "median"), phase_max=(phase_col, "max"))
+        .sort_values(["core_median", "tail_median", "phase_median"], kind="mergesort")
+        .reset_index(drop=True)
+    )
+    return out, setting_col
+
+
+def plot_core_tail_phase(out_pdf: Path, df: pd.DataFrame, setting_col: str, dpi: int) -> None:
+    fig, axes = plt.subplots(1, 3, figsize=(16.0, 5.0), constrained_layout=True)
+    x = np.arange(1, len(df) + 1)
+    floor = 1e-16
+    specs = [
+        ("core_median", "core_max", "Core convergence"),
+        ("tail_median", "tail_max", "Tail convergence"),
+        ("phase_median", "phase_max", "Phase convergence"),
+    ]
+    for ax, (cm, cx, title) in zip(axes, specs):
+        ax.semilogy(x, np.maximum(df[cm], floor), marker="o", lw=2, label="median")
+        ax.semilogy(x, np.maximum(df[cx], floor), marker="s", lw=2, ls="--", label="max")
+        ax.set_title(title)
+        ax.set_xlabel("Configuration rank")
+        ax.set_ylabel("Metric value")
+        ax.grid(alpha=0.25)
+        ax.legend(loc="best", frameon=True)
+    fig.suptitle("Core-versus-tail-versus-phase convergence diagnostics", fontsize=14)
+    savefig_both(fig, out_pdf, dpi)
+
+
+def select_representative_cases(df: pd.DataFrame, cols: dict[str, str | None], nmax: int = 8) -> pd.DataFrame:
+    g = [cols["mach"], cols["alpha"]]
+    agg_map = {
+        "max_delta_cr": ("delta_cr", "max"),
+        "max_delta_ci": ("delta_ci", "max"),
+        "n_configs": (cols["setting"], "nunique"),
+        "n_rows": (cols["setting"], "size"),
+    }
+    if cols["residual"] is not None:
+        agg_map["residual_median"] = (cols["residual"], "median")
+        agg_map["residual_max"] = (cols["residual"], "max")
+    grouped = df.groupby(g, as_index=False).agg(**agg_map)
+
+    if cols["residual"] is None:
+        grouped["residual_median"] = np.nan
+        grouped["residual_max"] = np.nan
+
+    if cols["status"]:
+        status_frame = (
+            df.groupby(g)[cols["status"]]
+            .apply(lambda s: "ok" if (~s.astype(str).str.contains("fail|reject|invalid|nan", case=False, na=False)).all() else "check")
+            .reset_index(name="status")
+        )
+        grouped = grouped.merge(status_frame, on=g, how="left")
+    else:
+        grouped["status"] = "ok"
+
+    grouped["priority"] = 0
+    grouped.loc[(np.isclose(grouped[cols["mach"]], 1.4, atol=5e-3)) & (np.isclose(grouped[cols["alpha"]], 0.18, atol=5e-3)), "priority"] = 100
+    grouped.loc[(np.isclose(grouped[cols["mach"]], 1.9, atol=5e-3)) & (np.isclose(grouped[cols["alpha"]], 0.2, atol=5e-3)), "priority"] = 90
+    grouped = grouped.sort_values(["priority", "max_delta_ci", "max_delta_cr", cols["mach"], cols["alpha"]], ascending=[False, False, False, True, True], kind="mergesort")
+    return grouped.head(nmax).reset_index(drop=True)
+
+
+def write_summary_tables(csv_path: Path, tex_path: Path, df: pd.DataFrame, cols: dict[str, str | None]) -> None:
+    out = df.copy()
+    rename = {
+        cols["mach"]: "Mach",
+        cols["alpha"]: "alpha",
+        "max_delta_cr": "max_delta_cr",
+        "max_delta_ci": "max_delta_ci",
+        "residual_median": "residual_median",
+        "residual_max": "residual_max",
+        "n_configs": "n_configs",
+        "status": "status",
+    }
+    out = out.rename(columns=rename)
+    keep = ["Mach", "alpha", "max_delta_cr", "max_delta_ci", "residual_median", "residual_max", "n_configs", "status"]
+    out = out[keep]
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+    out.to_csv(csv_path, index=False)
+
+    formatters = {
+        "Mach": lambda x: f"{x:.3f}",
+        "alpha": lambda x: f"{x:.3f}",
+        "max_delta_cr": lambda x: f"{x:.3e}",
+        "max_delta_ci": lambda x: f"{x:.3e}",
+        "residual_median": lambda x: f"{x:.3e}" if pd.notna(x) else "--",
+        "residual_max": lambda x: f"{x:.3e}" if pd.notna(x) else "--",
+        "n_configs": lambda x: f"{int(x)}",
+        "status": str,
+    }
+    tex = out.to_latex(
+        index=False,
+        escape=False,
+        formatters=formatters,
+        column_format="rrcccccl",
+        caption="Summary of supersonic convergence and robustness diagnostics for representative cases.",
+        label="tab:supersonic_convergence_robustness_summary",
+    )
+    tex_path.write_text(tex, encoding="utf-8")
+    print(f"Saved: {csv_path}")
+    print(f"Saved: {tex_path}")
+
+
+def main() -> None:
+    args = parse_args()
+    repo = find_repo_root(args.repo_root)
+    files = discover_files(repo)
+
+    for key in ["modes_long", "modes_index", "conv_point", "conv_setting", "core_tail", "box_summary"]:
+        p = files[key]
+        if isinstance(p, Path) and not p.exists():
+            raise FileNotFoundError(f"Missing required file: {p}")
+
+    out_fig = files["out_fig"]
+    out_tab = files["out_tab"]
+    out_fig.mkdir(parents=True, exist_ok=True)
+    out_tab.mkdir(parents=True, exist_ok=True)
+
+    mode_df, meta, mode_cols = load_mode_case(files, 1.4, 0.18)
+    modal = compute_modal_quantities(mode_df, mode_cols, meta)
+    plot_representative_mode(out_fig / "Fig_supersonic_representative_mode_M140_a018.pdf", modal, meta, args.dpi)
+    plot_modal_residuals(out_fig / "Fig_supersonic_modal_reconstruction_residuals_M140_a018.pdf", modal, meta, args.dpi)
+
+    conv_df, conv_cols = prepare_convergence_point_df(files["conv_point"])
+    setting_summary = build_setting_summary(conv_df, conv_cols)
+    plot_eigenvalue_convergence(out_fig / "Fig_supersonic_eigenvalue_convergence.pdf", setting_summary, conv_cols["setting"], args.dpi)
+
+    robustness_paths = sorted({Path(files["box_summary"]).resolve(), *[Path(p).resolve() for p in files["robustness_files"]]})
+    robustness_df = read_robustness_tables(robustness_paths)
+    robustness_work = prepare_robustness_df(robustness_df)
+    plot_robustness(out_fig / "Fig_supersonic_box_and_matching_robustness.pdf", robustness_work, args.dpi)
+
+    ctp_df, ctp_setting = prepare_core_tail_df(files["core_tail"])
+    plot_core_tail_phase(out_fig / "Fig_supersonic_core_tail_phase_convergence.pdf", ctp_df, ctp_setting, args.dpi)
+
+    rep = select_representative_cases(conv_df, conv_cols, nmax=8)
+    write_summary_tables(
+        out_tab / "Tab_supersonic_convergence_robustness_summary.csv",
+        out_tab / "Tab_supersonic_convergence_robustness_summary.tex",
+        rep,
+        conv_cols,
+    )
+
+    print("Done.")
+
+
+if __name__ == "__main__":
+    main()

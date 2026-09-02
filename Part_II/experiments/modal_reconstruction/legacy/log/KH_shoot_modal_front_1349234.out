@@ -1,0 +1,18 @@
+Densification spectrale locale du front modal supersonique sur r1i0n17
+points=assets/classic_supersonic/shooting/supersonic_reference_core_local_spectral.csv
+modal-summary=assets/classic_supersonic/shooting/supersonic_shooting_modal_surface_core_summary.csv
+workers=3
+frontier: backtrack=1 lookahead=4 frontier_subdivisions=2 other_subdivisions=1
+box: min=10.0 max=500.0 factor=6.0 amp=[-30.0,5.0]
+guards: stage1<=0.05 err_ci<=0.01 delta_ci<=0.025 delta_cr<=0.08
+Wed May 27 11:33:49 AM CEST 2026
+Supersonic modal-front spectral densification
+points_csv=assets/classic_supersonic/shooting/supersonic_reference_core_local_spectral.csv
+modal_summary_csv=assets/classic_supersonic/shooting/supersonic_shooting_modal_surface_core_summary.csv
+frontiers=3 line_specs=3
+densification: backtrack=1 lookahead=4 frontier_subdivisions=2 other_subdivisions=1
+line-spec=1.20:0.200000:0.175000,0.187500,0.200000,0.208333,0.216667,0.225000,0.237500,0.250000,0.262500,0.275000
+line-spec=1.30:0.175000:0.150000,0.162500,0.175000,0.183333,0.191667,0.200000,0.212500,0.225000
+line-spec=1.50:0.150000:0.125000,0.137500,0.150000,0.158333,0.166667,0.175000,0.187500,0.200000,0.212500,0.225000,0.237500,0.250000
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/classic_supersonic/shooting/supersonic_shooting_modal_front_spectral_dense_line_specs.txt
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/classic_supersonic/shooting/supersonic_shooting_modal_front_spectral_dense_frontiers.csv

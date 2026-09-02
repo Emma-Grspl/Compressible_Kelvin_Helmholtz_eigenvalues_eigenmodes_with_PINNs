@@ -1,0 +1,10 @@
+{
+  "name": "supersonic_article_test_T401",
+  "n": 401,
+  "construction": "Existing sealed T128 plus 273 deterministic geometry-only farthest-point selections from the remaining atlas manifest.",
+  "selection_uses_reference_values": false,
+  "disjoint_from_validation_V64": true,
+  "disjoint_from_anchor_N76": true,
+  "lower_budget_disjointness": "Guaranteed because N24\u2282N36\u2282N48\u2282N60\u2282N76.",
+  "selection_rule": "Per-primary-chart deterministic farthest-point sampling in normalized local chart coordinates."
+}

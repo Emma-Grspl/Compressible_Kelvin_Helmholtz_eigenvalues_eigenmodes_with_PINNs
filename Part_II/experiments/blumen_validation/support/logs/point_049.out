@@ -1,0 +1,11 @@
+=== TRUE POSITIVE BLUMEN ISOLINE POINT ===
+Task index       : 49
+Blumen row       : 83
+Curve            : 4__ci=0.05__ci_0.05
+Mach             : 1.5255878284923927
+Target ci        : 0.05
+Blumen alpha     : 0.1097999434523127
+Status           : converged_root
+Classical alpha  : 0.1058529386592619
+Delta alpha      : -0.003947004793050796
+Spectral solves  : 12

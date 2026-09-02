@@ -1,0 +1,38 @@
+============================================================
+POWELL WIDE RETRY
+Mach   = 1.20
+tag    = 120
+alphas = 0.05
+start  = Fri Aug  7 08:40:25 PM CEST 2026
+============================================================
+[01/01] alpha=0.05000 |dc_pinn|=4.462e-02 |dc_corr|=6.359e-10 mismatch=3.289e-12 nfev=148 time=24.40s
+
+{
+  "status": "COMPLETED",
+  "Mach": 1.2,
+  "n_requested": 1,
+  "n_successful": 1,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M120_S4M0_v1/pinn_powell_retry_wide/pinn_powell_spectral_results.csv",
+  "pinn_spectral_error_mean": 0.04462118326051523,
+  "pinn_spectral_error_max": 0.04462118326051523,
+  "corrected_spectral_error_mean": 6.359476798857405e-10,
+  "corrected_spectral_error_max": 6.359476798857405e-10,
+  "delta_c_from_pinn_mean": 0.04462118299728266,
+  "delta_c_from_pinn_max": 0.04462118299728266,
+  "initial_mismatch_mean": 0.001199004042115948,
+  "initial_mismatch_max": 0.001199004042115948,
+  "corrected_mismatch_mean": 3.2889623944553016e-12,
+  "corrected_mismatch_max": 3.2889623944553016e-12,
+  "mismatch_reduction_mean": 364553892.17501825,
+  "mismatch_reduction_max": 364553892.17501825,
+  "optimization_seconds_mean": 24.397188790142536,
+  "optimization_seconds_max": 24.397188790142536,
+  "nfev_reported_mean": 148.0,
+  "nfev_reported_max": 148.0
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M120_S4M0_v1/pinn_powell_retry_wide/pinn_powell_spectral_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M120_S4M0_v1/pinn_powell_retry_wide/pinn_powell_spectral_summary.json
+
+end = Fri Aug  7 08:40:57 PM CEST 2026

@@ -1,0 +1,1104 @@
+#!/usr/bin/env python3
+"""Generate convergence and robustness assets for the classical supersonic KH reference.
+
+The script classifies CSV files from their column schema, not from one hard-coded
+directory name. Paths containing QUARANTINE, OLD, backup, archive, obsolete or
+superseded are always rejected.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import warnings
+from pathlib import Path
+from typing import Iterable
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+
+mpl.rcParams.update(
+    {
+        "font.size": 11,
+        "axes.labelsize": 11,
+        "axes.titlesize": 12,
+        "legend.fontsize": 9,
+        "xtick.labelsize": 10,
+        "ytick.labelsize": 10,
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+        "savefig.bbox": "tight",
+    }
+)
+
+EXCLUDED_PART = re.compile(
+    r"quarantine|(?:^|[_-])old(?:[_-]|$)|backup|archive|obsolete|superseded",
+    re.IGNORECASE,
+)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo-root", type=Path, default=Path.cwd())
+    parser.add_argument("--dpi", type=int, default=300)
+    return parser.parse_args()
+
+
+def find_repo_root(start: Path) -> Path:
+    start = start.expanduser().resolve()
+    for candidate in (start, *start.parents):
+        if (candidate / "assets").is_dir():
+            return candidate
+    raise FileNotFoundError("Impossible de trouver la racine du dépôt contenant assets/.")
+
+
+def is_allowed(path: Path) -> bool:
+    return not any(EXCLUDED_PART.search(part) for part in path.parts)
+
+
+def normalized_name(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", str(name).casefold())
+
+
+def pick_column(
+    df: pd.DataFrame,
+    names: Iterable[str],
+    *,
+    required: bool = True,
+    label: str = "",
+) -> str | None:
+    columns = {normalized_name(column): str(column) for column in df.columns}
+    for name in names:
+        key = normalized_name(name)
+        if key in columns:
+            return columns[key]
+    if required:
+        raise KeyError(
+            f"Colonne introuvable pour {label or tuple(names)}. "
+            f"Colonnes disponibles : {list(df.columns)}"
+        )
+    return None
+
+
+def columns_containing(df: pd.DataFrame, *tokens: str) -> list[str]:
+    tokens = tuple(token.casefold() for token in tokens)
+    return [
+        str(column)
+        for column in df.columns
+        if all(token in str(column).casefold() for token in tokens)
+    ]
+
+
+def read_header(path: Path) -> pd.DataFrame | None:
+    try:
+        return pd.read_csv(path, compression="infer", nrows=5)
+    except Exception:
+        return None
+
+
+def score_path(path: Path, terms: Iterable[str]) -> int:
+    text = str(path).casefold()
+    return sum(term.casefold() in text for term in terms)
+
+
+def resolve_basic_columns(df: pd.DataFrame) -> dict[str, str | None]:
+    return {
+        "mach": pick_column(df, ("Mach", "M", "mach_number"), required=False),
+        "alpha": pick_column(df, ("alpha", "wavenumber"), required=False),
+        "cr": pick_column(df, ("cr", "c_r", "classical_cr", "real_c"), required=False),
+        "ci": pick_column(df, ("ci", "c_i", "classical_ci", "imag_c"), required=False),
+        "setting": pick_column(
+            df,
+            (
+                "setting",
+                "setting_name",
+                "configuration",
+                "config",
+                "numerical_setting",
+                "case_name",
+                "label",
+            ),
+            required=False,
+        ),
+        "status": pick_column(
+            df,
+            ("status", "solver_status", "state", "flag", "accepted"),
+            required=False,
+        ),
+        "residual": pick_column(
+            df,
+            (
+                "spectral_residual",
+                "residual",
+                "residual_max",
+                "max_residual",
+                "matching_residual",
+                "root_residual",
+                "resid",
+            ),
+            required=False,
+        ),
+    }
+
+
+def classify_inputs(asset_root: Path) -> dict[str, object]:
+    csv_paths = sorted(
+        path
+        for pattern in ("*.csv", "*.csv.gz")
+        for path in asset_root.rglob(pattern)
+        if path.is_file() and is_allowed(path)
+    )
+
+    convergence_candidates: list[tuple[int, Path]] = []
+    setting_candidates: list[tuple[int, Path]] = []
+    core_tail_candidates: list[tuple[int, Path]] = []
+    robustness_candidates: list[tuple[int, Path]] = []
+
+    for path in csv_paths:
+        header = read_header(path)
+        if header is None:
+            continue
+
+        columns = resolve_basic_columns(header)
+        has_eigenvalue = columns["cr"] is not None and columns["ci"] is not None
+        has_coordinates = columns["mach"] is not None and columns["alpha"] is not None
+        has_setting = columns["setting"] is not None
+        has_residual = columns["residual"] is not None
+
+        has_core = bool(columns_containing(header, "core"))
+        has_tail = bool(columns_containing(header, "tail"))
+        has_phase = bool(columns_containing(header, "phase"))
+
+        path_text = str(path).casefold()
+        in_shooting = "/shooting/" in path_text.replace("\\", "/")
+        robust_filename = any(
+            token in path.name.casefold()
+            for token in ("branch_guided", "bigbox", "match05", "reconfirm", "boxrobust")
+        )
+
+        if has_coordinates and has_eigenvalue and has_setting:
+            score = (
+                20
+                + 8 * int(has_residual)
+                + 5 * score_path(path, ("convergence", "audit"))
+                + 3 * score_path(path, ("m18", "m19", "valid_branch"))
+            )
+            convergence_candidates.append((score, path))
+
+        if has_setting and has_residual:
+            score = 10 + 5 * score_path(path, ("by_setting", "convergence", "audit"))
+            setting_candidates.append((score, path))
+
+        if has_core and has_tail and has_phase:
+            score = 30 + 5 * score_path(path, ("convergence", "core_vs_tail", "phase"))
+            core_tail_candidates.append((score, path))
+
+        if has_eigenvalue and (in_shooting or robust_filename):
+            domain_columns = (
+                pick_column(
+                    header,
+                    (
+                        "ymax",
+                        "y_max",
+                        "domain_half_width",
+                        "box_half_width",
+                        "domain_size",
+                        "box_size",
+                        "L",
+                    ),
+                    required=False,
+                )
+                is not None
+            )
+            match_columns = (
+                pick_column(
+                    header,
+                    (
+                        "match_y",
+                        "matching_y",
+                        "y_match",
+                        "matching_position",
+                        "match_position",
+                    ),
+                    required=False,
+                )
+                is not None
+            )
+            score = (
+                15
+                + 8 * int(domain_columns)
+                + 8 * int(match_columns)
+                + 5 * int(robust_filename)
+            )
+            robustness_candidates.append((score, path))
+
+    if not convergence_candidates:
+        raise FileNotFoundError(
+            "Aucun CSV non-quarantaine ne contient simultanément "
+            "Mach, alpha, cr, ci et une colonne de configuration."
+        )
+    if not core_tail_candidates:
+        raise FileNotFoundError(
+            "Aucun CSV non-quarantaine ne contient des colonnes core, tail et phase."
+        )
+    if not robustness_candidates:
+        raise FileNotFoundError(
+            "Aucun CSV de robustesse non-quarantaine exploitable n'a été trouvé sous shooting/."
+        )
+
+    convergence_candidates.sort(key=lambda item: (item[0], str(item[1])), reverse=True)
+    setting_candidates.sort(key=lambda item: (item[0], str(item[1])), reverse=True)
+    core_tail_candidates.sort(key=lambda item: (item[0], str(item[1])), reverse=True)
+    robustness_candidates.sort(key=lambda item: (item[0], str(item[1])), reverse=True)
+
+    convergence_path = convergence_candidates[0][1]
+    setting_path = setting_candidates[0][1] if setting_candidates else None
+    core_tail_path = core_tail_candidates[0][1]
+
+    # Keep all explicitly relevant shooting robustness files, not only one.
+    robustness_paths = sorted(
+        {
+            path
+            for _, path in robustness_candidates
+            if any(
+                token in path.name.casefold()
+                for token in ("branch_guided", "bigbox", "match05", "reconfirm", "boxrobust")
+            )
+        }
+    )
+    if not robustness_paths:
+        robustness_paths = [robustness_candidates[0][1]]
+
+    print(f"Convergence point table: {convergence_path}")
+    if setting_path is not None:
+        print(f"Convergence setting table: {setting_path}")
+    print(f"Core-tail-phase table: {core_tail_path}")
+    print("Robustness tables:")
+    for path in robustness_paths:
+        print(f"  {path}")
+
+    return {
+        "convergence": convergence_path,
+        "setting": setting_path,
+        "core_tail": core_tail_path,
+        "robustness": robustness_paths,
+    }
+
+
+def save_both(fig: plt.Figure, pdf_path: Path, dpi: int) -> None:
+    pdf_path.parent.mkdir(parents=True, exist_ok=True)
+    png_path = pdf_path.with_suffix(".png")
+    fig.savefig(pdf_path)
+    fig.savefig(png_path, dpi=dpi)
+    plt.close(fig)
+    print(f"Saved: {pdf_path}")
+    print(f"Saved: {png_path}")
+
+
+def prepare_convergence(path: Path) -> tuple[pd.DataFrame, dict[str, str]]:
+    frame = pd.read_csv(path, compression="infer")
+    columns = resolve_basic_columns(frame)
+
+    required = ("mach", "alpha", "cr", "ci", "setting")
+    missing = [name for name in required if columns[name] is None]
+    if missing:
+        raise KeyError(f"Colonnes absentes dans {path}: {missing}")
+
+    for name in ("mach", "alpha", "cr", "ci", "residual"):
+        column = columns[name]
+        if column is not None:
+            frame[column] = pd.to_numeric(frame[column], errors="coerce")
+
+    if columns["status"] is None:
+        frame["_status"] = "ok"
+        columns["status"] = "_status"
+
+    frame["_accepted"] = ~frame[columns["status"]].astype(str).str.contains(
+        "fail|reject|invalid|missing|nan|negative",
+        case=False,
+        na=False,
+    )
+    frame = frame.loc[
+        frame["_accepted"]
+        & frame[columns["mach"]].notna()
+        & frame[columns["alpha"]].notna()
+        & frame[columns["cr"]].notna()
+        & frame[columns["ci"]].notna()
+    ].copy()
+
+    setting = columns["setting"]
+    frame[setting] = frame[setting].astype(str)
+
+    # Determine the strictest global setting from residuals when available.
+    if columns["residual"] is not None:
+        residual = columns["residual"]
+        setting_quality = (
+            frame.groupby(setting, as_index=False)
+            .agg(
+                residual_median=(residual, "median"),
+                residual_max=(residual, "max"),
+            )
+            .sort_values(
+                ["residual_median", "residual_max"],
+                kind="mergesort",
+            )
+        )
+        strictest_setting = str(setting_quality.iloc[0][setting])
+    else:
+        strictest_setting = str(frame[setting].value_counts().index[0])
+
+    reference = frame.loc[frame[setting] == strictest_setting].copy()
+    reference = (
+        reference.sort_values(
+            [columns["mach"], columns["alpha"]],
+            kind="mergesort",
+        )
+        .drop_duplicates([columns["mach"], columns["alpha"]])
+        [[columns["mach"], columns["alpha"], columns["cr"], columns["ci"]]]
+        .rename(
+            columns={
+                columns["cr"]: "_cr_reference",
+                columns["ci"]: "_ci_reference",
+            }
+        )
+    )
+
+    frame = frame.merge(
+        reference,
+        on=[columns["mach"], columns["alpha"]],
+        how="left",
+    )
+
+    # Per-point fallback when the globally strictest setting lacks one coordinate.
+    if columns["residual"] is not None:
+        fallback = (
+            frame.sort_values(
+                [columns["mach"], columns["alpha"], columns["residual"]],
+                kind="mergesort",
+            )
+            .groupby([columns["mach"], columns["alpha"]], as_index=False)
+            .first()
+            [[
+                columns["mach"],
+                columns["alpha"],
+                columns["cr"],
+                columns["ci"],
+            ]]
+            .rename(
+                columns={
+                    columns["cr"]: "_cr_fallback",
+                    columns["ci"]: "_ci_fallback",
+                }
+            )
+        )
+        frame = frame.merge(
+            fallback,
+            on=[columns["mach"], columns["alpha"]],
+            how="left",
+        )
+        frame["_cr_reference"] = frame["_cr_reference"].fillna(frame["_cr_fallback"])
+        frame["_ci_reference"] = frame["_ci_reference"].fillna(frame["_ci_fallback"])
+
+    frame["delta_cr"] = np.abs(frame[columns["cr"]] - frame["_cr_reference"])
+    frame["delta_ci"] = np.abs(frame[columns["ci"]] - frame["_ci_reference"])
+    frame.attrs["strictest_setting"] = strictest_setting
+
+    return frame, {key: str(value) if value is not None else "" for key, value in columns.items()}
+
+
+def summarize_settings(frame: pd.DataFrame, columns: dict[str, str]) -> pd.DataFrame:
+    setting = columns["setting"]
+    summary = (
+        frame.groupby(setting, as_index=False)
+        .agg(
+            max_delta_cr=("delta_cr", "max"),
+            max_delta_ci=("delta_ci", "max"),
+            median_delta_cr=("delta_cr", "median"),
+            median_delta_ci=("delta_ci", "median"),
+            n_points=(columns["mach"], "size"),
+        )
+    )
+
+    residual = columns["residual"]
+    if residual:
+        residual_summary = (
+            frame.groupby(setting, as_index=False)
+            .agg(
+                residual_median=(residual, "median"),
+                residual_max=(residual, "max"),
+            )
+        )
+        summary = summary.merge(residual_summary, on=setting, how="left")
+    else:
+        summary["residual_median"] = np.nan
+        summary["residual_max"] = np.nan
+
+    # Coarse -> strict: largest eigenvalue deviation first, strict reference last.
+    summary = summary.sort_values(
+        ["max_delta_ci", "max_delta_cr", "residual_median"],
+        ascending=(False, False, False),
+        kind="mergesort",
+    ).reset_index(drop=True)
+    summary["rank"] = np.arange(1, len(summary) + 1)
+    return summary
+
+
+def plot_eigenvalue_convergence(
+    summary: pd.DataFrame,
+    columns: dict[str, str],
+    strictest_setting: str,
+    output_path: Path,
+    dpi: int,
+) -> None:
+    fig, axes = plt.subplots(
+        1,
+        3,
+        figsize=(15.8, 5.2),
+        constrained_layout=True,
+    )
+    x = summary["rank"].to_numpy()
+    floor = 1e-16
+
+    axes[0].semilogy(
+        x,
+        np.maximum(summary["max_delta_cr"], floor),
+        marker="o",
+        linewidth=2,
+    )
+    axes[0].set_title(r"Convergence of $c_r$")
+    axes[0].set_ylabel(r"$\max|\Delta c_r|$")
+
+    axes[1].semilogy(
+        x,
+        np.maximum(summary["max_delta_ci"], floor),
+        marker="o",
+        linewidth=2,
+    )
+    axes[1].set_title(r"Convergence of $c_i$")
+    axes[1].set_ylabel(r"$\max|\Delta c_i|$")
+
+    if summary["residual_median"].notna().any():
+        axes[2].semilogy(
+            x,
+            np.maximum(summary["residual_median"], floor),
+            marker="o",
+            linewidth=2,
+            label="median",
+        )
+        axes[2].semilogy(
+            x,
+            np.maximum(summary["residual_max"], floor),
+            marker="s",
+            linestyle="--",
+            linewidth=2,
+            label="maximum",
+        )
+        axes[2].legend(loc="best", frameon=True)
+    axes[2].set_title("Spectral residual convergence")
+    axes[2].set_ylabel("Spectral residual")
+
+    for axis in axes:
+        axis.set_xlabel("Numerical configuration rank (coarse → strict)")
+        axis.grid(alpha=0.25)
+        axis.set_xticks(x)
+
+    fig.suptitle(
+        f"Supersonic numerical convergence; strict reference: {strictest_setting}",
+        fontsize=14,
+    )
+    save_both(fig, output_path, dpi)
+
+
+def infer_number_from_filename(name: str, tokens: Iterable[str]) -> float | None:
+    lowered = name.casefold()
+    for token in tokens:
+        match = re.search(rf"{token}[_-]?([0-9]+(?:p[0-9]+|\.[0-9]+)?)", lowered)
+        if match:
+            return float(match.group(1).replace("p", "."))
+    return None
+
+
+def load_robustness(paths: list[Path]) -> pd.DataFrame:
+    frames: list[pd.DataFrame] = []
+
+    for path in paths:
+        frame = pd.read_csv(path, compression="infer")
+        columns = resolve_basic_columns(frame)
+        if columns["cr"] is None or columns["ci"] is None:
+            continue
+
+        for name in ("mach", "alpha", "cr", "ci", "residual"):
+            column = columns[name]
+            if column is not None:
+                frame[column] = pd.to_numeric(frame[column], errors="coerce")
+
+        domain_col = pick_column(
+            frame,
+            (
+                "ymax",
+                "y_max",
+                "domain_half_width",
+                "box_half_width",
+                "domain_size",
+                "box_size",
+                "L",
+            ),
+            required=False,
+        )
+        match_col = pick_column(
+            frame,
+            (
+                "match_y",
+                "matching_y",
+                "y_match",
+                "matching_position",
+                "match_position",
+            ),
+            required=False,
+        )
+
+        frame["_domain_parameter"] = (
+            pd.to_numeric(frame[domain_col], errors="coerce")
+            if domain_col is not None
+            else np.nan
+        )
+        frame["_matching_parameter"] = (
+            pd.to_numeric(frame[match_col], errors="coerce")
+            if match_col is not None
+            else np.nan
+        )
+
+        if frame["_domain_parameter"].isna().all():
+            inferred = infer_number_from_filename(
+                path.name,
+                ("bigbox", "box", "ymax", "domain", "l"),
+            )
+            if inferred is not None:
+                frame["_domain_parameter"] = inferred
+
+        if frame["_matching_parameter"].isna().all():
+            inferred = infer_number_from_filename(
+                path.name,
+                ("match", "matching", "ymatch"),
+            )
+            if inferred is not None:
+                frame["_matching_parameter"] = inferred
+
+        frame["_source_file"] = path.name
+        frame["_cr"] = frame[columns["cr"]]
+        frame["_ci"] = frame[columns["ci"]]
+        frame["_residual"] = (
+            frame[columns["residual"]]
+            if columns["residual"] is not None
+            else np.nan
+        )
+
+        if columns["mach"] is not None and frame[columns["mach"]].notna().any():
+            target_mach = 1.4
+            frame["_mach_distance"] = np.abs(frame[columns["mach"]] - target_mach)
+            nearest_mach_distance = frame["_mach_distance"].min()
+            frame = frame.loc[
+                np.isclose(
+                    frame["_mach_distance"],
+                    nearest_mach_distance,
+                    atol=1e-12,
+                    rtol=0.0,
+                )
+            ].copy()
+
+        if columns["alpha"] is not None and frame[columns["alpha"]].notna().any():
+            target_alpha = 0.18
+            frame["_alpha_distance"] = np.abs(frame[columns["alpha"]] - target_alpha)
+            nearest_alpha_distance = frame["_alpha_distance"].min()
+            frame = frame.loc[
+                np.isclose(
+                    frame["_alpha_distance"],
+                    nearest_alpha_distance,
+                    atol=1e-12,
+                    rtol=0.0,
+                )
+            ].copy()
+
+        frames.append(frame)
+
+    if not frames:
+        raise ValueError("Aucune table de robustesse exploitable.")
+
+    combined = pd.concat(frames, ignore_index=True, sort=False)
+
+    if combined["_residual"].notna().any():
+        reference_row = combined.sort_values("_residual", kind="mergesort").iloc[0]
+        reference_cr = float(reference_row["_cr"])
+        reference_ci = float(reference_row["_ci"])
+    else:
+        reference_cr = float(combined["_cr"].median())
+        reference_ci = float(combined["_ci"].median())
+
+    combined["delta_cr"] = np.abs(combined["_cr"] - reference_cr)
+    combined["delta_ci"] = np.abs(combined["_ci"] - reference_ci)
+    return combined
+
+
+def robustness_summary(frame: pd.DataFrame, parameter: str) -> pd.DataFrame:
+    valid = frame.loc[frame[parameter].notna()].copy()
+    if valid.empty:
+        return pd.DataFrame()
+    return (
+        valid.groupby(parameter, as_index=False)
+        .agg(
+            max_delta_cr=("delta_cr", "max"),
+            max_delta_ci=("delta_ci", "max"),
+            n_configurations=("_source_file", "nunique"),
+        )
+        .sort_values(parameter, kind="mergesort")
+    )
+
+
+def plot_robustness(
+    frame: pd.DataFrame,
+    output_path: Path,
+    dpi: int,
+) -> None:
+    domain = robustness_summary(frame, "_domain_parameter")
+    matching = robustness_summary(frame, "_matching_parameter")
+
+    fig, axes = plt.subplots(
+        1,
+        2,
+        figsize=(13.6, 5.1),
+        constrained_layout=True,
+    )
+    floor = 1e-16
+
+    if not domain.empty:
+        axes[0].semilogy(
+            domain["_domain_parameter"],
+            np.maximum(domain["max_delta_cr"], floor),
+            marker="o",
+            linewidth=2,
+            label=r"$\max|\Delta c_r|$",
+        )
+        axes[0].semilogy(
+            domain["_domain_parameter"],
+            np.maximum(domain["max_delta_ci"], floor),
+            marker="s",
+            linestyle="--",
+            linewidth=2,
+            label=r"$\max|\Delta c_i|$",
+        )
+    else:
+        axes[0].text(
+            0.5,
+            0.5,
+            "No explicit domain-size parameter\nfound in non-quarantine files",
+            ha="center",
+            va="center",
+            transform=axes[0].transAxes,
+        )
+    axes[0].set_title("Domain-size robustness")
+    axes[0].set_xlabel(r"Domain-size parameter")
+    axes[0].set_ylabel("Eigenvalue deviation")
+    axes[0].grid(alpha=0.25)
+    axes[0].legend(loc="best", frameon=True)
+
+    if not matching.empty:
+        axes[1].semilogy(
+            matching["_matching_parameter"],
+            np.maximum(matching["max_delta_cr"], floor),
+            marker="o",
+            linewidth=2,
+            label=r"$\max|\Delta c_r|$",
+        )
+        axes[1].semilogy(
+            matching["_matching_parameter"],
+            np.maximum(matching["max_delta_ci"], floor),
+            marker="s",
+            linestyle="--",
+            linewidth=2,
+            label=r"$\max|\Delta c_i|$",
+        )
+    else:
+        axes[1].text(
+            0.5,
+            0.5,
+            "No explicit matching-position parameter\nfound in non-quarantine files",
+            ha="center",
+            va="center",
+            transform=axes[1].transAxes,
+        )
+    axes[1].set_title("Matching-position robustness")
+    axes[1].set_xlabel(r"Matching position")
+    axes[1].set_ylabel("Eigenvalue deviation")
+    axes[1].grid(alpha=0.25)
+    axes[1].legend(loc="best", frameon=True)
+
+    fig.suptitle(
+        r"Supersonic robustness near $M=1.4$, $\alpha=0.18$",
+        fontsize=14,
+    )
+    save_both(fig, output_path, dpi)
+
+
+def select_metric_column(df: pd.DataFrame, token: str) -> str:
+    preferred = (
+        columns_containing(df, token, "rel")
+        + columns_containing(df, token, "error")
+        + columns_containing(df, token, "l2")
+        + columns_containing(df, token)
+    )
+    if not preferred:
+        raise KeyError(
+            f"Aucune colonne correspondant à {token!r}. Colonnes : {list(df.columns)}"
+        )
+    return preferred[0]
+
+
+def prepare_core_tail_phase(path: Path) -> tuple[pd.DataFrame, str]:
+    frame = pd.read_csv(path, compression="infer")
+    setting = pick_column(
+        frame,
+        (
+            "setting",
+            "setting_name",
+            "configuration",
+            "config",
+            "case_name",
+            "label",
+        ),
+        required=False,
+    )
+    if setting is None:
+        frame["_setting"] = np.arange(len(frame)).astype(str)
+        setting = "_setting"
+
+    core = select_metric_column(frame, "core")
+    tail = select_metric_column(frame, "tail")
+    phase = select_metric_column(frame, "phase")
+
+    for column in (core, tail, phase):
+        frame[column] = pd.to_numeric(frame[column], errors="coerce")
+
+    summary = (
+        frame.groupby(setting, as_index=False)
+        .agg(
+            core_median=(core, "median"),
+            core_max=(core, "max"),
+            tail_median=(tail, "median"),
+            tail_max=(tail, "max"),
+            phase_median=(phase, "median"),
+            phase_max=(phase, "max"),
+        )
+        .sort_values(
+            ["core_median", "tail_median", "phase_median"],
+            ascending=(False, False, False),
+            kind="mergesort",
+        )
+        .reset_index(drop=True)
+    )
+    summary["rank"] = np.arange(1, len(summary) + 1)
+    return summary, setting
+
+
+def plot_core_tail_phase(
+    summary: pd.DataFrame,
+    output_path: Path,
+    dpi: int,
+) -> None:
+    fig, axes = plt.subplots(
+        1,
+        3,
+        figsize=(16.0, 5.1),
+        constrained_layout=True,
+    )
+    x = summary["rank"].to_numpy()
+    floor = 1e-16
+
+    specifications = (
+        ("core_median", "core_max", "Core"),
+        ("tail_median", "tail_max", "Tail"),
+        ("phase_median", "phase_max", "Phase"),
+    )
+
+    for axis, (median_column, max_column, title) in zip(axes, specifications):
+        axis.semilogy(
+            x,
+            np.maximum(summary[median_column], floor),
+            marker="o",
+            linewidth=2,
+            label="median",
+        )
+        axis.semilogy(
+            x,
+            np.maximum(summary[max_column], floor),
+            marker="s",
+            linestyle="--",
+            linewidth=2,
+            label="maximum",
+        )
+        axis.set_title(f"{title} convergence")
+        axis.set_xlabel("Numerical configuration rank (coarse → strict)")
+        axis.set_ylabel("Diagnostic metric")
+        axis.set_xticks(x)
+        axis.grid(alpha=0.25)
+        axis.legend(loc="best", frameon=True)
+
+    fig.suptitle(
+        "Core-versus-tail-versus-phase convergence",
+        fontsize=14,
+    )
+    save_both(fig, output_path, dpi)
+
+
+def choose_representative_points(
+    frame: pd.DataFrame,
+    columns: dict[str, str],
+    maximum_rows: int = 8,
+) -> pd.DataFrame:
+    group_columns = [columns["mach"], columns["alpha"]]
+    aggregation = {
+        "max_delta_cr": ("delta_cr", "max"),
+        "max_delta_ci": ("delta_ci", "max"),
+        "n_configurations": (columns["setting"], "nunique"),
+    }
+
+    if columns["residual"]:
+        aggregation["residual_median"] = (columns["residual"], "median")
+        aggregation["residual_max"] = (columns["residual"], "max")
+
+    summary = frame.groupby(group_columns, as_index=False).agg(**aggregation)
+
+    if not columns["residual"]:
+        summary["residual_median"] = np.nan
+        summary["residual_max"] = np.nan
+
+    summary["status"] = np.where(
+        np.isfinite(summary["max_delta_cr"])
+        & np.isfinite(summary["max_delta_ci"]),
+        "validated",
+        "check",
+    )
+
+    # Deterministic representative selection:
+    # endpoints in Mach/alpha plus the largest observed deviations.
+    indices: list[int] = []
+    for column in group_columns:
+        indices.extend(
+            [
+                int(summary[column].idxmin()),
+                int(summary[column].idxmax()),
+            ]
+        )
+    indices.extend(
+        summary.nlargest(maximum_rows, "max_delta_ci").index.astype(int).tolist()
+    )
+    indices.extend(
+        summary.nlargest(maximum_rows, "max_delta_cr").index.astype(int).tolist()
+    )
+
+    unique_indices = list(dict.fromkeys(indices))[:maximum_rows]
+    return summary.loc[unique_indices].sort_values(group_columns).reset_index(drop=True)
+
+
+def write_summary_tables(
+    summary: pd.DataFrame,
+    columns: dict[str, str],
+    csv_path: Path,
+    tex_path: Path,
+) -> None:
+    output = summary.rename(
+        columns={
+            columns["mach"]: "Mach",
+            columns["alpha"]: "alpha",
+        }
+    )[
+        [
+            "Mach",
+            "alpha",
+            "max_delta_cr",
+            "max_delta_ci",
+            "residual_median",
+            "residual_max",
+            "n_configurations",
+            "status",
+        ]
+    ]
+
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+    output.to_csv(csv_path, index=False)
+
+    formatters = {
+        "Mach": lambda value: f"{value:.3f}",
+        "alpha": lambda value: f"{value:.4f}",
+        "max_delta_cr": lambda value: f"{value:.3e}",
+        "max_delta_ci": lambda value: f"{value:.3e}",
+        "residual_median": lambda value: (
+            f"{value:.3e}" if pd.notna(value) else "--"
+        ),
+        "residual_max": lambda value: (
+            f"{value:.3e}" if pd.notna(value) else "--"
+        ),
+        "n_configurations": lambda value: str(int(value)),
+        "status": str,
+    }
+
+    latex = output.to_latex(
+        index=False,
+        escape=False,
+        formatters=formatters,
+        column_format="rrcccccl",
+        caption=(
+            "Summary of supersonic numerical convergence and robustness "
+            "for representative spectral points."
+        ),
+        label="tab:supersonic_convergence_robustness_summary",
+    )
+    tex_path.write_text(latex, encoding="utf-8")
+
+    print(f"Saved: {csv_path}")
+    print(f"Saved: {tex_path}")
+
+
+def main() -> None:
+    args = parse_args()
+    repo = find_repo_root(args.repo_root)
+
+    # Article-ready high-Mach convergence tables already generated in the repo.
+    convergence_path = (
+        repo
+        / "assets"
+        / "article"
+        / "classical_supersonic"
+        / "tables"
+        / "supersonic_high_mach_convergence_by_point.csv"
+    )
+
+    setting_path = (
+        repo
+        / "assets"
+        / "article"
+        / "classical_supersonic"
+        / "source_data"
+        / "supersonic_high_mach_convergence_by_setting.csv"
+    )
+
+    core_tail_path = (
+        repo
+        / "assets"
+        / "article"
+        / "classical_supersonic"
+        / "source_data"
+        / "supersonic_high_mach_core_tail_phase_convergence.csv"
+    )
+
+    # Raw non-quarantine convergence runs used for box/matching robustness.
+    reproducibility_root = (
+        repo
+        / "classic_supersonic"
+        / "reproducibility"
+        / "results"
+    )
+
+    robustness_paths = sorted(
+        path
+        for path in reproducibility_root.rglob("convergence_runs.csv")
+        if path.is_file() and is_allowed(path)
+    )
+
+    required_paths = [
+        convergence_path,
+        setting_path,
+        core_tail_path,
+    ]
+
+    for required_path in required_paths:
+        if not required_path.is_file():
+            raise FileNotFoundError(
+                f"Required input file not found: {required_path}"
+            )
+
+    if not robustness_paths:
+        raise FileNotFoundError(
+            "No valid non-quarantine convergence_runs.csv file was found "
+            f"under {reproducibility_root}"
+        )
+
+    print(f"Convergence point table: {convergence_path}")
+    print(f"Convergence setting table: {setting_path}")
+    print(f"Core-tail-phase table: {core_tail_path}")
+    print("Robustness run tables:")
+    for robustness_path in robustness_paths:
+        print(f"  {robustness_path}")
+
+    output_figures = (
+        repo
+        / "assets"
+        / "article"
+        / "classical_supersonic"
+        / "figures"
+    )
+
+    output_tables = (
+        repo
+        / "assets"
+        / "article"
+        / "classical_supersonic"
+        / "source_data"
+    )
+
+    output_figures.mkdir(parents=True, exist_ok=True)
+    output_tables.mkdir(parents=True, exist_ok=True)
+
+    convergence, columns = prepare_convergence(convergence_path)
+
+    setting_summary = summarize_settings(convergence, columns)
+
+    plot_eigenvalue_convergence(
+        setting_summary,
+        columns,
+        convergence.attrs["strictest_setting"],
+        output_figures
+        / "Fig_supersonic_eigenvalue_convergence.pdf",
+        args.dpi,
+    )
+
+    robustness = load_robustness(robustness_paths)
+
+    plot_robustness(
+        robustness,
+        output_figures
+        / "Fig_supersonic_box_and_matching_robustness.pdf",
+        args.dpi,
+    )
+
+    core_tail_phase, _ = prepare_core_tail_phase(core_tail_path)
+
+    plot_core_tail_phase(
+        core_tail_phase,
+        output_figures
+        / "Fig_supersonic_core_tail_phase_convergence.pdf",
+        args.dpi,
+    )
+
+    representative = choose_representative_points(
+        convergence,
+        columns,
+    )
+
+    write_summary_tables(
+        representative,
+        columns,
+        output_tables
+        / "Tab_supersonic_convergence_robustness_summary.csv",
+        output_tables
+        / "Tab_supersonic_convergence_robustness_summary.tex",
+    )
+
+    print("All convergence and robustness assets were generated.")
+
+
+
+if __name__ == "__main__":
+    main()

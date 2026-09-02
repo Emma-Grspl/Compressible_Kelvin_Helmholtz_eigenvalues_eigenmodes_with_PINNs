@@ -1,0 +1,1 @@
+assets/pinn_supersonic/pilots/local_M100_sparse_v1_legacy_20260803_111432

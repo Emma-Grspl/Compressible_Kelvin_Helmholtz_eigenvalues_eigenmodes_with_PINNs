@@ -1,0 +1,40 @@
+============================================================
+ATLAS N76 C00 SMOKE
+node=r3i4n1
+start=Tue Aug 11 11:32:41 AM CEST 2026
+============================================================
+train Mach: 1.00 1.05 1.10 1.15 1.20 1.25
+validation Mach: 
+test Mach (sealed): 
+[spectral_prefit] 1/2 M=1.20 loss=7.756263e+00
+[spectral_prefit] 2/2 M=1.05 loss=2.781257e+01
+[modal_frozen] 1/2 M=1.05 loss=6.555185e+00 rk=8.454e-02 rq=1.039e-01
+[modal_frozen] 2/2 M=1.05 loss=2.260815e+00 rk=1.092e-01 rq=9.402e-02
+[joint] 1/2 M=1.25 loss=3.231239e+02 spec=6.389e+00
+[joint] 2/2 M=1.10 loss=3.647287e+02 spec=7.187e+00
+
+================================================================================
+GLOBAL S4M0 TRAINING COMPLETE
+================================================================================
+selected: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1/N76/smoke/C00/best_joint_checkpoint.pt
+
+{
+  "train": {
+    "n": 10,
+    "n_mach": 6,
+    "cr_mae": 0.19930367430395166,
+    "cr_max_abs": 0.3163656755473408,
+    "ci_mae": 0.0379654315439676,
+    "ci_max_abs": 0.1337691171965798,
+    "omega_i_mae": 0.003343064262791217,
+    "spectral_error_mean": 0.20690398571185714,
+    "spectral_error_max": 0.31648602764523076
+  }
+}
+
+TEST SPLIT REMAINS SEALED.
+
+output: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1/N76/smoke/C00
+
+SMOKE_FINISHED
+end=Tue Aug 11 11:33:03 AM CEST 2026

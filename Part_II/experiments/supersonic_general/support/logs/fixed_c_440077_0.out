@@ -1,0 +1,87 @@
+SOURCE=oracle
+OUTPUT_DIR=assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/fixed_c_oracle_all
+START=Thu Jul 30 03:36:42 PM CEST 2026
+[01/45] source=oracle alpha=0.05000 |dc|=0.000e+00 stage2=1.656e-20 p40=1.504e-05 ov40=9.738e-11 time=1.49s
+[02/45] source=oracle alpha=0.05500 |dc|=0.000e+00 stage2=1.209e-20 p40=1.838e-05 ov40=1.456e-10 time=1.48s
+[03/45] source=oracle alpha=0.06000 |dc|=0.000e+00 stage2=3.371e-20 p40=2.208e-05 ov40=2.105e-10 time=1.91s
+[04/45] source=oracle alpha=0.06500 |dc|=0.000e+00 stage2=9.600e-01 p40=2.616e-05 ov40=2.955e-10 time=6.66s
+[05/45] source=oracle alpha=0.07000 |dc|=0.000e+00 stage2=6.367e+00 p40=3.061e-05 ov40=4.048e-10 time=6.62s
+[06/45] source=oracle alpha=0.07500 |dc|=0.000e+00 stage2=1.728e+01 p40=3.546e-05 ov40=5.429e-10 time=6.95s
+[07/45] source=oracle alpha=0.08000 |dc|=0.000e+00 stage2=3.457e+01 p40=4.069e-05 ov40=7.150e-10 time=7.00s
+[08/45] source=oracle alpha=0.08500 |dc|=0.000e+00 stage2=5.664e+01 p40=4.636e-05 ov40=9.276e-10 time=7.09s
+[09/45] source=oracle alpha=0.09000 |dc|=0.000e+00 stage2=7.374e+01 p40=5.267e-05 ov40=1.197e-09 time=7.12s
+[10/45] source=oracle alpha=0.09500 |dc|=0.000e+00 stage2=9.422e+01 p40=5.938e-05 ov40=1.521e-09 time=7.17s
+[11/45] source=oracle alpha=0.10000 |dc|=0.000e+00 stage2=1.186e+02 p40=6.632e-05 ov40=1.895e-09 time=6.67s
+[12/45] source=oracle alpha=0.10500 |dc|=0.000e+00 stage2=1.474e+02 p40=7.346e-05 ov40=2.322e-09 time=6.71s
+[13/45] source=oracle alpha=0.11000 |dc|=0.000e+00 stage2=1.814e+02 p40=8.102e-05 ov40=2.819e-09 time=6.71s
+[14/45] source=oracle alpha=0.11500 |dc|=0.000e+00 stage2=2.213e+02 p40=8.924e-05 ov40=3.414e-09 time=7.40s
+[15/45] source=oracle alpha=0.12000 |dc|=0.000e+00 stage2=2.683e+02 p40=9.811e-05 ov40=4.122e-09 time=7.47s
+[16/45] source=oracle alpha=0.12500 |dc|=0.000e+00 stage2=3.234e+02 p40=1.076e-04 ov40=4.947e-09 time=7.51s
+[17/45] source=oracle alpha=0.13000 |dc|=0.000e+00 stage2=3.881e+02 p40=1.177e-04 ov40=5.911e-09 time=7.61s
+[18/45] source=oracle alpha=0.13500 |dc|=0.000e+00 stage2=4.640e+02 p40=1.283e-04 ov40=7.011e-09 time=7.70s
+[19/45] source=oracle alpha=0.14000 |dc|=0.000e+00 stage2=5.532e+02 p40=1.394e-04 ov40=8.269e-09 time=7.79s
+[20/45] source=oracle alpha=0.14500 |dc|=0.000e+00 stage2=6.583e+02 p40=1.511e-04 ov40=9.695e-09 time=6.89s
+[21/45] source=oracle alpha=0.15000 |dc|=0.000e+00 stage2=7.824e+02 p40=1.634e-04 ov40=1.131e-08 time=7.98s
+[22/45] source=oracle alpha=0.15500 |dc|=0.000e+00 stage2=9.292e+02 p40=1.762e-04 ov40=1.312e-08 time=8.09s
+[23/45] source=oracle alpha=0.16000 |dc|=0.000e+00 stage2=1.104e+03 p40=1.897e-04 ov40=1.516e-08 time=8.30s
+[24/45] source=oracle alpha=0.16500 |dc|=0.000e+00 stage2=1.312e+03 p40=2.037e-04 ov40=1.743e-08 time=7.11s
+[25/45] source=oracle alpha=0.17000 |dc|=0.000e+00 stage2=1.561e+03 p40=2.185e-04 ov40=2.000e-08 time=8.62s
+[26/45] source=oracle alpha=0.17500 |dc|=0.000e+00 stage2=1.861e+03 p40=2.342e-04 ov40=2.289e-08 time=7.22s
+[27/45] source=oracle alpha=0.18000 |dc|=0.000e+00 stage2=2.225e+03 p40=2.511e-04 ov40=2.623e-08 time=9.02s
+[28/45] source=oracle alpha=0.18500 |dc|=0.000e+00 stage2=2.670e+03 p40=2.697e-04 ov40=3.017e-08 time=9.24s
+[29/45] source=oracle alpha=0.19000 |dc|=0.000e+00 stage2=3.218e+03 p40=2.895e-04 ov40=3.465e-08 time=9.50s
+[30/45] source=oracle alpha=0.19500 |dc|=0.000e+00 stage2=3.900e+03 p40=3.094e-04 ov40=3.944e-08 time=9.91s
+[31/45] source=oracle alpha=0.20000 |dc|=0.000e+00 stage2=4.757e+03 p40=3.289e-04 ov40=4.437e-08 time=7.51s
+[32/45] source=oracle alpha=0.20500 |dc|=0.000e+00 stage2=5.850e+03 p40=3.489e-04 ov40=4.967e-08 time=10.57s
+[33/45] source=oracle alpha=0.21000 |dc|=0.000e+00 stage2=6.552e+03 p40=3.714e-04 ov40=5.603e-08 time=10.81s
+[34/45] source=oracle alpha=0.21500 |dc|=0.000e+00 stage2=7.218e+03 p40=3.953e-04 ov40=6.315e-08 time=7.71s
+[35/45] source=oracle alpha=0.22000 |dc|=0.000e+00 stage2=7.931e+03 p40=4.203e-04 ov40=7.105e-08 time=10.86s
+[36/45] source=oracle alpha=0.22500 |dc|=0.000e+00 stage2=8.692e+03 p40=4.467e-04 ov40=7.981e-08 time=7.94s
+[37/45] source=oracle alpha=0.23000 |dc|=0.000e+00 stage2=9.503e+03 p40=4.744e-04 ov40=8.952e-08 time=11.56s
+[38/45] source=oracle alpha=0.23500 |dc|=0.000e+00 stage2=1.037e+04 p40=5.035e-04 ov40=1.003e-07 time=11.83s
+[39/45] source=oracle alpha=0.24000 |dc|=0.000e+00 stage2=1.129e+04 p40=5.341e-04 ov40=1.121e-07 time=8.31s
+[40/45] source=oracle alpha=0.24500 |dc|=0.000e+00 stage2=1.226e+04 p40=5.663e-04 ov40=1.252e-07 time=12.71s
+[41/45] source=oracle alpha=0.25000 |dc|=0.000e+00 stage2=1.329e+04 p40=6.000e-04 ov40=1.396e-07 time=12.81s
+[42/45] source=oracle alpha=0.25500 |dc|=0.000e+00 stage2=1.439e+04 p40=6.355e-04 ov40=1.555e-07 time=8.27s
+[43/45] source=oracle alpha=0.26000 |dc|=0.000e+00 stage2=1.554e+04 p40=6.728e-04 ov40=1.729e-07 time=8.09s
+[44/45] source=oracle alpha=0.26500 |dc|=0.000e+00 stage2=1.676e+04 p40=7.118e-04 ov40=1.920e-07 time=14.45s
+[45/45] source=oracle alpha=0.27000 |dc|=0.000e+00 stage2=1.805e+04 p40=7.528e-04 ov40=2.130e-07 time=15.38s
+
+{
+  "status": "COMPLETED",
+  "source": "oracle",
+  "alpha_set": "all",
+  "Mach": 1.5,
+  "n_requested": 45,
+  "n_successful": 45,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/fixed_c_oracle_all/fixed_c_modal_results.csv",
+  "complex_spectral_error_mean": 0.0,
+  "complex_spectral_error_max": 0.0,
+  "stage2_mismatch_mean": 4125.010272125782,
+  "stage2_mismatch_max": 18051.917603825143,
+  "p_rel_l2_core20_mean": 1.688448853053413e-05,
+  "p_rel_l2_core20_max": 4.6328220321812756e-05,
+  "p_rel_l2_core40_mean": 0.00025482325078372776,
+  "p_rel_l2_core40_max": 0.0007528153263909509,
+  "rho_rel_l2_core40_mean": 0.000254823250783733,
+  "rho_rel_l2_core40_max": 0.0007528153263909423,
+  "u_rel_l2_core40_mean": 0.00015632440300602919,
+  "u_rel_l2_core40_max": 0.0006895109883880047,
+  "v_rel_l2_core40_mean": 0.0002796942186726841,
+  "v_rel_l2_core40_max": 0.0007924932197935425,
+  "p_overlap_error_core20_mean": 2.3120855600448447e-10,
+  "p_overlap_error_core20_max": 1.0731521227214103e-09,
+  "p_overlap_error_core40_mean": 4.335656360105528e-08,
+  "p_overlap_error_core40_max": 2.130038763148434e-07,
+  "stage2_seconds_mean": 7.947335057964342,
+  "stage2_seconds_max": 14.900448101107031,
+  "reconstruction_seconds_mean": 0.2696813020803448,
+  "reconstruction_seconds_max": 0.481781983980909,
+  "fixed_c_total_seconds_mean": 8.217016360044687,
+  "fixed_c_total_seconds_max": 15.38223008508794
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/fixed_c_oracle_all/fixed_c_modal_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/fixed_c_oracle_all/fixed_c_modal_summary.json
+END=Thu Jul 30 03:43:29 PM CEST 2026

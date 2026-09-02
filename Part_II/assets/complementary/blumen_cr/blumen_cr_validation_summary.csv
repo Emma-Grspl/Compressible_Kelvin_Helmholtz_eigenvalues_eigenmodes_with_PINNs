@@ -1,0 +1,2 @@
+n_planned,n_available,n_usable,n_weak,n_unavailable,n_inside_ci90_usable,n_outside_ci90_usable,median_abs_discrepancy,p95_abs_discrepancy,max_abs_discrepancy,median_relative_discrepancy,p95_relative_discrepancy,max_relative_discrepancy
+9,8,7,1,1,4,3,0.004982701937083,0.01107294642700909,0.0115815710105434,0.0213663758089448,0.04052522323886211,0.0432217153476625

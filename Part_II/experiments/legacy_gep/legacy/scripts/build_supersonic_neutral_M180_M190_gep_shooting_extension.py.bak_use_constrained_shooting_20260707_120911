@@ -1,0 +1,761 @@
+from __future__ import annotations
+
+"""
+Build a separate high-Mach neutral-boundary extension for the supersonic KH reference.
+
+Default workflow:
+- read digitized Blumen ci=0 / ci=0.01 curves;
+- build a small set of M=1.8 and M=1.9 candidate points close to neutrality;
+- optionally use the dense GEP as a candidate generator;
+- optionally validate the selected GEP candidate with local mstab17 shooting;
+- export review/validated CSVs and modal fields in a dedicated extension folder.
+
+Smoke test:
+    python scripts/build_supersonic_neutral_M180_M190_gep_shooting_extension.py \
+      --ci-datasets assets/classic_supersonic/blumen_ci_datasets.csv \
+      --cr-datasets assets/classic_supersonic/blumen_cr_datasets.csv \
+      --dry-run
+"""
+
+import argparse
+import json
+from pathlib import Path
+import sys
+from typing import Any
+
+import numpy as np
+import pandas as pd
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from classical_solver.supersonic.blumen_reference import (  # noqa: E402
+    curve_intersections_at_mach,
+    load_wide_digitized_curves,
+)
+
+
+DEFAULT_OUTPUT_DIR = (
+    ROOT_DIR
+    / "assets"
+    / "classic_supersonic"
+    / "extension_neutral_M180_M190_gep_shooting"
+)
+DEFAULT_CI_DATASETS = ROOT_DIR / "assets" / "classic_supersonic" / "blumen_ci_datasets.csv"
+DEFAULT_CR_DATASETS = ROOT_DIR / "assets" / "classic_supersonic" / "blumen_cr_datasets.csv"
+DEFAULT_POINTS = (
+    (1.8, 0.258),
+    (1.8, 0.248),
+    (1.8, 0.238),
+    (1.9, 0.252),
+    (1.9, 0.242),
+    (1.9, 0.232),
+)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Build a separate M=1.8/M=1.9 supersonic neutral extension using "
+            "Blumen seeds, GEP candidates and local shooting validation."
+        )
+    )
+    parser.add_argument("--ci-datasets", type=Path, default=DEFAULT_CI_DATASETS)
+    parser.add_argument("--cr-datasets", type=Path, default=DEFAULT_CR_DATASETS)
+    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--max-points", type=int, default=None)
+    parser.add_argument("--no-shooting", action="store_true")
+    parser.add_argument("--no-figures", action="store_true")
+    return parser
+
+
+def _curve_key(curve: dict[str, Any]) -> str:
+    return str(curve.get("stem", "")).strip().lower().replace(" ", "")
+
+
+def select_curve(curves: list[dict[str, Any]], *, stem: str | None = None, level: float | None = None) -> dict[str, Any]:
+    if stem is not None:
+        target = stem.strip().lower().replace(" ", "")
+        for curve in curves:
+            if _curve_key(curve) == target:
+                return curve
+    if level is not None:
+        candidates = [
+            curve
+            for curve in curves
+            if curve.get("level") is not None and np.isclose(float(curve["level"]), float(level), atol=1e-12)
+        ]
+        if candidates:
+            return candidates[0]
+    label = stem if stem is not None else f"level={level}"
+    available = ", ".join(str(curve.get("stem")) for curve in curves)
+    raise RuntimeError(f"Blumen curve {label!r} not found. Available curves: {available}")
+
+
+def numeric_curve_level(curve: dict[str, Any]) -> float | None:
+    if curve.get("level") is not None:
+        return float(curve["level"])
+    raw = str(curve.get("stem", "")).strip().replace(",", ".")
+    try:
+        return float(raw)
+    except ValueError:
+        return None
+
+
+def principal_alpha_at_mach(curve: dict[str, Any], mach: float) -> float:
+    intersections = curve_intersections_at_mach(curve, float(mach))
+    if not intersections:
+        return float("nan")
+    return float(max(intersections))
+
+
+def estimate_level_from_dataset(curves: list[dict[str, Any]], *, alpha: float, mach: float, family: str) -> float:
+    anchors: list[tuple[float, float]] = []
+    for curve in curves:
+        level = numeric_curve_level(curve)
+        if curve.get("family") not in {family, "unknown"} or level is None:
+            continue
+        alpha_on_curve = principal_alpha_at_mach(curve, mach)
+        if np.isfinite(alpha_on_curve):
+            anchors.append((float(alpha_on_curve), float(level)))
+    if len(anchors) < 2:
+        return float("nan")
+    anchors = sorted(anchors)
+    alpha_grid = np.array([item[0] for item in anchors], dtype=float)
+    level_grid = np.array([item[1] for item in anchors], dtype=float)
+    if alpha < float(alpha_grid.min()) or alpha > float(alpha_grid.max()):
+        return float("nan")
+    return float(np.interp(float(alpha), alpha_grid, level_grid))
+
+
+def build_candidate_table(ci_dataset: Path, cr_dataset: Path, max_points: int | None) -> pd.DataFrame:
+    ci_curves = load_wide_digitized_curves(ci_dataset)
+    cr_curves = load_wide_digitized_curves(cr_dataset)
+    neutral_curve = select_curve(ci_curves, stem="ci_sup=0")
+    ci001_curve = select_curve(ci_curves, stem="0.01")
+
+    rows: list[dict[str, Any]] = []
+    for mach, alpha in DEFAULT_POINTS:
+        alpha_neutral = principal_alpha_at_mach(neutral_curve, mach)
+        alpha_ci001 = principal_alpha_at_mach(ci001_curve, mach)
+        denom = alpha_neutral - alpha_ci001
+        if np.isfinite(denom) and abs(denom) > 1e-12:
+            ci_seed = 0.01 * (alpha_neutral - float(alpha)) / denom
+        else:
+            ci_seed = float("nan")
+        ci_seed = float(np.clip(ci_seed, 1e-4, 0.03)) if np.isfinite(ci_seed) else float("nan")
+        cr_seed = estimate_level_from_dataset(cr_curves, alpha=float(alpha), mach=float(mach), family="cr_level")
+
+        rows.append(
+            {
+                "Mach": float(mach),
+                "alpha": float(alpha),
+                "alpha_neutral": float(alpha_neutral),
+                "alpha_ci001": float(alpha_ci001),
+                "ci_seed_blumen": ci_seed,
+                "cr_seed_blumen": cr_seed,
+                "status": "dry_run",
+                "reason": "candidate_from_blumen_ci0_ci001_interpolation",
+            }
+        )
+
+    df = pd.DataFrame(rows)
+    if max_points is not None and int(max_points) > 0:
+        df = df.head(int(max_points)).copy()
+    return df
+
+
+def normalize_gep_mode(vector: np.ndarray, n_points: int, mach: float) -> dict[str, np.ndarray]:
+    u = np.asarray(vector[0:n_points], dtype=np.complex128).copy()
+    v = np.asarray(vector[n_points : 2 * n_points], dtype=np.complex128).copy()
+    p = np.asarray(vector[2 * n_points : 3 * n_points], dtype=np.complex128).copy()
+    rho = p * float(mach) ** 2
+
+    idx = int(np.argmax(np.abs(rho)))
+    if np.abs(rho[idx]) > 0.0:
+        phase = np.exp(-1j * np.angle(rho[idx]))
+        u, v, p, rho = u * phase, v * phase, p * phase, rho * phase
+    if np.max(np.real(rho)) < abs(np.min(np.real(rho))):
+        u, v, p, rho = -u, -v, -p, -rho
+    scale = max(np.max(np.abs(np.real(rho))), np.max(np.abs(np.imag(rho))), 1e-12)
+    return {"u": u / scale, "v": v / scale, "p": p / scale, "rho": rho / scale}
+
+
+def edge_fraction(field: np.ndarray) -> float:
+    amp = np.abs(field)
+    peak = max(float(np.max(amp)), 1e-12)
+    return float(max(amp[0], amp[-1]) / peak)
+
+
+def run_gep_for_point(row: pd.Series, *, max_modes: int = 200) -> tuple[pd.DataFrame, dict[str, Any] | None]:
+    from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+
+    alpha = float(row["alpha"])
+    mach = float(row["Mach"])
+    ci_seed = float(row["ci_seed_blumen"])
+    cr_seed = float(row["cr_seed_blumen"]) if np.isfinite(float(row["cr_seed_blumen"])) else np.nan
+
+    solver = NotebookStyleDenseGEPSolver(
+        alpha=alpha,
+        Mach=mach,
+        n_points=301,
+        mapping_kind="pin",
+        mapping_scale=5.0,
+        xi_max=0.98,
+    )
+    modes = solver.finite_modes()
+    if not modes:
+        return pd.DataFrame(
+            [
+                {
+                    "Mach": mach,
+                    "alpha": alpha,
+                    "rank": 0,
+                    "status": "rejected",
+                    "reason": "gep_returned_no_finite_positive_ci_modes",
+                }
+            ]
+        ), None
+
+    previous_signature = None
+    scored: list[dict[str, Any]] = []
+    for mode in modes:
+        fields = normalize_gep_mode(np.asarray(mode["vector"]), solver.n_points, mach)
+        p_edge = edge_fraction(fields["p"])
+        rho_edge = edge_fraction(fields["rho"])
+        cr_distance = 0.0 if not np.isfinite(cr_seed) else abs(float(mode["cr"]) - cr_seed)
+        ci_distance = abs(float(mode["ci"]) - ci_seed) if np.isfinite(ci_seed) else abs(float(mode["ci"]))
+        overlap_penalty = 0.0
+        if previous_signature is not None:
+            overlap_penalty = 1.0 - solver.signature_overlap(mode, previous_signature)
+        score = 4.0 * ci_distance + 0.5 * cr_distance + 0.75 * max(p_edge, rho_edge) + 0.25 * overlap_penalty
+        scored.append(
+            {
+                "mode": mode,
+                "score": float(score),
+                "p_edge_fraction": p_edge,
+                "rho_edge_fraction": rho_edge,
+                "cr_distance_to_seed": cr_distance,
+                "ci_distance_to_seed": ci_distance,
+                "fields": fields,
+                "solver_y": solver.y.copy(),
+            }
+        )
+
+    # Keep all best-ranked modes exported, but select with a ci-first criterion.
+    ranked = sorted(scored, key=lambda item: item["score"])[:max_modes]
+
+    cr_seed_used = cr_seed if np.isfinite(cr_seed) else 1.0 - 1.0 / mach
+    cr_seed_source = "blumen" if np.isfinite(cr_seed) else "asymptotic_fallback"
+
+    # CI-FIRST: Blumen ci isolines are the reliable target here.
+    # cr is only a weak diagnostic/penalty, not a hard selection window.
+    ci_min_used = max(1.0e-7, 0.05 * abs(ci_seed))
+    ci_max_used = max(5.0e-4, 8.0 * abs(ci_seed))
+
+    # Avoid selecting clearly acoustic/extreme phase-speed modes unless no better mode exists.
+    # This is a soft penalty, not a rejection.
+    cr_soft_center = cr_seed_used
+    acoustic_cr_threshold = 0.97
+
+    candidate_rows: list[dict[str, Any]] = []
+    revised_scores: list[float] = []
+    eligible_flags: list[bool] = []
+
+    for rank, item in enumerate(ranked, start=1):
+        mode = item["mode"]
+
+        gep_cr = float(mode["cr"])
+        gep_ci = float(mode["ci"])
+
+        cr_dist = abs(gep_cr - cr_seed_used)
+        ci_dist = abs(gep_ci - ci_seed)
+
+        # Normalized ci mismatch is the dominant quantity.
+        ci_scale = max(abs(ci_seed), 1.0e-6)
+        ci_rel_dist = ci_dist / ci_scale
+
+        edge = max(float(item["p_edge_fraction"]), float(item["rho_edge_fraction"]))
+
+        # Soft penalties only.
+        cr_soft_penalty = 0.05 * abs(gep_cr - cr_soft_center)
+        acoustic_penalty = 0.25 if abs(gep_cr) > acoustic_cr_threshold else 0.0
+        edge_penalty = 0.1 * edge
+
+        revised_score = ci_rel_dist + cr_soft_penalty + acoustic_penalty + edge_penalty
+
+        eligible = True
+        reason = "gep_candidate_not_selected_ci_first"
+        status = "not_run"
+
+        if gep_cr <= 0.0:
+            eligible = False
+            reason = "rejected_negative_cr_branch"
+            status = "rejected"
+        elif not (ci_min_used <= gep_ci <= ci_max_used):
+            eligible = False
+            reason = "rejected_by_ci_window"
+            status = "rejected"
+
+        candidate_rows.append(
+            {
+                "Mach": mach,
+                "alpha": alpha,
+                "rank": rank,
+                "selected": False,
+                "status": status,
+                "reason": reason,
+                "gep_cr": gep_cr,
+                "gep_ci": gep_ci,
+                "gep_omega_i": float(mode["omega_i"]),
+                "ci_seed_blumen": ci_seed,
+                "cr_seed_blumen": cr_seed,
+                "gep_score": float(item["score"]),
+                "gep_ci_distance_to_seed": float(item["ci_distance_to_seed"]),
+                "gep_cr_distance_to_seed": float(item["cr_distance_to_seed"]),
+                "gep_p_edge_fraction": float(item["p_edge_fraction"]),
+                "gep_rho_edge_fraction": float(item["rho_edge_fraction"]),
+                "n_finite_modes": len(modes),
+                "cr_seed_used": float(cr_seed_used),
+                "cr_seed_source": cr_seed_source,
+                "gep_abs_cr_distance_to_seed": float(cr_dist),
+                "gep_abs_ci_distance_to_seed": float(ci_dist),
+                "gep_ci_relative_distance_to_seed": float(ci_rel_dist),
+                "gep_revised_score": float(revised_score),
+                "ci_min_used": float(ci_min_used),
+                "ci_max_used": float(ci_max_used),
+                "selection_policy": "ci_first_cr_soft_penalty",
+            }
+        )
+
+        revised_scores.append(float(revised_score))
+        eligible_flags.append(bool(eligible))
+
+    eligible_indices = [i for i, ok in enumerate(eligible_flags) if ok]
+
+    if not eligible_indices:
+        print(
+            f"[ci-first-selector] M={mach} alpha={alpha}: no eligible GEP candidate "
+            f"with ci in [{ci_min_used:.3g}, {ci_max_used:.3g}] around ci_seed={ci_seed:.6g}."
+        )
+        return pd.DataFrame(candidate_rows), None
+
+    best_i = min(eligible_indices, key=lambda i: revised_scores[i])
+    candidate_rows[best_i]["selected"] = True
+    candidate_rows[best_i]["status"] = "review"
+    candidate_rows[best_i]["reason"] = "selected_by_ci_seed_with_cr_soft_penalty"
+
+    selected_item = ranked[best_i]
+
+    print(
+        f"[ci-first-selector] M={mach} alpha={alpha}: selected rank={candidate_rows[best_i]['rank']} "
+        f"cr={candidate_rows[best_i]['gep_cr']:.6g}, "
+        f"ci={candidate_rows[best_i]['gep_ci']:.6g}, "
+        f"ci_seed={ci_seed:.6g}, "
+        f"ci_rel_dist={candidate_rows[best_i]['gep_ci_relative_distance_to_seed']:.3g}, "
+        f"cr={candidate_rows[best_i]['gep_cr']:.6g}"
+    )
+
+    return pd.DataFrame(candidate_rows), selected_item
+
+
+def run_shooting_validation(row: pd.Series, selected: dict[str, Any]) -> tuple[dict[str, Any], dict[str, np.ndarray] | None]:
+    from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+    from scripts.audit_supersonic_shooting_visual_validation import reconstruct_shooting_fields
+
+    mode = selected["mode"]
+    alpha = float(row["alpha"])
+    mach = float(row["Mach"])
+    gep_cr = float(mode["cr"])
+    gep_ci = float(mode["ci"])
+    ci_seed = float(row["ci_seed_blumen"])
+
+    # CI-first local shooting validation.
+    # The goal is to validate the Blumen/GEP growth rate, not to let the
+    # solver drift to a neutral floor or to a high-ci boundary branch.
+    ci_target = ci_seed if np.isfinite(ci_seed) and ci_seed > 0 else gep_ci
+
+    cr_half = 0.025
+    ci_half = max(2e-4, 0.40 * abs(ci_target))
+
+    cr_min = max(0.0, gep_cr - cr_half)
+    cr_max = gep_cr + cr_half
+    ci_min = max(1e-7, ci_target - ci_half)
+    ci_max = ci_target + ci_half
+
+    print(
+        f"[shooting-ci-local] M={mach} alpha={alpha}: "
+        f"GEP c=({gep_cr:.6g}, {gep_ci:.6g}), "
+        f"ci_seed={ci_seed:.6g}, "
+        f"box cr=[{cr_min:.6g}, {cr_max:.6g}], "
+        f"ci=[{ci_min:.6g}, {ci_max:.6g}]"
+    )
+    solver = Mstab17SupersonicSolver(
+        alpha=alpha,
+        Mach=mach,
+        match_y=1.0,
+        use_mapping=True,
+        mapping_scale=5.0,
+        min_y_limit=10.0,
+        max_y_limit=1200.0,
+        y_limit_factor=10.0,
+        ln_p_right_min=-30.0,
+        ln_p_right_max=5.0,
+    )
+    result = solver.solve(
+        cr_min=cr_min,
+        cr_max=cr_max,
+        ci_min=ci_min,
+        ci_max=ci_max,
+        max_iter=10,
+        grid_size=4,
+    )
+
+    dc_abs = float(np.hypot(float(result.cr) - gep_cr, float(result.ci) - gep_ci))
+    dc_rel = float(dc_abs / max(np.hypot(gep_cr, gep_ci), 1e-12))
+    status = "validated" if result.success and dc_abs <= 0.04 and dc_rel <= 0.35 else "review"
+    reason = "shooting_success_close_to_gep" if status == "validated" else "shooting_requires_review"
+
+    fields = None
+    if result.success:
+        fields = reconstruct_shooting_fields(
+            alpha=alpha,
+            mach=mach,
+            cr=float(result.cr),
+            ci=float(result.ci),
+            ln_p_start_right=float(result.ln_p_start_right),
+            match_y=1.0,
+            use_mapping=True,
+            mapping_scale=5.0,
+            min_y_limit=10.0,
+            max_y_limit=1200.0,
+            y_limit_factor=10.0,
+        )
+
+    return (
+        {
+            "Mach": mach,
+            "alpha": alpha,
+            "status": status,
+            "reason": reason,
+            "gep_cr": gep_cr,
+            "gep_ci": gep_ci,
+            "shooting_cr": float(result.cr),
+            "shooting_ci": float(result.ci),
+            "shooting_omega_i": float(result.omega_i),
+            "abs_dc": dc_abs,
+            "rel_dc": dc_rel,
+            "stage1_mismatch": float(result.stage1_mismatch),
+            "stage2_mismatch": float(result.stage2_mismatch),
+            "spectral_success": bool(result.spectral_success),
+            "mode_success": bool(result.mode_success),
+            "shooting_success": bool(result.success),
+            "ln_p_start_right": float(result.ln_p_start_right),
+            "y_limit": float(result.y_limit),
+        },
+        fields,
+    )
+
+
+def append_fields_rows(
+    rows: list[dict[str, Any]],
+    *,
+    mach: float,
+    alpha: float,
+    status: str,
+    source: str,
+    fields: dict[str, np.ndarray],
+) -> None:
+    for idx, y_value in enumerate(np.asarray(fields["y"], dtype=float)):
+        item: dict[str, Any] = {
+            "Mach": float(mach),
+            "alpha": float(alpha),
+            "status": status,
+            "source": source,
+            "point_index": int(idx),
+            "y": float(y_value),
+        }
+        for name in ("p", "rho", "u", "v"):
+            value = np.asarray(fields[name], dtype=np.complex128)[idx]
+            item[f"{name}_real"] = float(np.real(value))
+            item[f"{name}_imag"] = float(np.imag(value))
+            item[f"{name}_abs"] = float(np.abs(value))
+        rows.append(item)
+
+
+def write_figures(output_dir: Path, candidates: pd.DataFrame, validated: pd.DataFrame) -> None:
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    fig_dir = output_dir / "figures"
+    fig_dir.mkdir(parents=True, exist_ok=True)
+
+    fig, ax = plt.subplots(figsize=(7.5, 4.8))
+    for mach, sub in candidates.groupby("Mach"):
+        ax.scatter(sub["alpha"], sub["ci_seed_blumen"], label=f"Blumen seed M={mach:.1f}")
+        if "gep_ci" in sub.columns:
+            selected = sub[sub.get("selected", False) == True]  # noqa: E712
+            if not selected.empty:
+                ax.scatter(selected["alpha"], selected["gep_ci"], marker="x", s=70, label=f"GEP selected M={mach:.1f}")
+    if not validated.empty and "shooting_ci" in validated.columns:
+        ax.scatter(validated["alpha"], validated["shooting_ci"], marker="s", facecolors="none", edgecolors="black", label="shooting")
+    ax.set_xlabel(r"$\alpha$")
+    ax.set_ylabel(r"$c_i$")
+    ax.set_title("Neutral M=1.8/1.9 extension candidates")
+    ax.grid(True, alpha=0.25)
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+    fig.savefig(fig_dir / "neutral_extension_ci_candidates.png", dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+
+def run_full_pipeline(args: argparse.Namespace, candidates_df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict[str, Any]]:
+    all_candidates: list[pd.DataFrame] = []
+    validation_rows: list[dict[str, Any]] = []
+    field_rows: list[dict[str, Any]] = []
+    failures: list[str] = []
+
+    for _, row in candidates_df.iterrows():
+        try:
+            gep_df, selected = run_gep_for_point(row)
+            all_candidates.append(gep_df)
+            if selected is None:
+                validation_rows.append(
+                    {
+                        "Mach": float(row["Mach"]),
+                        "alpha": float(row["alpha"]),
+                        "status": "rejected",
+                        "reason": "gep_returned_no_selectable_mode",
+                    }
+                )
+                continue
+
+            if args.no_shooting:
+                mode = selected["mode"]
+                validation_rows.append(
+                    {
+                        "Mach": float(row["Mach"]),
+                        "alpha": float(row["alpha"]),
+                        "status": "not_run",
+                        "reason": "no_shooting_requested",
+                        "gep_cr": float(mode["cr"]),
+                        "gep_ci": float(mode["ci"]),
+                    }
+                )
+                gep_fields = {"y": selected["solver_y"], **selected["fields"]}
+                append_fields_rows(
+                    field_rows,
+                    mach=float(row["Mach"]),
+                    alpha=float(row["alpha"]),
+                    status="not_run",
+                    source="gep_selected",
+                    fields=gep_fields,
+                )
+                continue
+
+            validation, fields = run_shooting_validation(row, selected)
+            validation_rows.append(validation)
+            if fields is not None:
+                append_fields_rows(
+                    field_rows,
+                    mach=float(row["Mach"]),
+                    alpha=float(row["alpha"]),
+                    status=str(validation["status"]),
+                    source="shooting_validation",
+                    fields=fields,
+                )
+        except Exception as exc:  # noqa: BLE001 - this script must keep per-point failure rows explicit.
+            failures.append(f"M={float(row['Mach']):.3f} alpha={float(row['alpha']):.3f}: {exc}")
+            validation_rows.append(
+                {
+                    "Mach": float(row["Mach"]),
+                    "alpha": float(row["alpha"]),
+                    "status": "review",
+                    "reason": f"exception:{type(exc).__name__}:{exc}",
+                }
+            )
+
+    candidates_out = pd.concat(all_candidates, ignore_index=True) if all_candidates else pd.DataFrame()
+    validated_out = pd.DataFrame(validation_rows).sort_values(["Mach", "alpha"]).reset_index(drop=True)
+    fields_out = pd.DataFrame(field_rows)
+    summary = {
+        "n_input_points": int(len(candidates_df)),
+        "n_gep_candidate_rows": int(len(candidates_out)),
+        "n_validated_rows": int(len(validated_out)),
+        "status_counts": validated_out["status"].value_counts(dropna=False).to_dict() if not validated_out.empty else {},
+        "failures": failures,
+        "note": "Separate extension only; does not modify the frozen 44-point supersonic reference.",
+    }
+    return candidates_out, validated_out, fields_out, summary
+
+
+
+def _post_filter_gep_selection_by_cr_prior(gep_df, selected, row, cr_window=0.35, allow_negative_cr=False):
+    """
+    Safety filter after run_gep_for_point.
+
+    It prevents sending an acoustic/exterior branch with |cr| ~ 1 to shooting
+    when the desired high-Mach travelling KH branch should be closer to:
+
+        cr_seed = 1 - 1/M
+
+    If the original selected candidate is outside the allowed cr window,
+    selected is set to None. This is conservative: it does not invent a mode
+    object for another candidate unless the original selected row is already
+    the eligible one.
+    """
+    import numpy as np
+    import pandas as pd
+
+    if gep_df is None or len(gep_df) == 0:
+        return gep_df, None
+
+    df = gep_df.copy()
+
+    mach = float(row["Mach"])
+    alpha = float(row["alpha"])
+
+    cr_seed = None
+    cr_seed_source = "none"
+
+    if "cr_seed_blumen" in row.index:
+        try:
+            val = pd.to_numeric(row.get("cr_seed_blumen"), errors="coerce")
+            if np.isfinite(val):
+                cr_seed = float(val)
+                cr_seed_source = "blumen"
+        except Exception:
+            pass
+
+    if cr_seed is None or not np.isfinite(cr_seed):
+        cr_seed = 1.0 - 1.0 / mach
+        cr_seed_source = "asymptotic_fallback"
+
+    if "gep_cr" not in df.columns or "gep_ci" not in df.columns:
+        print("[cr-post-filter] Missing gep_cr/gep_ci columns; rejecting selected candidate for safety.")
+        df["cr_seed_used"] = cr_seed
+        df["cr_seed_source"] = cr_seed_source
+        df["gep_abs_cr_distance_to_seed"] = np.nan
+        df["gep_revised_score"] = np.nan
+        df["selected"] = False
+        df["status"] = "rejected"
+        df["reason"] = "rejected_missing_gep_cr_ci"
+        return df, None
+
+    cr = pd.to_numeric(df["gep_cr"], errors="coerce")
+    ci = pd.to_numeric(df["gep_ci"], errors="coerce")
+
+    if "ci_seed_blumen" in df.columns:
+        ci_seed = pd.to_numeric(df["ci_seed_blumen"], errors="coerce")
+    else:
+        ci_seed = float(row.get("ci_seed_blumen", 0.0))
+
+    cr_dist = (cr - cr_seed).abs()
+    ci_dist = (ci - ci_seed).abs()
+
+    if "gep_p_edge_fraction" in df.columns:
+        p_edge = pd.to_numeric(df["gep_p_edge_fraction"], errors="coerce").fillna(0.0)
+    else:
+        p_edge = 0.0
+
+    if "gep_rho_edge_fraction" in df.columns:
+        rho_edge = pd.to_numeric(df["gep_rho_edge_fraction"], errors="coerce").fillna(0.0)
+    else:
+        rho_edge = 0.0
+
+    edge = p_edge + rho_edge
+
+    df["cr_seed_used"] = cr_seed
+    df["cr_seed_source"] = cr_seed_source
+    df["gep_abs_cr_distance_to_seed"] = cr_dist
+    df["gep_revised_score"] = ci_dist + 10.0 * cr_dist + 0.1 * edge
+
+    old_selected_mask = df["selected"].astype(str).str.lower().eq("true") if "selected" in df.columns else pd.Series(False, index=df.index)
+    old_selected_indices = list(df.index[old_selected_mask])
+
+    eligible = np.isfinite(cr) & np.isfinite(ci) & (cr_dist <= float(cr_window))
+    if not allow_negative_cr:
+        eligible = eligible & (cr > 0)
+
+    df["selected"] = False
+    df["status"] = "not_run"
+    df["reason"] = "gep_candidate_not_selected_after_cr_filter"
+
+    neg_mask = (cr < 0) & (not allow_negative_cr)
+    far_mask = cr_dist > float(cr_window)
+
+    df.loc[neg_mask.fillna(False), "status"] = "rejected"
+    df.loc[neg_mask.fillna(False), "reason"] = "rejected_negative_cr_branch"
+
+    df.loc[far_mask.fillna(False), "status"] = "rejected"
+    df.loc[far_mask.fillna(False), "reason"] = "rejected_by_cr_window"
+
+    eligible_indices = list(df.index[eligible.fillna(False)])
+
+    if not eligible_indices:
+        print(
+            f"[cr-post-filter] M={mach} alpha={alpha}: no eligible GEP candidate "
+            f"inside cr_window={cr_window} around cr_seed={cr_seed:.6g} ({cr_seed_source}). "
+            f"Original selected candidate rejected."
+        )
+        return df, None
+
+    best_idx = df.loc[eligible_indices, "gep_revised_score"].idxmin()
+    df.loc[best_idx, "selected"] = True
+    df.loc[best_idx, "status"] = "review"
+    df.loc[best_idx, "reason"] = "selected_by_ci_seed_cr_seed_and_edge_penalty"
+
+    print(
+        f"[cr-post-filter] M={mach} alpha={alpha}: best eligible row rank={df.loc[best_idx, 'rank']} "
+        f"cr={df.loc[best_idx, 'gep_cr']:.6g}, ci={df.loc[best_idx, 'gep_ci']:.6g}, "
+        f"cr_seed={cr_seed:.6g} ({cr_seed_source}), "
+        f"cr_dist={df.loc[best_idx, 'gep_abs_cr_distance_to_seed']:.6g}"
+    )
+
+    # We only keep the selected mode object if it corresponds to the originally selected row.
+    # Otherwise we refuse to run shooting because we do not have the mode dict for that row here.
+    if best_idx in old_selected_indices and selected is not None:
+        print("[cr-post-filter] Original selected mode passed cr filter; keeping selected mode object.")
+        return df, selected
+
+    print(
+        "[cr-post-filter] Best CSV candidate is not the original selected mode object; "
+        "setting selected=None for safety. Patch run_gep_for_point later if this row must be shot."
+    )
+    return df, None
+
+
+def main() -> None:
+    args = build_parser().parse_args()
+    output_dir = args.output_dir
+    if not output_dir.is_absolute():
+        output_dir = ROOT_DIR / output_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    candidates_df = build_candidate_table(args.ci_datasets, args.cr_datasets, args.max_points)
+
+    if args.dry_run:
+        preview_path = output_dir / "candidates_preview.csv"
+        candidates_df.to_csv(preview_path, index=False)
+        print(f"Dry-run only. Wrote {preview_path}")
+        return
+
+    gep_candidates, shooting_validated, modal_fields, summary = run_full_pipeline(args, candidates_df)
+    gep_candidates.to_csv(output_dir / "supersonic_neutral_M180_M190_gep_candidates.csv", index=False)
+    shooting_validated.to_csv(output_dir / "supersonic_neutral_M180_M190_shooting_validated.csv", index=False)
+    modal_fields.to_csv(output_dir / "supersonic_neutral_M180_M190_modal_fields.csv", index=False)
+    with (output_dir / "supersonic_neutral_M180_M190_audit_summary.json").open("w", encoding="utf-8") as stream:
+        json.dump(summary, stream, indent=2)
+
+    if not args.no_figures:
+        write_figures(output_dir, gep_candidates, shooting_validated)
+
+    print(f"Wrote extension outputs in {output_dir}")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,14 @@
+Audit pointwise shooting supersonique sur r1i0n4
+points: 0.100000:1.80 0.125000:1.80 0.150000:1.80 0.175000:1.80 0.200000:1.80 0.225000:1.80 0.250000:1.80 0.275000:1.80 0.300000:1.80
+workers=16
+box: min=10 max=1200 factor=10 amp=[-30,5]
+Sun Jun 21 01:35:03 PM CEST 2026
+Supersonic shooting point audit
+points: 0.100:1.800 0.125:1.800 0.150:1.800 0.175:1.800 0.200:1.800 0.225:1.800 0.250:1.800 0.275:1.800 0.300:1.800
+workers=16
+box: min=10.0 max=1200.0 factor=10.00 amp=[-30.0,5.0]
+box robustness: factors=1.50,2.00 relL2<=0.150 peak<=0.750 center8<=0.100 edge_growth<=1.250
+[point] alpha=0.100 Mach=1.800 status=validated ci=0.08167 cr=0.45473 err_ci=nan box_any=False box_robust=False stage1=7.608e-03 stage2=1.665e-20
+[point] alpha=0.125 Mach=1.800 status=validated ci=0.08167 cr=0.46930 err_ci=nan box_any=False box_robust=False stage1=1.034e-02 stage2=7.000e-20
+[point] alpha=0.150 Mach=1.800 status=validated ci=0.08167 cr=0.47333 err_ci=nan box_any=False box_robust=False stage1=1.365e-02 stage2=1.013e-19
+[point] alpha=0.175 Mach=1.800 status=validated ci=0.08167 cr=0.47333 err_ci=nan box_any=False box_robust=False stage1=1.795e-02 stage2=1.219e-19

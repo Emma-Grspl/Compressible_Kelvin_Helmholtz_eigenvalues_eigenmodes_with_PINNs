@@ -1,0 +1,15 @@
+Classical convergence inspection
+================================
+Runs: 3
+Legacy converged: 0
+Spectral successes: 3
+Modal reconstruction successes: 3
+Branch check failures: 1
+Tail-sensitive runs: 2
+Overall validated: 2
+Legacy stage-2 bound hits: 3
+Unresolved M1.4 provenance runs: 1
+
+supersonic_M140 / supersonic_shooting / shooting_box: spectral=1/1, modal=1/1, overall=0/1, branch_failures=1, tail_sensitive=0, legacy_bound_hits=1, unresolved_provenance=1, plateau=False at Ly=nan, proposed=None
+supersonic_M180 / supersonic_shooting / shooting_box: spectral=1/1, modal=1/1, overall=1/1, branch_failures=0, tail_sensitive=1, legacy_bound_hits=1, unresolved_provenance=0, plateau=True at Ly=2000.0, proposed=supersonic_M180__supersonic_shooting__shooting_modalfix_smoke__77c1680830a8
+supersonic_M190 / supersonic_shooting / shooting_box: spectral=1/1, modal=1/1, overall=1/1, branch_failures=0, tail_sensitive=1, legacy_bound_hits=1, unresolved_provenance=0, plateau=True at Ly=2000.0, proposed=supersonic_M190__supersonic_shooting__shooting_modalfix_smoke__ec412bbce4ae

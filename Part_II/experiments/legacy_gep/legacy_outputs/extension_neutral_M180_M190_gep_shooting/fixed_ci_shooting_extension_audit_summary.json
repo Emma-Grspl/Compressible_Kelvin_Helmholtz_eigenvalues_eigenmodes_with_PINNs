@@ -1,0 +1,30 @@
+{
+  "dataset": "supersonic_neutral_M180_M190_fixed_ci_shooting_extension",
+  "status": "final_fixed_ci_shooting_exact_amplitude",
+  "frozen_reference_modified": false,
+  "method": {
+    "ci": "fixed from digitized/interpolated Blumen ci contours",
+    "cr": "found by fixed-ci Riccati shooting stage1 mismatch minimization",
+    "amplitude": "exact logarithmic right-branch amplitude match",
+    "modal_fields": "Riccati shooting reconstruction, normalized by max |rho|",
+    "gep": "audit only; nearest GEP modes do not match fixed-ci shooting anchors"
+  },
+  "files": {
+    "eigenvalues": "assets/classic_supersonic/extension_neutral_M180_M190_gep_shooting/supersonic_neutral_M180_M190_fixed_ci_shooting_anchors_exact_amplitude.csv",
+    "modal_fields": "assets/classic_supersonic/extension_neutral_M180_M190_gep_shooting/supersonic_neutral_M180_M190_fixed_ci_shooting_modal_fields.csv",
+    "gep_nearest_audit": "assets/classic_supersonic/extension_neutral_M180_M190_gep_shooting/supersonic_neutral_M180_M190_fixed_ci_anchor_gep_nearest.csv"
+  },
+  "n_eigen_points": 6,
+  "n_modal_rows": 27570,
+  "all_full_success_exact": true,
+  "max_stage1_mismatch": 6.524904204522726e-05,
+  "max_stage2_mismatch_exact": 3.532481643300456e-15,
+  "modal_rows_per_point": {
+    "M=1.8, alpha=0.238": 4595,
+    "M=1.8, alpha=0.248": 4595,
+    "M=1.8, alpha=0.258": 4595,
+    "M=1.9, alpha=0.232": 4595,
+    "M=1.9, alpha=0.242": 4595,
+    "M=1.9, alpha=0.252": 4595
+  }
+}

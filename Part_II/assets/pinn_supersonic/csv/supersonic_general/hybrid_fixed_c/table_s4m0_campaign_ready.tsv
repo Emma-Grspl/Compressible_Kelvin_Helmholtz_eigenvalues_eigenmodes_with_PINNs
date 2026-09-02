@@ -1,0 +1,4 @@
+tag	Mach	checkpoint	anchor_file
+110	1.1	assets/pinn_supersonic/pilots/local_M110_sparse_v1/runs/long_S4/best_joint_checkpoint.pt	assets/pinn_supersonic/pilots/local_M110_sparse_v1/data/spectral_anchors_S4_M110.csv
+150	1.5	assets/pinn_supersonic/pilots/local_M150_sparse_v1/runs/long_S4/best_joint_checkpoint.pt	assets/pinn_supersonic/pilots/local_M150_sparse_v1/data/spectral_anchors_S4_M150.csv
+190	1.9	assets/pinn_supersonic/pilots/local_M190_sparse_v1/runs/long_S4/best_joint_checkpoint.pt	assets/pinn_supersonic/pilots/local_M190_sparse_v1/data/spectral_anchors_S4_M190.csv

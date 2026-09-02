@@ -1,0 +1,54 @@
+\begin{table}[t]
+\centering
+\caption{
+Measured training expenditure for the production $N=76$ FULLC neural
+atlas. The reported GPU time includes the spectral-prefit,
+fixed-spectrum modal, and joint-training stages for all 12
+charts. It excludes post-training Riccati shooting, validation
+benchmarks, threshold studies, and ablation experiments.
+}
+\label{tab:production_atlas_training_cost}
+\small
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{lr}
+\toprule
+Quantity & Value \\
+\midrule
+GPU hardware
+& NVIDIA V100 \\
+
+Number of charts
+& 12 \\
+
+GPUs per chart
+& 1 \\
+
+Spectral-prefit steps / chart
+& 2,000 \\
+
+Fixed-spectrum modal steps / chart
+& 4,000 \\
+
+Joint-training steps / chart
+& 4,000 \\
+
+Total training steps / chart
+& 10,000 \\
+
+\midrule
+
+Cumulative training time
+& 2.144 GPU-h \\
+
+Mean time / chart
+& 643.2 s \\
+
+Median time / chart
+& 652.0 s \\
+
+Min--max time / chart
+& 559.0--694.0 s \\
+
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,40 @@
+{
+  "coordinate": {
+    "Mach": 1.15,
+    "alpha": 0.06
+  },
+  "grid": {
+    "n": 775,
+    "n_cr": 25,
+    "n_ci": 31,
+    "cr_min": 0.0,
+    "cr_max": 0.12,
+    "ci_min": 0.06,
+    "ci_max": 0.24
+  },
+  "technical_success": {
+    "n": 775,
+    "fraction": 1.0
+  },
+  "target_recovery": {
+    "n": 35,
+    "fraction": 0.04516129032258064
+  },
+  "target_error": {
+    "median": 0.07926939964057184,
+    "p95": 0.12645148443310109,
+    "min": 1.7338515903818274e-06
+  },
+  "historical_seed": {
+    "pinn_cr": 0.026089,
+    "pinn_ci": 0.115581
+  },
+  "historical_target": {
+    "cr": -2.549736936302885e-09,
+    "ci": 0.1998472244836177
+  },
+  "historical_failure_solution": {
+    "cr": 0.0,
+    "ci": 0.102065065
+  }
+}

@@ -1,0 +1,12 @@
+Loading pytorch-gpu/py3/2.1.1
+  Loading requirement: cuda/11.8.0 nccl/2.18.5-1-cuda cudnn/8.7.0.84-cuda
+    gcc/8.5.0 openmpi/4.1.5-cuda intel-mkl/2020.4 magma/2.7.1-cuda sox/14.4.2
+    sparsehash/2.0.3 libjpeg-turbo/2.1.3 ffmpeg/4.4.4
+Traceback (most recent call last):
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/generate_supersonic_atlas_modal_mach.py", line 1641, in <module>
+    main()
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/generate_supersonic_atlas_modal_mach.py", line 994, in main
+    call_reconstructor(
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/generate_supersonic_atlas_modal_mach.py", line 209, in call_reconstructor
+    raise TypeError(
+TypeError: Unsupported mandatory parameter 'alpha' in reconstruct_shooting_fields(*, alpha: 'float', mach: 'float', cr: 'float', ci: 'float', ln_p_start_right: 'float', match_y: 'float', use_mapping: 'bool', mapping_scale: 'float', min_y_limit: 'float', max_y_limit: 'float', y_limit_factor: 'float', max_step: 'float' = inf) -> 'dict[str, np.ndarray]'

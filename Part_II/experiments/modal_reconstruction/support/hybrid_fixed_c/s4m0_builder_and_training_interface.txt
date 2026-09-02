@@ -1,0 +1,156 @@
+================ BUILDER HELP ================
+usage: build_local_supersonic_pilot.py [-h] --mach MACH --tag TAG
+                                       [--dataset-dir DATASET_DIR]
+                                       [--pilot-root PILOT_ROOT] [--overwrite]
+
+options:
+  -h, --help            show this help message and exit
+  --mach MACH
+  --tag TAG             Example: M110 or M190
+  --dataset-dir DATASET_DIR
+  --pilot-root PILOT_ROOT
+  --overwrite
+
+================ GENERIC TRAINING SLURM ================
+     1	#!/bin/bash
+     2	#SBATCH --output=assets/pinn_supersonic/logs/%x_%j.out
+     3	#SBATCH --error=assets/pinn_supersonic/logs/%x_%j.err
+     4	#SBATCH --time=12:00:00
+     5	#SBATCH --nodes=1
+     6	#SBATCH --ntasks=1
+     7	#SBATCH --cpus-per-task=8
+     8	#SBATCH --gres=gpu:1
+     9	#SBATCH --hint=nomultithread
+    10	#SBATCH --account=fdb@v100
+    11	
+    12	set -euo pipefail
+    13	
+    14	CONFIG="${1:?Missing configuration path}"
+    15	OUTPUT_DIR="${2:?Missing output directory}"
+    16	
+    17	module purge
+    18	module load pytorch-gpu/py3/2.1.1
+    19	
+    20	cd "$WORK/These_PINN_KH_RT"
+    21	
+    22	export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+    23	export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    24	export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    25	export OPENBLAS_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    26	
+    27	echo "===== LOCAL SUPERSONIC LONG TRAINING ====="
+    28	echo "job        : ${SLURM_JOB_ID}"
+    29	echo "job name   : ${SLURM_JOB_NAME}"
+    30	echo "node       : $(hostname)"
+    31	echo "config     : ${CONFIG}"
+    32	echo "output     : ${OUTPUT_DIR}"
+    33	echo "start      : $(date)"
+    34	echo
+    35	
+    36	nvidia-smi
+    37	
+    38	srun \
+    39	  python \
+    40	    code/scripts/training/train_local_supersonic_kappa_q_logamp.py \
+    41	    --config "$CONFIG" \
+    42	    --output-dir "$OUTPUT_DIR" \
+    43	    --device cuda \
+    44	    --prefit-steps 2000 \
+    45	    --modal-steps 4000 \
+    46	    --joint-steps 4000 \
+    47	    --spectral-lr 2e-4 \
+    48	    --modal-lr 1e-4 \
+    49	    --joint-spectral-lr 5e-5 \
+    50	    --joint-modal-lr 5e-5 \
+    51	    --n-interior 1024 \
+    52	    --n-boundary 96 \
+    53	    --modal-points-per-mode 257 \
+    54	    --print-every 100 \
+    55	    --overwrite
+    56	
+    57	echo
+    58	echo "end: $(date)"
+
+================ M150 TRAINING SLURM ================
+     1	#!/bin/bash
+     2	#SBATCH --output=assets/pinn_supersonic/logs/%x_%j.out
+     3	#SBATCH --error=assets/pinn_supersonic/logs/%x_%j.err
+     4	#SBATCH --time=12:00:00
+     5	#SBATCH --nodes=1
+     6	#SBATCH --ntasks=1
+     7	#SBATCH --cpus-per-task=8
+     8	#SBATCH --gres=gpu:1
+     9	#SBATCH --hint=nomultithread
+    10	#SBATCH --account=fdb@v100
+    11	
+    12	set -euo pipefail
+    13	
+    14	CONFIG="${1:?Missing configuration path}"
+    15	OUTPUT_DIR="${2:?Missing output directory}"
+    16	
+    17	module purge
+    18	module load pytorch-gpu/py3/2.1.1
+    19	
+    20	cd "$WORK/These_PINN_KH_RT"
+    21	
+    22	export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+    23	export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    24	export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    25	export OPENBLAS_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    26	
+    27	echo "===== LONG LOCAL SUPERSONIC M150 ====="
+    28	echo "job        : ${SLURM_JOB_ID}"
+    29	echo "node       : $(hostname)"
+    30	echo "config     : ${CONFIG}"
+    31	echo "output     : ${OUTPUT_DIR}"
+    32	echo "start      : $(date)"
+    33	echo
+    34	
+    35	nvidia-smi
+    36	
+    37	srun \
+    38	  python \
+    39	    code/scripts/training/train_local_supersonic_kappa_q_logamp.py \
+    40	    --config "$CONFIG" \
+    41	    --output-dir "$OUTPUT_DIR" \
+    42	    --device cuda \
+    43	    --prefit-steps 2000 \
+    44	    --modal-steps 4000 \
+    45	    --joint-steps 4000 \
+    46	    --spectral-lr 2e-4 \
+    47	    --modal-lr 1e-4 \
+    48	    --joint-spectral-lr 5e-5 \
+    49	    --joint-modal-lr 5e-5 \
+    50	    --n-interior 1024 \
+    51	    --n-boundary 96 \
+    52	    --modal-points-per-mode 257 \
+    53	    --print-every 100 \
+    54	    --overwrite
+    55	
+    56	echo
+    57	echo "end: $(date)"
+
+================ BUILDER ARGUMENTS ================
+46:def main() -> None:
+47:    parser = argparse.ArgumentParser()
+49:    parser.add_argument(
+55:    parser.add_argument(
+61:    parser.add_argument(
+70:    parser.add_argument(
+78:    parser.add_argument(
+86:        args.dataset_dir
+87:        if args.dataset_dir.is_absolute()
+88:        else REPO_ROOT / args.dataset_dir
+92:        args.pilot_root
+93:        if args.pilot_root.is_absolute()
+94:        else REPO_ROOT / args.pilot_root
+99:        / f"local_{args.tag}_sparse_v1"
+103:        if not args.overwrite:
+145:        args.mach,
+149:        select_mach(anchors, args.mach)
+155:        select_mach(modal_2, args.mach)
+161:        select_mach(modal_4, args.mach)
+168:            f"No spectral data at Mach={args.mach}"
+210:    tag = args.tag
+355:        "Mach": float(args.mach),
+431:        "Mach": float(args.mach),

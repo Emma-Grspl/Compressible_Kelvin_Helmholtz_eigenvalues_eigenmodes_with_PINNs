@@ -1,0 +1,70 @@
+
+[case 1/8] alpha=0.07125000
+  PINN c=0.43504485+i0.02758077 R1rel=2.309e-03 R2rel=3.957e-03
+  GEP  c=0.41929527+i0.00000000 distance=5.737e-02 overlap=0.4295
+  SHOOT c=0.43504485+i0.02758185 stage1=6.889e-08 stage2=2.966e+01 success=False
+  MODAL p_overlap=0.6812 p_rel=7.321e-01 q_rel=9.882e-01
+
+[case 2/8] alpha=0.08875000
+  PINN c=0.44370425+i0.02766915 R1rel=5.235e-03 R2rel=3.773e-03
+  GEP  c=0.42891816+i0.00000000 distance=5.728e-02 overlap=0.5970
+  SHOOT c=0.44370425+i0.02766915 stage1=9.355e-08 stage2=7.731e+01 success=False
+  MODAL p_overlap=0.6636 p_rel=7.481e-01 q_rel=9.934e-01
+
+[case 3/8] alpha=0.10375000
+  PINN c=0.45041549+i0.02667785 R1rel=2.071e-03 R2rel=3.781e-03
+  GEP  c=0.42211792+i0.00000000 distance=6.040e-02 overlap=0.5883
+  SHOOT c=0.45041353+i0.02667680 stage1=1.140e-07 stage2=1.547e+02 success=False
+  MODAL p_overlap=0.6484 p_rel=7.613e-01 q_rel=9.943e-01
+
+[case 4/8] alpha=0.12125000
+  PINN c=0.45749304+i0.02458609 R1rel=1.639e-03 R2rel=2.649e-03
+  GEP  c=0.43576239+i0.00000000 distance=5.376e-02 overlap=0.5099
+  SHOOT c=0.45749500+i0.02458609 stage1=9.260e-08 stage2=3.242e+02 success=False
+  MODAL p_overlap=0.6294 p_rel=7.771e-01 q_rel=9.949e-01
+
+[case 5/8] alpha=0.13875000
+  PINN c=0.46387616+i0.02172694 R1rel=1.660e-03 R2rel=2.235e-03
+  GEP  c=0.43748285+i0.00000000 distance=5.084e-02 overlap=0.3706
+  SHOOT c=0.46387485+i0.02172694 stage1=1.395e-07 stage2=6.635e+02 success=False
+  MODAL p_overlap=0.6086 p_rel=7.935e-01 q_rel=9.953e-01
+
+[case 6/8] alpha=0.15625000
+  PINN c=0.46965310+i0.01828157 R1rel=1.523e-03 R2rel=2.419e-03
+  GEP  c=0.49643846+i0.05378644 distance=7.589e-02 overlap=0.9079
+  SHOOT c=0.46965310+i0.01828229 stage1=1.965e-07 stage2=1.388e+03 success=False
+  MODAL p_overlap=0.5862 p_rel=8.101e-01 q_rel=9.957e-01
+
+[case 7/8] alpha=0.17125000
+  PINN c=0.47418800+i0.01496454 R1rel=1.415e-03 R2rel=2.525e-03
+  GEP  c=0.43996544+i0.00000000 distance=4.546e-02 overlap=0.3960
+  SHOOT c=0.47419128+i0.01496513 stage1=5.728e-08 stage2=2.771e+03 success=False
+  MODAL p_overlap=0.5661 p_rel=8.243e-01 q_rel=9.960e-01
+
+[case 8/8] alpha=0.18875000
+  PINN c=0.47907388+i0.01076096 R1rel=1.932e-03 R2rel=2.579e-03
+  GEP  c=0.43475337+i0.00000000 distance=4.927e-02 overlap=0.6180
+  SHOOT c=0.47907061+i0.01076202 stage1=5.078e-08 stage2=7.217e+03 success=False
+  MODAL p_overlap=0.5418 p_rel=8.405e-01 q_rel=9.963e-01
+
+[summary]
+  alpha  pinn_cr  pinn_ci  pinn_r1_rel  pinn_r2_rel  gep_pinn_spectral_distance  shooting_pinn_spectral_distance  shooting_stage1_mismatch  shooting_stage2_mismatch  shooting_pinn_p_overlap  shooting_pinn_p_rel_after_fit  shooting_pinn_q_rel_after_fit  pinn_seed_validated_by_shooting  full_pipeline_consistent          status
+0.07125 0.435045 0.027581     0.002309     0.003957                    0.057366                         0.000002              6.888563e-08                 29.663200                 0.681226                       0.732073                       0.988189                            False                     False shooting_failed
+0.08875 0.443704 0.027669     0.005235     0.003773                    0.057280                         0.000000              9.354733e-08                 77.314240                 0.663638                       0.748054                       0.993407                            False                     False shooting_failed
+0.10375 0.450415 0.026678     0.002071     0.003781                    0.060395                         0.000003              1.140360e-07                154.733130                 0.648361                       0.761333                       0.994294                            False                     False shooting_failed
+0.12125 0.457493 0.024586     0.001639     0.002649                    0.053760                         0.000002              9.259951e-08                324.234990                 0.629401                       0.777081                       0.994890                            False                     False shooting_failed
+0.13875 0.463876 0.021727     0.001660     0.002235                    0.050841                         0.000001              1.395439e-07                663.529378                 0.608568                       0.793502                       0.995338                            False                     False shooting_failed
+0.15625 0.469653 0.018282     0.001523     0.002419                    0.075894                         0.000001              1.965016e-07               1387.779170                 0.586238                       0.810139                       0.995705                            False                     False shooting_failed
+0.17125 0.474188 0.014965     0.001415     0.002525                    0.045464                         0.000003              5.728014e-08               2770.502434                 0.566136                       0.824312                       0.995973                            False                     False shooting_failed
+0.18875 0.479074 0.010761     0.001932     0.002579                    0.049270                         0.000004              5.077980e-08               7216.819517                 0.541804                       0.840505                       0.996261                            False                     False shooting_failed
+
+[report]
+{
+  "n_cases": 8,
+  "n_pinn_seed_validated_by_shooting": 0,
+  "n_full_pipeline_consistent": 0,
+  "status_counts": {
+    "shooting_failed": 8
+  },
+  "scientific_note": "These are off-anchor consistency checks. No pre-existing classical reference values were used at the tested alpha values."
+}

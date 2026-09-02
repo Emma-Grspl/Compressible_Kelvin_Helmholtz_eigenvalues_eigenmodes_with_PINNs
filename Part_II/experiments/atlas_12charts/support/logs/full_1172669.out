@@ -1,0 +1,52 @@
+====================================================================================================
+DIRECT CANDIDATE
+====================================================================================================
+c_direct = 0.0000000000 + i 0.1092058400
+
+Continuation alpha=0.105
+  incoming seed = (0.065547110, 0.101364790)
+  corrected = (0.061474844, 0.137751509) mismatch=6.759e-07
+
+Continuation alpha=0.100
+  incoming seed = (0.061474844, 0.137751509)
+  corrected = (0.045625235, 0.140860884) mismatch=7.699e-08
+
+Continuation alpha=0.095
+  incoming seed = (0.045625235, 0.140860884)
+  corrected = (0.018545157, 0.143970259) mismatch=5.130e-08
+
+Continuation alpha=0.090
+  incoming seed = (0.018545157, 0.143970259)
+  corrected = (0.000000000, 0.109204634) mismatch=9.471e-08
+
+====================================================================================================
+FINAL CONTINUATION CANDIDATE
+====================================================================================================
+c_cont = 0.0000000000 + i 0.1092046338
+
+Reconstructing direct mode...
+Reconstructing continuation mode...
+
+========================================================================================================================
+PINN MODAL FINGERPRINT
+========================================================================================================================
+   candidate              cr              ci  pinn_overlap_core10  pinn_overlap_core15  pinn_overlap_core20  pinn_overlap_core30  pinn_overlap_core40  spectral_error_vs_reference_EVAL_ONLY  selected_by_pinn_core20
+      direct 0.000000000e+00 1.092077931e-01      9.686539623e-01      9.119973131e-01      8.249633319e-01      5.721603696e-01      3.442329788e-01                        7.578411910e-02                     True
+continuation 0.000000000e+00 1.092085400e-01      9.686539016e-01      9.119971800e-01      8.249631480e-01      5.721603192e-01      3.442333207e-01                        7.578337222e-02                    False
+
+========================================================================================================================
+REFERENCE-FREE SELECTION
+========================================================================================================================
+selected candidate: direct
+selected c = (0.0000000000, 0.1092077931)
+core20 overlap margin = 0.000000
+
+========================================================================================================================
+EVALUATION AGAINST VALIDATION REFERENCE — NOT USED FOR SELECTION
+========================================================================================================================
+reference c = (0.0000000018, 0.1849919122)
+selected spectral error = 7.578411910e-02
+
+WRITTEN: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1_continuousM/N76/modal_validation/C00_branch_fingerprint_diagnostic.csv
+
+CORRECTOR_BENCHMARK_FINISHED

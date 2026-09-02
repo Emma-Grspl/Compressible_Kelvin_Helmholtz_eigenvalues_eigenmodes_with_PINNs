@@ -1,0 +1,11 @@
+Classical convergence inspection
+================================
+Runs: 11
+Converged: 8
+Failed: 3
+Branch check failures: 2
+
+subsonic_interior / subsonic_mstab17 / shooting_box: converged=4/4, branch_failures=0, plateau=True at Ly=40.0, proposed=subsonic_interior__subsonic_mstab17__shooting_box__0a93fe865b3b
+subsonic_neutral / subsonic_mstab17 / shooting_box: converged=4/4, branch_failures=0, plateau=True at Ly=100.0, proposed=subsonic_neutral__subsonic_mstab17__shooting_box__1ec1da986337
+supersonic_M140 / supersonic_gep / supersonic_gep_resolution: converged=0/2, branch_failures=2, plateau=False at n_points=nan, proposed=None
+supersonic_M140 / supersonic_shooting / shooting_box: converged=0/1, branch_failures=0, plateau=False at Ly=nan, proposed=None

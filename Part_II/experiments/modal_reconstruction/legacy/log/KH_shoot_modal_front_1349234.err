@@ -1,0 +1,42 @@
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in scalar power
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in scalar power
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in scalar power
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in square
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in square
+  return 1.0 / np.cosh(y) ** 2
+/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/classical_solver/supersonic/mstab17_supersonic_solver.py:100: RuntimeWarning: overflow encountered in square
+  return 1.0 / np.cosh(y) ** 2
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/gpfslocalsup/pub/anaconda-py3/2023.09/envs/python-3.11.5/lib/python3.11/concurrent/futures/process.py", line 256, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/audit_supersonic_shooting_ci_alpha_continuation.py", line 749, in evaluate_line
+    not_run_row(
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/audit_supersonic_shooting_ci_alpha_continuation.py", line 668, in not_run_row
+    "acceptance_mode": str(cfg["acceptance_mode"]),
+                           ^^^
+NameError: name 'cfg' is not defined
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/densify_supersonic_modal_front_spectral.py", line 312, in <module>
+    main()
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/densify_supersonic_modal_front_spectral.py", line 266, in main
+    line_summary, line_candidates, line_fields = future.result()
+                                                 ^^^^^^^^^^^^^^^
+  File "/gpfslocalsup/pub/anaconda-py3/2023.09/envs/python-3.11.5/lib/python3.11/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/gpfslocalsup/pub/anaconda-py3/2023.09/envs/python-3.11.5/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+NameError: name 'cfg' is not defined
+srun: error: r1i0n17: task 0: Exited with exit code 1
+srun: Terminating StepId=1349234.0
