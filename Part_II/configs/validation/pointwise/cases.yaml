@@ -1,0 +1,192 @@
+version: 1
+
+excluded_fixed_ci_points:
+  - {Mach: 1.8, alpha: 0.238}
+  - {Mach: 1.8, alpha: 0.248}
+  - {Mach: 1.8, alpha: 0.258}
+  - {Mach: 1.9, alpha: 0.232}
+  - {Mach: 1.9, alpha: 0.242}
+  - {Mach: 1.9, alpha: 0.252}
+
+cases:
+  - case_id: subsonic_interior
+    regime: subsonic
+    Mach: 0.5
+    alpha: 0.5
+    reference_cr: 0.0
+    reference_ci: 0.2673341164147236
+    validation_status: robust_reference_primary
+    spectral_source: assets/classic_subsonic/convergence_box_resolution/article_test_a050_M050_exact_solver/subsonic_classical_robust_reference_points.csv
+    modal_source: null
+    allowed_solvers: [subsonic_mstab17]
+    branch_identifier: subsonic_cr0_physical
+    seed_cr: 0.0
+    seed_ci: 0.2673341164147236
+    branch_check:
+      max_absolute_distance: 0.04
+      max_relative_distance: 0.35
+    nominal:
+      subsonic_mstab17:
+        Ly: 80.0
+        matching_y: 1.0
+        rtol: 1.0e-10
+        atol: 1.0e-12
+        max_step: null
+        n_scan: 61
+        ci_min: 1.0e-3
+        ci_max: 1.0
+
+  - case_id: subsonic_neutral
+    regime: subsonic
+    Mach: 0.49
+    alpha: 0.86
+    reference_cr: 0.0
+    reference_ci: 0.0077519783829051
+    validation_status: secondary_near_neutral
+    spectral_source: assets/classic_subsonic/data/subsonic_hybrid_growth_map.csv
+    modal_source: null
+    allowed_solvers: [subsonic_mstab17]
+    branch_identifier: subsonic_cr0_neutral
+    seed_cr: 0.0
+    seed_ci: 0.0077519783829051
+    branch_check:
+      max_absolute_distance: 0.04
+      max_relative_distance: 0.35
+    nominal:
+      subsonic_mstab17:
+        Ly: 80.0
+        matching_y: 1.0
+        rtol: 1.0e-10
+        atol: 1.0e-12
+        max_step: null
+        n_scan: 41
+        ci_min: 1.0e-3
+        ci_max: 1.0
+
+  - case_id: supersonic_M140
+    regime: supersonic
+    Mach: 1.4
+    alpha: 0.18125
+    reference_cr: 0.3153193678544234
+    reference_ci: 0.0427209194542578
+    validation_status: modal_spectral_validated_with_exported_fields
+    spectral_source: assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_reference_v2_spectral.csv
+    modal_source: experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_raw.parquet
+    allowed_solvers: [supersonic_shooting, supersonic_gep]
+    branch_identifier: supersonic_M140_branch_guided
+    branch_provenance_status: unresolved_current_solver_mismatch
+    branch_candidates:
+      configured_reference:
+        cr: 0.3153193678544234
+        ci: 0.0427209194542578
+      current_shooting_root:
+        cr: 0.3334594428308841
+        ci: 0.0426275027406403
+    seed_cr: 0.3153193678544234
+    seed_ci: 0.0427209194542578
+    branch_check:
+      max_absolute_distance: 0.04
+      max_relative_distance: 0.35
+    nominal:
+      supersonic_shooting:
+        Ly: 500.0
+        matching_y: 1.0
+        rtol: 1.0e-10
+        atol: 1.0e-12
+        max_step: null
+        mapping_kind: pin
+        mapping_scale: 5.0
+        y_limit_factor: 6.0
+        cr_half_width: 0.025
+        ci_half_width: 0.015
+        grid_size: 5
+        max_iter: 20
+        search_tolerance: 1.0e-9
+      supersonic_gep:
+        n_points: 301
+        mapping_kind: pin
+        mapping_scale: 5.0
+        xi_max: 0.98
+        ci_weight: 25.0
+
+  - case_id: supersonic_M180
+    regime: supersonic
+    Mach: 1.8
+    alpha: 0.1
+    reference_cr: 0.4488
+    reference_ci: 0.027003792
+    validation_status: validated_core_stable_tail_sensitive
+    spectral_source: assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_reference_v2_spectral.csv
+    modal_source: experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_raw.parquet
+    allowed_solvers: [supersonic_shooting, supersonic_gep]
+    branch_identifier: supersonic_M180_core_stable
+    branch_provenance_status: resolved
+    branch_candidates:
+      configured_reference: {cr: 0.4488, ci: 0.027003792}
+    seed_cr: 0.4488
+    seed_ci: 0.027003792
+    branch_check:
+      max_absolute_distance: 0.04
+      max_relative_distance: 0.35
+    nominal:
+      supersonic_shooting:
+        Ly: 2000.0
+        matching_y: 1.0
+        rtol: 1.0e-10
+        atol: 1.0e-12
+        max_step: null
+        mapping_kind: pin
+        mapping_scale: 3.0
+        y_limit_factor: 10.0
+        cr_half_width: 0.025
+        ci_half_width: 0.015
+        grid_size: 5
+        max_iter: 20
+        search_tolerance: 1.0e-11
+      supersonic_gep:
+        n_points: 301
+        mapping_kind: pin
+        mapping_scale: 5.0
+        xi_max: 0.98
+        ci_weight: 25.0
+
+  - case_id: supersonic_M190
+    regime: supersonic
+    Mach: 1.9
+    alpha: 0.1
+    reference_cr: 0.47900784
+    reference_ci: 0.022000112
+    validation_status: validated_core_stable_tail_sensitive
+    spectral_source: assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_reference_v2_spectral.csv
+    modal_source: experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_raw.parquet
+    allowed_solvers: [supersonic_shooting, supersonic_gep]
+    branch_identifier: supersonic_M190_core_stable
+    branch_provenance_status: resolved
+    branch_candidates:
+      configured_reference: {cr: 0.47900784, ci: 0.022000112}
+    seed_cr: 0.47900784
+    seed_ci: 0.022000112
+    branch_check:
+      max_absolute_distance: 0.04
+      max_relative_distance: 0.35
+    nominal:
+      supersonic_shooting:
+        Ly: 2000.0
+        matching_y: 1.0
+        rtol: 1.0e-10
+        atol: 1.0e-12
+        max_step: null
+        mapping_kind: pin
+        mapping_scale: 3.0
+        y_limit_factor: 10.0
+        cr_half_width: 0.025
+        ci_half_width: 0.015
+        grid_size: 5
+        max_iter: 20
+        search_tolerance: 1.0e-11
+      supersonic_gep:
+        n_points: 301
+        mapping_kind: pin
+        mapping_scale: 5.0
+        xi_max: 0.98
+        ci_weight: 25.0

@@ -51,6 +51,7 @@ for the final classical reference.
 Part_II/
 ├── article/       # curated 25-figure publication package and manifest
 ├── assets/        # reusable classical, atlas, modal, and audit assets
+├── configs/       # curated public configuration facade; not runtime source
 ├── code/          # active solver, model, physics, config, and execution code
 ├── experiments/   # preserved experiment-specific outputs below GitHub limits
 ├── models_saved/  # checkpoint layout documentation; binaries remain local
@@ -68,6 +69,10 @@ The current layout is transitional: active classical solvers remain in
 scientific plot generators in `plots/`, and active experiment input/output
 records in `experiments/`. See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
 for the exact current topology.
+
+`configs/` provides verified public configuration copies for reproducibility;
+it does not replace `code/configs/` as the runtime/source-side configuration
+store. See [configs/README.md](configs/README.md).
 
 ## Installation
 

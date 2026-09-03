@@ -12,6 +12,10 @@ The final classical eigenvalue and eigenmode reference is obtained by
 high-accuracy Riccati shooting. GEP material remains a diagnostic resource and
 is not described here as the final classical method.
 
+[`configs/`](configs/) exposes a curated public configuration facade for the
+documented production and validation records. Current executable workflows
+still use `code/configs/`; the facade does not normalize runtime paths.
+
 ## Level 1 -- Validate publication figures
 
 **Purpose.** Verify the 25 tracked curated PNG assets against their manifest

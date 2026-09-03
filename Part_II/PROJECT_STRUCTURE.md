@@ -13,6 +13,9 @@ and `code/configs/` rather than under the future common top-level contract.
 - `assets/`: reusable classical references, Blumen validation, atlas and anchor
   data, modal outputs, PINN diagnostics, and canonical sources of article
   figures.
+- `configs/`: curated public configuration facade. Its copies are mapped and
+  hash-checked against current runtime sources; it is not itself the runtime
+  configuration store.
 
 The manifest does not imply a single common scientific plotting entrypoint.
 Publication wrappers copy or publish authoritative assets; upstream generator
@@ -37,6 +40,10 @@ without guessing.
 Numerical algorithms were not changed during repository integration. The final
 classical reference is high-accuracy Riccati shooting; GEP material is retained
 as diagnostic material rather than as the final reference workflow.
+
+The public `configs/` facade intentionally excludes mixed source-side snapshot
+families. Current executable workflows continue to resolve configuration paths
+under `code/configs/` unless a script documents otherwise.
 
 ## Experiments and results
 
