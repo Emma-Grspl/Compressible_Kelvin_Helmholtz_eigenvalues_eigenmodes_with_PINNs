@@ -16,6 +16,13 @@ launchers, and audit material. It is provenance only and is not part of the
 active production workflow. Historical paths inside logs and metadata are
 preserved intentionally.
 
+## Historical HPC material
+
+`hpc/legacy_gep/` contains the former generalized-eigenvalue Slurm launcher
+family. It is retained byte-for-byte as historical diagnostic material. The
+active classical implementation remains under `../code/`, where the final
+reference workflow is Riccati shooting rather than GEP.
+
 ## Source
 
 - Source repository: `/Users/emma.grospellier/Thèse/These_PINN_KH_RT`

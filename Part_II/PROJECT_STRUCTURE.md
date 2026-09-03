@@ -30,7 +30,7 @@ without guessing.
 - `code/scripts/`: training, shooting, audits, evaluation, benchmarks, and
   data-preparation entrypoints.
 - `code/configs/`: current active and legacy campaign configurations.
-- `code/slurm/`: retained HPC launcher and campaign material.
+- `code/slurm/`: retained non-GEP HPC launcher and campaign material.
 - `plots/`: current scientific plotting code retained in its source-workspace
   location.
 - `scripts/`: publication and reviewer-control entrypoints. In particular,
@@ -65,3 +65,7 @@ under `code/configs/` unless a script documents otherwise.
 - `provenance/review/`: ambiguous files, missing-input snapshots, and broken
   launchers retained without destructive cleanup. This material is not part of
   the active production workflow.
+- `provenance/hpc/legacy_gep/`: historical GEP launcher family, preserved for
+  diagnostic traceability rather than as the final reference workflow.
+- `scripts/hpc/`: public navigation facade and family-level HPC manifest; it
+  documents the source-side launcher collections without duplicating them.
