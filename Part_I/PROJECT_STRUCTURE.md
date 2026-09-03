@@ -1,74 +1,57 @@
-# Project structure
+# Part I project structure
 
-## Article package
+Part I is the subsonic study. Its active public implementation is centred on
+`code/`; the layout below describes the current repository, not a future
+normalized layout.
 
-- `article/assets/`: exactly the 17 curated Main and Supplementary PNG files.
-- `article/FIGURE_MANIFEST.csv`: filename, canonical source, publishing script,
-  source data, SHA-256 hash, and scientific note for every figure.
-- `scripts/figures/`: one lightweight, unambiguous publishing entrypoint per
-  article figure. These scripts copy validated processed assets byte-for-byte;
+## Publication, assets, and results
+
+- `article/`: exactly 17 curated Main and Supplementary PNG assets,
+  `FIGURE_MANIFEST.csv`, and article-facing documentation. Its figure scripts
+  are publishing entrypoints that copy validated processed assets byte-for-byte;
   they do not retrain a model or recompute a GEP.
+- `assets/`: canonical classical, PINN/GEP, and complementary-audit processed
+  inputs and figures.
+- `results/`: tracked validation tables, numerical audit outputs, and retained
+  normalization or representation ablations.
 
-## Reproducible code
+## Active code and public workflows
 
 - `code/src/`: importable numerical and PINN implementation (`PYTHONPATH=code`).
-- `code/src/scripts/classical/`: Riccati/shooting reference solvers and
-  classical reconstructions.
-- `code/src/scripts/training/`: fixed-Mach and atlas training entry points.
+- `code/src/scripts/classical/`: **current active subsonic classical Riccati
+  shooting solvers and reconstructions**.
+- `code/src/scripts/training/`: fixed-Mach and atlas training entrypoints.
 - `code/src/scripts/gep/`: GEP selection, resolution, modal refinement, and
-  benchmark entry points.
+  benchmark entrypoints.
 - `code/src/scripts/evaluation/`: quantitative validation and audits.
-- `code/src/launch/slurm/`: migrated Jean-Zay launchers.
-- `code/plots/scripts/`: scripts whose primary role is figure generation.
-- `configs/`: curated public copies or summaries of validated classical,
-  atlas-routing, GEP-policy, and `N340` anchor-budget configurations.
-- `examples/`: small repository-relative CPU examples; they do not train a
-  model or run a dense GEP sweep.
+- `code/src/launch/slurm/`: retained Jean-Zay launchers.
+- `code/plots/scripts/`: scientific figure-generation modules.
+- `scripts/`: public analysis, paper, and publication-figure entrypoints.
+- `examples/`: small repository-relative CPU demonstrations; they do not train
+  a model or run a dense GEP sweep.
 - `tests/`: lightweight integrity and classical single-point tests used by CI.
 
-## Scientific outputs
+## Configurations, models, and documentation
 
-- `assets/classic_subsonic/{csv,png,pdf}/`: canonical classical tables and
-  figures.
-- `assets/pinn_subsonic/{csv,png,pdf}/`: canonical PINN/GEP tables and figures.
-- `assets/complementary_audits/final_figures/`: final corrected figures migrated
-  from the temporary complementary-audit workspace.
-- `results/complementary_audits/`: numerical outputs from audit phases A-I,
-  including the curated input tables used by final figures.
+- `configs/`: curated public copies or summaries of validated classical,
+  atlas-routing, GEP-policy, and `N340` anchor-budget configurations.
 - `models_saved/production/`: final fixed-Mach and 49-chart atlas checkpoints.
-- `models_saved/CHECKPOINT_MANIFEST.csv`: file-level size and SHA-256 inventory
-  for the published production checkpoint set.
+  `models_saved/CHECKPOINT_MANIFEST.csv` is the file-level size and SHA-256
+  inventory. Excluded supporting or historical checkpoint trees are recorded
+  in `provenance/PUBLIC_REPOSITORY_EXCLUSIONS.csv`.
+- `docs/`: technical notes, protocols, migration tables, and scientific
+  documentation.
+- `provenance/`: migration records, public-repository exclusions, and
+  complementary-audit traceability.
 
-Supporting, imported, and historical checkpoint trees are documented but not
-published in Git. Their exclusion is recorded in
-`provenance/PUBLIC_REPOSITORY_EXCLUSIONS.csv`.
+## Historical and compatibility material
 
-## Archive
+- `archive/`: deliberately separate historical code, configurations, assets,
+  CSV files, and development outputs. Historical names such as `hybrid` or
+  `frozen` are not canonical terminology for the current pipeline.
+- `classical_solver/`, `KH_RT_Blumen/`, and `src/`: currently empty
+  compatibility or legacy-looking roots. They are retained without claiming
+  that they contain active implementation.
 
-`archive/` is deliberately separate from executable code. It preserves old
-code, configurations, assets, CSV files, and miscellaneous development output
-for traceability. Historical filenames may retain old terminology such as
-`hybrid` or `frozen`; those names are not the canonical terminology of the
-current pipeline.
-
-## Documentation
-
-The `docs/` tables form the migration ledger. In particular:
-
-- `Table_subsonic_migration_manifest.csv` maps every audited source path to its
-  actual destination and validation status.
-- `Table_checkpoint_inventory.csv` maps duplicate checkpoint paths to one
-  physical canonical content.
-- `Table_article_figures.csv` keeps manuscript status separate from canonical
-  scientific-asset status.
-- `SUBSONIC_MIGRATION_FINAL_REPORT.md` records validation results and remaining
-  intervention points.
-- `provenance/complementary_audits/COMPLEMENTARY_PHASE_INVENTORY.csv` records
-  every file from the former temporary workspace, its hash, decision, and
-  verified destination.
-- `provenance/complementary_audits/COMPLEMENTARY_MIGRATION_REPORT.md` summarizes
-  the semantic migration and exclusions.
-
-Two legacy links to Jean-Zay/Lustre data could not be resolved locally. They
-are recorded as `EXTERNAL_LINK_UNRESOLVED` and were not replaced by fabricated
-local paths.
+Two legacy Jean-Zay/Lustre links remain recorded as
+`EXTERNAL_LINK_UNRESOLVED`; they were not replaced by fabricated local paths.

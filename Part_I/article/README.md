@@ -13,10 +13,11 @@ Each row in `FIGURE_MANIFEST.csv` identifies:
 - the processed data used by the original scientific plotting code;
 - the SHA-256 hash of the curated PNG.
 
-The entrypoints publish the validated canonical assets byte-for-byte. This
+The entrypoints publish the validated canonical assets byte-for-byte. They are
+publication wrappers, not the upstream scientific plotting calculations. This
 ensures that rebuilding the article package does not retrain a neural model,
 rerun Riccati shooting, or recompute a dense GEP. The docstring of each
-entrypoint also names the original scientific generator when available.
+entrypoint names the original scientific generator when available.
 
 ## Figure map
 

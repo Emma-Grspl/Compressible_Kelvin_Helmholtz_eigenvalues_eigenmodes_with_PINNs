@@ -1,57 +1,59 @@
 # Part II project structure
 
-## `article/`
+Part II is the supersonic study. It has a validated but transitional layout:
+several active components still live under `code/`, `plots/`, `experiments/`,
+and `code/configs/` rather than under the future common top-level contract.
 
-The curated 25-figure publication package. `assets/` contains only final Main
-and Supplementary figures; `FIGURE_MANIFEST.csv` maps them to hashes, sources,
-and the common publication entrypoint.
+## Publication and reusable assets
 
-## `assets/`
+- `article/`: the curated 25-figure publication package. `article/assets/`
+  contains final figures and `FIGURE_MANIFEST.csv` records their canonical
+  source, source data, SHA-256 hash, and upstream scientific plotting
+  provenance when known.
+- `assets/`: reusable classical references, Blumen validation, atlas and anchor
+  data, modal outputs, PINN diagnostics, and canonical sources of article
+  figures.
 
-The reusable scientific asset collection from the supersonic workspace:
-classical references, Blumen validation, atlas and anchor data, modal outputs,
-PINN diagnostics, and the canonical sources of curated article figures.
+The manifest does not imply a single common scientific plotting entrypoint.
+Publication wrappers copy or publish authoritative assets; upstream generator
+provenance is recorded separately when it is known. `NO_SCRIPT_FOUND` is an
+intentional honest record for figures whose upstream script cannot be assigned
+without guessing.
 
-## `code/`
+## Current active code topology
 
-Reusable classical solver, physics, model, configuration, training, shooting,
-evaluation, audit, and legacy diagnostic code. Numerical algorithms were not
-changed during repository integration.
+- `code/src/classical_solver/`: **current active supersonic solver
+  implementation**.
+- `code/scripts/`: training, shooting, audits, evaluation, benchmarks, and
+  data-preparation entrypoints.
+- `code/configs/`: current active and legacy campaign configurations.
+- `code/slurm/`: retained HPC launcher and campaign material.
+- `plots/`: current scientific plotting code retained in its source-workspace
+  location.
+- `scripts/`: publication and reviewer-control entrypoints. In particular,
+  `scripts/figures/` publishes curated assets without duplicating scientific
+  computations.
 
-## `experiments/`
+Numerical algorithms were not changed during repository integration. The final
+classical reference is high-accuracy Riccati shooting; GEP material is retained
+as diagnostic material rather than as the final reference workflow.
 
-Experiment-specific outputs preserved below the public file-size threshold.
-Large raw legacy exports are not added to Git and are listed in provenance.
+## Experiments and results
 
-## `results/`
+- `experiments/`: current active experiment input/output root, organized by
+  scientific campaign. It is preserved in place because active scripts refer
+  to this location.
+- `results/`: processed complementary reviewer-control outputs, including
+  physics residuals, threshold sensitivity, multiseed ablation, matched branch
+  localization, failure basin, routing, computational cost, and Blumen `c_r`
+  validation.
 
-Complementary reviewer audits migrated by scientific role: physics residuals,
-threshold sensitivity, multiseed ablation, matched branch localization,
-failure basin, routing, computational cost, and Blumen `c_r` validation.
+## Models and provenance
 
-## `scripts/`
-
-`figures/` publishes the curated article package from validated assets.
-`reviewer_controls/` retains complementary reviewer-audit scripts distinctly
-from production entrypoints.
-
-## `plots/`
-
-The original figure-generator modules remain preserved here because their
-scientific plotting logic is still useful. The publication package is exposed
-through `scripts/figures/` rather than duplicating those computations.
-
-## `models_saved/`
-
-Documents the expected local checkpoint layout. The original binary checkpoint
-bank remains intentionally outside public Git.
-
-## `provenance/`
-
-Migration records, large-file exclusions, and historical records. Historical
-paths may be retained here without becoming active execution dependencies.
-
-## `_TO_REVIEW/`
-
-Ambiguous files, missing-input snapshots, and broken launchers retained without
-destructive cleanup.
+- `models_saved/`: documentation of the expected local checkpoint layout. The
+  original binary checkpoint bank is intentionally outside public Git.
+- `provenance/`: migration, review, large-file exclusion, and historical
+  traceability. Historical paths may appear here without becoming active
+  execution dependencies.
+- `_TO_REVIEW/`: ambiguous files, missing-input snapshots, and broken launchers
+  retained without destructive cleanup.
