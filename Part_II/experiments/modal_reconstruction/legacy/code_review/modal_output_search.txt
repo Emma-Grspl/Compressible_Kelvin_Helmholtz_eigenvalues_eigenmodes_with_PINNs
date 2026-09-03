@@ -1,0 +1,148 @@
+scripts/run_kh_subsonic_riccati_core1d.py:62:    parser.add_argument("--gamma-supervision-weight", type=float, default=3.0)
+scripts/run_kh_subsonic_riccati_core1d.py:64:    parser.add_argument("--boundary-kappa-weight", type=float, default=5.0)
+scripts/run_kh_subsonic_riccati_core1d.py:67:    parser.add_argument("--center-kappa-weight", type=float, default=0.5)
+scripts/run_kh_subsonic_riccati_core1d.py:76:    parser.add_argument("--gamma-supervision-alphas", type=float, nargs="*", default=None)
+scripts/run_kh_subsonic_riccati_core1d.py:84:    gamma_supervision_alphas = args.gamma_supervision_alphas
+scripts/run_kh_subsonic_riccati_core1d.py:85:    if gamma_supervision_alphas is None:
+scripts/run_kh_subsonic_riccati_core1d.py:86:        gamma_supervision_alphas = args.anchor_alphas
+scripts/run_kh_subsonic_riccati_core1d.py:147:        w_bc_kappa=float(warm_config.get("w_bc_kappa", 10.0)),
+scripts/run_kh_subsonic_riccati_core1d.py:180:        w_riccati_gamma_supervision=float(args.gamma_supervision_weight),
+scripts/run_kh_subsonic_riccati_core1d.py:181:        riccati_gamma_n_xi=129,
+scripts/run_kh_subsonic_riccati_core1d.py:182:        riccati_gamma_every=10,
+scripts/run_kh_subsonic_riccati_core1d.py:183:        riccati_gamma_alpha_count=len(gamma_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d.py:184:        riccati_gamma_alphas=tuple(float(alpha) for alpha in gamma_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d.py:185:        w_riccati_center_kappa=float(args.center_kappa_weight),
+scripts/run_kh_subsonic_riccati_core1d.py:187:        w_riccati_boundary_band_kappa=float(args.boundary_kappa_weight),
+scripts/run_kh_subsonic_riccati_core1d.py:241:        f"gamma_sup={cfg.w_riccati_gamma_supervision:.2f} anchor={cfg.w_riccati_anchor:.2f} "
+scripts/run_kh_subsonic_riccati_core1d.py:242:        f"bc_k={cfg.w_riccati_boundary_band_kappa:.2f} bc_q={cfg.w_riccati_boundary_band_q:.2f} "
+scripts/run_kh_subsonic_riccati_core1d.py:324:                "w_riccati_gamma_supervision": float(cfg.w_riccati_gamma_supervision),
+scripts/run_kh_subsonic_riccati_core1d.py:326:                "w_riccati_boundary_band_kappa": float(cfg.w_riccati_boundary_band_kappa),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:224:    parser.add_argument("--gamma-supervision-weight", type=float, default=3.0)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:226:    parser.add_argument("--boundary-kappa-weight", type=float, default=5.0)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:229:    parser.add_argument("--center-kappa-weight", type=float, default=0.5)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:233:    parser.add_argument("--gamma-supervision-alphas", type=float, nargs="*", default=None)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:256:    gamma_supervision_alphas = args.gamma_supervision_alphas if args.gamma_supervision_alphas is not None else args.anchor_alphas
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:319:        w_bc_kappa=float(warm_config.get("w_bc_kappa", 10.0)),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:353:        w_riccati_gamma_supervision=float(args.gamma_supervision_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:354:        riccati_gamma_n_xi=129,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:355:        riccati_gamma_every=10,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:356:        riccati_gamma_alpha_count=len(gamma_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:357:        riccati_gamma_alphas=tuple(float(alpha) for alpha in gamma_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:358:        w_riccati_center_kappa=float(args.center_kappa_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:360:        w_riccati_boundary_band_kappa=float(args.boundary_kappa_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:484:        f"q_sup={cfg.w_q_supervision:.2f} gamma_sup={cfg.w_riccati_gamma_supervision:.2f} "
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:485:        f"anchor={cfg.w_riccati_anchor:.2f} bc_k={cfg.w_riccati_boundary_band_kappa:.2f} "
+src/models/kh_subsonic_pinn.py:108:        mode_output_dim = 4 if self.mode_representation == "first_order_real" else 2
+src/models/kh_subsonic_pinn.py:113:                    mode_output_dim,
+src/models/kh_subsonic_pinn.py:155:        output_dim = 4 if self.mode_representation == "first_order_real" else 2
+src/models/kh_subsonic_pinn.py:159:        raw_outputs = torch.empty(features.shape[0], output_dim, dtype=features.dtype, device=features.device)
+src/models/kh_subsonic_pinn.py:180:            kappa = raw_outputs[:, 0:1]
+src/models/kh_subsonic_pinn.py:182:            return torch.cat([kappa, q], dim=-1)
+src/models/kh_subsonic_pinn.py:311:            if src_layer.out_features != dst_layer.out_features:
+src/models/kh_subsonic_pinn.py:314:                    f"layer={idx}, src_out={src_layer.out_features}, dst_out={dst_layer.out_features}"
+src/models/kh_subsonic_pinn.py:377:        mode_output_dim = 4 if self.mode_representation == "first_order_real" else 2
+src/models/kh_subsonic_pinn.py:380:            mode_output_dim,
+src/models/kh_subsonic_pinn.py:419:            kappa = raw_outputs[:, 0:1]
+src/models/kh_subsonic_pinn.py:421:            return torch.cat([kappa, q], dim=-1)
+src/physics/kh_subsonic_residual.py:61:def asymptotic_riccati_gammas(alpha: torch.Tensor, mach: float, ci: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+src/physics/kh_subsonic_residual.py:70:    gamma_left = alpha_c * _principal_sqrt_torch(r_inf_left)
+src/physics/kh_subsonic_residual.py:71:    gamma_right = -alpha_c * _principal_sqrt_torch(r_inf_right)
+src/physics/kh_subsonic_residual.py:72:    return gamma_left, gamma_right
+src/physics/kh_subsonic_residual.py:75:def riccati_gamma_rhs(
+src/physics/kh_subsonic_residual.py:77:    gamma: torch.Tensor,
+src/physics/kh_subsonic_residual.py:82:    gamma = _clamp_complex_abs(gamma, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py:94:    rhs = -(gamma**2) - p_term * gamma + (alpha_c**2) * r_term
+src/physics/kh_subsonic_residual.py:105:    kappa = outputs[:, 0:1]
+src/physics/kh_subsonic_residual.py:112:    kappa_sorted = kappa[order, 0]
+src/physics/kh_subsonic_residual.py:122:        ln_amp_sorted[idx] = ln_amp_sorted[idx - 1] + 0.5 * (kappa_sorted[idx] + kappa_sorted[idx - 1]) * dy
+src/physics/kh_subsonic_residual.py:127:        ln_amp_sorted[idx] = ln_amp_sorted[idx + 1] - 0.5 * (kappa_sorted[idx] + kappa_sorted[idx + 1]) * dy
+src/physics/kh_subsonic_residual.py:138:    gamma = torch.complex(kappa, q)
+src/physics/kh_subsonic_residual.py:140:    p_y = gamma * p
+src/physics/kh_subsonic_residual.py:141:    return pr, pi, p_y, gamma, y
+src/physics/kh_subsonic_residual.py:233:        kappa = outputs[:, 0:1]
+src/physics/kh_subsonic_residual.py:236:        kappa_xi = _differentiate(kappa, xi)
+src/physics/kh_subsonic_residual.py:243:        kappa_y = kappa_xi / y_xi
+src/physics/kh_subsonic_residual.py:250:        gamma = torch.complex(kappa, q)
+src/physics/kh_subsonic_residual.py:260:        gamma_rhs = -(gamma**2) - p_term * gamma + (alpha_complex**2) * r_term
+src/physics/kh_subsonic_residual.py:261:        gamma_y = torch.complex(kappa_y, q_y)
+src/physics/kh_subsonic_residual.py:262:        residual = gamma_y - gamma_rhs
+src/physics/kh_subsonic_residual.py:338:        loss_kappa, loss_q = riccati_boundary_loss_components(model, xi_left, xi_right, alpha)
+src/physics/kh_subsonic_residual.py:339:        return loss_kappa + loss_q
+src/physics/kh_subsonic_residual.py:350:        gamma_left, gamma_right = asymptotic_riccati_gammas(alpha, float(getattr(model, "mach", 0.5)), ci)
+src/physics/kh_subsonic_residual.py:351:        target_left = gamma_left * torch.complex(p_left_r, p_left_i)
+src/physics/kh_subsonic_residual.py:352:        target_right = gamma_right * torch.complex(p_right_r, p_right_i)
+src/physics/kh_subsonic_residual.py:372:    gamma_left, gamma_right = asymptotic_riccati_gammas(alpha, float(getattr(model, "mach", 0.5)), ci)
+src/physics/kh_subsonic_residual.py:374:    loss_kappa = (
+src/physics/kh_subsonic_residual.py:375:        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py:376:        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py:379:        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py:380:        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py:382:    return loss_kappa, loss_q
+src/physics/kh_subsonic_residual.py:418:    gamma_left, gamma_right = asymptotic_riccati_gammas(alpha_left, float(getattr(model, "mach", 0.5)), ci)
+src/physics/kh_subsonic_residual.py:420:    loss_kappa = (
+src/physics/kh_subsonic_residual.py:421:        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py:422:        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py:425:        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py:426:        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py:428:    return loss_kappa, loss_q
+src/physics/kh_subsonic_residual.py:439:    kappa = pred[:, 0:1]
+src/physics/kh_subsonic_residual.py:441:    kappa_xi = _differentiate(kappa, xi_center)
+src/physics/kh_subsonic_residual.py:444:    kappa_y = kappa_xi / y_xi
+src/physics/kh_subsonic_residual.py:446:    loss_center = kappa.pow(2).mean()
+src/physics/kh_subsonic_residual.py:447:    loss_peak = torch.relu(kappa_y).pow(2).mean()
+src/physics/kh_subsonic_residual.py:520:    gamma_val: torch.Tensor,
+src/physics/kh_subsonic_residual.py:526:    k1 = riccati_gamma_rhs(y_val, gamma_val, alpha_val, mach, ci_val)
+src/physics/kh_subsonic_residual.py:527:    k2 = riccati_gamma_rhs(y_val + 0.5 * h, gamma_val + 0.5 * h * k1, alpha_val, mach, ci_val)
+src/physics/kh_subsonic_residual.py:528:    k3 = riccati_gamma_rhs(y_val + 0.5 * h, gamma_val + 0.5 * h * k2, alpha_val, mach, ci_val)
+src/physics/kh_subsonic_residual.py:529:    k4 = riccati_gamma_rhs(y_val + h, gamma_val + h * k3, alpha_val, mach, ci_val)
+src/physics/kh_subsonic_residual.py:530:    gamma_next = gamma_val + (h / 6.0) * (k1 + 2.0 * k2 + 2.0 * k3 + k4)
+src/physics/kh_subsonic_residual.py:531:    return _clamp_complex_abs(gamma_next, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py:537:    gamma_start: torch.Tensor,
+src/physics/kh_subsonic_residual.py:545:        return gamma_start
+src/physics/kh_subsonic_residual.py:546:    gamma_curr = gamma_start
+src/physics/kh_subsonic_residual.py:550:        gamma_curr = _riccati_rk4_step(y_curr, gamma_curr, h, alpha_val, mach, ci_val)
+src/physics/kh_subsonic_residual.py:552:    return gamma_curr
+src/physics/kh_subsonic_residual.py:577:    gamma_left_pred = torch.complex(pred_left[:, 0], pred_left[:, 1])
+src/physics/kh_subsonic_residual.py:578:    gamma_right_pred = torch.complex(pred_right[:, 0], pred_right[:, 1])
+src/physics/kh_subsonic_residual.py:584:        gamma_left_0, gamma_right_0 = asymptotic_riccati_gammas(alpha_scalar, mach, ci_scalar)
+src/physics/kh_subsonic_residual.py:585:        gamma_left_curr = gamma_left_0[0]
+src/physics/kh_subsonic_residual.py:586:        gamma_right_curr = gamma_right_0[0]
+src/physics/kh_subsonic_residual.py:588:        left_path = [gamma_left_curr]
+src/physics/kh_subsonic_residual.py:589:        right_desc_path = [gamma_right_curr]
+src/physics/kh_subsonic_residual.py:595:            gamma_left_curr = _riccati_segment_integrate(
+src/physics/kh_subsonic_residual.py:598:                gamma_left_curr,
+src/physics/kh_subsonic_residual.py:604:            left_path.append(gamma_left_curr)
+src/physics/kh_subsonic_residual.py:608:            gamma_right_curr = _riccati_segment_integrate(
+src/physics/kh_subsonic_residual.py:611:                gamma_right_curr,
+src/physics/kh_subsonic_residual.py:617:            right_desc_path.append(gamma_right_curr)
+src/physics/kh_subsonic_residual.py:619:        gamma_left_target = torch.stack(left_path)
+src/physics/kh_subsonic_residual.py:620:        gamma_right_target = torch.flip(torch.stack(right_desc_path), dims=[0])
+src/physics/kh_subsonic_residual.py:622:    gamma_left_target = _clamp_complex_abs(gamma_left_target, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py:623:    gamma_right_target = _clamp_complex_abs(gamma_right_target, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py:624:    gamma_left_pred = _clamp_complex_abs(gamma_left_pred, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py:625:    gamma_right_pred = _clamp_complex_abs(gamma_right_pred, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py:627:    left_loss = (gamma_left_pred.real - gamma_left_target.real).pow(2) + (gamma_left_pred.imag - gamma_left_target.imag).pow(2)
+src/physics/kh_subsonic_residual.py:628:    right_loss = (gamma_right_pred.real - gamma_right_target.real).pow(2) + (gamma_right_pred.imag - gamma_right_target.imag).pow(2)
+src/physics/kh_subsonic_residual.py:650:    def rk4_step(y_val: torch.Tensor, gamma_val: torch.Tensor, h: torch.Tensor, alpha_val: torch.Tensor, ci_val: torch.Tensor) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py:651:        return _riccati_rk4_step(y_val, gamma_val, h, alpha_val, mach, ci_val)
+src/physics/kh_subsonic_residual.py:657:        gamma_left_0, gamma_right_0 = asymptotic_riccati_gammas(alpha_scalar, mach, ci_scalar)
+src/physics/kh_subsonic_residual.py:658:        gamma_left = gamma_left_0[0]
+src/physics/kh_subsonic_residual.py:659:        gamma_right = gamma_right_0[0]
+src/physics/kh_subsonic_residual.py:668:            gamma_left = rk4_step(y_curr, gamma_left, h_left, alpha_scalar[0], ci_scalar[0])
+src/physics/kh_subsonic_residual.py:673:            gamma_right = rk4_step(y_curr, gamma_right, h_right, alpha_scalar[0], ci_scalar[0])
+src/physics/kh_subsonic_residual.py:676:        mismatch = torch.abs(gamma_left - gamma_right) ** 2
+src/physics/kh_subsonic_residual.py:843:        kappa = outputs[:, 0:1]
+src/physics/kh_subsonic_residual.py:846:        kappa_xi = _differentiate(kappa, xi)
+src/physics/kh_subsonic_residual.py:853:        kappa_y = kappa_xi / y_xi
+src/physics/kh_subsonic_residual.py:860:        gamma = torch.complex(kappa, q)
+src/physics/kh_subsonic_residual.py:870:        gamma_rhs = -(gamma**2) - p_term * gamma + (alpha_complex**2) * r_term
+src/physics/kh_subsonic_residual.py:871:        gamma_y = torch.complex(kappa_y, q_y)
+src/physics/kh_subsonic_residual.py:872:        residual = gamma_y - gamma_rhs
+src/physics/kh_subsonic_residual.py:935:    gamma_left = alpha_c * _principal_sqrt_torch(r_inf_left)
+src/physics/kh_subsonic_residual.py:936:    gamma_right = -alpha_c * _principal_sqrt_torch(r_inf_right)
+src/physics/kh_subsonic_residual.py:938:    loss_kappa = (
+src/physics/kh_subsonic_residual.py:939:        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py:940:        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py:943:        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py:944:        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py:946:    return loss_kappa, loss_q

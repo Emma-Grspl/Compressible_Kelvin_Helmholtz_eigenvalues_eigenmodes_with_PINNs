@@ -1,0 +1,44 @@
+============================================================
+POWELL WIDE RETRY
+Mach   = 1.05
+tag    = 105
+alphas = 0.12 0.125 0.13 0.135 0.14 0.145 0.15
+start  = Fri Aug  7 08:40:24 PM CEST 2026
+============================================================
+[01/07] alpha=0.12000 |dc_pinn|=4.452e-02 |dc_corr|=1.394e-07 mismatch=1.561e-08 nfev=240 time=40.04s
+[02/07] alpha=0.12500 |dc_pinn|=5.137e-02 |dc_corr|=2.806e-06 mismatch=2.499e-07 nfev=240 time=39.55s
+[03/07] alpha=0.13000 |dc_pinn|=6.029e-02 |dc_corr|=5.138e-05 mismatch=2.731e-06 nfev=240 time=39.15s
+[04/07] alpha=0.13500 |dc_pinn|=5.642e-02 |dc_corr|=3.129e-06 mismatch=1.349e-07 nfev=240 time=38.53s
+[05/07] alpha=0.14000 |dc_pinn|=4.203e-02 |dc_corr|=3.162e-10 mismatch=9.309e-12 nfev=196 time=31.88s
+[06/07] alpha=0.14500 |dc_pinn|=3.215e-02 |dc_corr|=1.438e-09 mismatch=9.898e-12 nfev=240 time=39.50s
+[07/07] alpha=0.15000 |dc_pinn|=2.400e-02 |dc_corr|=1.003e-10 mismatch=1.358e-11 nfev=240 time=39.45s
+
+{
+  "status": "COMPLETED",
+  "Mach": 1.05,
+  "n_requested": 7,
+  "n_successful": 7,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M105_S4M0_v1/pinn_powell_retry_wide/pinn_powell_spectral_results.csv",
+  "pinn_spectral_error_mean": 0.04439612607824217,
+  "pinn_spectral_error_max": 0.060290664988532985,
+  "corrected_spectral_error_mean": 8.207706739336388e-06,
+  "corrected_spectral_error_max": 5.1377662367160265e-05,
+  "delta_c_from_pinn_mean": 0.04439816327680164,
+  "delta_c_from_pinn_max": 0.06030805022048576,
+  "initial_mismatch_mean": 0.0043889309191538235,
+  "initial_mismatch_max": 0.005019799471720589,
+  "corrected_mismatch_mean": 4.473182482980294e-07,
+  "corrected_mismatch_max": 2.7307272624606194e-06,
+  "mismatch_reduction_mean": 152778137.27374312,
+  "mismatch_reduction_max": 458718046.5005773,
+  "optimization_seconds_mean": 38.300588064960074,
+  "optimization_seconds_max": 40.04390810150653,
+  "nfev_reported_mean": 233.71428571428572,
+  "nfev_reported_max": 240.0
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M105_S4M0_v1/pinn_powell_retry_wide/pinn_powell_spectral_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M105_S4M0_v1/pinn_powell_retry_wide/pinn_powell_spectral_summary.json
+
+end = Fri Aug  7 08:45:02 PM CEST 2026

@@ -1,0 +1,9 @@
+pipeline,COST1_seconds,COST500_seconds,COST500_time_definition,technical_success_COST500
+"Direct PINN
+spectral",0.0004540690148,0.005446049561,GPU batched wall time,
+"Direct PINN
+spectral + modal",0.003815484376,0.18697397597,GPU batched wall time,
+"Generic classical
+shooting",244.39573539799312,134618.31210174458,serial-equivalent sum,420.0
+"PINN-seeded
+shooting",255.4382982000243,232408.65649667266,serial-equivalent sum,500.0

@@ -1,0 +1,52 @@
+{
+  "condition": "generic",
+  "dataset": "T401 branch-labelled",
+  "start": 351,
+  "stop": 401,
+  "predictions": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/atlas2d_v1_continuousM/N76/test401/N76_test401_predictions_401.csv",
+  "phase6_worker": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/pinn_supersonic/reviewer_runs/run_budget_matched_v64.py",
+  "budget": "12 multistart_single_box calls per T401 point",
+  "reference_used_for_selection": false,
+  "target_tolerance": 0.0001,
+  "generic_centers": [
+    [
+      0.1,
+      0.0001
+    ],
+    [
+      0.5,
+      0.0001
+    ],
+    [
+      0.9,
+      0.0001
+    ],
+    [
+      0.1,
+      0.002
+    ],
+    [
+      0.5,
+      0.002
+    ],
+    [
+      0.9,
+      0.002
+    ]
+  ],
+  "cr_half_windows": [
+    0.015,
+    0.03,
+    0.06,
+    0.1
+  ],
+  "ci_half_windows": [
+    0.008,
+    0.015,
+    0.03
+  ],
+  "retry_growth": 1.75,
+  "max_retries": 3,
+  "max_iter": 10,
+  "grid_size": 4
+}

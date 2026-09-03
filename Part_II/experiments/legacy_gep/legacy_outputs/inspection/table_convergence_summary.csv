@@ -1,0 +1,5 @@
+case_id,solver,sweep_type,n_runs,n_converged,n_failed,n_branch_failures,plateau_reached,plateau_axis,plateau_value,proposed_run_id,proposed_Ly,proposed_n_points,proposed_rtol,proposed_atol,proposed_max_step,spectral_plateau_tolerance,modal_plateau_tolerance
+subsonic_interior,subsonic_mstab17,shooting_box,4,4,0,0,True,Ly,40.0,subsonic_interior__subsonic_mstab17__shooting_box__0a93fe865b3b,40.0,,1e-10,1e-12,,1e-05,0.01
+subsonic_neutral,subsonic_mstab17,shooting_box,4,4,0,0,True,Ly,100.0,subsonic_neutral__subsonic_mstab17__shooting_box__1ec1da986337,100.0,,1e-10,1e-12,,1e-05,0.01
+supersonic_M140,supersonic_gep,supersonic_gep_resolution,2,0,2,2,False,n_points,,,,,,,,1e-05,0.01
+supersonic_M140,supersonic_shooting,shooting_box,1,0,1,0,False,Ly,,,,,,,,1e-05,0.01

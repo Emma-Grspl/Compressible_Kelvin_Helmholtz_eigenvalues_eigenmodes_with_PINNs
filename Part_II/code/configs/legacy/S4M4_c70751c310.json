@@ -1,0 +1,29 @@
+{
+  "experiment_family": "local_supersonic_M100_sparse_v1",
+  "Mach": 1.0,
+  "alpha_min": 0.05,
+  "alpha_max": 0.36,
+  "spectral_reference": "experiments/modal_reconstruction/legacy_outputs/data/table_spectral_full_M100.csv",
+  "spectral_anchor_file": "experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M100.csv",
+  "seed": 12345,
+  "modal_representation": [
+    "kappa",
+    "q",
+    "logabs_p_center_gauge"
+  ],
+  "predict_phase": false,
+  "spectral_outputs": [
+    "cr",
+    "ci"
+  ],
+  "modal_outputs": [
+    "kappa",
+    "q",
+    "logabs_p"
+  ],
+  "use_spectral_supervision": true,
+  "use_modal_supervision": true,
+  "modal_anchor_file": "assets/pinn_supersonic/pilots/local_M100_sparse_v1/data/modal_bank_S4M4_M100.npz",
+  "experiment": "S4M4",
+  "output_dir": "assets/pinn_supersonic/pilots/local_M100_sparse_v1/runs/S4M4"
+}

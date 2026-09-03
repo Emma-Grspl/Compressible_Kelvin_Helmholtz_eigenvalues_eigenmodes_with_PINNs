@@ -1,0 +1,79 @@
+{
+  "alpha_max": 0.45,
+  "alpha_min": 0.05,
+  "alpha_step": 0.005,
+  "analytic_tail_points": 300,
+  "anchor_candidates": 1,
+  "anchor_mach_max_distance": 1e-08,
+  "anchor_table": "classic_supersonic/data/spectral/M105_alpha005_exact_anchor.csv",
+  "bridge_growth": 1.5,
+  "ci_factor": 100.0,
+  "ci_floor": 1e-12,
+  "ci_upper": 0.2,
+  "cr_half_width": 0.08,
+  "direct_ci_scale_floor": 0.0001,
+  "direct_ci_switch": 0.001,
+  "fallbacks": [
+    {
+      "atol": 1e-11,
+      "extent": 20.0,
+      "matching_y": 1.0,
+      "max_step": 0.5,
+      "name": "nominal",
+      "rtol": 1e-09
+    },
+    {
+      "atol": 1e-12,
+      "extent": 30.0,
+      "matching_y": 1.0,
+      "max_step": 0.25,
+      "name": "strict_L30",
+      "rtol": 1e-10
+    },
+    {
+      "atol": 1e-13,
+      "extent": 40.0,
+      "matching_y": 1.0,
+      "max_step": 0.2,
+      "name": "strict_L40",
+      "rtol": 1e-11
+    },
+    {
+      "atol": 1e-13,
+      "extent": 30.0,
+      "matching_y": 0.5,
+      "max_step": 0.2,
+      "name": "strict_L30_y0p5",
+      "rtol": 1e-11
+    },
+    {
+      "atol": 1e-13,
+      "extent": 30.0,
+      "matching_y": 1.5,
+      "max_step": 0.2,
+      "name": "strict_L30_y1p5",
+      "rtol": 1e-11
+    }
+  ],
+  "linear_ci_diff_step": 0.001,
+  "log_ci_diff_step": 0.0001,
+  "mach_values": [
+    1.05
+  ],
+  "max_bridge_attempts_per_target": 240,
+  "max_nfev": 240,
+  "method": "DOP853",
+  "minimum_bridge_step": 1e-06,
+  "modal_atol": 1e-12,
+  "modal_dy": 0.025,
+  "modal_max_step": 0.25,
+  "modal_numerical_extent": 40.0,
+  "modal_rtol": 1e-10,
+  "neutral_fit_ci_max": 0.0005,
+  "neutral_fit_points": 5,
+  "neutral_min_r2": 0.98,
+  "neutral_stop_margin": 0.0,
+  "output_root": "classic_supersonic/reproducibility/results/dense_kappa_q_M105_full_branch_repair_v1",
+  "root_tolerance": 1e-08,
+  "tail_tolerance": 1e-06
+}

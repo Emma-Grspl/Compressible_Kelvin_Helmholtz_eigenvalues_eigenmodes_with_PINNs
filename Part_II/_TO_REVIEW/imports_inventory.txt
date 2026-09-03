@@ -1,0 +1,1631 @@
+./code/scripts/shooting/solve_reconstruct_blumen_maps.py:from __future__ import annotations
+./code/scripts/shooting/solve_reconstruct_blumen_maps.py:import argparse
+./code/scripts/shooting/solve_reconstruct_blumen_maps.py:import glob
+./code/scripts/shooting/solve_reconstruct_blumen_maps.py:from pathlib import Path
+./code/scripts/shooting/solve_reconstruct_blumen_maps.py:import sys
+./code/scripts/shooting/solve_reconstruct_blumen_maps.py:import matplotlib.pyplot as plt
+./code/scripts/shooting/solve_reconstruct_blumen_maps.py:import numpy as np
+./code/scripts/shooting/solve_reconstruct_blumen_maps.py:import pandas as pd
+./code/scripts/shooting/solve_reconstruct_blumen_maps.py:from classical_solver.compressible_rayleigh import sample_growth_map
+./archive/legacy_classical_solver/compressible_rayleigh.py:import numpy as np
+./archive/legacy_classical_solver/compressible_rayleigh.py:import matplotlib.pyplot as plt
+./archive/legacy_classical_solver/compressible_rayleigh.py:from scipy.sparse import diags, csr_matrix
+./archive/legacy_classical_solver/compressible_rayleigh.py:from scipy.sparse.linalg import eigs
+./archive/legacy_classical_solver/compressible_rayleigh.py:import pandas as pd
+./archive/legacy_classical_solver/compressible_rayleigh.py:import os
+./archive/legacy_classical_solver/compressible_rayleigh.py:        from scipy.sparse import vstack, hstack
+./archive/pinn_prototype/src/training/train_pinn_blumen_subsonic.py:from __future__ import annotations
+./archive/pinn_prototype/src/training/train_pinn_blumen_subsonic.py:import argparse
+./archive/pinn_prototype/src/training/train_pinn_blumen_subsonic.py:from pathlib import Path
+./archive/pinn_prototype/src/training/train_pinn_blumen_subsonic.py:import torch
+./archive/pinn_prototype/src/training/train_pinn_blumen_subsonic.py:import torch.optim as optim
+./archive/pinn_prototype/src/training/train_pinn_blumen_subsonic.py:from src.data.collocation_blumen import reference_point, sample_boundary_points, sample_interior_points
+./archive/pinn_prototype/src/training/train_pinn_blumen_subsonic.py:from src.models.pinn_blumen_subsonic import BlumenSubsonicPINN
+./archive/pinn_prototype/src/training/train_pinn_blumen_subsonic.py:from src.physics.residual_blumen import boundary_decay_loss, normalization_loss, pressure_ode_residual
+./archive/pinn_prototype/src/models/pinn_blumen_subsonic.py:from __future__ import annotations
+./archive/pinn_prototype/src/models/pinn_blumen_subsonic.py:import math
+./archive/pinn_prototype/src/models/pinn_blumen_subsonic.py:import torch
+./archive/pinn_prototype/src/models/pinn_blumen_subsonic.py:import torch.nn as nn
+./archive/pinn_prototype/src/physics/residual_blumen.py:from __future__ import annotations
+./archive/pinn_prototype/src/physics/residual_blumen.py:import torch
+./archive/pinn_prototype/src/data/collocation_blumen.py:from __future__ import annotations
+./archive/pinn_prototype/src/data/collocation_blumen.py:import torch
+./archive/gep_prototypes/dense_gep_solver.py:from __future__ import annotations
+./archive/gep_prototypes/dense_gep_solver.py:import argparse
+./archive/gep_prototypes/dense_gep_solver.py:from dataclasses import dataclass
+./archive/gep_prototypes/dense_gep_solver.py:import numpy as np
+./archive/gep_prototypes/dense_gep_solver.py:from scipy.linalg import eig
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:from __future__ import annotations
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:import argparse
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:import glob
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:from pathlib import Path
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:import sys
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:import matplotlib.tri as mtri
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:import numpy as np
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:import pandas as pd
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/audits/audit_scan_gep_supersonic_local.py:from classical_solver.supersonic.reconstruct_blumen_supersonic_shooting import parse_reference_level
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:from __future__ import annotations
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import argparse
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:from pathlib import Path
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import sys
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import numpy as np
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import pandas as pd
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:from classical_solver.gep.adaptive_continuation_sweep_gep import run_point
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:from __future__ import annotations
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import argparse
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:from pathlib import Path
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import sys
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import matplotlib.pyplot as plt
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import numpy as np
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import pandas as pd
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:            # Recompute the matching signature from the last attempted resolution.
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from __future__ import annotations
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import argparse
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from pathlib import Path
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import sys
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import matplotlib.pyplot as plt
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from matplotlib.backends.backend_pdf import PdfPages
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import numpy as np
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import pandas as pd
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/src/code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:from __future__ import annotations
+./code/src/code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:import argparse
+./code/src/code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:from pathlib import Path
+./code/src/code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:import sys
+./code/src/code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:import pandas as pd
+./code/src/code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/audits/audit_gep_parameter_grid.py:from __future__ import annotations
+./code/scripts/audits/audit_gep_parameter_grid.py:import argparse
+./code/scripts/audits/audit_gep_parameter_grid.py:from itertools import product
+./code/scripts/audits/audit_gep_parameter_grid.py:from pathlib import Path
+./code/scripts/audits/audit_gep_parameter_grid.py:import sys
+./code/scripts/audits/audit_gep_parameter_grid.py:import pandas as pd
+./code/scripts/audits/audit_gep_parameter_grid.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/scripts/audits/audit_gep_parameter_grid.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/legacy/dense_gep_notebook_style.py:from __future__ import annotations
+./code/scripts/legacy/dense_gep_notebook_style.py:from dataclasses import dataclass
+./code/scripts/legacy/dense_gep_notebook_style.py:import numpy as np
+./code/scripts/legacy/dense_gep_notebook_style.py:from scipy.linalg import eig as dense_eig
+./code/scripts/legacy/dense_gep_notebook_style.py:from scipy.sparse import bmat, csr_matrix, diags
+./code/scripts/shooting/solve_reconstruct_blumen_supersonic_shooting.py:from __future__ import annotations
+./code/scripts/shooting/solve_reconstruct_blumen_supersonic_shooting.py:import argparse
+./code/scripts/shooting/solve_reconstruct_blumen_supersonic_shooting.py:import glob
+./code/scripts/shooting/solve_reconstruct_blumen_supersonic_shooting.py:from pathlib import Path
+./code/scripts/shooting/solve_reconstruct_blumen_supersonic_shooting.py:import sys
+./code/scripts/shooting/solve_reconstruct_blumen_supersonic_shooting.py:import matplotlib.pyplot as plt
+./code/scripts/shooting/solve_reconstruct_blumen_supersonic_shooting.py:import numpy as np
+./code/scripts/shooting/solve_reconstruct_blumen_supersonic_shooting.py:import pandas as pd
+./code/scripts/shooting/solve_reconstruct_blumen_supersonic_shooting.py:from classical_solver.supersonic.shooting_supersonic import sample_supersonic_growth_map
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:from __future__ import annotations
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:import argparse
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:import glob
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:from pathlib import Path
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:import sys
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:import matplotlib.pyplot as plt
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:import numpy as np
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:import pandas as pd
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks.py:from classical_solver.supersonic.reconstruct_blumen_supersonic_shooting import parse_reference_level
+./code/scripts/evaluation/mstab17_supersonic_solver.py:from __future__ import annotations
+./code/scripts/evaluation/mstab17_supersonic_solver.py:import argparse
+./code/scripts/evaluation/mstab17_supersonic_solver.py:from dataclasses import dataclass
+./code/scripts/evaluation/mstab17_supersonic_solver.py:from pathlib import Path
+./code/scripts/evaluation/mstab17_supersonic_solver.py:import matplotlib.pyplot as plt
+./code/scripts/evaluation/mstab17_supersonic_solver.py:import numpy as np
+./code/scripts/evaluation/mstab17_supersonic_solver.py:from scipy.integrate import solve_ivp
+./code/scripts/evaluation/mstab17_supersonic_solver.py:from scipy.optimize import minimize_scalar
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:from __future__ import annotations
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:import argparse
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:import glob
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:from pathlib import Path
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:import sys
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:import matplotlib.tri as mtri
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:import numpy as np
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:import pandas as pd
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/audits/audit_scan_mstab17_supersonic_local.py:from classical_solver.supersonic.reconstruct_blumen_supersonic_shooting import parse_reference_level
+./code/scripts/evaluation/shooting_supersonic.py:from __future__ import annotations
+./code/scripts/evaluation/shooting_supersonic.py:from dataclasses import dataclass
+./code/scripts/evaluation/shooting_supersonic.py:import numpy as np
+./code/scripts/evaluation/shooting_supersonic.py:import pandas as pd
+./code/scripts/evaluation/shooting_supersonic.py:from scipy.integrate import solve_ivp
+./code/scripts/evaluation/shooting_supersonic.py:from scipy.optimize import minimize
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:import sys
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:import matplotlib.pyplot as plt
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:import torch
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache2D
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results_2d.py:from src.models.kh_subsonic_pinn import KHSubsonicMultiMachPINN
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:import sys
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:import matplotlib.pyplot as plt
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:from matplotlib.backends.backend_pdf import PdfPages
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:import torch
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/plot_kh_subsonic_pinn_results.py:from src.physics.kh_subsonic_residual import base_velocity, base_velocity_derivative, dy_dxi, xi_to_y
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn.py:import sys
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn.py:from src.training.kh_subsonic_trainer import (
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn_2d.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn_2d.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn_2d.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn_2d.py:import sys
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/scripts/train_kh_subsonic_pinn_2d.py:from src.training.kh_subsonic_trainer_2d import (
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:from dataclasses import asdict, dataclass
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:import torch
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:import torch.optim as optim
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:from src.data.kh_subsonic_sampling import (
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer.py:from src.physics.kh_subsonic_residual import (
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:from dataclasses import asdict, dataclass
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:import torch
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:import torch.optim as optim
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:from src.data.kh_subsonic_sampling import (
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:from src.models.kh_subsonic_pinn import KHSubsonicMultiMachPINN
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/training/kh_subsonic_trainer_2d.py:from src.physics.kh_subsonic_residual import (
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/models/kh_subsonic_pinn.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/models/kh_subsonic_pinn.py:import math
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/models/kh_subsonic_pinn.py:import torch
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/models/kh_subsonic_pinn.py:import torch.nn as nn
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/models/kh_subsonic_pinn.py:import torch.nn.functional as F
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/physics/kh_subsonic_residual.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/physics/kh_subsonic_residual.py:import torch
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/data/kh_subsonic_sampling.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/data/kh_subsonic_sampling.py:from dataclasses import dataclass
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/data/kh_subsonic_sampling.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/data/kh_subsonic_sampling.py:import torch
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_pinn/code/src/data/kh_subsonic_sampling.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/shooting_subsonic.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/shooting_subsonic.py:from dataclasses import dataclass
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/shooting_subsonic.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/shooting_subsonic.py:import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/shooting_subsonic.py:from scipy.integrate import solve_ivp
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/shooting_subsonic.py:from scipy.optimize import minimize_scalar
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import glob
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import json
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import sys
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import matplotlib.pyplot as plt
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:from scipy.interpolate import RegularGridInterpolator
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:from classical_solver.subsonic.robust_subsonic_shooting import sample_robust_subsonic_growth_map
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_ci_map.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_ci_map.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_ci_map.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_ci_map.py:import sys
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_ci_map.py:import matplotlib.pyplot as plt
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_ci_map.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_ci_map.py:import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/mstab17_subsonic_solver.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/mstab17_subsonic_solver.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/mstab17_subsonic_solver.py:from dataclasses import dataclass
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/mstab17_subsonic_solver.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/mstab17_subsonic_solver.py:import matplotlib.pyplot as plt
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/mstab17_subsonic_solver.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/mstab17_subsonic_solver.py:from scipy.integrate import solve_ivp
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/mstab17_subsonic_solver.py:from scipy.optimize import minimize_scalar
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/robust_subsonic_shooting.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/robust_subsonic_shooting.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/robust_subsonic_shooting.py:from dataclasses import dataclass
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/robust_subsonic_shooting.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/robust_subsonic_shooting.py:import sys
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/robust_subsonic_shooting.py:import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/robust_subsonic_shooting.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/robust_subsonic_shooting.py:from classical_solver.subsonic.shooting_subsonic import SubsonicShootingSolver
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_error_map.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_error_map.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_error_map.py:import matplotlib.pyplot as plt
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_error_map.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/subsonic/plot_subsonic_error_map.py:import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/plot_single_mode_like_thesis.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/plot_single_mode_like_thesis.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/plot_single_mode_like_thesis.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/plot_single_mode_like_thesis.py:import sys
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/plot_single_mode_like_thesis.py:import matplotlib.pyplot as plt
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/plot_single_mode_like_thesis.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/plot_single_mode_like_thesis.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/sweep_alpha_gep_notebook_style.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/sweep_alpha_gep_notebook_style.py:import argparse
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/sweep_alpha_gep_notebook_style.py:from pathlib import Path
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/sweep_alpha_gep_notebook_style.py:import sys
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/sweep_alpha_gep_notebook_style.py:import matplotlib.pyplot as plt
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/sweep_alpha_gep_notebook_style.py:from matplotlib.backends.backend_pdf import PdfPages
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/sweep_alpha_gep_notebook_style.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/sweep_alpha_gep_notebook_style.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/classical_solver/gep/sweep_alpha_gep_notebook_style.py:    import pandas as pd
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/code/src/classical_solver/gep/dense_gep_notebook_style.py:from __future__ import annotations
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/code/src/classical_solver/gep/dense_gep_notebook_style.py:from dataclasses import dataclass
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/code/src/classical_solver/gep/dense_gep_notebook_style.py:import numpy as np
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/code/src/classical_solver/gep/dense_gep_notebook_style.py:from scipy.linalg import eig as dense_eig
+./archive/repo_cleanup_2026-04-24/legacy_workspaces/subsonique_classique/code/code/src/classical_solver/gep/dense_gep_notebook_style.py:from scipy.sparse import bmat, csr_matrix, diags
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:from __future__ import annotations
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:import argparse
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:from pathlib import Path
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:import sys
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:import matplotlib
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:import matplotlib.pyplot as plt
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:import numpy as np
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:import pandas as pd
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/evaluation/track_supersonic_shooting_multistart.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:from __future__ import annotations
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:import argparse
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:from pathlib import Path
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:import sys
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:import matplotlib
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:import numpy as np
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:import pandas as pd
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_candidate_modes_near_blumen.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./scripts/search_kh_subsonic_alpha_sweep_external_ci.py:from __future__ import annotations
+./scripts/search_kh_subsonic_alpha_sweep_external_ci.py:import argparse
+./scripts/search_kh_subsonic_alpha_sweep_external_ci.py:from pathlib import Path
+./scripts/search_kh_subsonic_alpha_sweep_external_ci.py:import sys
+./scripts/search_kh_subsonic_alpha_sweep_external_ci.py:import numpy as np
+./scripts/search_kh_subsonic_alpha_sweep_external_ci.py:import pandas as pd
+./scripts/search_kh_subsonic_alpha_sweep_external_ci.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/run_kh_subsonic_targeted_regime_test.py:from __future__ import annotations
+./scripts/run_kh_subsonic_targeted_regime_test.py:import argparse
+./scripts/run_kh_subsonic_targeted_regime_test.py:from pathlib import Path
+./scripts/run_kh_subsonic_targeted_regime_test.py:import sys
+./scripts/run_kh_subsonic_targeted_regime_test.py:import numpy as np
+./scripts/run_kh_subsonic_targeted_regime_test.py:import pandas as pd
+./scripts/run_kh_subsonic_targeted_regime_test.py:import torch
+./scripts/run_kh_subsonic_targeted_regime_test.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache  # noqa: E402
+./scripts/run_kh_subsonic_targeted_regime_test.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/run_kh_subsonic_edge_repair_sweep.py:from __future__ import annotations
+./scripts/run_kh_subsonic_edge_repair_sweep.py:import argparse
+./scripts/run_kh_subsonic_edge_repair_sweep.py:from dataclasses import dataclass
+./scripts/run_kh_subsonic_edge_repair_sweep.py:from pathlib import Path
+./scripts/run_kh_subsonic_edge_repair_sweep.py:import sys
+./scripts/run_kh_subsonic_edge_repair_sweep.py:import matplotlib
+./scripts/run_kh_subsonic_edge_repair_sweep.py:import matplotlib.pyplot as plt
+./scripts/run_kh_subsonic_edge_repair_sweep.py:import numpy as np
+./scripts/run_kh_subsonic_edge_repair_sweep.py:import pandas as pd
+./scripts/run_kh_subsonic_edge_repair_sweep.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:import argparse
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:from pathlib import Path
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:import sys
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:from matplotlib.backends.backend_pdf import PdfPages
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:import numpy as np
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:import pandas as pd
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:import torch
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config, load_fixed_mach_state_dict_compat
+./scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py:from src.physics.kh_subsonic_residual import (
+./scripts/plot_kh_subsonic_pinn_results_2d.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_pinn_results_2d.py:import argparse
+./scripts/plot_kh_subsonic_pinn_results_2d.py:from pathlib import Path
+./scripts/plot_kh_subsonic_pinn_results_2d.py:import sys
+./scripts/plot_kh_subsonic_pinn_results_2d.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_pinn_results_2d.py:import numpy as np
+./scripts/plot_kh_subsonic_pinn_results_2d.py:import pandas as pd
+./scripts/plot_kh_subsonic_pinn_results_2d.py:import torch
+./scripts/plot_kh_subsonic_pinn_results_2d.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache2D
+./scripts/plot_kh_subsonic_pinn_results_2d.py:from src.models.kh_subsonic_pinn import KHSubsonicMultiMachPINN
+./scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:from __future__ import annotations
+./scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:import argparse
+./scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:from pathlib import Path
+./scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:import sys
+./scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:import pandas as pd
+./scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:import torch
+./scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_full_mode_supervision_test.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:from __future__ import annotations
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:import argparse
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:from pathlib import Path
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:import sys
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:import matplotlib
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:import matplotlib.pyplot as plt
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:import numpy as np
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:import pandas as pd
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_ci_visual.py:from classical_solver.supersonic.shooting_supersonic import sample_supersonic_growth_map
+./code/scripts/evaluation/merge_supersonic_pointwise_strict_reference.py:from __future__ import annotations
+./code/scripts/evaluation/merge_supersonic_pointwise_strict_reference.py:import argparse
+./code/scripts/evaluation/merge_supersonic_pointwise_strict_reference.py:from pathlib import Path
+./code/scripts/evaluation/merge_supersonic_pointwise_strict_reference.py:import shutil
+./code/scripts/evaluation/merge_supersonic_pointwise_strict_reference.py:import numpy as np
+./code/scripts/evaluation/merge_supersonic_pointwise_strict_reference.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:import argparse
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:import sys
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:import matplotlib
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:import numpy as np
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py:from scripts.audits.audit_supersonic_families_against_blumen import DEFAULT_OUTPUT_DIR  # noqa: E402
+./plots/scripts/pinn_supersonic/plot_supersonic_database_presentation.py:from __future__ import annotations
+./plots/scripts/pinn_supersonic/plot_supersonic_database_presentation.py:import argparse
+./plots/scripts/pinn_supersonic/plot_supersonic_database_presentation.py:from pathlib import Path
+./plots/scripts/pinn_supersonic/plot_supersonic_database_presentation.py:import matplotlib
+./plots/scripts/pinn_supersonic/plot_supersonic_database_presentation.py:import matplotlib.pyplot as plt
+./plots/scripts/pinn_supersonic/plot_supersonic_database_presentation.py:import numpy as np
+./plots/scripts/pinn_supersonic/plot_supersonic_database_presentation.py:import pandas as pd
+./plots/scripts/pinn_supersonic/plot_supersonic_database_presentation.py:from matplotlib.colors import ListedColormap
+./plots/scripts/pinn_supersonic/plot_supersonic_database_presentation.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves as load_supersonic_curves
+./plots/scripts/classic_supersonic/plot_supersonic_shooting_reference_vs_blumen.py:from __future__ import annotations
+./plots/scripts/classic_supersonic/plot_supersonic_shooting_reference_vs_blumen.py:import argparse
+./plots/scripts/classic_supersonic/plot_supersonic_shooting_reference_vs_blumen.py:from pathlib import Path
+./plots/scripts/classic_supersonic/plot_supersonic_shooting_reference_vs_blumen.py:import sys
+./plots/scripts/classic_supersonic/plot_supersonic_shooting_reference_vs_blumen.py:import matplotlib
+./plots/scripts/classic_supersonic/plot_supersonic_shooting_reference_vs_blumen.py:import matplotlib.pyplot as plt
+./plots/scripts/classic_supersonic/plot_supersonic_shooting_reference_vs_blumen.py:import pandas as pd
+./scripts/run_kh_subsonic_representation_ablation_local.py:from __future__ import annotations
+./scripts/run_kh_subsonic_representation_ablation_local.py:import argparse
+./scripts/run_kh_subsonic_representation_ablation_local.py:from pathlib import Path
+./scripts/run_kh_subsonic_representation_ablation_local.py:import sys
+./scripts/run_kh_subsonic_representation_ablation_local.py:import matplotlib
+./scripts/run_kh_subsonic_representation_ablation_local.py:import matplotlib.pyplot as plt
+./scripts/run_kh_subsonic_representation_ablation_local.py:import numpy as np
+./scripts/run_kh_subsonic_representation_ablation_local.py:import pandas as pd
+./scripts/run_kh_subsonic_representation_ablation_local.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/run_kh_subsonic_ci_window_ablation.py:from __future__ import annotations
+./scripts/run_kh_subsonic_ci_window_ablation.py:import argparse
+./scripts/run_kh_subsonic_ci_window_ablation.py:from dataclasses import asdict, dataclass
+./scripts/run_kh_subsonic_ci_window_ablation.py:from pathlib import Path
+./scripts/run_kh_subsonic_ci_window_ablation.py:import random
+./scripts/run_kh_subsonic_ci_window_ablation.py:import sys
+./scripts/run_kh_subsonic_ci_window_ablation.py:import matplotlib
+./scripts/run_kh_subsonic_ci_window_ablation.py:import matplotlib.pyplot as plt
+./scripts/run_kh_subsonic_ci_window_ablation.py:import numpy as np
+./scripts/run_kh_subsonic_ci_window_ablation.py:import pandas as pd
+./scripts/run_kh_subsonic_ci_window_ablation.py:import torch
+./scripts/run_kh_subsonic_ci_window_ablation.py:import torch.nn as nn
+./scripts/run_kh_subsonic_ci_window_ablation.py:import torch.nn.functional as F
+./scripts/run_kh_subsonic_ci_window_ablation.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver  # noqa: E402
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:from __future__ import annotations
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:import argparse
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:from dataclasses import dataclass
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:from pathlib import Path
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:import sys
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:import numpy as np
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:import pandas as pd
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR, plot_isolines  # noqa: E402
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/legacy/track_supersonic_branch_beam_search.py:from classical_solver.supersonic.blumen_reference import (  # noqa: E402
+./scripts/plot_kh_subsonic_pinn_results.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_pinn_results.py:import argparse
+./scripts/plot_kh_subsonic_pinn_results.py:from pathlib import Path
+./scripts/plot_kh_subsonic_pinn_results.py:import sys
+./scripts/plot_kh_subsonic_pinn_results.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_pinn_results.py:from matplotlib.backends.backend_pdf import PdfPages
+./scripts/plot_kh_subsonic_pinn_results.py:import numpy as np
+./scripts/plot_kh_subsonic_pinn_results.py:import pandas as pd
+./scripts/plot_kh_subsonic_pinn_results.py:import torch
+./scripts/plot_kh_subsonic_pinn_results.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/plot_kh_subsonic_pinn_results.py:from src.models.kh_subsonic_pinn import (
+./scripts/plot_kh_subsonic_pinn_results.py:from src.physics.kh_subsonic_residual import base_velocity, base_velocity_derivative, dy_dxi, reconstruct_pressure_p_y_from_riccati, xi_to_y
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:import argparse
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:from pathlib import Path
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:import sys
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:import numpy as np
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:import pandas as pd
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:import torch
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver  # noqa: E402
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config  # noqa: E402
+./scripts/plot_kh_subsonic_ci_supervision_vs_physics.py:from src.physics.kh_subsonic_residual import reconstruct_pressure_from_riccati, xi_to_y  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_mode_repair_test.py:from __future__ import annotations
+./scripts/run_kh_subsonic_highalpha_mode_repair_test.py:import argparse
+./scripts/run_kh_subsonic_highalpha_mode_repair_test.py:from pathlib import Path
+./scripts/run_kh_subsonic_highalpha_mode_repair_test.py:import sys
+./scripts/run_kh_subsonic_highalpha_mode_repair_test.py:import pandas as pd
+./scripts/run_kh_subsonic_highalpha_mode_repair_test.py:import torch
+./scripts/run_kh_subsonic_highalpha_mode_repair_test.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_mode_repair_test.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_mode_repair_test.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:import argparse
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:from concurrent.futures import ProcessPoolExecutor, as_completed
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:import sys
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:import matplotlib
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:import numpy as np
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:from scripts.audits.audit_supersonic_shooting_ci_map import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:from scripts.audits.audit_supersonic_shooting_visual_validation_6969b4f1bf import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch.py:from scripts.evaluation.track_supersonic_shooting_multistart import multistart_single_box  # noqa: E402
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:import argparse
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:import sys
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:import matplotlib
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:import numpy as np
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:from scripts.audits.audit_supersonic_blumen_local_reference import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_blumen_cr_uncertainty.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/legacy/analyze_supersonic_mode_database.py:from __future__ import annotations
+./code/scripts/legacy/analyze_supersonic_mode_database.py:import argparse
+./code/scripts/legacy/analyze_supersonic_mode_database.py:from pathlib import Path
+./code/scripts/legacy/analyze_supersonic_mode_database.py:import matplotlib.pyplot as plt
+./code/scripts/legacy/analyze_supersonic_mode_database.py:import numpy as np
+./code/scripts/legacy/analyze_supersonic_mode_database.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_cluster_families.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_cluster_families.py:import argparse
+./code/scripts/audits/audit_supersonic_cluster_families.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_cluster_families.py:import sys
+./code/scripts/audits/audit_supersonic_cluster_families.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_cluster_families.py:import numpy as np
+./code/scripts/audits/audit_supersonic_cluster_families.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_cluster_families.py:from scipy.optimize import minimize_scalar
+./code/scripts/audits/audit_supersonic_cluster_families.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR  # noqa: E402
+./code/scripts/audits/audit_supersonic_cluster_families.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/audits/audit_supersonic_cluster_families.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:import argparse
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:from pathlib import Path
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:import sys
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:import numpy as np
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:import pandas as pd
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:import torch
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:from src.models.kh_subsonic_pinn import (
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:from src.physics.kh_subsonic_residual import base_velocity, base_velocity_derivative, dy_dxi, xi_to_y
+./scripts/plot_kh_subsonic_pinn_single_mode_like_thesis.py:from src.physics.kh_subsonic_residual import reconstruct_pressure_p_y_from_riccati
+./scripts/run_kh_subsonic_ci_supervision_vs_physics.py:from __future__ import annotations
+./scripts/run_kh_subsonic_ci_supervision_vs_physics.py:import argparse
+./scripts/run_kh_subsonic_ci_supervision_vs_physics.py:from pathlib import Path
+./scripts/run_kh_subsonic_ci_supervision_vs_physics.py:import sys
+./scripts/run_kh_subsonic_ci_supervision_vs_physics.py:import numpy as np
+./scripts/run_kh_subsonic_ci_supervision_vs_physics.py:import pandas as pd
+./scripts/run_kh_subsonic_ci_supervision_vs_physics.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/run_kh_subsonic_pinn_2d_ci_mode_campaign.py:from __future__ import annotations
+./scripts/run_kh_subsonic_pinn_2d_ci_mode_campaign.py:import argparse
+./scripts/run_kh_subsonic_pinn_2d_ci_mode_campaign.py:from pathlib import Path
+./scripts/run_kh_subsonic_pinn_2d_ci_mode_campaign.py:import sys
+./scripts/run_kh_subsonic_pinn_2d_ci_mode_campaign.py:from scripts.evaluate_kh_subsonic_pinn_2d_ci_modes import evaluate_run  # noqa: E402
+./scripts/run_kh_subsonic_pinn_2d_ci_mode_campaign.py:from src.training.kh_subsonic_trainer_2d import (  # noqa: E402
+./scripts/run_kh_subsonic_pinn_2d_band_M05_M07.py:from __future__ import annotations
+./scripts/run_kh_subsonic_pinn_2d_band_M05_M07.py:import argparse
+./scripts/run_kh_subsonic_pinn_2d_band_M05_M07.py:from pathlib import Path
+./scripts/run_kh_subsonic_pinn_2d_band_M05_M07.py:import sys
+./scripts/run_kh_subsonic_pinn_2d_band_M05_M07.py:from scripts.run_kh_subsonic_pinn_2d_pilot_M05_M06 import (  # noqa: E402
+./code/scripts/legacy/cluster_supersonic_mode_families.py:from __future__ import annotations
+./code/scripts/legacy/cluster_supersonic_mode_families.py:import argparse
+./code/scripts/legacy/cluster_supersonic_mode_families.py:from dataclasses import dataclass
+./code/scripts/legacy/cluster_supersonic_mode_families.py:from pathlib import Path
+./code/scripts/legacy/cluster_supersonic_mode_families.py:import sys
+./code/scripts/legacy/cluster_supersonic_mode_families.py:import numpy as np
+./code/scripts/legacy/cluster_supersonic_mode_families.py:import pandas as pd
+./code/scripts/legacy/cluster_supersonic_mode_families.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR, plot_isolines  # noqa: E402
+./code/scripts/legacy/cluster_supersonic_mode_families.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/legacy/cluster_supersonic_mode_families.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/legacy/track_supersonic_branch_continuation.py:from __future__ import annotations
+./code/scripts/legacy/track_supersonic_branch_continuation.py:import argparse
+./code/scripts/legacy/track_supersonic_branch_continuation.py:from pathlib import Path
+./code/scripts/legacy/track_supersonic_branch_continuation.py:import sys
+./code/scripts/legacy/track_supersonic_branch_continuation.py:import numpy as np
+./code/scripts/legacy/track_supersonic_branch_continuation.py:import pandas as pd
+./code/scripts/legacy/track_supersonic_branch_continuation.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR, plot_isolines  # noqa: E402
+./code/scripts/legacy/track_supersonic_branch_continuation.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/legacy/track_supersonic_branch_continuation.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/legacy/track_supersonic_branch_continuation.py:from classical_solver.supersonic.blumen_reference import (  # noqa: E402
+./scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py:from __future__ import annotations
+./scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py:import argparse
+./scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py:from pathlib import Path
+./scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py:import sys
+./scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py:import pandas as pd
+./scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py:from scripts.evaluate_kh_subsonic_pinn_2d_ci_modes import evaluate_run  # noqa: E402
+./scripts/run_kh_subsonic_pinn_2d_pilot_M05_M06.py:from src.training.kh_subsonic_trainer_2d import (  # noqa: E402
+./scripts/run_kh_subsonic_normalization_ablation_local.py:from __future__ import annotations
+./scripts/run_kh_subsonic_normalization_ablation_local.py:import argparse
+./scripts/run_kh_subsonic_normalization_ablation_local.py:from pathlib import Path
+./scripts/run_kh_subsonic_normalization_ablation_local.py:import sys
+./scripts/run_kh_subsonic_normalization_ablation_local.py:import matplotlib
+./scripts/run_kh_subsonic_normalization_ablation_local.py:import matplotlib.pyplot as plt
+./scripts/run_kh_subsonic_normalization_ablation_local.py:import numpy as np
+./scripts/run_kh_subsonic_normalization_ablation_local.py:import pandas as pd
+./scripts/run_kh_subsonic_normalization_ablation_local.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/train_kh_subsonic_pinn.py:from __future__ import annotations
+./scripts/train_kh_subsonic_pinn.py:import argparse
+./scripts/train_kh_subsonic_pinn.py:from pathlib import Path
+./scripts/train_kh_subsonic_pinn.py:import sys
+./scripts/train_kh_subsonic_pinn.py:from src.training.kh_subsonic_trainer import (
+./code/scripts/data_preparation/prepare_supersonic_modal_surface_branch_guided_inputs.py:from __future__ import annotations
+./code/scripts/data_preparation/prepare_supersonic_modal_surface_branch_guided_inputs.py:import argparse
+./code/scripts/data_preparation/prepare_supersonic_modal_surface_branch_guided_inputs.py:from pathlib import Path
+./code/scripts/data_preparation/prepare_supersonic_modal_surface_branch_guided_inputs.py:import sys
+./code/scripts/data_preparation/prepare_supersonic_modal_surface_branch_guided_inputs.py:import numpy as np
+./code/scripts/data_preparation/prepare_supersonic_modal_surface_branch_guided_inputs.py:import pandas as pd
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:from __future__ import annotations
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:import argparse
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:from pathlib import Path
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:import sys
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:import matplotlib.pyplot as plt
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:import numpy as np
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:import pandas as pd
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:import torch
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN, build_fixed_mach_model_from_config
+./scripts/compare_kh_subsonic_mode_two_runs_amp_phase.py:from src.physics.kh_subsonic_residual import reconstruct_pressure_from_riccati, xi_to_y
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:from __future__ import annotations
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:import argparse
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:from pathlib import Path
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:import sys
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:import matplotlib.pyplot as plt
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:import numpy as np
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:import pandas as pd
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:import torch
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN, KHSubsonicMultiMachPINN, build_fixed_mach_model_from_config
+./scripts/compare_kh_subsonic_three_modes_amp_phase_q.py:from src.physics.kh_subsonic_residual import reconstruct_pressure_from_riccati, reconstruct_pressure_from_riccati_2d, xi_to_y
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:from __future__ import annotations
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:import argparse
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:from dataclasses import asdict, is_dataclass
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:from pathlib import Path
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:import shutil
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:import sys
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:import numpy as np
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:import pandas as pd
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:import torch
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver  # noqa: E402
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:from scripts.compare_kh_subsonic_fixed_mach_modal_candidates import (  # noqa: E402
+./scripts/run_kh_subsonic_riccati_lowalpha_repair.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./plots/scripts/pinn_supersonic/plot_supersonic_cr_digitized_points.py:from __future__ import annotations
+./plots/scripts/pinn_supersonic/plot_supersonic_cr_digitized_points.py:import argparse
+./plots/scripts/pinn_supersonic/plot_supersonic_cr_digitized_points.py:from pathlib import Path
+./plots/scripts/pinn_supersonic/plot_supersonic_cr_digitized_points.py:import matplotlib
+./plots/scripts/pinn_supersonic/plot_supersonic_cr_digitized_points.py:import matplotlib.pyplot as plt
+./plots/scripts/pinn_supersonic/plot_supersonic_cr_digitized_points.py:import pandas as pd
+./plots/scripts/classic_supersonic/plot_supersonic_blumen_digitized_diagnostic.py:from __future__ import annotations
+./plots/scripts/classic_supersonic/plot_supersonic_blumen_digitized_diagnostic.py:import argparse
+./plots/scripts/classic_supersonic/plot_supersonic_blumen_digitized_diagnostic.py:from pathlib import Path
+./plots/scripts/classic_supersonic/plot_supersonic_blumen_digitized_diagnostic.py:import sys
+./plots/scripts/classic_supersonic/plot_supersonic_blumen_digitized_diagnostic.py:import matplotlib
+./plots/scripts/classic_supersonic/plot_supersonic_blumen_digitized_diagnostic.py:import matplotlib.pyplot as plt
+./plots/scripts/classic_supersonic/plot_supersonic_blumen_digitized_diagnostic.py:import numpy as np
+./plots/scripts/classic_supersonic/plot_supersonic_blumen_digitized_diagnostic.py:import pandas as pd
+./plots/scripts/classic_supersonic/plot_supersonic_blumen_digitized_diagnostic.py:from classical_solver.supersonic.blumen_reference import estimate_blumen_ci, load_digitized_curves
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:from __future__ import annotations
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:import argparse
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:from pathlib import Path
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:import sys
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:import numpy as np
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:import pandas as pd
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_local_spectrum.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:from __future__ import annotations
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:import argparse
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:from pathlib import Path
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:import sys
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:import matplotlib
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:import numpy as np
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:import pandas as pd
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_raw_spectrum_vs_blumen.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:from __future__ import annotations
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:import argparse
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:from dataclasses import dataclass
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:from pathlib import Path
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:import sys
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:import matplotlib.pyplot as plt
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:from matplotlib.backends.backend_pdf import PdfPages
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:import numpy as np
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:import pandas as pd
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:import torch
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config, load_fixed_mach_state_dict_compat
+./scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py:from src.physics.kh_subsonic_residual import (
+./scripts/run_kh_subsonic_riccati_core1d.py:from __future__ import annotations
+./scripts/run_kh_subsonic_riccati_core1d.py:import argparse
+./scripts/run_kh_subsonic_riccati_core1d.py:from dataclasses import asdict
+./scripts/run_kh_subsonic_riccati_core1d.py:from pathlib import Path
+./scripts/run_kh_subsonic_riccati_core1d.py:import sys
+./scripts/run_kh_subsonic_riccati_core1d.py:import numpy as np
+./scripts/run_kh_subsonic_riccati_core1d.py:import pandas as pd
+./scripts/run_kh_subsonic_riccati_core1d.py:import torch
+./scripts/run_kh_subsonic_riccati_core1d.py:from scripts.run_kh_subsonic_riccati_lowalpha_repair import (  # noqa: E402
+./scripts/run_kh_subsonic_riccati_core1d.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:from __future__ import annotations
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:import argparse
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:from pathlib import Path
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:import sys
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:import matplotlib
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:import matplotlib.pyplot as plt
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:import numpy as np
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:import pandas as pd
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/evaluation/track_supersonic_shooting_mach_continuation.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:from __future__ import annotations
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:import argparse
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:from dataclasses import asdict, dataclass
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:from pathlib import Path
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:import sys
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:import numpy as np
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:import pandas as pd
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:import torch
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/train_kh_subsonic_ci_stage0_anchor_lock.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN
+./scripts/build_presentation_plots.py:from __future__ import annotations
+./scripts/build_presentation_plots.py:import shutil
+./scripts/build_presentation_plots.py:from pathlib import Path
+./scripts/build_presentation_plots.py:import sys
+./scripts/build_presentation_plots.py:import matplotlib.pyplot as plt
+./scripts/build_presentation_plots.py:import numpy as np
+./scripts/build_presentation_plots.py:import pandas as pd
+./scripts/build_presentation_plots.py:import torch
+./scripts/build_presentation_plots.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./scripts/build_presentation_plots.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN, build_fixed_mach_model_from_config
+./scripts/build_presentation_plots.py:from src.physics.kh_subsonic_residual import reconstruct_pressure_from_riccati, xi_to_y
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_paper_figure.py:from __future__ import annotations
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_paper_figure.py:import argparse
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_paper_figure.py:from pathlib import Path
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_paper_figure.py:import matplotlib
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_paper_figure.py:import matplotlib.pyplot as plt
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_paper_figure.py:import pandas as pd
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_paper_figure.py:from classical_solver.supersonic.blumen_reference import load_supersonic_blumen_csv
+./scripts/build_subsonic_1d_presentation.py:from __future__ import annotations
+./scripts/build_subsonic_1d_presentation.py:import argparse
+./scripts/build_subsonic_1d_presentation.py:import shutil
+./scripts/build_subsonic_1d_presentation.py:from pathlib import Path
+./scripts/build_subsonic_1d_presentation.py:import sys
+./scripts/build_subsonic_1d_presentation.py:import matplotlib.pyplot as plt
+./scripts/build_subsonic_1d_presentation.py:import numpy as np
+./scripts/build_subsonic_1d_presentation.py:import pandas as pd
+./scripts/build_subsonic_1d_presentation.py:import torch
+./scripts/build_subsonic_1d_presentation.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/build_subsonic_1d_presentation.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./scripts/build_subsonic_1d_presentation.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config
+./scripts/build_subsonic_1d_presentation.py:from src.physics.kh_subsonic_residual import reconstruct_pressure_from_riccati
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:import argparse
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:from pathlib import Path
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:import sys
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:import numpy as np
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:import pandas as pd
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:import torch
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:from src.models.kh_subsonic_pinn import KHSubsonicMultiMachPINN
+./scripts/plot_kh_subsonic_mode_error_heatmaps_2d.py:from src.physics.kh_subsonic_residual import reconstruct_pressure_from_riccati_2d, xi_to_y
+./code/scripts/audits/audit_diagnose_supersonic_mach_branch_tracking.py:from __future__ import annotations
+./code/scripts/audits/audit_diagnose_supersonic_mach_branch_tracking.py:import argparse
+./code/scripts/audits/audit_diagnose_supersonic_mach_branch_tracking.py:from pathlib import Path
+./code/scripts/audits/audit_diagnose_supersonic_mach_branch_tracking.py:import sys
+./code/scripts/audits/audit_diagnose_supersonic_mach_branch_tracking.py:import numpy as np
+./code/scripts/audits/audit_diagnose_supersonic_mach_branch_tracking.py:import pandas as pd
+./code/scripts/audits/audit_diagnose_supersonic_mach_branch_tracking.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR, plot_isolines
+./code/scripts/audits/audit_diagnose_supersonic_mach_branch_tracking.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/scripts/audits/audit_diagnose_supersonic_mach_branch_tracking.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:from __future__ import annotations
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:import argparse
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:from concurrent.futures import ProcessPoolExecutor, as_completed
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:from pathlib import Path
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:import sys
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:import numpy as np
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:import pandas as pd
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:from scripts.audits.audit_supersonic_shooting_ci_alpha_continuation import (  # noqa: E402
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:from scripts.audits.audit_supersonic_shooting_point_batch import DEFAULT_OUTPUT_DIR, plot_modes_pdf  # noqa: E402
+./code/scripts/evaluation/densify_supersonic_modal_front_spectral.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:from __future__ import annotations
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:import argparse
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:from concurrent.futures import ProcessPoolExecutor, as_completed
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:from pathlib import Path
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:import sys
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:import numpy as np
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:import pandas as pd
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:from scripts.audits.audit_supersonic_shooting_ci_alpha_continuation import (  # noqa: E402
+./code/scripts/evaluation/densify_supersonic_intermediate_mach_spectral.py:from scripts.audits.audit_supersonic_shooting_point_batch import DEFAULT_OUTPUT_DIR, plot_modes_pdf  # noqa: E402
+./scripts/plot_kh_subsonic_ci_supervision_budget_summary.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_ci_supervision_budget_summary.py:import argparse
+./scripts/plot_kh_subsonic_ci_supervision_budget_summary.py:from pathlib import Path
+./scripts/plot_kh_subsonic_ci_supervision_budget_summary.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_ci_supervision_budget_summary.py:import numpy as np
+./scripts/plot_kh_subsonic_ci_supervision_budget_summary.py:import pandas as pd
+./scripts/plot_kh_subsonic_ci_supervision_budget_summary.py:        "Available plots generated from the summary only:",
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:import argparse
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:from pathlib import Path
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:import sys
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:import numpy as np
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:import pandas as pd
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:import torch
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config, load_fixed_mach_state_dict_compat
+./scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py:from src.physics.kh_subsonic_residual import (
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:import argparse
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:import sys
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:import matplotlib
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:import matplotlib.colors as mcolors
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:import numpy as np
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:from scipy.integrate import solve_ivp
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:from scipy.optimize import minimize_scalar
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/audits/audit_supersonic_blumen_eigenconditions.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/data_preparation/prepare_build_supersonic_reference_tables.py:from __future__ import annotations
+./code/scripts/data_preparation/prepare_build_supersonic_reference_tables.py:import argparse
+./code/scripts/data_preparation/prepare_build_supersonic_reference_tables.py:from pathlib import Path
+./code/scripts/data_preparation/prepare_build_supersonic_reference_tables.py:import sys
+./code/scripts/data_preparation/prepare_build_supersonic_reference_tables.py:import numpy as np
+./code/scripts/data_preparation/prepare_build_supersonic_reference_tables.py:import pandas as pd
+./code/scripts/data_preparation/prepare_build_supersonic_reference_tables.py:from scripts.audits.audit_supersonic_shooting_point_batch import DEFAULT_OUTPUT_DIR  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:from __future__ import annotations
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:import argparse
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:from pathlib import Path
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:import sys
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:from types import SimpleNamespace
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:import numpy as np
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:import pandas as pd
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:import torch
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_stepwise_test.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_local_mode_families.py:from __future__ import annotations
+./code/scripts/audits/audit_diagnose_supersonic_local_mode_families.py:import argparse
+./code/scripts/audits/audit_diagnose_supersonic_local_mode_families.py:from pathlib import Path
+./code/scripts/audits/audit_diagnose_supersonic_local_mode_families.py:import sys
+./code/scripts/audits/audit_diagnose_supersonic_local_mode_families.py:import numpy as np
+./code/scripts/audits/audit_diagnose_supersonic_local_mode_families.py:import pandas as pd
+./code/scripts/audits/audit_diagnose_supersonic_local_mode_families.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_local_mode_families.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_local_mode_families.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:import argparse
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:import sys
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:import matplotlib
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:import numpy as np
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_blumen_local_reference.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:from __future__ import annotations
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import argparse
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:from dataclasses import asdict
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:from pathlib import Path
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import random
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import sys
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import matplotlib
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import matplotlib.pyplot as plt
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import numpy as np
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import pandas as pd
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import torch
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import torch.nn as nn
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:import torch.nn.functional as F
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver  # noqa: E402
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:from scripts.run_kh_subsonic_riccati_lowalpha_repair import (  # noqa: E402
+./scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:from __future__ import annotations
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:import argparse
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:from pathlib import Path
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:import sys
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:import numpy as np
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:import pandas as pd
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:import torch
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_continuation_test.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:import argparse
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:import sys
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:import matplotlib
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:import numpy as np
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:from scripts.audits.audit_supersonic_families_against_blumen import DEFAULT_OUTPUT_DIR  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_mode_structure.py:from scripts.evaluation.track_supersonic_shooting_multistart import extract_shooting_profile  # noqa: E402
+./scripts/compare_kh_subsonic_mode_amp_phase.py:from __future__ import annotations
+./scripts/compare_kh_subsonic_mode_amp_phase.py:import argparse
+./scripts/compare_kh_subsonic_mode_amp_phase.py:from pathlib import Path
+./scripts/compare_kh_subsonic_mode_amp_phase.py:import sys
+./scripts/compare_kh_subsonic_mode_amp_phase.py:import matplotlib.pyplot as plt
+./scripts/compare_kh_subsonic_mode_amp_phase.py:import numpy as np
+./scripts/compare_kh_subsonic_mode_amp_phase.py:import pandas as pd
+./scripts/compare_kh_subsonic_mode_amp_phase.py:import torch
+./scripts/compare_kh_subsonic_mode_amp_phase.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./scripts/compare_kh_subsonic_mode_amp_phase.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/compare_kh_subsonic_mode_amp_phase.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN, build_fixed_mach_model_from_config
+./scripts/compare_kh_subsonic_mode_amp_phase.py:from src.physics.kh_subsonic_residual import reconstruct_pressure_from_riccati, xi_to_y
+./code/scripts/audits/audit_supersonic_families_against_blumen.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_families_against_blumen.py:import argparse
+./code/scripts/audits/audit_supersonic_families_against_blumen.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_families_against_blumen.py:from typing import Iterable
+./code/scripts/audits/audit_supersonic_families_against_blumen.py:import matplotlib
+./code/scripts/audits/audit_supersonic_families_against_blumen.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_families_against_blumen.py:import numpy as np
+./code/scripts/audits/audit_supersonic_families_against_blumen.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:import argparse
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:import sys
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:import matplotlib
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:import numpy as np
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_ci_map.py:from scripts.evaluation.track_supersonic_shooting_multistart import (  # noqa: E402
+./scripts/render_kh_subsonic_exact_10figs.py:from __future__ import annotations
+./scripts/render_kh_subsonic_exact_10figs.py:import argparse
+./scripts/render_kh_subsonic_exact_10figs.py:from pathlib import Path
+./scripts/render_kh_subsonic_exact_10figs.py:import sys
+./scripts/render_kh_subsonic_exact_10figs.py:import numpy as np
+./scripts/render_kh_subsonic_exact_10figs.py:import pandas as pd
+./scripts/render_kh_subsonic_exact_10figs.py:from PIL import Image, ImageDraw, ImageFont
+./scripts/render_kh_subsonic_exact_10figs.py:import torch
+./scripts/render_kh_subsonic_exact_10figs.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver  # noqa: E402
+./scripts/render_kh_subsonic_exact_10figs.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config, load_fixed_mach_state_dict_compat  # noqa: E402
+./scripts/render_kh_subsonic_exact_10figs.py:from src.physics.kh_subsonic_residual import (  # noqa: E402
+./code/scripts/evaluation/evaluate_validate_supersonic_branch_selector.py:from __future__ import annotations
+./code/scripts/evaluation/evaluate_validate_supersonic_branch_selector.py:import argparse
+./code/scripts/evaluation/evaluate_validate_supersonic_branch_selector.py:from pathlib import Path
+./code/scripts/evaluation/evaluate_validate_supersonic_branch_selector.py:import sys
+./code/scripts/evaluation/evaluate_validate_supersonic_branch_selector.py:import numpy as np
+./code/scripts/evaluation/evaluate_validate_supersonic_branch_selector.py:import pandas as pd
+./code/scripts/evaluation/evaluate_validate_supersonic_branch_selector.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/scripts/evaluation/evaluate_validate_supersonic_branch_selector.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:import argparse
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:import sys
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:import numpy as np
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:from scipy.optimize import minimize_scalar
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_vs_gep_families.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:from __future__ import annotations
+./scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:import argparse
+./scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:from pathlib import Path
+./scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:import sys
+./scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:import pandas as pd
+./scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:import torch
+./scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_mode_supervision_test.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:import argparse
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:from pathlib import Path
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:import sys
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:import numpy as np
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:import pandas as pd
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:import torch
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config  # noqa: E402
+./scripts/plot_kh_subsonic_mode_error_vs_alpha.py:from src.physics.kh_subsonic_residual import reconstruct_pressure_from_riccati, xi_to_y  # noqa: E402
+./scripts/run_kh_subsonic_hybrid_alpha_sweep.py:from __future__ import annotations
+./scripts/run_kh_subsonic_hybrid_alpha_sweep.py:import argparse
+./scripts/run_kh_subsonic_hybrid_alpha_sweep.py:from pathlib import Path
+./scripts/run_kh_subsonic_hybrid_alpha_sweep.py:import sys
+./scripts/run_kh_subsonic_hybrid_alpha_sweep.py:import matplotlib
+./scripts/run_kh_subsonic_hybrid_alpha_sweep.py:import matplotlib.pyplot as plt
+./scripts/run_kh_subsonic_hybrid_alpha_sweep.py:import numpy as np
+./scripts/run_kh_subsonic_hybrid_alpha_sweep.py:import pandas as pd
+./scripts/run_kh_subsonic_hybrid_alpha_sweep.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_reference.py:from __future__ import annotations
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_reference.py:import argparse
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_reference.py:from pathlib import Path
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_reference.py:import matplotlib
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_reference.py:import matplotlib.pyplot as plt
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_reference.py:import pandas as pd
+./plots/scripts/classic_supersonic/plot_blumen_supersonic_reference.py:from classical_solver.supersonic.blumen_reference import load_supersonic_blumen_csv
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:from __future__ import annotations
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:import argparse
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:from pathlib import Path
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:import sys
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:import matplotlib
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:import matplotlib.pyplot as plt
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:import numpy as np
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:import pandas as pd
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR  # noqa: E402
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/evaluation/evaluate_compare_supersonic_gep_candidates_vs_shooting.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:import argparse
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:from concurrent.futures import ProcessPoolExecutor, as_completed
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:import sys
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:import matplotlib
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:import numpy as np
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_lines.py:from scripts.audits.audit_supersonic_shooting_point_batch import (  # noqa: E402
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:from __future__ import annotations
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:import argparse
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:from pathlib import Path
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:import sys
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:import matplotlib
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:import matplotlib.font_manager as font_manager
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:import matplotlib.pyplot as plt
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:from matplotlib.backends.backend_pdf import PdfPages
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:import numpy as np
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:import pandas as pd
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:import torch
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver  # noqa: E402
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver  # noqa: E402
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config, load_fixed_mach_state_dict_compat  # noqa: E402
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison.py:from src.physics.kh_subsonic_residual import (  # noqa: E402
+./plots/scripts/classic_supersonic/plot_blumen_isocontours.py:from __future__ import annotations
+./plots/scripts/classic_supersonic/plot_blumen_isocontours.py:from pathlib import Path
+./plots/scripts/classic_supersonic/plot_blumen_isocontours.py:import glob
+./plots/scripts/classic_supersonic/plot_blumen_isocontours.py:import matplotlib.pyplot as plt
+./plots/scripts/classic_supersonic/plot_blumen_isocontours.py:import numpy as np
+./plots/scripts/classic_supersonic/plot_blumen_isocontours.py:import pandas as pd
+./plots/scripts/classic_supersonic/plot_blumen_isocontours.py:from classical_solver.supersonic.blumen_reference import load_supersonic_blumen_csv
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:from __future__ import annotations
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:import argparse
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:from pathlib import Path
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:import sys
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:import matplotlib
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:import matplotlib.pyplot as plt
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:import numpy as np
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:import pandas as pd
+./code/scripts/data_preparation/prepare_build_supersonic_validated_modal_package.py:from classical_solver.supersonic.blumen_reference import estimate_blumen_ci, load_digitized_curves
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:from __future__ import annotations
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:import argparse
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:from pathlib import Path
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:import sys
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:import matplotlib
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:import matplotlib.pyplot as plt
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:import numpy as np
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:import pandas as pd
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves  # noqa: E402
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:from scripts.audits.audit_supersonic_shooting_ci_map import build_seed_list, ci_primary_score  # noqa: E402
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:from scripts.audits.audit_supersonic_shooting_visual_validation_6969b4f1bf import (  # noqa: E402
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:from scripts.evaluation.track_supersonic_shooting_multistart import multistart_single_box  # noqa: E402
+./code/scripts/data_preparation/prepare_build_supersonic_shooting_reference_package.py:                f"Resume shooting grid from {resume_path} "
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:from __future__ import annotations
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:import argparse
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:from dataclasses import dataclass
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:from pathlib import Path
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:import sys
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:import matplotlib
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:from matplotlib.backends.backend_pdf import PdfPages
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:import matplotlib.pyplot as plt
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:import numpy as np
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:import pandas as pd
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:import torch
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache2D
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:from src.models.kh_subsonic_pinn import KHSubsonicMultiMachPINN
+./scripts/evaluate_kh_subsonic_pinn_2d_ci_modes.py:from src.physics.kh_subsonic_residual import (
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:from __future__ import annotations
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:import argparse
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:from pathlib import Path
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:import sys
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:import numpy as np
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:import pandas as pd
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:from PIL import Image, ImageDraw, ImageFont
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:import torch
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config, load_fixed_mach_state_dict_compat  # noqa: E402
+./scripts/render_kh_subsonic_reference_comparison_pngs.py:from src.physics.kh_subsonic_residual import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:import argparse
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:from concurrent.futures import ProcessPoolExecutor, as_completed
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:from dataclasses import dataclass
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:import sys
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:import matplotlib
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:import numpy as np
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:from scripts.audits.audit_supersonic_shooting_ci_map import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:from scripts.audits.audit_supersonic_shooting_point_batch import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:from scripts.audits.audit_supersonic_shooting_visual_validation_6969b4f1bf import reconstruct_shooting_fields  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_ci_alpha_continuation.py:from scripts.evaluation.track_supersonic_shooting_multistart import multistart_single_box  # noqa: E402
+./code/scripts/evaluation/merge_supersonic_reference_dense_run.py:from __future__ import annotations
+./code/scripts/evaluation/merge_supersonic_reference_dense_run.py:import argparse
+./code/scripts/evaluation/merge_supersonic_reference_dense_run.py:from pathlib import Path
+./code/scripts/evaluation/merge_supersonic_reference_dense_run.py:import shutil
+./code/scripts/evaluation/merge_supersonic_reference_dense_run.py:import pandas as pd
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:from __future__ import annotations
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:import argparse
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:from pathlib import Path
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:import sys
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:import matplotlib
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:import matplotlib.pyplot as plt
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:import numpy as np
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:import pandas as pd
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR  # noqa: E402
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./code/scripts/legacy/run_supersonic_gep_blumen_guided_sweep.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./scripts/audit_supersonic_shooting_blumen_locked.py:from __future__ import annotations
+./scripts/audit_supersonic_shooting_blumen_locked.py:import argparse
+./scripts/audit_supersonic_shooting_blumen_locked.py:from pathlib import Path
+./scripts/audit_supersonic_shooting_blumen_locked.py:import sys
+./scripts/audit_supersonic_shooting_blumen_locked.py:import matplotlib
+./scripts/audit_supersonic_shooting_blumen_locked.py:import numpy as np
+./scripts/audit_supersonic_shooting_blumen_locked.py:import pandas as pd
+./scripts/audit_supersonic_shooting_blumen_locked.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./scripts/audit_supersonic_shooting_blumen_locked.py:from scripts.audits.audit_supersonic_shooting_ci_map import ci_primary_score  # noqa: E402
+./scripts/audit_supersonic_shooting_blumen_locked.py:from scripts.audits.audit_supersonic_shooting_point_batch import (  # noqa: E402
+./scripts/audit_supersonic_shooting_blumen_locked.py:from scripts.audits.audit_supersonic_shooting_visual_validation_6969b4f1bf import (  # noqa: E402
+./scripts/audit_supersonic_shooting_blumen_locked.py:from scripts.audits.audit_supersonic_shooting_ci_map import extended_profile_diagnostics  # noqa: E402
+./scripts/audit_supersonic_shooting_blumen_locked.py:from scripts.evaluation.track_supersonic_shooting_multistart import multistart_single_box  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:from __future__ import annotations
+./scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:import argparse
+./scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:from pathlib import Path
+./scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:import sys
+./scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:import pandas as pd
+./scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:import torch
+./scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_balanced_full_mode_supervision_test.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/train_kh_subsonic_pinn_2d.py:from __future__ import annotations
+./scripts/train_kh_subsonic_pinn_2d.py:import argparse
+./scripts/train_kh_subsonic_pinn_2d.py:from pathlib import Path
+./scripts/train_kh_subsonic_pinn_2d.py:import sys
+./scripts/train_kh_subsonic_pinn_2d.py:from src.training.kh_subsonic_trainer_2d import (
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:from __future__ import annotations
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:import argparse
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:from dataclasses import dataclass
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:from pathlib import Path
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:import sys
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:import matplotlib
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:import matplotlib.pyplot as plt
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:import numpy as np
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:import pandas as pd
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:from scripts.audits.audit_supersonic_shooting_ci_map import extended_profile_diagnostics  # noqa: E402
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:from scripts.audits.audit_supersonic_shooting_point_batch import (  # noqa: E402
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:from scripts.audits.audit_supersonic_shooting_visual_validation_6969b4f1bf import reconstruct_shooting_fields  # noqa: E402
+./code/scripts/evaluation/track_supersonic_shooting_modal_surface.py:from scripts.evaluation.track_supersonic_shooting_multistart import multistart_single_box  # noqa: E402
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:from __future__ import annotations
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:import argparse
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:from pathlib import Path
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:import sys
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:import matplotlib
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:import matplotlib.pyplot as plt
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:import numpy as np
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:import pandas as pd
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves
+./code/scripts/shooting/solve_reconstruct_supersonic_blumen_cr_visual.py:from classical_solver.supersonic.shooting_supersonic import sample_supersonic_growth_map
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_vs_blumen_overlay.py:from __future__ import annotations
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_vs_blumen_overlay.py:import argparse
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_vs_blumen_overlay.py:from pathlib import Path
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_vs_blumen_overlay.py:import matplotlib
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_vs_blumen_overlay.py:import matplotlib.pyplot as plt
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_vs_blumen_overlay.py:import numpy as np
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_vs_blumen_overlay.py:import pandas as pd
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_vs_blumen_overlay.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves as load_supersonic_curves
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:from __future__ import annotations
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:import argparse
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:from dataclasses import asdict
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:from pathlib import Path
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:import sys
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:import numpy as np
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:import pandas as pd
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:import torch
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:from scripts.run_kh_subsonic_riccati_lowalpha_repair import (  # noqa: E402
+./scripts/run_kh_subsonic_riccati_mode_repair_edges.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:from __future__ import annotations
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:import argparse
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:from concurrent.futures import ProcessPoolExecutor, as_completed
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:from pathlib import Path
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:import sys
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:import matplotlib
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:import numpy as np
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:import pandas as pd
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:from scripts.audits.audit_supersonic_families_against_blumen import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:from scripts.audits.audit_supersonic_shooting_ci_map import ci_primary_score  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:from scripts.audits.audit_supersonic_shooting_point_batch import (  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:from scripts.audits.audit_supersonic_shooting_visual_validation_6969b4f1bf import reconstruct_shooting_fields  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:from scripts.evaluation.track_supersonic_shooting_multistart import multistart_single_box  # noqa: E402
+./code/scripts/audits/audit_supersonic_shooting_point_batch_branch_guided.py:from scripts.audits.audit_supersonic_shooting_ci_map import extended_profile_diagnostics  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:from __future__ import annotations
+./scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:import argparse
+./scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:from pathlib import Path
+./scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:import sys
+./scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:import pandas as pd
+./scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:import torch
+./scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:from src.data.kh_subsonic_sampling import SubsonicReferenceCache  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config  # noqa: E402
+./scripts/run_kh_subsonic_highalpha_classic_two_stage_repair_test.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/compare_kh_subsonic_ci_two_runs.py:from __future__ import annotations
+./scripts/compare_kh_subsonic_ci_two_runs.py:import argparse
+./scripts/compare_kh_subsonic_ci_two_runs.py:from pathlib import Path
+./scripts/compare_kh_subsonic_ci_two_runs.py:import sys
+./scripts/compare_kh_subsonic_ci_two_runs.py:import matplotlib.pyplot as plt
+./scripts/compare_kh_subsonic_ci_two_runs.py:import numpy as np
+./scripts/compare_kh_subsonic_ci_two_runs.py:import pandas as pd
+./scripts/compare_kh_subsonic_ci_two_runs.py:import torch
+./scripts/compare_kh_subsonic_ci_two_runs.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/compare_kh_subsonic_ci_two_runs.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN, build_fixed_mach_model_from_config
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:from __future__ import annotations
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:import argparse
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:from pathlib import Path
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:import sys
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:import matplotlib.pyplot as plt
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:import numpy as np
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:import pandas as pd
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:import torch
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/plot_kh_subsonic_ci_error_heatmap.py:from src.models.kh_subsonic_pinn import (
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:from __future__ import annotations
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:import argparse
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:from pathlib import Path
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:import sys
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:import matplotlib.pyplot as plt
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:import numpy as np
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:import pandas as pd
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:import torch
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN, build_fixed_mach_model_from_config
+./scripts/compare_kh_subsonic_classic_vs_pinn_mode.py:from src.physics.kh_subsonic_residual import base_velocity, base_velocity_derivative, dy_dxi, reconstruct_pressure_p_y_from_riccati, xi_to_y
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:from __future__ import annotations
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:import argparse
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:from pathlib import Path
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:import sys
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:import numpy as np
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:import pandas as pd
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:import plotly.graph_objects as go
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:from plotly.subplots import make_subplots
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:import torch
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver  # noqa: E402
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver  # noqa: E402
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:from src.models.kh_subsonic_pinn import build_fixed_mach_model_from_config, load_fixed_mach_state_dict_compat  # noqa: E402
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:from src.physics.kh_subsonic_residual import (  # noqa: E402
+./scripts/build_kh_subsonic_M05_alpha010_080_reference_comparison_plotly.py:        "CI curves are compared against a classical reference ci(alpha) interpolated from an existing validated local asset.",
+./plots/scripts/pinn_supersonic/plot_supersonic_presentation_summary.py:from __future__ import annotations
+./plots/scripts/pinn_supersonic/plot_supersonic_presentation_summary.py:from pathlib import Path
+./plots/scripts/pinn_supersonic/plot_supersonic_presentation_summary.py:import matplotlib
+./plots/scripts/pinn_supersonic/plot_supersonic_presentation_summary.py:import matplotlib.pyplot as plt
+./plots/scripts/pinn_supersonic/plot_supersonic_presentation_summary.py:import numpy as np
+./plots/scripts/pinn_supersonic/plot_supersonic_presentation_summary.py:import pandas as pd
+./scripts/run_kh_subsonic_first_order_real.py:from __future__ import annotations
+./scripts/run_kh_subsonic_first_order_real.py:import argparse
+./scripts/run_kh_subsonic_first_order_real.py:from pathlib import Path
+./scripts/run_kh_subsonic_first_order_real.py:import sys
+./scripts/run_kh_subsonic_first_order_real.py:import numpy as np
+./scripts/run_kh_subsonic_first_order_real.py:import pandas as pd
+./scripts/run_kh_subsonic_first_order_real.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/compare_kh_subsonic_pressure_mode.py:from __future__ import annotations
+./scripts/compare_kh_subsonic_pressure_mode.py:import argparse
+./scripts/compare_kh_subsonic_pressure_mode.py:from pathlib import Path
+./scripts/compare_kh_subsonic_pressure_mode.py:import sys
+./scripts/compare_kh_subsonic_pressure_mode.py:import matplotlib.pyplot as plt
+./scripts/compare_kh_subsonic_pressure_mode.py:import numpy as np
+./scripts/compare_kh_subsonic_pressure_mode.py:import pandas as pd
+./scripts/compare_kh_subsonic_pressure_mode.py:import torch
+./scripts/compare_kh_subsonic_pressure_mode.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./scripts/compare_kh_subsonic_pressure_mode.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+./scripts/compare_kh_subsonic_pressure_mode.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN, build_fixed_mach_model_from_config
+./scripts/compare_kh_subsonic_pressure_mode.py:from src.physics.kh_subsonic_residual import xi_to_y
+./scripts/search_kh_subsonic_singlecase_external_ci.py:from __future__ import annotations
+./scripts/search_kh_subsonic_singlecase_external_ci.py:import argparse
+./scripts/search_kh_subsonic_singlecase_external_ci.py:from pathlib import Path
+./scripts/search_kh_subsonic_singlecase_external_ci.py:import sys
+./scripts/search_kh_subsonic_singlecase_external_ci.py:import numpy as np
+./scripts/search_kh_subsonic_singlecase_external_ci.py:import pandas as pd
+./scripts/search_kh_subsonic_singlecase_external_ci.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/run_kh_subsonic_first_order_real_stabilized.py:from __future__ import annotations
+./scripts/run_kh_subsonic_first_order_real_stabilized.py:import argparse
+./scripts/run_kh_subsonic_first_order_real_stabilized.py:from pathlib import Path
+./scripts/run_kh_subsonic_first_order_real_stabilized.py:import sys
+./scripts/run_kh_subsonic_first_order_real_stabilized.py:import numpy as np
+./scripts/run_kh_subsonic_first_order_real_stabilized.py:import pandas as pd
+./scripts/run_kh_subsonic_first_order_real_stabilized.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./scripts/run_kh_subsonic_modefocus_lowalpha.py:from __future__ import annotations
+./scripts/run_kh_subsonic_modefocus_lowalpha.py:import argparse
+./scripts/run_kh_subsonic_modefocus_lowalpha.py:from pathlib import Path
+./scripts/run_kh_subsonic_modefocus_lowalpha.py:import sys
+./scripts/run_kh_subsonic_modefocus_lowalpha.py:import numpy as np
+./scripts/run_kh_subsonic_modefocus_lowalpha.py:import pandas as pd
+./scripts/run_kh_subsonic_modefocus_lowalpha.py:from src.training.kh_subsonic_trainer import (  # noqa: E402
+./code/scripts/audits/audit_check_blumen_supersonic_digitization.py:from __future__ import annotations
+./code/scripts/audits/audit_check_blumen_supersonic_digitization.py:import argparse
+./code/scripts/audits/audit_check_blumen_supersonic_digitization.py:from pathlib import Path
+./code/scripts/audits/audit_check_blumen_supersonic_digitization.py:import sys
+./code/scripts/audits/audit_check_blumen_supersonic_digitization.py:import matplotlib
+./code/scripts/audits/audit_check_blumen_supersonic_digitization.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_check_blumen_supersonic_digitization.py:from classical_solver.supersonic.blumen_reference import (  # noqa: E402
+./code/scripts/audits/audit_check_blumen_supersonic_digitization.py:    print("Blumen targets from calibrated supersonic digitization")
+./code/scripts/audits/audit_diagnose_supersonic_modal_branch_selector.py:from __future__ import annotations
+./code/scripts/audits/audit_diagnose_supersonic_modal_branch_selector.py:import argparse
+./code/scripts/audits/audit_diagnose_supersonic_modal_branch_selector.py:from pathlib import Path
+./code/scripts/audits/audit_diagnose_supersonic_modal_branch_selector.py:import sys
+./code/scripts/audits/audit_diagnose_supersonic_modal_branch_selector.py:import numpy as np
+./code/scripts/audits/audit_diagnose_supersonic_modal_branch_selector.py:import pandas as pd
+./code/scripts/audits/audit_diagnose_supersonic_modal_branch_selector.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR, plot_isolines  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_modal_branch_selector.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver  # noqa: E402
+./code/scripts/audits/audit_diagnose_supersonic_modal_branch_selector.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver  # noqa: E402
+./classical_solver/subsonic/shooting_subsonic.py:from __future__ import annotations
+./classical_solver/subsonic/shooting_subsonic.py:from dataclasses import dataclass
+./classical_solver/subsonic/shooting_subsonic.py:import numpy as np
+./classical_solver/subsonic/shooting_subsonic.py:import pandas as pd
+./classical_solver/subsonic/shooting_subsonic.py:from scipy.integrate import solve_ivp
+./classical_solver/subsonic/shooting_subsonic.py:from scipy.optimize import minimize_scalar
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:from __future__ import annotations
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import argparse
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import glob
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import json
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:from pathlib import Path
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import sys
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import matplotlib.pyplot as plt
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import numpy as np
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:import pandas as pd
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:from scipy.interpolate import RegularGridInterpolator
+./classical_solver/subsonic/reconstruct_blumen_subsonic_robust.py:from classical_solver.subsonic.robust_subsonic_shooting import sample_robust_subsonic_growth_map
+./classical_solver/subsonic/hybrid_subsonic_scan.py:from __future__ import annotations
+./classical_solver/subsonic/hybrid_subsonic_scan.py:import argparse
+./classical_solver/subsonic/hybrid_subsonic_scan.py:import glob
+./classical_solver/subsonic/hybrid_subsonic_scan.py:import json
+./classical_solver/subsonic/hybrid_subsonic_scan.py:from pathlib import Path
+./classical_solver/subsonic/hybrid_subsonic_scan.py:import sys
+./classical_solver/subsonic/hybrid_subsonic_scan.py:import matplotlib.pyplot as plt
+./classical_solver/subsonic/hybrid_subsonic_scan.py:import numpy as np
+./classical_solver/subsonic/hybrid_subsonic_scan.py:import pandas as pd
+./classical_solver/subsonic/hybrid_subsonic_scan.py:from scipy.interpolate import RegularGridInterpolator
+./classical_solver/subsonic/hybrid_subsonic_scan.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./classical_solver/subsonic/hybrid_subsonic_scan.py:from classical_solver.subsonic.shooting_subsonic import SubsonicShootingSolver
+./classical_solver/subsonic/plot_subsonic_ci_map.py:from __future__ import annotations
+./classical_solver/subsonic/plot_subsonic_ci_map.py:import argparse
+./classical_solver/subsonic/plot_subsonic_ci_map.py:from pathlib import Path
+./classical_solver/subsonic/plot_subsonic_ci_map.py:import sys
+./classical_solver/subsonic/plot_subsonic_ci_map.py:import matplotlib.pyplot as plt
+./classical_solver/subsonic/plot_subsonic_ci_map.py:import numpy as np
+./classical_solver/subsonic/plot_subsonic_ci_map.py:import pandas as pd
+./classical_solver/subsonic/mstab17_subsonic_solver.py:from __future__ import annotations
+./classical_solver/subsonic/mstab17_subsonic_solver.py:import argparse
+./classical_solver/subsonic/mstab17_subsonic_solver.py:from dataclasses import dataclass
+./classical_solver/subsonic/mstab17_subsonic_solver.py:from pathlib import Path
+./classical_solver/subsonic/mstab17_subsonic_solver.py:import numpy as np
+./classical_solver/subsonic/mstab17_subsonic_solver.py:from scipy.integrate import solve_ivp
+./classical_solver/subsonic/mstab17_subsonic_solver.py:from scipy.optimize import minimize_scalar
+./classical_solver/subsonic/mstab17_subsonic_solver.py:        import matplotlib.pyplot as plt
+./classical_solver/subsonic/robust_subsonic_shooting.py:from __future__ import annotations
+./classical_solver/subsonic/robust_subsonic_shooting.py:import argparse
+./classical_solver/subsonic/robust_subsonic_shooting.py:from dataclasses import dataclass
+./classical_solver/subsonic/robust_subsonic_shooting.py:from pathlib import Path
+./classical_solver/subsonic/robust_subsonic_shooting.py:import sys
+./classical_solver/subsonic/robust_subsonic_shooting.py:import pandas as pd
+./classical_solver/subsonic/robust_subsonic_shooting.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./classical_solver/subsonic/robust_subsonic_shooting.py:from classical_solver.subsonic.shooting_subsonic import SubsonicShootingSolver
+./classical_solver/subsonic/plot_subsonic_error_map.py:from __future__ import annotations
+./classical_solver/subsonic/plot_subsonic_error_map.py:from pathlib import Path
+./classical_solver/subsonic/plot_subsonic_error_map.py:import matplotlib.pyplot as plt
+./classical_solver/subsonic/plot_subsonic_error_map.py:import numpy as np
+./classical_solver/subsonic/plot_subsonic_error_map.py:import pandas as pd
+./classical_solver/subsonic/compare_subsonic_shooting_solvers.py:from __future__ import annotations
+./classical_solver/subsonic/compare_subsonic_shooting_solvers.py:import json
+./classical_solver/subsonic/compare_subsonic_shooting_solvers.py:from pathlib import Path
+./classical_solver/subsonic/compare_subsonic_shooting_solvers.py:import sys
+./classical_solver/subsonic/compare_subsonic_shooting_solvers.py:import numpy as np
+./classical_solver/subsonic/compare_subsonic_shooting_solvers.py:import pandas as pd
+./classical_solver/subsonic/compare_subsonic_shooting_solvers.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./classical_solver/subsonic/compare_subsonic_shooting_solvers.py:from classical_solver.subsonic.shooting_subsonic import SubsonicShootingSolver
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:from __future__ import annotations
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:import argparse
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:import glob
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:import json
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:from pathlib import Path
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:import sys
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:import matplotlib.pyplot as plt
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:import numpy as np
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:import pandas as pd
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:from scipy.interpolate import RegularGridInterpolator
+./classical_solver/subsonic/reconstruct_blumen_subsonic_shooting.py:from classical_solver.subsonic.shooting_subsonic import sample_subsonic_growth_map
+./code/src/classical_solver/gep/compare_sweep_gep_vs_shooting.py:from __future__ import annotations
+./code/src/classical_solver/gep/compare_sweep_gep_vs_shooting.py:import argparse
+./code/src/classical_solver/gep/compare_sweep_gep_vs_shooting.py:from pathlib import Path
+./code/src/classical_solver/gep/compare_sweep_gep_vs_shooting.py:import sys
+./code/src/classical_solver/gep/compare_sweep_gep_vs_shooting.py:import matplotlib.pyplot as plt
+./code/src/classical_solver/gep/compare_sweep_gep_vs_shooting.py:import numpy as np
+./code/src/classical_solver/gep/compare_sweep_gep_vs_shooting.py:import pandas as pd
+./code/src/classical_solver/gep/compare_sweep_gep_vs_shooting.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/gep/compare_sweep_gep_vs_shooting.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./classical_solver/gep/plot_single_mode_like_thesis.py:from __future__ import annotations
+./classical_solver/gep/plot_single_mode_like_thesis.py:import argparse
+./classical_solver/gep/plot_single_mode_like_thesis.py:from pathlib import Path
+./classical_solver/gep/plot_single_mode_like_thesis.py:import sys
+./classical_solver/gep/plot_single_mode_like_thesis.py:import matplotlib.pyplot as plt
+./classical_solver/gep/plot_single_mode_like_thesis.py:import numpy as np
+./classical_solver/gep/plot_single_mode_like_thesis.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:from __future__ import annotations
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:import argparse
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:from pathlib import Path
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:import sys
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:import matplotlib.pyplot as plt
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:import matplotlib.tri as mtri
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:import numpy as np
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:import pandas as pd
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/src/classical_solver/gep/scan_gep_supersonic_local.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves as load_supersonic_curves
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:from __future__ import annotations
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:import argparse
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:from pathlib import Path
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:import sys
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:import matplotlib
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:import matplotlib.pyplot as plt
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:from matplotlib.backends.backend_pdf import PdfPages
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:import numpy as np
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:import pandas as pd
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_modes_by_ci.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/gep/adaptive_gep_guided_by_shooting.py:from __future__ import annotations
+./code/src/classical_solver/gep/adaptive_gep_guided_by_shooting.py:import argparse
+./code/src/classical_solver/gep/adaptive_gep_guided_by_shooting.py:from pathlib import Path
+./code/src/classical_solver/gep/adaptive_gep_guided_by_shooting.py:import sys
+./code/src/classical_solver/gep/adaptive_gep_guided_by_shooting.py:import pandas as pd
+./code/src/classical_solver/gep/adaptive_gep_guided_by_shooting.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/gep/adaptive_gep_guided_by_shooting.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/src/classical_solver/gep/merge_supersonic_mode_database_chunks.py:from __future__ import annotations
+./code/src/classical_solver/gep/merge_supersonic_mode_database_chunks.py:import argparse
+./code/src/classical_solver/gep/merge_supersonic_mode_database_chunks.py:import json
+./code/src/classical_solver/gep/merge_supersonic_mode_database_chunks.py:from pathlib import Path
+./code/src/classical_solver/gep/merge_supersonic_mode_database_chunks.py:import sys
+./code/src/classical_solver/gep/merge_supersonic_mode_database_chunks.py:import numpy as np
+./code/src/classical_solver/gep/merge_supersonic_mode_database_chunks.py:import pandas as pd
+./code/src/classical_solver/gep/merge_supersonic_mode_database_chunks.py:from classical_solver.gep.build_supersonic_mode_database import OUTPUT_DIR, plot_isolines
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:from __future__ import annotations
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import argparse
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:from pathlib import Path
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import sys
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import matplotlib.pyplot as plt
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import numpy as np
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:import pandas as pd
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:from classical_solver.gep.adaptive_continuation_sweep_gep import run_point
+./code/scripts/audits/audit_scan_gep_validity_frontier.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:from __future__ import annotations
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import argparse
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:from pathlib import Path
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import sys
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import matplotlib.pyplot as plt
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import numpy as np
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:import pandas as pd
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/legacy/adaptive_continuation_sweep_gep.py:            # Recompute the matching signature from the last attempted resolution.
+./code/src/classical_solver/gep/run_supersonic_mode_database_chunk.py:from __future__ import annotations
+./code/src/classical_solver/gep/run_supersonic_mode_database_chunk.py:import argparse
+./code/src/classical_solver/gep/run_supersonic_mode_database_chunk.py:from pathlib import Path
+./code/src/classical_solver/gep/run_supersonic_mode_database_chunk.py:import sys
+./code/src/classical_solver/gep/run_supersonic_mode_database_chunk.py:import numpy as np
+./code/src/classical_solver/gep/run_supersonic_mode_database_chunk.py:from classical_solver.gep.build_supersonic_mode_database import build_parser, run_supersonic_mode_database
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from __future__ import annotations
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import argparse
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from pathlib import Path
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import sys
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import matplotlib.pyplot as plt
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from matplotlib.backends.backend_pdf import PdfPages
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import numpy as np
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:import pandas as pd
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./plots/scripts/pinn_supersonic/plot_reconstructed_eigenmodes.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./classical_solver/gep/sweep_alpha_gep_notebook_style.py:from __future__ import annotations
+./classical_solver/gep/sweep_alpha_gep_notebook_style.py:import argparse
+./classical_solver/gep/sweep_alpha_gep_notebook_style.py:from pathlib import Path
+./classical_solver/gep/sweep_alpha_gep_notebook_style.py:import sys
+./classical_solver/gep/sweep_alpha_gep_notebook_style.py:import matplotlib.pyplot as plt
+./classical_solver/gep/sweep_alpha_gep_notebook_style.py:from matplotlib.backends.backend_pdf import PdfPages
+./classical_solver/gep/sweep_alpha_gep_notebook_style.py:import numpy as np
+./classical_solver/gep/sweep_alpha_gep_notebook_style.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./classical_solver/gep/sweep_alpha_gep_notebook_style.py:    import pandas as pd
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_limit_schematic.py:from __future__ import annotations
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_limit_schematic.py:import argparse
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_limit_schematic.py:from pathlib import Path
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_limit_schematic.py:import sys
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_limit_schematic.py:import matplotlib
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_limit_schematic.py:import matplotlib.pyplot as plt
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_limit_schematic.py:import numpy as np
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_limit_schematic.py:import pandas as pd
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_limit_schematic.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves as load_supersonic_curves
+./code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:from __future__ import annotations
+./code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:import argparse
+./code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:from pathlib import Path
+./code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:import sys
+./code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:import pandas as pd
+./code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/gep/compare_gep_vs_shooting_supersonic.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/scripts/audits/audit_gep_parameter_grid.py:from __future__ import annotations
+./code/scripts/audits/audit_gep_parameter_grid.py:import argparse
+./code/scripts/audits/audit_gep_parameter_grid.py:from itertools import product
+./code/scripts/audits/audit_gep_parameter_grid.py:from pathlib import Path
+./code/scripts/audits/audit_gep_parameter_grid.py:import sys
+./code/scripts/audits/audit_gep_parameter_grid.py:import pandas as pd
+./code/scripts/audits/audit_gep_parameter_grid.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/scripts/audits/audit_gep_parameter_grid.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/src/classical_solver/gep/audit_local_supersonic_spectrum.py:from __future__ import annotations
+./code/src/classical_solver/gep/audit_local_supersonic_spectrum.py:import argparse
+./code/src/classical_solver/gep/audit_local_supersonic_spectrum.py:from pathlib import Path
+./code/src/classical_solver/gep/audit_local_supersonic_spectrum.py:import sys
+./code/src/classical_solver/gep/audit_local_supersonic_spectrum.py:import pandas as pd
+./code/src/classical_solver/gep/audit_local_supersonic_spectrum.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/gep/audit_local_supersonic_spectrum.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:from __future__ import annotations
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:import argparse
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:import json
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:from pathlib import Path
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:import sys
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:import matplotlib.pyplot as plt
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:import numpy as np
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:import pandas as pd
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/gep/build_supersonic_mode_database.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:from __future__ import annotations
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:import argparse
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:from pathlib import Path
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:import sys
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:import matplotlib
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:import matplotlib.pyplot as plt
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:from matplotlib.backends.backend_pdf import PdfPages
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:import numpy as np
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:import pandas as pd
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/gep/audit_supersonic_gep_asymptotic_box.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:from __future__ import annotations
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:import argparse
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:from pathlib import Path
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:import sys
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:import matplotlib
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:import matplotlib.pyplot as plt
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:import numpy as np
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:import pandas as pd
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:from classical_solver.gep.build_supersonic_mode_database import solve_point
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves as load_supersonic_curves
+./code/src/classical_solver/gep/audit_supersonic_blumen_points.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/src/classical_solver/gep/dense_gep_notebook_style.py:from __future__ import annotations
+./code/src/classical_solver/gep/dense_gep_notebook_style.py:from dataclasses import dataclass
+./code/src/classical_solver/gep/dense_gep_notebook_style.py:import numpy as np
+./code/src/classical_solver/gep/dense_gep_notebook_style.py:from scipy.linalg import eig as dense_eig
+./code/src/classical_solver/gep/dense_gep_notebook_style.py:from scipy.sparse import bmat, csr_matrix, diags
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_top2_overlay.py:from __future__ import annotations
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_top2_overlay.py:import argparse
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_top2_overlay.py:from pathlib import Path
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_top2_overlay.py:import sys
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_top2_overlay.py:import matplotlib
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_top2_overlay.py:import matplotlib.pyplot as plt
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_top2_overlay.py:import numpy as np
+./plots/scripts/pinn_supersonic/plot_supersonic_gep_top2_overlay.py:from classical_solver.gep.dense_gep_notebook_style import NotebookStyleDenseGEPSolver
+./code/src/classical_solver/supersonic/reconstruct_blumen_supersonic_shooting.py:from __future__ import annotations
+./code/src/classical_solver/supersonic/reconstruct_blumen_supersonic_shooting.py:import argparse
+./code/src/classical_solver/supersonic/reconstruct_blumen_supersonic_shooting.py:from pathlib import Path
+./code/src/classical_solver/supersonic/reconstruct_blumen_supersonic_shooting.py:import sys
+./code/src/classical_solver/supersonic/reconstruct_blumen_supersonic_shooting.py:import matplotlib.pyplot as plt
+./code/src/classical_solver/supersonic/reconstruct_blumen_supersonic_shooting.py:import numpy as np
+./code/src/classical_solver/supersonic/reconstruct_blumen_supersonic_shooting.py:import pandas as pd
+./code/src/classical_solver/supersonic/reconstruct_blumen_supersonic_shooting.py:from classical_solver.supersonic.shooting_supersonic import sample_supersonic_growth_map
+./code/src/classical_solver/supersonic/reconstruct_blumen_supersonic_shooting.py:from classical_solver.supersonic.blumen_reference import (
+./code/scripts/evaluation/blumen_reference.py:from __future__ import annotations
+./code/scripts/evaluation/blumen_reference.py:from pathlib import Path
+./code/scripts/evaluation/blumen_reference.py:import numpy as np
+./code/scripts/evaluation/blumen_reference.py:import pandas as pd
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks_016ceb7fd6.py:from __future__ import annotations
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks_016ceb7fd6.py:import argparse
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks_016ceb7fd6.py:from pathlib import Path
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks_016ceb7fd6.py:import sys
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks_016ceb7fd6.py:import matplotlib.pyplot as plt
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks_016ceb7fd6.py:import numpy as np
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks_016ceb7fd6.py:import pandas as pd
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks_016ceb7fd6.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./plots/scripts/classic_supersonic/plot_mstab17_supersonic_point_checks_016ceb7fd6.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves as load_supersonic_curves
+./code/src/classical_solver/supersonic/mstab17_supersonic_solver.py:from __future__ import annotations
+./code/src/classical_solver/supersonic/mstab17_supersonic_solver.py:import argparse
+./code/src/classical_solver/supersonic/mstab17_supersonic_solver.py:from dataclasses import dataclass
+./code/src/classical_solver/supersonic/mstab17_supersonic_solver.py:from pathlib import Path
+./code/src/classical_solver/supersonic/mstab17_supersonic_solver.py:import matplotlib.pyplot as plt
+./code/src/classical_solver/supersonic/mstab17_supersonic_solver.py:import numpy as np
+./code/src/classical_solver/supersonic/mstab17_supersonic_solver.py:from scipy.integrate import solve_ivp
+./code/src/classical_solver/supersonic/mstab17_supersonic_solver.py:from scipy.optimize import minimize_scalar
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:from __future__ import annotations
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:import argparse
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:from pathlib import Path
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:import sys
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:import matplotlib.pyplot as plt
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:import matplotlib.tri as mtri
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:import numpy as np
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:import pandas as pd
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:from classical_solver.supersonic.mstab17_supersonic_solver import Mstab17SupersonicSolver
+./code/src/classical_solver/supersonic/scan_mstab17_supersonic_local.py:from classical_solver.supersonic.blumen_reference import load_digitized_curves as load_supersonic_curves
+./code/src/classical_solver/supersonic/shooting_supersonic.py:from __future__ import annotations
+./code/src/classical_solver/supersonic/shooting_supersonic.py:from dataclasses import dataclass
+./code/src/classical_solver/supersonic/shooting_supersonic.py:import numpy as np
+./code/src/classical_solver/supersonic/shooting_supersonic.py:import pandas as pd
+./code/src/classical_solver/supersonic/shooting_supersonic.py:from scipy.integrate import solve_ivp
+./code/src/classical_solver/supersonic/shooting_supersonic.py:from scipy.optimize import minimize
+./src/training/kh_subsonic_trainer.py:from __future__ import annotations
+./src/training/kh_subsonic_trainer.py:from dataclasses import asdict, dataclass
+./src/training/kh_subsonic_trainer.py:from pathlib import Path
+./src/training/kh_subsonic_trainer.py:import numpy as np
+./src/training/kh_subsonic_trainer.py:import pandas as pd
+./src/training/kh_subsonic_trainer.py:import torch
+./src/training/kh_subsonic_trainer.py:import torch.optim as optim
+./src/training/kh_subsonic_trainer.py:from classical_solver.subsonic.mstab17_subsonic_solver import Mstab17SubsonicSolver
+./src/training/kh_subsonic_trainer.py:from src.data.kh_subsonic_sampling import (
+./src/training/kh_subsonic_trainer.py:from src.models.kh_subsonic_pinn import KHSubsonicFixedMachPINN, load_fixed_mach_state_dict_compat
+./src/training/kh_subsonic_trainer.py:from src.physics.kh_subsonic_residual import (
+./src/training/kh_subsonic_trainer.py:            print(f"Warm start loaded from {initial_model_path} (strict=True, compat=True)")
+./src/training/kh_subsonic_trainer.py:                "Warm start loaded from "
+./src/training/kh_subsonic_trainer_2d.py:from __future__ import annotations
+./src/training/kh_subsonic_trainer_2d.py:from dataclasses import asdict, dataclass
+./src/training/kh_subsonic_trainer_2d.py:from pathlib import Path
+./src/training/kh_subsonic_trainer_2d.py:import numpy as np
+./src/training/kh_subsonic_trainer_2d.py:import pandas as pd
+./src/training/kh_subsonic_trainer_2d.py:import torch
+./src/training/kh_subsonic_trainer_2d.py:import torch.optim as optim
+./src/training/kh_subsonic_trainer_2d.py:from src.data.kh_subsonic_sampling import (
+./src/training/kh_subsonic_trainer_2d.py:from src.models.kh_subsonic_pinn import (
+./src/training/kh_subsonic_trainer_2d.py:from src.physics.kh_subsonic_residual import (
+./src/models/kh_subsonic_pinn.py:from __future__ import annotations
+./src/models/kh_subsonic_pinn.py:from collections.abc import Mapping
+./src/models/kh_subsonic_pinn.py:import math
+./src/models/kh_subsonic_pinn.py:import torch
+./src/models/kh_subsonic_pinn.py:import torch.nn as nn
+./src/models/kh_subsonic_pinn.py:import torch.nn.functional as F
+./src/physics/kh_subsonic_residual.py:from __future__ import annotations
+./src/physics/kh_subsonic_residual.py:import torch
+./src/data/kh_subsonic_sampling.py:from __future__ import annotations
+./src/data/kh_subsonic_sampling.py:from dataclasses import dataclass
+./src/data/kh_subsonic_sampling.py:from pathlib import Path
+./src/data/kh_subsonic_sampling.py:import numpy as np
+./src/data/kh_subsonic_sampling.py:import torch
+./src/data/kh_subsonic_sampling.py:import pandas as pd
+./src/data/kh_subsonic_sampling.py:from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver

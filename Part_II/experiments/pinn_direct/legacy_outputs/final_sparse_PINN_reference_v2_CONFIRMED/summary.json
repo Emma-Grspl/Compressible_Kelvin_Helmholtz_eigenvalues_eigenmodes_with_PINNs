@@ -1,0 +1,37 @@
+{
+  "status": "final_sparse_PINN_reference_v2_built",
+  "n_total_spectral_points": 183,
+  "n_base_points_before_campaign": 133,
+  "n_smallM_campaign_points_added": 50,
+  "n_total_modal_rows": 838847,
+  "point_counts_by_Mach": {
+    "1.1": 9,
+    "1.2": 14,
+    "1.25": 11,
+    "1.3": 13,
+    "1.33": 9,
+    "1.4": 14,
+    "1.5": 12,
+    "1.6": 6,
+    "1.7": 6,
+    "1.8": 49,
+    "1.9": 40
+  },
+  "validation_status_counts": {
+    "validated_core_stable_tail_sensitive": 89,
+    "modal_spectral_validated_with_exported_fields": 44,
+    "validated_visual_smallM_strict": 33,
+    "validated_visual_smallM_tail_sensitive": 12,
+    "validated_visual_smallM_strict_boundary_flag": 5
+  },
+  "boundary_flag_points": 5,
+  "outputs": {
+    "spectral": "assets/classic_supersonic/final_sparse_PINN_reference_v2_smallM_M18M19/supersonic_sparse_PINN_reference_v2_spectral.csv",
+    "modal_fields": "assets/classic_supersonic/final_sparse_PINN_reference_v2_smallM_M18M19/supersonic_sparse_PINN_reference_v2_modal_fields.csv",
+    "coverage": "assets/classic_supersonic/final_sparse_PINN_reference_v2_smallM_M18M19/coverage_by_Mach_v2.csv",
+    "suggested_remaining_targets": "assets/classic_supersonic/final_sparse_PINN_reference_v2_smallM_M18M19/suggested_remaining_targets_v2.csv",
+    "overlay_png": "assets/classic_supersonic/final_sparse_PINN_reference_v2_smallM_M18M19/blumen_ci_overlay_sparse_PINN_reference_v2.png",
+    "overlay_pdf": "assets/classic_supersonic/final_sparse_PINN_reference_v2_smallM_M18M19/blumen_ci_overlay_sparse_PINN_reference_v2.pdf"
+  },
+  "important_note": "Small-M campaign modes were visually accepted. Boundary-flagged points hit ci=0.12 or cr=0 in the initial scan and should be rescanned later, but are kept with explicit flags for sparse PINN reference experiments."
+}

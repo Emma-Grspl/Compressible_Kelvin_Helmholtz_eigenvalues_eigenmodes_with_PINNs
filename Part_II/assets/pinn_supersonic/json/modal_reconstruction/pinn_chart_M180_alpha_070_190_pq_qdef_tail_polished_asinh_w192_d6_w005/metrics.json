@@ -1,0 +1,10 @@
+{
+  "checkpoint": "models_saved/modal_reconstruction/pinn_chart_M180_alpha_070_190_pq_qdef_tail_polished_asinh_w192_d6_w005/best_model.pt",
+  "best_val": 7.510745044783106e-05,
+  "global_p_rel_l2": 0.007335361373644873,
+  "global_q_rel_l2": 0.002940891271076421,
+  "cr_abs_mean": 3.7503346024281746e-06,
+  "cr_abs_max": 9.903502857788737e-06,
+  "ci_abs_mean": 1.357152288970035e-06,
+  "ci_abs_max": 3.033596383483772e-06
+}

@@ -1,0 +1,91 @@
+MODE=pinn_local
+OUTPUT_DIR=assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_local_corrected_all
+START=Thu Jul 30 05:04:45 PM CEST 2026
+[01/45] mode=pinn_local alpha=0.05000 |dc_pinn|=2.261e-02 |dc_shoot|=4.267e-06 p40=1.762e-05 time=38.58s
+[02/45] mode=pinn_local alpha=0.05500 |dc_pinn|=1.548e-02 |dc_shoot|=2.416e-06 p40=1.732e-05 time=38.50s
+[03/45] mode=pinn_local alpha=0.06000 |dc_pinn|=9.374e-03 |dc_shoot|=7.412e-06 p40=3.129e-05 time=38.83s
+[04/45] mode=pinn_local alpha=0.06500 |dc_pinn|=4.234e-03 |dc_shoot|=3.916e-06 p40=2.827e-05 time=39.23s
+[05/45] mode=pinn_local alpha=0.07000 |dc_pinn|=2.030e-06 |dc_shoot|=6.320e-06 p40=3.606e-05 time=39.38s
+[06/45] mode=pinn_local alpha=0.07500 |dc_pinn|=3.409e-03 |dc_shoot|=5.896e-06 p40=4.008e-05 time=39.89s
+[07/45] mode=pinn_local alpha=0.08000 |dc_pinn|=6.064e-03 |dc_shoot|=4.700e-06 p40=3.758e-05 time=40.33s
+[08/45] mode=pinn_local alpha=0.08500 |dc_pinn|=8.038e-03 |dc_shoot|=4.202e-06 p40=4.291e-05 time=40.55s
+[09/45] mode=pinn_local alpha=0.09000 |dc_pinn|=9.394e-03 |dc_shoot|=5.545e-06 p40=5.538e-05 time=40.98s
+[10/45] mode=pinn_local alpha=0.09500 |dc_pinn|=1.018e-02 |dc_shoot|=2.634e-06 p40=6.348e-05 time=41.17s
+[11/45] mode=pinn_local alpha=0.10000 |dc_pinn|=1.046e-02 |dc_shoot|=4.469e-06 p40=7.423e-05 time=42.00s
+[12/45] mode=pinn_local alpha=0.10500 |dc_pinn|=1.026e-02 |dc_shoot|=3.753e-06 p40=7.912e-05 time=41.70s
+[13/45] mode=pinn_local alpha=0.11000 |dc_pinn|=9.633e-03 |dc_shoot|=5.830e-06 p40=7.896e-05 time=42.18s
+[14/45] mode=pinn_local alpha=0.11500 |dc_pinn|=8.630e-03 |dc_shoot|=4.873e-06 p40=8.911e-05 time=42.62s
+[15/45] mode=pinn_local alpha=0.12000 |dc_pinn|=7.302e-03 |dc_shoot|=5.469e-06 p40=1.026e-04 time=43.37s
+[16/45] mode=pinn_local alpha=0.12500 |dc_pinn|=5.708e-03 |dc_shoot|=5.971e-06 p40=1.072e-04 time=42.31s
+[17/45] mode=pinn_local alpha=0.13000 |dc_pinn|=3.910e-03 |dc_shoot|=5.715e-06 p40=1.223e-04 time=43.96s
+[18/45] mode=pinn_local alpha=0.13500 |dc_pinn|=1.982e-03 |dc_shoot|=2.540e-07 p40=1.285e-04 time=44.64s
+[19/45] mode=pinn_local alpha=0.14000 |dc_pinn|=1.715e-06 |dc_shoot|=6.557e-06 p40=1.543e-04 time=44.70s
+[20/45] mode=pinn_local alpha=0.14500 |dc_pinn|=1.947e-03 |dc_shoot|=6.281e-06 p40=1.576e-04 time=44.96s
+[21/45] mode=pinn_local alpha=0.15000 |dc_pinn|=3.771e-03 |dc_shoot|=4.531e-06 p40=1.673e-04 time=45.16s
+[22/45] mode=pinn_local alpha=0.15500 |dc_pinn|=5.380e-03 |dc_shoot|=5.525e-06 p40=1.635e-04 time=45.87s
+[23/45] mode=pinn_local alpha=0.16000 |dc_pinn|=6.687e-03 |dc_shoot|=1.019e-06 p40=1.908e-04 time=46.59s
+[24/45] mode=pinn_local alpha=0.16500 |dc_pinn|=7.612e-03 |dc_shoot|=6.767e-06 p40=2.153e-04 time=47.80s
+[25/45] mode=pinn_local alpha=0.17000 |dc_pinn|=8.092e-03 |dc_shoot|=5.664e-06 p40=2.243e-04 time=48.40s
+[26/45] mode=pinn_local alpha=0.17500 |dc_pinn|=8.089e-03 |dc_shoot|=7.367e-06 p40=2.521e-04 time=49.45s
+[27/45] mode=pinn_local alpha=0.18000 |dc_pinn|=7.592e-03 |dc_shoot|=5.658e-06 p40=2.643e-04 time=50.34s
+[28/45] mode=pinn_local alpha=0.18500 |dc_pinn|=6.629e-03 |dc_shoot|=6.507e-06 p40=2.709e-04 time=51.07s
+[29/45] mode=pinn_local alpha=0.19000 |dc_pinn|=5.267e-03 |dc_shoot|=3.719e-06 p40=3.012e-04 time=52.01s
+[30/45] mode=pinn_local alpha=0.19500 |dc_pinn|=3.613e-03 |dc_shoot|=9.481e-07 p40=3.125e-04 time=52.37s
+[31/45] mode=pinn_local alpha=0.20000 |dc_pinn|=1.804e-03 |dc_shoot|=2.640e-06 p40=3.281e-04 time=54.01s
+[32/45] mode=pinn_local alpha=0.20500 |dc_pinn|=6.147e-06 |dc_shoot|=3.222e-06 p40=3.619e-04 time=55.96s
+[33/45] mode=pinn_local alpha=0.21000 |dc_pinn|=1.655e-03 |dc_shoot|=5.487e-06 p40=3.641e-04 time=57.40s
+[34/45] mode=pinn_local alpha=0.21500 |dc_pinn|=3.017e-03 |dc_shoot|=6.428e-06 p40=4.116e-04 time=56.12s
+[35/45] mode=pinn_local alpha=0.22000 |dc_pinn|=3.985e-03 |dc_shoot|=3.298e-06 p40=4.294e-04 time=56.90s
+[36/45] mode=pinn_local alpha=0.22500 |dc_pinn|=4.492e-03 |dc_shoot|=3.531e-06 p40=4.547e-04 time=59.66s
+[37/45] mode=pinn_local alpha=0.23000 |dc_pinn|=4.505e-03 |dc_shoot|=1.950e-06 p40=4.701e-04 time=61.59s
+[38/45] mode=pinn_local alpha=0.23500 |dc_pinn|=4.024e-03 |dc_shoot|=4.214e-06 p40=5.103e-04 time=62.71s
+[39/45] mode=pinn_local alpha=0.24000 |dc_pinn|=3.075e-03 |dc_shoot|=3.408e-06 p40=5.327e-04 time=65.25s
+[40/45] mode=pinn_local alpha=0.24500 |dc_pinn|=1.712e-03 |dc_shoot|=6.032e-06 p40=5.775e-04 time=66.48s
+[41/45] mode=pinn_local alpha=0.25000 |dc_pinn|=7.783e-06 |dc_shoot|=1.716e-06 p40=5.935e-04 time=62.16s
+[42/45] mode=pinn_local alpha=0.25500 |dc_pinn|=1.963e-03 |dc_shoot|=6.151e-06 p40=6.253e-04 time=70.06s
+[43/45] mode=pinn_local alpha=0.26000 |dc_pinn|=4.115e-03 |dc_shoot|=6.047e-06 p40=6.787e-04 time=72.25s
+[44/45] mode=pinn_local alpha=0.26500 |dc_pinn|=6.380e-03 |dc_shoot|=5.963e-06 p40=7.052e-04 time=73.82s
+[45/45] mode=pinn_local alpha=0.27000 |dc_pinn|=8.705e-03 |dc_shoot|=5.593e-06 p40=7.406e-04 time=75.54s
+
+{
+  "status": "COMPLETED",
+  "mode": "pinn_local",
+  "alpha_set": "all",
+  "Mach": 1.5,
+  "n_requested": 45,
+  "n_successful": 45,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_local_corrected_all/full_shooting_results.csv",
+  "pinn_complex_spectral_error_mean": 0.0057955390940505605,
+  "pinn_complex_spectral_error_max": 0.022607780316684097,
+  "shooting_complex_spectral_error_mean": 4.663647566523024e-06,
+  "shooting_complex_spectral_error_max": 7.4119557322371475e-06,
+  "delta_c_from_pinn_mean": 0.005796118119480285,
+  "delta_c_from_pinn_max": 0.022604713858150206,
+  "stage1_mismatch_mean": 1.2239134293491306e-06,
+  "stage1_mismatch_max": 2.7538685594821654e-06,
+  "stage2_mismatch_mean": 2.2108309016276079e-16,
+  "stage2_mismatch_max": 6.782746148476826e-16,
+  "p_rel_l2_core20_mean": 2.1533935860671543e-05,
+  "p_rel_l2_core20_max": 4.745767509035471e-05,
+  "p_rel_l2_core40_mean": 0.0002579942929515134,
+  "p_rel_l2_core40_max": 0.0007406288356248763,
+  "rho_rel_l2_core40_mean": 0.00025799429295151813,
+  "rho_rel_l2_core40_max": 0.0007406288356248697,
+  "u_rel_l2_core40_mean": 0.00015972091565466415,
+  "u_rel_l2_core40_max": 0.000709620398926294,
+  "v_rel_l2_core40_mean": 0.0002831236340916311,
+  "v_rel_l2_core40_max": 0.0007801524904030166,
+  "p_overlap_error_core40_mean": 4.3778010298349085e-08,
+  "p_overlap_error_core40_max": 2.0726606086984845e-07,
+  "solve_seconds_mean": 50.145196052868336,
+  "solve_seconds_max": 75.25386907439679,
+  "reconstruction_seconds_mean": 0.2737060606893566,
+  "reconstruction_seconds_max": 0.4641224006190896,
+  "total_seconds_mean": 50.41890211355769,
+  "total_seconds_max": 75.53527741879225
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_local_corrected_all/full_shooting_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/pinn_local_corrected_all/full_shooting_summary.json
+END=Thu Jul 30 05:43:14 PM CEST 2026

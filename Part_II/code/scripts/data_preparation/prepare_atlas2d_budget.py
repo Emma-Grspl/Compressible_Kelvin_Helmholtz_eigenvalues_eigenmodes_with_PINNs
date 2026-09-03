@@ -1,0 +1,510 @@
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+from pathlib import Path
+
+import pandas as pd
+
+
+FREEZE = Path(
+    "assets/pinn_supersonic/datasets/"
+    "atlas2d_v1/freeze"
+)
+
+TEMPLATE_CONFIG = Path(
+    "configs/pinn_supersonic/"
+    "global_S4M0_machsplit_G52_v1.json"
+)
+
+GENERATED_ROOT = Path(
+    "assets/pinn_supersonic/datasets/"
+    "atlas2d_v1/generated"
+)
+
+CONFIG_ROOT = Path(
+    "configs/pinn_supersonic/"
+    "atlas2d_v1"
+)
+
+RUN_ROOT = Path(
+    "assets/pinn_supersonic/"
+    "atlas2d_v1"
+)
+
+
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser()
+
+    p.add_argument(
+        "--budget",
+        type=int,
+        required=True,
+        choices=[24, 36, 48, 60, 76],
+    )
+
+    return p.parse_args()
+
+
+def membership_contains(
+    value: object,
+    chart_id: str,
+) -> bool:
+
+    members = [
+        token.strip()
+        for token in str(value).split(";")
+        if token.strip()
+    ]
+
+    return chart_id in members
+
+
+def main() -> None:
+
+    args = parse_args()
+    budget = int(args.budget)
+
+    anchor_file = (
+        FREEZE
+        / f"anchors_N{budget}.csv"
+    )
+
+    charts_file = (
+        FREEZE
+        / "charts.json"
+    )
+
+    if not anchor_file.is_file():
+        raise FileNotFoundError(
+            anchor_file
+        )
+
+    if not charts_file.is_file():
+        raise FileNotFoundError(
+            charts_file
+        )
+
+    if not TEMPLATE_CONFIG.is_file():
+        raise FileNotFoundError(
+            TEMPLATE_CONFIG
+        )
+
+    anchors = pd.read_csv(
+        anchor_file
+    )
+
+    with charts_file.open() as f:
+        charts = json.load(f)
+
+    with TEMPLATE_CONFIG.open() as f:
+        template = json.load(f)
+
+    required = {
+        "Mach",
+        "alpha",
+        "cr",
+        "ci",
+        "charts",
+        "primary_chart",
+        "point_role",
+    }
+
+    missing = (
+        required
+        - set(anchors.columns)
+    )
+
+    if missing:
+        raise RuntimeError(
+            f"Missing anchor columns: "
+            f"{sorted(missing)}"
+        )
+
+    if len(anchors) != budget:
+        raise RuntimeError(
+            f"N{budget} contains "
+            f"{len(anchors)} rows, "
+            f"expected {budget}."
+        )
+
+    if (
+        anchors["point_role"]
+        .isin(["validation", "test"])
+        .any()
+    ):
+        raise RuntimeError(
+            "Validation/test leakage "
+            "inside anchor file."
+        )
+
+    dataset_dir = (
+        GENERATED_ROOT
+        / f"N{budget}"
+    )
+
+    config_dir = (
+        CONFIG_ROOT
+        / f"N{budget}"
+    )
+
+    run_root = (
+        RUN_ROOT
+        / f"N{budget}"
+    )
+
+    dataset_dir.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    config_dir.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    run_root.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    summary_rows = []
+
+    print()
+    print("=" * 100)
+    print(
+        f"PREPARE ATLAS2D V1 — N{budget}"
+    )
+    print("=" * 100)
+
+    for chart_index, chart in enumerate(charts):
+
+        chart_id = str(
+            chart["chart"]
+        )
+
+        mask = anchors["charts"].apply(
+            lambda x: membership_contains(
+                x,
+                chart_id,
+            )
+        )
+
+        sub = (
+            anchors[mask]
+            .copy()
+            .sort_values(
+                ["Mach", "alpha"]
+            )
+            .reset_index(drop=True)
+        )
+
+        if len(sub) < 2:
+            raise RuntimeError(
+                f"{chart_id}: only "
+                f"{len(sub)} anchors."
+            )
+
+        # -------------------------------------------------------------
+        # The chart dataset contains anchors ONLY.
+        # No validation/test classical reference is passed to training.
+        # -------------------------------------------------------------
+
+        if "split" in sub.columns:
+            sub["split"] = "train"
+
+        if "dataset_split" in sub.columns:
+            sub["dataset_split"] = "train"
+
+        if "partition" in sub.columns:
+            sub["partition"] = "train"
+
+        sub["point_role"] = "train_pool"
+
+        # -------------------------------------------------------------
+        # Atlas datasets contain TRAINING ANCHORS ONLY.
+        #
+        # The source rows still carry the historical G52 whole-Mach
+        # split and anchor flags. Those metadata must not survive into
+        # a local atlas chart, otherwise the global trainer silently
+        # rejects valid atlas anchors.
+        # -------------------------------------------------------------
+
+        if "mach_split" in sub.columns:
+            sub["mach_split"] = "train"
+
+        if "is_spectral_anchor" in sub.columns:
+            sub["is_spectral_anchor"] = True
+
+        if "usable_as_training_anchor" in sub.columns:
+            sub["usable_as_training_anchor"] = True
+
+        # Rank is local to each Mach and only used for deterministic
+        # ordering by the legacy spectral-target loader.
+        sub["anchor_rank"] = (
+            sub.groupby("Mach")
+            .cumcount()
+            .add(1)
+            .astype(int)
+        )
+
+        dataset_path = (
+            dataset_dir
+            / f"{chart_id}_anchors.csv"
+        )
+
+        sub.to_csv(
+            dataset_path,
+            index=False,
+        )
+
+        # -------------------------------------------------------------
+        # Configuration derived from the validated global G52 config.
+        # -------------------------------------------------------------
+
+        cfg = copy.deepcopy(
+            template
+        )
+
+        cfg["experiment"] = (
+            f"atlas2d_v1_N{budget}_{chart_id}"
+        )
+
+        cfg["seed"] = (
+            12345
+            + chart_index
+        )
+
+        cfg["dataset_file"] = str(
+            dataset_path
+        )
+
+        output_dir = (
+            run_root
+            / "runs"
+            / chart_id
+        )
+
+        cfg["output_dir"] = str(
+            output_dir
+        )
+
+        cfg["mach_min"] = float(
+            chart["mach_min"]
+        )
+
+        cfg["mach_max"] = float(
+            chart["mach_max"]
+        )
+
+        cfg["alpha_min"] = float(
+            chart["alpha_min"]
+        )
+
+        cfg["alpha_max"] = float(
+            chart["alpha_max"]
+        )
+
+        cfg["use_spectral_supervision"] = True
+        cfg["use_modal_supervision"] = False
+
+        cfg["n_spectral_anchors"] = int(
+            len(sub)
+        )
+
+        cfg["n_modal_anchors"] = 0
+
+        # -------------------------------------------------------------
+        # New point-level split:
+        #
+        # The chart file contains only allowed training anchors.
+        # Therefore every Mach represented here is a training Mach
+        # for this particular chart dataset.
+        #
+        # Validation/test are external and NEVER passed to the trainer.
+        # -------------------------------------------------------------
+
+        cfg["split_policy"] = {
+            "train": sorted(
+                float(x)
+                for x in sub[
+                    "Mach"
+                ].unique()
+            ),
+            "validation": [],
+            "test": [],
+        }
+
+        cfg["coordinate_policy"] = {
+            "network_inputs": [
+                "Mach",
+                "alpha",
+            ],
+            "s_used_as_network_input": False,
+            "s_used_for_anchor_selection": False,
+        }
+
+        # -------------------------------------------------------------
+        # Each chart has two modal experts.
+        # Put the gate in the middle of the local alpha interval.
+        # -------------------------------------------------------------
+
+        alpha_mid = 0.5 * (
+            float(chart["alpha_min"])
+            + float(chart["alpha_max"])
+        )
+
+        cfg["model"][
+            "alpha_split"
+        ] = float(alpha_mid)
+
+        cfg["model"][
+            "alpha_gate_width"
+        ] = 0.02
+
+        # -------------------------------------------------------------
+        # Fixed conservative output box.
+        #
+        # IMPORTANT:
+        # these are NOT fitted from validation/test reference values.
+        # Same numerical prior will be used for every anchor budget.
+        # -------------------------------------------------------------
+
+        cfg["model"]["cr_min"] = -0.10
+        cfg["model"]["cr_max"] = 0.65
+
+        cfg["model"]["ci_floor"] = 1.0e-6
+        cfg["model"]["ci_max"] = 0.25
+
+        config_path = (
+            config_dir
+            / f"{chart_id}.json"
+        )
+
+        with config_path.open(
+            "w"
+        ) as f:
+            json.dump(
+                cfg,
+                f,
+                indent=2,
+            )
+
+        summary_rows.append(
+            {
+                "budget": budget,
+                "chart": chart_id,
+                "mach_min": float(
+                    chart["mach_min"]
+                ),
+                "mach_max": float(
+                    chart["mach_max"]
+                ),
+                "alpha_min": float(
+                    chart["alpha_min"]
+                ),
+                "alpha_max": float(
+                    chart["alpha_max"]
+                ),
+                "n_anchors_seen_by_chart": len(
+                    sub
+                ),
+                "n_unique_mach": sub[
+                    "Mach"
+                ].nunique(),
+                "dataset": str(
+                    dataset_path
+                ),
+                "config": str(
+                    config_path
+                ),
+                "output": str(
+                    output_dir
+                ),
+            }
+        )
+
+        print(
+            f"{chart_id}: "
+            f"{len(sub):2d} anchors | "
+            f"{sub['Mach'].nunique():2d} Mach | "
+            f"M=[{chart['mach_min']:.2f},"
+            f"{chart['mach_max']:.2f}] | "
+            f"alpha=[{chart['alpha_min']:.3f},"
+            f"{chart['alpha_max']:.3f}]"
+        )
+
+    summary = pd.DataFrame(
+        summary_rows
+    )
+
+    summary_path = (
+        dataset_dir
+        / "chart_training_manifest.csv"
+    )
+
+    summary.to_csv(
+        summary_path,
+        index=False,
+    )
+
+    # -------------------------------------------------------------
+    # Global safety checks
+    # -------------------------------------------------------------
+
+    if summary["chart"].nunique() != 12:
+        raise RuntimeError(
+            "Expected exactly 12 charts."
+        )
+
+    if (
+        summary[
+            "n_anchors_seen_by_chart"
+        ] < 2
+    ).any():
+        raise RuntimeError(
+            "At least one chart has "
+            "fewer than 2 anchors."
+        )
+
+    print()
+    print("=" * 100)
+    print("READY")
+    print("=" * 100)
+
+    print(
+        "Unique classical anchors:",
+        len(anchors),
+    )
+
+    print(
+        "Charts:",
+        len(summary),
+    )
+
+    print(
+        "Sum of chart usages:",
+        int(
+            summary[
+                "n_anchors_seen_by_chart"
+            ].sum()
+        ),
+    )
+
+    print()
+    print(
+        "NOTE: Sum of chart usages is allowed "
+        "to exceed anchor budget because overlap "
+        "anchors are shared."
+    )
+
+    print()
+    print(
+        "written:",
+        summary_path,
+    )
+
+
+if __name__ == "__main__":
+    main()

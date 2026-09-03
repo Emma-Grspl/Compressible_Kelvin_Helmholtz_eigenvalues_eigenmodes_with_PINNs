@@ -1,0 +1,8 @@
+Constructor:
+(alpha: 'float', Mach: 'float', *, match_y: 'float' = 1.0, ln_p_start_left: 'float' = -5.0, rtol: 'float' = 1e-10, atol: 'float' = 1e-12, max_step: 'float' = inf, min_y_limit: 'float' = 10.0, max_y_limit: 'float' = 80.0, y_limit_factor: 'float' = 4.0, amplitude_match_y: 'float | None' = None, use_mapping: 'bool' = False, mapping_scale: 'float' = 5.0, ln_p_right_min: 'float' = -15.0, ln_p_right_max: 'float' = 5.0)
+
+Public and relevant methods:
+plot_mode(self, result: 'Mstab17SupersonicResult', output_path: 'Path | None' = None) -> 'None'
+solve(self, *, cr_min: 'float' = 0.03, cr_max: 'float' = 0.35, ci_min: 'float' = 0.01, ci_max: 'float' = 0.12, max_iter: 'int' = 12, tol: 'float' = 1e-07, grid_size: 'int' = 4, constrain_to_initial_box: 'bool' = False) -> 'Mstab17SupersonicResult'
+solve_eigenvalue(self, *, cr_min: 'float' = 0.03, cr_max: 'float' = 0.35, ci_min: 'float' = 0.01, ci_max: 'float' = 0.12, max_iter: 'int' = 12, tol: 'float' = 1e-07, grid_size: 'int' = 4, constrain_to_initial_box: 'bool' = False) -> 'tuple[float, float, float]'
+stage1_mismatch(self, cr: 'float', ci: 'float') -> 'float'

@@ -1,0 +1,15 @@
+============================================================
+PHASE 11-I — alpha=0.25 remaining point
+Mach: 1.30
+Job:  1586893_1
+Node: r10i7n5
+============================================================
+Local Blumen c_r uncertainty summary:
+ alpha_target  Mach  target_level  bootstrap_valid_count  bootstrap_valid_fraction  bootstrap_mean  bootstrap_std  bootstrap_q05  bootstrap_q16  bootstrap_q50  bootstrap_q84  bootstrap_q95  bootstrap_ci90_width  bootstrap_ci68_width                support_levels  n_support_levels  reference_cr  reference_minus_target  reference_minus_q50  reference_inside_ci90  reference_zscore  reference_tail_probability  support_level_1  support_level_1_points  support_level_1_mach_min  support_level_1_mach_max  support_level_2  support_level_2_points  support_level_2_mach_min  support_level_2_mach_max  support_level_3  support_level_3_points  support_level_3_mach_min  support_level_3_mach_max  support_level_4  support_level_4_points  support_level_4_mach_min  support_level_4_mach_max  support_level_5  support_level_5_points  support_level_5_mach_min  support_level_5_mach_max
+         0.25   1.3      0.288644                   2613                    0.2613        0.280688       0.008509       0.263097       0.272628       0.282756       0.288353       0.290799              0.027702              0.015725 0.100,0.150,0.200,0.250,0.300                 5      0.313605                0.024961             0.030849                    0.0          3.868571                         0.0              0.1                       6                  1.226027                   1.40137             0.15                       6                  1.235616                  1.405479              0.2                       6                  1.247945                  1.380822             0.25                       7                  1.223288                  1.368493              0.3                       6                  1.249315                  1.338356
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/blumen_gep/phase11_final_a025_M130_summary.csv
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/blumen_gep/phase11_final_a025_M130_support_points.csv
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/blumen_gep/phase11_final_a025_M130_samples.csv
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/blumen_gep/phase11_final_a025_M130_audit.pdf
+
+DONE alpha=0.25 Mach=1.30

@@ -1,0 +1,43 @@
+{
+  "status": "convergence_audit_complete",
+  "n_points_tested": 89,
+  "n_converged_requires_visual_confirmation": 89,
+  "status_counts": {
+    "converged_requires_visual_confirmation": 89
+  },
+  "settings": [
+    {
+      "name": "ms1p5_y1200",
+      "mapping_scale": 1.5,
+      "search_y_limit": 900.0,
+      "final_y_limit": 1200.0
+    },
+    {
+      "name": "ms2_y1600",
+      "mapping_scale": 2.0,
+      "search_y_limit": 900.0,
+      "final_y_limit": 1600.0
+    },
+    {
+      "name": "ms3_y2000",
+      "mapping_scale": 3.0,
+      "search_y_limit": 1200.0,
+      "final_y_limit": 2000.0
+    },
+    {
+      "name": "ms5_y1600",
+      "mapping_scale": 5.0,
+      "search_y_limit": 900.0,
+      "final_y_limit": 1600.0
+    }
+  ],
+  "acceptance_thresholds": {
+    "max_stage1": 0.0001,
+    "cr_range": 0.003,
+    "ci_range": 0.003,
+    "max_edge_frac": 0.025,
+    "max_center_jump": 0.05,
+    "max_modal_rel_l2": 0.15
+  },
+  "important_note": "This is a numerical convergence audit over mapping_scale and y_limit. It is still not a final validation. Visual confirmation is required."
+}

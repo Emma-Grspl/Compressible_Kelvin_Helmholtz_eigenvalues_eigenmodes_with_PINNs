@@ -1,0 +1,19 @@
+{
+  "Mach": 1.5,
+  "direction": "high",
+  "last_accepted_alpha": 0.27110107421875,
+  "last_accepted_ci": 3.055718296772264e-05,
+  "last_accepted_cr": 0.40522020009793014,
+  "last_success": false,
+  "last_target": 0.275,
+  "neutral_fit": {
+    "alpha_max_fit": 0.27110107421875,
+    "alpha_min_fit": 0.27,
+    "alpha_neutral": 0.271173136299463,
+    "intercept": 0.09541937089086158,
+    "n_points": 5,
+    "r2": 0.9989334385557128,
+    "slope": -0.35187619316939894
+  },
+  "updated": "2026-07-23T11:49:57.638353+00:00"
+}

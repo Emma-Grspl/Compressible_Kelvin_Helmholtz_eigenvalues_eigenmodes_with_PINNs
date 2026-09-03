@@ -1,0 +1,143 @@
+{
+  "finalized_at": "2026-07-24T07:58:53+00:00",
+  "freeze_id": "dense_kappa_q_campaign_v1_FINAL_FREEZE",
+  "include_operational_checkpoints": false,
+  "prepared_at": "2026-07-24T07:45:30+00:00",
+  "required_assets": [
+    "classical_supersonic_maps/cr_map.pdf",
+    "classical_supersonic_maps/ci_map.pdf",
+    "classical_supersonic_maps/omega_i_map.pdf",
+    "classical_supersonic_maps/neutral_curve.pdf",
+    "classical_supersonic_maps/retained_point_mask.pdf",
+    "classical_supersonic_maps/classical_supersonic_dense_reference.csv",
+    "classical_supersonic_all_modes.pdf"
+  ],
+  "source_campaign_root": "classic_supersonic/reproducibility/results/dense_kappa_q_campaign_v1",
+  "source_repo": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT",
+  "state": "sealed",
+  "validation": {
+    "Mach_max": 1.9,
+    "Mach_min": 1.1,
+    "alpha_max": 0.45,
+    "alpha_min": 0.05,
+    "alpha_step": 0.005,
+    "campaign_root": "classic_supersonic/reproducibility/results/dense_kappa_q_campaign_v1",
+    "configured_targets": 1377,
+    "max_retained_residual_norm": 9.536208903643116e-09,
+    "mode_status_counts": {
+      "converged": 770
+    },
+    "n_alpha": 81,
+    "n_mach": 17,
+    "n_modes": 770,
+    "n_off_grid_anchor_targets": 4,
+    "n_retained": 770,
+    "n_spectral_rows": 1475,
+    "n_targets": 1381,
+    "per_mach": [
+      {
+        "Mach": 1.1,
+        "directory": "M1p100000",
+        "modes": 53,
+        "retained": 53
+      },
+      {
+        "Mach": 1.15,
+        "directory": "M1p150000",
+        "modes": 57,
+        "retained": 57
+      },
+      {
+        "Mach": 1.2,
+        "directory": "M1p200000",
+        "modes": 57,
+        "retained": 57
+      },
+      {
+        "Mach": 1.25,
+        "directory": "M1p250000",
+        "modes": 55,
+        "retained": 55
+      },
+      {
+        "Mach": 1.3,
+        "directory": "M1p300000",
+        "modes": 52,
+        "retained": 52
+      },
+      {
+        "Mach": 1.35,
+        "directory": "M1p350000",
+        "modes": 50,
+        "retained": 50
+      },
+      {
+        "Mach": 1.4,
+        "directory": "M1p400000",
+        "modes": 48,
+        "retained": 48
+      },
+      {
+        "Mach": 1.45,
+        "directory": "M1p450000",
+        "modes": 46,
+        "retained": 46
+      },
+      {
+        "Mach": 1.5,
+        "directory": "M1p500000",
+        "modes": 45,
+        "retained": 45
+      },
+      {
+        "Mach": 1.55,
+        "directory": "M1p550000",
+        "modes": 43,
+        "retained": 43
+      },
+      {
+        "Mach": 1.6,
+        "directory": "M1p600000",
+        "modes": 42,
+        "retained": 42
+      },
+      {
+        "Mach": 1.65,
+        "directory": "M1p650000",
+        "modes": 40,
+        "retained": 40
+      },
+      {
+        "Mach": 1.7,
+        "directory": "M1p700000",
+        "modes": 39,
+        "retained": 39
+      },
+      {
+        "Mach": 1.75,
+        "directory": "M1p750000",
+        "modes": 38,
+        "retained": 38
+      },
+      {
+        "Mach": 1.8,
+        "directory": "M1p800000",
+        "modes": 36,
+        "retained": 36
+      },
+      {
+        "Mach": 1.85,
+        "directory": "M1p850000",
+        "modes": 35,
+        "retained": 35
+      },
+      {
+        "Mach": 1.9,
+        "directory": "M1p900000",
+        "modes": 34,
+        "retained": 34
+      }
+    ],
+    "validated_at": "2026-07-24T07:45:22+00:00"
+  }
+}

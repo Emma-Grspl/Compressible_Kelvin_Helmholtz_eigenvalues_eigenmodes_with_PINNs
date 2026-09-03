@@ -1,0 +1,4 @@
+metric,n,median_delta,mean_delta,p95_delta,positive_count_seeded_better,negative_count_generic_better
+target_error_generic_minus_seeded,63,0.45255929939587464,0.47049098621565466,0.7586334956570383,63,0
+box_solves_generic_minus_seeded,64,1.0,3.453125,10.849999999999994,58,0
+seconds_generic_minus_seeded,64,159.20066937844967,203.98109654929613,446.0567625252529,62,2

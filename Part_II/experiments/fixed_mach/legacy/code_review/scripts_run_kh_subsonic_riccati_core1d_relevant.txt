@@ -1,0 +1,330 @@
+FILE: scripts/run_kh_subsonic_riccati_core1d.py
+
+8-import numpy as np
+9-import pandas as pd
+10-import torch
+11-
+12-ROOT_DIR = Path(__file__).resolve().parents[1]
+13-if str(ROOT_DIR) not in sys.path:
+14-    sys.path.insert(0, str(ROOT_DIR))
+15-
+16:from scripts.run_kh_subsonic_riccati_lowalpha_repair import (  # noqa: E402
+17-    _maybe_bool,
+18-    _maybe_float,
+19-    _maybe_int,
+20-    evaluate_candidate,
+21-    load_warmstart_checkpoint,
+22-    prepare_warmstart_eval_run_dir,
+23-)
+24-from src.training.kh_subsonic_trainer import (  # noqa: E402
+25-    KHSubsonicTrainingConfig,
+26-    save_training_artifacts,
+27-    train_fixed_mach_subsonic_pinn,
+28-)
+29-
+30-
+31:def build_parser() -> argparse.ArgumentParser:
+32-    parser = argparse.ArgumentParser(
+33-        description="Core-only 1D subsonic Riccati training for joint ci + mode reconstruction on alpha in [0.05, 0.8]."
+34-    )
+35-    parser.add_argument("--warmstart-run-dir", type=Path, required=True)
+36-    parser.add_argument("--warmstart-checkpoint", type=Path, default=None)
+37-    parser.add_argument("--target-mach", type=float, default=None)
+38-    parser.add_argument("--output-dir", type=Path, required=True)
+39-    parser.add_argument("--skip-training", action="store_true")
+40-    parser.add_argument("--epochs", type=int, default=1800)
+41-    parser.add_argument("--checkpoint-every", type=int, default=250)
+42-    parser.add_argument("--learning-rate", type=float, default=2e-4)
+43-    parser.add_argument("--ci-branch-lr", type=float, default=5e-5)
+44-    parser.add_argument("--mode-branch-lr", type=float, default=2e-4)
+45-    parser.add_argument("--device", type=str, default="cpu")
+46-    parser.add_argument("--alpha-min", type=float, default=0.05)
+47-    parser.add_argument("--alpha-max", type=float, default=0.8)
+48-    parser.add_argument("--num-alpha-ci", type=int, default=41)
+49-    parser.add_argument("--num-alpha-modes", type=int, default=21)
+50-    parser.add_argument("--n-y-pinn", type=int, default=1001)
+51-    parser.add_argument("--y-max", type=float, default=10.0)
+52-    parser.add_argument("--y-common", type=int, default=801)
+53-    parser.add_argument("--overlay-alphas", type=float, nargs="+", default=[0.05, 0.10, 0.20, 0.35, 0.50, 0.65, 0.80])
+54-    parser.add_argument("--low-alpha-threshold", type=float, default=0.5)
+55-    parser.add_argument("--low-alpha-weight", type=float, default=8.0)
+56-    parser.add_argument("--low-alpha-sample-fraction", type=float, default=0.30)
+57-    parser.add_argument("--focus-fraction", type=float, default=0.50)
+58-    parser.add_argument("--focus-half-width", type=float, default=0.04)
+59-    parser.add_argument("--mode-error-threshold", type=float, default=0.05)
+60-    parser.add_argument("--ci-supervision-weight", type=float, default=5.0)
+61-    parser.add_argument("--q-supervision-weight", type=float, default=5.0)
+62:    parser.add_argument("--gamma-supervision-weight", type=float, default=3.0)
+63:    parser.add_argument("--riccati-anchor-weight", type=float, default=2.0)
+64:    parser.add_argument("--boundary-kappa-weight", type=float, default=5.0)
+65-    parser.add_argument("--boundary-q-weight", type=float, default=10.0)
+66-    parser.add_argument("--shooting-match-weight", type=float, default=12.0)
+67:    parser.add_argument("--center-kappa-weight", type=float, default=0.5)
+68-    parser.add_argument("--center-peak-weight", type=float, default=0.5)
+69-    parser.add_argument(
+70-        "--anchor-alphas",
+71-        type=float,
+72-        nargs="*",
+73-        default=[0.05, 0.10, 0.15, 0.20, 0.30, 0.40, 0.50, 0.65, 0.80],
+74-    )
+75-    parser.add_argument("--q-supervision-alphas", type=float, nargs="*", default=None)
+76:    parser.add_argument("--gamma-supervision-alphas", type=float, nargs="*", default=None)
+77-    return parser
+78-
+79-
+80:def build_config(args: argparse.Namespace, warm_config: pd.Series, checkpoint: Path) -> KHSubsonicTrainingConfig:
+81-    q_supervision_alphas = args.q_supervision_alphas
+82-    if q_supervision_alphas is None:
+83-        q_supervision_alphas = args.anchor_alphas
+84:    gamma_supervision_alphas = args.gamma_supervision_alphas
+85:    if gamma_supervision_alphas is None:
+86:        gamma_supervision_alphas = args.anchor_alphas
+87-    target_mach = float(warm_config["mach"]) if args.target_mach is None else float(args.target_mach)
+88-    model_alpha_min = float(warm_config["alpha_min"])
+89-    model_alpha_max = float(warm_config["alpha_max"])
+90-
+91-    return KHSubsonicTrainingConfig(
+92-        mach=float(target_mach),
+93-        alpha_min=float(model_alpha_min),
+94-        alpha_max=float(model_alpha_max),
+95-        sampling_alpha_min=float(args.alpha_min),
+96-        sampling_alpha_max=float(args.alpha_max),
+97-        audit_alpha_min=float(args.alpha_min),
+98-        audit_alpha_max=float(args.alpha_max),
+99-        epochs=int(args.epochs),
+100-        learning_rate=float(args.learning_rate),
+101-        hidden_dim=int(warm_config["hidden_dim"]),
+102-        mode_hidden_dim=_maybe_int(warm_config.get("mode_hidden_dim")),
+103-        ci_hidden_dim=_maybe_int(warm_config.get("ci_hidden_dim")),
+104-        mode_depth=int(warm_config["mode_depth"]),
+105-        ci_depth=int(warm_config["ci_depth"]),
+106-        fixed_scalar_ci=_maybe_bool(warm_config.get("fixed_scalar_ci", False)),
+107-        freeze_ci=False,
+108-        activation=str(warm_config["activation"]),
+109-        fourier_features=int(warm_config.get("fourier_features", 0)),
+110-        fourier_scale=float(warm_config.get("fourier_scale", 2.0)),
+111-        initial_ci=float(warm_config.get("initial_ci", 0.2)),
+112:        mapping_scale=float(warm_config["mapping_scale"]),
+113:        trainable_mapping_scale=False,
+114-        n_interior=512,
+115-        n_boundary=64,
+116-        n_alpha_supervision=64,
+117-        n_anchor_alpha=32,
+118-        n_norm_interior=256,
+119-        n_reference_alpha=41,
+120-        n_audit_alpha=int(args.num_alpha_ci),
+121-        n_mode_audit_alpha=int(args.num_alpha_modes),
+122-        n_mode_audit_y=801,
+123-        audit_every=250,
+124-        checkpoint_every=int(args.checkpoint_every),
+125-        enable_classic_ci_supervision=True,
+126-        enable_classic_mode_audit=True,
+127-        separate_branch_optimizers=True,
+128-        detach_ci_in_mode_branch=True,
+129-        ci_branch_lr=float(args.ci_branch_lr),
+130-        mode_branch_lr=float(args.mode_branch_lr),
+131-        focus_fraction=float(args.focus_fraction),
+132-        focus_half_width=float(args.focus_half_width),
+133-        low_alpha_sample_fraction=float(args.low_alpha_sample_fraction),
+134-        low_alpha_sample_threshold=float(args.low_alpha_threshold),
+135-        neutral_fraction=0.0,
+136-        neutral_half_width=float(warm_config.get("neutral_half_width", 0.04)),
+137-        error_threshold=0.01,
+138-        mode_error_threshold=float(args.mode_error_threshold),
+139-        max_focus_points=12,
+140-        anchor_strategy=str(warm_config.get("anchor_strategy", "point")),
+141-        anchor_half_width=float(warm_config.get("anchor_half_width", 0.12)),
+142-        anchor_max_candidates=int(warm_config.get("anchor_max_candidates", 257)),
+143-        mode_center_fraction=float(warm_config.get("mode_center_fraction", 0.5)),
+144-        mode_center_half_width=float(warm_config.get("mode_center_half_width", 0.3)),
+145-        w_pde=float(warm_config.get("w_pde", 1.0)),
+146-        w_bc=float(warm_config.get("w_bc", 10.0)),
+147:        w_bc_kappa=float(warm_config.get("w_bc_kappa", 10.0)),
+148-        w_bc_q=float(warm_config.get("w_bc_q", 20.0)),
+149-        w_norm=float(warm_config.get("w_norm", 1.0)),
+150-        w_integral_norm=float(warm_config.get("w_integral_norm", 1.0)),
+151-        w_phase=float(warm_config.get("w_phase", 1.0)),
+152-        w_peak_slope=float(warm_config.get("w_peak_slope", 0.0)),
+153-        w_peak_curvature=float(warm_config.get("w_peak_curvature", 0.0)),
+154-        w_loc_center=float(warm_config.get("w_loc_center", 0.0)),
+155-        w_loc_spread=float(warm_config.get("w_loc_spread", 0.0)),
+156-        w_ci_supervision=float(args.ci_supervision_weight),
+157-        audit_ci_weight=1.0,
+158-        audit_mode_weight=8.0,
+159-        audit_env_weight=2.0,
+160-        audit_phase_weight=2.0,
+161-        audit_peak_weight=1.0,
+162-        phase_mask_fraction=float(warm_config.get("phase_mask_fraction", 0.15)),
+163-        classic_n_points=int(warm_config.get("classic_n_points", 561)),
+164:        classic_mapping_scale=float(warm_config.get("classic_mapping_scale", 3.0)),
+165-        classic_xi_max=float(warm_config.get("classic_xi_max", 0.99)),
+166-        enforce_mode_symmetry=_maybe_bool(warm_config.get("enforce_mode_symmetry", False)),
+167-        mode_representation=str(warm_config["mode_representation"]),
+168-        mode_experts=int(warm_config.get("mode_experts", 1)),
+169-        alpha_split_threshold=_maybe_float(warm_config.get("alpha_split_threshold")),
+170:        riccati_anchor_supervision=True,
+171:        riccati_anchor_n_xi=97,
+172:        riccati_anchor_every=20,
+173:        riccati_anchor_alphas=tuple(float(alpha) for alpha in args.anchor_alphas),
+174:        w_riccati_anchor=float(args.riccati_anchor_weight),
+175-        w_q_supervision=float(args.q_supervision_weight),
+176-        q_supervision_n_xi=129,
+177-        q_supervision_every=10,
+178-        q_supervision_alpha_count=len(q_supervision_alphas),
+179-        q_supervision_alphas=tuple(float(alpha) for alpha in q_supervision_alphas),
+180:        w_riccati_gamma_supervision=float(args.gamma_supervision_weight),
+181:        riccati_gamma_n_xi=129,
+182:        riccati_gamma_every=10,
+183:        riccati_gamma_alpha_count=len(gamma_supervision_alphas),
+184:        riccati_gamma_alphas=tuple(float(alpha) for alpha in gamma_supervision_alphas),
+185:        w_riccati_center_kappa=float(args.center_kappa_weight),
+186:        w_riccati_center_peak=float(args.center_peak_weight),
+187:        w_riccati_boundary_band_kappa=float(args.boundary_kappa_weight),
+188:        w_riccati_boundary_band_q=float(args.boundary_q_weight),
+189:        riccati_center_xi=0.0,
+190:        riccati_boundary_band_points=64,
+191:        riccati_boundary_band_start=0.94,
+192:        riccati_boundary_band_end=0.995,
+193:        w_riccati_shooting_match=float(args.shooting_match_weight),
+194:        riccati_shooting_steps=256,
+195:        riccati_shooting_xi_boundary=0.995,
+196-        mode_low_alpha_threshold=float(args.low_alpha_threshold),
+197-        mode_low_alpha_weight=float(args.low_alpha_weight),
+198-        mode_low_alpha_audit_fraction=0.75,
+199-        initial_model_path=str(checkpoint),
+200-        initial_model_strict=True,
+201-        output_dir=str(args.output_dir),
+202-        device=str(args.device),
+203-    )
+204-
+205-
+206:def main() -> None:
+207-    parser = build_parser()
+208-    args = parser.parse_args()
+209-    checkpoint = load_warmstart_checkpoint(args)
+210-    args.output_dir.mkdir(parents=True, exist_ok=True)
+211-
+212-    warm_config_path = Path(args.warmstart_run_dir) / "config.csv"
+213-    if not warm_config_path.exists():
+214-        raise FileNotFoundError(f"Warm-start config not found: {warm_config_path}")
+215-    warm_config_df = pd.read_csv(warm_config_path)
+216-    if warm_config_df.empty:
+217-        raise RuntimeError(f"Warm-start config is empty: {warm_config_path}")
+218-    warm_config = warm_config_df.iloc[0]
+219-
+220-    cfg = build_config(args, warm_config, checkpoint)
+221-    pd.DataFrame([asdict(cfg)]).to_csv(args.output_dir / "config.csv", index=False)
+222-    pd.DataFrame(
+223-        [
+224-            {
+225-                "warmstart_run_dir": str(args.warmstart_run_dir),
+226-                "warmstart_checkpoint": str(checkpoint),
+227-            }
+228-        ]
+229-    ).to_csv(args.output_dir / "warmstart_source.csv", index=False)
+230-
+231-    print("Core-only 1D subsonic Riccati protocol")
+232-    print(f"warm start={checkpoint}")
+233-    print(f"mach={cfg.mach:.3f}")
+234-    print(
+235-        f"alpha-range(model)=[{cfg.alpha_min:.3f}, {cfg.alpha_max:.3f}] "
+236-        f"active=[{args.alpha_min:.3f}, {args.alpha_max:.3f}]"
+237-    )
+238-    print(f"epochs={cfg.epochs} lr={cfg.learning_rate:.2e} ci_lr={cfg.ci_branch_lr:.2e} mode_lr={cfg.mode_branch_lr:.2e}")
+239-    print(
+240-        f"weights: ci={cfg.w_ci_supervision:.2f} q_sup={cfg.w_q_supervision:.2f} "
+241:        f"gamma_sup={cfg.w_riccati_gamma_supervision:.2f} anchor={cfg.w_riccati_anchor:.2f} "
+242:        f"bc_k={cfg.w_riccati_boundary_band_kappa:.2f} bc_q={cfg.w_riccati_boundary_band_q:.2f} "
+243:        f"shoot={cfg.w_riccati_shooting_match:.2f}"
+244-    )
+245-    print(
+246-        f"sampling: focus_fraction={cfg.focus_fraction:.2f} focus_half_width={cfg.focus_half_width:.3f} "
+247-        f"low_alpha_fraction={cfg.low_alpha_sample_fraction:.2f} low_alpha_threshold={cfg.low_alpha_sample_threshold:.3f}"
+248-    )
+249-
+250-    if args.skip_training:
+251-        model_best_path = Path(cfg.output_dir) / "model_best.pt"
+252-        if not model_best_path.exists():
+253-            raise FileNotFoundError(
+254-                f"Skip-training requested but post-train model is missing: {model_best_path}"
+255-            )
+256-        print(f"Skip training enabled; reusing existing post-train model at {model_best_path}")
+257-    else:
+258-        model, history = train_fixed_mach_subsonic_pinn(cfg)
+259-        save_training_artifacts(model, history, cfg)
+260-
+261-    device = torch.device(cfg.device)
+262-    eval_root = Path(cfg.output_dir)
+263-    warm_eval_root = eval_root / "warmstart_eval"
+264-    post_eval_root = eval_root / "posttrain_eval"
+265-    warm_eval_run_dir = prepare_warmstart_eval_run_dir(
+266-        base_run_dir=Path(args.warmstart_run_dir),
+267-        checkpoint=checkpoint if args.warmstart_checkpoint is not None else None,
+268-        eval_root=eval_root,
+269-        eval_config=cfg,
+270-    )
+271-
+272-    warm_summary, warm_regimes_df = evaluate_candidate(
+273-        name="warmstart",
+--
+298-        low_alpha_threshold=args.low_alpha_threshold,
+299-        alpha_min_override=args.alpha_min,
+300-        alpha_max_override=args.alpha_max,
+301-    )
+302-
+303-    lowalpha_summary = pd.DataFrame(
+304-        [
+305-            {
+306:                "regime": "riccati_core1d",
+307-                "warmstart_run_dir": str(args.warmstart_run_dir),
+308-                "warmstart_checkpoint": str(checkpoint),
+309-                "output_dir": str(cfg.output_dir),
+310-                "model_alpha_min": float(cfg.alpha_min),
+311-                "model_alpha_max": float(cfg.alpha_max),
+312-                "active_alpha_min": float(args.alpha_min),
+313-                "active_alpha_max": float(args.alpha_max),
+314-                "target_mach": float(cfg.mach),
+315-                "low_alpha_threshold": float(cfg.mode_low_alpha_threshold),
+316-                "low_alpha_weight": float(cfg.mode_low_alpha_weight),
+317-                "low_alpha_sample_fraction": float(cfg.low_alpha_sample_fraction),
+318-                "epochs": int(cfg.epochs),
+319-                "learning_rate": float(cfg.learning_rate),
+320-                "ci_branch_lr": float(cfg.ci_branch_lr or 0.0),
+321-                "mode_branch_lr": float(cfg.mode_branch_lr or 0.0),
+322-                "w_ci_supervision": float(cfg.w_ci_supervision),
+323-                "w_q_supervision": float(cfg.w_q_supervision),
+324:                "w_riccati_gamma_supervision": float(cfg.w_riccati_gamma_supervision),
+325:                "w_riccati_anchor": float(cfg.w_riccati_anchor),
+326:                "w_riccati_boundary_band_kappa": float(cfg.w_riccati_boundary_band_kappa),
+327:                "w_riccati_boundary_band_q": float(cfg.w_riccati_boundary_band_q),
+328:                "w_riccati_shooting_match": float(cfg.w_riccati_shooting_match),
+329-                **{f"warm_{k}": v for k, v in warm_summary.items()},
+330-                **{f"post_{k}": v for k, v in post_summary.items()},
+331-            }
+332-        ]
+333-    )
+334-    improvement_df = pd.DataFrame(
+335-        [
+336-            {
+337-                "delta_ci_mae": float(post_summary["ci_mae"] - warm_summary["ci_mae"]),
+338-                "delta_low_alpha_p_rel_mean": float(post_summary["low_alpha_p_rel_mean"] - warm_summary["low_alpha_p_rel_mean"]),
+339-                "delta_low_alpha_u_rel_mean": float(post_summary["low_alpha_u_rel_mean"] - warm_summary["low_alpha_u_rel_mean"]),
+340-                "delta_low_alpha_v_rel_mean": float(post_summary["low_alpha_v_rel_mean"] - warm_summary["low_alpha_v_rel_mean"]),
+341-                "delta_high_alpha_p_rel_mean": float(post_summary["high_alpha_p_rel_mean"] - warm_summary["high_alpha_p_rel_mean"]),
+342-            }
+343-        ]
+344-    )
+345-
+346-    lowalpha_summary_path = eval_root / "core1d_repair_summary.csv"
+347-    improvement_path = eval_root / "core1d_repair_improvement.csv"
+348-    lowalpha_summary.to_csv(lowalpha_summary_path, index=False)
+349-    improvement_df.to_csv(improvement_path, index=False)
+350-    warm_regimes_df.to_csv(
+351-        warm_eval_root / "modes" / "mode_regime_summary.csv",
+352-        index=False,
+353-    )
+354-    post_regimes_df.to_csv(
+355-        post_eval_root / "modes" / "mode_regime_summary.csv",
+356-        index=False,
+357-    )
+358-

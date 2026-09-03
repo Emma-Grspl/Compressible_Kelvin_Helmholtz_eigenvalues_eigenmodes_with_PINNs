@@ -1,0 +1,2 @@
+line_id,target_mach,anchor_alpha,lower_mach,upper_mach,interp_weight,interpolated_cr,interpolated_ci,blumen_ci,anchor_source_mode
+M1.40_anchor0.150,1.4,0.15,1.3,1.5,0.49999999999999944,0.3151531599887013,0.05587151182983867,0.032689688669455735,interpolated_modal_reference

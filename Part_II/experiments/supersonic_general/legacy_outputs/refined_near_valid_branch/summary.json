@@ -1,0 +1,17 @@
+{
+  "status": "refined_near_valid_branch_requires_visual_confirmation",
+  "alpha_step": 0.0025,
+  "mapping_scale": 2.0,
+  "final_y_limit": 1600.0,
+  "n_tasks": 90,
+  "n_refined_near_valid": 89,
+  "status_counts": {
+    "refined_near_valid_requires_visual_confirmation": 89,
+    "refined_rejected": 1
+  },
+  "by_Mach": {
+    "1.8": 49,
+    "1.9": 40
+  },
+  "note": "These are refined near-valid candidates, not final validated points. They require visual confirmation after higher-resolution reconstruction."
+}

@@ -1,0 +1,1 @@
+"""Classical supersonic figure generators."""

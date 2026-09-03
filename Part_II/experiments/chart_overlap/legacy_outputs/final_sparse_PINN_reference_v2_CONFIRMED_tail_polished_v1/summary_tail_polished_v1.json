@@ -1,0 +1,22 @@
+{
+  "status": "tail_polished_v1_built",
+  "input_dataset": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED",
+  "n_points": 183,
+  "n_modal_rows": 838847,
+  "n_tail_polished": 5,
+  "n_tail_not_polished": 178,
+  "method": {
+    "side": "left",
+    "join_fraction_of_peak_p": 0.05,
+    "fit_low_fraction_of_peak_p": 0.003,
+    "fit_high_fraction_of_peak_p": 0.08,
+    "description": "Fit complex exponential in weak left-tail overlap using p, then apply same lambda to p/rho/u/v for y < y_join. Core is unchanged."
+  },
+  "outputs": {
+    "spectral": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED_tail_polished_v1/supersonic_sparse_PINN_reference_v2_CONFIRMED_tail_polished_v1_spectral.csv",
+    "modal_fields": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED_tail_polished_v1/supersonic_sparse_PINN_reference_v2_CONFIRMED_tail_polished_v1_modal_fields.csv",
+    "audit": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED_tail_polished_v1/tail_polish_audit.csv",
+    "review_pdf": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED_tail_polished_v1/tail_polish_raw_vs_polished_left_tail_review.pdf"
+  },
+  "important_note": "This is a tail-regularized export for PINN/visual use. The raw confirmed dataset remains the primary frozen reference."
+}

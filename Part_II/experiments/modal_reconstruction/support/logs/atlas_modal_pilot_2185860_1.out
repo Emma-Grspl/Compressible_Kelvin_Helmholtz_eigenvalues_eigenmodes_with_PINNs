@@ -1,0 +1,14 @@
+reconstruct signature: (*, alpha: 'float', mach: 'float', cr: 'float', ci: 'float', ln_p_start_right: 'float', match_y: 'float', use_mapping: 'bool', mapping_scale: 'float', min_y_limit: 'float', max_y_limit: 'float', y_limit_factor: 'float', max_step: 'float' = inf) -> 'dict[str, np.ndarray]'
+M=1.8000 s=0.2000 alpha=0.04598394 quality=spectral_only reason=tail_check_failed
+M=1.8000 s=0.6500 alpha=0.14944781 quality=modal_certified reason=all_checks_passed
+M=1.8000 s=0.9300 alpha=0.21382533 quality=spectral_only reason=tail_check_failed
+M=1.8000 s=0.9850 alpha=0.22647092 quality=spectral_only reason=tail_check_failed
+{
+  "Mach": 1.8,
+  "n_requested": 4,
+  "n_completed": 4,
+  "quality_counts": {
+    "spectral_only": 3,
+    "modal_certified": 1
+  }
+}

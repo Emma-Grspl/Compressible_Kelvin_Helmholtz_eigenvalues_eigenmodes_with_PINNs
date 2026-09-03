@@ -1,0 +1,11 @@
+{
+  "dataset": "supersonic_44pts_validated_only",
+  "contains_M18_M19_extension": false,
+  "spectral_file": "assets/classic_supersonic/final_44pts_validated_only/supersonic_modal_spectral_validated_44pts.csv",
+  "fields_file": "assets/classic_supersonic/final_44pts_validated_only/supersonic_modal_fields_p_rho_u_v_44pts_validated_only.csv",
+  "n_spectral_points": 44,
+  "n_field_points": 44,
+  "n_field_rows": 215905,
+  "max_Mach": 1.7,
+  "note": "M=1.8/M=1.9 fixed-ci extension invalidated and excluded."
+}

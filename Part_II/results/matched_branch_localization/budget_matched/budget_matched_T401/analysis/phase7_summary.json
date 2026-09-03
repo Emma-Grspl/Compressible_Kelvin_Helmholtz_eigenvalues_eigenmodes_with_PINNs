@@ -1,0 +1,58 @@
+{
+  "n_paired": 401,
+  "target_tolerance": 0.0001,
+  "pairing": {
+    "max_delta_Mach": 0.0,
+    "max_delta_alpha": 0.0,
+    "max_delta_cr_reference": 0.0,
+    "max_delta_ci_reference": 0.0
+  },
+  "seeded": {
+    "condition": "SEEDED",
+    "n": 401,
+    "technical_success": 401,
+    "target_recovery": 400,
+    "target_error_median": 3.647138687676845e-06,
+    "target_error_p90": 6.5329384095896675e-06,
+    "target_error_p95": 8.117371197522136e-06,
+    "target_error_p99": 1.0238879415270491e-05,
+    "target_error_max": 0.09778215948361772,
+    "error_le_1e-5": 396,
+    "error_le_1e-4": 400
+  },
+  "generic": {
+    "condition": "GENERIC",
+    "n": 401,
+    "technical_success": 401,
+    "target_recovery": 1,
+    "target_error_median": 0.4520004313912778,
+    "target_error_p90": 0.6599972104883428,
+    "target_error_p95": 0.7614709141879168,
+    "target_error_p99": 0.7634933525172295,
+    "target_error_max": 0.7872325302270823,
+    "error_le_1e-5": 1,
+    "error_le_1e-4": 1
+  },
+  "target_branch_discordances": {
+    "both": 1,
+    "seeded_only": 399,
+    "generic_only": 0,
+    "neither": 1,
+    "exact_two_sided_p": 1.5490367659397273e-120
+  },
+  "technical_discordances": {
+    "both": 401,
+    "seeded_only": 0,
+    "generic_only": 0,
+    "neither": 0,
+    "exact_two_sided_p": 1.0
+  },
+  "paired_target_error_generic_minus_seeded": {
+    "median": 0.4519976297417816,
+    "mean": 0.46798469848406987,
+    "p95": 0.7614636674575223,
+    "seeded_lower_error": 400,
+    "generic_lower_error": 1
+  },
+  "cost_comparison": "NOT PERFORMED: historical seeded T401 output does not retain full per-box retry counts."
+}

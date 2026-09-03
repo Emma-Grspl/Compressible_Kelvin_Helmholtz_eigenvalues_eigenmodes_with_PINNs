@@ -1,0 +1,10 @@
+{
+  "n_input_points": 6,
+  "n_gep_candidate_rows": 1200,
+  "n_validated_rows": 6,
+  "status_counts": {
+    "review": 6
+  },
+  "failures": [],
+  "note": "Separate extension only; does not modify the frozen 44-point supersonic reference."
+}

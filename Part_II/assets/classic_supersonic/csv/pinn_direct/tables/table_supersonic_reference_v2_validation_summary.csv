@@ -1,0 +1,6 @@
+article_category,validation_status,n_points
+boundary-sensitive,validated_visual_smallM_strict_boundary_flag,5
+modal fields exported,modal_spectral_validated_with_exported_fields,44
+other validated,validated_visual_smallM_strict,33
+tail-sensitive,validated_core_stable_tail_sensitive,89
+tail-sensitive,validated_visual_smallM_tail_sensitive,12

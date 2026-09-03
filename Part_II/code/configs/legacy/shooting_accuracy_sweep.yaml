@@ -1,0 +1,37 @@
+version: 1
+sweep:
+  name: shooting_accuracy
+  type: shooting_accuracy
+  cases:
+    - subsonic_interior
+    - subsonic_neutral
+    - supersonic_M140
+    - supersonic_M180
+    - supersonic_M190
+  solver_by_regime:
+    subsonic: subsonic_mstab17
+    supersonic: supersonic_shooting
+  levels_by_regime:
+    subsonic:
+      - {label: default_primary_tolerance, rtol: 1.0e-8, atol: 1.0e-10, max_step: null}
+      - {label: strict_mstab17_tolerance, rtol: 1.0e-10, atol: 1.0e-12, max_step: null}
+    supersonic:
+      - {label: loose_tolerance, rtol: 1.0e-8, atol: 1.0e-10, max_step: null}
+      - {label: strict_adaptive, rtol: 1.0e-10, atol: 1.0e-12, max_step: null}
+      - {label: strict_step_2, rtol: 1.0e-10, atol: 1.0e-12, max_step: 2.0}
+      - {label: strict_step_1, rtol: 1.0e-10, atol: 1.0e-12, max_step: 1.0}
+      - {label: strict_step_0p5, rtol: 1.0e-10, atol: 1.0e-12, max_step: 0.5}
+      - {label: strict_step_0p25, rtol: 1.0e-10, atol: 1.0e-12, max_step: 0.25}
+  # Provisional smoke thresholds from the stage-2 diagnostic; not article values.
+  modal_diagnostics:
+    assembly_y: zero
+    window_half_width: 0.25
+    relative_p_window_error_max: 1.0e-3
+    relative_py_window_error_max: 1.0e-3
+    relative_p_jump_max: 1.0e-3
+    relative_py_jump_max: 1.0e-3
+    require_finite_fields: true
+    require_nondegenerate_fields: true
+    nondegenerate_min_peak: 1.0e-12
+    core_thresholds: [1.0e-3, 1.0e-2, 5.0e-2]
+  produce_modes: true

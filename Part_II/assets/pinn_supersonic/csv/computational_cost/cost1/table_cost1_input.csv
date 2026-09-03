@@ -1,0 +1,2 @@
+cost_id,benchmark_id,mach_index,alpha_index,Mach,alpha,primary_chart,charts,cr,ci,omega_i,point_role,mach_split,cr_pred,ci_pred,cr_abs_error,ci_abs_error,spectral_error,omega_i_ref,omega_i_pred,omega_i_abs_error,atlas_chart,atlas_budget,spectral_relative_error
+0,0,0,0,1.018,0.05775,C00,C00,0.0,0.0,0.0,validation,validation,-0.012604296,0.0042007715,0.0126042962074279,0.0042007714509963,0.0132858858819459,0.0,0.000242594551295,0.000242594551295,C00,76,13285885881.945911

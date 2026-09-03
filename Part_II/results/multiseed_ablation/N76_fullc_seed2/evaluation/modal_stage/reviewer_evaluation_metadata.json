@@ -1,0 +1,9 @@
+{
+  "tag": "N76_fullc_seed2",
+  "run_root": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/reviewer_runs/N76_fullc_seed2/runs",
+  "checkpoint": "best_modal_frozen_spectrum_checkpoint.pt",
+  "stage": "modal_stage",
+  "device": "cpu",
+  "validation_source": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/datasets/atlas2d_v1/freeze/validation_reference_64.csv",
+  "trainer": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/pinn_supersonic/train_global_supersonic_kappa_q_logamp_continuousM.py"
+}

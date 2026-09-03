@@ -1,0 +1,27 @@
+============================================================
+PHASE 11-I — FINAL STRATIFIED BLUMEN cr VALIDATION
+Job ID:       1584544
+Array task:   0
+Node:         r3i6n7
+alpha:        0.15
+Mach values:  1.20 1.25 1.30
+Start:        Mon Aug 31 11:56:01 AM CEST 2026
+============================================================
+Local Blumen c_r uncertainty summary:
+ alpha_target  Mach  target_level  bootstrap_valid_count  bootstrap_valid_fraction  bootstrap_mean  bootstrap_std  bootstrap_q05  bootstrap_q16  bootstrap_q50  bootstrap_q84  bootstrap_q95  bootstrap_ci90_width  bootstrap_ci68_width                support_levels  n_support_levels  reference_cr  reference_minus_target  reference_minus_q50  reference_inside_ci90  reference_zscore  reference_tail_probability  support_level_1  support_level_1_points  support_level_1_mach_min  support_level_1_mach_max  support_level_2  support_level_2_points  support_level_2_mach_min  support_level_2_mach_max  support_level_3  support_level_3_points  support_level_3_mach_min  support_level_3_mach_max  support_level_4  support_level_4_points  support_level_4_mach_min  support_level_4_mach_max  support_level_5  support_level_5_points  support_level_5_mach_min  support_level_5_mach_max
+         0.15  1.20      0.205151                  10000                       1.0        0.204213       0.003814       0.197239       0.200599       0.204541       0.207844       0.209958              0.012719              0.007245       0.100,0.150,0.200,0.250                 4      0.209260                0.004109             0.004719                    1.0          1.323125                      0.0758              0.1                       6                  1.139726                  1.287671             0.15                       4                  1.131507                  1.235616              0.2                       7                  1.132877                  1.271233             0.25                       4                  1.197260                  1.269863              NaN                     NaN                       NaN                       NaN
+         0.15  1.25      0.215953                  10000                       1.0        0.235377       0.003986       0.229567       0.231563       0.234987       0.239231       0.242420              0.012853              0.007668 0.100,0.150,0.200,0.250,0.300                 5      0.239970                0.024016             0.004983                    1.0          1.152244                      0.1228              0.1                       6                  1.163014                  1.330137             0.15                       6                  1.167123                  1.335616              0.2                       5                  1.194521                  1.294521             0.25                       6                  1.197260                  1.323288              0.3                     5.0                  1.249315                  1.313699
+         0.15  1.30      0.256894                  10000                       1.0        0.257532       0.003619       0.253380       0.254352       0.256376       0.261719       0.264862              0.011482              0.007367 0.100,0.150,0.200,0.250,0.300                 5      0.267957                0.011064             0.011582                    0.0          2.880825                      0.0060              0.1                       6                  1.226027                  1.401370             0.15                       6                  1.235616                  1.405479              0.2                       6                  1.247945                  1.380822             0.25                       7                  1.223288                  1.368493              0.3                     7.0                  1.267123                  1.378082
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/blumen_gep/phase11_final_a015_summary.csv
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/blumen_gep/phase11_final_a015_support_points.csv
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/blumen_gep/phase11_final_a015_samples.csv
+Wrote /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/blumen_gep/phase11_final_a015_audit.pdf
+
+============================================================
+DONE alpha=0.15
+End: Mon Aug 31 11:59:18 AM CEST 2026
+============================================================
+-rw-r----- 1 usv13rn fdb  34K Aug 31 11:59 assets/blumen_gep/phase11_final_a015_audit.pdf
+-rw-r----- 1 usv13rn fdb 3.7M Aug 31 11:59 assets/blumen_gep/phase11_final_a015_samples.csv
+-rw-r----- 1 usv13rn fdb 2.5K Aug 31 11:59 assets/blumen_gep/phase11_final_a015_summary.csv
+-rw-r----- 1 usv13rn fdb 6.6K Aug 31 11:59 assets/blumen_gep/phase11_final_a015_support_points.csv

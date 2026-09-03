@@ -1,0 +1,185 @@
+corrected shooting solver: OK
+M 1.20000 -> 1.18333 accepted=True c=0.18153023+i0.10311739
+M 1.18333 -> 1.16667 accepted=True c=0.16917121+i0.10693109
+M 1.16667 -> 1.15000 accepted=True c=0.15598612+i0.11078997
+M 1.15000 -> 1.13000 accepted=True c=0.13872002+i0.11545955
+M 1.13000 -> 1.11000 accepted=True c=0.11919049+i0.12014238
+M 1.11000 -> 1.09000 accepted=True c=0.09595134+i0.12479590
+M 1.09000 -> 1.07000 accepted=True c=0.06497844+i0.12935611
+M 1.07000 -> 1.05000 accepted=True c=0.00000000+i0.10573194
+M 1.05000 -> 1.03333 accepted=True c=0.00000000+i0.06620863
+M 1.03333 -> 1.01667 accepted=True c=0.00000000+i0.04282486
+M 1.01667 -> 1.00000 accepted=True c=0.00000000+i0.02154278
+
+alpha trace M=1.00000
+alpha=0.13500000 c=0.00000000+i2.38069425e-02 stage1=3.00e-08 stage2=2.37e-19
+alpha=0.14100000 c=0.00000000+i2.68239387e-02 stage1=1.72e-08 stage2=2.25e-19
+alpha=0.14820000 c=0.00000000+i3.09655580e-02 stage1=8.60e-09 stage2=2.11e-19
+alpha=0.15684000 c=0.00000000+i3.69141270e-02 stage1=1.08e-08 stage2=1.96e-19
+alpha=0.16684000 c=0.00000000+i4.57725660e-02 stage1=1.58e-08 stage2=1.79e-19
+alpha=0.17684000 c=0.00000000+i5.85177146e-02 stage1=1.34e-08 stage2=1.61e-19
+alpha=0.18684000 c=0.00000000+i8.47337269e-02 stage1=2.59e-08 stage2=1.41e-19
+alpha=0.19684000 c=0.04310689+i9.66650717e-02 stage1=2.89e-09 stage2=4.15e-19
+alpha=0.20684000 c=0.06311643+i9.03551293e-02 stage1=2.82e-09 stage2=6.82e-19
+alpha=0.21684000 c=0.07774273+i8.41153476e-02 stage1=2.56e-08 stage2=9.95e-19
+alpha=0.22684000 c=0.08967515+i7.79421686e-02 stage1=2.35e-08 stage2=1.38e-18
+alpha=0.23684000 c=0.09989745+i7.18322661e-02 stage1=6.16e-09 stage2=1.90e-18
+alpha=0.24684000 c=0.10890359+i6.57825005e-02 stage1=3.49e-08 stage2=2.61e-18
+alpha=0.25684000 c=0.11698465+i5.97896460e-02 stage1=4.37e-08 stage2=3.60e-18
+alpha=0.26684000 c=0.12433083+i5.38510339e-02 stage1=2.95e-08 stage2=5.05e-18
+alpha=0.27684000 c=0.13107386+i4.79641374e-02 stage1=3.72e-08 stage2=7.22e-18
+alpha=0.28684000 c=0.13730990+i4.21259541e-02 stage1=3.95e-08 stage2=1.07e-17
+alpha=0.29684000 c=0.14311249+i3.63345300e-02 stage1=4.75e-08 stage2=1.64e-17
+alpha=0.30684000 c=0.14853898+i3.05873725e-02 stage1=3.61e-08 stage2=2.68e-17
+alpha=0.31684000 c=0.15363493+i2.48821013e-02 stage1=9.34e-09 stage2=4.76e-17
+alpha=0.32684000 c=0.15843796+i1.92168520e-02 stage1=1.03e-08 stage2=1.07e-16
+alpha=0.33684000 c=0.16297911+i1.35896630e-02 stage1=2.49e-08 stage2=2.41e-16
+alpha=0.34684000 c=0.16728466+i7.99842383e-03 stage1=3.90e-08 stage2=9.46e-16
+alpha=0.35684000 c=0.17137702+i2.44163292e-03 stage1=2.21e-08 stage2=7.20e-15
+alpha=0.36184000 c=0.17319587+i2.92774670e-05 stage1=6.81e-07 stage2=8.64e-15
+alpha=0.36284000 c=0.17400211+i2.15841543e-05 stage1=9.37e-06 stage2=8.98e-15
+alpha=0.36384000 c=0.17394902+i1.94858149e-05 stage1=1.99e-05 stage2=2.29e-14
+alpha=0.36484000 c=0.17428795+i1.75530072e-05 stage1=8.20e-06 stage2=9.02e-15
+retry alpha=0.36584000: step 0.001000 -> 0.000500
+alpha=0.36534000 c=0.17401253+i1.68235366e-05 stage1=1.59e-05 stage2=9.37e-15
+retry alpha=0.36584000: step 0.000500 -> 0.000250
+retry alpha=0.36559000: step 0.000250 -> 0.000125
+neutral M=1.00000: alpha_n=0.36534001000000027 method=power status=local_continuation_failed
+
+alpha trace M=1.05000
+alpha=0.13500000 c=0.02464272+i1.30477519e-01 stage1=3.21e-08 stage2=2.51e-19
+alpha=0.14100000 c=0.04731884+i1.26613184e-01 stage1=3.30e-08 stage2=3.79e-19
+alpha=0.14820000 c=0.06439301+i1.22006199e-01 stage1=1.90e-08 stage2=5.15e-19
+alpha=0.15684000 c=0.07978356+i1.16519862e-01 stage1=1.25e-08 stage2=6.76e-19
+alpha=0.16684000 c=0.09403942+i1.10226166e-01 stage1=4.16e-08 stage2=8.87e-19
+alpha=0.17684000 c=0.10597215+i1.03989766e-01 stage1=2.07e-08 stage2=1.13e-18
+alpha=0.18684000 c=0.11632150+i9.78095933e-02 stage1=2.84e-08 stage2=1.41e-18
+alpha=0.19684000 c=0.12549993+i9.16828175e-02 stage1=3.04e-08 stage2=1.75e-18
+alpha=0.20684000 c=0.13376556+i8.56081868e-02 stage1=2.08e-08 stage2=2.17e-18
+alpha=0.21684000 c=0.14129387+i7.95836531e-02 stage1=9.74e-09 stage2=2.71e-18
+alpha=0.22684000 c=0.14821067+i7.36071979e-02 stage1=1.44e-08 stage2=3.41e-18
+alpha=0.23684000 c=0.15460984+i6.76774142e-02 stage1=3.07e-08 stage2=4.36e-18
+alpha=0.24684000 c=0.16056434+i6.17923789e-02 stage1=2.84e-08 stage2=5.65e-18
+alpha=0.25684000 c=0.16613146+i5.59507789e-02 stage1=2.30e-08 stage2=7.47e-18
+alpha=0.26684000 c=0.17135800+i5.01509090e-02 stage1=7.08e-09 stage2=1.01e-17
+alpha=0.27684000 c=0.17628215+i4.43912862e-02 stage1=1.72e-08 stage2=1.42e-17
+alpha=0.28684000 c=0.18093608+i3.86703233e-02 stage1=3.97e-08 stage2=2.06e-17
+alpha=0.29684000 c=0.18534690+i3.29870086e-02 stage1=2.71e-08 stage2=3.17e-17
+alpha=0.30684000 c=0.18953796+i2.73395981e-02 stage1=3.41e-08 stage2=5.24e-17
+alpha=0.31684000 c=0.19352933+i2.17270460e-02 stage1=3.52e-08 stage2=9.87e-17
+alpha=0.32684000 c=0.19733855+i1.61478713e-02 stage1=3.35e-08 stage2=2.06e-16
+alpha=0.33684000 c=0.20098097+i1.06011104e-02 stage1=2.57e-08 stage2=6.14e-16
+alpha=0.34684000 c=0.20447029+i5.08542487e-03 stage1=1.27e-08 stage2=2.28e-15
+alpha=0.35684000 c=0.20777403+i2.54111938e-05 stage1=1.83e-05 stage2=8.23e-15
+alpha=0.35784000 c=0.20782128+i2.04456817e-05 stage1=5.58e-06 stage2=8.42e-15
+retry alpha=0.35884000: step 0.001000 -> 0.000500
+retry alpha=0.35834000: step 0.000500 -> 0.000250
+retry alpha=0.35809000: step 0.000250 -> 0.000125
+neutral M=1.05000: alpha_n=0.35784001000013566 method=power status=local_continuation_failed
+
+alpha trace M=1.15000
+alpha=0.13500000 c=0.16096238+i1.07988798e-01 stage1=4.31e-08 stage2=1.61e-18
+alpha=0.14100000 c=0.16659443+i1.04636931e-01 stage1=2.91e-08 stage2=1.77e-18
+alpha=0.14820000 c=0.17292028+i1.00629218e-01 stage1=1.20e-08 stage2=1.99e-18
+alpha=0.15684000 c=0.17996757+i9.58400065e-02 stage1=3.42e-08 stage2=2.30e-18
+alpha=0.16684000 c=0.18748527+i9.03231133e-02 stage1=3.24e-08 stage2=2.71e-18
+alpha=0.17684000 c=0.19441300+i8.48338983e-02 stage1=3.61e-08 stage2=3.21e-18
+alpha=0.18684000 c=0.20083080+i7.93705789e-02 stage1=2.91e-08 stage2=3.83e-18
+alpha=0.19684000 c=0.20680345+i7.39329150e-02 stage1=2.67e-08 stage2=4.62e-18
+alpha=0.20684000 c=0.21238388+i6.85197692e-02 stage1=8.30e-09 stage2=5.65e-18
+alpha=0.21684000 c=0.21761629+i6.31306736e-02 stage1=2.10e-08 stage2=7.01e-18
+alpha=0.22684000 c=0.22253814+i5.77651275e-02 stage1=3.11e-08 stage2=8.86e-18
+alpha=0.23684000 c=0.22718101+i5.24222050e-02 stage1=3.28e-08 stage2=1.14e-17
+alpha=0.24684000 c=0.23157280+i4.71018306e-02 stage1=3.64e-08 stage2=1.51e-17
+alpha=0.25684000 c=0.23573708+i4.18030966e-02 stage1=2.77e-08 stage2=2.07e-17
+alpha=0.26684000 c=0.23969463+i3.65261061e-02 stage1=3.55e-08 stage2=2.95e-17
+alpha=0.27684000 c=0.24346404+i3.12700907e-02 stage1=2.16e-08 stage2=4.42e-17
+alpha=0.28684000 c=0.24706154+i2.60348098e-02 stage1=3.83e-08 stage2=7.12e-17
+alpha=0.29684000 c=0.25050137+i2.08201213e-02 stage1=2.96e-09 stage2=1.27e-16
+alpha=0.30684000 c=0.25379677+i1.56256396e-02 stage1=3.76e-08 stage2=2.64e-16
+alpha=0.31684000 c=0.25695901+i1.04510081e-02 stage1=4.63e-08 stage2=4.12e-16
+alpha=0.32684000 c=0.25999899+i5.29621240e-03 stage1=1.94e-08 stage2=3.91e-15
+alpha=0.33684000 c=0.26292641+i1.59229662e-04 stage1=2.73e-08 stage2=6.66e-15
+alpha=0.33784000 c=0.26327395+i2.37503714e-05 stage1=3.21e-06 stage2=7.28e-15
+retry alpha=0.33884000: step 0.001000 -> 0.000500
+retry alpha=0.33834000: step 0.000500 -> 0.000250
+retry alpha=0.33809000: step 0.000250 -> 0.000125
+alpha=0.33796500 c=0.26339126+i2.22107048e-05 stage1=1.26e-05 stage2=1.71e-14
+neutral M=1.15000: alpha_n=0.33796501000000023 method=power status=local_continuation_failed
+
+alpha trace M=1.20000
+alpha=0.13500000 c=0.19751114+i9.67822114e-02 stage1=3.39e-08 stage2=2.28e-18
+alpha=0.14100000 c=0.20239638+i9.36920113e-02 stage1=9.36e-09 stage2=2.49e-18
+alpha=0.14820000 c=0.20792902+i8.99886965e-02 stage1=1.85e-08 stage2=2.79e-18
+alpha=0.15684000 c=0.21414343+i8.55510156e-02 stage1=3.69e-08 stage2=3.20e-18
+alpha=0.16684000 c=0.22082513+i8.04247018e-02 stage1=2.06e-08 stage2=3.77e-18
+alpha=0.17684000 c=0.22702533+i7.53084454e-02 stage1=1.18e-08 stage2=4.48e-18
+alpha=0.18684000 c=0.23280180+i7.02026773e-02 stage1=4.62e-08 stage2=5.36e-18
+alpha=0.19684000 c=0.23820297+i6.51081514e-02 stage1=1.08e-08 stage2=6.54e-18
+alpha=0.20684000 c=0.24326958+i6.00246696e-02 stage1=2.11e-08 stage2=8.07e-18
+alpha=0.21684000 c=0.24803669+i5.49526809e-02 stage1=2.89e-08 stage2=1.02e-17
+alpha=0.22684000 c=0.25253404+i4.98924763e-02 stage1=1.05e-08 stage2=1.31e-17
+alpha=0.23684000 c=0.25678798+i4.48443086e-02 stage1=4.29e-08 stage2=1.73e-17
+alpha=0.24684000 c=0.26082136+i3.98081777e-02 stage1=1.88e-08 stage2=2.35e-17
+alpha=0.25684000 c=0.26465406+i3.47847736e-02 stage1=1.95e-08 stage2=3.34e-17
+alpha=0.26684000 c=0.26830409+i2.97740317e-02 stage1=3.86e-08 stage2=5.00e-17
+alpha=0.27684000 c=0.27178694+i2.47764430e-02 stage1=1.35e-08 stage2=8.04e-17
+alpha=0.28684000 c=0.27511697+i1.97921303e-02 stage1=2.49e-08 stage2=1.63e-16
+alpha=0.29684000 c=0.27830666+i1.48213669e-02 stage1=2.20e-08 stage2=2.89e-16
+alpha=0.30684000 c=0.28136736+i9.86438573e-03 stage1=3.77e-08 stage2=8.32e-16
+alpha=0.31684000 c=0.28430944+i4.92156087e-03 stage1=4.66e-08 stage2=2.73e-15
+alpha=0.32184000 c=0.28573900+i2.45541151e-03 stage1=5.62e-09 stage2=6.06e-15
+alpha=0.32684000 c=0.28713860+i4.11766012e-05 stage1=1.92e-07 stage2=6.57e-15
+alpha=0.32784000 c=0.28749446+i2.11874062e-05 stage1=5.07e-06 stage2=6.86e-15
+retry alpha=0.32884000: step 0.001000 -> 0.000500
+retry alpha=0.32834000: step 0.000500 -> 0.000250
+alpha=0.32809000 c=0.28731458+i2.03472436e-05 stage1=1.69e-05 stage2=7.08e-15
+alpha=0.32834000 c=0.28765371+i1.87926786e-05 stage1=1.05e-05 stage2=1.55e-14
+retry alpha=0.32859000: step 0.000250 -> 0.000125
+neutral M=1.20000: alpha_n=0.3283400100000002 method=power status=local_continuation_failed
+
+  Mach                    status  n_trace_points  n_fit_points  alpha_last  ci_last  alpha_neutral_linear  linear_rmse  alpha_neutral_power  power_A  power_beta  power_rmse  alpha_neutral_selected selected_method
+ 1.00 local_continuation_failed              30             8    0.365340 0.000017                   NaN     0.000614             0.365340 2.155661    1.419463    0.000351                0.365340           power
+ 1.05 local_continuation_failed              26             8    0.357840 0.000020                   NaN     0.000291             0.357840 0.660375    1.070300    0.000167                0.357840           power
+ 1.15 local_continuation_failed              25             8    0.337965 0.000022                   NaN     0.000156             0.337965 0.575287    1.040324    0.000124                0.337965           power
+ 1.20 local_continuation_failed              26             8    0.328340 0.000019                   NaN     0.000244             0.328340 0.724915    1.123034    0.000183                0.328340           power
+
+ {
+  "n_requested_mach": 4,
+  "n_base_seeds": 4,
+  "n_neutral_estimates": 4,
+  "status_counts": {
+    "local_continuation_failed": 4
+  },
+  "scientific_note": "alpha_n(M) is extrapolated from positive-ci shooting solutions on the unstable side; ci=0 is not imposed in the solver."
+}
+ Mach  n_points  alpha_previous  ci_previous  alpha_last  ci_last  alpha_neutral_secant  secant_slope_dci_dalpha  alpha_neutral_last3  last3_slope_dci_dalpha  alpha_neutral_selected  delta_alpha_from_last  fit_spread  cr_neutral_estimate  dcr_dalpha_last        selected_method status
+ 1.00        30         0.36484     0.000018    0.365340 0.000017              0.376871                -0.001459             0.374662               -0.001797                     NaN                    NaN         NaN                  NaN              NaN no_valid_extrapolation failed
+ 1.05        26         0.35684     0.000025    0.357840 0.000020              0.361958                -0.004966             0.357411               -0.478918                0.361958               0.004118         NaN             0.208016         0.047249        last_two_secant     ok
+ 1.15        25         0.33784     0.000024    0.337965 0.000022              0.339768                -0.012317             0.338087               -0.127044                0.339768               0.001803    0.001682             0.265083         0.938452        last_two_secant     ok
+ 1.20        26         0.32809     0.000020    0.328340 0.000019              0.331362                -0.006218             0.332289               -0.004789                0.331362               0.003022    0.000926             0.291753         1.356548        last_two_secant     ok
+
+ {
+  "n_mach": 4,
+  "n_valid": 3,
+  "method": "Linear zero crossing based primarily on the last two positive-ci shooting points."
+}
+
+wrote: assets/pinn_supersonic/runs/supersonic_neutral_boundary_refined_M100_115/neutral_boundary_secant_refit.csv
+
+REPORT
+{
+  "n_requested_mach": 4,
+  "n_base_seeds": 4,
+  "n_neutral_estimates": 4,
+  "status_counts": {
+    "local_continuation_failed": 4
+  },
+  "scientific_note": "alpha_n(M) is extrapolated from positive-ci shooting solutions on the unstable side; ci=0 is not imposed in the solver."
+}
+REFINED BOUNDARY
+Mach,n_points,alpha_previous,ci_previous,alpha_last,ci_last,alpha_neutral_secant,secant_slope_dci_dalpha,alpha_neutral_last3,last3_slope_dci_dalpha,alpha_neutral_selected,delta_alpha_from_last,fit_spread,cr_neutral_estimate,dcr_dalpha_last,selected_method,status
+1.0,30,0.3648400000000002,1.7553007189184702e-05,0.3653400000000002,1.6823536565121854e-05,0.3768713324554631,-0.0014589412481253621,0.3746621764040106,-0.0017974173223191336,,,,,,no_valid_extrapolation,failed
+1.05,26,0.3568400000000002,2.541119383891552e-05,0.3578400000000002,2.0445681678326798e-05,0.36195753732889957,-0.004965512160588329,0.35741143812556175,-0.4789183482088771,0.36195753732889957,0.004117537328899357,,0.20801583438407845,0.04724930899721587,last_two_secant,ok
+1.15,25,0.3378400000000002,2.375037143236e-05,0.3379650000000002,2.2210704828087183e-05,0.3397682073280037,-0.012317332834200126,0.3380867071286558,-0.12704353966172338,0.3397682073280037,0.0018032073280035421,0.0016815001993479295,0.26508348254347486,0.9384515092475322,last_two_secant,ok
+1.2,26,0.3280900000000001,2.034724359718176e-05,0.3283400000000001,1.879267862293233e-05,0.33136217645036187,-0.006218259896996688,0.33228862145626376,-0.004789455228393615,0.33136217645036187,0.003022176450361791,0.000926445005901888,0.2917534418618927,1.3565483163652632,last_two_secant,ok

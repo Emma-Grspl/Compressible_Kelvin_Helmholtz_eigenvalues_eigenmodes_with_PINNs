@@ -1,0 +1,50 @@
+{
+  "source_files": [
+    "assets/pinn_supersonic/runs/supersonic_neutral_boundary_lowM_M100_120/alpha_traces.csv",
+    "assets/pinn_supersonic/runs/supersonic_neutral_boundary_refined_M100_115/alpha_traces.csv",
+    "assets/pinn_supersonic/runs/supersonic_neutral_boundary_dense_M120_160/alpha_traces.csv",
+    "assets/pinn_supersonic/runs/supersonic_neutral_boundary_dense_M160_200/alpha_traces.csv"
+  ],
+  "n_source_files": 4,
+  "n_rows_raw": 401,
+  "n_rows_deduplicated": 372,
+  "n_duplicates_removed": 29,
+  "n_mach": 22,
+  "mach_min": 1.0,
+  "mach_max": 2.0,
+  "n_accepted": 368
+}
+
+wrote: assets/pinn_supersonic/runs/supersonic_neutral_boundary_master_M100_200_refined/alpha_traces_merged.csv
+wrote: assets/pinn_supersonic/runs/supersonic_neutral_boundary_master_M100_200_refined/merge_report.json
+ Mach  n_points  alpha_previous  ci_previous  alpha_last  ci_last  alpha_neutral_secant  secant_slope_dci_dalpha  alpha_neutral_last3  last3_slope_dci_dalpha  alpha_neutral_selected  delta_alpha_from_last  fit_spread  cr_neutral_estimate  dcr_dalpha_last        selected_method status
+ 1.00        46         0.36484     0.000018    0.365340 0.000017              0.376871                -0.001459             0.374662               -0.001797                     NaN                    NaN         NaN                  NaN              NaN no_valid_extrapolation failed
+ 1.02        16         0.35868     0.000722    0.361180 0.000033              0.361299                -0.275737             0.360830               -0.474622                0.361299               0.000119         NaN             0.188257         0.346301        last_two_secant     ok
+ 1.05        41         0.35684     0.000025    0.357840 0.000020              0.361958                -0.004966             0.359604               -0.011165                0.361958               0.004118    0.002354             0.208016         0.047249        last_two_secant     ok
+ 1.10        15         0.34618     0.000550    0.347430 0.000046              0.347543                -0.403127             0.347429               -0.495208                0.347543               0.000113         NaN             0.236876         0.293775        last_two_secant     ok
+ 1.15        40         0.33784     0.000024    0.337965 0.000022              0.339768                -0.012317             0.338367               -0.050947                0.339768               0.001803    0.001401             0.265083         0.938452        last_two_secant     ok
+ 1.20        39         0.32809     0.000020    0.328340 0.000019              0.331362                -0.006218             0.332289               -0.004789                0.331362               0.003022    0.000926             0.291753         1.356548        last_two_secant     ok
+ 1.25        14         0.31618     0.000203    0.316680 0.000043              0.316815                -0.319777             0.316707               -0.454975                0.316815               0.000135    0.000108             0.309746         0.421250        last_two_secant     ok
+ 1.30        13         0.30618     0.000235    0.307180 0.000032              0.307335                -0.203032             0.307059               -0.393512                0.307335               0.000155         NaN             0.331033         0.447786        last_two_secant     ok
+ 1.35        13         0.29618     0.000427    0.297180 0.000044              0.297295                -0.382760             0.297249               -0.418804                0.297295               0.000115    0.000046             0.350575         0.314085        last_two_secant     ok
+ 1.40        12         0.28618     0.000771    0.288680 0.000028              0.288773                -0.297221             0.288626               -0.353272                0.288773               0.000093         NaN             0.369666         0.359339        last_two_secant     ok
+ 1.45        12         0.27868     0.000272    0.279680 0.000036              0.279835                -0.235496             0.279611               -0.372312                0.279835               0.000155         NaN             0.387086         0.258578        last_two_secant     ok
+ 1.50        11         0.26868     0.000904    0.271180 0.000036              0.271283                -0.347484             0.271233               -0.363844                0.271283               0.000103    0.000050             0.403919         0.283840        last_two_secant     ok
+ 1.55         9         0.24368     0.006868    0.263680 0.000034              0.263779                -0.341735             0.263760               -0.342678                0.263779               0.000099    0.000019             0.419814         0.252104        last_two_secant     ok
+ 1.60        11         0.25368     0.000713    0.256180 0.000034              0.256306                -0.271352             0.256144               -0.316867                0.256306               0.000126         NaN             0.434970         0.189569        last_two_secant     ok
+ 1.65        10         0.24618     0.000808    0.248680 0.000048              0.248836                -0.304273             0.248813               -0.311711                0.248836               0.000156    0.000024             0.449446         0.219471        last_two_secant     ok
+ 1.70         8         0.22368     0.005503    0.243680 0.000024              0.243766                -0.273988             0.243571               -0.282152                0.243766               0.000086         NaN             0.463404         0.227340        last_two_secant     ok
+ 1.75        11         0.23368     0.000542    0.236180 0.000032              0.236334                -0.204303             0.236164               -0.246801                0.236334               0.000154         NaN             0.476600         0.223543        last_two_secant     ok
+ 1.80        10         0.22868     0.000210    0.229680 0.000041              0.229920                -0.169527             0.229705               -0.251804                0.229920               0.000240    0.000214             0.489032         0.155803        last_two_secant     ok
+ 1.85         7         0.20368     0.005154    0.223680 0.000042              0.223845                -0.255587             0.224009               -0.249602                0.223845               0.000165    0.000164             0.501035         0.226026        last_two_secant     ok
+ 1.90        11         0.21718     0.000227    0.218180 0.000040              0.218393                -0.187465             0.218313               -0.219595                0.218393               0.000213    0.000080             0.512566         0.194695        last_two_secant     ok
+ 1.95        10         0.21218     0.000146    0.213180 0.000034              0.213477                -0.112732             0.213248               -0.177366                0.213477               0.000297    0.000230             0.523590         0.146765        last_two_secant     ok
+ 2.00         9         0.20718     0.000129    0.208180 0.000036              0.208562                -0.093292             0.208258               -0.162144                0.208562               0.000382    0.000304             0.534189         0.170083        last_two_secant     ok
+
+ {
+  "n_mach": 22,
+  "n_valid": 21,
+  "method": "Linear zero crossing based primarily on the last two positive-ci shooting points."
+}
+
+wrote: assets/pinn_supersonic/runs/supersonic_neutral_boundary_master_M100_200_refined/neutral_boundary_secant_refit.csv

@@ -1,0 +1,59 @@
+job   : 333932
+node  : r9i2n8
+start : Tue Jul 28 11:52:35 AM CEST 2026
+
+Tue Jul 28 11:52:35 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.03             Driver Version: 580.159.03     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-SXM2-32GB           On  |   00000000:8A:00.0 Off |                    0 |
+| N/A   44C    P0             45W /  300W |       0MiB /  32768MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[read] chunk=7 selected=161182
+[read] chunk=8 selected=9863
+
+REFERENCE
+  rows : 171045
+  modes: 45
+  alpha: 0.05 0.27
+
+[S4] mode=1/45 alpha=0.050000 p_rel=7.398e-01 overlap=6.527e-02
+[S4] mode=10/45 alpha=0.095000 p_rel=8.521e-01 overlap=1.557e-01
+[S4] mode=20/45 alpha=0.145000 p_rel=1.022e+00 overlap=3.103e-01
+[S4] mode=30/45 alpha=0.195000 p_rel=8.529e-01 overlap=1.902e-01
+[S4] mode=40/45 alpha=0.245000 p_rel=7.702e-01 overlap=1.792e-01
+[S4] mode=45/45 alpha=0.270000 p_rel=8.253e-01 overlap=2.136e-01
+[S4M2] mode=1/45 alpha=0.050000 p_rel=2.778e-01 overlap=3.483e-02
+[S4M2] mode=10/45 alpha=0.095000 p_rel=3.265e-01 overlap=3.981e-02
+[S4M2] mode=20/45 alpha=0.145000 p_rel=6.015e-01 overlap=1.385e-01
+[S4M2] mode=30/45 alpha=0.195000 p_rel=3.452e-01 overlap=2.426e-02
+[S4M2] mode=40/45 alpha=0.245000 p_rel=1.003e-01 overlap=1.774e-03
+[S4M2] mode=45/45 alpha=0.270000 p_rel=4.822e-01 overlap=3.946e-02
+
+DENSE MODAL SUMMARY
+model               subset  n_modes  kappa_nrmse_mean  q_nrmse_mean  log_amp_rmse_mean  pressure_rel_l2_mean  pressure_overlap_error_mean
+   S4                  all       45          1.049184      0.223777           1.086763              0.862153                     0.193898
+   S4           off_anchor       41          1.049515      0.225544           1.079933              0.863580                     0.194822
+   S4    S4M2_modal_anchor        2          1.088564      0.202462           1.185774              0.774044                     0.127522
+   S4 spectral_only_anchor        2          1.003025      0.208866           1.127768              0.921014                     0.241333
+ S4M2                  all       45          0.260345      0.113806           0.168253              0.340260                     0.047640
+ S4M2           off_anchor       41          0.268679      0.117284           0.170982              0.347783                     0.047907
+ S4M2    S4M2_modal_anchor        2          0.015608      0.003969           0.009940              0.004723                     0.000009
+ S4M2 spectral_only_anchor        2          0.334245      0.152331           0.270611              0.521570                     0.089788
+
+LOCAL SUPERSONIC DENSE MODAL AUDIT: COMPLETED
+
+end: Tue Jul 28 11:53:10 AM CEST 2026

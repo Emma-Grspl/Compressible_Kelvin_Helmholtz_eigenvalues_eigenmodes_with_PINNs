@@ -1,0 +1,9 @@
+{
+  "selected_checkpoint": "models_saved/supersonic_general/smoke/best_joint_checkpoint.pt",
+  "best_stage_losses": {
+    "spectral_prefit": 0.7296509742736816,
+    "modal_frozen_spectrum": 5.077119827270508,
+    "joint": 83.05738830566406
+  },
+  "test_audited": false
+}

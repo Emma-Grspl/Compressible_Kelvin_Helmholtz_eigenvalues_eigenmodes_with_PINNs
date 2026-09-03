@@ -1,0 +1,767 @@
+===== IMPORTS AND HELPERS =====
+#!/usr/bin/env python3
+"""
+Joint spectral--modal training for one subsonic KH atlas chart.
+
+The trainable spectral branch predicts c_i(M, eta). Its prediction is inserted
+directly into the first-order pressure equations and far-field conditions used
+by the modal PINN. The two branches are optimized jointly.
+
+Only sparse scalar c_i anchors are used as classical supervision. Classical
+modal fields are used exclusively for post-training diagnostics.
+"""
+
+from __future__ import annotations
+
+import argparse
+import importlib
+import inspect
+import json
+import math
+import random
+from pathlib import Path
+from typing import Any, Callable
+
+import numpy as np
+import pandas as pd
+import torch
+from torch import nn
+from torch.nn import functional as F
+
+
+MODULES = {
+    "pq_legacy": "scripts.dev.train_subsonic_seedGEP_pq2d_continuous_M_alpha",
+    "pq_etaaware": "scripts.dev.train_subsonic_seedGEP_pq2d_continuous_M_alpha_etaaware",
+    "pQscaled": "scripts.dev.train_subsonic_seedGEP_pQscaled2d_continuous_M_alpha",
+}
+
+
+def parse_float_list(value: str | list[float] | tuple[float, ...] | None) -> list[float]:
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple)):
+        return [float(item) for item in value]
+    return [float(item) for item in str(value).replace(",", " ").split() if item.strip()]
+
+
+def call_supported(function: Callable[..., Any], **kwargs: Any) -> Any:
+    parameters = inspect.signature(function).parameters
+    selected = {key: value for key, value in kwargs.items() if key in parameters}
+    return function(**selected)
+
+
+def first_linear_input_dimension(state_dict: dict[str, torch.Tensor]) -> int | None:
+    candidates: list[tuple[int, int]] = []
+    for key, tensor in state_dict.items():
+        if key.endswith(".weight") and tensor.ndim == 2:
+            pieces = key.split(".")
+            index = next((int(piece) for piece in pieces if piece.isdigit()), 10**9)
+            candidates.append((index, int(tensor.shape[1])))
+    return min(candidates)[1] if candidates else None
+
+
+def infer_field_family(
+    requested: str,
+    checkpoint_path: Path,
+    checkpoint: dict[str, Any],
+) -> str:
+    if requested != "auto":
+        return requested
+
+    checkpoint_args = dict(checkpoint.get("args", {}))
+    text = " ".join(
+        [
+            str(checkpoint_path),
+            str(checkpoint_args.get("output_dir", "")),
+            str(checkpoint_args.get("field_family", "")),
+        ]
+    ).lower()
+
+    if "qscaled" in text or "pqscaled" in text:
+        return "pQscaled"
+
+    state = checkpoint.get("field_state_dict", {})
+    n_freq = int(checkpoint_args.get("n_freq", 12))
+    input_dim = first_linear_input_dimension(state)
+
+    if input_dim is not None:
+        base_dimension = input_dim - 2 * n_freq
+        if base_dimension >= 7:
+            return "pq_etaaware"
+
+    return "pq_legacy"
+
+
+def checkpoint_value(
+    cli_value: Any,
+    checkpoint_args: dict[str, Any],
+    name: str,
+    default: Any,
+) -> Any:
+    if cli_value is not None:
+        return cli_value
+    value = checkpoint_args.get(name, default)
+    return default if value is None else value
+
+
+class CiAtlasNet(nn.Module):
+    """
+    Trainable c_i branch in atlas coordinates.
+
+    External signature remains ci_net(alpha, Mach), because the existing
+    pressure residual functions use this interface. Internally, the network
+    converts alpha to eta = alpha / sqrt(1-M^2).
+    """
+
+    def __init__(
+        self,
+        *,
+        mach_min: float,
+        mach_max: float,
+        eta_min: float,
+        eta_max: float,
+        ci_init: float,
+        width: int = 96,
+        depth: int = 3,
+    ) -> None:
+        super().__init__()
+
+        if mach_max <= mach_min:
+            raise ValueError("mach_max must be greater than mach_min.")
+        if eta_max <= eta_min:
+            raise ValueError("eta_max must be greater than eta_min.")
+        if depth < 1:
+            raise ValueError("depth must be at least 1.")
+
+        self.mach_min = float(mach_min)
+        self.mach_max = float(mach_max)
+        self.eta_min = float(eta_min)
+        self.eta_max = float(eta_max)
+
+        layers: list[nn.Module] = [nn.Linear(5, width), nn.Tanh()]
+        for _ in range(depth - 1):
+            layers.extend([nn.Linear(width, width), nn.Tanh()])
+        layers.append(nn.Linear(width, 1))
+        self.net = nn.Sequential(*layers)
+
+        initial = max(float(ci_init), 1.0e-5)
+        inverse_softplus = math.log(math.expm1(initial))
+
+        with torch.no_grad():
+            final_layer = self.net[-1]
+            assert isinstance(final_layer, nn.Linear)
+            final_layer.weight.mul_(0.05)
+            final_layer.bias.fill_(inverse_softplus)
+
+    def forward(self, alpha: torch.Tensor, mach: torch.Tensor) -> torch.Tensor:
+        cutoff = torch.sqrt(torch.clamp(1.0 - mach**2, min=1.0e-12))
+        eta = alpha / cutoff
+
+        eta_normalized = (
+            2.0 * (eta - self.eta_min) / (self.eta_max - self.eta_min) - 1.0
+        )
+        mach_normalized = (
+            2.0 * (mach - self.mach_min) / (self.mach_max - self.mach_min) - 1.0
+        )
+
+        features = torch.cat(
+            [
+                eta_normalized,
+                mach_normalized,
+                eta_normalized**2,
+                eta_normalized * mach_normalized,
+                mach_normalized**2,
+            ],
+            dim=1,
+        )
+        return F.softplus(self.net(features)) + 1.0e-10
+
+
+def ci_anchor_loss(
+    ci_net: nn.Module,
+    anchor_df: pd.DataFrame,
+    device: torch.device,
+) -> torch.Tensor:
+    dtype = torch.float64
+
+    alpha = torch.tensor(
+        anchor_df["alpha"].to_numpy(dtype=float), device=device, dtype=dtype
+    ).view(-1, 1)
+    mach = torch.tensor(
+        anchor_df["Mach"].to_numpy(dtype=float), device=device, dtype=dtype
+    ).view(-1, 1)
+    reference = torch.tensor(
+        anchor_df["ci"].to_numpy(dtype=float), device=device, dtype=dtype
+    ).view(-1, 1)
+
+    prediction = ci_net(alpha, mach)
+    scale = torch.clamp(reference.abs(), min=5.0e-2)
+    return torch.mean(((prediction - reference) / scale) ** 2)
+
+
+def gradient_norm(
+    gradients: tuple[torch.Tensor | None, ...] | list[torch.Tensor | None],
+) -> float:
+    total = 0.0
+    found = False
+    for gradient in gradients:
+        if gradient is None:
+            continue
+        found = True
+        total += float(gradient.detach().double().pow(2).sum().cpu())
+    return math.sqrt(total) if found else 0.0
+
+
+def parameter_gradient_norm(module: nn.Module) -> float:
+    return gradient_norm([parameter.grad for parameter in module.parameters()])
+
+
+def anchor_metrics(
+    ci_net: nn.Module,
+    anchor_df: pd.DataFrame,
+    device: torch.device,
+) -> dict[str, float]:
+    dtype = torch.float64
+    alpha = torch.tensor(
+        anchor_df["alpha"].to_numpy(dtype=float), device=device, dtype=dtype
+    ).view(-1, 1)
+    mach = torch.tensor(
+        anchor_df["Mach"].to_numpy(dtype=float), device=device, dtype=dtype
+    ).view(-1, 1)
+    reference = torch.tensor(
+        anchor_df["ci"].to_numpy(dtype=float), device=device, dtype=dtype
+    ).view(-1, 1)
+
+    with torch.no_grad():
+        prediction = ci_net(alpha, mach)
+
+    absolute = (prediction - reference).abs()
+    scale = torch.clamp(reference.abs(), min=5.0e-2)
+
+    return {
+        "ci_anchor_mae_abs": float(absolute.mean().cpu()),
+        "ci_anchor_linf_abs": float(absolute.max().cpu()),
+        "ci_anchor_rel_rmse_scaled": float(
+            torch.sqrt(torch.mean((absolute / scale) ** 2)).cpu()
+        ),
+    }
+
+
+def build_parser() -> argparse.ArgumentParser:
+
+===== PARSER AND CONFIGURATION =====
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Jointly train c_i and the modal field for one atlas chart."
+    )
+
+    parser.add_argument("--init-checkpoint", required=True)
+    parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--device", default="cuda")
+    parser.add_argument(
+        "--field-family",
+        choices=["auto", *MODULES.keys()],
+        default="auto",
+    )
+
+    parser.add_argument("--mach-min", type=float)
+    parser.add_argument("--mach-max", type=float)
+    parser.add_argument("--eta-min", type=float)
+    parser.add_argument("--eta-max", type=float)
+
+    parser.add_argument("--anchor-mach-values", default="")
+    parser.add_argument("--anchor-eta-values", default="")
+    parser.add_argument("--eval-mach-values", default="")
+    parser.add_argument("--eval-eta-values", default="")
+
+    parser.add_argument("--epochs", type=int)
+    parser.add_argument("--n-train", type=int)
+    parser.add_argument("--n-sym", type=int)
+    parser.add_argument("--n-y", type=int)
+
+    parser.add_argument("--ymax", type=float)
+    parser.add_argument("--central-ymax", type=float)
+    parser.add_argument("--sym-ymax", type=float)
+
+    parser.add_argument("--field-lr", type=float, default=5.0e-5)
+    parser.add_argument("--ci-lr", type=float, default=2.0e-4)
+    parser.add_argument("--ci-prefit-steps", type=int, default=3000)
+    parser.add_argument("--ci-width", type=int, default=96)
+    parser.add_argument("--ci-depth", type=int, default=3)
+
+    parser.add_argument("--width", type=int)
+    parser.add_argument("--depth", type=int)
+    parser.add_argument("--n-freq", type=int)
+
+    parser.add_argument("--w-compat", type=float)
+    parser.add_argument("--w-ode", type=float)
+    parser.add_argument("--w-bc", type=float)
+    parser.add_argument("--w-gauge", type=float)
+    parser.add_argument("--w-q-center", type=float)
+    parser.add_argument("--w-parity", type=float)
+    parser.add_argument("--w-ci", type=float, default=1000.0)
+
+    parser.add_argument("--amp-mask-frac", type=float)
+    parser.add_argument("--print-every", type=int, default=100)
+    parser.add_argument("--seed", type=int, default=1234)
+    return parser
+
+
+def main() -> None:
+    cli = build_parser().parse_args()
+
+    random.seed(cli.seed)
+    np.random.seed(cli.seed)
+    torch.manual_seed(cli.seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(cli.seed)
+
+    checkpoint_path = Path(cli.init_checkpoint)
+    if not checkpoint_path.is_file():
+        raise FileNotFoundError(checkpoint_path)
+
+    device = torch.device(
+        cli.device if cli.device == "cpu" or torch.cuda.is_available() else "cpu"
+    )
+    dtype = torch.float64
+
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    checkpoint_args = dict(checkpoint.get("args", {}))
+
+    family = infer_field_family(cli.field_family, checkpoint_path, checkpoint)
+    atlas_module = importlib.import_module(MODULES[family])
+
+    raw_ranges = {
+        "mach_min": checkpoint_value(cli.mach_min, checkpoint_args, "mach_min", None),
+        "mach_max": checkpoint_value(cli.mach_max, checkpoint_args, "mach_max", None),
+        "eta_min": checkpoint_value(cli.eta_min, checkpoint_args, "eta_min", None),
+        "eta_max": checkpoint_value(cli.eta_max, checkpoint_args, "eta_max", None),
+    }
+    missing_ranges = [name for name, value in raw_ranges.items() if value is None]
+    if missing_ranges:
+        raise RuntimeError(
+            "The initial checkpoint does not contain the chart bounds "
+            f"{missing_ranges}. Supply them explicitly with --mach-min, "
+            "--mach-max, --eta-min and --eta-max."
+        )
+
+    mach_min = float(raw_ranges["mach_min"])
+    mach_max = float(raw_ranges["mach_max"])
+    eta_min = float(raw_ranges["eta_min"])
+    eta_max = float(raw_ranges["eta_max"])
+
+    if not (0.0 <= mach_min < mach_max < 1.0):
+        raise ValueError(f"Invalid Mach interval [{mach_min}, {mach_max}].")
+    if not (0.0 < eta_min < eta_max):
+        raise ValueError(f"Invalid eta interval [{eta_min}, {eta_max}].")
+
+    ymax = float(checkpoint_value(cli.ymax, checkpoint_args, "ymax", 100.0))
+    central_ymax = float(
+        checkpoint_value(cli.central_ymax, checkpoint_args, "central_ymax", 25.0)
+    )
+    sym_ymax = float(
+        checkpoint_value(cli.sym_ymax, checkpoint_args, "sym_ymax", central_ymax)
+    )
+
+    epochs = int(checkpoint_value(cli.epochs, checkpoint_args, "epochs", 15000))
+    n_train = int(checkpoint_value(cli.n_train, checkpoint_args, "n_train", 4096))
+    n_sym = int(checkpoint_value(cli.n_sym, checkpoint_args, "n_sym", 768))
+    n_y = int(checkpoint_value(cli.n_y, checkpoint_args, "n_y", 5001))
+
+    width = int(checkpoint_value(cli.width, checkpoint_args, "width", 256))
+    depth = int(checkpoint_value(cli.depth, checkpoint_args, "depth", 7))
+    n_freq = int(checkpoint_value(cli.n_freq, checkpoint_args, "n_freq", 12))
+
+    w_compat = float(checkpoint_value(cli.w_compat, checkpoint_args, "w_compat", 20.0))
+    w_ode = float(checkpoint_value(cli.w_ode, checkpoint_args, "w_ode", 1.0))
+    w_bc = float(checkpoint_value(cli.w_bc, checkpoint_args, "w_bc", 30.0))
+    w_gauge = float(checkpoint_value(cli.w_gauge, checkpoint_args, "w_gauge", 100.0))
+    w_q_center = float(
+        checkpoint_value(cli.w_q_center, checkpoint_args, "w_q_center", 2.0)
+    )
+    w_parity = float(
+        checkpoint_value(cli.w_parity, checkpoint_args, "w_parity", 0.2)
+    )
+    amp_mask_frac = float(
+        checkpoint_value(cli.amp_mask_frac, checkpoint_args, "amp_mask_frac", 0.05)
+    )
+
+    old_anchor_machs = parse_float_list(
+        checkpoint_args.get("anchor_mach_values", "")
+    )
+    anchor_mach_values = parse_float_list(cli.anchor_mach_values)
+    if not anchor_mach_values:
+        anchor_mach_values = old_anchor_machs
+    if not anchor_mach_values:
+        anchor_mach_values = np.linspace(mach_min, mach_max, 5).tolist()
+
+    anchor_eta_values = parse_float_list(cli.anchor_eta_values)
+    if not anchor_eta_values:
+        anchor_eta_values = np.linspace(eta_min, eta_max, 4).tolist()
+
+    if len(anchor_eta_values) != 4:
+        raise ValueError(
+            "Exactly four eta anchors per Mach are required; "
+            f"received {len(anchor_eta_values)}."
+        )
+
+    for value in anchor_mach_values:
+        if not mach_min <= value <= mach_max:
+            raise ValueError(f"Anchor Mach {value} is outside this chart.")
+    for value in anchor_eta_values:
+        if not eta_min <= value <= eta_max:
+            raise ValueError(f"Anchor eta {value} is outside this chart.")
+
+    eval_mach_values = parse_float_list(cli.eval_mach_values)
+    if not eval_mach_values:
+        eval_mach_values = np.linspace(mach_min, mach_max, 3).tolist()
+
+    eval_eta_values = parse_float_list(cli.eval_eta_values)
+    if not eval_eta_values:
+        eta_step = (eta_max - eta_min) / 8.0
+        eval_eta_values = [
+            eta_min + eta_step,
+            0.5 * (eta_min + eta_max),
+            eta_max - eta_step,
+        ]
+
+    cli.mach_min = mach_min
+    cli.mach_max = mach_max
+    cli.eta_min = eta_min
+    cli.eta_max = eta_max
+    cli.ymax = ymax
+    cli.central_ymax = central_ymax
+    cli.sym_ymax = sym_ymax
+    cli.epochs = epochs
+    cli.n_train = n_train
+    cli.n_sym = n_sym
+    cli.n_y = n_y
+    cli.width = width
+    cli.depth = depth
+    cli.n_freq = n_freq
+    cli.w_compat = w_compat
+    cli.w_ode = w_ode
+    cli.w_bc = w_bc
+    cli.w_gauge = w_gauge
+    cli.w_q_center = w_q_center
+    cli.w_parity = w_parity
+    cli.amp_mask_frac = amp_mask_frac
+    cli.anchor_mach_values = " ".join(map(str, anchor_mach_values))
+    cli.anchor_eta_values = " ".join(map(str, anchor_eta_values))
+    cli.eval_mach_values = " ".join(map(str, eval_mach_values))
+    cli.eval_eta_values = " ".join(map(str, eval_eta_values))
+
+    output_dir = Path(cli.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    alpha_corners = [
+        eta * math.sqrt(max(1.0 - mach**2, 1.0e-14))
+        for eta in (eta_min, eta_max)
+        for mach in (mach_min, mach_max)
+    ]
+    alpha_min = min(alpha_corners)
+    alpha_max = max(alpha_corners)
+
+    field = call_supported(
+        atlas_module.FieldPQNet,
+        ymax=ymax,
+        alpha_min=alpha_min,
+        alpha_max=alpha_max,
+        mach_min=mach_min,
+        mach_max=mach_max,
+        eta_min=eta_min,
+        eta_max=eta_max,
+        width=width,
+        depth=depth,
+        n_freq=n_freq,
+    ).to(device=device, dtype=dtype)
+
+    field_state = checkpoint.get("field_state_dict")
+    if field_state is None:
+        raise KeyError(f"{checkpoint_path} has no field_state_dict.")
+
+    load_result = field.load_state_dict(field_state, strict=True)
+
+    anchor_df = atlas_module.build_ci_anchor_table_eta(
+        anchor_mach_values, anchor_eta_values
+    )
+    anchor_df.to_csv(output_dir / "ci_anchor_points.csv", index=False)
+
+    counts = anchor_df.groupby("Mach").size()
+    if not (counts == 4).all():
+        raise RuntimeError(
+            "The anchor table does not contain exactly four anchors per Mach: "
+            f"{counts.to_dict()}"
+        )
+
+    ci_net = CiAtlasNet(
+        mach_min=mach_min,
+        mach_max=mach_max,
+        eta_min=eta_min,
+        eta_max=eta_max,
+        ci_init=float(anchor_df["ci"].mean()),
+        width=cli.ci_width,
+        depth=cli.ci_depth,
+    ).to(device=device, dtype=dtype)
+
+    print("=" * 92)
+    print("JOINT SPECTRAL--MODAL ATLAS TRAINING")
+    print(f"checkpoint       : {checkpoint_path}")
+    print(f"output           : {output_dir}")
+    print(f"field family     : {family}")
+    print(f"load result      : {load_result}")
+    print(f"Mach interval    : [{mach_min}, {mach_max}]")
+    print(f"eta interval     : [{eta_min}, {eta_max}]")
+    print(f"anchor Machs     : {anchor_mach_values}")
+    print(f"four eta anchors : {anchor_eta_values}")
+    print("c_i detached     : False")
+    print("=" * 92)
+
+    prefit_optimizer = torch.optim.AdamW(
+        ci_net.parameters(),
+        lr=cli.ci_lr,
+        weight_decay=1.0e-10,
+        foreach=False,
+
+===== TRAINING LOOP =====
+        foreach=False,
+    )
+
+    prefit_rows: list[dict[str, float | int]] = []
+    for step in range(1, cli.ci_prefit_steps + 1):
+        prefit_optimizer.zero_grad(set_to_none=True)
+        loss_ci = ci_anchor_loss(ci_net, anchor_df, device)
+        loss_ci.backward()
+        grad_value = parameter_gradient_norm(ci_net)
+        prefit_optimizer.step()
+
+        prefit_rows.append(
+            {
+                "step": step,
+                "ci_anchor_loss": float(loss_ci.detach().cpu()),
+                "ci_grad_norm": grad_value,
+            }
+        )
+
+        if step == 1 or step == cli.ci_prefit_steps or step % 500 == 0:
+            print(
+                f"c_i prefit {step:6d} | "
+                f"loss={float(loss_ci.detach().cpu()):.4e} | "
+                f"grad={grad_value:.4e}"
+            )
+
+    pd.DataFrame(prefit_rows).to_csv(
+        output_dir / "ci_prefit_history.csv", index=False
+    )
+
+    optimizer = torch.optim.AdamW(
+        [
+            {"params": field.parameters(), "lr": cli.field_lr},
+            {"params": ci_net.parameters(), "lr": cli.ci_lr},
+        ],
+        weight_decay=1.0e-8,
+        foreach=False,
+    )
+
+    def schedule_multiplier(epoch: int) -> float:
+        fraction = min(epoch / max(epochs, 1), 1.0)
+        return 0.05 + 0.95 * 0.5 * (1.0 + math.cos(math.pi * fraction))
+
+    scheduler = torch.optim.lr_scheduler.LambdaLR(
+        optimizer, lr_lambda=[schedule_multiplier, schedule_multiplier]
+    )
+
+    physics_function = getattr(atlas_module, "physics_losses_scaledQ", None)
+    if physics_function is None:
+        physics_function = getattr(atlas_module, "physics_losses")
+
+    history: list[dict[str, float | int]] = []
+    best_loss = float("inf")
+    best_epoch = -1
+    coupling_checked = False
+
+    for epoch in range(1, epochs + 1):
+        field.train()
+        ci_net.train()
+        optimizer.zero_grad(set_to_none=True)
+
+        y, alpha, mach, _eta = atlas_module.sample_batch_eta(
+            n=n_train,
+            ymax=ymax,
+            central_ymax=central_ymax,
+            mach_min=mach_min,
+            mach_max=mach_max,
+            eta_min=eta_min,
+            eta_max=eta_max,
+            device=device,
+        )
+
+        terms = call_supported(
+            physics_function,
+            field=field,
+            ci_net=ci_net,
+            ci_provider=ci_net,
+            y=y,
+            alpha=alpha,
+            mach=mach,
+            ymax=ymax,
+            detach_ci=False,
+        )
+
+        required = {"compat", "ode", "bc", "gauge", "q_center"}
+        missing = required.difference(terms)
+        if missing:
+            raise RuntimeError(
+                f"Missing physics terms {sorted(missing)}. "
+                f"Available terms: {sorted(terms)}"
+            )
+
+        modal_loss = (
+            w_compat * terms["compat"]
+            + w_ode * terms["ode"]
+            + w_bc * terms["bc"]
+            + w_gauge * terms["gauge"]
+            + w_q_center * terms["q_center"]
+        )
+
+        if w_parity > 0.0:
+            parity = atlas_module.parity_loss_eta(
+                field=field,
+                n=n_sym,
+                sym_ymax=sym_ymax,
+                mach_min=mach_min,
+                mach_max=mach_max,
+                eta_min=eta_min,
+                eta_max=eta_max,
+                device=device,
+            )
+        else:
+            parity = torch.zeros((), device=device, dtype=dtype)
+
+        modal_loss = modal_loss + w_parity * parity
+        spectral_anchor_loss = ci_anchor_loss(ci_net, anchor_df, device)
+        loss = modal_loss + cli.w_ci * spectral_anchor_loss
+
+        if not coupling_checked:
+            coupling_gradients = torch.autograd.grad(
+                modal_loss,
+                tuple(ci_net.parameters()),
+                retain_graph=True,
+                allow_unused=True,
+            )
+            coupling_value = gradient_norm(coupling_gradients)
+            print(
+                "Physics-only gradient norm reaching c_i branch: "
+                f"{coupling_value:.6e}"
+            )
+            if not math.isfinite(coupling_value) or coupling_value <= 0.0:
+                raise RuntimeError(
+                    "No gradient from modal physics to c_i. "
+                    "The spectral and modal branches are not coupled."
+                )
+            coupling_checked = True
+
+        loss.backward()
+        spectral_grad_value = parameter_gradient_norm(ci_net)
+
+        torch.nn.utils.clip_grad_norm_(
+            list(field.parameters()) + list(ci_net.parameters()), max_norm=10.0
+        )
+        optimizer.step()
+        scheduler.step()
+
+        with torch.no_grad():
+            ci_batch_mean = float(ci_net(alpha, mach).mean().cpu())
+
+        row = {
+            "epoch": epoch,
+            "loss": float(loss.detach().cpu()),
+            "modal_loss": float(modal_loss.detach().cpu()),
+            "compat": float(terms["compat"].detach().cpu()),
+            "ode": float(terms["ode"].detach().cpu()),
+            "bc": float(terms["bc"].detach().cpu()),
+            "gauge": float(terms["gauge"].detach().cpu()),
+            "q_center": float(terms["q_center"].detach().cpu()),
+            "parity": float(parity.detach().cpu()),
+            "ci_anchor": float(spectral_anchor_loss.detach().cpu()),
+            "ci_batch_mean": ci_batch_mean,
+            "ci_grad_norm": spectral_grad_value,
+            "field_lr": float(optimizer.param_groups[0]["lr"]),
+            "ci_lr": float(optimizer.param_groups[1]["lr"]),
+        }
+        history.append(row)
+
+        if row["loss"] < best_loss:
+            best_loss = row["loss"]
+            best_epoch = epoch
+            torch.save(
+                {
+                    "field_state_dict": field.state_dict(),
+                    "ci_state_dict": ci_net.state_dict(),
+                    "args": {
+                        **vars(cli),
+                        "field_family_resolved": family,
+                        "mach_min": mach_min,
+                        "mach_max": mach_max,
+                        "eta_min": eta_min,
+                        "eta_max": eta_max,
+                        "width": width,
+                        "depth": depth,
+                        "n_freq": n_freq,
+                        "detach_ci_in_mode_branch": False,
+                        "spectral_source": "trainable_CiAtlasNet",
+                        "n_ci_anchors": int(len(anchor_df)),
+                        "n_ci_anchors_per_mach": 4,
+                    },
+                    "anchor_df": anchor_df.to_dict(orient="list"),
+                    "best_epoch": best_epoch,
+                    "best_loss": best_loss,
+                },
+                output_dir / "model_best.pt",
+            )
+
+        if epoch == 1 or epoch == epochs or epoch % cli.print_every == 0:
+            print(
+                f"epoch={epoch:6d} "
+                f"loss={row['loss']:.4e} "
+                f"modal={row['modal_loss']:.4e} "
+                f"ci_anchor={row['ci_anchor']:.4e} "
+                f"ci_grad={row['ci_grad_norm']:.4e}"
+            )
+
+    pd.DataFrame(history).to_csv(output_dir / "history.csv", index=False)
+
+    selected = torch.load(output_dir / "model_best.pt", map_location=device)
+    field.load_state_dict(selected["field_state_dict"], strict=True)
+    ci_net.load_state_dict(selected["ci_state_dict"], strict=True)
+    field.eval()
+    ci_net.eval()
+
+    metrics = anchor_metrics(ci_net, anchor_df, device)
+    pd.DataFrame([metrics]).to_csv(
+        output_dir / "ci_anchor_metrics.csv", index=False
+    )
+
+    diagnostics = atlas_module.run_diagnostics_eta(
+        cli, field, ci_net, anchor_df, device
+    )
+
+    selected["ci_anchor_metrics"] = metrics
+    selected["diagnostics_columns"] = list(diagnostics.columns)
+    torch.save(selected, output_dir / "model_state.pt")
+
+    metadata = {
+        "field_family": family,
+        "init_checkpoint": str(checkpoint_path),
+        "output_dir": str(output_dir),
+        "best_epoch": best_epoch,
+        "best_loss": best_loss,
+        "anchor_mach_values": anchor_mach_values,
+        "anchor_eta_values": anchor_eta_values,
+        "n_anchors_per_mach": 4,
+        "joint_physics_coupling": True,
+        "ci_detached": False,
+        "classical_modal_supervision_in_training": False,
+        **metrics,
+    }
+    (output_dir / "joint_training_metadata.json").write_text(

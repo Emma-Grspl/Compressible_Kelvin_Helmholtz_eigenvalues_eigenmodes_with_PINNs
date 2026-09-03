@@ -1,0 +1,684 @@
+================================================================================
+S4M0 TRAINING TEMPLATE REPORT
+DATE=Mon Aug  3 09:59:17 AM CEST 2026
+PWD=/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT
+================================================================================
+
+################################################################################
+# 1. TRAINING SLURM SCRIPTS
+################################################################################
+
+================================================================================
+FILE: code/slurm/modal_reconstruction/train_local_supersonic_long.slurm
+================================================================================
+     1	#!/bin/bash
+     2	#SBATCH --output=assets/pinn_supersonic/logs/%x_%j.out
+     3	#SBATCH --error=assets/pinn_supersonic/logs/%x_%j.err
+     4	#SBATCH --time=12:00:00
+     5	#SBATCH --nodes=1
+     6	#SBATCH --ntasks=1
+     7	#SBATCH --cpus-per-task=8
+     8	#SBATCH --gres=gpu:1
+     9	#SBATCH --hint=nomultithread
+    10	#SBATCH --account=fdb@v100
+    11	
+    12	set -euo pipefail
+    13	
+    14	CONFIG="${1:?Missing configuration path}"
+    15	OUTPUT_DIR="${2:?Missing output directory}"
+    16	
+    17	module purge
+    18	module load pytorch-gpu/py3/2.1.1
+    19	
+    20	cd "$WORK/These_PINN_KH_RT"
+    21	
+    22	export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+    23	export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    24	export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    25	export OPENBLAS_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    26	
+    27	echo "===== LOCAL SUPERSONIC LONG TRAINING ====="
+    28	echo "job        : ${SLURM_JOB_ID}"
+    29	echo "job name   : ${SLURM_JOB_NAME}"
+    30	echo "node       : $(hostname)"
+    31	echo "config     : ${CONFIG}"
+    32	echo "output     : ${OUTPUT_DIR}"
+    33	echo "start      : $(date)"
+    34	echo
+    35	
+    36	nvidia-smi
+    37	
+    38	srun \
+    39	  python \
+    40	    code/scripts/training/train_local_supersonic_kappa_q_logamp.py \
+    41	    --config "$CONFIG" \
+    42	    --output-dir "$OUTPUT_DIR" \
+    43	    --device cuda \
+    44	    --prefit-steps 2000 \
+    45	    --modal-steps 4000 \
+    46	    --joint-steps 4000 \
+    47	    --spectral-lr 2e-4 \
+    48	    --modal-lr 1e-4 \
+    49	    --joint-spectral-lr 5e-5 \
+    50	    --joint-modal-lr 5e-5 \
+    51	    --n-interior 1024 \
+    52	    --n-boundary 96 \
+    53	    --modal-points-per-mode 257 \
+    54	    --print-every 100 \
+    55	    --overwrite
+    56	
+    57	echo
+    58	echo "end: $(date)"
+
+================================================================================
+FILE: code/slurm/modal_reconstruction/train_local_supersonic_M150_long.slurm
+================================================================================
+     1	#!/bin/bash
+     2	#SBATCH --output=assets/pinn_supersonic/logs/%x_%j.out
+     3	#SBATCH --error=assets/pinn_supersonic/logs/%x_%j.err
+     4	#SBATCH --time=12:00:00
+     5	#SBATCH --nodes=1
+     6	#SBATCH --ntasks=1
+     7	#SBATCH --cpus-per-task=8
+     8	#SBATCH --gres=gpu:1
+     9	#SBATCH --hint=nomultithread
+    10	#SBATCH --account=fdb@v100
+    11	
+    12	set -euo pipefail
+    13	
+    14	CONFIG="${1:?Missing configuration path}"
+    15	OUTPUT_DIR="${2:?Missing output directory}"
+    16	
+    17	module purge
+    18	module load pytorch-gpu/py3/2.1.1
+    19	
+    20	cd "$WORK/These_PINN_KH_RT"
+    21	
+    22	export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+    23	export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    24	export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    25	export OPENBLAS_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+    26	
+    27	echo "===== LONG LOCAL SUPERSONIC M150 ====="
+    28	echo "job        : ${SLURM_JOB_ID}"
+    29	echo "node       : $(hostname)"
+    30	echo "config     : ${CONFIG}"
+    31	echo "output     : ${OUTPUT_DIR}"
+    32	echo "start      : $(date)"
+    33	echo
+    34	
+    35	nvidia-smi
+    36	
+    37	srun \
+    38	  python \
+    39	    code/scripts/training/train_local_supersonic_kappa_q_logamp.py \
+    40	    --config "$CONFIG" \
+    41	    --output-dir "$OUTPUT_DIR" \
+    42	    --device cuda \
+    43	    --prefit-steps 2000 \
+    44	    --modal-steps 4000 \
+    45	    --joint-steps 4000 \
+    46	    --spectral-lr 2e-4 \
+    47	    --modal-lr 1e-4 \
+    48	    --joint-spectral-lr 5e-5 \
+    49	    --joint-modal-lr 5e-5 \
+    50	    --n-interior 1024 \
+    51	    --n-boundary 96 \
+    52	    --modal-points-per-mode 257 \
+    53	    --print-every 100 \
+    54	    --overwrite
+    55	
+    56	echo
+    57	echo "end: $(date)"
+
+################################################################################
+# 2. S4 CONFIGS
+################################################################################
+
+================================================================================
+FILE: code/configs/legacy/S4_f7e389f47c.json
+================================================================================
+{
+    "experiment_family": "local_supersonic_M110_sparse_v1",
+    "Mach": 1.1,
+    "alpha_min": 0.09,
+    "alpha_max": 0.345,
+    "spectral_reference": "experiments/modal_reconstruction/legacy_outputs/data/table_spectral_full_M110.csv",
+    "spectral_anchor_file": "experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M110.csv",
+    "seed": 12345,
+    "model": {
+        "xi_max": 0.985,
+        "mapping_scale": 3.0,
+        "spectral_width": 96,
+        "spectral_depth": 3,
+        "modal_width": 256,
+        "modal_depth": 7,
+        "n_frequencies": 12,
+        "mode_experts": 2,
+        "alpha_split": 0.2275,
+        "alpha_gate_width": 0.0204,
+        "cr_min": -0.11805843887026102,
+        "cr_max": 0.3541753238627558,
+        "ci_floor": 1e-06,
+        "ci_max": 0.2874878683316643
+    },
+    "loss_weights": {
+        "riccati_kappa": 1.0,
+        "riccati_q": 1.0,
+        "log_amp_compatibility": 5.0,
+        "boundary_kappa": 10.0,
+        "boundary_q": 10.0,
+        "spectral": 50.0,
+        "modal_kappa": 1.0,
+        "modal_q": 1.0,
+        "modal_log_amp": 1.0
+    },
+    "modal_representation": [
+        "kappa",
+        "q",
+        "logabs_p_center_gauge"
+    ],
+    "predict_phase": false,
+    "use_spectral_supervision": true,
+    "use_modal_supervision": false,
+    "modal_anchor_file": null,
+    "experiment": "S4",
+    "output_dir": "assets/pinn_supersonic/pilots/local_M110_sparse_v1/runs/S4"
+}
+
+================================================================================
+FILE: code/configs/legacy/S4_1b16d52ace.json
+================================================================================
+{
+    "experiment_family": "local_supersonic_M150_sparse_v1",
+    "Mach": 1.5,
+    "alpha_min": 0.05,
+    "alpha_max": 0.27,
+    "spectral_reference": "experiments/modal_reconstruction/legacy_outputs/data/table_spectral_full_M150.csv",
+    "spectral_anchor_file": "experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M150.csv",
+    "seed": 12345,
+    "model": {
+        "xi_max": 0.985,
+        "mapping_scale": 3.0,
+        "spectral_width": 96,
+        "spectral_depth": 3,
+        "modal_width": 256,
+        "modal_depth": 7,
+        "n_frequencies": 12,
+        "mode_experts": 2,
+        "alpha_split": 0.17,
+        "alpha_gate_width": 0.02,
+        "cr_min": 0.2,
+        "cr_max": 0.5,
+        "ci_floor": 1e-06,
+        "ci_max": 0.15
+    },
+    "loss_weights": {
+        "riccati_kappa": 1.0,
+        "riccati_q": 1.0,
+        "log_amp_compatibility": 5.0,
+        "boundary_kappa": 10.0,
+        "boundary_q": 10.0,
+        "spectral": 50.0,
+        "modal_kappa": 1.0,
+        "modal_q": 1.0,
+        "modal_log_amp": 1.0
+    },
+    "modal_representation": [
+        "kappa",
+        "q",
+        "logabs_p_center_gauge"
+    ],
+    "predict_phase": false,
+    "use_spectral_supervision": true,
+    "use_modal_supervision": false,
+    "modal_anchor_file": null,
+    "experiment": "S4",
+    "output_dir": "assets/pinn_supersonic/pilots/local_M150_sparse_v1/runs/S4"
+}
+
+================================================================================
+FILE: code/configs/legacy/S4_735b5955e4.json
+================================================================================
+{
+    "experiment_family": "local_supersonic_M190_sparse_v1",
+    "Mach": 1.9,
+    "alpha_min": 0.05,
+    "alpha_max": 0.215,
+    "spectral_reference": "experiments/modal_reconstruction/legacy_outputs/data/table_spectral_full_M190.csv",
+    "spectral_anchor_file": "experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M190.csv",
+    "seed": 12345,
+    "model": {
+        "xi_max": 0.985,
+        "mapping_scale": 3.0,
+        "spectral_width": 96,
+        "spectral_depth": 3,
+        "modal_width": 256,
+        "modal_depth": 7,
+        "n_frequencies": 12,
+        "mode_experts": 2,
+        "alpha_split": 0.14,
+        "alpha_gate_width": 0.013199999999999998,
+        "cr_min": 0.35750130330964924,
+        "cr_max": 0.61185864489249,
+        "ci_floor": 1e-06,
+        "ci_max": 0.15
+    },
+    "loss_weights": {
+        "riccati_kappa": 1.0,
+        "riccati_q": 1.0,
+        "log_amp_compatibility": 5.0,
+        "boundary_kappa": 10.0,
+        "boundary_q": 10.0,
+        "spectral": 50.0,
+        "modal_kappa": 1.0,
+        "modal_q": 1.0,
+        "modal_log_amp": 1.0
+    },
+    "modal_representation": [
+        "kappa",
+        "q",
+        "logabs_p_center_gauge"
+    ],
+    "predict_phase": false,
+    "use_spectral_supervision": true,
+    "use_modal_supervision": false,
+    "modal_anchor_file": null,
+    "experiment": "S4",
+    "output_dir": "assets/pinn_supersonic/pilots/local_M190_sparse_v1/runs/S4"
+}
+
+################################################################################
+# 3. PILOT FILE TREES
+################################################################################
+
+================================================================================
+PILOT: assets/pinn_supersonic/pilots/local_M110_sparse_v1
+================================================================================
+code/configs/legacy/P0_b311639efd.json	4 KB
+code/configs/legacy/S4_f7e389f47c.json	4 KB
+code/configs/legacy/S4M2_e8091069fa.json	4 KB
+code/configs/legacy/S4M4_61039b8b8a.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/data/modal_bank_S4M2_M110.npz	616 KB
+experiments/modal_reconstruction/legacy_outputs/data/modal_bank_S4M4_M110.npz	1220 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M2_M110.csv	8 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M110.csv	8 KB
+experiments/modal_reconstruction/legacy_outputs/data/pilot_data_report_8c714284b4.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M110.csv	8 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_spectral_full_M110.csv	64 KB
+experiments/modal_reconstruction/legacy_outputs/dense_modal_audit_S4_vs_S4M4/audit_metadata.json	4 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_paired_comparison.csv	32 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_per_mode_metrics.csv	40 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_S4M4_minus_S4.csv	32 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_S4_vs_S4M4_per_mode.csv	40 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_S4_vs_S4M4_summary.csv	4 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_summary.csv	4 KB
+models_saved/supersonic_general/long_S4/best_joint_checkpoint_21136e1623.pt	3244 KB
+models_saved/modal_reconstruction/long_S4/best_modal_spectral_fixed_spectrum_checkpoint_7ffc709495.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4/checkpoint_selection_3a3789dcf6.json	4 KB
+models_saved/supersonic_general/long_S4/final_checkpoint_9576873dca.pt	3244 KB
+models_saved/supersonic_general/long_S4/initial_checkpoint_3cdce8dd07.pt	3244 KB
+models_saved/supersonic_general/long_S4/last_checkpoint_55608c6c8d.pt	3244 KB
+models_saved/supersonic_general/long_S4M4/best_joint_checkpoint.pt	3244 KB
+models_saved/modal_reconstruction/long_S4M4/best_modal_spectral_fixed_spectrum_checkpoint.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4M4/checkpoint_selection.json	4 KB
+models_saved/supersonic_general/long_S4M4/final_checkpoint.pt	3244 KB
+models_saved/supersonic_general/long_S4M4/initial_checkpoint.pt	3244 KB
+models_saved/supersonic_general/long_S4M4/last_checkpoint.pt	3244 KB
+code/configs/legacy/S4M4_61039b8b8a.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4M4/table_spectral_audit_predictions.csv	68 KB
+experiments/supersonic_general/legacy_outputs/long_S4M4/spectral_metrics.json	4 KB
+experiments/supersonic_general/legacy_outputs/long_S4M4/table_training_history.csv	2160 KB
+code/configs/legacy/S4_f7e389f47c.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4/table_spectral_audit_predictions_958f29d752.csv	68 KB
+experiments/supersonic_general/legacy_outputs/long_S4/spectral_metrics_afa219b2c1.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4/table_training_history_3ecead105b.csv	1752 KB
+models_saved/supersonic_general/_smoke_S4/best_joint_checkpoint.pt	3240 KB
+models_saved/modal_reconstruction/_smoke_S4/best_modal_spectral_fixed_spectrum_checkpoint.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4/checkpoint_selection.json	4 KB
+models_saved/supersonic_general/_smoke_S4/final_checkpoint.pt	3244 KB
+models_saved/supersonic_general/_smoke_S4/initial_checkpoint.pt	3240 KB
+models_saved/supersonic_general/_smoke_S4/last_checkpoint.pt	3240 KB
+models_saved/supersonic_general/_smoke_S4M4/best_joint_checkpoint.pt	3244 KB
+models_saved/modal_reconstruction/_smoke_S4M4/best_modal_spectral_fixed_spectrum_checkpoint.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4M4/checkpoint_selection.json	4 KB
+models_saved/supersonic_general/_smoke_S4M4/final_checkpoint.pt	3244 KB
+models_saved/supersonic_general/_smoke_S4M4/initial_checkpoint.pt	3240 KB
+models_saved/supersonic_general/_smoke_S4M4/last_checkpoint.pt	3240 KB
+code/configs/legacy/S4M4_61039b8b8a.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4M4/table_spectral_audit_predictions.csv	68 KB
+experiments/supersonic_general/legacy_outputs/_smoke_S4M4/spectral_metrics.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4M4/table_training_history.csv	4 KB
+code/configs/legacy/S4_f7e389f47c.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4/table_spectral_audit_predictions.csv	68 KB
+experiments/supersonic_general/legacy_outputs/_smoke_S4/spectral_metrics.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4/table_training_history.csv	4 KB
+experiments/chart_overlap/legacy_outputs/local_M110_sparse_v1/VALIDATED_M110_S4M4.json	4 KB
+experiments/chart_overlap/legacy/local_M110_sparse_v1/VALIDATED_M110_S4M4.md	4 KB
+experiments/supersonic_general/legacy/local_M110_sparse_v1/VALIDATED_M110_S4M4_SHA256SUMS	4 KB
+
+================================================================================
+PILOT: assets/pinn_supersonic/pilots/local_M150_sparse_v1
+================================================================================
+code/configs/legacy/P0_6515bd23dd.json	4 KB
+code/configs/legacy/S4_1b16d52ace.json	4 KB
+code/configs/legacy/S4M2_1b7b1e4038.json	4 KB
+code/configs/legacy/S4M4_bdfd72eb5c.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/data/modal_bank_S4M2_M150.npz	616 KB
+experiments/modal_reconstruction/legacy_outputs/data/modal_bank_S4M4_M150.npz	1220 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M2_M150.csv	8 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M150.csv	8 KB
+experiments/supersonic_general/legacy_outputs/data/pilot_data_report_6d7b57e757.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M150.csv	8 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_spectral_full_M150.csv	52 KB
+experiments/supersonic_general/legacy/logs/calibration_jobs.env	4 KB
+experiments/modal_reconstruction/legacy/logs/dense_modal_audit_job.env	4 KB
+experiments/modal_reconstruction/legacy/logs/dense_modal_M2M4_audit_job.env	4 KB
+experiments/supersonic_general/legacy/logs/long_jobs.env	4 KB
+experiments/supersonic_general/legacy/logs/S4M4_long_job.env	4 KB
+experiments/modal_reconstruction/legacy_outputs/runs/table_calibration_M150_comparison.csv	4 KB
+models_saved/supersonic_general/calibration_S4/final_checkpoint.pt	3244 KB
+models_saved/supersonic_general/long_S4/initial_checkpoint_b6edbdf640.pt	3244 KB
+models_saved/supersonic_general/calibration_S4M2/final_checkpoint.pt	3244 KB
+models_saved/supersonic_general/long_S4M2/initial_checkpoint.pt	3244 KB
+code/configs/legacy/S4M2_1b7b1e4038.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/calibration_S4M2/table_spectral_audit_predictions.csv	56 KB
+experiments/supersonic_general/legacy_outputs/calibration_S4M2/spectral_metrics.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/calibration_S4M2/table_training_history.csv	532 KB
+code/configs/legacy/S4_1b16d52ace.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/calibration_S4/table_spectral_audit_predictions.csv	56 KB
+experiments/supersonic_general/legacy_outputs/calibration_S4/spectral_metrics.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/calibration_S4/table_training_history.csv	432 KB
+experiments/modal_reconstruction/legacy_outputs/dense_modal_audit_S4M2_vs_S4M4/audit_metadata.json	4 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4M2_vs_S4M4/table_modal_dense_paired_comparison.csv	28 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4M2_vs_S4M4/table_modal_dense_per_mode_metrics.csv	36 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4M2_vs_S4M4/table_modal_dense_summary.csv	4 KB
+experiments/modal_reconstruction/legacy_outputs/dense_modal_audit_S4_vs_S4M2/audit_metadata.json	4 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M2/table_modal_dense_paired_comparison.csv	28 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M2/table_modal_dense_per_mode_metrics.csv	36 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M2/table_modal_dense_summary.csv	8 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_threeway/table_modal_dense_S4M2_minus_S4.csv	28 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_threeway/table_modal_dense_S4M4_minus_S4.csv	28 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_threeway/table_modal_dense_S4M4_minus_S4M2.csv	28 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_threeway/table_modal_dense_threeway_per_mode.csv	48 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_threeway/table_modal_dense_threeway_summary.csv	8 KB
+models_saved/supersonic_general/long_S4/best_joint_checkpoint_601b535fde.pt	3244 KB
+models_saved/modal_reconstruction/long_S4/best_modal_spectral_fixed_spectrum_checkpoint_082e60c2b2.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4/checkpoint_selection_464bb86567.json	4 KB
+models_saved/supersonic_general/long_S4/final_checkpoint_28c1e1d5f4.pt	3244 KB
+models_saved/supersonic_general/long_S4/initial_checkpoint_b6edbdf640.pt	3244 KB
+models_saved/supersonic_general/long_S4/last_checkpoint_baed092442.pt	3244 KB
+models_saved/supersonic_general/long_S4M2/best_joint_checkpoint.pt	3244 KB
+models_saved/modal_reconstruction/long_S4M2/best_modal_spectral_fixed_spectrum_checkpoint.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4M2/checkpoint_selection.json	4 KB
+models_saved/supersonic_general/long_S4M2/final_checkpoint.pt	3244 KB
+models_saved/supersonic_general/long_S4M2/initial_checkpoint.pt	3244 KB
+models_saved/supersonic_general/long_S4M2/last_checkpoint.pt	3244 KB
+code/configs/legacy/S4M2_1b7b1e4038.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4M2/table_spectral_audit_predictions.csv	56 KB
+experiments/supersonic_general/legacy_outputs/long_S4M2/spectral_metrics.json	4 KB
+experiments/supersonic_general/legacy_outputs/long_S4M2/table_training_history.csv	2168 KB
+models_saved/supersonic_general/long_S4M4/best_joint_checkpoint_baee09989f.pt	3244 KB
+models_saved/modal_reconstruction/long_S4M4/best_modal_spectral_fixed_spectrum_checkpoint_bcd7e9ac16.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4M4/checkpoint_selection_aa4ae73e29.json	4 KB
+models_saved/supersonic_general/long_S4M4/final_checkpoint_63a2937094.pt	3244 KB
+models_saved/supersonic_general/long_S4M4/initial_checkpoint_eae863eccc.pt	3244 KB
+models_saved/supersonic_general/long_S4M4/last_checkpoint_a2d0a7d187.pt	3244 KB
+code/configs/legacy/S4M4_bdfd72eb5c.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4M4/table_spectral_audit_predictions_3750da03e2.csv	56 KB
+experiments/supersonic_general/legacy_outputs/long_S4M4/spectral_metrics_a122465c66.json	4 KB
+experiments/supersonic_general/legacy_outputs/long_S4M4/table_training_history_ac273cdf3a.csv	2160 KB
+code/configs/legacy/S4_1b16d52ace.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4/table_spectral_audit_predictions_af2f96e70b.csv	56 KB
+experiments/supersonic_general/legacy_outputs/long_S4/spectral_metrics_452e80b1f2.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4/table_training_history_367649f8a4.csv	1752 KB
+models_saved/supersonic_general/_smoke_checkpoint_S4M2/best_joint_checkpoint.pt	3244 KB
+models_saved/modal_reconstruction/_smoke_checkpoint_S4M2/best_modal_spectral_fixed_spectrum_checkpoint.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_checkpoint_S4M2/checkpoint_selection.json	4 KB
+models_saved/supersonic_general/_smoke_checkpoint_S4M2/final_checkpoint.pt	3244 KB
+models_saved/supersonic_general/_smoke_S4M2/initial_checkpoint.pt	3240 KB
+models_saved/supersonic_general/_smoke_checkpoint_S4M2/last_checkpoint.pt	3240 KB
+code/configs/legacy/S4M2_1b7b1e4038.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_checkpoint_S4M2/table_spectral_audit_predictions.csv	56 KB
+experiments/supersonic_general/legacy_outputs/_smoke_checkpoint_S4M2/spectral_metrics.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_checkpoint_S4M2/table_training_history.csv	4 KB
+models_saved/supersonic_general/_smoke_S4/final_checkpoint_db4e9763ac.pt	3244 KB
+models_saved/supersonic_general/_smoke_S4/initial_checkpoint_0e5040b680.pt	3240 KB
+models_saved/supersonic_general/_smoke_S4M2/final_checkpoint.pt	3244 KB
+models_saved/supersonic_general/_smoke_S4M2/initial_checkpoint.pt	3240 KB
+code/configs/legacy/S4M2_1b7b1e4038.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4M2/table_spectral_audit_predictions.csv	56 KB
+experiments/supersonic_general/legacy_outputs/_smoke_S4M2/spectral_metrics.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4M2/table_training_history.csv	4 KB
+code/configs/legacy/S4_1b16d52ace.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4/table_spectral_audit_predictions_f2c2526b6c.csv	56 KB
+experiments/supersonic_general/legacy_outputs/_smoke_S4/spectral_metrics_857191cb33.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4/table_training_history_7e05733f79.csv	4 KB
+experiments/chart_overlap/legacy_outputs/local_M150_sparse_v1/VALIDATED_M150_S4M4.json	4 KB
+experiments/chart_overlap/legacy/local_M150_sparse_v1/VALIDATED_M150_S4M4.md	4 KB
+experiments/supersonic_general/legacy/local_M150_sparse_v1/VALIDATED_M150_S4M4_SHA256SUMS	4 KB
+
+================================================================================
+PILOT: assets/pinn_supersonic/pilots/local_M190_sparse_v1
+================================================================================
+code/configs/legacy/P0_663cca25fb.json	4 KB
+code/configs/legacy/S4_735b5955e4.json	4 KB
+code/configs/legacy/S4M2_017b75dc7a.json	4 KB
+code/configs/legacy/S4M4_6946d89a6f.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/data/modal_bank_S4M2_M190.npz	616 KB
+experiments/modal_reconstruction/legacy_outputs/data/modal_bank_S4M4_M190.npz	1220 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M2_M190.csv	8 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M190.csv	8 KB
+experiments/modal_reconstruction/legacy_outputs/data/pilot_data_report_b2938e885a.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M190.csv	8 KB
+experiments/modal_reconstruction/legacy_outputs/data/table_spectral_full_M190.csv	40 KB
+experiments/modal_reconstruction/legacy_outputs/dense_modal_audit_S4_vs_S4M4/audit_metadata_8197b62b3b.json	4 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_paired_comparison_f82ec98411.csv	24 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_per_mode_metrics_ebdb1912da.csv	28 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_S4M4_minus_S4_da784cebcc.csv	20 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_S4_vs_S4M4_per_mode_7c8bc9f1eb.csv	24 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_S4_vs_S4M4_summary_72bca8329c.csv	4 KB
+experiments/chart_overlap/legacy_outputs/dense_modal_audit_S4_vs_S4M4/table_modal_dense_summary_817cd6a5cf.csv	4 KB
+models_saved/supersonic_general/long_S4/best_joint_checkpoint_931682f2b1.pt	3244 KB
+models_saved/modal_reconstruction/long_S4/best_modal_spectral_fixed_spectrum_checkpoint_9f84402856.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4/checkpoint_selection_00eca4cf6c.json	4 KB
+models_saved/supersonic_general/long_S4/final_checkpoint_d90515d45f.pt	3244 KB
+models_saved/supersonic_general/long_S4/initial_checkpoint_d7adf11d40.pt	3244 KB
+models_saved/supersonic_general/long_S4/last_checkpoint_166e5ace2f.pt	3244 KB
+models_saved/supersonic_general/long_S4M4/best_joint_checkpoint_d35ed87e0b.pt	3244 KB
+models_saved/modal_reconstruction/long_S4M4/best_modal_spectral_fixed_spectrum_checkpoint_61b779710c.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4M4/checkpoint_selection_29c06c63fc.json	4 KB
+models_saved/supersonic_general/long_S4M4/final_checkpoint_2a4bde2375.pt	3244 KB
+models_saved/supersonic_general/long_S4M4/initial_checkpoint_fdd250a1ad.pt	3244 KB
+models_saved/supersonic_general/long_S4M4/last_checkpoint_aa19a43106.pt	3244 KB
+code/configs/legacy/S4M4_6946d89a6f.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4M4/table_spectral_audit_predictions_974e7d97d1.csv	44 KB
+experiments/supersonic_general/legacy_outputs/long_S4M4/spectral_metrics_6f0d24b703.json	4 KB
+experiments/supersonic_general/legacy_outputs/long_S4M4/table_training_history_4d660381ac.csv	2156 KB
+code/configs/legacy/S4_735b5955e4.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4/table_spectral_audit_predictions_80c7e28e0b.csv	44 KB
+experiments/supersonic_general/legacy_outputs/long_S4/spectral_metrics_358db2783f.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/long_S4/table_training_history_74505dfc72.csv	1752 KB
+models_saved/supersonic_general/_smoke_S4/best_joint_checkpoint_745af6d073.pt	3240 KB
+models_saved/modal_reconstruction/_smoke_S4/best_modal_spectral_fixed_spectrum_checkpoint_d48d777487.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4/checkpoint_selection_36afc8a65e.json	4 KB
+models_saved/supersonic_general/_smoke_S4/final_checkpoint_60ad9c338a.pt	3244 KB
+models_saved/supersonic_general/_smoke_S4/initial_checkpoint_6bc21e94f3.pt	3240 KB
+models_saved/supersonic_general/_smoke_S4/last_checkpoint_4b86ad1e91.pt	3240 KB
+models_saved/supersonic_general/_smoke_S4M4/best_joint_checkpoint_58aa5ac330.pt	3244 KB
+models_saved/modal_reconstruction/_smoke_S4M4/best_modal_spectral_fixed_spectrum_checkpoint_90ed2ea507.pt	3244 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4M4/checkpoint_selection_62f549df6f.json	4 KB
+models_saved/supersonic_general/_smoke_S4M4/final_checkpoint_549e504220.pt	3244 KB
+models_saved/supersonic_general/_smoke_S4M4/initial_checkpoint_e7d877cc10.pt	3240 KB
+models_saved/supersonic_general/_smoke_S4M4/last_checkpoint_b0a88cb01a.pt	3240 KB
+code/configs/legacy/S4M4_6946d89a6f.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4M4/table_spectral_audit_predictions_900ae0a93d.csv	44 KB
+experiments/supersonic_general/legacy_outputs/_smoke_S4M4/spectral_metrics_0ddb691536.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4M4/table_training_history_f057b36f65.csv	4 KB
+code/configs/legacy/S4_735b5955e4.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4/table_spectral_audit_predictions_11cba211ce.csv	44 KB
+experiments/supersonic_general/legacy_outputs/_smoke_S4/spectral_metrics_646f4d2315.json	4 KB
+experiments/modal_reconstruction/legacy_outputs/_smoke_S4/table_training_history_daad860ef0.csv	4 KB
+experiments/chart_overlap/legacy_outputs/local_M190_sparse_v1/VALIDATED_M190_S4M4.json	4 KB
+experiments/chart_overlap/legacy/local_M190_sparse_v1/VALIDATED_M190_S4M4.md	4 KB
+experiments/supersonic_general/legacy/local_M190_sparse_v1/VALIDATED_M190_S4M4_SHA256SUMS	4 KB
+
+################################################################################
+# 4. ANCHOR CSV HEADERS AND CONTENT
+################################################################################
+
+================================================================================
+FILE: experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M110.csv
+================================================================================
+Mach,alpha,cr,ci,omega_i,delta_kappa,delta_q,residual_norm,accepted,parameterization,settings_name,spectral_extent,matching_y,max_step,rtol,atol,optimizer_success,optimizer_status,optimizer_message,optimizer_nfev,objective_calls,integration_failures,active_lower_ci,active_upper_ci,ci_lower,ci_upper,seed_cr,seed_ci,attempt_timestamp,purpose,source_path,source_Mach,source_alpha,source_cr,source_ci,mach_distance,anchor_score,direction,is_target,status,requested_alpha,seed_alpha,alpha_step,anchor_source_path,anchor_source_Mach,anchor_source_alpha,neutral_alpha_estimate,neutral_fit_r2,timestamp,trial_alpha,trial_step,mach_directory,mode_status,mode_gamma_mismatch_at_match,mode_numerical_extent,mode_tail_tolerance,mode_far_left,mode_far_right,mode_mu_left,mode_mu_right,mode_n_coordinates,mode_available,freeze_id,reference_status,reference_subset,reference_source_path,neutral_alpha_lower,neutral_alpha_upper,neutral_alpha_uncertainty,neutral_last_positive_ci,neutral_estimate_method,final_reference_id,_id_key,alpha_neutral_used,alpha_neutral_uncertainty_used,alpha_neutral_source,s,mach_split,_distance_to_target,_residual_sort,anchor_rank,anchor_quantile,anchor_target_s,anchor_distance_s,index_mode_npz_path,index_mode_index_in_npz,index_n_coordinates,index_y_min,index_y_max,index_display_limit,index_min_abs_U_minus_c
+1.1,0.115,0.0840064838857459,0.1316074319054831,0.0151348546691305,2.8513887778691677e-10,-1.7271604285662434e-11,2.856614918748812e-10,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,3,16,0,False,False,0.0013166821507262,0.2,0.0849704771240262,0.1316682150726215,2026-07-23T11:41:03.242861+00:00,continuation,,,,,,,,low,True,converged,0.115,0.12,-0.0049999999999999,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.2,0.1875,,,2026-07-23T11:41:03.255266+00:00,0.115,-0.0049999999999999,M1p100000,converged,2.876350450451331e-10,40.0,1e-06,-475.1770450168399,312.3582392311435,0.0291129018782626,0.0443537244298275,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.100000_a0.11500000,M1.100000_a0.11500000,0.345,,max_available_alpha_proxy,0.3333333333333333,train,0.0028985507246376,2.856614918748812e-10,1,0.1,0.336231884057971,0.0028985507246376,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails.npz,5,3801,-475.1770450168399,312.3582392311435,343.9943735156397,0.1319249027233593
+1.1,0.19,0.1660505044719185,0.0869943604140983,0.0165289284786786,-8.951173136040325e-16,1.5612511283791264e-16,9.086308689299251e-16,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,4,21,0,False,False,0.0008844275094396,0.2,0.1642727872469405,0.0884427509439601,2026-07-23T11:42:31.164179+00:00,continuation,,,,,,,,high,True,converged,0.19,0.1875,0.0025,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.2,0.1875,,,2026-07-23T11:42:31.218471+00:00,0.19,0.0025,M1p100000,converged,5.1973166190563796e-11,40.0,1e-06,-481.2599412444247,161.47272346711227,0.028729865867032,0.0860664063026381,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.100000_a0.19000000,M1.100000_a0.19000000,0.345,,max_available_alpha_proxy,0.5507246376811594,train,0.0014492753623188,9.086308689299251e-16,2,0.4,0.5492753623188406,0.0014492753623188,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails.npz,21,3801,-481.2599412444247,161.47272346711227,348.1988713881464,0.0872905377907642
+1.1,0.265,0.2071896831590645,0.0445687947481188,0.0118107306082514,-6.855627177060344e-14,5.393654273211368e-13,5.437049076368516e-13,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,3,16,0,False,False,0.0004471528147178,0.2,0.2072496180369414,0.0447152814717873,2026-07-23T11:42:39.532352+00:00,continuation,,,,,,,,high,True,converged,0.265,0.26,0.005,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.2,0.1875,,,2026-07-23T11:42:39.548776+00:00,0.265,0.005,M1p100000,converged,6.428623134118188e-11,40.0,1e-06,-701.0391707689962,105.40734215134758,0.019705651574228,0.1322866915704204,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.100000_a0.26500000,M1.100000_a0.26500000,0.345,,max_available_alpha_proxy,0.7681159420289856,train,0.0057971014492753,5.437049076368516e-13,3,0.7,0.773913043478261,0.0057971014492753,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails.npz,36,3801,-701.0391707689962,105.40734215134758,507.24949787983536,0.0456365991842436
+1.1,0.32,0.2281319917527765,0.0145552597941017,0.0046576831341125,-3.5832448119776934e-14,1.22887811038197e-14,3.7881109794647005e-14,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,4,21,0,False,False,0.0001491444041096,0.2,0.2281682667395471,0.0149144404109684,2026-07-23T11:42:46.511090+00:00,continuation,,,,,,,,high,True,converged,0.32,0.315,0.005,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.2,0.1875,,,2026-07-23T11:42:46.526937+00:00,0.32,0.005,M1p100000,converged,1.5570166759447788e-10,40.0,1e-06,-1811.6802867987765,82.55931931736346,0.0076186452545769,0.169334801309142,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.100000_a0.32000000,M1.100000_a0.32000000,0.345,,max_available_alpha_proxy,0.927536231884058,train,0.0028985507246376,3.7881109794647005e-14,4,0.9,0.9246376811594204,0.0028985507246376,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails.npz,47,3801,-1811.6802867987765,82.55931931736346,1306.0537084301682,0.0160880818277282
+
+================================================================================
+FILE: experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M150.csv
+================================================================================
+Mach,alpha,cr,ci,omega_i,delta_kappa,delta_q,residual_norm,accepted,parameterization,settings_name,spectral_extent,matching_y,max_step,rtol,atol,optimizer_success,optimizer_status,optimizer_message,optimizer_nfev,objective_calls,integration_failures,active_lower_ci,active_upper_ci,ci_lower,ci_upper,seed_cr,seed_ci,attempt_timestamp,purpose,source_path,source_Mach,source_alpha,source_cr,source_ci,mach_distance,anchor_score,direction,is_target,status,requested_alpha,seed_alpha,alpha_step,anchor_source_path,anchor_source_Mach,anchor_source_alpha,neutral_alpha_estimate,neutral_fit_r2,timestamp,trial_alpha,trial_step,mach_directory,mode_status,mode_gamma_mismatch_at_match,mode_numerical_extent,mode_tail_tolerance,mode_far_left,mode_far_right,mode_mu_left,mode_mu_right,mode_n_coordinates,mode_available,freeze_id,reference_status,reference_subset,reference_source_path,neutral_alpha_lower,neutral_alpha_upper,neutral_alpha_uncertainty,neutral_last_positive_ci,neutral_estimate_method,final_reference_id,_id_key,alpha_neutral_used,alpha_neutral_uncertainty_used,alpha_neutral_source,s,mach_split,_distance_to_target,_residual_sort,anchor_rank,anchor_quantile,anchor_target_s,anchor_distance_s,index_mode_npz_path,index_mode_index_in_npz,index_n_coordinates,index_y_min,index_y_max,index_display_limit,index_min_abs_U_minus_c
+1.5,0.07,0.3085296796468241,0.0584602672387943,0.0040922187067156,5.706633082747103e-13,1.4406704995639785e-13,5.885676904946247e-13,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,3,16,0,False,False,0.0005861032188141,0.2,0.3087763377587843,0.058610321881412,2026-07-23T11:45:50.791039+00:00,continuation,,,,,,,,low,True,converged,0.07,0.075,-0.0049999999999999,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.5,0.125,,,2026-07-23T11:45:50.802767+00:00,0.07,-0.0049999999999999,M1p500000,converged,1.598705481428045e-11,40.0,1e-06,-1938.086189664255,786.9814236261274,0.0071302210794564,0.017579042355559,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.500000_a0.07000000,M1.500000_a0.07000000,0.27,,max_available_alpha_proxy,0.2592592592592592,train,0.0074074074074074,5.885676904946247e-13,1,0.1,0.2666666666666666,0.0074074074074074,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails_eede6d32d9.npz,4,3801,-1938.086189664255,786.9814236261274,1396.155835992681,0.0587176006404463
+1.5,0.14,0.3574130186646834,0.0447397340201771,0.0062635627628247,5.467848396278896e-15,1.3714723801072635e-14,1.4764518787430832e-14,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,3,16,0,False,False,0.000448206565352,0.2,0.357512820255406,0.0448206565352029,2026-07-23T11:45:54.751768+00:00,continuation,,,,,,,,high,True,converged,0.14,0.135,0.005,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.5,0.125,,,2026-07-23T11:45:54.763735+00:00,0.14,0.005,M1p500000,converged,3.968701792142173e-11,40.0,1e-06,-1281.9701563634037,295.20483023056374,0.0107833321649962,0.0469780214462826,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.500000_a0.14000000,M1.500000_a0.14000000,0.27,,max_available_alpha_proxy,0.5185185185185185,train,0.0074074074074074,1.4764518787430832e-14,2,0.4,0.5111111111111111,0.0074074074074074,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails_eede6d32d9.npz,18,3801,-1281.9701563634037,295.20483023056374,924.0052348929258,0.0447497000346115
+1.5,0.205,0.3845145331817926,0.0238977814289654,0.0048990451929379,5.866140906363172e-14,1.30218318766806e-12,1.3035038224564901e-12,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,3,16,0,False,False,0.0002402081338331,0.2,0.3845627160595108,0.0240208133833127,2026-07-23T11:46:02.268049+00:00,continuation,,,,,,,,high,True,converged,0.205,0.2,0.0049999999999999,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.5,0.125,,,2026-07-23T11:46:02.293767+00:00,0.205,0.0049999999999999,M1p500000,converged,4.7788220579993206e-11,40.0,1e-06,-1649.530646583568,171.78514505597488,0.008384102808293,0.0809574728466571,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.500000_a0.20500000,M1.500000_a0.20500000,0.27,,max_available_alpha_proxy,0.7592592592592592,train,0.0037037037037037,1.3035038224564901e-12,3,0.7,0.7555555555555554,0.0037037037037037,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails_eede6d32d9.npz,31,3801,-1649.530646583568,171.78514505597488,1184.6791345570664,0.0243299896241671
+1.5,0.25,0.3982562675527282,0.0077922850962732,0.0019480712740683,-1.6341095143701523e-14,7.77292726711343e-14,7.942840310920928e-14,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,4,21,0,False,False,8.089658526396348e-05,0.2,0.3982876676340059,0.0080896585263963,2026-07-23T11:46:08.167128+00:00,continuation,,,,,,,,high,True,converged,0.25,0.245,0.005,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.5,0.125,,,2026-07-23T11:46:08.179716+00:00,0.25,0.005,M1p500000,converged,4.315561766051911e-11,40.0,1e-06,-4158.438055039699,129.16124721638988,0.0033242572358799,0.1078251055599741,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.500000_a0.25000000,M1.500000_a0.25000000,0.27,,max_available_alpha_proxy,0.9259259259259258,train,0.0074074074074074,7.942840310920928e-14,4,0.9,0.9185185185185184,0.0074074074074074,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails_eede6d32d9.npz,40,3801,-4158.438055039699,129.16124721638988,2993.6490226304404,0.0083067858494605
+
+================================================================================
+FILE: experiments/modal_reconstruction/legacy_outputs/data/table_modal_manifest_S4M4_M190.csv
+================================================================================
+Mach,alpha,cr,ci,omega_i,delta_kappa,delta_q,residual_norm,accepted,parameterization,settings_name,spectral_extent,matching_y,max_step,rtol,atol,optimizer_success,optimizer_status,optimizer_message,optimizer_nfev,objective_calls,integration_failures,active_lower_ci,active_upper_ci,ci_lower,ci_upper,seed_cr,seed_ci,attempt_timestamp,purpose,source_path,source_Mach,source_alpha,source_cr,source_ci,mach_distance,anchor_score,direction,is_target,status,requested_alpha,seed_alpha,alpha_step,anchor_source_path,anchor_source_Mach,anchor_source_alpha,neutral_alpha_estimate,neutral_fit_r2,timestamp,trial_alpha,trial_step,mach_directory,mode_status,mode_gamma_mismatch_at_match,mode_numerical_extent,mode_tail_tolerance,mode_far_left,mode_far_right,mode_mu_left,mode_mu_right,mode_n_coordinates,mode_available,freeze_id,reference_status,reference_subset,reference_source_path,neutral_alpha_lower,neutral_alpha_upper,neutral_alpha_uncertainty,neutral_last_positive_ci,neutral_estimate_method,final_reference_id,_id_key,alpha_neutral_used,alpha_neutral_uncertainty_used,alpha_neutral_source,s,mach_split,_distance_to_target,_residual_sort,anchor_rank,anchor_quantile,anchor_target_s,anchor_distance_s,index_mode_npz_path,index_mode_index_in_npz,index_n_coordinates,index_y_min,index_y_max,index_display_limit,index_min_abs_U_minus_c
+1.9,0.065,0.4644930709807444,0.0220661663779487,0.0014343008145666,4.4610756061436163e-13,3.5970011691421893e-13,5.730585744454043e-13,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,3,16,0,False,False,0.0002219917809249,0.2,0.4645455570671053,0.0221991780924929,2026-07-23T11:50:48.629974+00:00,continuation,,,,,,,,low,True,converged,0.065,0.07,-0.005,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.9,0.08,,,2026-07-23T11:50:48.640571+00:00,0.065,-0.005,M1p900000,converged,2.282437061809352e-11,40.0,1e-06,-4732.594055364902,1247.4605906725244,0.0029202197604407,0.0110856840116642,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.900000_a0.06500000,M1.900000_a0.06500000,0.215,,max_available_alpha_proxy,0.3023255813953489,train,0.0069767441860464,5.730585744454043e-13,1,0.1,0.3093023255813953,0.0069767441860464,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails_815b93b37e.npz,3,3801,-4732.594055364902,1247.4605906725244,3404.974381263416,0.0221937077710708
+1.9,0.115,0.4844567807943823,0.0205943065902101,0.0023683452578741,7.347074337804571e-14,9.083792745778753e-14,1.1683098560462852e-13,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,3,16,0,False,False,0.0002067415574577,0.2,0.4845052491894526,0.0206741557457787,2026-07-23T11:50:55.128894+00:00,continuation,,,,,,,,high,True,converged,0.115,0.11,0.005,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.9,0.08,,,2026-07-23T11:50:55.139714+00:00,0.115,0.005,M1p900000,converged,6.293969439171706e-11,40.0,1e-06,-2872.762346449169,473.227534769188,0.0048124154818229,0.0292605949296066,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.900000_a0.11500000,M1.900000_a0.11500000,0.215,,max_available_alpha_proxy,0.5348837209302326,train,0.0046511627906976,1.1683098560462852e-13,2,0.4,0.5395348837209303,0.0046511627906976,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails_815b93b37e.npz,13,3801,-2872.762346449169,473.227534769188,2062.393000548968,0.0207984617407227
+1.9,0.165,0.4997828810399796,0.0123143262874896,0.0020318638374357,6.22821239026905e-13,3.480539641220748e-12,3.5358255740197455e-12,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,3,16,0,False,False,0.0001241488695888,0.2,0.499816286295727,0.0124148869588871,2026-07-23T11:51:01.714199+00:00,continuation,,,,,,,,high,True,converged,0.165,0.16,0.005,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.9,0.08,,,2026-07-23T11:51:01.725968+00:00,0.165,0.005,M1p900000,converged,4.729822089604645e-12,40.0,1e-06,-3353.455176415545,262.94010171868825,0.0041227150279423,0.052724226600634,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.900000_a0.16500000,M1.900000_a0.16500000,0.215,,max_available_alpha_proxy,0.7674418604651163,train,0.0023255813953487,3.5358255740197455e-12,3,0.7,0.7697674418604651,0.0023255813953487,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails_815b93b37e.npz,23,3801,-3353.455176415545,262.94010171868825,2405.0308497490005,0.0123363806550072
+1.9,0.2,0.5085061968756752,0.004459012725829,0.0008918025451658,1.7669546381604574e-13,4.899379513201296e-14,1.833621522959554e-13,True,log_ci,nominal,20.0,1.0,0.5,1e-09,1e-11,True,1.0,`gtol` termination condition is satisfied.,4,21,0,False,False,4.680512735997857e-05,0.2,0.5085315021572175,0.0046805127359978,2026-07-23T11:51:06.757280+00:00,continuation,,,,,,,,high,True,converged,0.2,0.195,0.005,assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv,1.9,0.08,,,2026-07-23T11:51:06.771455+00:00,0.2,0.005,M1p900000,converged,9.978845887868195e-11,40.0,1e-06,-7644.122239592101,193.4759355399714,0.0018080400764276,0.0716951973464501,3801.0,True,dense_kappa_q_campaign_v1_FINAL_FREEZE,retained_classical_supersonic,base_dense_campaign,assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv,,,,,,M1.900000_a0.20000000,M1.900000_a0.20000000,0.215,,max_available_alpha_proxy,0.930232558139535,train,0.0069767441860465,1.833621522959554e-13,4,0.9,0.9232558139534884,0.0069767441860465,assets/classic_supersonic/data/modal_reconstruction/modes/modes_compact_with_analytic_tails_815b93b37e.npz,30,3801,-7644.122239592101,193.4759355399714,5490.793172443782,0.0091465163782233
+
+################################################################################
+# 5. JSON DIFFERENCES
+################################################################################
+KEY                                                                    M110                                M150                                M190                               
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Mach                                                                   1.1                                 1.5                                 1.9                                
+alpha_max                                                              0.345                               0.27                                0.215                              
+alpha_min                                                              0.09                                0.05                                0.05                               
+experiment_family                                                      'local_supersonic_M110_sparse_v1'   'local_supersonic_M150_sparse_v1'   'local_supersonic_M190_sparse_v1'  
+model.alpha_gate_width                                                 0.0204                              0.02                                0.013199999999999998               
+model.alpha_split                                                      0.2275                              0.17                                0.14                               
+model.ci_max                                                           0.2874878683316643                  0.15                                0.15                               
+model.cr_max                                                           0.3541753238627558                  0.5                                 0.61185864489249                   
+model.cr_min                                                           -0.11805843887026102                0.2                                 0.35750130330964924                
+output_dir                                                             'assets/pinn_supersonic/pilots/loc  'assets/pinn_supersonic/pilots/loc  'assets/pinn_supersonic/pilots/loc 
+spectral_anchor_file                                                   'assets/pinn_supersonic/pilots/loc  'assets/pinn_supersonic/pilots/loc  'assets/pinn_supersonic/pilots/loc 
+spectral_reference                                                     'assets/pinn_supersonic/pilots/loc  'assets/pinn_supersonic/pilots/loc  'assets/pinn_supersonic/pilots/loc 
+
+################################################################################
+# 6. CODE THAT CREATES PILOTS, CONFIGS OR ANCHORS
+################################################################################
+code/slurm/modal_reconstruction/audit_local_supersonic_M150_S4M2_vs_S4M4.slurm:25:PILOT_DIR="assets/pinn_supersonic/pilots/local_M150_sparse_v1"
+code/slurm/modal_reconstruction/audit_local_supersonic_M150_S4M2_vs_S4M4.slurm:51:      "$PILOT_DIR/data/spectral_anchors_S4_M150.csv" \
+code/slurm/fixed_mach/audit_local_supersonic_fixedM_S4_vs_S4M4.slurm:58:      "$PILOT_DIR/data/spectral_anchors_S4_${TAG}.csv" \
+code/slurm/legacy_gep/run_supersonic_M150_S4M0_pinn_seeded_gep.slurm:44:    "models_saved/supersonic_general/long_S4/best_joint_checkpoint_601b535fde.pt" \
+code/slurm/modal_reconstruction/audit_local_supersonic_M150_dense.slurm:24:PILOT_DIR="assets/pinn_supersonic/pilots/local_M150_sparse_v1"
+code/slurm/modal_reconstruction/audit_local_supersonic_M150_dense.slurm:49:      "$PILOT_DIR/data/spectral_anchors_S4_M150.csv" \
+code/slurm/pinn_direct/build_sparse_supersonic_dataset_v1.slurm:2:#SBATCH --job-name=sup_sparse_v1
+code/slurm/pinn_direct/build_sparse_supersonic_dataset_v1.slurm:29:OUTPUT_DIR="assets/pinn_supersonic/datasets/sparse_v1"
+scripts/dev/run_supersonic_s4m0_hybrid_validation.sh:14:PILOT_ROOT="assets/pinn_supersonic/pilots/local_M${TAG}_sparse_v1"
+scripts/dev/run_supersonic_s4m0_hybrid_validation.sh:42:EXPECTED_ANCHOR_FILE="$PILOT_ROOT/data/spectral_anchors_S4_M${TAG}.csv"
+code/scripts/benchmarks/benchmark_supersonic_M150_S4M0_gep.py:543:            "local_M150_sparse_v1/runs/"
+code/scripts/data_preparation/prepare_build_local_supersonic_pilot.py:66:            "datasets/sparse_v1"
+code/scripts/data_preparation/prepare_build_local_supersonic_pilot.py:99:        / f"local_{args.tag}_sparse_v1"
+code/scripts/data_preparation/prepare_build_local_supersonic_pilot.py:218:        / f"spectral_anchors_S4_{tag}.csv"
+code/scripts/data_preparation/prepare_build_local_supersonic_pilot.py:353:            f"local_supersonic_{tag}_sparse_v1"
+code/scripts/evaluation/smoke_test_local_supersonic_kappa_q_logamp.py:29:    "local_M100_sparse_v1/configs/"
+code/scripts/evaluation/smoke_test_local_supersonic_kappa_q_logamp.py:36:    "local_M100_sparse_v1/data/"
+
+################################################################################
+# 7. TRAINING SCRIPT CONFIG ACCESS
+################################################################################
+52:    model_config = config["model"]
+55:        mach=float(config["Mach"]),
+56:        alpha_min=float(config["alpha_min"]),
+57:        alpha_max=float(config["alpha_max"]),
+58:        xi_max=float(model_config["xi_max"]),
+60:            model_config["mapping_scale"]
+63:            model_config["spectral_width"]
+66:            model_config["spectral_depth"]
+69:            model_config["modal_width"]
+72:            model_config["modal_depth"]
+75:            model_config["n_frequencies"]
+78:            model_config["mode_experts"]
+81:            model_config["alpha_split"]
+84:            model_config["alpha_gate_width"]
+86:        cr_min=float(model_config["cr_min"]),
+87:        cr_max=float(model_config["cr_max"]),
+89:            model_config["ci_floor"]
+91:        ci_max=float(model_config["ci_max"]),
+103:            config["spectral_anchor_file"]
+105:    ).sort_values("anchor_rank")
+252:                "Insufficient modal reference points "
+547:    model_config = config["model"]
+548:    weights = config["loss_weights"]
+553:        alpha_min=float(config["alpha_min"]),
+554:        alpha_max=float(config["alpha_max"]),
+555:        xi_max=float(model_config["xi_max"]),
+564:        mach=float(config["Mach"]),
+568:        float(config["alpha_min"]),
+569:        float(config["alpha_max"]),
+577:        mach=float(config["Mach"]),
+579:            model_config["xi_max"]
+683:    reference = pd.read_csv(
+685:            config["spectral_reference"]
+692:        reference["alpha"].to_numpy(float),
+710:    reference = reference.copy()
+712:    reference["cr_pinn"] = cr_prediction_np
+713:    reference["ci_pinn"] = ci_prediction_np
+715:    reference["omega_i_pinn"] = (
+716:        reference["alpha"]
+717:        * reference["ci_pinn"]
+720:    reference["cr_error"] = (
+721:        reference["cr_pinn"]
+722:        - reference["cr"]
+725:    reference["ci_error"] = (
+726:        reference["ci_pinn"]
+727:        - reference["ci"]
+730:    reference.to_csv(
+739:                np.abs(reference["cr_error"])
+744:                np.abs(reference["cr_error"])
+749:                np.abs(reference["ci_error"])
+754:                np.abs(reference["ci_error"])
+760:                    reference["omega_i_pinn"]
+761:                    - reference["omega_i"]
+863:    config_path = resolve_path(args.config)
+865:    config = json.loads(
+874:        else resolve_path(config["output_dir"])
+900:    seed = int(config["seed"])
+921:    if config[
+934:    if config["use_modal_supervision"]:
+937:                config["modal_anchor_file"]
+
+################################################################################
+# 8. ALL SUPERSONIC CONFIG/DATA BUILDERS
+################################################################################
+code/scripts/data_preparation/prepare_build_final_sparse_reference_v2_with_smallM_campaign.py
+code/scripts/data_preparation/prepare_build_final_sparse_supersonic_reference_with_M18_M19.py
+code/scripts/data_preparation/prepare_build_supersonic_fixed_ci_shooting_anchors_45523d471e.py
+code/scripts/audits/audit_check_pinn_supersonic_pq_modal_anchors.py
+scripts/compare_kh_subsonic_fixed_mach_modal_candidates.py
+code/scripts/evaluation/freeze_supersonic_sparse_PINN_reference_v2.py
+scripts/merge_modal_fields_for_sparse_46pts.py
+code/scripts/evaluation/package_supersonic_sparse_reference_v2_final_freeze.py
+code/scripts/data_preparation/prepare_build_local_supersonic_pilot.py
+code/scripts/data_preparation/prepare_build_sparse_supersonic_dataset.py
+code/scripts/data_preparation/export_fixed_mach_s4m4_assets.py
+scripts/plot_kh_subsonic_fixed_mach_classic_vs_pinn_modes.py
+scripts/plot_kh_subsonic_fixed_mach_mode_field_error_heatmaps.py
+code/scripts/data_preparation/prepare_pinn_supersonic_fixedM_pq_modal_anchors.py
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py
+code/scripts/training/train_kh_supersonic_singlecase_pressure_pq_firstorder_modal_anchors.py
+code/scripts/training/train_kh_supersonic_singlecase_pressure_pq_firstorder_validated_anchors_enveloped.py
+code/scripts/training/train_kh_supersonic_singlecase_pressure_pq_firstorder_validated_anchors.py
+code/scripts/training/train_kh_supersonic_singlecase_pressure_pq_firstorder_validated_anchors_righttail.py
+code/scripts/training/train_kh_supersonic_singlecase_pressure_pq_firstorder_validated_anchors_tail.py
+code/scripts/training/train_pinn_supersonic_fixedM_pq_modal_anchors.py
+code/scripts/evaluation/evaluate_validate_pinn_supersonic_offanchor_gep_shooting.py

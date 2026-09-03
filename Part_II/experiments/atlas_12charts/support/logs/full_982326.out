@@ -1,0 +1,385 @@
+Loading working solver modules...
+Resume: 1 points already available.
+[01/64] id=00 SKIP existing
+
+==============================================================================================================
+[02/64] id=01 C00 M=1.100 alpha=0.090
+PINN seed = (0.04605177, 0.10238984)
+PINN validation error = 9.457202e-02
+  GEP...
+    status=COMPLETED err=1.914434e-01
+  shooting multistart...
+    success=True/True err=7.578436e-02 mismatch=2.506e-08
+  Powell...
+    optimizer_success=False err=7.578497e-02 mismatch=1.063e-07
+
+==============================================================================================================
+[03/64] id=02 C00 M=1.100 alpha=0.105
+PINN seed = (0.06528106, 0.10132615)
+PINN validation error = 3.663386e-02
+  GEP...
+    status=COMPLETED err=1.367281e-01
+  shooting multistart...
+    success=True/True err=9.530522e-06 mismatch=6.238e-07
+  Powell...
+    optimizer_success=False err=9.729840e-03 mismatch=6.173e-04
+
+==============================================================================================================
+[04/64] id=03 C00 M=1.100 alpha=0.115
+PINN seed = (0.07605596, 0.10810586)
+PINN validation error = 2.480997e-02
+  GEP...
+    status=COMPLETED err=1.302838e-01
+  shooting multistart...
+    success=True/True err=4.481716e-06 mismatch=4.218e-07
+  Powell...
+    optimizer_success=False err=1.085098e-04 mismatch=1.021e-05
+
+==============================================================================================================
+[05/64] id=04 C00 M=1.200 alpha=0.075
+PINN seed = (0.12545168, 0.14682667)
+PINN validation error = 1.898251e-02
+  GEP...
+    status=COMPLETED err=1.263286e-01
+  shooting multistart...
+    success=True/True err=7.894108e-06 mismatch=5.108e-07
+  Powell...
+    optimizer_success=False err=2.489887e-05 mismatch=1.611e-06
+
+==============================================================================================================
+[06/64] id=05 C01 M=1.000 alpha=0.145
+PINN seed = (0.00257078, 0.04978510)
+PINN validation error = 2.089730e-02
+  GEP...
+    status=COMPLETED err=2.918391e-02
+  shooting multistart...
+    success=True/True err=6.149553e-06 mismatch=2.087e-06
+  Powell...
+    optimizer_success=False err=5.968946e-05 mismatch=2.027e-05
+
+==============================================================================================================
+[07/64] id=06 C01 M=1.000 alpha=0.155
+PINN seed = (0.00322053, 0.06286102)
+PINN validation error = 2.751045e-02
+  GEP...
+    status=COMPLETED err=3.565205e-02
+  shooting multistart...
+    success=True/True err=2.923618e-06 mismatch=8.666e-07
+  Powell...
+    optimizer_success=False err=4.127045e-05 mismatch=1.224e-05
+
+==============================================================================================================
+[08/64] id=07 C01 M=1.000 alpha=0.180
+PINN seed = (-0.00057778, 0.07512697)
+PINN validation error = 1.100290e-02
+  GEP...
+    status=COMPLETED err=6.420149e-02
+  shooting multistart...
+    success=True/True err=1.395843e-06 mismatch=1.972e-07
+  Powell...
+    optimizer_success=False err=5.864230e-08 mismatch=8.214e-09
+
+==============================================================================================================
+[09/64] id=08 C01 M=1.050 alpha=0.140
+PINN seed = (0.05725029, 0.10974763)
+PINN validation error = 2.172840e-02
+  GEP...
+    status=COMPLETED err=1.272910e-01
+  shooting multistart...
+    success=True/True err=2.714939e-06 mismatch=2.085e-07
+  Powell...
+    optimizer_success=False err=7.304207e-09 mismatch=5.401e-10
+
+==============================================================================================================
+[10/64] id=09 C01 M=1.150 alpha=0.175
+PINN seed = (0.18524867, 0.06642592)
+PINN validation error = 2.097293e-02
+  GEP...
+    status=COMPLETED err=8.350518e-02
+  shooting multistart...
+    success=True/True err=7.931950e-06 mismatch=2.010e-06
+  Powell...
+    optimizer_success=False err=8.848837e-05 mismatch=2.242e-05
+
+==============================================================================================================
+[11/64] id=10 C01 M=1.150 alpha=0.200
+PINN seed = (0.20773979, 0.06088175)
+PINN validation error = 1.137105e-02
+  GEP...
+    status=COMPLETED err=6.942698e-02
+  shooting multistart...
+    success=True/True err=1.888013e-06 mismatch=5.791e-07
+  Powell...
+    optimizer_success=False err=2.543722e-05 mismatch=7.803e-06
+
+==============================================================================================================
+[12/64] id=11 C01 M=1.200 alpha=0.190
+PINN seed = (0.24306750, 0.06121680)
+PINN validation error = 1.126887e-02
+  GEP...
+    status=COMPLETED err=6.609579e-02
+  shooting multistart...
+    success=True/True err=5.299860e-06 mismatch=1.569e-06
+  Powell...
+    optimizer_success=False err=7.755483e-09 mismatch=2.283e-09
+
+==============================================================================================================
+[13/64] id=12 C02 M=1.000 alpha=0.250
+PINN seed = (0.11036551, 0.06243412)
+PINN validation error = 1.869064e-03
+  GEP...
+    status=COMPLETED err=6.168851e-02
+  shooting multistart...
+    success=True/True err=4.600123e-06 mismatch=1.475e-06
+  Powell...
+    optimizer_success=False err=2.293361e-08 mismatch=7.366e-09
+
+==============================================================================================================
+[14/64] id=13 C02 M=1.000 alpha=0.315
+PINN seed = (0.15602530, 0.02099753)
+PINN validation error = 5.936367e-03
+  GEP...
+    status=COMPLETED err=2.343976e-02
+  shooting multistart...
+    success=True/True err=4.241574e-06 mismatch=2.092e-06
+  Powell...
+    optimizer_success=False err=1.951458e-08 mismatch=9.586e-09
+
+==============================================================================================================
+[15/64] id=14 C02 M=1.050 alpha=0.220
+PINN seed = (0.12801382, 0.07635104)
+PINN validation error = 1.558449e-02
+  GEP...
+    status=COMPLETED err=7.699225e-02
+  shooting multistart...
+    success=True/True err=6.005556e-07 mismatch=1.851e-07
+  Powell...
+    optimizer_success=False err=1.656901e-08 mismatch=5.144e-09
+
+==============================================================================================================
+[16/64] id=15 C02 M=1.050 alpha=0.225
+PINN seed = (0.13051976, 0.07338329)
+PINN validation error = 1.651235e-02
+  GEP...
+    status=COMPLETED err=7.362619e-02
+  shooting multistart...
+    success=True/True err=4.737391e-06 mismatch=1.516e-06
+  Powell...
+    optimizer_success=False err=1.639478e-08 mismatch=5.365e-09
+
+==============================================================================================================
+[17/64] id=16 C02 M=1.050 alpha=0.350
+PINN seed = (0.20477943, 0.00219664)
+PINN validation error = 1.382198e-03
+  GEP...
+    status=COMPLETED err=7.630686e-04
+  shooting multistart...
+    success=True/True err=1.918067e-06 mismatch=1.157e-06
+  Powell...
+    optimizer_success=False err=2.444101e-08 mismatch=1.380e-08
+
+==============================================================================================================
+[18/64] id=17 C02 M=1.100 alpha=0.215
+PINN seed = (0.18072134, 0.07088590)
+PINN validation error = 2.212655e-03
+  GEP...
+    status=COMPLETED err=6.999870e-02
+  shooting multistart...
+    success=True/True err=3.528307e-06 mismatch=1.143e-06
+  Powell...
+    optimizer_success=False err=1.236625e-08 mismatch=3.916e-09
+
+==============================================================================================================
+[19/64] id=18 C02 M=1.100 alpha=0.265
+PINN seed = (0.20861474, 0.04871225)
+PINN validation error = 4.381667e-03
+  GEP...
+    status=COMPLETED err=4.147425e-02
+  shooting multistart...
+    success=True/True err=2.921488e-06 mismatch=1.260e-06
+  Powell...
+    optimizer_success=False err=1.299730e-08 mismatch=5.561e-09
+
+==============================================================================================================
+[20/64] id=19 C02 M=1.150 alpha=0.230
+PINN seed = (0.22920133, 0.05466783)
+PINN validation error = 5.355298e-03
+  GEP...
+    status=COMPLETED err=5.344125e-02
+  shooting multistart...
+    success=True/True err=5.165316e-06 mismatch=1.911e-06
+  Powell...
+    optimizer_success=False err=6.873986e-09 mismatch=2.493e-09
+
+==============================================================================================================
+[21/64] id=20 C02 M=1.200 alpha=0.285
+PINN seed = (0.27308112, 0.01493580)
+PINN validation error = 5.947905e-03
+  GEP...
+    status=COMPLETED err=1.603345e-02
+  shooting multistart...
+    success=True/True err=3.911286e-06 mismatch=1.914e-06
+  Powell...
+    optimizer_success=False err=9.150863e-09 mismatch=4.390e-09
+
+==============================================================================================================
+[22/64] id=21 C02 M=1.200 alpha=0.315
+PINN seed = (0.27632686, 0.00640652)
+PINN validation error = 7.472058e-03
+  GEP...
+    status=COMPLETED err=8.208807e-03
+  shooting multistart...
+    success=True/True err=3.212773e-06 mismatch=1.762e-06
+  Powell...
+    optimizer_success=False err=2.099495e-08 mismatch=1.151e-08
+
+==============================================================================================================
+[23/64] id=22 C10 M=1.300 alpha=0.085
+PINN seed = (0.22818677, 0.09805051)
+PINN validation error = 1.482354e-02
+  GEP...
+    status=COMPLETED err=9.641527e-02
+  shooting multistart...
+    success=True/True err=6.411020e-07 mismatch=6.187e-08
+  Powell...
+    optimizer_success=False err=8.060974e-09 mismatch=7.430e-10
+
+==============================================================================================================
+[24/64] id=23 C10 M=1.350 alpha=0.055
+PINN seed = (0.19754365, 0.09155581)
+PINN validation error = 7.463694e-03
+  GEP...
+    status=COMPLETED err=9.170973e-02
+  shooting multistart...
+    success=True/True err=5.851255e-06 mismatch=2.949e-07
+  Powell...
+    optimizer_success=False err=2.369855e-08 mismatch=1.168e-09
+
+==============================================================================================================
+[25/64] id=24 C10 M=1.350 alpha=0.090
+PINN seed = (0.25666150, 0.08528159)
+PINN validation error = 8.402410e-03
+  GEP...
+    status=COMPLETED err=8.193430e-02
+  shooting multistart...
+    success=True/True err=8.945431e-06 mismatch=9.853e-07
+  Powell...
+    optimizer_success=False err=4.149228e-09 mismatch=4.689e-10
+
+==============================================================================================================
+[26/64] id=25 C10 M=1.400 alpha=0.075
+PINN seed = (0.24641156, 0.07534391)
+PINN validation error = 1.449466e-02
+  GEP...
+    status=COMPLETED err=7.572328e-02
+  shooting multistart...
+    success=True/True err=2.295465e-06 mismatch=1.982e-07
+  Powell...
+    optimizer_success=False err=2.223873e-08 mismatch=1.937e-09
+
+==============================================================================================================
+[27/64] id=26 C11 M=1.250 alpha=0.160
+PINN seed = (0.24592388, 0.07571601)
+PINN validation error = 1.432393e-03
+  GEP...
+    status=COMPLETED err=7.155964e-02
+  shooting multistart...
+    success=True/True err=4.375189e-06 mismatch=1.055e-06
+  Powell...
+    optimizer_success=False err=2.328512e-08 mismatch=5.618e-09
+
+==============================================================================================================
+[28/64] id=27 C11 M=1.250 alpha=0.170
+PINN seed = (0.25147945, 0.07127248)
+PINN validation error = 1.886562e-03
+  GEP...
+    status=COMPLETED err=6.665952e-02
+  shooting multistart...
+    success=True/True err=6.406108e-06 mismatch=1.680e-06
+  Powell...
+    optimizer_success=False err=1.464756e-08 mismatch=3.868e-09
+
+==============================================================================================================
+[29/64] id=28 C11 M=1.250 alpha=0.195
+PINN seed = (0.26787360, 0.05723409)
+PINN validation error = 2.228150e-03
+  GEP...
+    status=COMPLETED err=5.451843e-02
+  shooting multistart...
+    success=True/True err=7.498839e-07 mismatch=2.359e-07
+  Powell...
+    optimizer_success=False err=2.809499e-08 mismatch=8.922e-09
+
+==============================================================================================================
+[30/64] id=29 C11 M=1.350 alpha=0.155
+PINN seed = (0.29593003, 0.05960397)
+PINN validation error = 8.255028e-04
+  GEP...
+    status=COMPLETED err=5.636771e-02
+  shooting multistart...
+    success=True/True err=4.690878e-06 mismatch=1.147e-06
+  Powell...
+    optimizer_success=False err=1.427762e-08 mismatch=3.564e-09
+
+==============================================================================================================
+[31/64] id=30 C11 M=1.400 alpha=0.190
+PINN seed = (0.33648682, 0.03775055)
+PINN validation error = 1.694344e-03
+  GEP...
+    status=COMPLETED err=3.442509e-02
+  shooting multistart...
+    success=True/True err=5.539781e-06 mismatch=1.792e-06
+  Powell...
+    optimizer_success=False err=2.713489e-08 mismatch=8.745e-09
+
+==============================================================================================================
+[32/64] id=31 C12 M=1.250 alpha=0.235
+PINN seed = (0.28277925, 0.04133891)
+PINN validation error = 2.663635e-03
+  GEP...
+    status=COMPLETED err=3.435931e-02
+  shooting multistart...
+    success=True/True err=5.353183e-07 mismatch=2.119e-07
+  Powell...
+    optimizer_success=False err=1.053608e-08 mismatch=4.134e-09
+
+==============================================================================================================
+[33/64] id=32 C12 M=1.250 alpha=0.285
+PINN seed = (0.29962670, 0.01201072)
+PINN validation error = 3.044852e-03
+  GEP...
+    status=COMPLETED err=9.028756e-03
+  shooting multistart...
+    success=True/True err=4.872472e-06 mismatch=2.403e-06
+  Powell...
+    optimizer_success=False err=4.522209e-09 mismatch=2.234e-09
+
+==============================================================================================================
+[34/64] id=33 C12 M=1.250 alpha=0.315
+PINN seed = (0.30988848, 0.00257759)
+PINN validation error = 1.959084e-03
+  GEP...
+    status=COMPLETED err=4.555777e-03
+  shooting multistart...
+    success=True/True err=5.110818e-07 mismatch=4.853e-07
+  Powell...
+    optimizer_success=False err=1.063791e-05 mismatch=5.883e-06
+
+==============================================================================================================
+[35/64] id=34 C12 M=1.400 alpha=0.210
+PINN seed = (0.34669650, 0.03041317)
+PINN validation error = 1.927227e-03
+  GEP...
+    status=COMPLETED err=2.571500e-02
+  shooting multistart...
+    success=True/True err=4.898944e-06 mismatch=1.776e-06
+  Powell...
+    optimizer_success=False err=3.387609e-09 mismatch=1.179e-09
+
+==============================================================================================================
+[36/64] id=35 C12 M=1.400 alpha=0.255
+PINN seed = (0.36056978, 0.00995214)
+PINN validation error = 3.567348e-03
+  GEP...
+    status=COMPLETED err=8.825922e-03
+  shooting multistart...

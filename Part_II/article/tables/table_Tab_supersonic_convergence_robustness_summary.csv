@@ -1,0 +1,9 @@
+Mach,alpha,max_delta_cr,max_delta_ci,residual_median,residual_max,n_configurations,status
+1.8,0.07,0.0,0.0,6.652550886322417e-07,6.652553652405743e-07,4,converged_requires_visual_confirmation
+1.8,0.0725,0.0,0.0,9.73438407837621e-07,9.734389028336337e-07,4,converged_requires_visual_confirmation
+1.8,0.075,0.0,0.0,8.059275069605415e-07,8.059275451195422e-07,4,converged_requires_visual_confirmation
+1.8,0.13,0.0,0.0,1.4451919510201046e-06,1.445192259668841e-06,4,converged_requires_visual_confirmation
+1.8,0.19,0.0,0.0,1.9241371164256653e-06,1.924138839057466e-06,4,converged_requires_visual_confirmation
+1.9,0.08,0.0,0.0,3.726604389877662e-07,3.726609923226026e-07,4,converged_requires_visual_confirmation
+1.9,0.13,0.0,0.0,4.105858562661199e-07,4.105861556386649e-07,4,converged_requires_visual_confirmation
+1.9,0.1775,0.0,0.0,2.277531396320014e-06,2.277531880888734e-06,4,converged_requires_visual_confirmation

@@ -1,0 +1,6 @@
+# Lightweight CPU-only CI dependencies. PyTorch and full GEP evaluation are excluded.
+numpy
+pandas
+scipy
+Pillow
+pytest

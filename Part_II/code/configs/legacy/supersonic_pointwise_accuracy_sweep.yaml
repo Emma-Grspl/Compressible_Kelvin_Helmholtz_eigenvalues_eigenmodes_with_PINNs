@@ -1,0 +1,35 @@
+version: 1
+sweep:
+  name: supersonic_pointwise_accuracy
+  type: shooting_accuracy
+  cases:
+    - supersonic_M110
+    - supersonic_M120
+    - supersonic_M130
+    - supersonic_M140
+    - supersonic_M150
+    - supersonic_M160
+    - supersonic_M170
+    - supersonic_M180
+    - supersonic_M190
+  solver_by_regime:
+    supersonic: supersonic_shooting
+  reference_policy: smallest_max_step_same_case
+  levels_by_regime:
+    supersonic:
+      - {label: max_step_2, rtol: 1.0e-10, atol: 1.0e-12, max_step: 2.0}
+      - {label: max_step_1, rtol: 1.0e-10, atol: 1.0e-12, max_step: 1.0}
+      - {label: max_step_0p5, rtol: 1.0e-10, atol: 1.0e-12, max_step: 0.5}
+      - {label: max_step_0p25, rtol: 1.0e-10, atol: 1.0e-12, max_step: 0.25}
+  modal_diagnostics:
+    assembly_y: zero
+    window_half_width: 0.25
+    relative_p_window_error_max: 1.0e-3
+    relative_py_window_error_max: 1.0e-3
+    relative_p_jump_max: 1.0e-3
+    relative_py_jump_max: 1.0e-3
+    require_finite_fields: true
+    require_nondegenerate_fields: true
+    nondegenerate_min_peak: 1.0e-12
+    core_thresholds: [1.0e-3]
+  produce_modes: true

@@ -1,0 +1,459 @@
+============================================================
+S4M0 HYBRID VALIDATION
+task = 6
+Mach = 1.40
+tag  = 140
+node = r6i6n6
+start = Fri Aug  7 06:26:24 PM CEST 2026
+============================================================
+============================================================
+S4M0 HYBRID VALIDATION
+============================================================
+TAG=140
+MACH=1.40
+CHECKPOINT=assets/pinn_supersonic/pilots/local_M140_sparse_v1/runs/long_S4/best_joint_checkpoint.pt
+ANCHOR_FILE=assets/pinn_supersonic/pilots/local_M140_sparse_v1/data/spectral_anchors_S4_M140.csv
+REFERENCE_MODAL_CSV=assets/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/classical_supersonic_final_modes_long.csv.gz
+OUTPUT_ROOT=assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1
+START=Fri Aug  7 06:26:26 PM CEST 2026
+
+
+============================================================
+1/5 — S4M0 modal audit
+============================================================
+  1/ 48 alpha=0.050000 spec=2.146e-02 p40=4.204e-01 ov40=6.434e-02
+  2/ 48 alpha=0.055000 spec=1.543e-02 p40=4.213e-01 ov40=6.082e-02
+  3/ 48 alpha=0.060000 spec=1.039e-02 p40=4.311e-01 ov40=6.141e-02
+  4/ 48 alpha=0.065000 spec=6.219e-03 p40=4.478e-01 ov40=6.560e-02
+  5/ 48 alpha=0.070000 spec=2.797e-03 p40=4.693e-01 ov40=7.291e-02
+  6/ 48 alpha=0.075000 spec=1.043e-05 p40=4.938e-01 ov40=8.284e-02
+  7/ 48 alpha=0.080000 spec=2.273e-03 p40=5.200e-01 ov40=9.493e-02
+  8/ 48 alpha=0.085000 spec=4.102e-03 p40=5.468e-01 ov40=1.087e-01
+  9/ 48 alpha=0.090000 spec=5.533e-03 p40=5.734e-01 ov40=1.238e-01
+ 10/ 48 alpha=0.095000 spec=6.590e-03 p40=5.992e-01 ov40=1.398e-01
+ 11/ 48 alpha=0.100000 spec=7.281e-03 p40=6.241e-01 ov40=1.564e-01
+ 12/ 48 alpha=0.105000 spec=7.610e-03 p40=6.478e-01 ov40=1.732e-01
+ 13/ 48 alpha=0.110000 spec=7.585e-03 p40=6.702e-01 ov40=1.900e-01
+ 14/ 48 alpha=0.115000 spec=7.223e-03 p40=6.911e-01 ov40=2.064e-01
+ 15/ 48 alpha=0.120000 spec=6.549e-03 p40=7.104e-01 ov40=2.223e-01
+ 16/ 48 alpha=0.125000 spec=5.598e-03 p40=7.281e-01 ov40=2.373e-01
+ 17/ 48 alpha=0.130000 spec=4.414e-03 p40=7.437e-01 ov40=2.510e-01
+ 18/ 48 alpha=0.135000 spec=3.048e-03 p40=7.569e-01 ov40=2.631e-01
+ 19/ 48 alpha=0.140000 spec=1.557e-03 p40=7.673e-01 ov40=2.731e-01
+ 20/ 48 alpha=0.145000 spec=3.006e-06 p40=7.744e-01 ov40=2.806e-01
+ 21/ 48 alpha=0.150000 spec=1.551e-03 p40=7.775e-01 ov40=2.849e-01
+ 22/ 48 alpha=0.155000 spec=3.034e-03 p40=7.761e-01 ov40=2.858e-01
+ 23/ 48 alpha=0.160000 spec=4.381e-03 p40=7.699e-01 ov40=2.829e-01
+ 24/ 48 alpha=0.165000 spec=5.526e-03 p40=7.586e-01 ov40=2.762e-01
+ 25/ 48 alpha=0.170000 spec=6.410e-03 p40=7.425e-01 ov40=2.660e-01
+ 26/ 48 alpha=0.175000 spec=6.983e-03 p40=7.222e-01 ov40=2.530e-01
+ 27/ 48 alpha=0.180000 spec=7.206e-03 p40=6.990e-01 ov40=2.382e-01
+ 28/ 48 alpha=0.185000 spec=7.057e-03 p40=6.744e-01 ov40=2.229e-01
+ 29/ 48 alpha=0.190000 spec=6.535e-03 p40=6.502e-01 ov40=2.081e-01
+ 30/ 48 alpha=0.195000 spec=5.661e-03 p40=6.277e-01 ov40=1.948e-01
+ 31/ 48 alpha=0.200000 spec=4.484e-03 p40=6.082e-01 ov40=1.835e-01
+ 32/ 48 alpha=0.205000 spec=3.080e-03 p40=5.922e-01 ov40=1.746e-01
+ 33/ 48 alpha=0.210000 spec=1.547e-03 p40=5.798e-01 ov40=1.679e-01
+ 34/ 48 alpha=0.215000 spec=1.146e-06 p40=5.706e-01 ov40=1.633e-01
+ 35/ 48 alpha=0.220000 spec=1.437e-03 p40=5.642e-01 ov40=1.604e-01
+ 36/ 48 alpha=0.225000 spec=2.651e-03 p40=5.602e-01 ov40=1.591e-01
+ 37/ 48 alpha=0.230000 spec=3.543e-03 p40=5.580e-01 ov40=1.589e-01
+ 38/ 48 alpha=0.235000 spec=4.040e-03 p40=5.574e-01 ov40=1.596e-01
+ 39/ 48 alpha=0.240000 spec=4.099e-03 p40=5.582e-01 ov40=1.612e-01
+ 40/ 48 alpha=0.245000 spec=3.704e-03 p40=5.600e-01 ov40=1.635e-01
+ 41/ 48 alpha=0.250000 spec=2.864e-03 p40=5.629e-01 ov40=1.664e-01
+ 42/ 48 alpha=0.255000 spec=1.613e-03 p40=5.668e-01 ov40=1.699e-01
+ 43/ 48 alpha=0.260000 spec=1.135e-06 p40=5.716e-01 ov40=1.740e-01
+ 44/ 48 alpha=0.265000 spec=1.916e-03 p40=5.775e-01 ov40=1.786e-01
+ 45/ 48 alpha=0.270000 spec=4.066e-03 p40=5.844e-01 ov40=1.837e-01
+ 46/ 48 alpha=0.275000 spec=6.387e-03 p40=5.924e-01 ov40=1.895e-01
+ 47/ 48 alpha=0.280000 spec=8.822e-03 p40=6.016e-01 ov40=1.960e-01
+ 48/ 48 alpha=0.285000 spec=1.132e-02 p40=6.121e-01 ov40=2.032e-01
+
+{
+  "status": "COMPLETED",
+  "Mach": 1.4,
+  "checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/pilots/local_M140_sparse_v1/runs/long_S4/best_joint_checkpoint.pt",
+  "n_modes": 48,
+  "n_anchors": 4,
+  "n_off_anchor": 44,
+  "spectral_complex_error_mean": 0.005116492027846839,
+  "spectral_complex_error_max": 0.02145933897769917,
+  "p_rel_l2_core20_mean": 0.3902611122094531,
+  "p_rel_l2_core40_mean": 0.6182496899264026,
+  "p_rel_l2_core40_max": 0.7775029287143678,
+  "overlap_error_core20_mean": 0.08289934565770635,
+  "overlap_error_core40_mean": 0.1830483850070934,
+  "overlap_error_core40_max": 0.28580768161765246,
+  "envelope_rel_l2_core40_mean": 0.44130563068770956,
+  "phase_rmse_core40_mean": 0.2981977171327596,
+  "kappa_rel_l2_core40_mean": 1.0226923566537272,
+  "q_rel_l2_core40_mean": 0.24407404092749746,
+  "results_csv": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/s4m0_audit/s4m0_modal_audit.csv"
+}
+
+S4M0 MODAL AUDIT: COMPLETED
+
+============================================================
+2/5 — Fixed-c oracle
+============================================================
+[01/48] source=oracle alpha=0.05000 |dc|=0.000e+00 stage2=3.106e-20 p40=1.058e-05 ov40=4.851e-11 time=1.37s
+[02/48] source=oracle alpha=0.05500 |dc|=0.000e+00 stage2=1.530e-19 p40=1.297e-05 ov40=7.302e-11 time=1.38s
+[03/48] source=oracle alpha=0.06000 |dc|=0.000e+00 stage2=5.541e-23 p40=1.562e-05 ov40=1.061e-10 time=2.39s
+[04/48] source=oracle alpha=0.06500 |dc|=0.000e+00 stage2=7.441e-01 p40=1.862e-05 ov40=1.510e-10 time=6.41s
+[05/48] source=oracle alpha=0.07000 |dc|=0.000e+00 stage2=2.647e+00 p40=2.192e-05 ov40=2.095e-10 time=6.32s
+[06/48] source=oracle alpha=0.07500 |dc|=0.000e+00 stage2=5.855e+00 p40=2.527e-05 ov40=2.786e-10 time=6.49s
+[07/48] source=oracle alpha=0.08000 |dc|=0.000e+00 stage2=1.052e+01 p40=2.893e-05 ov40=3.649e-10 time=6.39s
+[08/48] source=oracle alpha=0.08500 |dc|=0.000e+00 stage2=1.683e+01 p40=3.311e-05 ov40=4.783e-10 time=6.49s
+[09/48] source=oracle alpha=0.09000 |dc|=0.000e+00 stage2=2.500e+01 p40=3.764e-05 ov40=6.184e-10 time=6.56s
+[10/48] source=oracle alpha=0.09500 |dc|=0.000e+00 stage2=3.526e+01 p40=4.227e-05 ov40=7.792e-10 time=6.60s
+[11/48] source=oracle alpha=0.10000 |dc|=0.000e+00 stage2=4.792e+01 p40=4.702e-05 ov40=9.633e-10 time=6.64s
+[12/48] source=oracle alpha=0.10500 |dc|=0.000e+00 stage2=6.331e+01 p40=5.216e-05 ov40=1.184e-09 time=6.47s
+[13/48] source=oracle alpha=0.11000 |dc|=0.000e+00 stage2=8.183e+01 p40=5.788e-05 ov40=1.457e-09 time=6.75s
+[14/48] source=oracle alpha=0.11500 |dc|=0.000e+00 stage2=1.039e+02 p40=6.405e-05 ov40=1.783e-09 time=6.76s
+[15/48] source=oracle alpha=0.12000 |dc|=0.000e+00 stage2=1.302e+02 p40=7.060e-05 ov40=2.164e-09 time=6.57s
+[16/48] source=oracle alpha=0.12500 |dc|=0.000e+00 stage2=1.612e+02 p40=7.747e-05 ov40=2.603e-09 time=6.56s
+[17/48] source=oracle alpha=0.13000 |dc|=0.000e+00 stage2=1.977e+02 p40=8.463e-05 ov40=3.103e-09 time=6.87s
+[18/48] source=oracle alpha=0.13500 |dc|=0.000e+00 stage2=2.406e+02 p40=9.213e-05 ov40=3.671e-09 time=6.99s
+[19/48] source=oracle alpha=0.14000 |dc|=0.000e+00 stage2=2.911e+02 p40=1.000e-04 ov40=4.320e-09 time=7.05s
+[20/48] source=oracle alpha=0.14500 |dc|=0.000e+00 stage2=3.503e+02 p40=1.084e-04 ov40=5.063e-09 time=7.10s
+[21/48] source=oracle alpha=0.15000 |dc|=0.000e+00 stage2=4.198e+02 p40=1.172e-04 ov40=5.912e-09 time=7.14s
+[22/48] source=oracle alpha=0.15500 |dc|=0.000e+00 stage2=5.015e+02 p40=1.266e-04 ov40=6.883e-09 time=7.21s
+[23/48] source=oracle alpha=0.16000 |dc|=0.000e+00 stage2=5.977e+02 p40=1.366e-04 ov40=7.990e-09 time=7.32s
+[24/48] source=oracle alpha=0.16500 |dc|=0.000e+00 stage2=7.110e+02 p40=1.471e-04 ov40=9.244e-09 time=7.49s
+[25/48] source=oracle alpha=0.17000 |dc|=0.000e+00 stage2=8.451e+02 p40=1.581e-04 ov40=1.067e-08 time=6.88s
+[26/48] source=oracle alpha=0.17500 |dc|=0.000e+00 stage2=1.004e+03 p40=1.696e-04 ov40=1.223e-08 time=7.66s
+[27/48] source=oracle alpha=0.18000 |dc|=0.000e+00 stage2=1.193e+03 p40=1.814e-04 ov40=1.395e-08 time=7.80s
+[28/48] source=oracle alpha=0.18500 |dc|=0.000e+00 stage2=1.420e+03 p40=1.936e-04 ov40=1.584e-08 time=7.96s
+[29/48] source=oracle alpha=0.19000 |dc|=0.000e+00 stage2=1.692e+03 p40=2.064e-04 ov40=1.794e-08 time=8.08s
+[30/48] source=oracle alpha=0.19500 |dc|=0.000e+00 stage2=2.021e+03 p40=2.205e-04 ov40=2.041e-08 time=7.13s
+[31/48] source=oracle alpha=0.20000 |dc|=0.000e+00 stage2=2.422e+03 p40=2.366e-04 ov40=2.341e-08 time=8.43s
+[32/48] source=oracle alpha=0.20500 |dc|=0.000e+00 stage2=2.915e+03 p40=2.534e-04 ov40=2.675e-08 time=7.27s
+[33/48] source=oracle alpha=0.21000 |dc|=0.000e+00 stage2=3.525e+03 p40=2.696e-04 ov40=3.016e-08 time=8.93s
+[34/48] source=oracle alpha=0.21500 |dc|=0.000e+00 stage2=4.289e+03 p40=2.855e-04 ov40=3.364e-08 time=9.16s
+[35/48] source=oracle alpha=0.22000 |dc|=0.000e+00 stage2=5.257e+03 p40=3.036e-04 ov40=3.789e-08 time=9.48s
+[36/48] source=oracle alpha=0.22500 |dc|=0.000e+00 stage2=6.503e+03 p40=3.254e-04 ov40=4.336e-08 time=9.86s
+[37/48] source=oracle alpha=0.23000 |dc|=0.000e+00 stage2=8.130e+03 p40=3.458e-04 ov40=4.870e-08 time=10.35s
+[38/48] source=oracle alpha=0.23500 |dc|=0.000e+00 stage2=1.030e+04 p40=3.648e-04 ov40=5.385e-08 time=10.91s
+[39/48] source=oracle alpha=0.24000 |dc|=0.000e+00 stage2=1.125e+04 p40=3.873e-04 ov40=6.036e-08 time=10.54s
+[40/48] source=oracle alpha=0.24500 |dc|=0.000e+00 stage2=1.221e+04 p40=4.110e-04 ov40=6.756e-08 time=11.02s
+[41/48] source=oracle alpha=0.25000 |dc|=0.000e+00 stage2=1.323e+04 p40=4.359e-04 ov40=7.553e-08 time=8.11s
+[42/48] source=oracle alpha=0.25500 |dc|=0.000e+00 stage2=1.431e+04 p40=4.621e-04 ov40=8.433e-08 time=8.26s
+[43/48] source=oracle alpha=0.26000 |dc|=0.000e+00 stage2=1.546e+04 p40=4.897e-04 ov40=9.403e-08 time=8.40s
+[44/48] source=oracle alpha=0.26500 |dc|=0.000e+00 stage2=1.667e+04 p40=5.187e-04 ov40=1.047e-07 time=12.51s
+[45/48] source=oracle alpha=0.27000 |dc|=0.000e+00 stage2=1.794e+04 p40=5.492e-04 ov40=1.165e-07 time=8.32s
+[46/48] source=oracle alpha=0.27500 |dc|=0.000e+00 stage2=1.928e+04 p40=5.813e-04 ov40=1.294e-07 time=12.98s
+[47/48] source=oracle alpha=0.28000 |dc|=0.000e+00 stage2=2.069e+04 p40=6.149e-04 ov40=1.436e-07 time=8.44s
+[48/48] source=oracle alpha=0.28500 |dc|=0.000e+00 stage2=2.218e+04 p40=6.503e-04 ov40=1.591e-07 time=8.63s
+
+{
+  "status": "COMPLETED",
+  "source": "oracle",
+  "alpha_set": "all",
+  "Mach": 1.4,
+  "n_requested": 48,
+  "n_successful": 48,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/fixed_c_oracle_all/fixed_c_modal_results.csv",
+  "complex_spectral_error_mean": 0.0,
+  "complex_spectral_error_max": 0.0,
+  "stage2_mismatch_mean": 4556.7805263165,
+  "stage2_mismatch_max": 22176.294112139174,
+  "p_rel_l2_core20_mean": 1.4280332234349678e-05,
+  "p_rel_l2_core20_max": 4.0226648074024984e-05,
+  "p_rel_l2_core40_mean": 0.0002113250668529267,
+  "p_rel_l2_core40_max": 0.0006502558038795756,
+  "rho_rel_l2_core40_mean": 0.00021132506685293175,
+  "rho_rel_l2_core40_max": 0.0006502558038795757,
+  "u_rel_l2_core40_mean": 0.00013420291141392538,
+  "u_rel_l2_core40_max": 0.00048655732043753906,
+  "v_rel_l2_core40_mean": 0.00023028758345971728,
+  "v_rel_l2_core40_max": 0.0006814817408035477,
+  "p_overlap_error_core20_mean": 1.6872459448110297e-10,
+  "p_overlap_error_core20_max": 8.090916825409522e-10,
+  "p_overlap_error_core40_mean": 3.090292032918255e-08,
+  "p_overlap_error_core40_max": 1.5910454542744645e-07,
+  "stage2_seconds_mean": 7.345343931287061,
+  "stage2_seconds_max": 12.572668891400099,
+  "reconstruction_seconds_mean": 0.2477884396406201,
+  "reconstruction_seconds_max": 0.40934966830536723,
+  "fixed_c_total_seconds_mean": 7.593132370927681,
+  "fixed_c_total_seconds_max": 12.982018559705466
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/fixed_c_oracle_all/fixed_c_modal_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/fixed_c_oracle_all/fixed_c_modal_summary.json
+
+============================================================
+3/5 — Fixed-c PINN
+============================================================
+[01/48] source=pinn   alpha=0.05000 |dc|=2.146e-02 stage2=2.630e-19 p40=3.377e-02 ov40=4.246e-04 time=1.33s
+[02/48] source=pinn   alpha=0.05500 |dc|=1.543e-02 stage2=2.737e-21 p40=2.668e-02 ov40=2.681e-04 time=1.70s
+[03/48] source=pinn   alpha=0.06000 |dc|=1.039e-02 stage2=2.286e-02 p40=1.958e-02 ov40=1.460e-04 time=6.22s
+[04/48] source=pinn   alpha=0.06500 |dc|=6.219e-03 stage2=6.140e-01 p40=1.269e-02 ov40=6.198e-05 time=6.26s
+[05/48] source=pinn   alpha=0.07000 |dc|=2.797e-03 stage2=2.364e+00 p40=6.142e-03 ov40=1.467e-05 time=6.31s
+[06/48] source=pinn   alpha=0.07500 |dc|=1.043e-05 stage2=5.862e+00 p40=3.187e-05 ov40=4.089e-10 time=6.41s
+[07/48] source=pinn   alpha=0.08000 |dc|=2.273e-03 stage2=1.181e+01 p40=5.654e-03 ov40=1.272e-05 time=6.44s
+[08/48] source=pinn   alpha=0.08500 |dc|=4.102e-03 stage2=2.098e+01 p40=1.080e-02 ov40=4.681e-05 time=6.34s
+[09/48] source=pinn   alpha=0.09000 |dc|=5.533e-03 stage2=3.407e+01 p40=1.531e-02 ov40=9.506e-05 time=6.40s
+[10/48] source=pinn   alpha=0.09500 |dc|=6.590e-03 stage2=5.158e+01 p40=1.907e-02 ov40=1.487e-04 time=6.61s
+[11/48] source=pinn   alpha=0.10000 |dc|=7.281e-03 stage2=7.364e+01 p40=2.191e-02 ov40=1.978e-04 time=6.67s
+[12/48] source=pinn   alpha=0.10500 |dc|=7.610e-03 stage2=9.992e+01 p40=2.370e-02 ov40=2.331e-04 time=6.66s
+[13/48] source=pinn   alpha=0.11000 |dc|=7.585e-03 stage2=1.296e+02 p40=2.435e-02 ov40=2.476e-04 time=6.48s
+[14/48] source=pinn   alpha=0.11500 |dc|=7.223e-03 stage2=1.615e+02 p40=2.382e-02 ov40=2.380e-04 time=6.82s
+[15/48] source=pinn   alpha=0.12000 |dc|=6.549e-03 stage2=1.945e+02 p40=2.212e-02 ov40=2.061e-04 time=6.89s
+[16/48] source=pinn   alpha=0.12500 |dc|=5.598e-03 stage2=2.274e+02 p40=1.933e-02 ov40=1.578e-04 time=6.93s
+[17/48] source=pinn   alpha=0.13000 |dc|=4.414e-03 stage2=2.594e+02 p40=1.555e-02 ov40=1.024e-04 time=6.54s
+[18/48] source=pinn   alpha=0.13500 |dc|=3.048e-03 stage2=2.903e+02 p40=1.094e-02 ov40=5.069e-05 time=6.95s
+[19/48] source=pinn   alpha=0.14000 |dc|=1.557e-03 stage2=3.204e+02 p40=5.665e-03 ov40=1.362e-05 time=6.97s
+[20/48] source=pinn   alpha=0.14500 |dc|=3.006e-06 stage2=3.503e+02 p40=1.058e-04 ov40=4.819e-09 time=6.97s
+[21/48] source=pinn   alpha=0.15000 |dc|=1.551e-03 stage2=3.815e+02 p40=5.997e-03 ov40=1.519e-05 time=6.98s
+[22/48] source=pinn   alpha=0.15500 |dc|=3.034e-03 stage2=4.157e+02 p40=1.190e-02 ov40=5.974e-05 time=6.58s
+[23/48] source=pinn   alpha=0.16000 |dc|=4.381e-03 stage2=4.554e+02 p40=1.749e-02 ov40=1.289e-04 time=7.06s
+[24/48] source=pinn   alpha=0.16500 |dc|=5.526e-03 stage2=5.038e+02 p40=2.249e-02 ov40=2.127e-04 time=6.65s
+[25/48] source=pinn   alpha=0.17000 |dc|=6.410e-03 stage2=5.651e+02 p40=2.664e-02 ov40=2.974e-04 time=7.19s
+[26/48] source=pinn   alpha=0.17500 |dc|=6.983e-03 stage2=6.452e+02 p40=2.965e-02 ov40=3.670e-04 time=6.71s
+[27/48] source=pinn   alpha=0.18000 |dc|=7.206e-03 stage2=7.521e+02 p40=3.131e-02 ov40=4.068e-04 time=7.36s
+[28/48] source=pinn   alpha=0.18500 |dc|=7.057e-03 stage2=8.973e+02 p40=3.141e-02 ov40=4.067e-04 time=6.82s
+[29/48] source=pinn   alpha=0.19000 |dc|=6.535e-03 stage2=1.098e+03 p40=2.983e-02 ov40=3.638e-04 time=6.89s
+[30/48] source=pinn   alpha=0.19500 |dc|=5.661e-03 stage2=1.378e+03 p40=2.654e-02 ov40=2.852e-04 time=7.85s
+[31/48] source=pinn   alpha=0.20000 |dc|=4.484e-03 stage2=1.774e+03 p40=2.163e-02 ov40=1.873e-04 time=7.88s
+[32/48] source=pinn   alpha=0.20500 |dc|=3.080e-03 stage2=2.338e+03 p40=1.532e-02 ov40=9.279e-05 time=8.26s
+[33/48] source=pinn   alpha=0.21000 |dc|=1.547e-03 stage2=3.143e+03 p40=8.008e-03 ov40=2.497e-05 time=8.62s
+[34/48] source=pinn   alpha=0.21500 |dc|=1.146e-06 stage2=4.289e+03 p40=2.850e-04 ov40=3.355e-08 time=8.98s
+[35/48] source=pinn   alpha=0.22000 |dc|=1.437e-03 stage2=5.906e+03 p40=7.504e-03 ov40=2.135e-05 time=9.42s
+[36/48] source=pinn   alpha=0.22500 |dc|=2.651e-03 stage2=8.149e+03 p40=1.440e-02 ov40=7.728e-05 time=9.99s
+[37/48] source=pinn   alpha=0.23000 |dc|=3.543e-03 stage2=1.001e+04 p40=1.984e-02 ov40=1.446e-04 time=10.62s
+[38/48] source=pinn   alpha=0.23500 |dc|=4.040e-03 stage2=1.100e+04 p40=2.326e-02 ov40=1.959e-04 time=7.53s
+[39/48] source=pinn   alpha=0.24000 |dc|=4.099e-03 stage2=1.197e+04 p40=2.422e-02 ov40=2.096e-04 time=7.87s
+[40/48] source=pinn   alpha=0.24500 |dc|=3.704e-03 stage2=1.292e+04 p40=2.240e-02 ov40=1.773e-04 time=11.13s
+[41/48] source=pinn   alpha=0.25000 |dc|=2.864e-03 stage2=1.382e+04 p40=1.769e-02 ov40=1.094e-04 time=11.09s
+[42/48] source=pinn   alpha=0.25500 |dc|=1.613e-03 stage2=1.467e+04 p40=1.007e-02 ov40=3.522e-05 time=8.15s
+[43/48] source=pinn   alpha=0.26000 |dc|=1.135e-06 stage2=1.546e+04 p40=4.894e-04 ov40=9.393e-08 time=8.21s
+[44/48] source=pinn   alpha=0.26500 |dc|=1.916e-03 stage2=1.620e+04 p40=1.313e-02 ov40=5.887e-05 time=12.24s
+[45/48] source=pinn   alpha=0.27000 |dc|=4.066e-03 stage2=1.689e+04 p40=2.808e-02 ov40=2.682e-04 time=8.38s
+[46/48] source=pinn   alpha=0.27500 |dc|=6.387e-03 stage2=1.755e+04 p40=4.481e-02 ov40=6.799e-04 time=8.42s
+[47/48] source=pinn   alpha=0.28000 |dc|=8.822e-03 stage2=1.819e+04 p40=6.293e-02 ov40=1.337e-03 time=12.71s
+[48/48] source=pinn   alpha=0.28500 |dc|=1.132e-02 stage2=1.881e+04 p40=8.213e-02 ov40=2.271e-03 time=8.51s
+
+{
+  "status": "COMPLETED",
+  "source": "pinn",
+  "alpha_set": "all",
+  "Mach": 1.4,
+  "n_requested": 48,
+  "n_successful": 48,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/fixed_c_pinn_all/fixed_c_modal_results.csv",
+  "complex_spectral_error_mean": 0.005116492027846835,
+  "complex_spectral_error_max": 0.021459338977699104,
+  "stage2_mismatch_mean": 4424.806734484812,
+  "stage2_mismatch_max": 18809.939408298327,
+  "p_rel_l2_core20_mean": 0.010202317967796009,
+  "p_rel_l2_core20_max": 0.03743420428086761,
+  "p_rel_l2_core40_mean": 0.020138296928075308,
+  "p_rel_l2_core40_max": 0.0821293752170999,
+  "rho_rel_l2_core40_mean": 0.020138296928075308,
+  "rho_rel_l2_core40_max": 0.08212937521709987,
+  "u_rel_l2_core40_mean": 0.01720686261499868,
+  "u_rel_l2_core40_max": 0.07352841384848804,
+  "v_rel_l2_core40_mean": 0.022308561306104115,
+  "v_rel_l2_core40_max": 0.08527592839536288,
+  "p_overlap_error_core20_mean": 7.640269693473072e-05,
+  "p_overlap_error_core20_max": 0.0007009054593027919,
+  "p_overlap_error_core40_mean": 0.00023125639347355148,
+  "p_overlap_error_core40_max": 0.002271477113668263,
+  "stage2_seconds_mean": 7.25766858960075,
+  "stage2_seconds_max": 12.310491322074085,
+  "reconstruction_seconds_mean": 0.2419271896845506,
+  "reconstruction_seconds_max": 0.39981123385950923,
+  "fixed_c_total_seconds_mean": 7.4995957792853005,
+  "fixed_c_total_seconds_max": 12.710302555933595
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/fixed_c_pinn_all/fixed_c_modal_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/fixed_c_pinn_all/fixed_c_modal_summary.json
+
+============================================================
+4/5 — PINN-seeded Powell spectral correction
+============================================================
+[01/48] alpha=0.05000 |dc_pinn|=2.146e-02 |dc_corr|=1.753e-08 mismatch=7.664e-10 nfev=80 time=14.49s
+[02/48] alpha=0.05500 |dc_pinn|=1.543e-02 |dc_corr|=2.238e-08 mismatch=1.140e-09 nfev=80 time=14.60s
+[03/48] alpha=0.06000 |dc_pinn|=1.039e-02 |dc_corr|=1.099e-08 mismatch=6.889e-10 nfev=80 time=14.77s
+[04/48] alpha=0.06500 |dc_pinn|=6.219e-03 |dc_corr|=1.114e-08 mismatch=7.704e-10 nfev=80 time=14.86s
+[05/48] alpha=0.07000 |dc_pinn|=2.797e-03 |dc_corr|=1.334e-08 mismatch=1.015e-09 nfev=80 time=14.98s
+[06/48] alpha=0.07500 |dc_pinn|=1.043e-05 |dc_corr|=6.516e-09 mismatch=5.730e-10 nfev=79 time=14.85s
+[07/48] alpha=0.08000 |dc_pinn|=2.273e-03 |dc_corr|=1.009e-08 mismatch=9.699e-10 nfev=80 time=15.09s
+[08/48] alpha=0.08500 |dc_pinn|=4.102e-03 |dc_corr|=1.093e-06 mismatch=1.146e-07 nfev=80 time=15.26s
+[09/48] alpha=0.09000 |dc_pinn|=5.533e-03 |dc_corr|=1.020e-06 mismatch=1.169e-07 nfev=80 time=15.30s
+[10/48] alpha=0.09500 |dc_pinn|=6.590e-03 |dc_corr|=3.615e-06 mismatch=4.502e-07 nfev=80 time=15.44s
+[11/48] alpha=0.10000 |dc_pinn|=7.281e-03 |dc_corr|=8.979e-09 mismatch=1.186e-09 nfev=80 time=15.58s
+[12/48] alpha=0.10500 |dc_pinn|=7.610e-03 |dc_corr|=1.866e-08 mismatch=2.696e-09 nfev=80 time=15.64s
+[13/48] alpha=0.11000 |dc_pinn|=7.585e-03 |dc_corr|=1.293e-08 mismatch=2.001e-09 nfev=80 time=15.86s
+[14/48] alpha=0.11500 |dc_pinn|=7.223e-03 |dc_corr|=2.009e-08 mismatch=3.311e-09 nfev=80 time=16.01s
+[15/48] alpha=0.12000 |dc_pinn|=6.549e-03 |dc_corr|=1.452e-08 mismatch=2.580e-09 nfev=80 time=15.98s
+[16/48] alpha=0.12500 |dc_pinn|=5.598e-03 |dc_corr|=1.180e-08 mismatch=2.181e-09 nfev=80 time=16.03s
+[17/48] alpha=0.13000 |dc_pinn|=4.414e-03 |dc_corr|=5.636e-09 mismatch=1.090e-09 nfev=80 time=16.23s
+[18/48] alpha=0.13500 |dc_pinn|=3.048e-03 |dc_corr|=9.463e-09 mismatch=2.004e-09 nfev=80 time=16.29s
+[19/48] alpha=0.14000 |dc_pinn|=1.557e-03 |dc_corr|=1.760e-08 mismatch=3.919e-09 nfev=80 time=16.46s
+[20/48] alpha=0.14500 |dc_pinn|=3.006e-06 |dc_corr|=2.818e-08 mismatch=6.483e-09 nfev=76 time=15.90s
+[21/48] alpha=0.15000 |dc_pinn|=1.551e-03 |dc_corr|=6.051e-09 mismatch=1.433e-09 nfev=80 time=16.80s
+[22/48] alpha=0.15500 |dc_pinn|=3.034e-03 |dc_corr|=1.703e-08 mismatch=4.252e-09 nfev=80 time=16.99s
+[23/48] alpha=0.16000 |dc_pinn|=4.381e-03 |dc_corr|=1.245e-08 mismatch=3.229e-09 nfev=80 time=17.21s
+[24/48] alpha=0.16500 |dc_pinn|=5.526e-03 |dc_corr|=1.646e-08 mismatch=4.513e-09 nfev=80 time=17.11s
+[25/48] alpha=0.17000 |dc_pinn|=6.410e-03 |dc_corr|=3.947e-09 mismatch=1.205e-09 nfev=80 time=17.28s
+[26/48] alpha=0.17500 |dc_pinn|=6.983e-03 |dc_corr|=5.104e-09 mismatch=1.471e-09 nfev=80 time=17.57s
+[27/48] alpha=0.18000 |dc_pinn|=7.206e-03 |dc_corr|=2.413e-08 mismatch=7.275e-09 nfev=80 time=17.77s
+[28/48] alpha=0.18500 |dc_pinn|=7.057e-03 |dc_corr|=1.499e-08 mismatch=4.720e-09 nfev=80 time=18.10s
+[29/48] alpha=0.19000 |dc_pinn|=6.535e-03 |dc_corr|=1.920e-08 mismatch=6.165e-09 nfev=80 time=18.37s
+[30/48] alpha=0.19500 |dc_pinn|=5.661e-03 |dc_corr|=8.076e-09 mismatch=2.794e-09 nfev=80 time=18.87s
+[31/48] alpha=0.20000 |dc_pinn|=4.484e-03 |dc_corr|=1.593e-08 mismatch=5.472e-09 nfev=80 time=19.38s
+[32/48] alpha=0.20500 |dc_pinn|=3.080e-03 |dc_corr|=1.816e-08 mismatch=6.359e-09 nfev=80 time=19.80s
+[33/48] alpha=0.21000 |dc_pinn|=1.547e-03 |dc_corr|=8.352e-09 mismatch=3.058e-09 nfev=80 time=20.09s
+[34/48] alpha=0.21500 |dc_pinn|=1.146e-06 |dc_corr|=2.072e-08 mismatch=7.708e-09 nfev=77 time=20.01s
+[35/48] alpha=0.22000 |dc_pinn|=1.437e-03 |dc_corr|=1.784e-08 mismatch=6.901e-09 nfev=80 time=21.68s
+[36/48] alpha=0.22500 |dc_pinn|=2.651e-03 |dc_corr|=1.599e-08 mismatch=6.325e-09 nfev=80 time=21.04s
+[37/48] alpha=0.23000 |dc_pinn|=3.543e-03 |dc_corr|=2.222e-08 mismatch=8.856e-09 nfev=80 time=22.32s
+[38/48] alpha=0.23500 |dc_pinn|=4.040e-03 |dc_corr|=2.324e-08 mismatch=9.543e-09 nfev=80 time=23.00s
+[39/48] alpha=0.24000 |dc_pinn|=4.099e-03 |dc_corr|=1.652e-08 mismatch=6.885e-09 nfev=80 time=22.77s
+[40/48] alpha=0.24500 |dc_pinn|=3.704e-03 |dc_corr|=2.257e-08 mismatch=9.561e-09 nfev=80 time=23.30s
+[41/48] alpha=0.25000 |dc_pinn|=2.864e-03 |dc_corr|=5.147e-09 mismatch=2.276e-09 nfev=80 time=23.39s
+[42/48] alpha=0.25500 |dc_pinn|=1.613e-03 |dc_corr|=1.448e-08 mismatch=6.455e-09 nfev=80 time=24.50s
+[43/48] alpha=0.26000 |dc_pinn|=1.135e-06 |dc_corr|=9.954e-09 mismatch=4.425e-09 nfev=80 time=26.43s
+[44/48] alpha=0.26500 |dc_pinn|=1.916e-03 |dc_corr|=9.911e-09 mismatch=4.625e-09 nfev=80 time=25.66s
+[45/48] alpha=0.27000 |dc_pinn|=4.066e-03 |dc_corr|=9.479e-09 mismatch=4.900e-09 nfev=80 time=25.79s
+[46/48] alpha=0.27500 |dc_pinn|=6.387e-03 |dc_corr|=8.700e-09 mismatch=4.705e-09 nfev=80 time=27.05s
+[47/48] alpha=0.28000 |dc_pinn|=8.822e-03 |dc_corr|=6.456e-09 mismatch=3.592e-09 nfev=80 time=29.18s
+[48/48] alpha=0.28500 |dc_pinn|=1.132e-02 |dc_corr|=9.859e-08 mismatch=1.185e-08 nfev=80 time=28.85s
+
+{
+  "status": "COMPLETED",
+  "Mach": 1.4,
+  "n_requested": 48,
+  "n_successful": 48,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/pinn_powell_all/pinn_powell_spectral_results.csv",
+  "pinn_spectral_error_mean": 0.005116492027846835,
+  "pinn_spectral_error_max": 0.021459338977699104,
+  "corrected_spectral_error_mean": 1.341426950457074e-07,
+  "corrected_spectral_error_max": 3.6150448803207323e-06,
+  "delta_c_from_pinn_mean": 0.0051164186568507805,
+  "delta_c_from_pinn_max": 0.021459322759526035,
+  "initial_mismatch_mean": 0.0012312518496247966,
+  "initial_mismatch_max": 0.005808434235739846,
+  "corrected_mismatch_mean": 1.803419854962317e-08,
+  "corrected_mismatch_max": 4.5017507059247375e-07,
+  "mismatch_reduction_mean": 403785.5923148032,
+  "mismatch_reduction_max": 1498417.393698239,
+  "optimization_seconds_mean": 18.956413900033414,
+  "optimization_seconds_max": 29.182151237968355,
+  "nfev_reported_mean": 79.83333333333333,
+  "nfev_reported_max": 80.0
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/pinn_powell_all/pinn_powell_spectral_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/pinn_powell_all/pinn_powell_spectral_summary.json
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/pinn_powell_all/s4m0_modal_audit_powell_corrected.csv
+
+============================================================
+5/5 — Powell-corrected modal reconstruction
+============================================================
+[01/48] source=pinn   alpha=0.05000 |dc|=1.753e-08 stage2=3.105e-20 p40=1.059e-05 ov40=4.856e-11 time=1.34s
+[02/48] source=pinn   alpha=0.05500 |dc|=2.238e-08 stage2=1.528e-19 p40=1.298e-05 ov40=7.311e-11 time=1.35s
+[03/48] source=pinn   alpha=0.06000 |dc|=1.099e-08 stage2=6.833e-23 p40=1.561e-05 ov40=1.060e-10 time=2.32s
+[04/48] source=pinn   alpha=0.06500 |dc|=1.114e-08 stage2=7.441e-01 p40=1.862e-05 ov40=1.510e-10 time=6.34s
+[05/48] source=pinn   alpha=0.07000 |dc|=1.334e-08 stage2=2.647e+00 p40=2.193e-05 ov40=2.096e-10 time=6.34s
+[06/48] source=pinn   alpha=0.07500 |dc|=6.516e-09 stage2=5.855e+00 p40=2.527e-05 ov40=2.786e-10 time=6.36s
+[07/48] source=pinn   alpha=0.08000 |dc|=1.009e-08 stage2=1.052e+01 p40=2.892e-05 ov40=3.649e-10 time=6.30s
+[08/48] source=pinn   alpha=0.08500 |dc|=1.093e-06 stage2=1.683e+01 p40=3.441e-05 ov40=5.066e-10 time=6.31s
+[09/48] source=pinn   alpha=0.09000 |dc|=1.020e-06 stage2=2.500e+01 p40=3.652e-05 ov40=5.920e-10 time=6.48s
+[10/48] source=pinn   alpha=0.09500 |dc|=3.615e-06 stage2=3.527e+01 p40=3.881e-05 ov40=6.946e-10 time=6.51s
+[11/48] source=pinn   alpha=0.10000 |dc|=8.979e-09 stage2=4.792e+01 p40=4.702e-05 ov40=9.632e-10 time=6.54s
+[12/48] source=pinn   alpha=0.10500 |dc|=1.866e-08 stage2=6.331e+01 p40=5.219e-05 ov40=1.185e-09 time=6.57s
+[13/48] source=pinn   alpha=0.11000 |dc|=1.293e-08 stage2=8.183e+01 p40=5.789e-05 ov40=1.457e-09 time=6.58s
+[14/48] source=pinn   alpha=0.11500 |dc|=2.009e-08 stage2=1.039e+02 p40=6.408e-05 ov40=1.785e-09 time=6.66s
+[15/48] source=pinn   alpha=0.12000 |dc|=1.452e-08 stage2=1.302e+02 p40=7.058e-05 ov40=2.163e-09 time=6.71s
+[16/48] source=pinn   alpha=0.12500 |dc|=1.180e-08 stage2=1.612e+02 p40=7.748e-05 ov40=2.604e-09 time=6.49s
+[17/48] source=pinn   alpha=0.13000 |dc|=5.636e-09 stage2=1.977e+02 p40=8.464e-05 ov40=3.103e-09 time=6.84s
+[18/48] source=pinn   alpha=0.13500 |dc|=9.463e-09 stage2=2.406e+02 p40=9.211e-05 ov40=3.669e-09 time=6.89s
+[19/48] source=pinn   alpha=0.14000 |dc|=1.760e-08 stage2=2.911e+02 p40=1.000e-04 ov40=4.320e-09 time=6.92s
+[20/48] source=pinn   alpha=0.14500 |dc|=2.818e-08 stage2=3.503e+02 p40=1.084e-04 ov40=5.067e-09 time=7.00s
+[21/48] source=pinn   alpha=0.15000 |dc|=6.051e-09 stage2=4.198e+02 p40=1.173e-04 ov40=5.914e-09 time=7.02s
+[22/48] source=pinn   alpha=0.15500 |dc|=1.703e-08 stage2=5.015e+02 p40=1.267e-04 ov40=6.886e-09 time=7.13s
+[23/48] source=pinn   alpha=0.16000 |dc|=1.245e-08 stage2=5.976e+02 p40=1.366e-04 ov40=7.993e-09 time=6.66s
+[24/48] source=pinn   alpha=0.16500 |dc|=1.646e-08 stage2=7.110e+02 p40=1.470e-04 ov40=9.239e-09 time=7.37s
+[25/48] source=pinn   alpha=0.17000 |dc|=3.947e-09 stage2=8.451e+02 p40=1.581e-04 ov40=1.067e-08 time=6.76s
+[26/48] source=pinn   alpha=0.17500 |dc|=5.104e-09 stage2=1.004e+03 p40=1.696e-04 ov40=1.223e-08 time=6.83s
+[27/48] source=pinn   alpha=0.18000 |dc|=2.413e-08 stage2=1.193e+03 p40=1.814e-04 ov40=1.395e-08 time=7.73s
+[28/48] source=pinn   alpha=0.18500 |dc|=1.499e-08 stage2=1.420e+03 p40=1.935e-04 ov40=1.583e-08 time=6.91s
+[29/48] source=pinn   alpha=0.19000 |dc|=1.920e-08 stage2=1.692e+03 p40=2.065e-04 ov40=1.794e-08 time=6.95s
+[30/48] source=pinn   alpha=0.19500 |dc|=8.076e-09 stage2=2.021e+03 p40=2.205e-04 ov40=2.041e-08 time=8.10s
+[31/48] source=pinn   alpha=0.20000 |dc|=1.593e-08 stage2=2.422e+03 p40=2.366e-04 ov40=2.342e-08 time=8.31s
+[32/48] source=pinn   alpha=0.20500 |dc|=1.816e-08 stage2=2.915e+03 p40=2.534e-04 ov40=2.676e-08 time=7.14s
+[33/48] source=pinn   alpha=0.21000 |dc|=8.352e-09 stage2=3.525e+03 p40=2.696e-04 ov40=3.017e-08 time=8.72s
+[34/48] source=pinn   alpha=0.21500 |dc|=2.072e-08 stage2=4.289e+03 p40=2.854e-04 ov40=3.363e-08 time=7.26s
+[35/48] source=pinn   alpha=0.22000 |dc|=1.784e-08 stage2=5.257e+03 p40=3.035e-04 ov40=3.788e-08 time=7.32s
+[36/48] source=pinn   alpha=0.22500 |dc|=1.599e-08 stage2=6.503e+03 p40=3.254e-04 ov40=4.335e-08 time=7.40s
+[37/48] source=pinn   alpha=0.23000 |dc|=2.222e-08 stage2=8.130e+03 p40=3.459e-04 ov40=4.872e-08 time=10.09s
+[38/48] source=pinn   alpha=0.23500 |dc|=2.324e-08 stage2=1.030e+04 p40=3.647e-04 ov40=5.383e-08 time=7.77s
+[39/48] source=pinn   alpha=0.24000 |dc|=1.652e-08 stage2=1.125e+04 p40=3.872e-04 ov40=6.033e-08 time=7.61s
+[40/48] source=pinn   alpha=0.24500 |dc|=2.257e-08 stage2=1.221e+04 p40=4.109e-04 ov40=6.754e-08 time=10.99s
+[41/48] source=pinn   alpha=0.25000 |dc|=5.147e-09 stage2=1.323e+04 p40=4.359e-04 ov40=7.553e-08 time=7.73s
+[42/48] source=pinn   alpha=0.25500 |dc|=1.448e-08 stage2=1.431e+04 p40=4.621e-04 ov40=8.432e-08 time=11.28s
+[43/48] source=pinn   alpha=0.26000 |dc|=9.954e-09 stage2=1.546e+04 p40=4.897e-04 ov40=9.401e-08 time=7.93s
+[44/48] source=pinn   alpha=0.26500 |dc|=9.911e-09 stage2=1.667e+04 p40=5.187e-04 ov40=1.047e-07 time=12.32s
+[45/48] source=pinn   alpha=0.27000 |dc|=9.479e-09 stage2=1.794e+04 p40=5.493e-04 ov40=1.165e-07 time=12.61s
+[46/48] source=pinn   alpha=0.27500 |dc|=8.700e-09 stage2=1.928e+04 p40=5.813e-04 ov40=1.294e-07 time=13.17s
+[47/48] source=pinn   alpha=0.28000 |dc|=6.456e-09 stage2=2.069e+04 p40=6.150e-04 ov40=1.436e-07 time=8.32s
+[48/48] source=pinn   alpha=0.28500 |dc|=9.859e-08 stage2=2.218e+04 p40=6.506e-04 ov40=1.592e-07 time=14.14s
+
+{
+  "status": "COMPLETED",
+  "source": "pinn",
+  "alpha_set": "all",
+  "Mach": 1.4,
+  "n_requested": 48,
+  "n_successful": 48,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/pinn_powell_modes_all/fixed_c_modal_results.csv",
+  "complex_spectral_error_mean": 1.3414269504727944e-07,
+  "complex_spectral_error_max": 3.615044880348423e-06,
+  "stage2_mismatch_mean": 4556.781563474946,
+  "stage2_mismatch_max": 22176.308187830786,
+  "p_rel_l2_core20_mean": 1.4342329366434057e-05,
+  "p_rel_l2_core20_max": 4.033200540157399e-05,
+  "p_rel_l2_core40_mean": 0.00021126152674502352,
+  "p_rel_l2_core40_max": 0.00065055251999667,
+  "rho_rel_l2_core40_mean": 0.00021126152674502848,
+  "rho_rel_l2_core40_max": 0.0006505525199966704,
+  "u_rel_l2_core40_mean": 0.0001342175086324268,
+  "u_rel_l2_core40_max": 0.00048680929155859795,
+  "v_rel_l2_core40_mean": 0.0002302054704336106,
+  "v_rel_l2_core40_max": 0.0006817810179773832,
+  "p_overlap_error_core20_mean": 1.690114414161966e-10,
+  "p_overlap_error_core20_max": 8.133355100525819e-10,
+  "p_overlap_error_core40_mean": 3.090268366201521e-08,
+  "p_overlap_error_core40_max": 1.5922651819266775e-07,
+  "stage2_seconds_mean": 7.222940680590303,
+  "stage2_seconds_max": 13.692570071201771,
+  "reconstruction_seconds_mean": 0.24440423148917034,
+  "reconstruction_seconds_max": 0.445577054284513,
+  "fixed_c_total_seconds_mean": 7.467344912079473,
+  "fixed_c_total_seconds_max": 14.138147125486284
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/pinn_powell_modes_all/fixed_c_modal_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/pinn_powell_modes_all/fixed_c_modal_summary.json
+
+          Mach              method  n  spectral_error_mean  spectral_error_max  p_rel_l2_mean   p_rel_l2_max  u_rel_l2_mean   u_rel_l2_max  v_rel_l2_mean   v_rel_l2_max  overlap_error_mean    time_mean_s     time_max_s  slowdown_vs_fast  modal_fast_pass  modal_precise_pass
+1.40000000e+00      fixed_c_oracle 48       0.00000000e+00      0.00000000e+00 2.11325067e-04 6.50255804e-04 1.34202911e-04 4.86557320e-04 2.30287583e-04 6.81481741e-04      3.09029203e-08 7.59313237e+00 1.29820186e+01    1.01247222e+00             True                True
+1.40000000e+00   fixed_c_pinn_fast 48       5.11649203e-03      2.14593390e-02 2.01382969e-02 8.21293752e-02 1.72068626e-02 7.35284138e-02 2.23085613e-02 8.52759284e-02      2.31256393e-04 7.49959578e+00 1.27103026e+01    1.00000000e+00             True                True
+1.40000000e+00 pinn_powell_precise 48       1.34142695e-07      3.61504488e-06 2.11261527e-04 6.50552520e-04 1.34217509e-04 4.86809292e-04 2.30205470e-04 6.81781018e-04      3.09026837e-08 2.64237588e+01 4.29835586e+01    3.52335774e+00             True                True
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/hybrid_validation_summary.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M140_S4M0_v1/hybrid_validation_summary.json
+
+END=Fri Aug  7 07:02:11 PM CEST 2026
+HYBRID VALIDATION COMPLETED FOR M=1.40
+
+end = Fri Aug  7 07:02:12 PM CEST 2026

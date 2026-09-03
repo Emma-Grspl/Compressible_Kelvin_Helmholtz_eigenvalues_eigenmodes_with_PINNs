@@ -1,0 +1,4 @@
+case_id,solver,sweep_type,n_runs,n_converged,n_failed,n_spectral_success,n_modal_reconstruction_success,n_branch_failures,n_tail_sensitive,n_overall_validated,n_legacy_stage2_bound_hits,n_unresolved_branch_provenance,plateau_reached,plateau_axis,plateau_value,proposed_run_id,proposed_Ly,proposed_n_points,proposed_rtol,proposed_atol,proposed_max_step,spectral_plateau_tolerance,modal_plateau_tolerance
+supersonic_M140,supersonic_shooting,shooting_box,1,0,1,1,1,1,0,0,1,1,False,Ly,,,,,,,,1e-05,0.01
+supersonic_M180,supersonic_shooting,shooting_box,1,0,1,1,1,0,1,1,1,0,True,Ly,2000.0,supersonic_M180__supersonic_shooting__shooting_modalfix_smoke__77c1680830a8,2000.0,,1e-10,1e-12,0.25,1e-05,0.01
+supersonic_M190,supersonic_shooting,shooting_box,1,0,1,1,1,0,1,1,1,0,True,Ly,2000.0,supersonic_M190__supersonic_shooting__shooting_modalfix_smoke__ec412bbce4ae,2000.0,,1e-10,1e-12,0.25,1e-05,0.01

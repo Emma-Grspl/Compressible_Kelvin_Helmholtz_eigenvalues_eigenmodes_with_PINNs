@@ -1,0 +1,40 @@
+{
+  "case": {
+    "name": "witness_M150_a01625",
+    "Mach": 1.5,
+    "alpha": 0.1625
+  },
+  "config_path": "code/configs/legacy/witness_M150_a01625.yaml",
+  "config_sha256": "4ca987ec4bf17e5cfefe52e84626e217c7f94a072255c85c10223df8a4a3216e",
+  "reference": {
+    "cr": 0.3680825090907056,
+    "ci": 0.0380056534011514,
+    "omega_i": 0.0061759186776871
+  },
+  "solved": {
+    "cr": 0.36808800427906274,
+    "ci": 0.03800674064024567,
+    "omega_i": 0.006176095354039922
+  },
+  "metrics": {
+    "abs_cr_error": 5.495188357129699e-06,
+    "abs_ci_error": 1.087239094275938e-06,
+    "abs_omega_i_error": 1.7667635282200833e-07,
+    "stage1_mismatch_at_reference": 1.5637739022447838e-06,
+    "stage1_mismatch_solved": 5.103536689850155e-10
+  },
+  "acceptance": {
+    "abs_cr_error_max": 1e-05,
+    "abs_ci_error_max": 2e-06,
+    "abs_omega_i_error_max": 5e-07,
+    "stage1_mismatch_max": 1e-08
+  },
+  "checks": {
+    "abs_cr_error": true,
+    "abs_ci_error": true,
+    "abs_omega_i_error": true,
+    "stage1_mismatch": true
+  },
+  "passed": true,
+  "elapsed_seconds": 10.840599708957598
+}

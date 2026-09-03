@@ -1,0 +1,19 @@
+# Template only: replace every <PLACEHOLDER> before publishing CITATION.cff.
+cff-version: 1.2.0
+message: "If you use this repository, please cite it using the final citation metadata."
+title: "<REPOSITORY_TITLE>"
+authors:
+  - family-names: "<AUTHOR_FAMILY_NAME>"
+    given-names: "<AUTHOR_GIVEN_NAME>"
+version: "<VERSION>"
+date-released: "<YYYY-MM-DD>"
+repository-code: "<REPOSITORY_URL>"
+preferred-citation:
+  type: article
+  title: "<ARTICLE_TITLE_IF_AVAILABLE>"
+  authors:
+    - family-names: "<AUTHOR_FAMILY_NAME>"
+      given-names: "<AUTHOR_GIVEN_NAME>"
+  journal: "<JOURNAL_IF_AVAILABLE>"
+  year: "<YEAR_IF_AVAILABLE>"
+  doi: "<DOI_IF_AVAILABLE>"

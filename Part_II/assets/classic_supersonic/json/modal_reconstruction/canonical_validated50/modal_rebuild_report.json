@@ -1,0 +1,18 @@
+{
+  "selection": "assets/classic_supersonic/csv/pinn_direct/tables/table_supersonic_reference_v2_spectral_validated_50pts.csv",
+  "base_source": "experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_raw.parquet",
+  "extension_source": "assets/classic_supersonic/csv/modal_reconstruction/final_50pts/table_supersonic_modal_fields_p_rho_u_v_50pts.csv",
+  "selected_points": 50,
+  "base_points": 44,
+  "extension_points": 6,
+  "output_rows": 243475,
+  "source_counts": {
+    "canonical_raw_confirmed_base44": 44,
+    "extension_exact_shooting_fields": 6
+  },
+  "outputs": {
+    "parquet": "/tmp/supersonic_validated50_rebuild/supersonic_modal_fields_p_rho_u_v_validated50.parquet",
+    "csv": "/tmp/supersonic_validated50_rebuild/supersonic_modal_fields_p_rho_u_v_validated50.csv",
+    "audit": "/tmp/supersonic_validated50_rebuild/supersonic_modal_fields_p_rho_u_v_validated50_audit.csv"
+  }
+}

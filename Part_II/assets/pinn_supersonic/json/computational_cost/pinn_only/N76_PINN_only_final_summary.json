@@ -1,0 +1,86 @@
+{
+  "device": "cuda",
+  "model_load_seconds": 1.5644860219908878,
+  "timing_excludes_checkpoint_load": true,
+  "cost1_coordinate": {
+    "Mach": 1.018,
+    "alpha": 0.05775,
+    "atlas_chart": "C00"
+  },
+  "spectral_only": {
+    "cost1": {
+      "repeats": 5000,
+      "total_seconds": 2.270345074008219,
+      "seconds_per_call": 0.0004540690148016438
+    },
+    "cost500_batched": {
+      "repeats": 1000,
+      "total_seconds": 5.446049561025575,
+      "seconds_per_call": 0.005446049561025575
+    },
+    "cost500_seconds_per_query_equivalent": 1.089209912205115e-05
+  },
+  "spectral_plus_modal_801": {
+    "cost1": {
+      "repeats": 500,
+      "total_seconds": 1.9077421879628673,
+      "seconds_per_call": 0.0038154843759257346
+    },
+    "cost500_batched": {
+      "repeats": 30,
+      "total_seconds": 5.609219279023819,
+      "seconds_per_call": 0.18697397596746063
+    },
+    "cost500_seconds_per_query_equivalent": 0.00037394795193492126
+  },
+  "T401_direct_PINN": {
+    "n": 401,
+    "ci_abs_error": {
+      "n": 401,
+      "mean": 0.0034112807787192974,
+      "median": 0.0013288113523807002,
+      "p90": 0.008871066953596005,
+      "p95": 0.015405794248284699,
+      "max": 0.08426653448361769
+    },
+    "spectral_error": {
+      "n": 401,
+      "mean": 0.006719843847939995,
+      "median": 0.004020298667981898,
+      "p90": 0.01652295755360559,
+      "p95": 0.02050820675866146,
+      "max": 0.08821280387414869
+    },
+    "branch_localization_success": 400,
+    "branch_localization_fraction": 0.9975062344139651
+  },
+  "T401_modal": {
+    "reference_source": "assets/classic_supersonic/csv/modal_reconstruction/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/table_classical_supersonic_final_modes_index.csv",
+    "n_total": 401,
+    "n_modal_success": 401,
+    "pressure_rel_l2": {
+      "n": 401,
+      "mean": 0.5912368712260009,
+      "median": 0.5168499700913578,
+      "p90": 0.9357973882577646,
+      "p95": 0.9536097710024745,
+      "max": 0.9823285175602431
+    },
+    "amplitude_rel_l2": {
+      "n": 401,
+      "mean": 0.376917247696655,
+      "median": 0.31091821343691484,
+      "p90": 0.7035629475551328,
+      "p95": 0.7512498574415474,
+      "max": 0.832978649637702
+    },
+    "pressure_overlap": {
+      "n": 401,
+      "mean": 0.7408850590844752,
+      "median": 0.8560759945335241,
+      "p90": 0.937407361932077,
+      "p95": 0.9511154820878036,
+      "max": 0.9984072274856799
+    }
+  }
+}

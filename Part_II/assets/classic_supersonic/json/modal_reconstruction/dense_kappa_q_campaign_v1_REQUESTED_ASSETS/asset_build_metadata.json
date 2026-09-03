@@ -1,0 +1,39 @@
+{
+  "active_threshold": 0.0001,
+  "blumen": {
+    "ci_level_source": "article/tables/table_blumen_ci_curve_levels.csv",
+    "ci_levels_available": true,
+    "curve_count": 5,
+    "levels_path": "article/tables/table_blumen_ci_curve_levels.csv",
+    "mach_calibration": "already physical Mach",
+    "point_count": 117,
+    "points_path": "article/tables/table_blumen_ci_digitized_points.csv"
+  },
+  "field_reconstruction": {
+    "U": "tanh(y)",
+    "p_y": "p_y = (kappa + i q) p",
+    "rho": "rho = M^2 p",
+    "u": "u = -p/(U-c) + i U_prime v/(alpha (U-c))",
+    "v": "v = i p_y / (alpha (U-c))"
+  },
+  "generated_at": "2026-07-24T09:18:57.676184+00:00",
+  "modal_components": [
+    "real",
+    "imaginary"
+  ],
+  "modal_fields": [
+    "p",
+    "rho",
+    "u",
+    "v"
+  ],
+  "modal_pdf": "classical_supersonic_all_modes_p_rho_u_v.pdf",
+  "modal_pdf_pages": 771,
+  "modal_points": 770,
+  "overlay_pdf": "blumen_vs_dense_alpha_mach_map.pdf",
+  "overlay_points_csv": "blumen_vs_dense_overlay_points.csv",
+  "reference_freeze": "assets/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FREEZE",
+  "reference_mach_values": 17,
+  "reference_points": 770,
+  "status": "PASS"
+}

@@ -1,0 +1,171 @@
+
+====================================================================================================
+ATLAS-2D VALIDATION — N76
+====================================================================================================
+COST500 points: 500
+device: cpu
+
+----------------------------------------------------------------------------------------------------
+C00 | validation points = 25
+checkpoint = models_saved/atlas/N76/C00/best_joint_checkpoint_33647c0c65.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C00: OK — 25 predictions
+
+----------------------------------------------------------------------------------------------------
+C01 | validation points = 35
+checkpoint = models_saved/atlas/N76/C01/best_joint_checkpoint_bd8dd50299.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C01: OK — 35 predictions
+
+----------------------------------------------------------------------------------------------------
+C02 | validation points = 61
+checkpoint = models_saved/atlas/N76/C02/best_joint_checkpoint_be0e4833f5.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C02: OK — 61 predictions
+
+----------------------------------------------------------------------------------------------------
+C10 | validation points = 21
+checkpoint = models_saved/atlas/N76/C10/best_joint_checkpoint_06bde09f2f.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C10: OK — 21 predictions
+
+----------------------------------------------------------------------------------------------------
+C11 | validation points = 30
+checkpoint = models_saved/atlas/N76/C11/best_joint_checkpoint_b7ea53532f.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C11: OK — 30 predictions
+
+----------------------------------------------------------------------------------------------------
+C12 | validation points = 50
+checkpoint = models_saved/atlas/N76/C12/best_joint_checkpoint_d4f26e5b75.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C12: OK — 50 predictions
+
+----------------------------------------------------------------------------------------------------
+C20 | validation points = 23
+checkpoint = models_saved/atlas/N76/C20/best_joint_checkpoint_b236e307a9.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C20: OK — 23 predictions
+
+----------------------------------------------------------------------------------------------------
+C21 | validation points = 36
+checkpoint = models_saved/atlas/N76/C21/best_joint_checkpoint_d89a36cc31.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C21: OK — 36 predictions
+
+----------------------------------------------------------------------------------------------------
+C22 | validation points = 60
+checkpoint = models_saved/atlas/N76/C22/best_joint_checkpoint_4f0defe56d.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C22: OK — 60 predictions
+
+----------------------------------------------------------------------------------------------------
+C30 | validation points = 33
+checkpoint = models_saved/atlas/N76/C30/best_joint_checkpoint_2d630591a9.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C30: OK — 33 predictions
+
+----------------------------------------------------------------------------------------------------
+C31 | validation points = 48
+checkpoint = models_saved/atlas/N76/C31/best_joint_checkpoint_eafc27be12.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C31: OK — 48 predictions
+
+----------------------------------------------------------------------------------------------------
+C32 | validation points = 78
+checkpoint = models_saved/atlas/N76/C32/best_joint_checkpoint_cd639cf2a1.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C32: OK — 78 predictions
+
+====================================================================================================
+ATLAS-N76 — 500-POINT FINAL TEST
+====================================================================================================
+{
+  "n": 500,
+  "cr_mae": 0.3082616974711418,
+  "cr_median_abs": 0.32341577112674713,
+  "cr_max_abs": 0.5093077421188354,
+  "ci_mae": 0.047910117002786134,
+  "ci_median_abs": 0.03154026344418526,
+  "ci_max_abs": 0.24382302165031433,
+  "omega_i_mae": 0.009452957376968319,
+  "spectral_error_mean": 0.32094100204860004,
+  "spectral_error_median": 0.3287012736557482,
+  "spectral_error_p90": 0.4564852787296914,
+  "spectral_error_p95": 0.4783688088032085,
+  "spectral_error_p99": 0.49821408039473736,
+  "spectral_error_max": 0.5093211135234926,
+  "spectral_relative_mean": 320941002048.60004,
+  "spectral_relative_p95": 478368808803.2085,
+  "spectral_relative_max": 509321113523.4926,
+  "fraction_error_le_1e-4": 0.0,
+  "fraction_error_le_5e-4": 0.0,
+  "fraction_error_le_1e-3": 0.0,
+  "fraction_error_le_2e-3": 0.0,
+  "fraction_error_le_5e-3": 0.0,
+  "fraction_error_le_1e-2": 0.0,
+  "budget": 76,
+  "n_charts": 12
+}
+
+==================================================================================================================================
+BY PRIMARY CHART
+==================================================================================================================================
+chart  n       cr_mae       ci_mae  spectral_error_mean  spectral_error_p95  spectral_error_max  fraction_error_le_1e-3  fraction_error_le_5e-3  fraction_error_le_1e-2
+  C00 25 5.214249e-02 8.136908e-02         1.006506e-01        2.062354e-01        2.152050e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C01 35 1.343672e-01 9.359524e-02         1.708258e-01        2.343760e-01        2.580872e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C02 61 2.120117e-01 3.373235e-02         2.172247e-01        2.715011e-01        2.744208e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C10 21 2.101044e-01 9.592600e-02         2.332333e-01        2.792679e-01        2.939596e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C11 30 2.743732e-01 6.546539e-02         2.828754e-01        3.239171e-01        3.318570e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C12 50 3.261983e-01 1.490347e-02         3.269742e-01        3.683266e-01        3.767674e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C20 23 3.197661e-01 5.627072e-02         3.250918e-01        3.672424e-01        3.768970e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C21 36 3.651534e-01 3.904953e-02         3.674853e-01        4.096365e-01        4.161275e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C22 60 3.637760e-01 2.014162e-02         3.657912e-01        4.304055e-01        4.449928e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C30 33 4.270243e-01 2.965252e-02         4.281319e-01        4.767452e-01        4.823521e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C31 48 4.567212e-01 1.931831e-02         4.572222e-01        5.026239e-01        5.093211e-01            0.000000e+00            0.000000e+00            0.000000e+00
+  C32 78 3.576576e-01 7.755673e-02         3.879832e-01        4.937691e-01        5.075618e-01            0.000000e+00            0.000000e+00            0.000000e+00
+
+==================================================================================================================================
+20 WORST VALIDATION POINTS
+==================================================================================================================================
+          Mach          alpha atlas_chart             cr             ci        cr_pred        ci_pred   cr_abs_error   ci_abs_error  spectral_error  spectral_relative_error  omega_i_abs_error
+1.88200000e+00 1.97250000e-01         C31 0.00000000e+00 0.00000000e+00 5.09307742e-01 3.69059597e-03 5.09307742e-01 3.69059597e-03  5.09321114e-01           5.09321114e+11     7.27970055e-04
+1.88200000e+00 2.12750000e-01         C31 0.00000000e+00 0.00000000e+00 5.08041859e-01 1.76220422e-03 5.08041859e-01 1.76220422e-03  5.08044915e-01           5.08044915e+11     3.74908948e-04
+1.88200000e+00 2.28250000e-01         C32 0.00000000e+00 0.00000000e+00 5.07561088e-01 8.25052441e-04 5.07561088e-01 8.25052441e-04  5.07561758e-01           5.07561758e+11     1.88318220e-04
+1.88200000e+00 1.81750000e-01         C31 0.00000000e+00 0.00000000e+00 5.04962444e-01 7.96094816e-03 5.04962444e-01 7.96094816e-03  5.05025194e-01           5.05025194e+11     1.44690233e-03
+1.88200000e+00 2.43750000e-01         C32 0.00000000e+00 0.00000000e+00 5.03127337e-01 8.82795604e-04 5.03127337e-01 8.82795604e-04  5.03128111e-01           5.03128111e+11     2.15181429e-04
+1.84600000e+00 1.97250000e-01         C31 0.00000000e+00 0.00000000e+00 4.98138070e-01 5.12602180e-03 4.98138070e-01 5.12602180e-03  4.98164444e-01           4.98164444e+11     1.01110780e-03
+1.88200000e+00 1.66250000e-01         C31 0.00000000e+00 0.00000000e+00 4.97952223e-01 1.22440476e-02 4.97952223e-01 1.22440476e-02  4.98102733e-01           4.98102733e+11     2.03557291e-03
+1.84600000e+00 2.28250000e-01         C32 0.00000000e+00 0.00000000e+00 4.97791857e-01 1.21719856e-03 4.97791857e-01 1.21719856e-03  4.97793345e-01           4.97793345e+11     2.77825571e-04
+1.84600000e+00 2.12750000e-01         C32 0.00000000e+00 0.00000000e+00 4.97776181e-01 2.59231520e-03 4.97776181e-01 2.59231520e-03  4.97782931e-01           4.97782931e+11     5.51515059e-04
+1.84600000e+00 1.81750000e-01         C31 0.00000000e+00 0.00000000e+00 4.95427728e-01 9.78410989e-03 4.95427728e-01 9.78410989e-03  4.95524331e-01           4.95524331e+11     1.77826197e-03
+1.88200000e+00 1.50750000e-01         C31 0.00000000e+00 0.00000000e+00 4.93267924e-01 1.52578438e-02 4.93267924e-01 1.52578438e-02  4.93503846e-01           4.93503846e+11     2.30011995e-03
+1.84600000e+00 2.43750000e-01         C32 0.00000000e+00 0.00000000e+00 4.93059486e-01 1.13548245e-03 4.93059486e-01 1.13548245e-03  4.93060794e-01           4.93060794e+11     2.76773848e-04
+1.84600000e+00 1.66250000e-01         C31 0.00000000e+00 0.00000000e+00 4.92059767e-01 1.39425835e-02 4.92059767e-01 1.39425835e-02  4.92257260e-01           4.92257260e+11     2.31795450e-03
+1.81000000e+00 2.12750000e-01         C32 0.00000000e+00 0.00000000e+00 4.88342613e-01 4.00066795e-03 4.88342613e-01 4.00066795e-03  4.88359000e-01           4.88359000e+11     8.51142106e-04
+1.88200000e+00 1.35250000e-01         C31 0.00000000e+00 0.00000000e+00 4.87839669e-01 1.81620326e-02 4.87839669e-01 1.81620326e-02  4.88177634e-01           4.88177634e+11     2.45641491e-03
+1.81000000e+00 2.28250000e-01         C32 0.00000000e+00 0.00000000e+00 4.88155365e-01 1.78358878e-03 4.88155365e-01 1.78358878e-03  4.88158623e-01           4.88158623e+11     4.07104140e-04
+1.88200000e+00 2.59250000e-01         C32 0.00000000e+00 0.00000000e+00 4.88090426e-01 1.63652888e-03 4.88090426e-01 1.63652888e-03  4.88093169e-01           4.88093169e+11     4.24270111e-04
+1.84600000e+00 1.50750000e-01         C31 0.00000000e+00 0.00000000e+00 4.86668289e-01 1.64599940e-02 4.86668289e-01 1.64599940e-02  4.86946562e-01           4.86946562e+11     2.48134410e-03
+1.81000000e+00 1.97250000e-01         C31 0.00000000e+00 0.00000000e+00 4.84615117e-01 7.11964583e-03 4.84615117e-01 7.11964583e-03  4.84667413e-01           4.84667413e+11     1.40435014e-03
+1.88200000e+00 1.19750000e-01         C30 0.00000000e+00 0.00000000e+00 4.81934428e-01 2.00697761e-02 4.81934428e-01 2.00697761e-02  4.82352142e-01           4.82352142e+11     2.40335569e-03
+
+====================================================================================================
+WRITTEN
+====================================================================================================
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/cost500/N76_cost500_predictions_500.csv
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/cost500/N76_cost500_metrics_global.json
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/cost500/N76_cost500_metrics_by_chart.csv
+assets/pinn_supersonic/atlas2d_v1_continuousM/N76/cost500/N76_cost500_worst_points.csv

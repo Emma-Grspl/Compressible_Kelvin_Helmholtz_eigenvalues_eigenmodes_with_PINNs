@@ -1,0 +1,7 @@
+cluster: jean_zay
+modules:
+  - pytorch-gpu/py3/2.1.1
+working_directory: "$WORK/These_PINN_KH_RT"
+pythonpath: "$WORK/These_PINN_KH_RT"
+cpu_account: "fdb@cpu"
+gpu_account: "fdb@v100"

@@ -1,0 +1,22 @@
+# Provenance: code/src/scripts/gep/selection/solve_blumen_exact_joint_gep_v3.py
+# Function: numerical_policy(mach, eta). This is a documentation copy of the
+# executable policy, not an independently maintained implementation.
+standard:
+  n_points: 301
+  mapping_scale: 5.0
+  xi_max: 0.98
+near_neutral:
+  condition: "eta >= 0.92"
+  n_points: 401
+  mapping_scale: 5.0
+  xi_max: 0.98
+longwave:
+  condition: "eta <= 0.12"
+  n_points: 301
+  mapping_scale: 10.0
+  xi_max: 0.99
+extreme_longwave:
+  condition: "mach >= 0.88 and eta <= 0.06"
+  n_points: 301
+  mapping_scale: 20.0
+  xi_max: 0.995

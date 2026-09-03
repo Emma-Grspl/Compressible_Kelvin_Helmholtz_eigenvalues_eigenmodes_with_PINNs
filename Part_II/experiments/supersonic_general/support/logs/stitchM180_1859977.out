@@ -1,0 +1,82 @@
+
+[case 0] alpha=0.07125000 c=0.43504485+i0.02758185
+  jump p: 4.169e-08 -> 1.759e-19
+  jump q after p scaling: 2.957e-06
+  scale disagreement: 2.957e-06
+  PINN fit: overlap=0.68123 p_rel=7.321e-01 q_rel=7.955e+01
+  status: stitch_improves_mode_but_not_validated
+
+[case 1] alpha=0.08875000 c=0.44370425+i0.02766915
+  jump p: 1.488e-08 -> 0.000e+00
+  jump q after p scaling: 6.515e-07
+  scale disagreement: 6.515e-07
+  PINN fit: overlap=0.66364 p_rel=7.481e-01 q_rel=7.940e+01
+  status: stitch_improves_mode_but_not_validated
+
+[case 2] alpha=0.10375000 c=0.45041353+i0.02667680
+  jump p: 6.524e-08 -> 1.761e-19
+  jump q after p scaling: 3.156e-06
+  scale disagreement: 3.156e-06
+  PINN fit: overlap=0.64836 p_rel=7.613e-01 q_rel=7.893e+01
+  status: stitch_improves_mode_but_not_validated
+
+[case 3] alpha=0.12125000 c=0.45749500+i0.02458609
+  jump p: 1.151e-07 -> 1.805e-16
+  jump q after p scaling: 5.271e-06
+  scale disagreement: 5.271e-06
+  PINN fit: overlap=0.62940 p_rel=7.771e-01 q_rel=7.522e+01
+  status: stitch_improves_mode_but_not_validated
+
+[case 4] alpha=0.13875000 c=0.46387485+i0.02172694
+  jump p: 1.412e-07 -> 8.819e-20
+  jump q after p scaling: 5.897e-06
+  scale disagreement: 5.897e-06
+  PINN fit: overlap=0.60857 p_rel=7.935e-01 q_rel=6.635e+01
+  status: stitch_improves_mode_but_not_validated
+
+[case 5] alpha=0.15625000 c=0.46965310+i0.01828229
+  jump p: 1.249e-07 -> 1.807e-16
+  jump q after p scaling: 4.642e-06
+  scale disagreement: 4.642e-06
+  PINN fit: overlap=0.58624 p_rel=8.101e-01 q_rel=5.344e+01
+  status: stitch_improves_mode_but_not_validated
+
+[case 6] alpha=0.17125000 c=0.47419128+i0.01496513
+  jump p: 5.952e-08 -> 1.809e-16
+  jump q after p scaling: 1.836e-06
+  scale disagreement: 1.836e-06
+  PINN fit: overlap=0.56614 p_rel=8.243e-01 q_rel=4.149e+01
+  status: stitch_improves_mode_but_not_validated
+
+[case 7] alpha=0.18875000 c=0.47907061+i0.01076202
+  jump p: 1.017e-07 -> 1.810e-16
+  jump q after p scaling: 3.731e-06
+  scale disagreement: 3.731e-06
+  PINN fit: overlap=0.54180 p_rel=8.405e-01 q_rel=2.907e+01
+  status: stitch_improves_mode_but_not_validated
+
+[summary]
+  alpha  pressure_jump_before  pressure_jump_after  q_jump_after  scale_disagreement  original_p_rel_after_fit  stitched_p_rel_after_fit  original_q_rel_after_fit  stitched_q_rel_after_fit  stitched_p_overlap  modal_stitch_validated                                 status
+0.07125          4.169083e-08         1.759213e-19  2.957282e-06        2.957282e-06                  0.732073                  0.732073                 79.554336                 79.554338            0.681226                   False stitch_improves_mode_but_not_validated
+0.08875          1.488183e-08         0.000000e+00  6.514676e-07        6.514676e-07                  0.748054                  0.748054                 79.400730                 79.400730            0.663638                   False stitch_improves_mode_but_not_validated
+0.10375          6.523715e-08         1.761268e-19  3.156064e-06        3.156064e-06                  0.761333                  0.761333                 78.931715                 78.931712            0.648361                   False stitch_improves_mode_but_not_validated
+0.12125          1.150869e-07         1.804775e-16  5.271143e-06        5.271143e-06                  0.777081                  0.777081                 75.224159                 75.224152            0.629401                   False stitch_improves_mode_but_not_validated
+0.13875          1.411985e-07         8.818747e-20  5.897233e-06        5.897233e-06                  0.793502                  0.793502                 66.345305                 66.345297            0.608568                   False stitch_improves_mode_but_not_validated
+0.15625          1.249283e-07         1.807458e-16  4.641650e-06        4.641650e-06                  0.810139                  0.810139                 53.440983                 53.440977            0.586238                   False stitch_improves_mode_but_not_validated
+0.17125          5.951538e-08         1.808701e-16  1.835505e-06        1.835505e-06                  0.824312                  0.824312                 41.487702                 41.487700            0.566136                   False stitch_improves_mode_but_not_validated
+0.18875          1.017134e-07         1.810226e-16  3.730516e-06        3.730516e-06                  0.840505                  0.840505                 29.067687                 29.067690            0.541804                   False stitch_improves_mode_but_not_validated
+
+[report]
+{
+  "n_cases": 8,
+  "n_modal_stitch_validated": 0,
+  "n_improved_p": 3,
+  "n_improved_q": 6,
+  "median_pressure_jump_before": 8.347525797139208e-08,
+  "median_pressure_jump_after": 9.032679870824573e-17,
+  "median_q_jump_after": 3.4432897498992247e-06,
+  "median_p_overlap": 0.6189844290273754,
+  "median_p_rel_after_fit": 0.7852912262850592,
+  "median_q_rel_after_fit": 70.78472456131038,
+  "interpretation": "The right shooting half is multiplied by the complex pressure matching factor p_left/p_right. Pressure continuity is imposed by construction; q continuity remains an independent diagnostic."
+}

@@ -1,0 +1,9 @@
+{
+  "selected_stage": "joint",
+  "selected_checkpoint": "models_saved/supersonic_general/long_S4/best_joint_checkpoint_a8657d9264.pt",
+  "best_stage_losses": {
+    "modal_frozen_spectrum": 0.000358393182978034,
+    "joint": 0.00015703968529123813
+  },
+  "global_step": 10000
+}

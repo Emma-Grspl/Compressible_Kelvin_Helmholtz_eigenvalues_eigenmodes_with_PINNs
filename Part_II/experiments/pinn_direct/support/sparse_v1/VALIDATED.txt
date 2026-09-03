@@ -1,0 +1,14 @@
+Sparse supersonic PINN dataset v1
+
+Validation:
+- 895 spectral reference points
+- 19 Mach values
+- 76 S4 spectral anchors
+- 38 S4M2 modal anchors
+- 76 S4M4 modal anchors
+- 0 unsafe center gauges
+
+Important:
+17 Mach values use max_available_alpha_proxy only as a monotone
+anchor-selection coordinate. These proxies are not certified neutral
+boundaries and must not be used to enforce ci=0 at s=1.

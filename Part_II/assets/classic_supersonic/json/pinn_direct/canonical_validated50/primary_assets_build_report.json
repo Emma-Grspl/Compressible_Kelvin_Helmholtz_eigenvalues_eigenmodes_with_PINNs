@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-07-17T15:36:36+02:00",
+  "spectral_selection": "assets/classic_supersonic/csv/pinn_direct/tables/table_supersonic_reference_v2_spectral_validated_50pts.csv",
+  "modal_source": "experiments/modal_reconstruction/support/canonical_validated50/supersonic_modal_fields_p_rho_u_v_validated50.parquet",
+  "point_count": 50,
+  "source_counts": {
+    "canonical_raw_confirmed_base44": 44,
+    "extension_exact_shooting_fields": 6
+  },
+  "pdf_validation": {
+    "pages": 51,
+    "unique_point_labels": 50
+  },
+  "overlay_dimensions": [
+    2861,
+    1062
+  ],
+  "outputs": {
+    "overlay": {
+      "path": "/private/tmp/validated50_primary_stage/ci/blumen_ci_isolines_overlay_validated50.png",
+      "sha256": "43c2252385ad2ae4191b543a15b3baf77f17be85449fa2f5de80604bf2b6ca83"
+    },
+    "modes_pdf": {
+      "path": "/private/tmp/validated50_primary_stage/modes/supersonic_modes_p_rho_u_v_validated50.pdf",
+      "sha256": "5d6639851c31050e01a0e6796e1fe73c888a3038c6074c68cbfc9abd3094e67a"
+    }
+  }
+}

@@ -1,0 +1,93 @@
+===== CALIBRATION M150 =====
+job        : 332193
+node       : r10i6n1
+config     : assets/pinn_supersonic/pilots/local_M150_sparse_v1/configs/S4.json
+output     : assets/pinn_supersonic/pilots/local_M150_sparse_v1/runs/calibration_S4
+start      : Tue Jul 28 11:07:35 AM CEST 2026
+
+Tue Jul 28 11:07:35 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.03             Driver Version: 580.159.03     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-SXM2-16GB           On  |   00000000:1A:00.0 Off |                    0 |
+| N/A   45C    P0             44W /  300W |       0MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[spectral_prefit] 1/500 loss=1.360768e+00
+[spectral_prefit] 50/500 loss=3.200514e-01
+[spectral_prefit] 100/500 loss=4.381327e-02
+[spectral_prefit] 150/500 loss=7.459231e-03
+[spectral_prefit] 200/500 loss=2.302754e-03
+[spectral_prefit] 250/500 loss=7.151396e-04
+[spectral_prefit] 300/500 loss=2.202859e-04
+[spectral_prefit] 350/500 loss=7.047545e-05
+[spectral_prefit] 400/500 loss=2.343702e-05
+[spectral_prefit] 450/500 loss=7.753367e-06
+[spectral_prefit] 500/500 loss=2.439818e-06
+[modal_frozen_spectrum] 1/1000 loss=2.128232e+01 ric=(9.946e-02,9.556e-02) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 50/1000 loss=1.977084e-01 ric=(4.803e-02,3.231e-02) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 100/1000 loss=9.875406e-02 ric=(1.399e-02,1.124e-02) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 150/1000 loss=6.138705e-02 ric=(9.753e-03,7.022e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 200/1000 loss=7.933651e-02 ric=(7.319e-03,4.165e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 250/1000 loss=4.009805e-02 ric=(5.100e-03,3.708e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 300/1000 loss=4.349486e-02 ric=(3.820e-03,2.622e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 350/1000 loss=3.911410e-02 ric=(4.124e-03,2.676e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 400/1000 loss=2.638756e-02 ric=(3.083e-03,2.060e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 450/1000 loss=3.586798e-02 ric=(3.262e-03,1.434e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 500/1000 loss=2.691894e-02 ric=(1.889e-03,1.589e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 550/1000 loss=2.630573e-02 ric=(1.791e-03,1.461e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 600/1000 loss=3.909098e-02 ric=(2.063e-03,1.123e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 650/1000 loss=2.188258e-02 ric=(1.746e-03,1.086e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 700/1000 loss=1.609791e-02 ric=(1.995e-03,1.179e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 750/1000 loss=2.283697e-02 ric=(9.918e-04,6.929e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 800/1000 loss=1.845647e-02 ric=(1.121e-03,7.752e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 850/1000 loss=2.117325e-02 ric=(1.526e-03,9.620e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 900/1000 loss=1.690675e-02 ric=(9.242e-04,7.850e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 950/1000 loss=1.916354e-02 ric=(1.113e-03,7.956e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1000/1000 loss=1.339084e-02 ric=(7.958e-04,7.042e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1/1000 loss=1.024008e-02 ric=(7.974e-04,7.882e-04) spec=2.382e-06 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 50/1000 loss=6.324617e-03 ric=(7.982e-04,5.429e-04) spec=2.394e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 100/1000 loss=4.303055e-03 ric=(6.831e-04,4.512e-04) spec=1.534e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 150/1000 loss=3.226618e-03 ric=(4.624e-04,4.221e-04) spec=7.235e-10 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 200/1000 loss=3.871647e-03 ric=(4.006e-04,3.673e-04) spec=2.879e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 250/1000 loss=6.142152e-03 ric=(4.523e-04,3.702e-04) spec=3.171e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 300/1000 loss=3.943871e-03 ric=(3.499e-04,3.065e-04) spec=5.950e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 350/1000 loss=9.651947e-03 ric=(5.406e-04,3.390e-04) spec=1.609e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 400/1000 loss=4.592190e-03 ric=(3.147e-04,3.422e-04) spec=1.483e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 450/1000 loss=2.999125e-03 ric=(2.938e-04,2.945e-04) spec=1.031e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 500/1000 loss=1.749288e-03 ric=(2.780e-04,2.583e-04) spec=7.484e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 550/1000 loss=1.883339e-03 ric=(2.832e-04,2.836e-04) spec=1.152e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 600/1000 loss=2.437898e-03 ric=(2.970e-04,2.511e-04) spec=6.393e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 650/1000 loss=1.896981e-03 ric=(2.982e-04,2.178e-04) spec=1.494e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 700/1000 loss=3.611489e-03 ric=(3.766e-04,2.157e-04) spec=1.430e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 750/1000 loss=2.976162e-03 ric=(3.980e-04,2.513e-04) spec=1.036e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 800/1000 loss=4.254903e-03 ric=(3.410e-04,2.522e-04) spec=6.780e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 850/1000 loss=7.254525e-03 ric=(4.334e-04,3.079e-04) spec=3.304e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 900/1000 loss=6.025126e-03 ric=(3.629e-04,3.226e-04) spec=3.451e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 950/1000 loss=7.657861e-03 ric=(4.335e-04,2.767e-04) spec=6.204e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1000/1000 loss=7.422334e-03 ric=(3.751e-04,2.801e-04) spec=1.151e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+
+SPECTRAL METRICS
+{
+  "cr_mae": 0.002112919228080693,
+  "cr_max_abs": 0.008904585888142691,
+  "ci_mae": 0.005236987333229856,
+  "ci_max_abs": 0.020760363308449097,
+  "omega_i_mae": 0.0006856244676288472
+}
+
+LOCAL SUPERSONIC TRAINING: COMPLETED
+
+end: Tue Jul 28 11:09:22 AM CEST 2026

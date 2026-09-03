@@ -1,0 +1,59 @@
+SUPERSONIC ATLAS BUDGET SELECTION PROTOCOL
+==========================================
+
+Validation set:
+    V64 = frozen 64-point validation set.
+
+Candidate budgets:
+    N = {76, 60, 48, 36, 24}.
+
+Budget nesting:
+    A24 subset A36 subset A48 subset A60 subset A76.
+
+All budgets are trained independently:
+    - identical architecture
+    - identical optimization schedule
+    - identical chart-specific random seeds
+    - continuous-M physics sampling
+    - no warm start between budgets
+
+Primary selection criterion:
+    Budget selection is based on PINN-seeded shooting branch recovery,
+    not raw PINN error alone.
+
+Technical success requires:
+    spectral_success == True
+    AND
+    mode_success == True.
+
+Target-branch recovery requires:
+    sqrt(
+        (cr_shoot - cr_reference)^2
+        +
+        (ci_shoot - ci_reference)^2
+    ) <= 1e-4.
+
+Frozen N76 baseline:
+    N76 recovers the target reference branch on 63/64 V64 points.
+
+Known irreducible branch-ambiguity point:
+    Mach = 1.10
+    alpha = 0.09
+
+At this point, the frozen reference and an independently valid
+low-mismatch shooting branch differ. This ambiguity is already present
+for N76 and is not counted as a lower-budget-induced failure.
+
+Eligibility criterion for N < 76:
+    On the 63 V64 points recovered by N76, the lower budget must:
+        1. technically succeed;
+        2. recover the target branch within spectral error <= 1e-4;
+        3. introduce zero new branch-recovery failures.
+
+Selection:
+    Among all eligible budgets, select the smallest N.
+
+Raw PINN V64 metrics are secondary diagnostics and do not independently
+determine the selected budget.
+
+T401 must not be inspected or used for model/budget selection.

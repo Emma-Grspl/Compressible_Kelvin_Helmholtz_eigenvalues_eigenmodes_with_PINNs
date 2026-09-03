@@ -1,0 +1,33 @@
+Loading pytorch-gpu/py3/2.1.1
+  Loading requirement: cuda/11.8.0 nccl/2.18.5-1-cuda cudnn/8.7.0.84-cuda
+    gcc/8.5.0 openmpi/4.1.5-cuda intel-mkl/2020.4 magma/2.7.1-cuda sox/14.4.2
+    sparsehash/2.0.3 libjpeg-turbo/2.1.3 ffmpeg/4.4.4
+Traceback (most recent call last):
+  File "/gpfslocalsup/pub/anaconda-py3/2023.09/envs/pytorch-gpu-2.1.1+py3.11.5/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'cr_reference'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/dev/benchmark_supersonic_M150_pinn_powell_spectrum.py", line 594, in <module>
+    main()
+  File "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/scripts/dev/benchmark_supersonic_M150_pinn_powell_spectrum.py", line 198, in main
+    row["cr_reference"]
+    ~~~^^^^^^^^^^^^^^^^
+  File "/gpfslocalsup/pub/anaconda-py3/2023.09/envs/pytorch-gpu-2.1.1+py3.11.5/lib/python3.11/site-packages/pandas/core/series.py", line 1040, in __getitem__
+    return self._get_value(key)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/gpfslocalsup/pub/anaconda-py3/2023.09/envs/pytorch-gpu-2.1.1+py3.11.5/lib/python3.11/site-packages/pandas/core/series.py", line 1156, in _get_value
+    loc = self.index.get_loc(label)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfslocalsup/pub/anaconda-py3/2023.09/envs/pytorch-gpu-2.1.1+py3.11.5/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'cr_reference'
+srun: error: r3i5n6: task 0: Exited with exit code 1
+srun: Terminating StepId=816384.0

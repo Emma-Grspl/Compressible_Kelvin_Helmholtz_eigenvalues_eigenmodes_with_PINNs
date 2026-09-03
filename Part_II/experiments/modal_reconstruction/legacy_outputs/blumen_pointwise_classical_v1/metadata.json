@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-07-29T08:16:41.938710+00:00",
+  "modes_csv": "assets/classic_supersonic/blumen_pointwise_classical_v1/blumen_pointwise_classical_modes.csv.gz",
+  "n_failures": 31,
+  "n_modes_reconstructed": 120,
+  "n_spectral_valid": 120,
+  "n_total": 151,
+  "spectral_csv": "assets/classic_supersonic/blumen_pointwise_classical_v1/blumen_pointwise_classical_spectral.csv",
+  "status": "INCOMPLETE"
+}

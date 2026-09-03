@@ -1,0 +1,104 @@
+============================================================
+FINAL MODAL RECONSTRUCTION
+Mach  = 1.20
+tag   = 120
+node  = r6i1n0
+start = Fri Aug  7 08:51:25 PM CEST 2026
+============================================================
+[01/57] source=pinn   alpha=0.05000 |dc|=6.359e-10 stage2=1.813e-21 p40=3.653e-06 ov40=6.044e-12 time=1.32s
+[02/57] source=pinn   alpha=0.05500 |dc|=1.145e-08 stage2=4.151e-22 p40=4.542e-06 ov40=9.356e-12 time=1.30s
+[03/57] source=pinn   alpha=0.06000 |dc|=3.797e-08 stage2=1.648e-22 p40=5.596e-06 ov40=1.420e-11 time=1.31s
+[04/57] source=pinn   alpha=0.06500 |dc|=1.655e-08 stage2=3.399e-22 p40=6.738e-06 ov40=2.060e-11 time=1.34s
+[05/57] source=pinn   alpha=0.07000 |dc|=1.930e-08 stage2=1.256e-21 p40=7.887e-06 ov40=2.827e-11 time=1.26s
+[06/57] source=pinn   alpha=0.07500 |dc|=1.717e-08 stage2=3.744e-21 p40=9.290e-06 ov40=3.923e-11 time=1.21s
+[07/57] source=pinn   alpha=0.08000 |dc|=1.357e-08 stage2=9.317e-21 p40=1.076e-05 ov40=5.265e-11 time=1.22s
+[08/57] source=pinn   alpha=0.08500 |dc|=7.289e-09 stage2=1.960e-20 p40=1.227e-05 ov40=6.835e-11 time=1.23s
+[09/57] source=pinn   alpha=0.09000 |dc|=1.443e-08 stage2=3.732e-20 p40=1.396e-05 ov40=8.852e-11 time=1.23s
+[10/57] source=pinn   alpha=0.09500 |dc|=4.386e-07 stage2=6.478e-20 p40=1.549e-05 ov40=1.101e-10 time=1.24s
+[11/57] source=pinn   alpha=0.10000 |dc|=6.015e-06 stage2=3.734e-21 p40=1.715e-05 ov40=1.463e-10 time=1.43s
+[12/57] source=pinn   alpha=0.10500 |dc|=2.597e-09 stage2=5.750e-04 p40=1.978e-05 ov40=1.773e-10 time=5.82s
+[13/57] source=pinn   alpha=0.11000 |dc|=1.371e-08 stage2=6.174e-01 p40=2.198e-05 ov40=2.186e-10 time=5.83s
+[14/57] source=pinn   alpha=0.11500 |dc|=1.524e-08 stage2=2.478e+00 p40=2.438e-05 ov40=2.689e-10 time=5.87s
+[15/57] source=pinn   alpha=0.12000 |dc|=1.043e-08 stage2=5.724e+00 p40=2.698e-05 ov40=3.292e-10 time=5.88s
+[16/57] source=pinn   alpha=0.12500 |dc|=2.216e-08 stage2=1.052e+01 p40=2.972e-05 ov40=3.988e-10 time=5.90s
+[17/57] source=pinn   alpha=0.13000 |dc|=8.270e-09 stage2=1.707e+01 p40=3.249e-05 ov40=4.761e-10 time=5.91s
+[18/57] source=pinn   alpha=0.13500 |dc|=3.785e-09 stage2=2.560e+01 p40=3.539e-05 ov40=5.644e-10 time=5.96s
+[19/57] source=pinn   alpha=0.14000 |dc|=6.442e-09 stage2=3.638e+01 p40=3.847e-05 ov40=6.657e-10 time=5.99s
+[20/57] source=pinn   alpha=0.14500 |dc|=2.532e-08 stage2=4.972e+01 p40=4.171e-05 ov40=7.820e-10 time=6.18s
+[21/57] source=pinn   alpha=0.15000 |dc|=1.727e-08 stage2=6.600e+01 p40=4.526e-05 ov40=9.191e-10 time=6.71s
+[22/57] source=pinn   alpha=0.15500 |dc|=1.137e-08 stage2=8.565e+01 p40=4.898e-05 ov40=1.075e-09 time=6.78s
+[23/57] source=pinn   alpha=0.16000 |dc|=6.107e-09 stage2=1.092e+02 p40=5.291e-05 ov40=1.252e-09 time=6.07s
+[24/57] source=pinn   alpha=0.16500 |dc|=1.472e-08 stage2=1.372e+02 p40=5.713e-05 ov40=1.458e-09 time=6.10s
+[25/57] source=pinn   alpha=0.17000 |dc|=7.061e-09 stage2=1.704e+02 p40=6.163e-05 ov40=1.693e-09 time=6.15s
+[26/57] source=pinn   alpha=0.17500 |dc|=5.948e-09 stage2=2.097e+02 p40=6.641e-05 ov40=1.963e-09 time=6.17s
+[27/57] source=pinn   alpha=0.18000 |dc|=2.174e-08 stage2=2.560e+02 p40=7.160e-05 ov40=2.277e-09 time=6.22s
+[28/57] source=pinn   alpha=0.18500 |dc|=7.529e-09 stage2=3.106e+02 p40=7.692e-05 ov40=2.623e-09 time=6.21s
+[29/57] source=pinn   alpha=0.18750 |dc|=2.620e-08 stage2=3.415e+02 p40=7.963e-05 ov40=2.808e-09 time=6.28s
+[30/57] source=pinn   alpha=0.19000 |dc|=2.951e-08 stage2=3.750e+02 p40=8.252e-05 ov40=3.012e-09 time=6.30s
+[31/57] source=pinn   alpha=0.19500 |dc|=1.999e-08 stage2=4.509e+02 p40=8.815e-05 ov40=3.426e-09 time=6.37s
+[32/57] source=pinn   alpha=0.20000 |dc|=2.397e-08 stage2=5.405e+02 p40=9.398e-05 ov40=3.884e-09 time=6.43s
+[33/57] source=pinn   alpha=0.20500 |dc|=1.781e-09 stage2=6.465e+02 p40=1.004e-04 ov40=4.419e-09 time=6.36s
+[34/57] source=pinn   alpha=0.21000 |dc|=1.685e-08 stage2=7.721e+02 p40=1.077e-04 ov40=5.072e-09 time=6.53s
+[35/57] source=pinn   alpha=0.21500 |dc|=2.114e-08 stage2=9.215e+02 p40=1.156e-04 ov40=5.830e-09 time=6.57s
+[36/57] source=pinn   alpha=0.22000 |dc|=8.075e-09 stage2=1.100e+03 p40=1.232e-04 ov40=6.590e-09 time=6.64s
+[37/57] source=pinn   alpha=0.22500 |dc|=2.054e-08 stage2=1.314e+03 p40=1.307e-04 ov40=7.387e-09 time=6.52s
+[38/57] source=pinn   alpha=0.23000 |dc|=1.699e-08 stage2=1.572e+03 p40=1.399e-04 ov40=8.427e-09 time=6.85s
+[39/57] source=pinn   alpha=0.23500 |dc|=1.466e-08 stage2=1.885e+03 p40=1.500e-04 ov40=9.658e-09 time=6.98s
+[40/57] source=pinn   alpha=0.24000 |dc|=2.100e-08 stage2=2.267e+03 p40=1.587e-04 ov40=1.076e-08 time=6.69s
+[41/57] source=pinn   alpha=0.24500 |dc|=6.146e-09 stage2=2.738e+03 p40=1.690e-04 ov40=1.214e-08 time=6.74s
+[42/57] source=pinn   alpha=0.25000 |dc|=9.212e-09 stage2=3.323e+03 p40=1.813e-04 ov40=1.392e-08 time=7.37s
+[43/57] source=pinn   alpha=0.25500 |dc|=1.096e-08 stage2=4.059e+03 p40=1.916e-04 ov40=1.543e-08 time=7.51s
+[44/57] source=pinn   alpha=0.26000 |dc|=9.919e-09 stage2=4.995e+03 p40=2.044e-04 ov40=1.748e-08 time=7.73s
+[45/57] source=pinn   alpha=0.26500 |dc|=1.679e-08 stage2=6.204e+03 p40=2.181e-04 ov40=1.978e-08 time=7.91s
+[46/57] source=pinn   alpha=0.27000 |dc|=1.357e-08 stage2=7.794e+03 p40=2.302e-04 ov40=2.189e-08 time=7.15s
+[47/57] source=pinn   alpha=0.27500 |dc|=2.634e-08 stage2=9.927e+03 p40=2.472e-04 ov40=2.511e-08 time=8.65s
+[48/57] source=pinn   alpha=0.28000 |dc|=1.326e-08 stage2=1.286e+04 p40=2.602e-04 ov40=2.758e-08 time=9.17s
+[49/57] source=pinn   alpha=0.28500 |dc|=3.009e-08 stage2=1.702e+04 p40=2.788e-04 ov40=3.147e-08 time=9.67s
+[50/57] source=pinn   alpha=0.29000 |dc|=8.075e-09 stage2=2.316e+04 p40=2.938e-04 ov40=3.462e-08 time=7.97s
+[51/57] source=pinn   alpha=0.29500 |dc|=2.501e-08 stage2=2.500e+04 p40=3.117e-04 ov40=3.864e-08 time=10.12s
+[52/57] source=pinn   alpha=0.30000 |dc|=3.003e-08 stage2=2.669e+04 p40=3.308e-04 ov40=4.313e-08 time=10.76s
+[53/57] source=pinn   alpha=0.30500 |dc|=1.292e-08 stage2=2.847e+04 p40=3.508e-04 ov40=4.803e-08 time=7.66s
+[54/57] source=pinn   alpha=0.31000 |dc|=7.263e-09 stage2=3.033e+04 p40=3.719e-04 ov40=5.347e-08 time=8.39s
+[55/57] source=pinn   alpha=0.31500 |dc|=2.081e-09 stage2=3.228e+04 p40=3.942e-04 ov40=5.945e-08 time=11.82s
+[56/57] source=pinn   alpha=0.32000 |dc|=1.704e-08 stage2=3.431e+04 p40=4.176e-04 ov40=6.597e-08 time=8.33s
+[57/57] source=pinn   alpha=0.32500 |dc|=2.837e-07 stage2=3.643e+04 p40=4.405e-04 ov40=7.266e-08 time=13.04s
+
+{
+  "status": "COMPLETED",
+  "source": "pinn",
+  "alpha_set": "all",
+  "Mach": 1.2,
+  "n_requested": 57,
+  "n_successful": 57,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M120_S4M0_v1/pinn_powell_modes_best/fixed_c_modal_results.csv",
+  "complex_spectral_error_mean": 1.3218365823828158e-07,
+  "complex_spectral_error_max": 6.014774475330215e-06,
+  "stage2_mismatch_mean": 5601.093459991604,
+  "stage2_mismatch_max": 36428.76257217527,
+  "p_rel_l2_core20_mean": 9.049775272615217e-06,
+  "p_rel_l2_core20_max": 2.6733986191261917e-05,
+  "p_rel_l2_core40_mean": 0.00012494022491105062,
+  "p_rel_l2_core40_max": 0.0004404727994553113,
+  "rho_rel_l2_core40_mean": 0.00012494022491105946,
+  "rho_rel_l2_core40_max": 0.0004404727994553114,
+  "u_rel_l2_core40_mean": 9.68947749019572e-05,
+  "u_rel_l2_core40_max": 0.00046888402042400887,
+  "v_rel_l2_core40_mean": 0.0001332288553624595,
+  "v_rel_l2_core40_max": 0.00045505077219577344,
+  "p_overlap_error_core20_mean": 7.030017114249076e-11,
+  "p_overlap_error_core20_max": 3.573525919620124e-10,
+  "p_overlap_error_core40_mean": 1.2100759234790316e-08,
+  "p_overlap_error_core40_max": 7.265668455769259e-08,
+  "stage2_seconds_mean": 5.857568876768806,
+  "stage2_seconds_max": 12.633501147851348,
+  "reconstruction_seconds_mean": 0.21894152397126482,
+  "reconstruction_seconds_max": 0.40871497616171837,
+  "fixed_c_total_seconds_mean": 6.07651040074007,
+  "fixed_c_total_seconds_max": 13.042216124013066
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M120_S4M0_v1/pinn_powell_modes_best/fixed_c_modal_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M120_S4M0_v1/pinn_powell_modes_best/fixed_c_modal_summary.json
+
+end = Fri Aug  7 08:57:47 PM CEST 2026

@@ -1,0 +1,21 @@
+{
+  "dataset_type": "fixed-M supersonic alpha-branch p/q modal anchors",
+  "Mach_fixed": 1.8,
+  "field_version": "tail_polished",
+  "normalize_gauge": false,
+  "spectral_csv": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/data/supersonic_sparse_PINN_reference_v2_FINAL_spectral.csv",
+  "fields_csv": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/data/supersonic_sparse_PINN_reference_v2_FINAL_modal_fields_tail_polished_v1.csv",
+  "n_spectral_anchors": 49,
+  "n_modal_rows": 216482,
+  "alpha_min": 0.07,
+  "alpha_max": 0.19,
+  "cr_min": 0.434396576,
+  "cr_max": 0.4794092479999999,
+  "ci_min": 0.010449408,
+  "ci_max": 0.027816272,
+  "min_abs_ci": 0.010449408,
+  "q_definition": "q = dp/dy, computed from modal pressure p(y) unless q columns exist.",
+  "gamma_definition": "gamma = q/p, stored as diagnostic only.",
+  "Q_definition": "Q = q/alpha, stored for p/Qscaled diagnostics or low-alpha variants.",
+  "method_role": "Dataset for local supersonic PINN chart. The PINN should learn spectral seeds cr/ci and modal seeds p/q, then pass them to a dense GEP or shooting refinement."
+}

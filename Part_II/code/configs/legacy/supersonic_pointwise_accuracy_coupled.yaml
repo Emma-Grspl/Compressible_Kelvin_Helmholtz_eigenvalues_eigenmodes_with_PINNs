@@ -1,0 +1,33 @@
+version: 1
+sweep:
+  name: supersonic_pointwise_accuracy_coupled
+  type: shooting_accuracy
+  cases:
+  - supersonic_M110
+  - supersonic_M120
+  - supersonic_M130
+  - supersonic_M140
+  - supersonic_M150
+  - supersonic_M160
+  - supersonic_M170
+  - supersonic_M180
+  - supersonic_M190
+  levels:
+  - label: coarse_2
+    max_step: 2.0
+    rtol: 1.0e-10
+    atol: 1.0e-12
+  - label: medium_1
+    max_step: 1.0
+    rtol: 1.0e-10
+    atol: 1.0e-12
+  - label: fine_0p5
+    max_step: 0.5
+    rtol: 1.0e-10
+    atol: 1.0e-12
+  - label: reference_0p25
+    max_step: 0.25
+    rtol: 1.0e-10
+    atol: 1.0e-12
+  reference_policy: smallest_max_step_same_case
+  produce_modes: true

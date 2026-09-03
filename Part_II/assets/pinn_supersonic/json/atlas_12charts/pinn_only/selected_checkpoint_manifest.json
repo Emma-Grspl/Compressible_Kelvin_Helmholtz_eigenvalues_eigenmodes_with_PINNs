@@ -1,0 +1,14 @@
+{
+  "C00": "models_saved/atlas/N76/C00/best_joint_checkpoint_33647c0c65.pt",
+  "C01": "models_saved/atlas/N76/C01/best_joint_checkpoint_bd8dd50299.pt",
+  "C02": "models_saved/atlas/N76/C02/best_joint_checkpoint_be0e4833f5.pt",
+  "C10": "models_saved/atlas/N76/C10/best_joint_checkpoint_06bde09f2f.pt",
+  "C11": "models_saved/atlas/N76/C11/best_joint_checkpoint_b7ea53532f.pt",
+  "C12": "models_saved/atlas/N76/C12/best_joint_checkpoint_d4f26e5b75.pt",
+  "C20": "models_saved/atlas/N76/C20/best_joint_checkpoint_b236e307a9.pt",
+  "C21": "models_saved/atlas/N76/C21/best_joint_checkpoint_d89a36cc31.pt",
+  "C22": "models_saved/atlas/N76/C22/best_joint_checkpoint_4f0defe56d.pt",
+  "C30": "models_saved/atlas/N76/C30/best_joint_checkpoint_2d630591a9.pt",
+  "C31": "models_saved/atlas/N76/C31/best_joint_checkpoint_eafc27be12.pt",
+  "C32": "models_saved/atlas/N76/C32/best_joint_checkpoint_cd639cf2a1.pt"
+}

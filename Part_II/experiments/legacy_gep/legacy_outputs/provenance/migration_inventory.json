@@ -1,0 +1,223 @@
+{
+  "source_freeze": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE",
+  "n_copied_files": 41,
+  "copied_files": [
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/data/supersonic_sparse_PINN_reference_v2_FINAL_spectral.csv",
+      "destination": "assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_reference_v2_spectral.csv",
+      "size_bytes": 168317
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/ci/blumen_ci_digitized_points.csv",
+      "destination": "article/tables/table_blumen_ci_digitized_points.csv",
+      "size_bytes": 15612
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/ci/reference_points_ci_overlay.csv",
+      "destination": "assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_reference_v2_spectral.csv",
+      "size_bytes": 168317
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/ci/blumen_ci_digitized_only.png",
+      "destination": "assets/classic_supersonic/png/blumen_validation/ci/Fig_blumen_ci_digitized_only.png",
+      "size_bytes": 97580
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/ci/blumen_ci_digitized_only.pdf",
+      "destination": "assets/classic_supersonic/pdf/blumen_validation/ci/Fig_blumen_ci_digitized_only.pdf",
+      "size_bytes": 17189
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/ci/blumen_ci_digitized_with_reference_points.png",
+      "destination": "assets/classic_supersonic/png/blumen_validation/ci/Fig_blumen_ci_with_reference_points.png",
+      "size_bytes": 374447
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/ci/blumen_ci_digitized_with_reference_points.pdf",
+      "destination": "assets/classic_supersonic/pdf/blumen_validation/ci/Fig_blumen_ci_with_reference_points.pdf",
+      "size_bytes": 37005
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/modes/supersonic_sparse_PINN_reference_v2_FINAL_modes_square_full_y.pdf",
+      "destination": "assets/classic_supersonic/pdf/modal_reconstruction/modes/Fig_supersonic_reference_v2_modes_full_y.pdf",
+      "size_bytes": 1875263
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/modes/supersonic_sparse_PINN_reference_v2_FINAL_tail_polished_square_full_y_review.pdf",
+      "destination": "assets/classic_supersonic/pdf/modal_reconstruction/modes/Report_supersonic_reference_v2_tail_polish_review_full_y.pdf",
+      "size_bytes": 1680526
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/data/supersonic_sparse_PINN_reference_v2_FINAL_spectral.csv",
+      "destination": "assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_reference_v2_spectral.csv",
+      "size_bytes": 168317
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/src/classical_solver/supersonic/mstab17_supersonic_solver.py",
+      "destination": "code/scripts/evaluation/mstab17_supersonic_solver_a0ebbf85ec.py",
+      "size_bytes": 19963
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/evaluation/blumen_reference.py",
+      "destination": "code/scripts/evaluation/blumen_reference.py",
+      "size_bytes": 8910
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/audits/audit_M18_M19_mapping_vs_box_effect.py",
+      "destination": "code/scripts/audits/audit_M18_M19_mapping_vs_box_effect.py",
+      "size_bytes": 7766
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/audits/audit_M18_M19_max_step_convergence_c6e9b8c068.py",
+      "destination": "code/scripts/audits/audit_M18_M19_max_step_convergence.py",
+      "size_bytes": 11924
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/audits/audit_M18_M19_refined_convergence_0e0240282c.py",
+      "destination": "code/scripts/audits/audit_M18_M19_refined_convergence.py",
+      "size_bytes": 13382
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/scripts/audit_gep_nearest_to_fixed_ci_shooting_anchors.py",
+      "destination": "code/scripts/audits/audit_gep_nearest_to_fixed_ci_shooting_anchors.py",
+      "size_bytes": 3201
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/audits/audit_supersonic_ci_first_shooting_mismatch_map_1a94c44bbe.py",
+      "destination": "code/scripts/audits/audit_supersonic_ci_first_shooting_mismatch_map.py",
+      "size_bytes": 2555
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py",
+      "destination": "code/scripts/audits/audit_supersonic_shooting_visual_validation.py",
+      "size_bytes": 16627
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/data_preparation/prepare_build_final_sparse_reference_v2_with_smallM_campaign.py",
+      "destination": "code/scripts/data_preparation/prepare_build_final_sparse_reference_v2_with_smallM_campaign.py",
+      "size_bytes": 17167
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/data_preparation/prepare_build_final_sparse_supersonic_reference_with_M18_M19.py",
+      "destination": "code/scripts/data_preparation/prepare_build_final_sparse_supersonic_reference_with_M18_M19.py",
+      "size_bytes": 19688
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/data_preparation/prepare_build_supersonic_fixed_ci_shooting_anchors_45523d471e.py",
+      "destination": "code/scripts/data_preparation/prepare_build_supersonic_fixed_ci_shooting_anchors.py",
+      "size_bytes": 5590
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/data_preparation/prepare_build_supersonic_fixed_ci_shooting_extension_final.py",
+      "destination": "code/scripts/data_preparation/prepare_build_supersonic_fixed_ci_shooting_extension_final_6f151a02f3.py",
+      "size_bytes": 7360
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/evaluation/freeze_supersonic_sparse_PINN_reference_v2.py",
+      "destination": "code/scripts/evaluation/freeze_supersonic_sparse_PINN_reference_v2.py",
+      "size_bytes": 15764
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/evaluation/freeze_supersonic_v2_assets_and_code.py",
+      "destination": "code/scripts/evaluation/freeze_supersonic_v2_assets_and_code.py",
+      "size_bytes": 17543
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/evaluation/package_supersonic_sparse_reference_v2_final_freeze.py",
+      "destination": "code/scripts/evaluation/package_supersonic_sparse_reference_v2_final_freeze.py",
+      "size_bytes": 19193
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/evaluation/polish_supersonic_v2_left_tails.py",
+      "destination": "code/scripts/evaluation/polish_supersonic_v2_left_tails.py",
+      "size_bytes": 12623
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/shooting/solve_refine_M18_M19_near_valid_branch_7cb1f8ed3e.py",
+      "destination": "code/scripts/shooting/solve_refine_M18_M19_near_valid_branch.py",
+      "size_bytes": 11560
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/audits/audit_scan_supersonic_M18_M19_strict_modal_validation_14e1027f3b.py",
+      "destination": "code/scripts/audits/audit_scan_supersonic_M18_M19_strict_modal_validation.py",
+      "size_bytes": 17354
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/code/scripts/audits/audit_scan_supersonic_target_campaign_3895a18fd6.py",
+      "destination": "code/scripts/audits/audit_scan_supersonic_target_campaign.py",
+      "size_bytes": 4982
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_audit_M18_M19_refined_convergence.slurm",
+      "destination": "code/slurm/classical_convergence/jz_audit_M18_M19_refined_convergence.slurm",
+      "size_bytes": 548
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_audit_mismatch_M18_a238.slurm",
+      "destination": "code/slurm/legacy_gep/jz_audit_mismatch_M18_a238.slurm",
+      "size_bytes": 728
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_audit_mismatch_M18_a238_wide.slurm",
+      "destination": "code/slurm/legacy_gep/jz_audit_mismatch_M18_a238_wide.slurm",
+      "size_bytes": 740
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_probe_shooting_first_M18_a238.slurm",
+      "destination": "code/slurm/legacy_gep/jz_probe_shooting_first_M18_a238.slurm",
+      "size_bytes": 828
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_refine_M18_M19_near_valid_branch.slurm",
+      "destination": "code/slurm/supersonic_general/jz_refine_M18_M19_near_valid_branch.slurm",
+      "size_bytes": 605
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_scan_M18_M19_alpha_strict_modal.slurm",
+      "destination": "code/slurm/pinn_direct/jz_scan_M18_M19_alpha_strict_modal.slurm",
+      "size_bytes": 865
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_scan_smallM_sparse_campaign.slurm",
+      "destination": "code/slurm/supersonic_general/jz_scan_smallM_sparse_campaign.slurm",
+      "size_bytes": 747
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_supersonic_neutral_M180_GEP_only.slurm",
+      "destination": "code/slurm/legacy_gep/jz_supersonic_neutral_M180_GEP_only.slurm",
+      "size_bytes": 663
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_supersonic_neutral_all6_GEP_only.slurm",
+      "destination": "code/slurm/legacy_gep/jz_supersonic_neutral_all6_GEP_only.slurm",
+      "size_bytes": 643
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/code/slurm/jz_supersonic_neutral_all6_ci_first_GEP_shooting.slurm",
+      "destination": "code/slurm/legacy_gep/jz_supersonic_neutral_all6_ci_first_GEP_shooting.slurm",
+      "size_bytes": 630
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/manifest.json",
+      "destination": "experiments/legacy_gep/legacy_outputs/provenance/original_freeze_manifest.json",
+      "size_bytes": 51963
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/SHA256SUMS.txt",
+      "destination": "experiments/legacy_gep/legacy/provenance/original_freeze_SHA256SUMS.txt",
+      "size_bytes": 9282
+    }
+  ],
+  "large_modal_files": [
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/data/supersonic_sparse_PINN_reference_v2_FINAL_modal_fields_raw_confirmed.csv",
+      "target": "classic_supersonic/data/modal/supersonic_reference_v2_modal_raw.csv",
+      "status": "not_copied_yet"
+    },
+    {
+      "source": "assets/classic_supersonic/supersonic_sparse_PINN_reference_v2_FINAL_FREEZE/data/supersonic_sparse_PINN_reference_v2_FINAL_modal_fields_tail_polished_v1.csv",
+      "target": "classic_supersonic/data/modal/supersonic_reference_v2_modal_tail_polished.csv",
+      "status": "not_copied_yet"
+    }
+  ]
+}

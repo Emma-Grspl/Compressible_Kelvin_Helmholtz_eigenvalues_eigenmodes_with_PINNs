@@ -1,0 +1,132 @@
+{
+  "acceptance_thresholds": {
+    "accuracy_nominal_vs_strict_complex_error_max": 1e-05,
+    "box_L40_vs_L50_complex_error_max": 1e-05,
+    "dense_reference_residual_max": 1e-08,
+    "matching_location_complex_error_max": 1e-05,
+    "modal_nominal_p_rel_l2_max": 0.005,
+    "spectral_run_residual_max": 1e-08
+  },
+  "comparison": {
+    "amplitude_threshold": 0.001,
+    "common_grid_points": 4001,
+    "core_limit": 20.0
+  },
+  "created_at": "2026-07-24T08:32:51+00:00",
+  "freeze_dir": "assets/classic_supersonic/dense_kappa_q_campaign_v1_FINAL_FREEZE",
+  "modal_settings": [
+    {
+      "id": "modal_coarse",
+      "modal_atol": 1e-11,
+      "modal_dy": 0.05,
+      "modal_max_step": 0.5,
+      "modal_numerical_extent": 40.0,
+      "modal_rtol": 1e-09
+    },
+    {
+      "id": "modal_nominal",
+      "modal_atol": 1e-12,
+      "modal_dy": 0.025,
+      "modal_max_step": 0.25,
+      "modal_numerical_extent": 40.0,
+      "modal_rtol": 1e-10
+    },
+    {
+      "id": "modal_strict",
+      "modal_atol": 1e-13,
+      "modal_dy": 0.0125,
+      "modal_max_step": 0.125,
+      "modal_numerical_extent": 50.0,
+      "modal_rtol": 1e-11
+    }
+  ],
+  "n_tasks": 51,
+  "reference_csv": "assets/classic_supersonic/csv/modal_reconstruction/classical_supersonic_maps/table_classical_supersonic_dense_reference.csv",
+  "selection": [
+    "low_alpha",
+    "peak_growth",
+    "near_neutral"
+  ],
+  "spectral_settings": [
+    {
+      "atol": 1e-13,
+      "extent": 20.0,
+      "id": "box_L20",
+      "level": 20.0,
+      "matching_y": 1.0,
+      "max_step": 0.2,
+      "rtol": 1e-11,
+      "sweep": "box"
+    },
+    {
+      "atol": 1e-13,
+      "extent": 30.0,
+      "id": "box_L30",
+      "level": 30.0,
+      "matching_y": 1.0,
+      "max_step": 0.2,
+      "rtol": 1e-11,
+      "sweep": "box"
+    },
+    {
+      "atol": 1e-13,
+      "extent": 40.0,
+      "id": "strict_L40_y1",
+      "level": 40.0,
+      "matching_y": 1.0,
+      "max_step": 0.125,
+      "rtol": 1e-11,
+      "sweep": "shared_reference"
+    },
+    {
+      "atol": 1e-13,
+      "extent": 50.0,
+      "id": "box_L50",
+      "level": 50.0,
+      "matching_y": 1.0,
+      "max_step": 0.125,
+      "rtol": 1e-11,
+      "sweep": "box_reference"
+    },
+    {
+      "atol": 1e-11,
+      "extent": 40.0,
+      "id": "accuracy_coarse",
+      "level": 0.5,
+      "matching_y": 1.0,
+      "max_step": 0.5,
+      "rtol": 1e-09,
+      "sweep": "integration"
+    },
+    {
+      "atol": 1e-12,
+      "extent": 40.0,
+      "id": "accuracy_nominal",
+      "level": 0.25,
+      "matching_y": 1.0,
+      "max_step": 0.25,
+      "rtol": 1e-10,
+      "sweep": "integration"
+    },
+    {
+      "atol": 1e-13,
+      "extent": 40.0,
+      "id": "matching_y0p5",
+      "level": 0.5,
+      "matching_y": 0.5,
+      "max_step": 0.125,
+      "rtol": 1e-11,
+      "sweep": "matching"
+    },
+    {
+      "atol": 1e-13,
+      "extent": 40.0,
+      "id": "matching_y1p5",
+      "level": 1.5,
+      "matching_y": 1.5,
+      "max_step": 0.125,
+      "rtol": 1e-11,
+      "sweep": "matching"
+    }
+  ]
+}

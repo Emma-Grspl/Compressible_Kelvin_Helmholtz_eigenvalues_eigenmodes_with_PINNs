@@ -1,0 +1,22 @@
+{
+  "classical_COST1_seconds": 244.39573539799312,
+  "hybrid_COST1_seconds": 255.4382982000243,
+  "direct_PINN_spectral_COST1_seconds": 0.0004540690148,
+  "direct_PINN_full_modal_COST1_seconds": 0.003815484376,
+  "classical_COST500_serial_seconds": 134618.31210174458,
+  "classical_COST500_serial_hours": 37.39397558381794,
+  "hybrid_COST500_serial_seconds": 232408.65649667266,
+  "hybrid_COST500_serial_hours": 64.55796013796463,
+  "direct_PINN_spectral_COST500_batch_seconds": 0.005446049561,
+  "direct_PINN_full_modal_COST500_batch_seconds": 0.18697397597,
+  "speedup_classical_vs_direct_PINN_COST1": 538234.7780450073,
+  "speedup_classical_vs_direct_PINN_COST500_batch": 24718524.977401428,
+  "speedup_classical_vs_direct_PINN_full_modal_COST1": 64053.65906758286,
+  "speedup_classical_vs_direct_PINN_full_modal_COST500_batch": 719984.2192121117,
+  "speedup_classical_vs_PINN_seeded_shooting_COST1": 0.9567701363505634,
+  "speedup_classical_vs_PINN_seeded_shooting_COST500": 0.5792310584768252,
+  "classical_mean_seconds_per_query": 269.23662420348916,
+  "hybrid_mean_seconds_per_query": 464.8173129933453,
+  "direct_PINN_spectral_amortized_seconds_per_query": 1.0892099122e-05,
+  "direct_PINN_full_modal_amortized_seconds_per_query": 0.00037394795194
+}

@@ -1,0 +1,294 @@
+scripts/run_kh_subsonic_riccati_core1d.py-173-        riccati_anchor_alphas=tuple(float(alpha) for alpha in args.anchor_alphas),
+scripts/run_kh_subsonic_riccati_core1d.py-174-        w_riccati_anchor=float(args.riccati_anchor_weight),
+scripts/run_kh_subsonic_riccati_core1d.py-175-        w_q_supervision=float(args.q_supervision_weight),
+scripts/run_kh_subsonic_riccati_core1d.py-176-        q_supervision_n_xi=129,
+scripts/run_kh_subsonic_riccati_core1d.py-177-        q_supervision_every=10,
+scripts/run_kh_subsonic_riccati_core1d.py-178-        q_supervision_alpha_count=len(q_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d.py-179-        q_supervision_alphas=tuple(float(alpha) for alpha in q_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d.py-180-        w_riccati_gamma_supervision=float(args.gamma_supervision_weight),
+scripts/run_kh_subsonic_riccati_core1d.py-181-        riccati_gamma_n_xi=129,
+scripts/run_kh_subsonic_riccati_core1d.py-182-        riccati_gamma_every=10,
+scripts/run_kh_subsonic_riccati_core1d.py-183-        riccati_gamma_alpha_count=len(gamma_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d.py-184-        riccati_gamma_alphas=tuple(float(alpha) for alpha in gamma_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d.py:185:        w_riccati_center_kappa=float(args.center_kappa_weight),
+scripts/run_kh_subsonic_riccati_core1d.py-186-        w_riccati_center_peak=float(args.center_peak_weight),
+scripts/run_kh_subsonic_riccati_core1d.py-187-        w_riccati_boundary_band_kappa=float(args.boundary_kappa_weight),
+scripts/run_kh_subsonic_riccati_core1d.py-188-        w_riccati_boundary_band_q=float(args.boundary_q_weight),
+scripts/run_kh_subsonic_riccati_core1d.py-189-        riccati_center_xi=0.0,
+scripts/run_kh_subsonic_riccati_core1d.py-190-        riccati_boundary_band_points=64,
+scripts/run_kh_subsonic_riccati_core1d.py-191-        riccati_boundary_band_start=0.94,
+scripts/run_kh_subsonic_riccati_core1d.py-192-        riccati_boundary_band_end=0.995,
+scripts/run_kh_subsonic_riccati_core1d.py-193-        w_riccati_shooting_match=float(args.shooting_match_weight),
+scripts/run_kh_subsonic_riccati_core1d.py-194-        riccati_shooting_steps=256,
+scripts/run_kh_subsonic_riccati_core1d.py-195-        riccati_shooting_xi_boundary=0.995,
+scripts/run_kh_subsonic_riccati_core1d.py-196-        mode_low_alpha_threshold=float(args.low_alpha_threshold),
+scripts/run_kh_subsonic_riccati_core1d.py-197-        mode_low_alpha_weight=float(args.low_alpha_weight),
+scripts/run_kh_subsonic_riccati_core1d.py-198-        mode_low_alpha_audit_fraction=0.75,
+scripts/run_kh_subsonic_riccati_core1d.py-199-        initial_model_path=str(checkpoint),
+scripts/run_kh_subsonic_riccati_core1d.py-200-        initial_model_strict=True,
+scripts/run_kh_subsonic_riccati_core1d.py-201-        output_dir=str(args.output_dir),
+scripts/run_kh_subsonic_riccati_core1d.py-202-        device=str(args.device),
+scripts/run_kh_subsonic_riccati_core1d.py-203-    )
+scripts/run_kh_subsonic_riccati_core1d.py-204-
+scripts/run_kh_subsonic_riccati_core1d.py-205-
+scripts/run_kh_subsonic_riccati_core1d.py-206-def main() -> None:
+scripts/run_kh_subsonic_riccati_core1d.py-207-    parser = build_parser()
+scripts/run_kh_subsonic_riccati_core1d.py-208-    args = parser.parse_args()
+scripts/run_kh_subsonic_riccati_core1d.py-209-    checkpoint = load_warmstart_checkpoint(args)
+scripts/run_kh_subsonic_riccati_core1d.py-210-    args.output_dir.mkdir(parents=True, exist_ok=True)
+scripts/run_kh_subsonic_riccati_core1d.py-211-
+scripts/run_kh_subsonic_riccati_core1d.py-212-    warm_config_path = Path(args.warmstart_run_dir) / "config.csv"
+scripts/run_kh_subsonic_riccati_core1d.py-213-    if not warm_config_path.exists():
+scripts/run_kh_subsonic_riccati_core1d.py-214-        raise FileNotFoundError(f"Warm-start config not found: {warm_config_path}")
+scripts/run_kh_subsonic_riccati_core1d.py-215-    warm_config_df = pd.read_csv(warm_config_path)
+scripts/run_kh_subsonic_riccati_core1d.py-216-    if warm_config_df.empty:
+scripts/run_kh_subsonic_riccati_core1d.py-217-        raise RuntimeError(f"Warm-start config is empty: {warm_config_path}")
+scripts/run_kh_subsonic_riccati_core1d.py-218-    warm_config = warm_config_df.iloc[0]
+scripts/run_kh_subsonic_riccati_core1d.py-219-
+scripts/run_kh_subsonic_riccati_core1d.py-220-    cfg = build_config(args, warm_config, checkpoint)
+scripts/run_kh_subsonic_riccati_core1d.py-221-    pd.DataFrame([asdict(cfg)]).to_csv(args.output_dir / "config.csv", index=False)
+scripts/run_kh_subsonic_riccati_core1d.py-222-    pd.DataFrame(
+scripts/run_kh_subsonic_riccati_core1d.py-223-        [
+scripts/run_kh_subsonic_riccati_core1d.py-224-            {
+scripts/run_kh_subsonic_riccati_core1d.py-225-                "warmstart_run_dir": str(args.warmstart_run_dir),
+scripts/run_kh_subsonic_riccati_core1d.py-226-                "warmstart_checkpoint": str(checkpoint),
+scripts/run_kh_subsonic_riccati_core1d.py-227-            }
+scripts/run_kh_subsonic_riccati_core1d.py-228-        ]
+scripts/run_kh_subsonic_riccati_core1d.py-229-    ).to_csv(args.output_dir / "warmstart_source.csv", index=False)
+scripts/run_kh_subsonic_riccati_core1d.py-230-
+--
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-346-        riccati_anchor_alphas=tuple(float(alpha) for alpha in args.anchor_alphas),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-347-        w_riccati_anchor=float(args.riccati_anchor_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-348-        w_q_supervision=float(args.q_supervision_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-349-        q_supervision_n_xi=129,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-350-        q_supervision_every=10,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-351-        q_supervision_alpha_count=len(q_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-352-        q_supervision_alphas=tuple(float(alpha) for alpha in q_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-353-        w_riccati_gamma_supervision=float(args.gamma_supervision_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-354-        riccati_gamma_n_xi=129,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-355-        riccati_gamma_every=10,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-356-        riccati_gamma_alpha_count=len(gamma_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-357-        riccati_gamma_alphas=tuple(float(alpha) for alpha in gamma_supervision_alphas),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py:358:        w_riccati_center_kappa=float(args.center_kappa_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-359-        w_riccati_center_peak=float(args.center_peak_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-360-        w_riccati_boundary_band_kappa=float(args.boundary_kappa_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-361-        w_riccati_boundary_band_q=float(args.boundary_q_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-362-        riccati_center_xi=0.0,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-363-        riccati_boundary_band_points=64,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-364-        riccati_boundary_band_start=0.94,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-365-        riccati_boundary_band_end=0.995,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-366-        w_riccati_shooting_match=float(args.shooting_match_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-367-        riccati_shooting_steps=256,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-368-        riccati_shooting_xi_boundary=0.995,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-369-        mode_low_alpha_threshold=float(args.low_alpha_threshold),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-370-        mode_low_alpha_weight=float(args.low_alpha_weight),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-371-        mode_low_alpha_audit_fraction=0.75,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-372-        initial_model_path=str(checkpoint),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-373-        initial_model_strict=True,
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-374-        output_dir=str(args.output_dir),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-375-        device=str(args.device),
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-376-    )
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-377-
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-378-
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-379-def main() -> None:
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-380-    args = build_parser().parse_args()
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-381-    set_seed(int(args.seed))
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-382-    checkpoint = load_warmstart_checkpoint(args)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-383-    args.output_dir.mkdir(parents=True, exist_ok=True)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-384-
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-385-    warm_config_path = Path(args.warmstart_run_dir) / "config.csv"
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-386-    if not warm_config_path.exists():
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-387-        raise FileNotFoundError(f"Warm-start config not found: {warm_config_path}")
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-388-    warm_config_df = pd.read_csv(warm_config_path)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-389-    if warm_config_df.empty:
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-390-        raise RuntimeError(f"Warm-start config is empty: {warm_config_path}")
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-391-    warm_config = warm_config_df.iloc[0]
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-392-
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-393-    target_mach = float(warm_config["mach"]) if args.target_mach is None else float(args.target_mach)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-394-    device = torch.device(args.device)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-395-    guide_root = args.output_dir / "guide"
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-396-    guide_root.mkdir(parents=True, exist_ok=True)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-397-
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-398-    alpha_ref = np.linspace(float(args.alpha_min), float(args.alpha_max), int(args.n_guide_reference_alpha), dtype=float)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-399-    ci_ref = build_reference_ci_grid(alpha_ref, target_mach)
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-400-    anchor_indices = build_anchor_indices(len(alpha_ref), int(args.n_guide_anchor_alpha))
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-401-    anchor_alpha = alpha_ref[anchor_indices]
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-402-    anchor_ci = ci_ref[anchor_indices]
+scripts/run_kh_subsonic_riccati_core1d_windowed_sparse.py-403-
+--
+src/physics/kh_subsonic_residual.py-254-        alpha_complex = torch.complex(alpha, torch.zeros_like(alpha))
+src/physics/kh_subsonic_residual.py-255-        mach_t = torch.as_tensor(float(mach), dtype=xi.dtype, device=xi.device)
+src/physics/kh_subsonic_residual.py-256-
+src/physics/kh_subsonic_residual.py-257-        u_diff = u_complex - c
+src/physics/kh_subsonic_residual.py-258-        p_term = -2.0 * du_complex / u_diff
+src/physics/kh_subsonic_residual.py-259-        r_term = 1.0 - mach_t**2 * (u_diff**2)
+src/physics/kh_subsonic_residual.py-260-        gamma_rhs = -(gamma**2) - p_term * gamma + (alpha_complex**2) * r_term
+src/physics/kh_subsonic_residual.py-261-        gamma_y = torch.complex(kappa_y, q_y)
+src/physics/kh_subsonic_residual.py-262-        residual = gamma_y - gamma_rhs
+src/physics/kh_subsonic_residual.py-263-        return residual.real, residual.imag, y
+src/physics/kh_subsonic_residual.py-264-
+src/physics/kh_subsonic_residual.py-265-    outputs = model(xi, alpha)
+src/physics/kh_subsonic_residual.py:266:    if mode_representation == "first_order_real":
+src/physics/kh_subsonic_residual.py-267-        p_r = outputs[:, 0:1]
+src/physics/kh_subsonic_residual.py-268-        p_i = outputs[:, 1:2]
+src/physics/kh_subsonic_residual.py-269-        v_r = outputs[:, 2:3]
+src/physics/kh_subsonic_residual.py-270-        v_i = outputs[:, 3:4]
+src/physics/kh_subsonic_residual.py-271-
+src/physics/kh_subsonic_residual.py-272-        p_r_xi = _differentiate(p_r, xi)
+src/physics/kh_subsonic_residual.py-273-        p_i_xi = _differentiate(p_i, xi)
+src/physics/kh_subsonic_residual.py-274-        v_r_xi = _differentiate(v_r, xi)
+src/physics/kh_subsonic_residual.py-275-        v_i_xi = _differentiate(v_i, xi)
+src/physics/kh_subsonic_residual.py-276-
+src/physics/kh_subsonic_residual.py-277-        mapping_scale = model.get_mapping_scale()
+src/physics/kh_subsonic_residual.py-278-        y = xi_to_y(xi, mapping_scale)
+src/physics/kh_subsonic_residual.py-279-        y_xi = dy_dxi(xi, mapping_scale)
+src/physics/kh_subsonic_residual.py-280-
+src/physics/kh_subsonic_residual.py-281-        u = base_velocity(y)
+src/physics/kh_subsonic_residual.py-282-        du = base_velocity_derivative(y)
+src/physics/kh_subsonic_residual.py-283-        ci = model.get_ci(alpha) if ci_override is None else ci_override
+src/physics/kh_subsonic_residual.py-284-
+src/physics/kh_subsonic_residual.py-285-        p = torch.complex(p_r, p_i)
+src/physics/kh_subsonic_residual.py-286-        v = torch.complex(v_r, v_i)
+src/physics/kh_subsonic_residual.py-287-        c = torch.complex(torch.zeros_like(ci), ci)
+src/physics/kh_subsonic_residual.py-288-        u_complex = torch.complex(u, torch.zeros_like(u))
+src/physics/kh_subsonic_residual.py-289-        du_complex = torch.complex(du, torch.zeros_like(du))
+src/physics/kh_subsonic_residual.py-290-        alpha_complex = torch.complex(alpha, torch.zeros_like(alpha))
+src/physics/kh_subsonic_residual.py-291-        mach_t = torch.as_tensor(float(mach), dtype=xi.dtype, device=xi.device)
+src/physics/kh_subsonic_residual.py-292-
+src/physics/kh_subsonic_residual.py-293-        u_diff = u_complex - c
+src/physics/kh_subsonic_residual.py-294-        r_term = 1.0 - mach_t**2 * (u_diff**2)
+src/physics/kh_subsonic_residual.py-295-        f = (2.0 * du_complex * v - (alpha_complex**2) * r_term * p) / u_diff
+src/physics/kh_subsonic_residual.py-296-
+src/physics/kh_subsonic_residual.py-297-        res_state_r = p_r_xi - y_xi * v_r
+src/physics/kh_subsonic_residual.py-298-        res_state_i = p_i_xi - y_xi * v_i
+src/physics/kh_subsonic_residual.py-299-        res_dyn_r = v_r_xi - y_xi * f.real
+src/physics/kh_subsonic_residual.py-300-        res_dyn_i = v_i_xi - y_xi * f.imag
+src/physics/kh_subsonic_residual.py-301-        return torch.cat([res_state_r, res_dyn_r], dim=0), torch.cat([res_state_i, res_dyn_i], dim=0), y
+src/physics/kh_subsonic_residual.py-302-
+src/physics/kh_subsonic_residual.py-303-    p_r = outputs[:, 0:1]
+src/physics/kh_subsonic_residual.py-304-    p_i = outputs[:, 1:2]
+src/physics/kh_subsonic_residual.py-305-
+src/physics/kh_subsonic_residual.py-306-    p_r_xi = _differentiate(p_r, xi)
+src/physics/kh_subsonic_residual.py-307-    p_i_xi = _differentiate(p_i, xi)
+src/physics/kh_subsonic_residual.py-308-    p_r_xixi = _differentiate(p_r_xi, xi)
+src/physics/kh_subsonic_residual.py-309-    p_i_xixi = _differentiate(p_i_xi, xi)
+src/physics/kh_subsonic_residual.py-310-
+src/physics/kh_subsonic_residual.py-311-    mapping_scale = model.get_mapping_scale()
+--
+src/physics/kh_subsonic_residual.py-328-    q_i = 2.0 * mach**2 * ur * ui
+src/physics/kh_subsonic_residual.py-329-
+src/physics/kh_subsonic_residual.py-330-    res_r = ur * p_r_yy - ui * p_i_yy - 2.0 * du * p_r_y + alpha.pow(2) * (q_r * p_r - q_i * p_i)
+src/physics/kh_subsonic_residual.py-331-    res_i = ur * p_i_yy + ui * p_r_yy - 2.0 * du * p_i_y + alpha.pow(2) * (q_r * p_i + q_i * p_r)
+src/physics/kh_subsonic_residual.py-332-    return res_r, res_i, y
+src/physics/kh_subsonic_residual.py-333-
+src/physics/kh_subsonic_residual.py-334-
+src/physics/kh_subsonic_residual.py-335-def boundary_decay_loss(model, xi_left: torch.Tensor, xi_right: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-336-    mode_representation = getattr(model, "mode_representation", "cartesian")
+src/physics/kh_subsonic_residual.py-337-    if mode_representation == "riccati":
+src/physics/kh_subsonic_residual.py-338-        loss_kappa, loss_q = riccati_boundary_loss_components(model, xi_left, xi_right, alpha)
+src/physics/kh_subsonic_residual.py-339-        return loss_kappa + loss_q
+src/physics/kh_subsonic_residual.py:340:    if mode_representation == "first_order_real":
+src/physics/kh_subsonic_residual.py-341-        pred_left = model(xi_left, alpha)
+src/physics/kh_subsonic_residual.py-342-        pred_right = model(xi_right, alpha)
+src/physics/kh_subsonic_residual.py-343-        p_left_r, p_left_i = extract_pressure_components(pred_left)
+src/physics/kh_subsonic_residual.py-344-        p_right_r, p_right_i = extract_pressure_components(pred_right)
+src/physics/kh_subsonic_residual.py-345-        v_left_r = pred_left[:, 2:3]
+src/physics/kh_subsonic_residual.py-346-        v_left_i = pred_left[:, 3:4]
+src/physics/kh_subsonic_residual.py-347-        v_right_r = pred_right[:, 2:3]
+src/physics/kh_subsonic_residual.py-348-        v_right_i = pred_right[:, 3:4]
+src/physics/kh_subsonic_residual.py-349-        ci = model.get_ci(alpha)
+src/physics/kh_subsonic_residual.py-350-        gamma_left, gamma_right = asymptotic_riccati_gammas(alpha, float(getattr(model, "mach", 0.5)), ci)
+src/physics/kh_subsonic_residual.py-351-        target_left = gamma_left * torch.complex(p_left_r, p_left_i)
+src/physics/kh_subsonic_residual.py-352-        target_right = gamma_right * torch.complex(p_right_r, p_right_i)
+src/physics/kh_subsonic_residual.py-353-        loss_left = (v_left_r - target_left.real).pow(2).mean() + (v_left_i - target_left.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py-354-        loss_right = (v_right_r - target_right.real).pow(2).mean() + (v_right_i - target_right.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py-355-        return loss_left + loss_right
+src/physics/kh_subsonic_residual.py-356-    pred_left = model(xi_left, alpha)
+src/physics/kh_subsonic_residual.py-357-    pred_right = model(xi_right, alpha)
+src/physics/kh_subsonic_residual.py-358-    return pred_left.pow(2).mean() + pred_right.pow(2).mean()
+src/physics/kh_subsonic_residual.py-359-
+src/physics/kh_subsonic_residual.py-360-
+src/physics/kh_subsonic_residual.py-361-def riccati_boundary_loss_components(
+src/physics/kh_subsonic_residual.py-362-    model,
+src/physics/kh_subsonic_residual.py-363-    xi_left: torch.Tensor,
+src/physics/kh_subsonic_residual.py-364-    xi_right: torch.Tensor,
+src/physics/kh_subsonic_residual.py-365-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-366-    *,
+src/physics/kh_subsonic_residual.py-367-    ci_override: torch.Tensor | None = None,
+src/physics/kh_subsonic_residual.py-368-) -> tuple[torch.Tensor, torch.Tensor]:
+src/physics/kh_subsonic_residual.py-369-    pred_left = model(xi_left, alpha)
+src/physics/kh_subsonic_residual.py-370-    pred_right = model(xi_right, alpha)
+src/physics/kh_subsonic_residual.py-371-    ci = model.get_ci(alpha) if ci_override is None else ci_override
+src/physics/kh_subsonic_residual.py-372-    gamma_left, gamma_right = asymptotic_riccati_gammas(alpha, float(getattr(model, "mach", 0.5)), ci)
+src/physics/kh_subsonic_residual.py-373-
+src/physics/kh_subsonic_residual.py-374-    loss_kappa = (
+src/physics/kh_subsonic_residual.py-375-        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py-376-        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py-377-    )
+src/physics/kh_subsonic_residual.py-378-    loss_q = (
+src/physics/kh_subsonic_residual.py-379-        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py-380-        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py-381-    )
+src/physics/kh_subsonic_residual.py-382-    return loss_kappa, loss_q
+src/physics/kh_subsonic_residual.py-383-
+src/physics/kh_subsonic_residual.py-384-
+src/physics/kh_subsonic_residual.py-385-def riccati_boundary_band_loss_components(
+--
+src/physics/kh_subsonic_residual.py-804-    slope_loss = torch.mean(env2_xi.pow(2))
+src/physics/kh_subsonic_residual.py-805-    curvature_loss = torch.mean(torch.relu(env2_xixi).pow(2))
+src/physics/kh_subsonic_residual.py-806-    return slope_loss, curvature_loss
+src/physics/kh_subsonic_residual.py-807-
+src/physics/kh_subsonic_residual.py-808-
+src/physics/kh_subsonic_residual.py-809-def first_order_stabilization_losses(
+src/physics/kh_subsonic_residual.py-810-    model,
+src/physics/kh_subsonic_residual.py-811-    xi: torch.Tensor,
+src/physics/kh_subsonic_residual.py-812-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-813-    *,
+src/physics/kh_subsonic_residual.py-814-    amp_cap: float = 2.0,
+src/physics/kh_subsonic_residual.py-815-) -> tuple[torch.Tensor, torch.Tensor]:
+src/physics/kh_subsonic_residual.py:816:    if getattr(model, "mode_representation", "cartesian") != "first_order_real":
+src/physics/kh_subsonic_residual.py-817-        zero = torch.zeros(1, device=xi.device, dtype=xi.dtype).mean()
+src/physics/kh_subsonic_residual.py-818-        return zero, zero
+src/physics/kh_subsonic_residual.py-819-
+src/physics/kh_subsonic_residual.py-820-    pred = model(xi, alpha)
+src/physics/kh_subsonic_residual.py-821-    pr = pred[:, 0:1]
+src/physics/kh_subsonic_residual.py-822-    pi = pred[:, 1:2]
+src/physics/kh_subsonic_residual.py-823-    vr = pred[:, 2:3]
+src/physics/kh_subsonic_residual.py-824-    vi = pred[:, 3:4]
+src/physics/kh_subsonic_residual.py-825-    amp2 = pr.pow(2) + pi.pow(2)
+src/physics/kh_subsonic_residual.py-826-    v_energy = torch.mean(vr.pow(2) + vi.pow(2))
+src/physics/kh_subsonic_residual.py-827-    amp_cap_loss = torch.mean(torch.relu(amp2 - float(amp_cap) ** 2).pow(2))
+src/physics/kh_subsonic_residual.py-828-    return v_energy, amp_cap_loss
+src/physics/kh_subsonic_residual.py-829-
+src/physics/kh_subsonic_residual.py-830-
+src/physics/kh_subsonic_residual.py-831-def pressure_ode_residual_2d(
+src/physics/kh_subsonic_residual.py-832-    model,
+src/physics/kh_subsonic_residual.py-833-    xi: torch.Tensor,
+src/physics/kh_subsonic_residual.py-834-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-835-    mach: torch.Tensor,
+src/physics/kh_subsonic_residual.py-836-    ci_override: torch.Tensor | None = None,
+src/physics/kh_subsonic_residual.py-837-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+src/physics/kh_subsonic_residual.py-838-    if not xi.requires_grad:
+src/physics/kh_subsonic_residual.py-839-        xi.requires_grad_(True)
+src/physics/kh_subsonic_residual.py-840-
+src/physics/kh_subsonic_residual.py-841-    if getattr(model, "mode_representation", "cartesian") == "riccati":
+src/physics/kh_subsonic_residual.py-842-        outputs = model(xi, alpha, mach)
+src/physics/kh_subsonic_residual.py-843-        kappa = outputs[:, 0:1]
+src/physics/kh_subsonic_residual.py-844-        q = outputs[:, 1:2]
+src/physics/kh_subsonic_residual.py-845-
+src/physics/kh_subsonic_residual.py-846-        kappa_xi = _differentiate(kappa, xi)
+src/physics/kh_subsonic_residual.py-847-        q_xi = _differentiate(q, xi)
+src/physics/kh_subsonic_residual.py-848-
+src/physics/kh_subsonic_residual.py-849-        mapping_scale = model.get_mapping_scale()
+src/physics/kh_subsonic_residual.py-850-        y = xi_to_y(xi, mapping_scale)
+src/physics/kh_subsonic_residual.py-851-        y_xi = dy_dxi(xi, mapping_scale)
+src/physics/kh_subsonic_residual.py-852-
+src/physics/kh_subsonic_residual.py-853-        kappa_y = kappa_xi / y_xi
+src/physics/kh_subsonic_residual.py-854-        q_y = q_xi / y_xi
+src/physics/kh_subsonic_residual.py-855-
+src/physics/kh_subsonic_residual.py-856-        u = base_velocity(y)
+src/physics/kh_subsonic_residual.py-857-        du = base_velocity_derivative(y)
+src/physics/kh_subsonic_residual.py-858-        ci = ci_override if ci_override is not None else model.get_ci(alpha, mach)
+src/physics/kh_subsonic_residual.py-859-
+src/physics/kh_subsonic_residual.py-860-        gamma = torch.complex(kappa, q)
+src/physics/kh_subsonic_residual.py-861-        c = torch.complex(torch.zeros_like(ci), ci)

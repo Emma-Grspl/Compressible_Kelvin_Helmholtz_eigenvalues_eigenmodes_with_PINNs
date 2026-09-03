@@ -1,0 +1,21 @@
+{
+  "status": "COMPLETED",
+  "Mach": 1.9,
+  "checkpoint": "models_saved/supersonic_general/long_S4/best_joint_checkpoint_931682f2b1.pt",
+  "n_modes": 34,
+  "n_anchors": 4,
+  "n_off_anchor": 30,
+  "spectral_complex_error_mean": 0.0040610879933267365,
+  "spectral_complex_error_max": 0.017680811983082485,
+  "p_rel_l2_core20_mean": 0.3649279092432556,
+  "p_rel_l2_core40_mean": 0.5812562448735772,
+  "p_rel_l2_core40_max": 0.7518922110011544,
+  "overlap_error_core20_mean": 0.07108659551932742,
+  "overlap_error_core40_mean": 0.17291986333126702,
+  "overlap_error_core40_max": 0.2851562009358597,
+  "envelope_rel_l2_core40_mean": 0.31978314320916407,
+  "phase_rmse_core40_mean": 0.3758455678001909,
+  "kappa_rel_l2_core40_mean": 1.1854941678507944,
+  "q_rel_l2_core40_mean": 0.16917750722945396,
+  "results_csv": "article/tables/table_s4m0_modal_audit_8b23389c15.csv"
+}

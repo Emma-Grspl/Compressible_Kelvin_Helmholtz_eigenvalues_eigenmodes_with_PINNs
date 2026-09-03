@@ -1,0 +1,13 @@
+{
+  "n_boundaries": 85,
+  "n_unique_chart_pairs": 17,
+  "samepoint_c_median": 0.008682469143027713,
+  "samepoint_c_p95": 0.04016182209635881,
+  "samepoint_c_max": 0.07511322632014505,
+  "samepoint_cr_median": 0.006715953350067139,
+  "samepoint_cr_p95": 0.03701917529106138,
+  "samepoint_cr_max": 0.06829208135604858,
+  "samepoint_ci_median": 0.0022273026406764984,
+  "samepoint_ci_p95": 0.015343761444091789,
+  "samepoint_ci_max": 0.03127600345760584
+}

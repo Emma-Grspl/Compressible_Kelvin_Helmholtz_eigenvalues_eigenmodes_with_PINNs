@@ -1,0 +1,24 @@
+{
+  "complete": true,
+  "expected_grid_points": 50,
+  "max_spectral_residual": 3.2785633824319342e-09,
+  "missing_modes": [],
+  "missing_roots": [],
+  "mode_rows": 50,
+  "overlap_consistency": {
+    "available": true,
+    "n_overlap": 0,
+    "note": "No common retained target; overlap is reported but is not a completion criterion.",
+    "passed": null
+  },
+  "residual_limit": 1e-08,
+  "retained_per_mach": {
+    "1.01": 10,
+    "1.025": 10,
+    "1.05": 10,
+    "1.075": 10,
+    "1.1": 10
+  },
+  "retained_rows": 50,
+  "target_rows": 50
+}

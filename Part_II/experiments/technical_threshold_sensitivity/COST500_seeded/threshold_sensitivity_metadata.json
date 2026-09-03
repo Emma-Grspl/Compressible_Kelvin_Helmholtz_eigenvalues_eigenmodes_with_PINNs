@@ -1,0 +1,20 @@
+{
+  "input": "assets/classic_supersonic/csv/computational_cost/analysis/table_N76_COST500_shooting_timing_500.csv",
+  "n_queries": 500,
+  "stage1_nominal": 0.05,
+  "stage2_nominal": 0.01,
+  "multipliers": [
+    0.25,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "critical_multiplier_summary": {
+    "n": 500,
+    "median": 2.4065331400101e-05,
+    "p90": 0.10458874819483947,
+    "p95": 0.2564775482281082,
+    "p99": 0.3817995289293106,
+    "max": 0.477594123632082
+  }
+}

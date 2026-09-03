@@ -1,0 +1,5 @@
+Loading pytorch-gpu/py3/2.1.1
+  Loading requirement: cuda/11.8.0 nccl/2.18.5-1-cuda cudnn/8.7.0.84-cuda
+    gcc/8.5.0 openmpi/4.1.5-cuda intel-mkl/2020.4 magma/2.7.1-cuda sox/14.4.2
+    sparsehash/2.0.3 libjpeg-turbo/2.1.3 ffmpeg/4.4.4
+slurmstepd: error: *** JOB 1687385 ON r6i1n7 CANCELLED AT 2026-07-10T17:57:51 DUE TO TIME LIMIT ***

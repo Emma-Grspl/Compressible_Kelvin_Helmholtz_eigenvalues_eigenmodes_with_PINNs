@@ -1,0 +1,16 @@
+version: 1
+sweep:
+  name: supersonic_gep_resolution
+  type: supersonic_gep_resolution
+  cases:
+    - supersonic_M140
+    - supersonic_M180
+    - supersonic_M190
+  solver: supersonic_gep
+  n_points: [241, 301, 401, 481, 602]
+  fixed:
+    mapping_kind: pin
+    mapping_scale: 5.0
+    xi_max: 0.98
+    ci_weight: 25.0
+  produce_modes: true

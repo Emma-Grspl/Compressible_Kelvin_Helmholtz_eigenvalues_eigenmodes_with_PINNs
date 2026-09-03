@@ -1,0 +1,18 @@
+{
+  "model": "N76 FULLC production atlas",
+  "n_charts": 12,
+  "slurm_array_job_id": "1188003",
+  "gpu_type": "NVIDIA V100",
+  "gpus_per_chart": 1,
+  "prefit_steps": 2000,
+  "modal_steps": 4000,
+  "joint_steps": 4000,
+  "total_training_steps_per_chart": 10000,
+  "total_gpu_seconds": 7719,
+  "total_gpu_hours": 2.1441666666666666,
+  "mean_seconds_per_chart": 643.25,
+  "median_seconds_per_chart": 652.0,
+  "min_seconds_per_chart": 559,
+  "max_seconds_per_chart": 694,
+  "scope": "Retained 12-chart N76 FULLC production training only; post-training classical shooting, validation, anchor-budget experiments and reviewer ablations excluded."
+}

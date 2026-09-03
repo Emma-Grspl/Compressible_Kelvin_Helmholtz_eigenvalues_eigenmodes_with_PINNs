@@ -1,0 +1,9 @@
+{
+  "selected_checkpoint": "models_saved/atlas/N36/C11/best_joint_checkpoint.pt",
+  "best_stage_losses": {
+    "spectral_prefit": 4.922862673062411e-10,
+    "modal_frozen_spectrum": 0.0012711965246126056,
+    "joint": 0.0004123703110963106
+  },
+  "test_audited": false
+}

@@ -1,0 +1,31 @@
+{
+  "source_checkpoint": "models_saved/modal_reconstruction/pinn_chart_M180_alpha_070_190_pq_qdef_tail_polished_asinh_w192_d6_w010/best_model.pt",
+  "best_checkpoint": "models_saved/modal_reconstruction/pinn_chart_M180_alpha_070_190_pq_qdef005_ode001_tail_polished_asinh_w192_d6/best_model.pt",
+  "Mach_fixed": 1.8,
+  "spectral_network_frozen": true,
+  "qdef_weight": 0.05,
+  "ode_weight": 0.001,
+  "initial": {
+    "modal_mse": 7.471320714103058e-05,
+    "qdef_mse": 1.9136699847877026e-05,
+    "ode_mse": 0.00012030539801344275,
+    "qdef_rms": 0.004374551586806774,
+    "ode_rms": 0.01096838153898716,
+    "min_abs_U_minus_c": 0.011064844205975533,
+    "min_ci": 0.010448742657899857
+  },
+  "final": {
+    "modal_mse": 7.476395694538951e-05,
+    "qdef_mse": 1.2926599993079435e-05,
+    "ode_mse": 4.794022243004292e-05,
+    "qdef_rms": 0.0035953582264482975,
+    "ode_rms": 0.006923887878656387,
+    "min_abs_U_minus_c": 0.011064844205975533,
+    "min_ci": 0.010448742657899857
+  },
+  "relative_change": {
+    "modal_mse": 0.000679261489379418,
+    "qdef_mse": -0.3245125807565259,
+    "ode_mse": -0.6015122910387932
+  }
+}

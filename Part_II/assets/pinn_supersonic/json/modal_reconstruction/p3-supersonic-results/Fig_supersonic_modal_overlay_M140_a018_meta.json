@@ -1,0 +1,33 @@
+{
+  "Mach": 1.4,
+  "alpha": 0.18,
+  "primary_chart": "C11",
+  "plot_y_range": [
+    -250.0,
+    250.0
+  ],
+  "n_plot_points": 40001,
+  "direct_pinn_native_mapped_ymax": 99.24433249370279,
+  "direct_pinn_neural_ymax": 98.74811083123427,
+  "direct_pinn_tail": "analytic far-field continuation outside neural mapped domain",
+  "reference_c": {
+    "cr": 0.3329061267127761,
+    "ci": 0.0431021730901373
+  },
+  "direct_pinn_c": {
+    "cr": 0.3332749307155609,
+    "ci": 0.04287908226251602
+  },
+  "shooting_c": {
+    "cr": 0.33290383625,
+    "ci": 0.0431030483333333
+  },
+  "reference_y_limit": 250.0,
+  "shooting_y_limit": 250.0,
+  "outputs": {
+    "real": "assets/p3-supersonic-results/Fig_supersonic_modal_overlay_M140_a018_real",
+    "imag": "assets/p3-supersonic-results/Fig_supersonic_modal_overlay_M140_a018_imag",
+    "data": "assets/pinn_supersonic/csv/modal_reconstruction/p3-supersonic-results/table_Fig_supersonic_modal_overlay_M140_a018_dense_data.csv",
+    "metrics": "assets/pinn_supersonic/csv/chart_overlap/p3-supersonic-results/table_Tab_supersonic_modal_overlay_M140_a018_metrics.csv"
+  }
+}

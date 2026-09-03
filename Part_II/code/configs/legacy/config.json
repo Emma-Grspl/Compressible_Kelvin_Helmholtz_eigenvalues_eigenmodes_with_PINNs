@@ -1,0 +1,14 @@
+{
+  "Mach": 1.0,
+  "base_alpha": 0.13,
+  "base_cr": 2.3040000000000003e-10,
+  "base_ci": 0.0215428757231599,
+  "n_requested_cases": 4,
+  "s_values": [
+    0.2,
+    0.65,
+    0.93,
+    0.985
+  ],
+  "reconstruct_signature": "(*, alpha: 'float', mach: 'float', cr: 'float', ci: 'float', ln_p_start_right: 'float', match_y: 'float', use_mapping: 'bool', mapping_scale: 'float', min_y_limit: 'float', max_y_limit: 'float', y_limit_factor: 'float', max_step: 'float' = inf) -> 'dict[str, np.ndarray]'"
+}

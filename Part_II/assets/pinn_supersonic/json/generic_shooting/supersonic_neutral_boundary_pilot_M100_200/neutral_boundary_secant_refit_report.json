@@ -1,0 +1,5 @@
+{
+  "n_mach": 4,
+  "n_valid": 4,
+  "method": "Linear zero crossing based primarily on the last two positive-ci shooting points."
+}

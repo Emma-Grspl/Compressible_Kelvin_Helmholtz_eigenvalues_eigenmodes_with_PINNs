@@ -20,6 +20,11 @@
 - `code/src/scripts/evaluation/`: quantitative validation and audits.
 - `code/src/launch/slurm/`: migrated Jean-Zay launchers.
 - `code/plots/scripts/`: scripts whose primary role is figure generation.
+- `configs/`: curated public copies or summaries of validated classical,
+  atlas-routing, GEP-policy, and `N340` anchor-budget configurations.
+- `examples/`: small repository-relative CPU examples; they do not train a
+  model or run a dense GEP sweep.
+- `tests/`: lightweight integrity and classical single-point tests used by CI.
 
 ## Scientific outputs
 
@@ -31,6 +36,8 @@
 - `results/complementary_audits/`: numerical outputs from audit phases A-I,
   including the curated input tables used by final figures.
 - `models_saved/production/`: final fixed-Mach and 49-chart atlas checkpoints.
+- `models_saved/CHECKPOINT_MANIFEST.csv`: file-level size and SHA-256 inventory
+  for the published production checkpoint set.
 
 Supporting, imported, and historical checkpoint trees are documented but not
 published in Git. Their exclusion is recorded in

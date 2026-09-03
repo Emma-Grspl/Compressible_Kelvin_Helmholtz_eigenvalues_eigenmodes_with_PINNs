@@ -1,0 +1,126 @@
+============================================================
+S4M0 TRAINING
+task       = 13
+Mach       = 1.80
+tag        = M180
+config     = assets/pinn_supersonic/pilots/local_M180_sparse_v1/configs/S4.json
+output_dir = assets/pinn_supersonic/pilots/local_M180_sparse_v1/runs/long_S4
+node       = r7i1n5
+start      = Fri Aug  7 05:34:24 PM CEST 2026
+============================================================
+[spectral_prefit] 1/2000 loss=8.268069e+00
+[spectral_prefit] 100/2000 loss=2.118831e-01
+[spectral_prefit] 200/2000 loss=5.134887e-03
+[spectral_prefit] 300/2000 loss=8.651002e-04
+[spectral_prefit] 400/2000 loss=1.824595e-04
+[spectral_prefit] 500/2000 loss=3.093058e-05
+[spectral_prefit] 600/2000 loss=4.106532e-06
+[spectral_prefit] 700/2000 loss=4.220101e-07
+[spectral_prefit] 800/2000 loss=3.304016e-08
+[spectral_prefit] 900/2000 loss=1.955650e-09
+[spectral_prefit] 1000/2000 loss=1.024297e-10
+[spectral_prefit] 1100/2000 loss=1.093814e-11
+[spectral_prefit] 1200/2000 loss=2.861355e-12
+[spectral_prefit] 1300/2000 loss=7.957816e-07
+[spectral_prefit] 1400/2000 loss=2.296589e-11
+[spectral_prefit] 1500/2000 loss=1.409298e-12
+[spectral_prefit] 1600/2000 loss=3.673556e-08
+[spectral_prefit] 1700/2000 loss=4.199823e-13
+[spectral_prefit] 1800/2000 loss=1.872596e-11
+[spectral_prefit] 1900/2000 loss=4.744781e-06
+[spectral_prefit] 2000/2000 loss=9.125253e-11
+[modal_frozen_spectrum] 1/4000 loss=1.954352e+01 ric=(9.385e-02,8.993e-02) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 100/4000 loss=4.406916e-02 ric=(1.200e-02,7.682e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 200/4000 loss=3.212402e-02 ric=(6.230e-03,2.787e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 300/4000 loss=2.307191e-02 ric=(3.073e-03,2.027e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 400/4000 loss=2.068521e-02 ric=(2.453e-03,1.537e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 500/4000 loss=1.699029e-02 ric=(2.059e-03,1.077e-03) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 600/4000 loss=1.199980e-02 ric=(1.655e-03,8.943e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 700/4000 loss=4.963878e-03 ric=(1.357e-03,6.820e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 800/4000 loss=3.741224e-03 ric=(7.298e-04,5.516e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 900/4000 loss=5.812770e-03 ric=(6.482e-04,4.712e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1000/4000 loss=1.011392e-02 ric=(5.696e-04,4.695e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1100/4000 loss=5.198949e-03 ric=(5.596e-04,3.990e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1200/4000 loss=3.126917e-03 ric=(3.371e-04,3.178e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1300/4000 loss=5.060721e-03 ric=(3.323e-04,2.592e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1400/4000 loss=8.970396e-03 ric=(3.348e-04,3.808e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1500/4000 loss=4.101503e-03 ric=(3.297e-04,2.656e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1600/4000 loss=7.166760e-03 ric=(3.193e-04,2.233e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1700/4000 loss=3.071242e-03 ric=(3.200e-04,2.140e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1800/4000 loss=3.533354e-03 ric=(2.444e-04,1.771e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 1900/4000 loss=4.531639e-03 ric=(3.045e-04,2.204e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2000/4000 loss=3.544430e-03 ric=(2.967e-04,1.886e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2100/4000 loss=6.191946e-03 ric=(2.404e-04,1.919e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2200/4000 loss=3.249475e-03 ric=(2.341e-04,1.588e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2300/4000 loss=3.965506e-03 ric=(2.423e-04,1.782e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2400/4000 loss=2.783465e-03 ric=(1.726e-04,1.245e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2500/4000 loss=1.353644e-03 ric=(1.463e-04,1.081e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2600/4000 loss=1.413644e-03 ric=(1.669e-04,1.013e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2700/4000 loss=2.977149e-03 ric=(1.636e-04,1.205e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2800/4000 loss=3.852825e-03 ric=(1.531e-04,1.011e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 2900/4000 loss=6.839861e-03 ric=(1.917e-04,2.045e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3000/4000 loss=2.680027e-03 ric=(2.073e-04,1.448e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3100/4000 loss=2.778011e-03 ric=(2.069e-04,1.122e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3200/4000 loss=2.786909e-03 ric=(1.701e-04,8.716e-05) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3300/4000 loss=7.076732e-04 ric=(1.028e-04,7.437e-05) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3400/4000 loss=6.601804e-04 ric=(1.245e-04,7.416e-05) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3500/4000 loss=2.125041e-03 ric=(1.370e-04,8.570e-05) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3600/4000 loss=2.106862e-03 ric=(1.515e-04,8.260e-05) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3700/4000 loss=3.601247e-03 ric=(1.964e-04,1.395e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3800/4000 loss=5.988271e-03 ric=(2.038e-04,2.421e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 3900/4000 loss=3.141069e-03 ric=(1.675e-04,1.288e-04) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[modal_frozen_spectrum] 4000/4000 loss=1.199289e-03 ric=(1.074e-04,7.098e-05) spec=0.000e+00 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1/4000 loss=1.190219e-03 ric=(1.045e-04,7.183e-05) spec=3.093e-11 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 100/4000 loss=3.251304e-04 ric=(8.124e-05,5.124e-05) spec=2.145e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 200/4000 loss=3.292837e-04 ric=(7.317e-05,5.418e-05) spec=6.954e-12 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 300/4000 loss=1.054088e-03 ric=(8.437e-05,6.875e-05) spec=2.163e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 400/4000 loss=1.674753e-03 ric=(9.237e-05,7.198e-05) spec=2.360e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 500/4000 loss=1.026433e-03 ric=(9.162e-05,7.370e-05) spec=2.719e-10 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 600/4000 loss=1.160591e-03 ric=(9.508e-05,5.333e-05) spec=2.940e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 700/4000 loss=8.185667e-04 ric=(7.034e-05,5.842e-05) spec=1.312e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 800/4000 loss=7.477020e-04 ric=(6.525e-05,4.727e-05) spec=4.880e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 900/4000 loss=8.949593e-04 ric=(9.462e-05,6.228e-05) spec=3.936e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1000/4000 loss=4.552803e-04 ric=(6.975e-05,4.831e-05) spec=8.432e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1100/4000 loss=9.148260e-04 ric=(7.669e-05,5.906e-05) spec=8.949e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1200/4000 loss=1.791728e-03 ric=(1.451e-04,1.320e-04) spec=3.223e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1300/4000 loss=1.070419e-03 ric=(8.473e-05,9.409e-05) spec=9.915e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1400/4000 loss=4.162875e-04 ric=(6.881e-05,4.367e-05) spec=8.043e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1500/4000 loss=4.323891e-04 ric=(4.838e-05,3.492e-05) spec=2.484e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1600/4000 loss=3.743381e-04 ric=(5.013e-05,3.247e-05) spec=1.137e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1700/4000 loss=6.625016e-04 ric=(5.753e-05,4.056e-05) spec=1.256e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1800/4000 loss=7.643692e-04 ric=(6.329e-05,5.106e-05) spec=1.238e-09 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 1900/4000 loss=1.051154e-03 ric=(6.079e-05,5.017e-05) spec=9.625e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2000/4000 loss=9.649995e-04 ric=(5.874e-05,4.994e-05) spec=2.600e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2100/4000 loss=1.262581e-03 ric=(8.185e-05,7.450e-05) spec=3.551e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2200/4000 loss=7.107882e-04 ric=(6.118e-05,4.817e-05) spec=1.421e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2300/4000 loss=3.959554e-04 ric=(4.442e-05,3.031e-05) spec=1.115e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2400/4000 loss=7.708662e-04 ric=(4.391e-05,3.239e-05) spec=3.962e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2500/4000 loss=6.143234e-04 ric=(5.121e-05,2.853e-05) spec=4.194e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2600/4000 loss=7.621393e-04 ric=(4.828e-05,3.971e-05) spec=1.027e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2700/4000 loss=3.688109e-04 ric=(4.160e-05,3.438e-05) spec=1.413e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2800/4000 loss=3.109369e-04 ric=(3.107e-05,3.008e-05) spec=7.551e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 2900/4000 loss=1.340866e-03 ric=(5.789e-05,6.390e-05) spec=2.732e-10 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3000/4000 loss=1.312345e-03 ric=(7.538e-05,5.266e-05) spec=3.723e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3100/4000 loss=4.452931e-04 ric=(3.699e-05,3.304e-05) spec=3.042e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3200/4000 loss=3.142993e-04 ric=(3.936e-05,4.128e-05) spec=7.936e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3300/4000 loss=2.867206e-04 ric=(3.485e-05,2.860e-05) spec=1.468e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3400/4000 loss=3.222323e-04 ric=(3.116e-05,2.753e-05) spec=1.294e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3500/4000 loss=7.160670e-04 ric=(3.595e-05,2.940e-05) spec=6.478e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3600/4000 loss=7.086333e-04 ric=(5.063e-05,6.374e-05) spec=8.325e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3700/4000 loss=1.176712e-03 ric=(6.887e-05,5.976e-05) spec=1.484e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3800/4000 loss=8.378967e-04 ric=(7.011e-05,8.365e-05) spec=5.771e-08 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 3900/4000 loss=6.189870e-04 ric=(3.797e-05,3.259e-05) spec=1.319e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+[joint] 4000/4000 loss=3.498916e-04 ric=(2.684e-05,2.799e-05) spec=1.528e-07 modal=(0.000e+00,0.000e+00,0.000e+00)
+
+SPECTRAL METRICS
+{
+  "cr_mae": 0.0011745842420209558,
+  "cr_max_abs": 0.005497505159083482,
+  "ci_mae": 0.004094051701853629,
+  "ci_max_abs": 0.024426937004831607,
+  "omega_i_mae": 0.00043334978451210467
+}
+
+LOCAL SUPERSONIC TRAINING: COMPLETED
+
+end = Fri Aug  7 05:40:46 PM CEST 2026

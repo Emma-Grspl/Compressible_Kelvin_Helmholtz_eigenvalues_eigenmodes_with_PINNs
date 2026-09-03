@@ -1,0 +1,11 @@
+# Provenance:
+# - assets/pinn_subsonic/csv/anchor_budget_runs/N340/Table_anchors.csv
+# - results/complementary_audits/phase_F/N340_p1f_seed1234/config.json
+production_anchor_budget: 340
+n_charts: 49
+n_unique_anchors: 340
+selection: "geometry-only nested cover4 + maximin"
+max_anchors_per_chart: 36
+median_anchors_per_chart: 9.0
+min_anchors_per_chart: 4
+canonical_anchor_table: "assets/pinn_subsonic/csv/anchor_budget_runs/N340/Table_anchors.csv"

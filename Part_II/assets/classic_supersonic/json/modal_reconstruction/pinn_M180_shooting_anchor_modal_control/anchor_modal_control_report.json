@@ -1,0 +1,11 @@
+{
+  "n_cases": 5,
+  "n_pinn_reference_modal_valid": 5,
+  "n_shooting_reference_modal_valid": 5,
+  "median_pinn_reference_p_rel": 0.0002175103319269385,
+  "median_shooting_reference_p_rel": 9.597428298349416e-06,
+  "interpretation": {
+    "shooting_bad_at_anchors": "The shooting modal reconstruction is incompatible with the classical modal dataset.",
+    "shooting_good_at_anchors_only": "The shooting reconstruction is valid, but the PINN modal interpolation must be investigated off-anchor."
+  }
+}

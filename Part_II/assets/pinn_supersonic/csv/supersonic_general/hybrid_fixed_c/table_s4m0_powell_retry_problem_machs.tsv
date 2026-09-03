@@ -1,0 +1,4 @@
+Mach	tag	alpha_file	output_dir
+1.05	105	assets/pinn_supersonic/hybrid_fixed_c/local_M105_S4M0_v1/m105_powell_retry_alphas.txt	assets/pinn_supersonic/hybrid_fixed_c/local_M105_S4M0_v1/pinn_powell_retry_wide
+1.15	115	assets/pinn_supersonic/hybrid_fixed_c/local_M115_S4M0_v1/m115_powell_retry_alphas.txt	assets/pinn_supersonic/hybrid_fixed_c/local_M115_S4M0_v1/pinn_powell_retry_wide
+1.20	120	assets/pinn_supersonic/hybrid_fixed_c/local_M120_S4M0_v1/m120_powell_retry_alphas.txt	assets/pinn_supersonic/hybrid_fixed_c/local_M120_S4M0_v1/pinn_powell_retry_wide

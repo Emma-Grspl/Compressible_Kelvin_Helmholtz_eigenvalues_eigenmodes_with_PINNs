@@ -1,0 +1,38 @@
+{
+  "status": "CONFIRMED_FREEZE",
+  "dataset": "supersonic_sparse_PINN_reference_v2_CONFIRMED",
+  "n_spectral_points": 183,
+  "n_modal_rows": 838847,
+  "n_points_with_fields": 183,
+  "n_points_missing_fields": 0,
+  "point_counts_by_Mach": {
+    "1.1": 9,
+    "1.2": 14,
+    "1.25": 11,
+    "1.3": 13,
+    "1.33": 9,
+    "1.4": 14,
+    "1.5": 12,
+    "1.6": 6,
+    "1.7": 6,
+    "1.8": 49,
+    "1.9": 40
+  },
+  "validation_status_counts": {
+    "validated_core_stable_tail_sensitive": 89,
+    "modal_spectral_validated_with_exported_fields": 44,
+    "validated_visual_smallM_strict": 33,
+    "validated_visual_smallM_tail_sensitive": 12,
+    "validated_visual_smallM_strict_boundary_flag": 5
+  },
+  "outputs": {
+    "spectral": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED/supersonic_sparse_PINN_reference_v2_CONFIRMED_spectral.csv",
+    "modal_fields": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED/supersonic_sparse_PINN_reference_v2_CONFIRMED_modal_fields.csv",
+    "point_audit": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED/supersonic_sparse_PINN_reference_v2_CONFIRMED_point_audit.csv",
+    "modes_overview_pdf": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED/supersonic_sparse_PINN_reference_v2_CONFIRMED_modes_overview.pdf",
+    "modes_core_tail_pdf": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED/supersonic_sparse_PINN_reference_v2_CONFIRMED_modes_core_tail.pdf",
+    "readme": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED/README_FREEZE.md",
+    "sha256": "assets/classic_supersonic/final_sparse_PINN_reference_v2_CONFIRMED/SHA256SUMS.txt"
+  },
+  "scientific_status": "Frozen sparse classical supersonic reference for PINN experiments. Modes accepted visually and numerically at the core; weak oscillatory tails may still be refined later. Boundary-flagged points are kept with explicit status."
+}

@@ -1,0 +1,465 @@
+FILE: src/models/kh_subsonic_pinn.py
+
+3-from collections.abc import Mapping
+4-import math
+5-
+6-import torch
+7-import torch.nn as nn
+8-import torch.nn.functional as F
+9-
+10-
+11:class FourierEncoding(nn.Module):
+12:    def __init__(self, in_features: int, num_frequencies: int, scale: float = 1.0):
+13-        super().__init__()
+14-        if num_frequencies <= 0:
+15-            self.register_buffer("B", torch.empty(in_features, 0))
+16-        else:
+17-            self.register_buffer("B", torch.randn(in_features, num_frequencies) * scale)
+18-
+19:    def forward(self, x: torch.Tensor) -> torch.Tensor:
+20-        if self.B.numel() == 0:
+21-            return x
+22-        projection = 2.0 * math.pi * x @ self.B
+23-        return torch.cat([torch.sin(projection), torch.cos(projection)], dim=-1)
+24-
+25-
+26:def build_mlp(
+27-    in_dim: int,
+28-    out_dim: int,
+29-    *,
+30-    hidden_dim: int,
+31-    depth: int,
+32-    activation: str,
+33-) -> nn.Sequential:
+34-    if activation == "tanh":
+35-        act: nn.Module = nn.Tanh()
+36-    elif activation == "silu":
+37-        act = nn.SiLU()
+38-    else:
+39-        raise ValueError(f"Unsupported activation={activation!r}.")
+40-
+41-    layers: list[nn.Module] = []
+42-    current_dim = in_dim
+43-    for _ in range(depth):
+44-        layers.append(nn.Linear(current_dim, hidden_dim))
+45-        layers.append(act)
+46-        current_dim = hidden_dim
+47-    layers.append(nn.Linear(current_dim, out_dim))
+48-    net = nn.Sequential(*layers)
+49-
+50-    for module in net.modules():
+51-        if isinstance(module, nn.Linear):
+52-            nn.init.xavier_normal_(module.weight)
+53-            nn.init.zeros_(module.bias)
+54-    return net
+55-
+56-
+57:class KHSubsonicFixedMachPINN(nn.Module):
+58-    """
+59-    Prototype PINN subsonique a Mach fixe.
+60-
+61-    - entrees du reseau de mode : (xi, alpha_normalise)
+62-        - sortie : (p_r, p_i) ou (p_r, p_i, v_r, v_i) pour le systeme premier ordre reel
+63-    - tete spectrale separee : c_i(alpha)
+64:    - mapping du projet : y = L * xi / (1 - xi^2)
+65-    """
+66-
+67:    def __init__(
+68-        self,
+69-        *,
+70-        alpha_min: float,
+71-        alpha_max: float,
+72-        hidden_dim: int = 128,
+73-        mode_hidden_dim: int | None = None,
+74-        ci_hidden_dim: int | None = None,
+75-        mode_depth: int = 4,
+76-        ci_depth: int = 2,
+77-        activation: str = "tanh",
+78-        fourier_features: int = 0,
+79-        fourier_scale: float = 2.0,
+80-        initial_ci: float = 0.3,
+81:        mapping_scale: float = 3.0,
+82:        trainable_mapping_scale: bool = False,
+83-        enforce_mode_symmetry: bool = False,
+84-        mode_representation: str = "cartesian",
+85-        mode_experts: int = 1,
+86-        alpha_split_threshold: float | None = None,
+87-        fixed_scalar_ci: bool = False,
+88-    ):
+89-        super().__init__()
+90-        self.alpha_min = float(alpha_min)
+91-        self.alpha_max = float(alpha_max)
+92-        self.enforce_mode_symmetry = bool(enforce_mode_symmetry)
+93:        if mode_representation not in {"cartesian", "amplitude_phase", "log_amplitude_phase", "riccati", "first_order_real"}:
+94-            raise ValueError(f"Unsupported mode_representation={mode_representation!r}.")
+95-        self.mode_representation = str(mode_representation)
+96-        self.fixed_scalar_ci = bool(fixed_scalar_ci)
+97-        self.mode_experts = int(mode_experts)
+98-        if self.mode_experts not in {1, 2}:
+99-            raise ValueError(f"Unsupported mode_experts={mode_experts!r}.")
+100-        if self.mode_experts == 2 and alpha_split_threshold is None:
+101-            alpha_split_threshold = 0.5 * (self.alpha_min + self.alpha_max)
+102-        self.alpha_split_threshold = None if alpha_split_threshold is None else float(alpha_split_threshold)
+103-        mode_hidden_dim = int(mode_hidden_dim if mode_hidden_dim is not None else hidden_dim)
+104-        ci_hidden_dim = int(ci_hidden_dim if ci_hidden_dim is not None else max(hidden_dim // 2, 1))
+105-
+106-        self.mode_fourier = FourierEncoding(2, fourier_features, fourier_scale) if fourier_features > 0 else None
+107-        mode_input_dim = 4 * fourier_features if fourier_features > 0 else 2
+108-        mode_output_dim = 4 if self.mode_representation == "first_order_real" else 2
+109-        self.mode_nets = nn.ModuleList(
+110-            [
+111-                build_mlp(
+112-                    mode_input_dim,
+113-                    mode_output_dim,
+114-                    hidden_dim=mode_hidden_dim,
+115-                    depth=mode_depth,
+116-                    activation=activation,
+117-                )
+118-                for _ in range(self.mode_experts)
+119-            ]
+120-        )
+121-        self.mode_net = self.mode_nets[0]
+122-        initial_raw_ci_bias = torch.log(torch.expm1(torch.tensor(float(initial_ci))))
+123-        if self.fixed_scalar_ci:
+--
+128-                1,
+129-                1,
+130-                hidden_dim=ci_hidden_dim,
+131-                depth=ci_depth,
+132-                activation=activation,
+133-            )
+134-            self.raw_ci_bias = nn.Parameter(initial_raw_ci_bias.view(1))
+135-
+136:        initial_raw_L = torch.log(torch.expm1(torch.tensor(float(mapping_scale))))
+137:        if trainable_mapping_scale:
+138-            self.raw_L = nn.Parameter(initial_raw_L.view(1))
+139-        else:
+140-            self.register_buffer("raw_L", initial_raw_L.view(1))
+141-
+142:    def normalize_alpha(self, alpha: torch.Tensor) -> torch.Tensor:
+143-        span = max(self.alpha_max - self.alpha_min, 1e-8)
+144-        alpha_scaled = 2.0 * (alpha - self.alpha_min) / span - 1.0
+145-        return alpha_scaled
+146-
+147:    def encode_mode_inputs(self, xi: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
+148-        alpha_n = self.normalize_alpha(alpha)
+149-        inputs = torch.cat([xi, alpha_n], dim=-1)
+150-        if self.mode_fourier is None:
+151-            return inputs
+152-        return self.mode_fourier(inputs)
+153-
+154:    def _forward_mode_raw(self, features: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
+155-        output_dim = 4 if self.mode_representation == "first_order_real" else 2
+156-        if self.mode_experts == 1:
+157-            return self.mode_net(features)
+158-
+159-        raw_outputs = torch.empty(features.shape[0], output_dim, dtype=features.dtype, device=features.device)
+160-        alpha_values = alpha[:, 0]
+161-        left_mask = alpha_values <= float(self.alpha_split_threshold)
+162-        right_mask = ~left_mask
+163-        if torch.any(left_mask):
+164-            raw_outputs[left_mask] = self.mode_nets[0](features[left_mask])
+165-        if torch.any(right_mask):
+166-            raw_outputs[right_mask] = self.mode_nets[1](features[right_mask])
+167-        return raw_outputs
+168-
+169:    def decode_mode_outputs(self, xi: torch.Tensor, raw_outputs: torch.Tensor) -> torch.Tensor:
+170-        if self.mode_representation == "cartesian":
+171-            if not self.enforce_mode_symmetry:
+172-                return raw_outputs
+173-            pr = raw_outputs[:, 0:1]
+174-            pi = raw_outputs[:, 1:2] * torch.sign(xi)
+175-            return torch.cat([pr, pi], dim=-1)
+176-
+177:        if self.mode_representation == "riccati":
+178-            if not self.enforce_mode_symmetry:
+179-                return raw_outputs
+180:            kappa = raw_outputs[:, 0:1]
+181-            q = raw_outputs[:, 1:2] * torch.sign(xi)
+182:            return torch.cat([kappa, q], dim=-1)
+183-
+184-        if self.mode_representation == "first_order_real":
+185-            if not self.enforce_mode_symmetry:
+186-                return raw_outputs
+187-            pr = raw_outputs[:, 0:1]
+188-            pi = raw_outputs[:, 1:2] * torch.sign(xi)
+189-            vr = raw_outputs[:, 2:3] * torch.sign(xi)
+190-            vi = raw_outputs[:, 3:4]
+191-            return torch.cat([pr, pi, vr, vi], dim=-1)
+192-
+193-        if self.mode_representation == "amplitude_phase":
+194-            amp = F.softplus(raw_outputs[:, 0:1]) + 1e-6
+195-        else:
+196-            amp = torch.exp(torch.clamp(raw_outputs[:, 0:1], min=-20.0, max=20.0))
+197-        phase = raw_outputs[:, 1:2]
+198-        if self.enforce_mode_symmetry:
+199-            phase = phase * torch.sign(xi)
+200-        pr = amp * torch.cos(phase)
+201-        pi = amp * torch.sin(phase)
+202-        return torch.cat([pr, pi], dim=-1)
+203-
+204:    def forward(self, xi: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
+205-        xi_in = torch.abs(xi) if self.enforce_mode_symmetry else xi
+206-        features = self.encode_mode_inputs(xi_in, alpha)
+207-        raw_outputs = self._forward_mode_raw(features, alpha)
+208-        return self.decode_mode_outputs(xi, raw_outputs)
+209-
+210:    def get_ci(self, alpha: torch.Tensor) -> torch.Tensor:
+211-        if self.fixed_scalar_ci:
+212-            return (F.softplus(self.raw_ci_bias) + 1e-6).expand_as(alpha)
+213-        alpha_n = self.normalize_alpha(alpha)
+214-        raw_ci = self.ci_net(alpha_n) + self.raw_ci_bias
+215-        return F.softplus(raw_ci) + 1e-6
+216-
+217:    def get_mapping_scale(self) -> torch.Tensor:
+218-        return F.softplus(self.raw_L) + 1e-6
+219-
+220-
+221:def _config_get(config: Mapping[str, object] | object, key: str, default: object = None) -> object:
+222-    if isinstance(config, Mapping):
+223-        value = config.get(key, default)
+224-    elif hasattr(config, "index"):
+225-        value = config[key] if key in config.index else default
+226-    else:
+227-        value = getattr(config, key, default)
+228-    if value is None:
+229-        return default
+230-    try:
+231-        if bool(torch.isnan(torch.tensor(value, dtype=torch.float32)).item()):
+232-            return default
+233-    except Exception:
+234-        pass
+235-    return value
+236-
+237-
+238:def build_fixed_mach_model_from_config(config: Mapping[str, object] | object) -> KHSubsonicFixedMachPINN:
+239-    mode_hidden_dim = _config_get(config, "mode_hidden_dim")
+240-    ci_hidden_dim = _config_get(config, "ci_hidden_dim")
+241-    return KHSubsonicFixedMachPINN(
+242-        alpha_min=float(_config_get(config, "alpha_min")),
+243-        alpha_max=float(_config_get(config, "alpha_max")),
+244-        hidden_dim=int(_config_get(config, "hidden_dim")),
+245-        mode_hidden_dim=None if mode_hidden_dim is None else int(mode_hidden_dim),
+246-        ci_hidden_dim=None if ci_hidden_dim is None else int(ci_hidden_dim),
+247-        mode_depth=int(_config_get(config, "mode_depth")),
+248-        ci_depth=int(_config_get(config, "ci_depth")),
+249-        activation=str(_config_get(config, "activation")),
+250-        fourier_features=int(_config_get(config, "fourier_features", 0)),
+251-        fourier_scale=float(_config_get(config, "fourier_scale", 2.0)),
+252-        initial_ci=float(_config_get(config, "initial_ci", 0.2)),
+253:        mapping_scale=float(_config_get(config, "mapping_scale", 3.0)),
+254:        trainable_mapping_scale=bool(_config_get(config, "trainable_mapping_scale", False)),
+255-        enforce_mode_symmetry=bool(_config_get(config, "enforce_mode_symmetry", False)),
+256-        mode_representation=str(_config_get(config, "mode_representation", "cartesian")),
+257-        mode_experts=int(_config_get(config, "mode_experts", 1)),
+258-        alpha_split_threshold=_config_get(config, "alpha_split_threshold"),
+259-        fixed_scalar_ci=bool(_config_get(config, "fixed_scalar_ci", False)),
+260-    )
+261-
+262-
+263:def load_fixed_mach_state_dict_compat(
+264-    model: KHSubsonicFixedMachPINN,
+265-    state_dict: Mapping[str, torch.Tensor],
+266-) -> None:
+267-    remapped = dict(state_dict)
+268-    legacy_mode_keys = [key for key in remapped if key.startswith("mode_net.")]
+269-    has_new_mode_keys = any(key.startswith("mode_nets.0.") for key in remapped)
+270-    if legacy_mode_keys and not has_new_mode_keys:
+271-        for key in legacy_mode_keys:
+272-            suffix = key[len("mode_net.") :]
+273-            remapped[f"mode_nets.0.{suffix}"] = remapped.pop(key)
+274-
+275-    incompatible = model.load_state_dict(remapped, strict=False)
+276-    ignored_missing = {key for key in incompatible.missing_keys if key.startswith("mode_net.")}
+277-    ignored_unexpected = {key for key in incompatible.unexpected_keys if key.startswith("mode_net.")}
+278-    real_missing = [key for key in incompatible.missing_keys if key not in ignored_missing]
+279-    real_unexpected = [key for key in incompatible.unexpected_keys if key not in ignored_unexpected]
+280-    if real_missing or real_unexpected:
+281-        raise RuntimeError(
+282-            "Incompatible fixed-mach checkpoint: "
+283-            f"missing={real_missing}, unexpected={real_unexpected}"
+284-        )
+285-
+286-
+287:def _linear_layers_from_sequential(net: nn.Sequential) -> list[nn.Linear]:
+288-    layers: list[nn.Linear] = []
+289-    for module in net:
+290-        if isinstance(module, nn.Linear):
+291-            layers.append(module)
+292-    return layers
+293-
+294-
+295:def _copy_linear_stack_with_padded_first_layer(
+296-    src_net: nn.Sequential,
+297-    dst_net: nn.Sequential,
+298-    *,
+299-    extra_inputs: int,
+300-) -> None:
+301-    src_layers = _linear_layers_from_sequential(src_net)
+302-    dst_layers = _linear_layers_from_sequential(dst_net)
+303-    if len(src_layers) != len(dst_layers):
+304-        raise RuntimeError(
+305-            "Incompatible MLP depths for fixed-mach -> multi-mach transfer: "
+306-            f"src_layers={len(src_layers)}, dst_layers={len(dst_layers)}"
+307-        )
+308-
+309-    with torch.no_grad():
+310-        for idx, (src_layer, dst_layer) in enumerate(zip(src_layers, dst_layers, strict=True)):
+311-            if src_layer.out_features != dst_layer.out_features:
+312-                raise RuntimeError(
+313-                    "Incompatible MLP widths for fixed-mach -> multi-mach transfer: "
+314-                    f"layer={idx}, src_out={src_layer.out_features}, dst_out={dst_layer.out_features}"
+315-                )
+316-            if idx == 0:
+317-                if dst_layer.in_features != src_layer.in_features + int(extra_inputs):
+318-                    raise RuntimeError(
+319-                        "Unexpected first-layer input sizes for fixed-mach -> multi-mach transfer: "
+320-                        f"src_in={src_layer.in_features}, dst_in={dst_layer.in_features}, extra_inputs={extra_inputs}"
+321-                    )
+322-                dst_layer.weight.zero_()
+323-                dst_layer.weight[:, : src_layer.in_features].copy_(src_layer.weight)
+324-                dst_layer.bias.copy_(src_layer.bias)
+325-                continue
+--
+328-                raise RuntimeError(
+329-                    "Incompatible hidden-layer input sizes for fixed-mach -> multi-mach transfer: "
+330-                    f"layer={idx}, src_in={src_layer.in_features}, dst_in={dst_layer.in_features}"
+331-                )
+332-            dst_layer.weight.copy_(src_layer.weight)
+333-            dst_layer.bias.copy_(src_layer.bias)
+334-
+335-
+336:class KHSubsonicMultiMachPINN(nn.Module):
+337-    """
+338-    Prototype PINN subsonique 2D sur (alpha, Mach).
+339-
+340-    - reseau de mode : (xi, alpha_normalise, mach_normalise) -> (p_r, p_i)
+341-    - tete spectrale : (alpha_normalise, mach_normalise) -> c_i(alpha, Mach)
+342-    """
+343-
+344:    def __init__(
+345-        self,
+346-        *,
+347-        alpha_min: float,
+348-        alpha_max: float,
+349-        mach_min: float,
+350-        mach_max: float,
+351-        hidden_dim: int = 128,
+352-        mode_hidden_dim: int | None = None,
+353-        ci_hidden_dim: int | None = None,
+354-        mode_depth: int = 4,
+355-        ci_depth: int = 2,
+356-        activation: str = "tanh",
+357-        fourier_features: int = 0,
+358-        fourier_scale: float = 2.0,
+359-        initial_ci: float = 0.3,
+360:        mapping_scale: float = 3.0,
+361:        trainable_mapping_scale: bool = False,
+362-        mode_representation: str = "cartesian",
+363-    ):
+364-        super().__init__()
+365-        self.alpha_min = float(alpha_min)
+366-        self.alpha_max = float(alpha_max)
+367-        self.mach_min = float(mach_min)
+368-        self.mach_max = float(mach_max)
+369:        if mode_representation not in {"cartesian", "riccati", "first_order_real"}:
+370-            raise ValueError(f"Unsupported mode_representation={mode_representation!r}.")
+371-        self.mode_representation = str(mode_representation)
+372-        mode_hidden_dim = int(mode_hidden_dim if mode_hidden_dim is not None else hidden_dim)
+373-        ci_hidden_dim = int(ci_hidden_dim if ci_hidden_dim is not None else max(hidden_dim // 2, 1))
+374-
+375-        self.mode_fourier = FourierEncoding(3, fourier_features, fourier_scale) if fourier_features > 0 else None
+376-        mode_input_dim = 6 * fourier_features if fourier_features > 0 else 3
+377-        mode_output_dim = 4 if self.mode_representation == "first_order_real" else 2
+378-        self.mode_net = build_mlp(
+379-            mode_input_dim,
+380-            mode_output_dim,
+381-            hidden_dim=mode_hidden_dim,
+382-            depth=mode_depth,
+383-            activation=activation,
+384-        )
+385-        self.ci_net = build_mlp(
+386-            2,
+387-            1,
+388-            hidden_dim=ci_hidden_dim,
+389-            depth=ci_depth,
+390-            activation=activation,
+391-        )
+392-
+393-        initial_raw_ci_bias = torch.log(torch.expm1(torch.tensor(float(initial_ci))))
+394-        self.raw_ci_bias = nn.Parameter(initial_raw_ci_bias.view(1))
+395-
+396:        initial_raw_L = torch.log(torch.expm1(torch.tensor(float(mapping_scale))))
+397:        if trainable_mapping_scale:
+398-            self.raw_L = nn.Parameter(initial_raw_L.view(1))
+399-        else:
+400-            self.register_buffer("raw_L", initial_raw_L.view(1))
+401-
+402:    def normalize_alpha(self, alpha: torch.Tensor) -> torch.Tensor:
+403-        span = max(self.alpha_max - self.alpha_min, 1e-8)
+404-        return 2.0 * (alpha - self.alpha_min) / span - 1.0
+405-
+406:    def normalize_mach(self, mach: torch.Tensor) -> torch.Tensor:
+407-        span = max(self.mach_max - self.mach_min, 1e-8)
+408-        return 2.0 * (mach - self.mach_min) / span - 1.0
+409-
+410:    def encode_mode_inputs(self, xi: torch.Tensor, alpha: torch.Tensor, mach: torch.Tensor) -> torch.Tensor:
+411-        inputs = torch.cat([xi, self.normalize_alpha(alpha), self.normalize_mach(mach)], dim=-1)
+412-        if self.mode_fourier is None:
+413-            return inputs
+414-        return self.mode_fourier(inputs)
+415-
+416:    def forward(self, xi: torch.Tensor, alpha: torch.Tensor, mach: torch.Tensor) -> torch.Tensor:
+417-        raw_outputs = self.mode_net(self.encode_mode_inputs(xi, alpha, mach))
+418:        if self.mode_representation == "riccati":
+419:            kappa = raw_outputs[:, 0:1]
+420-            q = raw_outputs[:, 1:2]
+421:            return torch.cat([kappa, q], dim=-1)
+422-        if self.mode_representation == "first_order_real":
+423-            pr = raw_outputs[:, 0:1]
+424-            pi = raw_outputs[:, 1:2]
+425-            vr = raw_outputs[:, 2:3]
+426-            vi = raw_outputs[:, 3:4]
+427-            return torch.cat([pr, pi, vr, vi], dim=-1)
+428-        return raw_outputs
+429-
+430:    def get_ci(self, alpha: torch.Tensor, mach: torch.Tensor) -> torch.Tensor:
+431-        inputs = torch.cat([self.normalize_alpha(alpha), self.normalize_mach(mach)], dim=-1)
+432-        raw_ci = self.ci_net(inputs) + self.raw_ci_bias
+433-        return F.softplus(raw_ci) + 1e-6
+434-
+435:    def get_mapping_scale(self) -> torch.Tensor:
+436-        return F.softplus(self.raw_L) + 1e-6
+437-
+438-
+439:def initialize_multimach_from_fixed_mach(
+440-    multimach_model: KHSubsonicMultiMachPINN,
+441-    fixed_model: KHSubsonicFixedMachPINN,
+442-) -> None:
+443-    if fixed_model.mode_representation != multimach_model.mode_representation:
+444-        raise RuntimeError(
+445-            "Mode representation mismatch for fixed-mach -> multi-mach transfer: "
+446-            f"{fixed_model.mode_representation!r} vs {multimach_model.mode_representation!r}"
+447-        )
+448-    if fixed_model.mode_fourier is not None or multimach_model.mode_fourier is not None:
+449-        raise RuntimeError(
+450-            "Fixed-mach -> multi-mach transfer only supports models without Fourier features."
+451-        )
+452-    if fixed_model.fixed_scalar_ci:
+453-        raise RuntimeError(
+454-            "Fixed-mach -> multi-mach transfer requires a trainable ci branch, not fixed_scalar_ci."
+455-        )
+456-    if fixed_model.ci_net is None:
+457-        raise RuntimeError("Fixed-mach ci_net is missing.")
+458-
+459-    _copy_linear_stack_with_padded_first_layer(
+460-        fixed_model.mode_net,
+461-        multimach_model.mode_net,
+462-        extra_inputs=1,
+463-    )
+464-    _copy_linear_stack_with_padded_first_layer(
+465-        fixed_model.ci_net,
+466-        multimach_model.ci_net,
+467-        extra_inputs=1,
+468-    )
+469-

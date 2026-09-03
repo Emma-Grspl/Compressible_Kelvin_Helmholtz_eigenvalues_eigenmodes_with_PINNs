@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-07-20T15:13:29+02:00",
+  "spectral_source": "assets/classic_supersonic/csv/pinn_direct/spectral/table_supersonic_primary_modal_spectral_133pts.csv",
+  "modal_source": "experiments/modal_reconstruction/support/modal/supersonic_reference_v2_modal_raw.parquet",
+  "blumen_points_source": "article/tables/table_blumen_ci_digitized_points.csv",
+  "blumen_levels_source": "article/tables/table_blumen_ci_curve_levels.csv",
+  "point_count": 133,
+  "status_counts": {
+    "validated_core_stable_tail_sensitive": 89,
+    "modal_spectral_validated_with_exported_fields": 44
+  },
+  "selected_mode": {
+    "Mach": 1.4,
+    "alpha": 0.18125,
+    "cr": 0.3153193678544234,
+    "ci": 0.0427209194542578,
+    "omega_i": 0.0077431666510842,
+    "validation_status": "modal_spectral_validated_with_exported_fields"
+  },
+  "blumen": {
+    "mach_calibration": "already physical Mach",
+    "uncertainty_method": "conservative digitization/sampling proxy: one half of the median positive local coordinate spacing on each digitized curve",
+    "point_count": 127,
+    "curve_count": 5,
+    "median_mach_error": 0.014522821576763545,
+    "median_alpha_error": 0.004752107165508973
+  },
+  "outputs": [
+    {
+      "path": "article/figures/Fig_fig_ci_blumen_vs_classical_overlay.pdf",
+      "size_bytes": 35558,
+      "sha256": "c3df3cde19d1197936ee74c2f9960e0256fb91eac1ed652360ed173e41c51989"
+    },
+    {
+      "path": "article/figures/Fig_fig_ci_blumen_vs_classical_overlay.png",
+      "size_bytes": 250310,
+      "sha256": "2579f0f08b7a5bdafbe7576527ea5a8b1d4ae051761b5645421b8efb818de413"
+    },
+    {
+      "path": "article/figures/Fig_fig_validated_points_map.pdf",
+      "size_bytes": 23286,
+      "sha256": "dadfcdbfd46602e8d402a4de315bcf3b50a61557f28e3c7e9ed0f74f0be26001"
+    },
+    {
+      "path": "article/figures/Fig_fig_validated_points_map.png",
+      "size_bytes": 224322,
+      "sha256": "c550be185342ecd29d4faf0926f467e8f653bf26d08a05f77999b5cf058fbc62"
+    },
+    {
+      "path": "article/figures/Fig_fig_modes_example_M140.pdf",
+      "size_bytes": 33753,
+      "sha256": "4b16148b8adba51525b424259fca03f57b358759e44da8a72712c4a32ca6adca"
+    },
+    {
+      "path": "article/figures/Fig_fig_modes_example_M140.png",
+      "size_bytes": 480471,
+      "sha256": "9b33453e2ed0270d201676ae91138d868649999b54501d7648975618072f250e"
+    },
+    {
+      "path": "article/tables/table_reference_summary.csv",
+      "size_bytes": 741,
+      "sha256": "72f8e6391e39653b0cc6da564153ac932e071d48772cf6dd3b1915d1adc98cd8"
+    },
+    {
+      "path": "article/tables/table_selected_mode.csv",
+      "size_bytes": 267,
+      "sha256": "84a9b5f12192611784e9dae7bd84c07bf1b4eda5f720468607a1d89e11ab14d1"
+    },
+    {
+      "path": "experiments/modal_reconstruction/support/article/README.md",
+      "size_bytes": 1450,
+      "sha256": "019bf43463457d168effcc30adbe5f68e6ca8d7dfcc1043e6d7e0af2a357afc9"
+    }
+  ]
+}

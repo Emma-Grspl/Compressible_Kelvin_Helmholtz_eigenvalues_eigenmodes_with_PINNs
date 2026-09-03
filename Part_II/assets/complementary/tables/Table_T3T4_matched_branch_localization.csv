@@ -1,0 +1,5 @@
+benchmark,condition,technical_count,technical_total,target_count,target_total,target_error_median,target_error_p95,error_le_1e-5,error_le_1e-4
+V64,PINN-seeded,64,64,63,63,3.502006412582551e-06,7.256830752933359e-06,62,63
+V64,Matched generic,64,64,0,63,0.452563628632111,0.7586371773181947,0,0
+T401,PINN-seeded,401,401,400,401,3.647138687676845e-06,8.117371197522136e-06,396,400
+T401,Matched generic,401,401,1,401,0.4520004313912778,0.7614709141879168,1,1

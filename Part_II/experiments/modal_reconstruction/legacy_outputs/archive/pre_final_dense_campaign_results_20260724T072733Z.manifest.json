@@ -1,0 +1,221 @@
+{
+  "archive": "classic_supersonic/reproducibility/archive/pre_final_dense_campaign_results_20260724T072733Z.tar.gz",
+  "created_at": "2026-07-24T07:28:44+00:00",
+  "entries": [
+    {
+      "kind": "directory",
+      "name": "adaptive_logmodulus_audit_M140_a005_low_alpha_quick",
+      "size_bytes": 2754544,
+      "source": "classic_supersonic/reproducibility/results/adaptive_logmodulus_audit_M140_a005_low_alpha_quick"
+    },
+    {
+      "kind": "directory",
+      "name": "adaptive_logmodulus_audit_M140_a030_neutral_path_smoke",
+      "size_bytes": 564003,
+      "source": "classic_supersonic/reproducibility/results/adaptive_logmodulus_audit_M140_a030_neutral_path_smoke"
+    },
+    {
+      "kind": "directory",
+      "name": "adaptive_logmodulus_audit_M140_a0325_neutral_path_smoke",
+      "size_bytes": 530638,
+      "source": "classic_supersonic/reproducibility/results/adaptive_logmodulus_audit_M140_a0325_neutral_path_smoke"
+    },
+    {
+      "kind": "directory",
+      "name": "adaptive_logmodulus_audit_M140_a035_near_neutral_quick",
+      "size_bytes": 2767797,
+      "source": "classic_supersonic/reproducibility/results/adaptive_logmodulus_audit_M140_a035_near_neutral_quick"
+    },
+    {
+      "kind": "directory",
+      "name": "adaptive_logmodulus_audit_M190_a020_high_mach_full",
+      "size_bytes": 4570413,
+      "source": "classic_supersonic/reproducibility/results/adaptive_logmodulus_audit_M190_a020_high_mach_full"
+    },
+    {
+      "kind": "directory",
+      "name": "adaptive_logmodulus_audit_M190_a020_high_mach_quick",
+      "size_bytes": 2873385,
+      "source": "classic_supersonic/reproducibility/results/adaptive_logmodulus_audit_M190_a020_high_mach_quick"
+    },
+    {
+      "kind": "directory",
+      "name": "classical_convergence",
+      "size_bytes": 2776353,
+      "source": "classic_supersonic/reproducibility/results/classical_convergence"
+    },
+    {
+      "kind": "directory",
+      "name": "classical_convergence_modalfix_v1",
+      "size_bytes": 6685295,
+      "source": "classic_supersonic/reproducibility/results/classical_convergence_modalfix_v1"
+    },
+    {
+      "kind": "directory",
+      "name": "classical_convergence_modalfix_v1_full",
+      "size_bytes": 13534487,
+      "source": "classic_supersonic/reproducibility/results/classical_convergence_modalfix_v1_full"
+    },
+    {
+      "kind": "directory",
+      "name": "classical_convergence_pointwise_direct_v1",
+      "size_bytes": 9648782,
+      "source": "classic_supersonic/reproducibility/results/classical_convergence_pointwise_direct_v1"
+    },
+    {
+      "kind": "directory",
+      "name": "classical_convergence_pointwise_resolution_coupled_v2",
+      "size_bytes": 17730077,
+      "source": "classic_supersonic/reproducibility/results/classical_convergence_pointwise_resolution_coupled_v2"
+    },
+    {
+      "kind": "directory",
+      "name": "classical_convergence_pointwise_small_boxes_v3",
+      "size_bytes": 4519922,
+      "source": "classic_supersonic/reproducibility/results/classical_convergence_pointwise_small_boxes_v3"
+    },
+    {
+      "kind": "directory",
+      "name": "classical_convergence_pointwise_v1",
+      "size_bytes": 2007395,
+      "source": "classic_supersonic/reproducibility/results/classical_convergence_pointwise_v1"
+    },
+    {
+      "kind": "directory",
+      "name": "compact_neutral_probe_M140_a029_L20_y0p5",
+      "size_bytes": 13021,
+      "source": "classic_supersonic/reproducibility/results/compact_neutral_probe_M140_a029_L20_y0p5"
+    },
+    {
+      "kind": "directory",
+      "name": "compact_neutral_probe_M140_a029_L30_y1",
+      "size_bytes": 84820,
+      "source": "classic_supersonic/reproducibility/results/compact_neutral_probe_M140_a029_L30_y1"
+    },
+    {
+      "kind": "directory",
+      "name": "compact_neutral_probe_M140_a029_L40_y1",
+      "size_bytes": 80381,
+      "source": "classic_supersonic/reproducibility/results/compact_neutral_probe_M140_a029_L40_y1"
+    },
+    {
+      "kind": "directory",
+      "name": "compact_spectral_analytic_tail_audit_M140_a035",
+      "size_bytes": 83102,
+      "source": "classic_supersonic/reproducibility/results/compact_spectral_analytic_tail_audit_M140_a035"
+    },
+    {
+      "kind": "directory",
+      "name": "compact_spectral_smoke_M140_a020",
+      "size_bytes": 2011781,
+      "source": "classic_supersonic/reproducibility/results/compact_spectral_smoke_M140_a020"
+    },
+    {
+      "kind": "directory",
+      "name": "final_50pts",
+      "size_bytes": 164954248,
+      "source": "classic_supersonic/reproducibility/results/final_50pts"
+    },
+    {
+      "kind": "directory",
+      "name": "highM_gt15_audit",
+      "size_bytes": 7283198,
+      "source": "classic_supersonic/reproducibility/results/highM_gt15_audit"
+    },
+    {
+      "kind": "directory",
+      "name": "kappa_q_modulus_convergence_full_M140_a018125",
+      "size_bytes": 116969427,
+      "source": "classic_supersonic/reproducibility/results/kappa_q_modulus_convergence_full_M140_a018125"
+    },
+    {
+      "kind": "directory",
+      "name": "kappa_q_modulus_convergence_quick_M140_a018125",
+      "size_bytes": 67081302,
+      "source": "classic_supersonic/reproducibility/results/kappa_q_modulus_convergence_quick_M140_a018125"
+    },
+    {
+      "kind": "directory",
+      "name": "kappa_q_modulus_eigenvalue_search_M140_a018125",
+      "size_bytes": 9614323,
+      "source": "classic_supersonic/reproducibility/results/kappa_q_modulus_eigenvalue_search_M140_a018125"
+    },
+    {
+      "kind": "directory",
+      "name": "kappa_q_modulus_test_M140_a018125",
+      "size_bytes": 2387733,
+      "source": "classic_supersonic/reproducibility/results/kappa_q_modulus_test_M140_a018125"
+    },
+    {
+      "kind": "directory",
+      "name": "kappa_q_modulus_test_M140_a018125_dy0025",
+      "size_bytes": 9543838,
+      "source": "classic_supersonic/reproducibility/results/kappa_q_modulus_test_M140_a018125_dy0025"
+    },
+    {
+      "kind": "directory",
+      "name": "kappa_q_modulus_test_M140_a018125_with_reference",
+      "size_bytes": 5400957,
+      "source": "classic_supersonic/reproducibility/results/kappa_q_modulus_test_M140_a018125_with_reference"
+    },
+    {
+      "kind": "directory",
+      "name": "modal_repeats",
+      "size_bytes": 16309706,
+      "source": "classic_supersonic/reproducibility/results/modal_repeats"
+    },
+    {
+      "kind": "file",
+      "name": "witness_M150_a01625_modal_calibration.json",
+      "size_bytes": 6904,
+      "source": "assets/classic_supersonic/json/chart_overlap/results/witness_M150_a01625_modal_calibration.json"
+    },
+    {
+      "kind": "file",
+      "name": "witness_M150_a01625_modal_comparison.csv",
+      "size_bytes": 5429665,
+      "source": "assets/classic_supersonic/csv/modal_reconstruction/modal_repeats/table_run_1.csv"
+    },
+    {
+      "kind": "file",
+      "name": "witness_M150_a01625_modal_reproduction_check.json",
+      "size_bytes": 3185,
+      "source": "assets/classic_supersonic/json/chart_overlap/results/witness_M150_a01625_modal_reproduction_check.json"
+    },
+    {
+      "kind": "file",
+      "name": "witness_M150_a01625_solve_result_schema.json",
+      "size_bytes": 1548,
+      "source": "assets/classic_supersonic/json/modal_reconstruction/results/witness_M150_a01625_solve_result_schema.json"
+    },
+    {
+      "kind": "file",
+      "name": "witness_M150_a01625_spectral_calibration.csv",
+      "size_bytes": 1153,
+      "source": "assets/classic_supersonic/csv/supersonic_general/results/table_witness_M150_a01625_spectral_calibration.csv"
+    },
+    {
+      "kind": "file",
+      "name": "witness_M150_a01625_spectral_calibration.json",
+      "size_bytes": 2880,
+      "source": "assets/classic_supersonic/json/pinn_direct/results/witness_M150_a01625_spectral_calibration.json"
+    },
+    {
+      "kind": "file",
+      "name": "witness_M150_a01625_spectral_reproduction.json",
+      "size_bytes": 1110,
+      "source": "assets/classic_supersonic/json/four_anchors/results/witness_M150_a01625_spectral_reproduction.json"
+    },
+    {
+      "kind": "file",
+      "name": "witness_M150_a01625_trajectory_schema.json",
+      "size_bytes": 2946,
+      "source": "assets/classic_supersonic/json/modal_reconstruction/results/witness_M150_a01625_trajectory_schema.json"
+    }
+  ],
+  "kept_in_place": [
+    "dense_kappa_q_campaign_v1"
+  ],
+  "sha256": "e3dc8c5c6013eb931b43d998991c3aaf37cbf202bc6c9409cc0b784ff99f3ba7",
+  "source_results_root": "classic_supersonic/reproducibility/results"
+}

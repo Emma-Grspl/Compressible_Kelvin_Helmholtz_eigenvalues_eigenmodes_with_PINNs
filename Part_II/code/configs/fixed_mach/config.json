@@ -1,0 +1,68 @@
+{
+  "dataset": "assets/pinn_supersonic/data/fixed_mach/datasets/fixedM_M180_alpha_branch_pq_modal_anchors_tail_polished.npz",
+  "run_dir": "assets/pinn_supersonic/runs/pinn_chart_M180_alpha_070_190_pq_qdef005_ode001_tail_polished_asinh_w192_d6",
+  "Mach_fixed": 1.8,
+  "alpha_min": 0.07,
+  "alpha_max": 0.19,
+  "epochs": 8000,
+  "batch_size": 8192,
+  "lr": 5e-06,
+  "width": 192,
+  "depth": 6,
+  "activation": "silu",
+  "spectral_weight": 1.0,
+  "modal_weight": 1.0,
+  "y_scale": 10.0,
+  "y_transform": "asinh",
+  "val_every_alpha": 0,
+  "seed": 6543,
+  "normalization": {
+    "x_mean": [
+      0.00966127654387548,
+      -1.2603745832534736e-17
+    ],
+    "x_std": [
+      0.13241288636038628,
+      0.5892556509890696
+    ],
+    "modal_mean": [
+      0.23199510244636737,
+      -0.018881265057741847,
+      0.0035842390989459906,
+      -0.018762275002310945
+    ],
+    "modal_std": [
+      0.1268145549273267,
+      0.11238342760424097,
+      0.0312832957391067,
+      0.03994938046993973
+    ],
+    "spec_mean": [
+      0.4594277694693877,
+      0.021807983183673427
+    ],
+    "spec_std": [
+      0.013177034917376448,
+      0.0054860321126155975
+    ]
+  },
+  "source_checkpoint": "models_saved/modal_reconstruction/pinn_chart_M180_alpha_070_190_pq_qdef_tail_polished_asinh_w192_d6_w010/best_model.pt",
+  "finetune_kind": "qdef_plus_compressible_pressure_ode",
+  "steps": 2500,
+  "collocation_batch_size": 4096,
+  "qdef_weight": 0.05,
+  "qdef_warmup_steps": 150,
+  "collocation_alpha_min": 0.07,
+  "collocation_alpha_max": 0.19,
+  "collocation_y_min": -20.0,
+  "collocation_y_max": 20.0,
+  "edge_fraction": 0.35,
+  "edge_width": 0.0125,
+  "spectral_network_frozen": true,
+  "pressure_ode": "q_y - 2*U_y/(U-c)*q - alpha^2*(1-M^2*(U-c)^2)*p = 0",
+  "base_flow": "U=tanh(y)",
+  "ode_weight": 0.001,
+  "collocation_ymax": 20.0,
+  "core_fraction": 0.6,
+  "core_ymax": 5.0
+}

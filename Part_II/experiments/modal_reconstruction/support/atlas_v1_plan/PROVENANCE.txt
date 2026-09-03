@@ -1,0 +1,24 @@
+Atlas plan version: v1
+Created: 2026-07-21T11:09:18+02:00
+Repository: /lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT
+Git commit: 984e55f7395fb90133344d1133000d7ba105b1e2
+
+Neutral boundary:
+- Mach range: [1, 2]
+- Corrected Riccati shooting
+- 22 Mach knots
+- Monotone PCHIP interpolation
+- Neutrality estimated from positive-ci solutions
+
+Quality note:
+- The attempted fine low-M continuation was rejected because all
+  four alpha continuations ended with local_continuation_failed.
+- The trusted original low-M campaign is retained.
+- M=1.00, 1.05 and 1.15 keep a neutral-boundary uncertainty flag.
+- All training points satisfy s <= 0.985 and will be independently
+  certified by shooting during modal dataset generation.
+
+Historical modal policy:
+- The heterogeneous 183-point archive is not used directly as a
+  homogeneous modal supervision dataset.
+- Atlas modal fields will be regenerated using the corrected solver.

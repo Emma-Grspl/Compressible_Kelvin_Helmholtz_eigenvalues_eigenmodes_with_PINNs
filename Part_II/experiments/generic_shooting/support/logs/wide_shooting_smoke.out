@@ -1,0 +1,43 @@
+[01/01] mode=wide       alpha=0.07000 |dc_pinn|=2.030e-06 |dc_shoot|=1.156e-05 p40=4.868e-05 time=59.43s
+
+{
+  "status": "COMPLETED",
+  "mode": "wide",
+  "alpha_set": "anchors",
+  "Mach": 1.5,
+  "n_requested": 1,
+  "n_successful": 1,
+  "n_failed": 0,
+  "output_csv": "assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/wide_shooting_smoke/full_shooting_results.csv",
+  "pinn_complex_spectral_error_mean": 2.030094654920295e-06,
+  "pinn_complex_spectral_error_max": 2.030094654920295e-06,
+  "shooting_complex_spectral_error_mean": 1.1563655317465243e-05,
+  "shooting_complex_spectral_error_max": 1.1563655317465243e-05,
+  "delta_c_from_pinn_mean": 1.199609806252822e-05,
+  "delta_c_from_pinn_max": 1.199609806252822e-05,
+  "stage1_mismatch_mean": 9.83927771015796e-07,
+  "stage1_mismatch_max": 9.83927771015796e-07,
+  "stage2_mismatch_mean": 1.5873797204991764e-17,
+  "stage2_mismatch_max": 1.5873797204991764e-17,
+  "p_rel_l2_core20_mean": 1.4413496123193501e-05,
+  "p_rel_l2_core20_max": 1.4413496123193501e-05,
+  "p_rel_l2_core40_mean": 4.868092674930746e-05,
+  "p_rel_l2_core40_max": 4.868092674930746e-05,
+  "rho_rel_l2_core40_mean": 4.868092674930974e-05,
+  "rho_rel_l2_core40_max": 4.868092674930974e-05,
+  "u_rel_l2_core40_mean": 2.7819421743685784e-05,
+  "u_rel_l2_core40_max": 2.7819421743685784e-05,
+  "v_rel_l2_core40_mean": 6.021670737745256e-05,
+  "v_rel_l2_core40_max": 6.021670737745256e-05,
+  "p_overlap_error_core40_mean": 9.45423628273545e-10,
+  "p_overlap_error_core40_max": 9.45423628273545e-10,
+  "solve_seconds_mean": 59.22586633800529,
+  "solve_seconds_max": 59.22586633800529,
+  "reconstruction_seconds_mean": 0.20557152101537213,
+  "reconstruction_seconds_max": 0.20557152101537213,
+  "total_seconds_mean": 59.43143785902066,
+  "total_seconds_max": 59.43143785902066
+}
+
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/wide_shooting_smoke/full_shooting_results.csv
+written: assets/pinn_supersonic/hybrid_fixed_c/local_M150_S4M0_v1/wide_shooting_smoke/full_shooting_summary.json

@@ -1,0 +1,403 @@
+src/physics/kh_subsonic_residual.py-16-
+src/physics/kh_subsonic_residual.py-17-def d2y_dxi2(xi: torch.Tensor, mapping_scale: torch.Tensor | float) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-18-    return 2.0 * mapping_scale * xi * (3.0 + xi.pow(2)) / (1.0 - xi.pow(2) + 1e-8).pow(3)
+src/physics/kh_subsonic_residual.py-19-
+src/physics/kh_subsonic_residual.py-20-
+src/physics/kh_subsonic_residual.py-21-def base_velocity(y: torch.Tensor) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-22-    return torch.tanh(y)
+src/physics/kh_subsonic_residual.py-23-
+src/physics/kh_subsonic_residual.py-24-
+src/physics/kh_subsonic_residual.py-25-def base_velocity_derivative(y: torch.Tensor) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py:26:    # Stable sech^2(y). torch.cosh overflows in float32 for the far-field
+src/physics/kh_subsonic_residual.py-27-    # compactified points used by the shooting losses.
+src/physics/kh_subsonic_residual.py-28-    exp_term = torch.exp(-2.0 * torch.abs(y))
+src/physics/kh_subsonic_residual.py-29-    return 4.0 * exp_term / (1.0 + exp_term).pow(2)
+src/physics/kh_subsonic_residual.py-30-
+src/physics/kh_subsonic_residual.py-31-
+src/physics/kh_subsonic_residual.py-32-def _finite_complex(z: torch.Tensor, *, limit: float) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-33-    real = torch.nan_to_num(z.real, nan=0.0, posinf=float(limit), neginf=-float(limit))
+src/physics/kh_subsonic_residual.py-34-    imag = torch.nan_to_num(z.imag, nan=0.0, posinf=float(limit), neginf=-float(limit))
+src/physics/kh_subsonic_residual.py-35-    return torch.complex(real, imag)
+src/physics/kh_subsonic_residual.py-36-
+src/physics/kh_subsonic_residual.py-37-
+src/physics/kh_subsonic_residual.py-38-def _clamp_complex_abs(z: torch.Tensor, *, max_abs: float) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-39-    z = _finite_complex(z, limit=float(max_abs))
+src/physics/kh_subsonic_residual.py-40-    magnitude = torch.abs(z).clamp_min(1.0)
+src/physics/kh_subsonic_residual.py-41-    scale = torch.clamp(float(max_abs) / magnitude, max=1.0)
+src/physics/kh_subsonic_residual.py-42-    return z * scale
+src/physics/kh_subsonic_residual.py-43-
+src/physics/kh_subsonic_residual.py-44-
+src/physics/kh_subsonic_residual.py-45-def _differentiate(values: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-46-    return torch.autograd.grad(
+src/physics/kh_subsonic_residual.py-47-        values,
+src/physics/kh_subsonic_residual.py-48-        x,
+src/physics/kh_subsonic_residual.py-49-        grad_outputs=torch.ones_like(values),
+src/physics/kh_subsonic_residual.py-50-        create_graph=True,
+src/physics/kh_subsonic_residual.py-51-        retain_graph=True,
+src/physics/kh_subsonic_residual.py-52-    )[0]
+src/physics/kh_subsonic_residual.py-53-
+src/physics/kh_subsonic_residual.py-54-
+src/physics/kh_subsonic_residual.py-55-def _principal_sqrt_torch(z: torch.Tensor) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-56-    root = torch.sqrt(z)
+src/physics/kh_subsonic_residual.py-57-    flip = (root.real < 0) | ((torch.abs(root.real) < 1e-12) & (root.imag < 0))
+src/physics/kh_subsonic_residual.py-58-    return torch.where(flip, -root, root)
+src/physics/kh_subsonic_residual.py-59-
+src/physics/kh_subsonic_residual.py-60-
+src/physics/kh_subsonic_residual.py:61:def asymptotic_riccati_gammas(alpha: torch.Tensor, mach: float, ci: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+src/physics/kh_subsonic_residual.py-62-    one = torch.ones_like(ci)
+src/physics/kh_subsonic_residual.py-63-    c = torch.complex(torch.zeros_like(ci), ci)
+src/physics/kh_subsonic_residual.py-64-    mach_t = torch.as_tensor(float(mach), dtype=ci.dtype, device=ci.device)
+src/physics/kh_subsonic_residual.py-65-
+src/physics/kh_subsonic_residual.py-66-    r_inf_left = one - mach_t**2 * ((-one - c) ** 2)
+src/physics/kh_subsonic_residual.py-67-    r_inf_right = one - mach_t**2 * ((one - c) ** 2)
+src/physics/kh_subsonic_residual.py-68-
+src/physics/kh_subsonic_residual.py-69-    alpha_c = torch.complex(alpha, torch.zeros_like(alpha))
+src/physics/kh_subsonic_residual.py:70:    gamma_left = alpha_c * _principal_sqrt_torch(r_inf_left)
+src/physics/kh_subsonic_residual.py:71:    gamma_right = -alpha_c * _principal_sqrt_torch(r_inf_right)
+src/physics/kh_subsonic_residual.py:72:    return gamma_left, gamma_right
+src/physics/kh_subsonic_residual.py-73-
+src/physics/kh_subsonic_residual.py-74-
+src/physics/kh_subsonic_residual.py-75-def riccati_gamma_rhs(
+src/physics/kh_subsonic_residual.py-76-    y: torch.Tensor,
+src/physics/kh_subsonic_residual.py-77-    gamma: torch.Tensor,
+src/physics/kh_subsonic_residual.py-78-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-79-    mach: float,
+src/physics/kh_subsonic_residual.py-80-    ci: torch.Tensor,
+src/physics/kh_subsonic_residual.py-81-) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-82-    gamma = _clamp_complex_abs(gamma, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py-83-    ci = torch.clamp(ci, min=1e-5)
+src/physics/kh_subsonic_residual.py-84-    one = torch.ones_like(ci)
+src/physics/kh_subsonic_residual.py-85-    c = torch.complex(torch.zeros_like(ci), ci)
+src/physics/kh_subsonic_residual.py-86-    u = torch.complex(base_velocity(y), torch.zeros_like(y))
+src/physics/kh_subsonic_residual.py-87-    du = torch.complex(base_velocity_derivative(y), torch.zeros_like(y))
+src/physics/kh_subsonic_residual.py-88-    alpha_c = torch.complex(alpha, torch.zeros_like(alpha))
+src/physics/kh_subsonic_residual.py-89-    mach_t = torch.as_tensor(float(mach), dtype=ci.dtype, device=ci.device)
+src/physics/kh_subsonic_residual.py-90-
+src/physics/kh_subsonic_residual.py-91-    u_diff = u - c
+src/physics/kh_subsonic_residual.py-92-    p_term = -2.0 * du / u_diff
+src/physics/kh_subsonic_residual.py-93-    r_term = one - mach_t**2 * (u_diff**2)
+src/physics/kh_subsonic_residual.py-94-    rhs = -(gamma**2) - p_term * gamma + (alpha_c**2) * r_term
+src/physics/kh_subsonic_residual.py-95-    return _clamp_complex_abs(rhs, max_abs=RICCATI_RHS_CLAMP)
+src/physics/kh_subsonic_residual.py-96-
+src/physics/kh_subsonic_residual.py-97-
+src/physics/kh_subsonic_residual.py-98-def _reconstruct_riccati_pressure_core(
+src/physics/kh_subsonic_residual.py-99-    outputs: torch.Tensor,
+src/physics/kh_subsonic_residual.py-100-    xi: torch.Tensor,
+src/physics/kh_subsonic_residual.py-101-    mapping_scale: torch.Tensor,
+src/physics/kh_subsonic_residual.py-102-    *,
+src/physics/kh_subsonic_residual.py-103-    anchor_xi: float = 0.0,
+src/physics/kh_subsonic_residual.py-104-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+src/physics/kh_subsonic_residual.py-105-    kappa = outputs[:, 0:1]
+src/physics/kh_subsonic_residual.py-106-    q = outputs[:, 1:2]
+src/physics/kh_subsonic_residual.py-107-
+--
+src/physics/kh_subsonic_residual.py-340-    if mode_representation == "first_order_real":
+src/physics/kh_subsonic_residual.py-341-        pred_left = model(xi_left, alpha)
+src/physics/kh_subsonic_residual.py-342-        pred_right = model(xi_right, alpha)
+src/physics/kh_subsonic_residual.py-343-        p_left_r, p_left_i = extract_pressure_components(pred_left)
+src/physics/kh_subsonic_residual.py-344-        p_right_r, p_right_i = extract_pressure_components(pred_right)
+src/physics/kh_subsonic_residual.py-345-        v_left_r = pred_left[:, 2:3]
+src/physics/kh_subsonic_residual.py-346-        v_left_i = pred_left[:, 3:4]
+src/physics/kh_subsonic_residual.py-347-        v_right_r = pred_right[:, 2:3]
+src/physics/kh_subsonic_residual.py-348-        v_right_i = pred_right[:, 3:4]
+src/physics/kh_subsonic_residual.py-349-        ci = model.get_ci(alpha)
+src/physics/kh_subsonic_residual.py:350:        gamma_left, gamma_right = asymptotic_riccati_gammas(alpha, float(getattr(model, "mach", 0.5)), ci)
+src/physics/kh_subsonic_residual.py:351:        target_left = gamma_left * torch.complex(p_left_r, p_left_i)
+src/physics/kh_subsonic_residual.py:352:        target_right = gamma_right * torch.complex(p_right_r, p_right_i)
+src/physics/kh_subsonic_residual.py-353-        loss_left = (v_left_r - target_left.real).pow(2).mean() + (v_left_i - target_left.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py-354-        loss_right = (v_right_r - target_right.real).pow(2).mean() + (v_right_i - target_right.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py-355-        return loss_left + loss_right
+src/physics/kh_subsonic_residual.py-356-    pred_left = model(xi_left, alpha)
+src/physics/kh_subsonic_residual.py-357-    pred_right = model(xi_right, alpha)
+src/physics/kh_subsonic_residual.py-358-    return pred_left.pow(2).mean() + pred_right.pow(2).mean()
+src/physics/kh_subsonic_residual.py-359-
+src/physics/kh_subsonic_residual.py-360-
+src/physics/kh_subsonic_residual.py-361-def riccati_boundary_loss_components(
+src/physics/kh_subsonic_residual.py-362-    model,
+src/physics/kh_subsonic_residual.py-363-    xi_left: torch.Tensor,
+src/physics/kh_subsonic_residual.py-364-    xi_right: torch.Tensor,
+src/physics/kh_subsonic_residual.py-365-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-366-    *,
+src/physics/kh_subsonic_residual.py-367-    ci_override: torch.Tensor | None = None,
+src/physics/kh_subsonic_residual.py-368-) -> tuple[torch.Tensor, torch.Tensor]:
+src/physics/kh_subsonic_residual.py-369-    pred_left = model(xi_left, alpha)
+src/physics/kh_subsonic_residual.py-370-    pred_right = model(xi_right, alpha)
+src/physics/kh_subsonic_residual.py-371-    ci = model.get_ci(alpha) if ci_override is None else ci_override
+src/physics/kh_subsonic_residual.py:372:    gamma_left, gamma_right = asymptotic_riccati_gammas(alpha, float(getattr(model, "mach", 0.5)), ci)
+src/physics/kh_subsonic_residual.py-373-
+src/physics/kh_subsonic_residual.py-374-    loss_kappa = (
+src/physics/kh_subsonic_residual.py:375:        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py:376:        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py-377-    )
+src/physics/kh_subsonic_residual.py-378-    loss_q = (
+src/physics/kh_subsonic_residual.py:379:        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py:380:        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py-381-    )
+src/physics/kh_subsonic_residual.py-382-    return loss_kappa, loss_q
+src/physics/kh_subsonic_residual.py-383-
+src/physics/kh_subsonic_residual.py-384-
+src/physics/kh_subsonic_residual.py-385-def riccati_boundary_band_loss_components(
+src/physics/kh_subsonic_residual.py-386-    model,
+src/physics/kh_subsonic_residual.py-387-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-388-    *,
+src/physics/kh_subsonic_residual.py-389-    n_points: int,
+src/physics/kh_subsonic_residual.py-390-    xi_start: float,
+src/physics/kh_subsonic_residual.py-391-    xi_end: float,
+src/physics/kh_subsonic_residual.py-392-    ci_override: torch.Tensor | None = None,
+src/physics/kh_subsonic_residual.py-393-) -> tuple[torch.Tensor, torch.Tensor]:
+src/physics/kh_subsonic_residual.py-394-    if n_points <= 0:
+src/physics/kh_subsonic_residual.py-395-        zero = torch.zeros(1, device=alpha.device, dtype=alpha.dtype).mean()
+src/physics/kh_subsonic_residual.py-396-        return zero, zero
+src/physics/kh_subsonic_residual.py-397-
+src/physics/kh_subsonic_residual.py-398-    xi_left = torch.linspace(-float(xi_end), -float(xi_start), int(n_points), device=alpha.device, dtype=alpha.dtype).view(-1, 1)
+src/physics/kh_subsonic_residual.py-399-    xi_right = torch.linspace(float(xi_start), float(xi_end), int(n_points), device=alpha.device, dtype=alpha.dtype).view(-1, 1)
+src/physics/kh_subsonic_residual.py-400-    xi_left.requires_grad_(True)
+src/physics/kh_subsonic_residual.py-401-    xi_right.requires_grad_(True)
+src/physics/kh_subsonic_residual.py-402-
+src/physics/kh_subsonic_residual.py-403-    if alpha.shape[0] == 1:
+src/physics/kh_subsonic_residual.py-404-        alpha_left = alpha.repeat(xi_left.shape[0], 1)
+src/physics/kh_subsonic_residual.py-405-        alpha_right = alpha.repeat(xi_right.shape[0], 1)
+src/physics/kh_subsonic_residual.py-406-    else:
+src/physics/kh_subsonic_residual.py-407-        alpha_left = alpha[: xi_left.shape[0]]
+src/physics/kh_subsonic_residual.py-408-        alpha_right = alpha[: xi_right.shape[0]]
+src/physics/kh_subsonic_residual.py-409-
+src/physics/kh_subsonic_residual.py-410-    pred_left = model(xi_left, alpha_left)
+src/physics/kh_subsonic_residual.py-411-    pred_right = model(xi_right, alpha_right)
+src/physics/kh_subsonic_residual.py-412-    if ci_override is None:
+src/physics/kh_subsonic_residual.py-413-        ci = model.get_ci(alpha_left)
+src/physics/kh_subsonic_residual.py-414-    elif ci_override.shape[0] == 1:
+src/physics/kh_subsonic_residual.py-415-        ci = ci_override.repeat(alpha_left.shape[0], 1)
+src/physics/kh_subsonic_residual.py-416-    else:
+src/physics/kh_subsonic_residual.py-417-        ci = ci_override[: alpha_left.shape[0]]
+src/physics/kh_subsonic_residual.py:418:    gamma_left, gamma_right = asymptotic_riccati_gammas(alpha_left, float(getattr(model, "mach", 0.5)), ci)
+src/physics/kh_subsonic_residual.py-419-
+src/physics/kh_subsonic_residual.py-420-    loss_kappa = (
+src/physics/kh_subsonic_residual.py:421:        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py:422:        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py-423-    )
+src/physics/kh_subsonic_residual.py-424-    loss_q = (
+src/physics/kh_subsonic_residual.py:425:        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py:426:        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py-427-    )
+src/physics/kh_subsonic_residual.py-428-    return loss_kappa, loss_q
+src/physics/kh_subsonic_residual.py-429-
+src/physics/kh_subsonic_residual.py-430-
+src/physics/kh_subsonic_residual.py-431-def riccati_center_constraints(
+src/physics/kh_subsonic_residual.py-432-    model,
+src/physics/kh_subsonic_residual.py-433-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-434-    *,
+src/physics/kh_subsonic_residual.py-435-    center_xi: float = 0.0,
+src/physics/kh_subsonic_residual.py-436-) -> tuple[torch.Tensor, torch.Tensor]:
+src/physics/kh_subsonic_residual.py-437-    xi_center = torch.full_like(alpha, float(center_xi), requires_grad=True)
+src/physics/kh_subsonic_residual.py-438-    pred = model(xi_center, alpha)
+src/physics/kh_subsonic_residual.py-439-    kappa = pred[:, 0:1]
+src/physics/kh_subsonic_residual.py-440-
+src/physics/kh_subsonic_residual.py-441-    kappa_xi = _differentiate(kappa, xi_center)
+src/physics/kh_subsonic_residual.py-442-    mapping_scale = model.get_mapping_scale()
+src/physics/kh_subsonic_residual.py-443-    y_xi = dy_dxi(xi_center, mapping_scale)
+src/physics/kh_subsonic_residual.py-444-    kappa_y = kappa_xi / y_xi
+src/physics/kh_subsonic_residual.py-445-
+src/physics/kh_subsonic_residual.py-446-    loss_center = kappa.pow(2).mean()
+src/physics/kh_subsonic_residual.py-447-    loss_peak = torch.relu(kappa_y).pow(2).mean()
+src/physics/kh_subsonic_residual.py-448-    return loss_center, loss_peak
+src/physics/kh_subsonic_residual.py-449-
+src/physics/kh_subsonic_residual.py-450-
+src/physics/kh_subsonic_residual.py-451-def riccati_shooting_match_loss(
+src/physics/kh_subsonic_residual.py-452-    model,
+src/physics/kh_subsonic_residual.py-453-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-454-    mach: float,
+src/physics/kh_subsonic_residual.py-455-    *,
+src/physics/kh_subsonic_residual.py-456-    n_steps: int,
+src/physics/kh_subsonic_residual.py-457-    xi_boundary: float,
+src/physics/kh_subsonic_residual.py-458-) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-459-    if n_steps <= 0:
+src/physics/kh_subsonic_residual.py-460-        return torch.zeros(1, device=alpha.device, dtype=alpha.dtype).mean()
+src/physics/kh_subsonic_residual.py-461-
+--
+src/physics/kh_subsonic_residual.py-567-    dtype = alpha_scalar.dtype
+src/physics/kh_subsonic_residual.py-568-
+src/physics/kh_subsonic_residual.py-569-    xi_left = torch.linspace(-float(xi_boundary), 0.0, int(n_points), device=device, dtype=dtype).view(-1, 1)
+src/physics/kh_subsonic_residual.py-570-    xi_right = torch.linspace(0.0, float(xi_boundary), int(n_points), device=device, dtype=dtype).view(-1, 1)
+src/physics/kh_subsonic_residual.py-571-
+src/physics/kh_subsonic_residual.py-572-    alpha_left = alpha_scalar.view(1, 1).repeat(xi_left.shape[0], 1)
+src/physics/kh_subsonic_residual.py-573-    alpha_right = alpha_scalar.view(1, 1).repeat(xi_right.shape[0], 1)
+src/physics/kh_subsonic_residual.py-574-
+src/physics/kh_subsonic_residual.py-575-    pred_left = model(xi_left, alpha_left)
+src/physics/kh_subsonic_residual.py-576-    pred_right = model(xi_right, alpha_right)
+src/physics/kh_subsonic_residual.py:577:    gamma_left_pred = torch.complex(pred_left[:, 0], pred_left[:, 1])
+src/physics/kh_subsonic_residual.py:578:    gamma_right_pred = torch.complex(pred_right[:, 0], pred_right[:, 1])
+src/physics/kh_subsonic_residual.py-579-
+src/physics/kh_subsonic_residual.py-580-    with torch.no_grad():
+src/physics/kh_subsonic_residual.py-581-        y_left = xi_to_y(xi_left, mapping_scale)[:, 0]
+src/physics/kh_subsonic_residual.py-582-        y_right = xi_to_y(xi_right, mapping_scale)[:, 0]
+src/physics/kh_subsonic_residual.py-583-
+src/physics/kh_subsonic_residual.py:584:        gamma_left_0, gamma_right_0 = asymptotic_riccati_gammas(alpha_scalar, mach, ci_scalar)
+src/physics/kh_subsonic_residual.py:585:        gamma_left_curr = gamma_left_0[0]
+src/physics/kh_subsonic_residual.py:586:        gamma_right_curr = gamma_right_0[0]
+src/physics/kh_subsonic_residual.py-587-
+src/physics/kh_subsonic_residual.py:588:        left_path = [gamma_left_curr]
+src/physics/kh_subsonic_residual.py:589:        right_desc_path = [gamma_right_curr]
+src/physics/kh_subsonic_residual.py-590-
+src/physics/kh_subsonic_residual.py-591-        n_segments = max(int(n_points) - 1, 1)
+src/physics/kh_subsonic_residual.py-592-        n_substeps = max(int(n_steps) // n_segments, 1)
+src/physics/kh_subsonic_residual.py-593-
+src/physics/kh_subsonic_residual.py-594-        for idx in range(1, y_left.shape[0]):
+src/physics/kh_subsonic_residual.py:595:            gamma_left_curr = _riccati_segment_integrate(
+src/physics/kh_subsonic_residual.py-596-                y_left[idx - 1],
+src/physics/kh_subsonic_residual.py-597-                y_left[idx],
+src/physics/kh_subsonic_residual.py:598:                gamma_left_curr,
+src/physics/kh_subsonic_residual.py-599-                alpha_scalar[0],
+src/physics/kh_subsonic_residual.py-600-                mach,
+src/physics/kh_subsonic_residual.py-601-                ci_scalar[0],
+src/physics/kh_subsonic_residual.py-602-                n_substeps=n_substeps,
+src/physics/kh_subsonic_residual.py-603-            )
+src/physics/kh_subsonic_residual.py:604:            left_path.append(gamma_left_curr)
+src/physics/kh_subsonic_residual.py-605-
+src/physics/kh_subsonic_residual.py-606-        y_right_desc = torch.flip(y_right, dims=[0])
+src/physics/kh_subsonic_residual.py-607-        for idx in range(1, y_right_desc.shape[0]):
+src/physics/kh_subsonic_residual.py:608:            gamma_right_curr = _riccati_segment_integrate(
+src/physics/kh_subsonic_residual.py-609-                y_right_desc[idx - 1],
+src/physics/kh_subsonic_residual.py-610-                y_right_desc[idx],
+src/physics/kh_subsonic_residual.py:611:                gamma_right_curr,
+src/physics/kh_subsonic_residual.py-612-                alpha_scalar[0],
+src/physics/kh_subsonic_residual.py-613-                mach,
+src/physics/kh_subsonic_residual.py-614-                ci_scalar[0],
+src/physics/kh_subsonic_residual.py-615-                n_substeps=n_substeps,
+src/physics/kh_subsonic_residual.py-616-            )
+src/physics/kh_subsonic_residual.py:617:            right_desc_path.append(gamma_right_curr)
+src/physics/kh_subsonic_residual.py-618-
+src/physics/kh_subsonic_residual.py:619:        gamma_left_target = torch.stack(left_path)
+src/physics/kh_subsonic_residual.py:620:        gamma_right_target = torch.flip(torch.stack(right_desc_path), dims=[0])
+src/physics/kh_subsonic_residual.py-621-
+src/physics/kh_subsonic_residual.py:622:    gamma_left_target = _clamp_complex_abs(gamma_left_target, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py:623:    gamma_right_target = _clamp_complex_abs(gamma_right_target, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py:624:    gamma_left_pred = _clamp_complex_abs(gamma_left_pred, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py:625:    gamma_right_pred = _clamp_complex_abs(gamma_right_pred, max_abs=RICCATI_STATE_CLAMP)
+src/physics/kh_subsonic_residual.py-626-
+src/physics/kh_subsonic_residual.py:627:    left_loss = (gamma_left_pred.real - gamma_left_target.real).pow(2) + (gamma_left_pred.imag - gamma_left_target.imag).pow(2)
+src/physics/kh_subsonic_residual.py:628:    right_loss = (gamma_right_pred.real - gamma_right_target.real).pow(2) + (gamma_right_pred.imag - gamma_right_target.imag).pow(2)
+src/physics/kh_subsonic_residual.py-629-    loss = 0.5 * (left_loss.mean() + right_loss.mean())
+src/physics/kh_subsonic_residual.py-630-    return torch.nan_to_num(loss, nan=RICCATI_STATE_CLAMP**2, posinf=RICCATI_STATE_CLAMP**2, neginf=RICCATI_STATE_CLAMP**2)
+src/physics/kh_subsonic_residual.py-631-
+src/physics/kh_subsonic_residual.py-632-
+src/physics/kh_subsonic_residual.py-633-def _riccati_shooting_match_loss_from_samples(
+src/physics/kh_subsonic_residual.py-634-    mapping_scale: torch.Tensor,
+src/physics/kh_subsonic_residual.py-635-    alpha_samples: torch.Tensor,
+src/physics/kh_subsonic_residual.py-636-    ci_samples: torch.Tensor,
+src/physics/kh_subsonic_residual.py-637-    mach: float,
+src/physics/kh_subsonic_residual.py-638-    *,
+src/physics/kh_subsonic_residual.py-639-    n_steps: int,
+src/physics/kh_subsonic_residual.py-640-    xi_boundary: float,
+src/physics/kh_subsonic_residual.py-641-) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-642-    if n_steps <= 0:
+src/physics/kh_subsonic_residual.py-643-        return torch.zeros(alpha_samples.shape[0], device=alpha_samples.device, dtype=alpha_samples.dtype)
+src/physics/kh_subsonic_residual.py-644-
+src/physics/kh_subsonic_residual.py-645-    xi_edge = torch.tensor([[float(xi_boundary)]], dtype=alpha_samples.dtype, device=alpha_samples.device)
+src/physics/kh_subsonic_residual.py-646-    y_max = torch.abs(xi_to_y(xi_edge, mapping_scale))[0, 0]
+src/physics/kh_subsonic_residual.py-647-    if not torch.isfinite(y_max) or float(torch.abs(y_max).detach().cpu()) <= 0.0:
+src/physics/kh_subsonic_residual.py-648-        return torch.zeros(alpha_samples.shape[0], device=alpha_samples.device, dtype=alpha_samples.dtype)
+src/physics/kh_subsonic_residual.py-649-
+src/physics/kh_subsonic_residual.py-650-    def rk4_step(y_val: torch.Tensor, gamma_val: torch.Tensor, h: torch.Tensor, alpha_val: torch.Tensor, ci_val: torch.Tensor) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-651-        return _riccati_rk4_step(y_val, gamma_val, h, alpha_val, mach, ci_val)
+src/physics/kh_subsonic_residual.py-652-
+src/physics/kh_subsonic_residual.py-653-    losses: list[torch.Tensor] = []
+src/physics/kh_subsonic_residual.py-654-    for alpha_val, ci_val in zip(alpha_samples, ci_samples):
+src/physics/kh_subsonic_residual.py-655-        alpha_scalar = alpha_val.view(1)
+src/physics/kh_subsonic_residual.py-656-        ci_scalar = ci_val.view(1)
+src/physics/kh_subsonic_residual.py:657:        gamma_left_0, gamma_right_0 = asymptotic_riccati_gammas(alpha_scalar, mach, ci_scalar)
+src/physics/kh_subsonic_residual.py:658:        gamma_left = gamma_left_0[0]
+src/physics/kh_subsonic_residual.py:659:        gamma_right = gamma_right_0[0]
+src/physics/kh_subsonic_residual.py-660-
+src/physics/kh_subsonic_residual.py-661-        y_left = -y_max
+src/physics/kh_subsonic_residual.py-662-        y_right = y_max
+src/physics/kh_subsonic_residual.py-663-        h_left = (torch.zeros_like(y_left) - y_left) / float(n_steps)
+src/physics/kh_subsonic_residual.py-664-        h_right = (torch.zeros_like(y_right) - y_right) / float(n_steps)
+src/physics/kh_subsonic_residual.py-665-
+src/physics/kh_subsonic_residual.py-666-        y_curr = y_left
+src/physics/kh_subsonic_residual.py-667-        for _ in range(int(n_steps)):
+src/physics/kh_subsonic_residual.py:668:            gamma_left = rk4_step(y_curr, gamma_left, h_left, alpha_scalar[0], ci_scalar[0])
+src/physics/kh_subsonic_residual.py-669-            y_curr = y_curr + h_left
+src/physics/kh_subsonic_residual.py-670-
+src/physics/kh_subsonic_residual.py-671-        y_curr = y_right
+src/physics/kh_subsonic_residual.py-672-        for _ in range(int(n_steps)):
+src/physics/kh_subsonic_residual.py:673:            gamma_right = rk4_step(y_curr, gamma_right, h_right, alpha_scalar[0], ci_scalar[0])
+src/physics/kh_subsonic_residual.py-674-            y_curr = y_curr + h_right
+src/physics/kh_subsonic_residual.py-675-
+src/physics/kh_subsonic_residual.py:676:        mismatch = torch.abs(gamma_left - gamma_right) ** 2
+src/physics/kh_subsonic_residual.py-677-        losses.append(torch.nan_to_num(mismatch.real, nan=RICCATI_STATE_CLAMP**2, posinf=RICCATI_STATE_CLAMP**2, neginf=RICCATI_STATE_CLAMP**2))
+src/physics/kh_subsonic_residual.py-678-
+src/physics/kh_subsonic_residual.py-679-    if not losses:
+src/physics/kh_subsonic_residual.py-680-        return torch.zeros(alpha_samples.shape[0], device=alpha_samples.device, dtype=alpha_samples.dtype)
+src/physics/kh_subsonic_residual.py-681-    return torch.stack(losses)
+src/physics/kh_subsonic_residual.py-682-
+src/physics/kh_subsonic_residual.py-683-
+src/physics/kh_subsonic_residual.py-684-def riccati_ci_local_min_loss(
+src/physics/kh_subsonic_residual.py-685-    model,
+src/physics/kh_subsonic_residual.py-686-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-687-    mach: float,
+src/physics/kh_subsonic_residual.py-688-    *,
+src/physics/kh_subsonic_residual.py-689-    n_steps: int,
+src/physics/kh_subsonic_residual.py-690-    xi_boundary: float,
+src/physics/kh_subsonic_residual.py-691-    delta_abs: float,
+src/physics/kh_subsonic_residual.py-692-    delta_rel: float,
+src/physics/kh_subsonic_residual.py-693-    margin: float = 0.0,
+src/physics/kh_subsonic_residual.py-694-) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-695-    if n_steps <= 0:
+src/physics/kh_subsonic_residual.py-696-        return torch.zeros(1, device=alpha.device, dtype=alpha.dtype).mean()
+src/physics/kh_subsonic_residual.py-697-
+src/physics/kh_subsonic_residual.py-698-    ci_center = model.get_ci(alpha)[:, 0]
+src/physics/kh_subsonic_residual.py-699-    delta = torch.clamp(
+src/physics/kh_subsonic_residual.py-700-        float(delta_abs) + float(delta_rel) * torch.abs(ci_center),
+src/physics/kh_subsonic_residual.py-701-        min=max(float(delta_abs), 1e-6),
+src/physics/kh_subsonic_residual.py-702-    )
+src/physics/kh_subsonic_residual.py-703-    ci_minus = torch.clamp(ci_center - delta, min=1e-6)
+src/physics/kh_subsonic_residual.py-704-    ci_plus = ci_center + delta
+src/physics/kh_subsonic_residual.py-705-
+src/physics/kh_subsonic_residual.py-706-    mapping_scale = model.get_mapping_scale()
+src/physics/kh_subsonic_residual.py-707-    alpha_samples = alpha[:, 0]
+src/physics/kh_subsonic_residual.py-708-    mismatch_center = _riccati_shooting_match_loss_from_samples(
+src/physics/kh_subsonic_residual.py-709-        mapping_scale,
+src/physics/kh_subsonic_residual.py-710-        alpha_samples,
+src/physics/kh_subsonic_residual.py-711-        ci_center,
+--
+src/physics/kh_subsonic_residual.py-925-    ci = ci_override if ci_override is not None else model.get_ci(alpha, mach)
+src/physics/kh_subsonic_residual.py-926-
+src/physics/kh_subsonic_residual.py-927-    one = torch.ones_like(ci)
+src/physics/kh_subsonic_residual.py-928-    c = torch.complex(torch.zeros_like(ci), ci)
+src/physics/kh_subsonic_residual.py-929-    alpha_c = torch.complex(alpha, torch.zeros_like(alpha))
+src/physics/kh_subsonic_residual.py-930-    mach_c = torch.complex(mach, torch.zeros_like(mach))
+src/physics/kh_subsonic_residual.py-931-
+src/physics/kh_subsonic_residual.py-932-    r_inf_left = one - mach_c.pow(2) * ((-one - c) ** 2)
+src/physics/kh_subsonic_residual.py-933-    r_inf_right = one - mach_c.pow(2) * ((one - c) ** 2)
+src/physics/kh_subsonic_residual.py-934-
+src/physics/kh_subsonic_residual.py:935:    gamma_left = alpha_c * _principal_sqrt_torch(r_inf_left)
+src/physics/kh_subsonic_residual.py:936:    gamma_right = -alpha_c * _principal_sqrt_torch(r_inf_right)
+src/physics/kh_subsonic_residual.py-937-
+src/physics/kh_subsonic_residual.py-938-    loss_kappa = (
+src/physics/kh_subsonic_residual.py:939:        (pred_left[:, 0:1] - gamma_left.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py:940:        + (pred_right[:, 0:1] - gamma_right.real).pow(2).mean()
+src/physics/kh_subsonic_residual.py-941-    )
+src/physics/kh_subsonic_residual.py-942-    loss_q = (
+src/physics/kh_subsonic_residual.py:943:        (pred_left[:, 1:2] - gamma_left.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py:944:        + (pred_right[:, 1:2] - gamma_right.imag).pow(2).mean()
+src/physics/kh_subsonic_residual.py-945-    )
+src/physics/kh_subsonic_residual.py-946-    return loss_kappa, loss_q
+src/physics/kh_subsonic_residual.py-947-
+src/physics/kh_subsonic_residual.py-948-
+src/physics/kh_subsonic_residual.py-949-def normalization_loss_2d(
+src/physics/kh_subsonic_residual.py-950-    model,
+src/physics/kh_subsonic_residual.py-951-    xi_ref: torch.Tensor,
+src/physics/kh_subsonic_residual.py-952-    alpha: torch.Tensor,
+src/physics/kh_subsonic_residual.py-953-    mach: torch.Tensor,
+src/physics/kh_subsonic_residual.py-954-    *,
+src/physics/kh_subsonic_residual.py-955-    target_pr: float = 1.0,
+src/physics/kh_subsonic_residual.py-956-    target_pi: float = 0.0,
+src/physics/kh_subsonic_residual.py-957-) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-958-    pred = model(xi_ref, alpha, mach)
+src/physics/kh_subsonic_residual.py-959-    target = torch.tensor([target_pr, target_pi], dtype=pred.dtype, device=pred.device).view(1, 2)
+src/physics/kh_subsonic_residual.py-960-    return torch.mean((pred - target) ** 2)
+src/physics/kh_subsonic_residual.py-961-
+src/physics/kh_subsonic_residual.py-962-
+src/physics/kh_subsonic_residual.py-963-def phase_loss_2d(model, xi_ref: torch.Tensor, alpha: torch.Tensor, mach: torch.Tensor) -> torch.Tensor:
+src/physics/kh_subsonic_residual.py-964-    pred = model(xi_ref, alpha, mach)
+src/physics/kh_subsonic_residual.py-965-    return torch.mean(pred[:, 1:2].pow(2))

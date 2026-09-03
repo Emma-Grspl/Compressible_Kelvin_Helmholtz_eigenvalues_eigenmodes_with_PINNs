@@ -1,0 +1,171 @@
+
+====================================================================================================
+ATLAS-2D VALIDATION — N76
+====================================================================================================
+T401 points: 401
+device: cpu
+
+----------------------------------------------------------------------------------------------------
+C00 | validation points = 28
+checkpoint = models_saved/atlas/N76/C00/best_joint_checkpoint_33647c0c65.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C00: OK — 28 predictions
+
+----------------------------------------------------------------------------------------------------
+C01 | validation points = 41
+checkpoint = models_saved/atlas/N76/C01/best_joint_checkpoint_bd8dd50299.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C01: OK — 41 predictions
+
+----------------------------------------------------------------------------------------------------
+C02 | validation points = 62
+checkpoint = models_saved/atlas/N76/C02/best_joint_checkpoint_be0e4833f5.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C02: OK — 62 predictions
+
+----------------------------------------------------------------------------------------------------
+C10 | validation points = 25
+checkpoint = models_saved/atlas/N76/C10/best_joint_checkpoint_06bde09f2f.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C10: OK — 25 predictions
+
+----------------------------------------------------------------------------------------------------
+C11 | validation points = 33
+checkpoint = models_saved/atlas/N76/C11/best_joint_checkpoint_b7ea53532f.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C11: OK — 33 predictions
+
+----------------------------------------------------------------------------------------------------
+C12 | validation points = 34
+checkpoint = models_saved/atlas/N76/C12/best_joint_checkpoint_d4f26e5b75.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C12: OK — 34 predictions
+
+----------------------------------------------------------------------------------------------------
+C20 | validation points = 25
+checkpoint = models_saved/atlas/N76/C20/best_joint_checkpoint_b236e307a9.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C20: OK — 25 predictions
+
+----------------------------------------------------------------------------------------------------
+C21 | validation points = 32
+checkpoint = models_saved/atlas/N76/C21/best_joint_checkpoint_d89a36cc31.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C21: OK — 32 predictions
+
+----------------------------------------------------------------------------------------------------
+C22 | validation points = 22
+checkpoint = models_saved/atlas/N76/C22/best_joint_checkpoint_4f0defe56d.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C22: OK — 22 predictions
+
+----------------------------------------------------------------------------------------------------
+C30 | validation points = 39
+checkpoint = models_saved/atlas/N76/C30/best_joint_checkpoint_2d630591a9.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C30: OK — 39 predictions
+
+----------------------------------------------------------------------------------------------------
+C31 | validation points = 48
+checkpoint = models_saved/atlas/N76/C31/best_joint_checkpoint_eafc27be12.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C31: OK — 48 predictions
+
+----------------------------------------------------------------------------------------------------
+C32 | validation points = 12
+checkpoint = models_saved/atlas/N76/C32/best_joint_checkpoint_cd639cf2a1.pt
+spectral_audit signature: (model: 'KHSupersonicGlobalPINN', frame: 'pd.DataFrame', *, device: 'torch.device', include_test: 'bool') -> 'tuple[pd.DataFrame, dict[str, Any]]'
+resolved arguments: ['device', 'frame', 'include_test', 'model']
+C32: OK — 12 predictions
+
+====================================================================================================
+ATLAS-N76 — 401-POINT FINAL TEST
+====================================================================================================
+{
+  "n": 401,
+  "cr_mae": 0.004886992142693574,
+  "cr_median_abs": 0.002989595713734916,
+  "cr_max_abs": 0.045126109759184796,
+  "ci_mae": 0.0034112807996241937,
+  "ci_median_abs": 0.001328811395444815,
+  "ci_max_abs": 0.08426653159631148,
+  "omega_i_mae": 0.000519385491273802,
+  "spectral_error_mean": 0.006719844018445011,
+  "spectral_error_median": 0.004020297891259513,
+  "spectral_error_p90": 0.01652295983160372,
+  "spectral_error_p95": 0.020508206841986003,
+  "spectral_error_p99": 0.03767015754260991,
+  "spectral_error_max": 0.08821280109902431,
+  "spectral_relative_mean": 0.08130193986378276,
+  "spectral_relative_p95": 0.3508453977035344,
+  "spectral_relative_max": 4.03452307513022,
+  "fraction_error_le_1e-4": 0.0024937655860349127,
+  "fraction_error_le_5e-4": 0.0399002493765586,
+  "fraction_error_le_1e-3": 0.10473815461346633,
+  "fraction_error_le_2e-3": 0.2793017456359102,
+  "fraction_error_le_5e-3": 0.5985037406483791,
+  "fraction_error_le_1e-2": 0.7905236907730673,
+  "budget": 76,
+  "n_charts": 12
+}
+
+==================================================================================================================================
+BY PRIMARY CHART
+==================================================================================================================================
+chart  n       cr_mae       ci_mae  spectral_error_mean  spectral_error_p95  spectral_error_max  fraction_error_le_1e-3  fraction_error_le_5e-3  fraction_error_le_1e-2
+  C00 28 1.256381e-02 1.347589e-02         2.048248e-02        4.698997e-02        8.821280e-02            0.000000e+00            0.000000e+00            2.142857e-01
+  C01 41 9.855888e-03 1.144187e-02         1.722693e-02        3.767016e-02        5.039374e-02            0.000000e+00            7.317073e-02            2.439024e-01
+  C02 62 3.974317e-03 2.644148e-03         5.185332e-03        1.509562e-02        1.835397e-02            6.451613e-02            6.129032e-01            8.387097e-01
+  C10 25 8.542852e-03 1.511402e-03         8.716729e-03        1.700795e-02        2.025133e-02            0.000000e+00            2.800000e-01            6.400000e-01
+  C11 33 1.747609e-03 8.004187e-04         2.098488e-03        3.932690e-03        4.170207e-03            2.424242e-01            1.000000e+00            1.000000e+00
+  C12 34 8.931297e-04 2.081315e-03         2.424139e-03        4.868990e-03        5.107800e-03            2.941176e-02            9.705882e-01            1.000000e+00
+  C20 25 5.083752e-03 3.265715e-03         6.229773e-03        1.368358e-02        1.565078e-02            0.000000e+00            4.800000e-01            8.400000e-01
+  C21 32 3.240224e-03 5.496751e-04         3.324839e-03        8.135917e-03        9.139493e-03            1.875000e-01            8.125000e-01            1.000000e+00
+  C22 22 6.192763e-03 1.385654e-03         6.530658e-03        1.397982e-02        1.737232e-02            4.545455e-02            4.545455e-01            8.181818e-01
+  C30 39 3.891303e-03 1.033486e-03         4.173832e-03        1.123758e-02        1.291289e-02            1.025641e-01            7.179487e-01            8.974359e-01
+  C31 48 2.256061e-03 8.070249e-04         2.540399e-03        6.167861e-03        9.863190e-03            3.333333e-01            8.333333e-01            1.000000e+00
+  C32 12 2.392982e-03 1.151753e-03         2.769329e-03        5.754918e-03        5.874690e-03            1.666667e-01            8.333333e-01            1.000000e+00
+
+==================================================================================================================================
+20 WORST VALIDATION POINTS
+==================================================================================================================================
+          Mach          alpha atlas_chart              cr             ci         cr_pred        ci_pred   cr_abs_error   ci_abs_error  spectral_error  spectral_relative_error  omega_i_abs_error
+1.15000000e+00 6.00000000e-02         C00 -2.54973694e-09 1.99847224e-01  2.60892659e-02 1.15580693e-01 2.60892685e-02 8.42665316e-02  8.82128011e-02           4.41401182e-01     5.05599190e-03
+1.10000000e+00 9.50000000e-02         C00  1.85431703e-02 1.43971975e-01  5.45845628e-02 1.01892367e-01 3.60413925e-02 4.20796081e-02  5.54046513e-02           3.81676681e-01     3.99756277e-03
+1.05000000e+00 1.30000000e-01         C01  5.56138077e-10 1.05732099e-01  4.51261103e-02 8.33008066e-02 4.51261098e-02 2.24312920e-02  5.03937361e-02           4.76617194e-01     2.91606796e-03
+1.05000000e+00 1.20000000e-01         C01  6.80304145e-10 7.98199008e-02  3.51701975e-02 5.87976053e-02 3.51701968e-02 2.10222955e-02  4.09741339e-02           5.13332308e-01     2.52267546e-03
+1.00000000e+00 1.95000000e-01         C01  3.82070566e-02 9.78340055e-02  7.63347745e-03 7.58272558e-02 3.05735791e-02 2.20067496e-02  3.76701575e-02           3.58661404e-01     4.29131618e-03
+1.00000000e+00 2.05000000e-01         C01  5.99798118e-02 9.15107939e-02  2.57348120e-02 7.70267248e-02 3.42449998e-02 1.44840691e-02  3.71820961e-02           3.39824028e-01     2.96923416e-03
+1.05000000e+00 1.90000000e-01         C01  1.19334016e-01 9.58677624e-02  8.50555748e-02 8.59600231e-02 3.42784409e-02 9.90773925e-03  3.56815752e-02           2.33102229e-01     1.88247046e-03
+1.10000000e+00 1.10000000e-01         C00  7.37351788e-02 1.34677575e-01  6.99946135e-02 1.03538744e-01 3.74056527e-03 3.11388306e-02  3.13626944e-02           2.04262291e-01     3.42527137e-03
+1.10000000e+00 1.50000000e-01         C01  1.32056641e-01 1.10472821e-01  1.42410502e-01 1.39109969e-01 1.03538604e-02 2.86371486e-02  3.04514155e-02           1.76866238e-01     4.29557230e-03
+1.05000000e+00 1.80000000e-01         C01  1.09389802e-01 1.02030885e-01  7.99253881e-02 9.87910479e-02 2.94644135e-02 3.23983715e-03  2.96420007e-02           1.98158229e-01     5.83170688e-04
+1.00000000e+00 1.65000000e-01         C01 -1.57197012e-10 4.39306948e-02  1.34816766e-03 7.15522766e-02 1.34816782e-03 2.76215818e-02  2.76544632e-02           6.29502068e-01     4.55756100e-03
+1.00000000e+00 1.60000000e-01         C01 -8.87793506e-11 3.94369303e-02  2.45675445e-03 6.66482002e-02 2.45675453e-03 2.72112698e-02  2.73219481e-02           6.92801085e-01     4.35380317e-03
+1.05000000e+00 1.15000000e-01         C00  1.21001384e-10 7.19056899e-02  1.76669061e-02 5.38967662e-02 1.76669060e-02 1.80089238e-02  2.52277804e-02           3.50845398e-01     2.07102623e-03
+1.05000000e+00 6.00000000e-02         C00  4.81892044e-10 2.68503829e-02 -1.60618424e-02 9.24909301e-03 1.60618429e-02 1.76012899e-02  2.38283068e-02           8.87447559e-01     1.05607739e-03
+1.05000000e+00 7.00000000e-02         C00  4.74377901e-10 3.25278215e-02 -1.91734433e-02 2.04225052e-02 1.91734438e-02 1.21053163e-02  2.26750883e-02           6.97098276e-01     8.47372143e-04
+1.20000000e+00 5.00000000e-02         C00  5.87939706e-02 1.40841470e-01  6.35644495e-02 1.18700869e-01 4.77047899e-03 2.21406004e-02  2.26487009e-02           1.48398705e-01     1.10703002e-03
+1.20000000e+00 1.00000000e-01         C00  1.62316738e-01 1.14869810e-01  1.84433773e-01 1.13476977e-01 2.21170348e-02 1.39283279e-03  2.21608487e-02           1.11444384e-01     1.39283279e-04
+1.20000000e+00 9.00000000e-02         C00  1.49248658e-01 1.20055155e-01  1.68112293e-01 1.29500702e-01 1.88636347e-02 9.44554656e-03  2.10963282e-02           1.10139341e-01     8.50099191e-04
+1.05000000e+00 1.70000000e-01         C01  9.80164090e-02 1.08249159e-01  7.81972110e-02 1.14557654e-01 1.98191980e-02 6.30849490e-03  2.07989835e-02           1.42428403e-01     1.07244413e-03
+1.00000000e+00 1.75000000e-01         C01 -7.09040491e-11 5.57083229e-02 -6.03199005e-04 7.62512684e-02 6.03198934e-04 2.05429455e-02  2.05517994e-02           3.68917933e-01     3.59501546e-03
+
+====================================================================================================
+WRITTEN
+====================================================================================================
+assets/pinn_supersonic/csv/pinn_direct/test401/table_N76_test401_predictions_401.csv
+assets/pinn_supersonic/json/pinn_direct/test401/N76_test401_metrics_global.json
+assets/pinn_supersonic/csv/pinn_direct/test401/table_N76_test401_metrics_by_chart.csv
+assets/pinn_supersonic/csv/pinn_direct/test401/table_N76_test401_worst_points.csv

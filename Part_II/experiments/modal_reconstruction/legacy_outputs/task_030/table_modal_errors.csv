@@ -1,0 +1,4 @@
+task_index,role,Mach,alpha,modal_setting,is_modal_reference,p_rel_l2_core,p_rel_l2_amp_mask,modulus_rel_l2_amp_mask,kappa_rel_l2_amp_mask,q_rel_l2_amp_mask,alignment_real,alignment_imag,comparison_core_limit,comparison_amplitude_threshold
+30,low_alpha,1.6,0.05,modal_coarse,False,4.534538647154037e-06,4.534538647154037e-06,1.0146979545390668e-06,5.1744744133454655e-05,4.9634836101379245e-05,1.0000009117558901,-3.8873014251093016e-06,20.0,0.001
+30,low_alpha,1.6,0.05,modal_nominal,False,9.186113762716687e-07,9.186113762716687e-07,2.1514061830888539e-07,1.0701979584121135e-05,1.0263104536628165e-05,1.0000001393265505,-7.774002713447789e-07,20.0,0.001
+30,low_alpha,1.6,0.05,modal_strict,True,0.0,0.0,0.0,0.0,0.0,1.0,0.0,20.0,0.001
