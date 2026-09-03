@@ -1,5 +1,21 @@
 # Migration provenance
 
+This directory is provenance, not an active numerical workflow. It records
+migration decisions, excluded large files, historical HPC locations, review
+traces, and audit outcomes. The authoritative active implementation is under
+`../code/`; reusable scientific assets are under `../assets/`; and processed
+scientific outputs are under `../results/` and `../experiments/`.
+
+Historical absolute paths below are retained as execution history. They are not
+public runtime requirements.
+
+## Review material
+
+`review/` contains retained ambiguous files, missing-input snapshots, broken
+launchers, and audit material. It is provenance only and is not part of the
+active production workflow. Historical paths inside logs and metadata are
+preserved intentionally.
+
 ## Source
 
 - Source repository: `/Users/emma.grospellier/Thèse/These_PINN_KH_RT`

@@ -55,5 +55,6 @@ as diagnostic material rather than as the final reference workflow.
 - `provenance/`: migration, review, large-file exclusion, and historical
   traceability. Historical paths may appear here without becoming active
   execution dependencies.
-- `_TO_REVIEW/`: ambiguous files, missing-input snapshots, and broken launchers
-  retained without destructive cleanup.
+- `provenance/review/`: ambiguous files, missing-input snapshots, and broken
+  launchers retained without destructive cleanup. This material is not part of
+  the active production workflow.

@@ -60,7 +60,8 @@ Migration hash/status counts: {'CANONICAL_CONTENT_POST_MIGRATION': 125, 'POST_MI
 
 Ambiguous files, including launchers whose Python target was absent from the
 source and the supplementary plotting snapshot with incomplete raw inputs,
-are isolated under `_TO_REVIEW/`; they are not counted as active components.
+are isolated under `provenance/review/`; they are not counted as active
+components.
 
 ## Finalization audit (2026-08-27)
 

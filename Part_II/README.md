@@ -60,7 +60,7 @@ Part_II/
 ├── scripts/       # figure publication and reviewer-control entry points
 ├── slurm/         # empty retained HPC-compatible top-level root
 ├── tests/         # lightweight checks retained from the workspace
-└── _TO_REVIEW/    # deliberately unresolved material
+└── provenance/review/ # deliberately unresolved review material
 ```
 
 The current layout is transitional: active classical solvers remain in

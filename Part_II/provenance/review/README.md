@@ -6,4 +6,5 @@ present in the source repository.
 
 Nothing was deleted. Do not use these files as active pipeline components
 until their scientific role and dependencies have been reviewed manually.
-See `provenance/FILE_CLASSIFICATION.csv` for each original path and note.
+See [`../FILE_CLASSIFICATION.csv`](../FILE_CLASSIFICATION.csv) for each
+original path and note.

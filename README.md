@@ -38,3 +38,16 @@ universal speedup.
 Each part has its own article assets, scientific data, code, provenance, and
 reproducibility documentation. Scientific assets are intentionally not mixed
 between the two regimes.
+
+See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the shared intended
+organizational contract and the current transitional layout, and
+[REPRODUCIBILITY.md](REPRODUCIBILITY.md) for the two workflow-specific guides.
+
+## Citation
+
+Final repository citation metadata will be added once publication metadata is
+finalized.
+
+## License
+
+License selection will be finalized at repository release.
