@@ -35,7 +35,10 @@ without guessing.
   location.
 - `scripts/`: publication and reviewer-control entrypoints. In particular,
   `scripts/figures/` publishes curated assets without duplicating scientific
-  computations.
+  computations. Both parts expose this common public figure interface, while
+  internal scientific generator layouts differ intentionally for historical
+  and workflow reasons. No physical plotting migration is currently required;
+  see `docs/PLOTTING_ARCHITECTURE.md`.
 
 Numerical algorithms were not changed during repository integration. The final
 classical reference is high-accuracy Riccati shooting; GEP material is retained

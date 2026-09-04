@@ -25,8 +25,13 @@ normalized layout.
   benchmark entrypoints.
 - `code/src/scripts/evaluation/`: quantitative validation and audits.
 - `code/src/launch/slurm/`: retained Jean-Zay launchers.
-- `code/plots/scripts/`: scientific figure-generation modules.
+- `code/plots/scripts/`: scientific figure-generation modules and retained
+  historical plotting provenance.
 - `scripts/`: public analysis, paper, and publication-figure entrypoints.
+  Both parts expose their common public figure interface under
+  `scripts/figures/`; Part I uses publication wrappers there, while internal
+  scientific generator layouts remain workflow-specific. No physical plotting
+  migration is currently required; see `docs/PLOTTING_ARCHITECTURE.md`.
 - `examples/`: small repository-relative CPU demonstrations; they do not train
   a model or run a dense GEP sweep.
 - `tests/`: lightweight integrity and classical single-point tests used by CI.
