@@ -27,6 +27,11 @@ without guessing.
 
 - `code/src/classical_solver/`: **current active supersonic solver
   implementation**.
+- `classical_solver/`: public navigation/documentation facade. It contains no
+  implementation code yet; the active generic package remains under
+  `code/src/classical_solver/`, while the validated/frozen workflow remains
+  under `code/src/classic_supersonic_reference/`. Physical normalization is
+  deferred until Phase 8.
 - `code/scripts/`: training, shooting, audits, evaluation, benchmarks, and
   data-preparation entrypoints.
 - `code/configs/`: current active and legacy campaign configurations.

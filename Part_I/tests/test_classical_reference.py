@@ -5,6 +5,14 @@ import math
 from src.scripts.classical.solve_robust_subsonic_shooting import (
     RobustSubsonicShootingSolver,
 )
+from src.scripts.gep.selection.solve_dense_gep_notebook_style import (
+    NotebookStyleDenseGEPSolver,
+)
+
+
+def test_dense_gep_canonical_module_imports() -> None:
+    """Keep the future public solver facade tied to the active Part I module."""
+    assert NotebookStyleDenseGEPSolver.__name__ == "NotebookStyleDenseGEPSolver"
 
 
 def test_robust_classical_reference_single_subsonic_point() -> None:

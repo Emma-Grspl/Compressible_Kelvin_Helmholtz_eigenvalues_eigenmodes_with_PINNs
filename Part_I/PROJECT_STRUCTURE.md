@@ -20,6 +20,9 @@ normalized layout.
 - `code/src/`: importable numerical and PINN implementation (`PYTHONPATH=code`).
 - `code/src/scripts/classical/`: **current active subsonic classical Riccati
   shooting solvers and reconstructions**.
+- `classical_solver/`: public navigation/documentation facade for the current
+  classical interface. It contains no implementation code yet; physical
+  normalization is deferred until Phase 8.
 - `code/src/scripts/training/`: fixed-Mach and atlas training entrypoints.
 - `code/src/scripts/gep/`: GEP selection, resolution, modal refinement, and
   benchmark entrypoints.
@@ -54,9 +57,11 @@ normalized layout.
 - `archive/`: deliberately separate historical code, configurations, assets,
   CSV files, and development outputs. Historical names such as `hybrid` or
   `frozen` are not canonical terminology for the current pipeline.
-- `classical_solver/`, `KH_RT_Blumen/`, and `src/`: currently empty
-  compatibility or legacy-looking roots. They are retained without claiming
-  that they contain active implementation.
+- `KH_RT_Blumen/` and `src/`: currently empty compatibility or legacy-looking
+  roots. They are retained without claiming that they contain active
+  implementation. `classical_solver/` is now a documentation facade only; the
+  active solver code remains under `code/src/scripts/classical/` and
+  `code/src/scripts/gep/selection/` pending Phase 8.
 
 Two legacy Jean-Zay/Lustre links remain recorded as
 `EXTERNAL_LINK_UNRESOLVED`; they were not replaced by fabricated local paths.
