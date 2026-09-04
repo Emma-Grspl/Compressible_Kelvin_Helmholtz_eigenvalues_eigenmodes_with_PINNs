@@ -20,7 +20,7 @@ export MKL_NUM_THREADS="$SLURM_CPUS_PER_TASK"
 
 OUT="assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2"
 
-python archive/code/scripts/assets_v2/inventory_missing_inputs.py
+python code/src/scripts/utils/inventory_missing_inputs.py
 python archive/code/scripts/assets_v2/build_ci_and_atlas_assets.py --output-dir "$OUT"
 python archive/code/scripts/assets_v2/select_mode_points_20.py --output "$OUT/data/validation_mode_points_20.csv"
 python code/plots/scripts/pinn_subsonic/active_implementation/source_tree/scripts/assets_v2/plot_numerical_audits.py --output-dir "$OUT"

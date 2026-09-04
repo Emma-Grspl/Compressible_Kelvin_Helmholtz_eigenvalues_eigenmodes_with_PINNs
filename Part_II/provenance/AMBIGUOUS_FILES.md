@@ -2,7 +2,6 @@
 
 34 unique destinations are wholly classified as ambiguous. Duplicate source rows that map to the same destination are listed once.
 
-- `provenance/review/archive/legacy_classical_solver/reconstruct_blumen_maps.py`
 - `provenance/review/article.md`
 - `provenance/review/assets/README.md`
 - `provenance/review/broken_launchers/code/slurm/legacy_gep/audit_supersonic_gep_nearest_candidates_highN.slurm`

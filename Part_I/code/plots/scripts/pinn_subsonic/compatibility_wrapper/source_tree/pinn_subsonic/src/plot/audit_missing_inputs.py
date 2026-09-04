@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compatibility entry point for `archive/code/scripts/assets_v2/inventory_missing_inputs.py`.
+"""Compatibility entry point for `code/src/scripts/utils/inventory_missing_inputs.py`.
 
 Scientific logic remains in the original script so both entry points stay aligned.
 """
@@ -10,7 +10,7 @@ import runpy
 import sys
 
 REPO_ROOT = Path(__file__).resolve().parents[9]
-SOURCE = REPO_ROOT / "archive/code/scripts/assets_v2/inventory_missing_inputs.py"
+SOURCE = REPO_ROOT / "code/src/scripts/utils/inventory_missing_inputs.py"
 
 
 def main() -> None:
