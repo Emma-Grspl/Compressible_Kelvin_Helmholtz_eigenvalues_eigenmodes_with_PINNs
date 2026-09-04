@@ -24,7 +24,7 @@ torch.set_default_dtype(torch.float64)
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 CONFIG_PATH = (
-    REPO_ROOT / 'code/configs/legacy/S4M4.json'
+    REPO_ROOT / 'configs/experiments/fixed_mach/S4M4.json'
 )
 
 MODAL_BANK_PATH = (

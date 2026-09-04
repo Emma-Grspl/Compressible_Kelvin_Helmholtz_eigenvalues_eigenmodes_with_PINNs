@@ -51,7 +51,7 @@ for the final classical reference.
 Part_II/
 ├── article/       # curated 25-figure publication package and manifest
 ├── assets/        # reusable classical, atlas, modal, and audit assets
-├── configs/       # curated public configuration facade; not runtime source
+├── configs/       # canonical reusable configurations plus normalization manifest
 ├── code/          # active solver, model, physics, config, and execution code
 ├── experiments/   # active campaign workspace: run-specific inputs and outputs
 ├── models_saved/  # checkpoint layout documentation; binaries remain local
@@ -65,9 +65,12 @@ Part_II/
 ```
 
 The current layout is transitional: active classical solvers remain in
-`code/src/classical_solver/`, active configurations in `code/configs/`,
-scientific plot generators in `plots/`, and active experiment input/output
-records in `experiments/`. `experiments/` is not the canonical
+`code/src/classical_solver/`, while five reusable validation and fixed-Mach
+smoke configurations now live canonically in `configs/`. Other campaign
+snapshots, including the dense classical campaign, remain under `code/configs/`
+pending later normalization. Scientific plot generators remain in `plots/`,
+and active experiment input/output records remain in `experiments/`.
+`experiments/` is not the canonical
 publication-results directory: validated publication-facing outputs are placed
 under `results/` where that normalization is complete. See
 [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md),
@@ -75,9 +78,9 @@ under `results/` where that normalization is complete. See
 [experiments/EXPERIMENT_REGISTRY.csv](experiments/EXPERIMENT_REGISTRY.csv) for
 the current topology and family-level dependencies.
 
-`configs/` provides verified public configuration copies for reproducibility;
-it does not replace `code/configs/` as the runtime/source-side configuration
-store. See [configs/README.md](configs/README.md).
+`configs/` is the canonical root for its normalized reusable configurations;
+it does not yet replace all `code/configs/` campaign snapshots. See
+[configs/README.md](configs/README.md).
 
 ## Installation
 

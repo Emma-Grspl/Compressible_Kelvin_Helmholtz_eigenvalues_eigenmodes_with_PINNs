@@ -13,9 +13,9 @@ and `code/configs/` rather than under the future common top-level contract.
 - `assets/`: reusable classical references, Blumen validation, atlas and anchor
   data, modal outputs, PINN diagnostics, and canonical sources of article
   figures.
-- `configs/`: curated public configuration facade. Its copies are mapped and
-  hash-checked against current runtime sources; it is not itself the runtime
-  configuration store.
+- `configs/`: canonical root for the normalized reusable validation and
+  fixed-Mach smoke configurations. The dense classical campaign and other
+  unresolved snapshots remain under `code/configs/` pending later phases.
 
 The manifest does not imply a single common scientific plotting entrypoint.
 Publication wrappers copy or publish authoritative assets; upstream generator
@@ -34,7 +34,8 @@ without guessing.
   deferred until Phase 8.
 - `code/scripts/`: training, shooting, audits, evaluation, benchmarks, and
   data-preparation entrypoints.
-- `code/configs/`: current active and legacy campaign configurations.
+- `code/configs/`: remaining active and legacy campaign configurations; it no
+  longer owns the five normalized reusable configurations under `configs/`.
 - `code/slurm/`: retained non-GEP HPC launcher and campaign material.
 - `plots/`: current scientific plotting code retained in its source-workspace
   location.
@@ -49,9 +50,9 @@ Numerical algorithms were not changed during repository integration. The final
 classical reference is high-accuracy Riccati shooting; GEP material is retained
 as diagnostic material rather than as the final reference workflow.
 
-The public `configs/` facade intentionally excludes mixed source-side snapshot
-families. Current executable workflows continue to resolve configuration paths
-under `code/configs/` unless a script documents otherwise.
+The canonical `configs/` root intentionally excludes mixed source-side
+snapshot families. Current executable workflows may still resolve those
+remaining campaign paths under `code/configs/` until later normalization.
 
 ## Experiments and results
 

@@ -1,17 +1,17 @@
 # Curated public configurations
 
-This directory is the stable, human-readable configuration facade for Part II.
-It mirrors the role of `Part_I/configs/` without refactoring the current
-supersonic runtime layout.
+This directory is the canonical, human-readable reusable configuration root
+for Part II. It mirrors the role of `Part_I/configs/` without refactoring the
+entire supersonic runtime layout.
 
-The authoritative configuration store for current executable workflows remains
-[`../code/configs/`](../code/configs/). The files here are verified public
-copies for production, validation, and one retained experimental smoke case;
-they are not loaded automatically by runtime code.
+Phase 8B.1 normalized the five reusable validation and fixed-Mach smoke
+configurations into this directory. Current workflows must use these canonical
+paths rather than duplicate files under `code/configs/legacy/`.
 
-`CONFIG_MANIFEST.csv` maps every public record to its runtime source and
-records the SHA-256 checksum. Each public copy must remain byte-identical to
-its listed source.
+`CONFIG_MANIFEST.csv` records the canonical path, SHA-256 checksum, and the
+status of any former legacy location. The dense classical campaign remains
+under `code/configs/legacy/` pending a later phase; it is not normalized by
+this batch.
 
 The following source-side areas are intentionally excluded from this facade:
 
