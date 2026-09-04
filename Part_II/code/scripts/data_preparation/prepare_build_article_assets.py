@@ -15,7 +15,7 @@ import pandas as pd
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 from scipy.interpolate import LinearNDInterpolator
 from scipy.spatial import Delaunay
-from classic_supersonic_reference.io.blumen_reference import supersonic_digitized_x_to_mach
+from classical_solver.supersonic.blumen_reference import supersonic_digitized_x_to_mach
 
 
 REPO = Path(__file__).resolve().parents[3]

@@ -317,7 +317,7 @@ def copy_code_snapshot():
 
     candidates = [
         "code/src/classical_solver/supersonic/mstab17_supersonic_solver.py",
-        "code/scripts/evaluation/blumen_reference.py",
+        "code/src/classical_solver/supersonic/blumen_reference.py",
 
         "code/scripts/audits/audit_supersonic_shooting_visual_validation_6969b4f1bf.py",
         "code/scripts/audits/audit_scan_supersonic_M18_M19_strict_modal_validation_14e1027f3b.py",

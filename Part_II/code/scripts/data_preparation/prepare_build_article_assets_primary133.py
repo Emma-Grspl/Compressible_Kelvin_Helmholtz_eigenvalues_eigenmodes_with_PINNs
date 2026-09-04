@@ -169,7 +169,7 @@ def transform_blumen_mach(
             str(src),
         )
 
-        from classic_supersonic_reference.io.blumen_reference import (
+        from classical_solver.supersonic.blumen_reference import (
             supersonic_digitized_x_to_mach,
         )
 
