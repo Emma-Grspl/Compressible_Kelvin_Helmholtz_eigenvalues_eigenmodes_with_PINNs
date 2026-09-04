@@ -18,7 +18,7 @@ EXPECTED_COLUMNS = [
 EXPECTED_CLASSIFICATIONS = {"production", "validation", "experiment"}
 EXPECTED_LEGACY_STATUSES = {
     "removed_phase_8b1",
-    "retained_pending_phase_8b2",
+    "removed_phase_8b2",
 }
 
 
@@ -40,7 +40,7 @@ def test_canonical_configuration_manifest_preserves_config_content() -> None:
         legacy = PART_II_ROOT / row["legacy_path"]
         assert canonical.is_file()
         assert sha256(canonical) == row["sha256"]
-        if row["legacy_path_status"] == "removed_phase_8b1":
+        if row["legacy_path_status"].startswith("removed_phase_"):
             assert not legacy.exists()
         else:
             assert legacy.is_file()

@@ -4,14 +4,13 @@ This directory is the canonical, human-readable reusable configuration root
 for Part II. It mirrors the role of `Part_I/configs/` without refactoring the
 entire supersonic runtime layout.
 
-Phase 8B.1 normalized the five reusable validation and fixed-Mach smoke
-configurations into this directory. Current workflows must use these canonical
-paths rather than duplicate files under `code/configs/legacy/`.
+Phases 8B.1 and 8B.2 normalized the reusable validation, fixed-Mach smoke,
+and dense classical campaign configurations into this directory. Current
+workflows must use these canonical paths rather than duplicate files under
+`code/configs/legacy/`.
 
 `CONFIG_MANIFEST.csv` records the canonical path, SHA-256 checksum, and the
-status of any former legacy location. The dense classical campaign remains
-under `code/configs/legacy/` pending a later phase; it is not normalized by
-this batch.
+status of any former legacy location.
 
 The following source-side areas are intentionally excluded from this facade:
 

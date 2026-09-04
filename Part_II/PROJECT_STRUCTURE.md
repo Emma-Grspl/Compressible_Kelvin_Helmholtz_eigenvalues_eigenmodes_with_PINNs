@@ -13,9 +13,9 @@ and `code/configs/` rather than under the future common top-level contract.
 - `assets/`: reusable classical references, Blumen validation, atlas and anchor
   data, modal outputs, PINN diagnostics, and canonical sources of article
   figures.
-- `configs/`: canonical root for the normalized reusable validation and
-  fixed-Mach smoke configurations. The dense classical campaign and other
-  unresolved snapshots remain under `code/configs/` pending later phases.
+- `configs/`: canonical root for the normalized reusable validation, fixed-Mach
+  smoke, and dense classical campaign configurations. Other unresolved
+  snapshots remain under `code/configs/` pending later phases.
 
 The manifest does not imply a single common scientific plotting entrypoint.
 Publication wrappers copy or publish authoritative assets; upstream generator

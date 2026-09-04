@@ -12,9 +12,9 @@ The final classical eigenvalue and eigenmode reference is obtained by
 high-accuracy Riccati shooting. GEP material remains a diagnostic resource and
 is not described here as the final classical method.
 
-[`configs/`](configs/) is the canonical root for the normalized validation and
-fixed-Mach smoke configurations. Other campaign snapshots, including the dense
-classical campaign, remain under `code/configs/` pending later phases.
+[`configs/`](configs/) is the canonical root for the normalized validation,
+fixed-Mach smoke, and dense classical campaign configurations. Other campaign
+snapshots remain under `code/configs/` pending later phases.
 
 ## Level 1 -- Validate publication figures
 

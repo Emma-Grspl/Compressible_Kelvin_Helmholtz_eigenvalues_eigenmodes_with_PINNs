@@ -41,7 +41,7 @@ DEFAULT_REFERENCE = (
     REPO_ROOT / 'assets/classic_supersonic/csv/modal_reconstruction/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/table_classical_supersonic_final_reference.csv'
 )
 DEFAULT_CONFIG = (
-    REPO_ROOT / 'code/configs/legacy/dense_supersonic_campaign_config.json'
+    REPO_ROOT / 'configs/production/classical/dense_supersonic_campaign_config.json'
 )
 DEFAULT_OUTPUT_ROOT = (
     REPO_ROOT

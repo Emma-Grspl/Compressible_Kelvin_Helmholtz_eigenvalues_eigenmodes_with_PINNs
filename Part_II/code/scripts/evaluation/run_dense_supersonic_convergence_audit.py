@@ -367,7 +367,7 @@ def run_task(repo: Path, freeze_dir: Path, output_dir: Path, task_index: int, ov
     task_dir.mkdir(parents=True, exist_ok=True)
 
     config = json.loads(config_path.read_text(encoding="utf-8"))
-    production_config_path = repo / "code/configs/legacy/dense_supersonic_campaign_config.json"
+    production_config_path = repo / "configs/production/classical/dense_supersonic_campaign_config.json"
     production_config = json.loads(production_config_path.read_text(encoding="utf-8"))
     campaign, modal = load_solver_modules(repo)
 

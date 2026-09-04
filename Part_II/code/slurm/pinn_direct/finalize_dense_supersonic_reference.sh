@@ -9,7 +9,7 @@ cd "$REPO"
 
 FREEZER="classic_supersonic/scripts/validation/freeze_dense_supersonic_results.py"
 BUILDER="classic_supersonic/scripts/validation/build_classical_supersonic_assets.py"
-CONFIG="code/configs/legacy/dense_supersonic_campaign_config.json"
+CONFIG="configs/production/classical/dense_supersonic_campaign_config.json"
 FREEZE_DIR="assets/classic_supersonic/$FREEZE_NAME"
 
 for path in "$FREEZER" "$BUILDER" "$CONFIG"; do

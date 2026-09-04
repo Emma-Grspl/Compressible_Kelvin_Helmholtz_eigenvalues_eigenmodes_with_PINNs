@@ -34,7 +34,7 @@ def main() -> int:
           "dense_kappa_q_lowM_lowalpha_extension_v1"
     )
     base_config_path = (
-        repo / "code/configs/legacy/dense_supersonic_campaign_config.json"
+        repo / "configs/production/classical/dense_supersonic_campaign_config.json"
     )
     anchor_path = (
         repo / "classic_supersonic/data/spectral/"

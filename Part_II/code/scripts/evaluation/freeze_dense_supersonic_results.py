@@ -468,7 +468,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--config",
         type=Path,
-        default=Path("code/configs/legacy/dense_supersonic_campaign_config.json"),
+        default=Path("configs/production/classical/dense_supersonic_campaign_config.json"),
     )
     parser.add_argument("--campaign-root", type=Path, default=None)
     parser.add_argument(

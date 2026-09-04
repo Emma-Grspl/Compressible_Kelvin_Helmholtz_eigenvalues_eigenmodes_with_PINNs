@@ -32,7 +32,7 @@ export MKL_NUM_THREADS=1
 
 POINTWISE="$PWD/article/tables/table_supersonic_blumen_positive_pointwise_values.csv"
 REFERENCE="$PWD/assets/classic_supersonic/csv/modal_reconstruction/dense_kappa_q_campaign_v1_FINAL_FULL_BRANCH_ASSETS/table_classical_supersonic_final_reference.csv"
-CONFIG="$PWD/code/configs/legacy/dense_supersonic_campaign_config.json"
+CONFIG="$PWD/configs/production/classical/dense_supersonic_campaign_config.json"
 RESULT_ROOT="$PWD/classic_supersonic/reproducibility/results/blumen_true_positive_isolines_local_v1"
 OUTPUT_ROOT="$PWD/assets/classic_supersonic/article"
 

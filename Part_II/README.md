@@ -65,11 +65,11 @@ Part_II/
 ```
 
 The current layout is transitional: active classical solvers remain in
-`code/src/classical_solver/`, while five reusable validation and fixed-Mach
-smoke configurations now live canonically in `configs/`. Other campaign
-snapshots, including the dense classical campaign, remain under `code/configs/`
-pending later normalization. Scientific plot generators remain in `plots/`,
-and active experiment input/output records remain in `experiments/`.
+`code/src/classical_solver/`, while reusable validation, fixed-Mach smoke, and
+dense classical campaign configurations now live canonically in `configs/`.
+Other campaign snapshots remain under `code/configs/` pending later
+normalization. Scientific plot generators remain in `plots/`, and active
+experiment input/output records remain in `experiments/`.
 `experiments/` is not the canonical
 publication-results directory: validated publication-facing outputs are placed
 under `results/` where that normalization is complete. See
