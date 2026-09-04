@@ -1,11 +1,10 @@
 # Curated public configurations
 
-This directory exposes only configuration records needed to interpret the Part
-I production workflow. They are traceable copies or summaries of tracked
-source files, not a migration of every historical experiment.
+This directory exposes the canonical reusable configuration records needed to
+interpret the Part I production workflow. It is not a migration of every
+historical experiment.
 
-- `classical/` contains exact copies of coupled shooting convergence YAML
-  files from `code/src/scripts/utils/`.
+- `classical/` contains the canonical coupled shooting convergence YAML files.
 - `atlas/` contains the machine-independent routing fields for the 49-chart
   `N340` atlas, derived from the tracked production training plan.
 - `gep/` documents the resolution policy encoded in the production selection
