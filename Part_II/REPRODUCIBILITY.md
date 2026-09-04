@@ -79,6 +79,14 @@ python code/scripts/evaluation/evaluate_compare_KH_shoot_to_validated.py --help
 **Limitation.** Not yet exposed as a single public entrypoint. These commands
 may require campaign-specific inputs, results, or local checkpoints.
 
+Campaign-specific paths are organized under [`experiments/`](experiments/).
+This is an active workspace containing both run-specific inputs and derived
+outputs, rather than the canonical publication-results directory. The
+family-level dependencies are recorded in
+[`experiments/EXPERIMENT_REGISTRY.csv`](experiments/EXPERIMENT_REGISTRY.csv);
+validated publication-facing outputs are placed under `results/` where that
+normalization is complete.
+
 **Hardware/cost.** CPU for inspection; potentially expensive for actual
 campaign evaluation.
 

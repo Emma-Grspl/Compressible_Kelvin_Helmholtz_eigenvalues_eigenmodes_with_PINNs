@@ -50,13 +50,16 @@ under `code/configs/` unless a script documents otherwise.
 
 ## Experiments and results
 
-- `experiments/`: current active experiment input/output root, organized by
-  scientific campaign. It is preserved in place because active scripts refer
-  to this location.
+- `experiments/`: active campaign workspace containing both run-specific inputs
+  and derived outputs. It is not the canonical publication-results directory;
+  it remains in place because current scripts read and write these paths. See
+  `experiments/README.md` and `experiments/EXPERIMENT_REGISTRY.csv`.
 - `results/`: processed complementary reviewer-control outputs, including
   physics residuals, threshold sensitivity, multiseed ablation, matched branch
   localization, failure basin, routing, computational cost, and Blumen `c_r`
-  validation.
+  validation. Part I normalizes more runtime material into `assets/`,
+  `results/`, and `models_saved/`; Part II intentionally retains its active
+  `experiments/` workspace until its input/output dependencies are separable.
 
 ## Models and provenance
 

@@ -53,7 +53,7 @@ Part_II/
 ├── assets/        # reusable classical, atlas, modal, and audit assets
 ├── configs/       # curated public configuration facade; not runtime source
 ├── code/          # active solver, model, physics, config, and execution code
-├── experiments/   # preserved experiment-specific outputs below GitHub limits
+├── experiments/   # active campaign workspace: run-specific inputs and outputs
 ├── models_saved/  # checkpoint layout documentation; binaries remain local
 ├── plots/         # preserved scientific plotting code from the source workspace
 ├── provenance/    # migration and large-file records
@@ -67,8 +67,13 @@ Part_II/
 The current layout is transitional: active classical solvers remain in
 `code/src/classical_solver/`, active configurations in `code/configs/`,
 scientific plot generators in `plots/`, and active experiment input/output
-records in `experiments/`. See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
-for the exact current topology.
+records in `experiments/`. `experiments/` is not the canonical
+publication-results directory: validated publication-facing outputs are placed
+under `results/` where that normalization is complete. See
+[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md),
+[experiments/README.md](experiments/README.md), and
+[experiments/EXPERIMENT_REGISTRY.csv](experiments/EXPERIMENT_REGISTRY.csv) for
+the current topology and family-level dependencies.
 
 `configs/` provides verified public configuration copies for reproducibility;
 it does not replace `code/configs/` as the runtime/source-side configuration
