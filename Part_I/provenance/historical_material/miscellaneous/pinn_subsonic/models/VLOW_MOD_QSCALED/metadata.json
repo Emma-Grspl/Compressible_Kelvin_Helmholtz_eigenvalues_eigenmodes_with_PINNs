@@ -1,0 +1,11 @@
+{
+  "chart_id": "VLOW_MOD_QSCALED",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/seedGEP_pQscaled2d_ATLAS_VLOW_MOD_M010_070_eta012_025_ciIDW/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/seedGEP_pQscaled2d_ATLAS_VLOW_MOD_M010_070_eta012_025_ciIDW",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_manifest.csv",
+  "checkpoint_sha256": "92ef58d82dde97e2923eaeb0923b073367658fdad9df3ff16788f943ab999158",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

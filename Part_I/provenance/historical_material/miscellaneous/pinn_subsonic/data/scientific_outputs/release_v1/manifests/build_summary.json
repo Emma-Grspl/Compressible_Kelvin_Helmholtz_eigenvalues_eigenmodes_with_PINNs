@@ -1,0 +1,10 @@
+{
+  "code_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/pinn_subsonic",
+  "asset_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/release_v1",
+  "catalogue_rows": 49,
+  "model_checkpoints_present": 49,
+  "model_checkpoints_missing": 0,
+  "files_materialized": 132,
+  "model_mode": "hardlink",
+  "model_tree_validated": true
+}

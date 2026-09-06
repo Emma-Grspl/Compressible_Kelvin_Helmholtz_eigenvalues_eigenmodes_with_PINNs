@@ -46,7 +46,7 @@ CLASSICAL_DIR="$(
         -maxdepth 5 \
         -type d \
         -name classical_solver \
-        -not -path '*/archive/*' \
+        -not -path '*/provenance/historical_material/*' \
         -print \
         -quit
 )"

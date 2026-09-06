@@ -1,0 +1,11 @@
+{
+  "chart_id": "HM2_VLOW_EXTREME",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pQscaled2d_ATLAS_HM2_VLOW_EXTREME_M0.85_0.98_eta0.05_0.12_ciIDW/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pQscaled2d_ATLAS_HM2_VLOW_EXTREME_M0.85_0.98_eta0.05_0.12_ciIDW",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_extension_plan_M005_098_eta005_098.csv",
+  "checkpoint_sha256": "2fd650d014f436828fb98feaf3baad2854542935589f95e09cd63b15a48ff494",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

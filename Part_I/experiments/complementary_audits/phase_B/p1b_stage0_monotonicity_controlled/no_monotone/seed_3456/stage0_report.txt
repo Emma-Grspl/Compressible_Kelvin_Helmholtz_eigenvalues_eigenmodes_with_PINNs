@@ -1,0 +1,20 @@
+Stage 0 CI anchor lock: PASS
+Mach=0.5
+alpha_range=[0.1, 0.8]
+anchors=0.100000 0.300000 0.550000 0.800000
+epochs=1000
+learning_rate=0.01
+weights: anchor=100.0 monotone=0.0 smooth=0.0
+lbfgs_steps=500
+target_max_abs=0.001
+best_epoch=1001
+best_anchor_mae=8.28877091e-08
+best_anchor_max_abs=2.12341547e-07
+best_anchor_mean_rel=1.28187912e-06
+best_anchor_max_rel=4.79611481e-06
+final_anchor_mae=8.28877091e-08
+final_anchor_max_abs=2.12341547e-07
+
+Interpretation:
+- PASS: la branche ci(alpha) apprend les ancres; on peut passer au stage PDE/mode en warmstart.
+- FAIL: ne pas lancer le stage PDE/mode; corriger d'abord le verrouillage de ci.

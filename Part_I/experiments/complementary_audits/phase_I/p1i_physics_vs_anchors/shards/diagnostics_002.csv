@@ -1,0 +1,2 @@
+chart_id,field_family,best_epoch,total_epochs,n_holdout,prefit_loss_replay,prefit_loss_historical,prefit_loss_abs_diff,prefit_loss_rel_diff,anchor_continuation_clip_count,anchor_continuation_clip_fraction,anchor_continuation_max_grad_norm,max_joint_vs_release_abs
+ETAEDGE_HM2B,pQscaled,44207,45000,32,3.687677393253372e-10,3.3923465601543387e-10,2.953308330990332e-11,0.08705797826434243,0,0.0,8.294222364989354,0.0023919858036322017

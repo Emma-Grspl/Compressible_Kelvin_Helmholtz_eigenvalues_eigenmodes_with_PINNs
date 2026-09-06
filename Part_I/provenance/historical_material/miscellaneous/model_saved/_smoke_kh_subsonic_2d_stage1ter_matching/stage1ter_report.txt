@@ -1,0 +1,32 @@
+2D subsonic Stage 1ter — Riccati matching modal reconstruction
+stage0_checkpoint=model_saved/kh_subsonic_2d_hybrid4ci_stage0_anchor_lock_no_monotone_lbfgs/model_best.pt
+freeze_ci_default=True
+detach_ci_in_mode_branch_default=True
+direct_modal_supervision=False
+mach_values=[0.3, 0.5]
+alpha_range=[0.1, 0.8]
+anchor_alphas=[0.1, 0.3, 0.55, 0.8]
+match_y_values=[-0.5, 0.0, 0.5]
+epochs=10
+learning_rate=5e-05
+loss_weights: pde=1.0 bc_kappa=20.0 bc_q=60.0 match=1.0 center_pde=1.0 norm=0.0 phase=0.0 ci_anchor=1.0
+match_warmup_epochs=5
+shoot_ymax=40.0
+shoot_steps=64
+best_metric=loss_total
+best_epoch=10
+best_loss_total=9.82217407e+00
+best_loss_match=3.72723460e-01
+best_ci_anchor_max_abs=2.91664442e-04
+best_ci_anchor_max_rel_unstable=8.24203460e-04
+best_ci_neutral_max_abs=1.09884772e-04
+
+Training losses:
+- pressure PDE residual on interior points
+- Riccati far-field boundary losses on kappa and q
+- left/right Riccati matching from physical ODE integration
+- center-focused PDE residual near y=0
+- optional ci anchor preservation only if freeze_ci is disabled
+- no direct modal supervision
+
+Diagnostics may use the classical solver after training, but the training loss does not.

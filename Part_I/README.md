@@ -39,7 +39,7 @@ classical reference or the selected GEP eigenpair.
 The repository preserves a validated subsonic Riccati shooting map, the
 49-chart production atlas with the `N340` sparse-anchor budget, fixed-Mach
 spectral/modal audits, and the 17 curated manuscript assets. Detailed scope
-and validation provenance are recorded in [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md)
+and validation provenance are recorded in [experiments/EXPERIMENTS.md](experiments/EXPERIMENTS.md)
 and [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md).
 
 ## Repository structure
@@ -49,23 +49,16 @@ Part_I/
 ├── article/          # 17 curated manuscript figures and their manifest
 ├── assets/           # validated classical, neural, and audit data
 ├── code/             # active Python source and scientific entry points
-├── configs/          # curated, traceable public configuration summaries
-├── docs/             # technical, protocol, and migration documentation
-├── examples/         # small CPU examples; no training
 ├── models_saved/     # production checkpoints and integrity manifest
 ├── provenance/       # migration, exclusions, and audit traceability
-├── results/          # processed validation and audit outputs
-├── scripts/          # analysis and publication-figure entry points
 ├── tests/            # lightweight CPU regression checks
-├── classical_solver/ # empty legacy-compatible compatibility root
-├── KH_RT_Blumen/     # empty legacy-compatible data root
 └── REPRODUCIBILITY.md
 ```
 
-The active classical subsonic solver currently lives in
-`code/src/scripts/classical/`. The empty `classical_solver/`, `KH_RT_Blumen/`,
-and `src/` roots are retained compatibility or legacy roots; they are not the
-active implementation.
+The active classical subsonic solver lives in `code/src/scripts/classical/`.
+Supporting experiments, including retained audit outputs, live under
+`experiments/`; historical protocols and migration records live under
+`provenance/`.
 
 ## Installation
 
@@ -88,16 +81,11 @@ documented HPC environment when exact platform compatibility is required.
 Run a small classical eigenvalue calculation:
 
 ```bash
-python examples/01_classical_eigenvalue.py
+python code/src/scripts/classical/solve_robust_subsonic_shooting.py --alpha 0.5 --mach 0.5
 ```
 
-Inspect deterministic chart routing without loading a checkpoint:
-
-```bash
-python examples/02_query_neural_atlas.py
-```
-
-See [examples/README.md](examples/README.md) for details.
+For atlas routing and checkpoint evaluation, use the verified Level 3 workflow
+in [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
 
 ## Reproducibility
 
@@ -120,11 +108,9 @@ are documented in [models_saved/README.md](models_saved/README.md).
 ## Citation
 
 Final repository citation metadata will be added once publication metadata is
-finalized. [CITATION.cff.template](CITATION.cff.template) is retained as a
-checklist until final author, release, and article metadata are supplied.
+finalized; no placeholder metadata is shipped with Part I.
 
 ## License
 
-License selection will be finalized at repository release. See
-[docs/LICENSE_OPTIONS.md](docs/LICENSE_OPTIONS.md) for neutral options that
-require a manual decision.
+License selection will be finalized at repository release. Neutral options are
+recorded in [provenance/docs/LICENSE_OPTIONS.md](provenance/docs/LICENSE_OPTIONS.md).

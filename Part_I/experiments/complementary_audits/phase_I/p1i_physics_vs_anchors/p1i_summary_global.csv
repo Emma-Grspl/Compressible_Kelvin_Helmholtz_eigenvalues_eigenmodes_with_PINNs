@@ -1,0 +1,2 @@
+n_points,n_charts,median_e_joint,median_e_anchor,median_delta_e,mean_delta_e,fraction_physics_better,median_delta_e_prefit,median_delta_e_rel_reg,ci95_delta_e_low,ci95_delta_e_high,ci95_fraction_better_low,ci95_fraction_better_high
+384.0,48.0,0.0002016787752276,0.0002093583231428,-2.1662220874660992e-06,-6.727392547882908e-06,0.6171875,4.640697474078692e-06,-7.1278384497842125e-06,-6.120334086867629e-06,-2.978131515285476e-07,0.5191809732388708,0.715415282566647

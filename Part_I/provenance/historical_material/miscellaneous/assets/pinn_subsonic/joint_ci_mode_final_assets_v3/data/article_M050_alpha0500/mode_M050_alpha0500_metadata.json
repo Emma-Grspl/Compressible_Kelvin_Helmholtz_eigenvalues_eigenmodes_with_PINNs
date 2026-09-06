@@ -1,0 +1,12 @@
+{
+  "Mach": 0.5,
+  "N": 401,
+  "alpha": 0.5,
+  "chart_id": "HIGH_HIM",
+  "checkpoint": "/Users/emma.grospellier/The\u0300se/These_PINN_KH_RT/assets/pinn_subsonic/joint_ci_mode_atlas_v2/HIGH_HIM/model_state.pt",
+  "ci_classic": 0.26732591302181385,
+  "ci_gep": 0.26736265070230997,
+  "ci_pinn": 0.2671673335824538,
+  "cr_gep": 3.9192027444199164e-15,
+  "eta": 0.5773502691896258
+}

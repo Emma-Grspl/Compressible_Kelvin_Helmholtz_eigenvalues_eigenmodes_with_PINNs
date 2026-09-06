@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compatibility entry point for `archive/code/scripts/run_kh_subsonic_pinn_2d_band_M05_M07.py`.
+"""Compatibility entry point for `provenance/historical_material/code/scripts/run_kh_subsonic_pinn_2d_band_M05_M07.py`.
 
 Scientific logic remains in the original script so both entry points stay aligned.
 """
@@ -10,7 +10,7 @@ import runpy
 import sys
 
 REPO_ROOT = Path(__file__).resolve().parents[6]
-SOURCE = REPO_ROOT / "archive/code/scripts/run_kh_subsonic_pinn_2d_band_M05_M07.py"
+SOURCE = REPO_ROOT / "provenance/historical_material/code/scripts/run_kh_subsonic_pinn_2d_band_M05_M07.py"
 
 
 def main() -> None:

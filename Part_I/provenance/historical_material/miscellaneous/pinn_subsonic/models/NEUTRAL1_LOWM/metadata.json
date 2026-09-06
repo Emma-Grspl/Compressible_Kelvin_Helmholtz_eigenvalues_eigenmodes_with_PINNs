@@ -1,0 +1,11 @@
+{
+  "chart_id": "NEUTRAL1_LOWM",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/seedGEP_pq2d_ATLAS_NEUTRAL1_LOWM_M0.10_0.40_eta0.65_0.80_ciIDW/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/seedGEP_pq2d_ATLAS_NEUTRAL1_LOWM_M0.10_0.40_eta0.65_0.80_ciIDW",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_manifest.csv",
+  "checkpoint_sha256": "658532850e0bc66103ec92de8d4dec1e7fb421b01868fddd8ad33ffa32f8f90b",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

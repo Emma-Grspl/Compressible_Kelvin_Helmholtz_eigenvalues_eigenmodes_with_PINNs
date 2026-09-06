@@ -1,0 +1,2 @@
+chart_id,field_family,best_epoch,total_epochs,n_holdout,prefit_loss_replay,prefit_loss_historical,prefit_loss_abs_diff,prefit_loss_rel_diff,anchor_continuation_clip_count,anchor_continuation_clip_fraction,anchor_continuation_max_grad_norm,max_joint_vs_release_abs
+HM2_VLOW_MOD,pQscaled,28712,30000,4,4.750393735460076e-11,4.750176326485177e-11,2.1740897489943434e-15,4.576861151179685e-05,2,6.965728615213152e-05,16.36416829286706,0.007760961812903366

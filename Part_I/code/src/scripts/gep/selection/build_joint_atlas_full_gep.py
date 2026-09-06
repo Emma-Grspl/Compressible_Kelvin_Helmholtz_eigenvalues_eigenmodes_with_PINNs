@@ -30,7 +30,7 @@ def main():
     parser.add_argument(
         "--plan",
         default=(
-            "archive/csv/assets/pinn_subsonic/joint_ci_mode_atlas_v2/"
+            "provenance/historical_material/csv/assets/pinn_subsonic/joint_ci_mode_atlas_v2/"
             "gep_chart_plan.tsv"
         ),
     )

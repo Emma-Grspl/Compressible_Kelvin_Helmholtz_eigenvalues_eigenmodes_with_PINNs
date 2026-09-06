@@ -449,7 +449,7 @@ def main() -> None:
 
     parser.add_argument(
         "--old-checkpoint",
-        default="models_saved/archive/pinn_subsonic/models/MID/model_state.pt",
+        default="models_saved/provenance/historical_material/pinn_subsonic/models/MID/model_state.pt",
     )
     parser.add_argument(
         "--new-checkpoint",
@@ -475,7 +475,7 @@ def main() -> None:
     parser.add_argument(
         "--new-direct-csv",
         default=(
-            "archive/csv/assets/pinn_subsonic/joint_ci_mode_atlas_v2/"
+            "provenance/historical_material/csv/assets/pinn_subsonic/joint_ci_mode_atlas_v2/"
             "MID/diagnostics_summary.csv"
         ),
     )

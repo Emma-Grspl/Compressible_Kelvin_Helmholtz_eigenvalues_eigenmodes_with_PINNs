@@ -1,0 +1,11 @@
+{
+  "chart_id": "HM1_HIGH",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM1_HIGH_M0.70_0.85_eta0.55_0.65_ciIDW_EVALFIX/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_M005_098_eta005_098/seedGEP_pq2d_ATLAS_HM1_HIGH_M0.70_0.85_eta0.55_0.65_ciIDW_EVALFIX",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_extension_plan_M005_098_eta005_098.csv",
+  "checkpoint_sha256": "8f2fd7b46bda64c96f543cea315b9ed913301b4e8e1c2033cb150d47083218da",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

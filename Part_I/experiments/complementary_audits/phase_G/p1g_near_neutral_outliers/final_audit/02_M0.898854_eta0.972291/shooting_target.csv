@@ -1,0 +1,2 @@
+Mach,eta,alpha,ci,omega_i,success,source,primary_ci,primary_success,primary_mismatch,secondary_ci,secondary_success,primary_secondary_ci_abs_diff
+0.8988538238910846,0.9722909910902984,0.42610513000129246,0.011207777779423318,0.00477569160772677,True,secondary_neutral,0.029231189524751042,True,1.7647047724954064e-05,0.011207777779423318,True,0.018023411745327726

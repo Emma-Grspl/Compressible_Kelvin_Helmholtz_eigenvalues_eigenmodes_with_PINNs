@@ -1,1 +1,0 @@
-"""Subsonic Kelvin--Helmholtz package."""

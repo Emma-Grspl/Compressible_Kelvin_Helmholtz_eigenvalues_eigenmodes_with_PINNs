@@ -1,0 +1,11 @@
+{
+  "chart_id": "LMEDGE_NEUTRAL1",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pq2d_FULLRECT_LMEDGE_NEUTRAL1_ciIDW_EVALFIX/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_ext_fullrect_M002_098_eta002_098/seedGEP_pq2d_FULLRECT_LMEDGE_NEUTRAL1_ciIDW_EVALFIX",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_manifest_fullrect_standard_N301.csv",
+  "checkpoint_sha256": "bc5a7481742ae431d3ca58a242921bcb7f3885b11c39ba3052916e4ec2032f93",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

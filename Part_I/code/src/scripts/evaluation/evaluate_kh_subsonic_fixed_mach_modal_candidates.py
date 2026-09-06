@@ -29,9 +29,9 @@ from src.physics.kh_subsonic_residual import (
 
 
 DEFAULT_CANDIDATES = {
-    "hybrid_8pt": Path("archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt"),
-    "riccati_multibranch": Path("archive/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch"),
-    "modefocus_lowalpha": Path("archive/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_modefocus_lowalpha"),
+    "hybrid_8pt": Path("provenance/historical_material/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_ci_supervision_vs_physics/hybrid_8pt"),
+    "riccati_multibranch": Path("provenance/historical_material/repo_cleanup_2026-04-24/kh_roots/kh_subsonic_fixed_mach_M05_riccati_multibranch"),
+    "modefocus_lowalpha": Path("provenance/historical_material/repo_cleanup_2026-04-24/model_saved/kh_subsonic_fixed_mach_M05_modefocus_lowalpha"),
 }
 
 

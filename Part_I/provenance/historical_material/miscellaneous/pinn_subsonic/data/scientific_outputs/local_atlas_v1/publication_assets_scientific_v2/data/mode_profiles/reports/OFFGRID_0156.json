@@ -1,0 +1,64 @@
+{
+  "Mach": 0.8610619349514022,
+  "alpha": 0.3759034069895469,
+  "chart_id": "HM2_NEUTRAL1",
+  "ci_final_csv": 0.1209232812437511,
+  "ci_ref_csv": 0.1208790149676369,
+  "ci_seed": 0.1222947658496019,
+  "ci_shooting_recomputed": 0.12087901496763692,
+  "classic_gep": {
+    "ci": 0.12092328124375118,
+    "cr": -2.4952410226606403e-14,
+    "n_finite_modes": 253,
+    "selection_source": "nearest_to_target"
+  },
+  "direct": {
+    "p_overlap": 0.9971279830215648,
+    "p_rel": 0.07573561377459054,
+    "rho_rel": 0.07573561377459054,
+    "u_rel": 0.23337830720081496,
+    "v_rel": 0.1521080918418028
+  },
+  "eta": 0.7392396038021384,
+  "final_gep": {
+    "ci": 0.12092328124375118,
+    "cr": -2.4952410226606403e-14,
+    "n_finite_modes": 253,
+    "selection_source": "nearest_to_target",
+    "vs_classic_gep": {
+      "p_overlap": 1.0,
+      "p_rel": 6.78718831386975e-16,
+      "rho_rel": 6.821034785252827e-16,
+      "u_rel": 6.778437020147115e-16,
+      "v_rel": 6.77738219754539e-16
+    },
+    "vs_shooting": {
+      "p_overlap": 0.9999999977885194,
+      "p_rel": 6.650952382169e-05,
+      "rho_rel": 6.650952382168948e-05,
+      "u_rel": 0.0006671869430445339,
+      "v_rel": 0.00011545086953220769
+    }
+  },
+  "model": {
+    "amp_mask_frac": 0.05,
+    "architecture": "eta-aware",
+    "depth": 7,
+    "field_family": "pq",
+    "input_dimension": 31,
+    "n_freq": 12,
+    "output_dimension": 4,
+    "width": 256
+  },
+  "numerical_policy": {
+    "N": 301,
+    "mapping_kind": "pin",
+    "mapping_scale": 5.0,
+    "xi_max": 0.98
+  },
+  "outputs": {
+    "direct": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/mode_profiles/direct/OFFGRID_0156.npz",
+    "gep": "assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/mode_profiles/gep/OFFGRID_0156.npz"
+  },
+  "point_id": "OFFGRID_0156"
+}

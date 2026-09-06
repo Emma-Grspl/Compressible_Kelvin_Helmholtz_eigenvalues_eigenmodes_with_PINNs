@@ -1,0 +1,33 @@
+{
+  "continuation_status_counts": {
+    "not_continued": 329,
+    "validated_bidirectional": 54,
+    "validated_forward_classic_anchored": 1
+  },
+  "coverage_max": 4,
+  "coverage_min": 1,
+  "domain": {
+    "Mach": [
+      0.02,
+      0.98
+    ],
+    "eta": [
+      0.02,
+      0.98
+    ]
+  },
+  "modal_metrics": {
+    "p_overlap_min": 0.9999918434076852,
+    "p_rel_max": 0.0040393507242365,
+    "rho_rel_max": 0.0040393507242364,
+    "u_rel_max": 0.0091264492640856,
+    "v_rel_max": 0.0063546753967412
+  },
+  "n_continuation_points": 55,
+  "n_coverage_points": 148225,
+  "n_offgrid_points": 384,
+  "n_rectangles": 49,
+  "n_reference_corrections": 21,
+  "release_validated": true,
+  "technical_success_rate": 1.0
+}

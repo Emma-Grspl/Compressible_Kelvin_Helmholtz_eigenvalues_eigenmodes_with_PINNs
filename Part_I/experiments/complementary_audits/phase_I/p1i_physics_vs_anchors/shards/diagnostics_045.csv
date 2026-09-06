@@ -1,0 +1,2 @@
+chart_id,field_family,best_epoch,total_epochs,n_holdout,prefit_loss_replay,prefit_loss_historical,prefit_loss_abs_diff,prefit_loss_rel_diff,anchor_continuation_clip_count,anchor_continuation_clip_fraction,anchor_continuation_max_grad_norm,max_joint_vs_release_abs
+ULTRALOW_M002_006_eta002_006,pQscaled,41361,45000,1,6.875373698222424e-10,6.897387966156947e-10,2.2014267934523606e-12,0.0031916818428280188,0,0.0,3.7236742479822316,0.001027791948570278

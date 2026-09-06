@@ -1,0 +1,5 @@
+alpha,Mach,ci_reference,source,success
+0.1,,0.6704450642662936,csv:assets/pinn_subsonic/article_work/fixed_mach_stage0_multiseed/seed_1234/anchor_targets.csv,True
+0.3,,0.4466834236245764,csv:assets/pinn_subsonic/article_work/fixed_mach_stage0_multiseed/seed_1234/anchor_targets.csv,True
+0.55,,0.2270755878284294,csv:assets/pinn_subsonic/article_work/fixed_mach_stage0_multiseed/seed_1234/anchor_targets.csv,True
+0.8,,0.0442736588328293,csv:assets/pinn_subsonic/article_work/fixed_mach_stage0_multiseed/seed_1234/anchor_targets.csv,True

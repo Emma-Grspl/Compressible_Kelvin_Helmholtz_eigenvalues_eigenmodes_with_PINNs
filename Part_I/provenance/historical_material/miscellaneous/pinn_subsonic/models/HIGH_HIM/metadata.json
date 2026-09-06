@@ -1,0 +1,11 @@
+{
+  "chart_id": "HIGH_HIM",
+  "source_checkpoint": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/seedGEP_pq2d_REPAIR_HIGH_HIM_M0.35_0.70_eta0.50_0.65_ciIDW/model_best.pt",
+  "source_chart_directory": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/seedGEP_pq2d_REPAIR_HIGH_HIM_M0.35_0.70_eta0.50_0.65_ciIDW",
+  "source_manifest": "/lustre/fswork/projects/rech/fdb/usv13rn/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/atlas_manifest.csv",
+  "checkpoint_sha256": "78d3fc3fee5570c350a6b8a298e256c84390486935c67b6ccb85059ced856107",
+  "materialization_mode": "hardlink",
+  "copied_config_files": [
+    "README.md"
+  ]
+}

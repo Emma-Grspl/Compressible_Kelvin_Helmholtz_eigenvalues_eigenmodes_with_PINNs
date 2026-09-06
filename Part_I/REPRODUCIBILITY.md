@@ -40,8 +40,7 @@ python code/src/scripts/classical/solve_robust_subsonic_shooting.py \
 ```
 
 **Outputs.** A `RobustSubsonicResult` summary printed by the solver, including
-the selected growth-rate result and diagnostics. The same code path is used by
-`examples/01_classical_eigenvalue.py`.
+the selected growth-rate result and diagnostics.
 
 **Hardware/cost.** CPU; a single point is lightweight. Dense scans or maps are
 more expensive and should be run deliberately.
@@ -54,12 +53,9 @@ the existing atlas code.
 **Inputs.** A query `(Mach, eta)`, the routing table under `code/configs/atlas/`,
 and a production checkpoint under `models_saved/production/atlas/N340/`.
 
-```bash
-python examples/02_query_neural_atlas.py
-```
-
-**Outputs.** The deterministically selected chart metadata and its expected
-checkpoint path. Checkpoint deserialization itself is implemented by
+**Outputs.** The deterministically selected chart metadata and expected
+checkpoint path are produced by the atlas evaluation workflow. Checkpoint
+deserialization itself is implemented by
 `code/src/scripts/gep/selection/audit_mid_joint_pinn_full_gep.py` in
 `evaluate_pinn`.
 

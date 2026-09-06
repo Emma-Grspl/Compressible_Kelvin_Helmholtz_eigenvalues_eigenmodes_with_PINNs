@@ -29,7 +29,7 @@ is known.
 Scientific generators and their historical plotting sources remain in
 [`../../code/plots/`](../../code/plots/) and related retained source-tree
 material. Their layout reflects the research workflow and is intentionally not
-physically normalized. See [`../../docs/PLOTTING_ARCHITECTURE.md`](../../docs/PLOTTING_ARCHITECTURE.md).
+physically normalized. See [`../../provenance/docs/PLOTTING_ARCHITECTURE.md`](../../provenance/docs/PLOTTING_ARCHITECTURE.md).
 
 [`validate_article_figures.py`](validate_article_figures.py) validates the
 curated package and manifest; it is a validation tool, not a figure generator.

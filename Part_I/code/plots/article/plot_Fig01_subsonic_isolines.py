@@ -4,7 +4,7 @@ Output: article/assets/Fig01_subsonic_isolines_blumen_vs_classical.png
 Purpose: Compare digitized Blumen isolines with the classical shooting map.
 Source data: assets/classic_subsonic/csv/data/Table_subsonic_hybrid_growth_map.csv
 Scientific computation: Publishes the validated processed asset; no solve is run.
-Original generator: archive/code/scripts/build_presentation_plots.py
+Original generator: provenance/historical_material/code/scripts/build_presentation_plots.py
 """
 
 from _publish_validated_asset import publish_validated_asset

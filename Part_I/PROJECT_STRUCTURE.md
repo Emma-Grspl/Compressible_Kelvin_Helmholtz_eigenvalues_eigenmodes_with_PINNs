@@ -1,71 +1,37 @@
 # Part I project structure
 
-Part I is the subsonic study. Its active public implementation is centred on
-`code/`; the layout below describes the current repository, not a future
-normalized layout.
+Part I is the subsonic study. Public, maintained implementation is contained
+under `code/`; experiment outputs and historical records are deliberately
+separate.
 
-## Publication, assets, and results
+## Publication and reproducibility
 
-- `article/`: exactly 17 curated Main and Supplementary PNG assets,
-  `FIGURE_MANIFEST.csv`, and article-facing documentation. Its figure scripts
-  are publishing entrypoints that copy validated processed assets byte-for-byte;
-  they do not retrain a model or recompute a GEP.
-- `assets/`: canonical classical, PINN/GEP, and complementary-audit processed
+- `article/`: the 17 curated manuscript PNG assets, their manifest, and
+  publishing wrappers. The wrappers publish validated data without retraining
+  or recomputing a GEP.
+- `assets/`: canonical classical, PINN/GEP, and publication-facing processed
   inputs and figures.
-- `results/`: tracked validation tables, numerical audit outputs, and retained
-  normalization or representation ablations.
+- `models_saved/`: production checkpoints and their integrity manifest.
+- `tests/`: lightweight integrity and classical single-point regression tests.
 
-## Active code and public workflows
+## Maintained code
 
-- `code/src/`: importable numerical and PINN implementation (`PYTHONPATH=code`).
-- `code/src/scripts/classical/`: **current active subsonic classical Riccati
-  shooting solvers and reconstructions**.
-- `classical_solver/`: public navigation/documentation facade for the current
-  classical interface. It contains no implementation code yet; physical
-  normalization is deferred until Phase 8.
-- `code/src/scripts/training/`: fixed-Mach and atlas training entrypoints.
-- `code/src/scripts/gep/`: GEP selection, resolution, modal refinement, and
-  benchmark entrypoints.
-- `code/src/scripts/evaluation/`: quantitative validation and audits.
-- `code/slurm/`: supported N340 seam, modal-asset, and runtime benchmark
-  launchers. Historical Jean-Zay campaign launchers remain under
-  `code/src/launch/slurm/`.
-- `code/plots/article/`: public publication wrappers and figure-package
-  validation. They publish the tracked validated PNGs byte-for-byte.
-- `code/plots/generators/`: final-article data and figure-generation helpers.
-- `code/plots/scripts/`: retained historical plotting provenance and
-  compatibility wrappers.
-- `experiments/`: scientific audits and supporting experiments, organized by
-  conclusion rather than publication figure.
-- `scripts/`: retained analysis and provenance utilities not yet in the public
-  plotting interface.
-- `examples/`: small repository-relative CPU demonstrations; they do not train
-  a model or run a dense GEP sweep.
-- `tests/`: lightweight integrity and classical single-point tests used by CI.
+- `code/configs/`: validated routing, GEP, classical, and anchor-budget
+  configurations.
+- `code/src/`: importable numerical, classical, PINN, GEP, and evaluation
+  implementation (`PYTHONPATH=code`).
+- `code/plots/article/`: article publishing wrappers and the figure-package
+  validator.
+- `code/plots/generators/`: maintained data and figure generators.
+- `code/slurm/`: supported N340 seam, modal-asset, and runtime launchers.
 
-## Configurations, models, and documentation
+## Experiments and provenance
 
-- `code/configs/`: curated public copies or summaries of validated classical,
-  atlas-routing, GEP-policy, and `N340` anchor-budget configurations.
-- `models_saved/production/`: final fixed-Mach and 49-chart atlas checkpoints.
-  `models_saved/CHECKPOINT_MANIFEST.csv` is the file-level size and SHA-256
-  inventory. Excluded supporting or historical checkpoint trees are recorded
-  in `provenance/PUBLIC_REPOSITORY_EXCLUSIONS.csv`.
-- `docs/`: technical notes, protocols, migration tables, and scientific
-  documentation.
-- `provenance/`: migration records, public-repository exclusions, and
-  complementary-audit traceability.
+- `experiments/`: supporting scientific experiments and their retained audit
+  outputs, including the complementary audits and legacy ablations.
+- `provenance/`: migration records, protocols, exclusions, historical plotting
+  and Slurm collections, and other non-public-workflow material.
 
-## Historical and compatibility material
-
-- `archive/`: deliberately separate historical code, configurations, assets,
-  CSV files, and development outputs. Historical names such as `hybrid` or
-  `frozen` are not canonical terminology for the current pipeline.
-- `KH_RT_Blumen/` and `src/`: currently empty compatibility or legacy-looking
-  roots. They are retained without claiming that they contain active
-  implementation. `classical_solver/` is now a documentation facade only; the
-  active solver code remains under `code/src/scripts/classical/` and
-  `code/src/scripts/gep/selection/` pending Phase 8.
-
-Two legacy Jean-Zay/Lustre links remain recorded as
-`EXTERNAL_LINK_UNRESOLVED`; they were not replaced by fabricated local paths.
+Historical names recorded beneath `provenance/` are not current runtime
+dependencies. The root contains no compatibility facades or duplicate code
+trees.

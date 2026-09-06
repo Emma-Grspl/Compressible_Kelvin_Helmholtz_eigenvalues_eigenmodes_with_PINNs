@@ -1,0 +1,13 @@
+{
+  "maxima": {
+    "p_rel_direct": 0.49074691145620036,
+    "rho_rel_direct": 0.4907469114562004,
+    "u_rel_direct": 5.0927948510104715,
+    "v_rel_direct": 0.9155863674307062
+  },
+  "min_pressure_overlap": 0.8713073495692166,
+  "n_points": 20,
+  "output_csv": "/Users/emma.grospellier/The\u0300se/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/direct_PINN_modal_errors_20.csv",
+  "output_figure_stem": "/Users/emma.grospellier/The\u0300se/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/figures/SuppFig_direct_PINN_modal_error_heatmaps",
+  "source": "/Users/emma.grospellier/The\u0300se/These_PINN_KH_RT/assets/pinn_subsonic/local_atlas_v1/publication_assets_scientific_v2/data/mode_profiles/reports"
+}

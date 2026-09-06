@@ -41,11 +41,11 @@ Scripts principaux :
   Solveur point-à-point combinant les deux méthodes.
 
 Scripts de support :
-- [compare_subsonic_shooting_solvers.py](${PROJECT_ROOT}/archive/code/classical_solver/subsonic/compare_subsonic_shooting_solvers.py)
+- [compare_subsonic_shooting_solvers.py](${PROJECT_ROOT}/provenance/historical_material/code/classical_solver/subsonic/compare_subsonic_shooting_solvers.py)
   Comparaison entre les deux solveurs.
-- [plot_subsonic_error_map.py](${PROJECT_ROOT}/code/plots/scripts/classic_subsonic/plot_classic_subsonic_error_map.py)
+- [plot_subsonic_error_map.py](${PROJECT_ROOT}/provenance/legacy_plot_scripts/classic_subsonic/plot_classic_subsonic_error_map.py)
   Carte d’erreur.
-- [plot_subsonic_ci_map.py](${PROJECT_ROOT}/code/plots/scripts/classic_subsonic/plot_classic_subsonic_ci_map.py)
+- [plot_subsonic_ci_map.py](${PROJECT_ROOT}/provenance/legacy_plot_scripts/classic_subsonic/plot_classic_subsonic_ci_map.py)
   Visualisation de `c_i`.
 
 Scripts historiques conservés :
@@ -71,12 +71,12 @@ python3 code/src/scripts/classical/solve_classic_subsonic_gep_shooting_scan.py -
 ## Lancement Jean Zay
 
 Script Slurm de référence :
-- [jz_submit_subsonic.slurm](${PROJECT_ROOT}/code/src/launch/slurm/jz_submit_subsonic.slurm)
+- [jz_submit_subsonic.slurm](${PROJECT_ROOT}/provenance/historical_slurm/slurm/jz_submit_subsonic.slurm)
 
 Commande :
 
 ```bash
-sbatch code/src/launch/slurm/jz_submit_subsonic.slurm
+sbatch provenance/historical_slurm/slurm/jz_submit_subsonic.slurm
 ```
 
 ## Convention de travail

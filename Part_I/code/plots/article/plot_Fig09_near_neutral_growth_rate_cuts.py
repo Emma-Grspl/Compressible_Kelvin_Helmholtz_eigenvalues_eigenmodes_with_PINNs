@@ -2,7 +2,7 @@
 Article figure: Fig. 9
 Output: article/assets/Fig09_near_neutral_growth_rate_cuts_N340.png
 Purpose: Show growth-rate cuts near the neutral boundary.
-Source data: results/complementary_audits/curated/section4_results/Fig_near_neutral_growth_rate_cuts_N340_data.csv
+Source data: experiments/complementary_audits/curated/section4_results/Fig_near_neutral_growth_rate_cuts_N340_data.csv
 Scientific computation: Publishes the validated processed asset; no GEP is run.
 Original generator: code/plots/generators/make_fig9_near_neutral_pro.py
 """
