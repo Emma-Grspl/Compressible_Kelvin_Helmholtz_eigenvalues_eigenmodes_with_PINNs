@@ -77,9 +77,11 @@ from src.scripts.gep.selection.audit_mid_joint_pinn_full_gep import (
     rel_l2,
 )
 
-DEFAULT_TRAIN_PLAN = (
+DEFAULT_HISTORICAL_TRAIN_PLAN = (
     "archive/csv/archive/csv/assets/pinn_subsonic/joint_ci_mode_atlas_v2/training_plan.tsv"
 )
+DEFAULT_ROUTING_CONFIG = ROOT / "configs/atlas/N340_chart_routing.csv"
+PRODUCTION_MODEL_ROOT = ROOT / "models_saved/production/atlas/N340"
 DEFAULT_VALIDATION_ROOT = (
     "assets/pinn_subsonic/joint_ci_mode_global_validation_v1"
 )
@@ -220,7 +222,7 @@ def grouped_metric_report(
     return report
 
 
-def normalize_plan(training_plan_path: Path) -> pd.DataFrame:
+def normalize_historical_plan(training_plan_path: Path) -> pd.DataFrame:
     plan = pd.read_csv(training_plan_path, sep="\t").copy()
     required = {
         "chart_id",
@@ -262,6 +264,53 @@ def normalize_plan(training_plan_path: Path) -> pd.DataFrame:
                 raise FileNotFoundError(
                     f"{row['chart_id']}: missing {column}: {path}"
                 )
+    return plan
+
+
+def normalize_runtime_routing(routing_path: Path) -> pd.DataFrame:
+    """Load canonical N340 routing metadata and production checkpoints.
+
+    The routing table intentionally excludes historical run-directory fields.
+    Runtime evaluation needs only chart geometry, field family, and the
+    production checkpoint identified by ``chart_id``.
+    """
+    plan = pd.read_csv(routing_path).copy()
+    required = {
+        "chart_id",
+        "family",
+        "mach_min",
+        "mach_max",
+        "eta_min",
+        "eta_max",
+    }
+    missing = sorted(required.difference(plan.columns))
+    if missing:
+        raise KeyError(
+            f"{routing_path} is missing required routing columns {missing}"
+        )
+
+    plan["chart_id"] = plan["chart_id"].astype(str)
+    for column in ("mach_min", "mach_max", "eta_min", "eta_max"):
+        plan[column] = pd.to_numeric(plan[column], errors="raise")
+
+    plan["checkpoint"] = plan["chart_id"].map(
+        lambda chart_id: str(
+            PRODUCTION_MODEL_ROOT / chart_id / "model_state.pt"
+        )
+    )
+    plan["chart_area"] = (
+        (plan["mach_max"] - plan["mach_min"])
+        * (plan["eta_max"] - plan["eta_min"])
+    )
+    plan = plan.sort_values("chart_id").reset_index(drop=True)
+
+    for _, row in plan.iterrows():
+        checkpoint = Path(str(row["checkpoint"]))
+        if not checkpoint.is_file():
+            raise FileNotFoundError(
+                f"{row['chart_id']}: missing production checkpoint: "
+                f"{checkpoint}"
+            )
     return plan
 
 
@@ -432,7 +481,7 @@ def command_aggregate(args: argparse.Namespace) -> None:
     output_dir = validation_root / "aggregate"
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    plan = normalize_plan(Path(args.training_plan))
+    plan = normalize_historical_plan(Path(args.training_plan))
     frames = []
 
     for _, chart in plan.iterrows():
@@ -816,7 +865,7 @@ def command_build_plans(args: argparse.Namespace) -> None:
     output_dir = validation_root / "plans"
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    plan = normalize_plan(Path(args.training_plan))
+    plan = normalize_runtime_routing(Path(args.routing_config))
     plan.to_csv(output_dir / "chart_catalog.tsv", sep="\t", index=False)
 
     historical_path = find_historical_points(args.historical_points)
@@ -1484,11 +1533,11 @@ def command_merge(args: argparse.Namespace) -> None:
             .reset_index(drop=True)
         )
 
-        training_plan = normalize_plan(Path(args.training_plan))
+        routing_plan = normalize_runtime_routing(Path(args.routing_config))
         routed_rows = []
         for _, row in outliers.iterrows():
             chart = route_chart(
-                training_plan,
+                routing_plan,
                 float(row["Mach"]),
                 float(row["eta"]),
                 preferred=str(row.get("chart_id", "")),
@@ -1628,7 +1677,7 @@ def command_recheck_outliers(args: argparse.Namespace) -> None:
         print("Empty shard:", output_path)
         return
 
-    training_plan = normalize_plan(Path(args.training_plan))
+    routing_plan = normalize_runtime_routing(Path(args.routing_config))
     device = torch.device("cpu")
     model_cache: dict[str, tuple[Any, ...]] = {}
     rows = []
@@ -1645,7 +1694,7 @@ def command_recheck_outliers(args: argparse.Namespace) -> None:
         for neighborhood_label, eta in neighborhood:
             try:
                 chart = route_chart(
-                    training_plan,
+                    routing_plan,
                     target_mach,
                     eta,
                     preferred=str(target.get("chart_id", "")),
@@ -2047,7 +2096,7 @@ def command_finalize(args: argparse.Namespace) -> None:
             )
         plt.close(fig)
 
-    training_plan = normalize_plan(Path(args.training_plan))
+    training_plan = normalize_historical_plan(Path(args.training_plan))
     release_dir = validation_root / "release_v1"
     if release_dir.exists():
         if args.clean_release:
@@ -2158,7 +2207,8 @@ def build_parser() -> argparse.ArgumentParser:
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument(
         "--training-plan",
-        default=DEFAULT_TRAIN_PLAN,
+        default=DEFAULT_HISTORICAL_TRAIN_PLAN,
+        help="Historical run-directory plan for aggregate/finalize commands.",
     )
     common.add_argument(
         "--validation-root",
@@ -2174,6 +2224,11 @@ def build_parser() -> argparse.ArgumentParser:
     plans = subparsers.add_parser(
         "build-plans",
         parents=[common],
+    )
+    plans.add_argument(
+        "--routing-config",
+        type=Path,
+        default=DEFAULT_ROUTING_CONFIG,
     )
     plans.add_argument("--historical-points", default=None)
     plans.set_defaults(function=command_build_plans)
@@ -2211,6 +2266,11 @@ def build_parser() -> argparse.ArgumentParser:
         "merge",
         parents=[common],
     )
+    merge.add_argument(
+        "--routing-config",
+        type=Path,
+        default=DEFAULT_ROUTING_CONFIG,
+    )
     merge.add_argument("--ci-abs-threshold", type=float, default=1.0e-2)
     merge.add_argument(
         "--ci-rel-reg-threshold",
@@ -2240,6 +2300,11 @@ def build_parser() -> argparse.ArgumentParser:
     recheck = subparsers.add_parser(
         "recheck-outliers",
         parents=[common],
+    )
+    recheck.add_argument(
+        "--routing-config",
+        type=Path,
+        default=DEFAULT_ROUTING_CONFIG,
     )
     recheck.add_argument("--plan", required=True)
     recheck.add_argument("--output-dir", required=True)
