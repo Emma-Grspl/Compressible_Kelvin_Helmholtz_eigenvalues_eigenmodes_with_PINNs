@@ -49,7 +49,7 @@ from src.scripts.gep.selection.solve_dense_gep_notebook_style import (
 from src.scripts.evaluation.evaluate_kh_subsonic_fixed_mach_modal_candidates import (
     load_classic_full_mode,
 )
-from src.scripts.training.atlas.direct_pinn.train_subsonic_joint_spectral_modal_chart import (
+from src.scripts.training.atlas.direct_pinn.train_atlas_chart_joint_ci_mode import (
     CiAtlasNet,
     MODULES,
     call_supported,

@@ -29,9 +29,9 @@ from torch.nn import functional as F
 
 
 MODULES = {
-    "pq_legacy": "scripts.dev.train_subsonic_seedGEP_pq2d_continuous_M_alpha",
-    "pq_etaaware": "scripts.dev.train_subsonic_seedGEP_pq2d_continuous_M_alpha_etaaware",
-    "pQscaled": "scripts.dev.train_subsonic_seedGEP_pQscaled2d_continuous_M_alpha",
+    "pq_legacy": "src.scripts.training.atlas.direct_pinn.train_atlas_modal_seeded_gep_pq",
+    "pq_etaaware": "src.scripts.training.atlas.direct_pinn.train_atlas_modal_seeded_gep_etaaware",
+    "pQscaled": "src.scripts.training.atlas.direct_pinn.train_atlas_modal_seeded_gep_qscaled",
 }
 
 

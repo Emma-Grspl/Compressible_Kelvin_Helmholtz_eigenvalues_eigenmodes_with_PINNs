@@ -59,8 +59,12 @@ from src.scripts.gep.selection.audit_mid_joint_pinn_full_gep import (
     rel_l2,
 )
 
-DEFAULT_TRAINING_PLAN = (
-    "archive/csv/assets/pinn_subsonic/joint_ci_mode_atlas_v2/training_plan.tsv"
+DEFAULT_ROUTING_CONFIG = (
+    ROOT / "configs/atlas/N340_chart_routing.csv"
+)
+
+MODEL_ROOT = (
+    ROOT / "models_saved/production/atlas/N340"
 )
 DEFAULT_CENTRAL_AUDIT = (
     "assets/pinn_subsonic/joint_ci_mode_full_gep_atlas_v2/"
@@ -208,16 +212,29 @@ def command_build_plan(args: argparse.Namespace) -> None:
     )
     selected = nearest_unique_points(central)
 
-    training = pd.read_csv(args.training_plan, sep="\t")
-    required_training = {"chart_id", "output_dir"}
-    missing = sorted(required_training.difference(training.columns))
+    routing = pd.read_csv(args.routing_config)
+    required_routing = {"chart_id"}
+    missing = sorted(required_routing.difference(routing.columns))
     if missing:
-        raise KeyError(f"Training plan is missing {missing}")
+        raise KeyError(f"Routing config is missing {missing}")
 
     checkpoint_map = {
-        str(row["chart_id"]): str(Path(str(row["output_dir"])) / "model_state.pt")
-        for _, row in training.iterrows()
+        str(chart_id): str(
+            MODEL_ROOT / str(chart_id) / "model_state.pt"
+        )
+        for chart_id in routing["chart_id"].astype(str)
     }
+
+    missing_checkpoint_files = [
+        path
+        for path in checkpoint_map.values()
+        if not Path(path).is_file()
+    ]
+    if missing_checkpoint_files:
+        raise FileNotFoundError(
+            "Missing canonical N340 checkpoint(s): "
+            + ", ".join(missing_checkpoint_files)
+        )
 
     selected["checkpoint"] = selected["chart_id"].astype(str).map(checkpoint_map)
     if selected["checkpoint"].isna().any():
@@ -928,7 +945,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     build = sub.add_parser("build-plan")
     build.add_argument("--central-audit", default=DEFAULT_CENTRAL_AUDIT)
-    build.add_argument("--training-plan", default=DEFAULT_TRAINING_PLAN)
+    build.add_argument("--routing-config", type=Path, default=DEFAULT_ROUTING_CONFIG)
     build.add_argument("--output-dir", default=DEFAULT_OUTPUT)
     build.set_defaults(function=command_build_plan)
 

@@ -23,7 +23,7 @@ from src.scripts.evaluation.benchmark_subsonic_local_atlas_core_ci_seeded_gep_v2
 # Le fournisseur de ci est le même IDW 2D utilisé dans les charts
 # p/q et p/Qscaled. Aucun réseau de champs n'est requis pour générer
 # le seed spectral.
-from src.scripts.training.atlas.direct_pinn.train_subsonic_pinn_seeded_gep_pq2d_continuous_M_alpha_etaaware import (
+from src.scripts.training.atlas.direct_pinn.train_atlas_modal_seeded_gep_etaaware import (
     CiGridIDW,
 )
 

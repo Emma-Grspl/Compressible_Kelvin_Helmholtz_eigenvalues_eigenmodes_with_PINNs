@@ -8,16 +8,11 @@ import src.scripts.evaluation.evaluate_joint_pinn_global_validation as V
 
 ROOT = Path(__file__).resolve().parents[4]
 
-BASE_PLAN = (
-    ROOT
-    / "archive/csv/assets/pinn_subsonic/"
-    "joint_ci_mode_atlas_v2/training_plan.tsv"
-)
+ROUTING = ROOT / "configs/atlas/N340_chart_routing.csv"
 
-RUN = (
+MODEL_ROOT = (
     ROOT
-    / "assets/pinn_subsonic/"
-    "anchor_budget_runs/N340"
+    / "models_saved/production/atlas/N340"
 )
 
 OUT = (
@@ -33,36 +28,20 @@ OUT.mkdir(
 
 
 def find_checkpoint(chart_id: str) -> Path:
-    directory = (
-        RUN
-        / "joint"
+    checkpoint = (
+        MODEL_ROOT
         / str(chart_id)
+        / "model_state.pt"
     )
-
-    candidates = [
-        directory / "model_best.pt",
-        directory / "model_state.pt",
-    ]
-
-    for p in candidates:
-        if p.is_file():
-            return p
-
-    pts = sorted(directory.glob("*.pt"))
-
-    if len(pts) == 1:
-        return pts[0]
-
-    raise FileNotFoundError(
-        f"Cannot uniquely identify checkpoint "
-        f"for {chart_id}: {pts}"
-    )
+    if not checkpoint.is_file():
+        raise FileNotFoundError(
+            f"Missing canonical N340 checkpoint for "
+            f"{chart_id}: {checkpoint}"
+        )
+    return checkpoint
 
 
-plan = pd.read_csv(
-    BASE_PLAN,
-    sep="\t",
-).copy()
+plan = pd.read_csv(ROUTING).copy()
 
 plan["checkpoint"] = [
     str(find_checkpoint(chart_id))

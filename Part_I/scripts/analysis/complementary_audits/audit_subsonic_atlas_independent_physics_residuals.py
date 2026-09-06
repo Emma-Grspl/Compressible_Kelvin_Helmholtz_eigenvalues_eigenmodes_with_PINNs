@@ -36,12 +36,19 @@ import importlib
 import inspect
 import math
 from pathlib import Path
+import sys
 
 import numpy as np
 import pandas as pd
 import torch
 
-from scripts.dev.train_subsonic_joint_spectral_modal_chart import (
+PART_I_ROOT = Path(__file__).resolve().parents[3]
+CODE_ROOT = PART_I_ROOT / "code"
+
+if str(CODE_ROOT) not in sys.path:
+    sys.path.insert(0, str(CODE_ROOT))
+
+from src.scripts.training.atlas.direct_pinn.train_atlas_chart_joint_ci_mode import (
     CiAtlasNet,
     infer_field_family,
 )
@@ -49,11 +56,11 @@ from scripts.dev.train_subsonic_joint_spectral_modal_chart import (
 
 MODULES = {
     "pq_legacy":
-        "scripts.dev.train_subsonic_seedGEP_pq2d_continuous_M_alpha",
+        "src.scripts.training.atlas.direct_pinn.train_atlas_modal_seeded_gep_pq",
     "pq_etaaware":
-        "scripts.dev.train_subsonic_seedGEP_pq2d_continuous_M_alpha_etaaware",
+        "src.scripts.training.atlas.direct_pinn.train_atlas_modal_seeded_gep_etaaware",
     "pQscaled":
-        "scripts.dev.train_subsonic_seedGEP_pQscaled2d_continuous_M_alpha",
+        "src.scripts.training.atlas.direct_pinn.train_atlas_modal_seeded_gep_qscaled",
 }
 
 

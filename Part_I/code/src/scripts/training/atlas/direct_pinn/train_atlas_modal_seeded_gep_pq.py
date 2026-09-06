@@ -14,13 +14,14 @@ import pandas as pd
 import torch
 from torch import nn
 
-ROOT = Path(__file__).resolve().parents[2]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
+ROOT = Path(__file__).resolve().parents[6]
+CODE_ROOT = ROOT / "code"
+if str(CODE_ROOT) not in sys.path:
+    sys.path.insert(0, str(CODE_ROOT))
 
-from classical_solver.subsonic.robust_subsonic_shooting import RobustSubsonicShootingSolver
+from src.scripts.classical.solve_robust_subsonic_shooting import RobustSubsonicShootingSolver
 
-from scripts.train_kh_subsonic_2d_pressure_pq_firstorder_mini import (
+from src.scripts.training.atlas.direct_pinn.train_kh_subsonic_2d_pressure_pq_firstorder_mini import (
     FieldPQNet,
     physics_losses,
     classical_pressure_reference,

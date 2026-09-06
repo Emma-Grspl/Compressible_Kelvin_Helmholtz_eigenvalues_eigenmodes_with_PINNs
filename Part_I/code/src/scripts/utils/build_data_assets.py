@@ -17,21 +17,13 @@ ROOT = Path(__file__).resolve().parents[4]
 OUT = ROOT / "assets/pinn_subsonic/article/N340"
 OUT.mkdir(parents=True, exist_ok=True)
 
-RUN = ROOT / "assets/pinn_subsonic/anchor_budget_runs/N340"
-
-POINTWISE = (
-    RUN
-    / "summary"
-    / "validation_pointwise_canonical.csv"
-)
-
-ANCHORS = RUN / "anchors.csv"
-
-PLAN = (
+ANCHORS = (
     ROOT
-    / "archive/csv/assets/pinn_subsonic/"
-    "joint_ci_mode_atlas_v2/training_plan.tsv"
+    / "assets/pinn_subsonic/csv/anchor_budget_runs/N340/"
+    "Table_anchors.csv"
 )
+
+PLAN = ROOT / "configs/atlas/N340_chart_routing.csv"
 
 RUNTIME_DIR = (
     ROOT
@@ -55,13 +47,6 @@ SELECTION_SUMMARY = (
     "gep_selection_N340/"
     "Table_summary.csv"
 )
-
-BUDGET_ROOT = (
-    ROOT
-    / "assets/pinn_subsonic/"
-    "anchor_budget_runs"
-)
-
 
 plt.rcParams.update({
     "font.size": 11,
@@ -107,7 +92,7 @@ def alpha_from_eta(M, eta):
 # =====================================================================
 
 def plot_atlas():
-    plan = pd.read_csv(PLAN, sep="\t").copy()
+    plan = pd.read_csv(PLAN).copy()
 
     fig, ax = plt.subplots(
         figsize=(11.5, 8.5)
@@ -217,24 +202,12 @@ def plot_anchor_map():
             anchors["eta"],
         )
 
-    # Count chart-local rows actually used by N340.
-    chart_files = sorted(
-        (RUN / "joint").glob(
-            "*/ci_anchor_points.csv"
-        )
-    )
-
-    chart_rows = 0
-
-    for path in chart_files:
-        chart_rows += len(pd.read_csv(path))
-
     fig, ax = plt.subplots(
         figsize=(11.5, 8.5)
     )
 
     # faint chart boundaries
-    plan = pd.read_csv(PLAN, sep="\t")
+    plan = pd.read_csv(PLAN)
 
     for _, row in plan.iterrows():
         m0 = float(row["mach_min"])
@@ -293,12 +266,7 @@ def plot_anchor_map():
         r"$N^\star=340$ global $c_i$ anchors"
     )
 
-    text = (
-        f"Unique physical locations: "
-        f"{len(anchors)}\n"
-        f"Chart-local usages: "
-        f"{chart_rows}"
-    )
+    text = f"Unique physical locations: {len(anchors)}"
 
     ax.text(
         0.98,
@@ -1049,9 +1017,6 @@ def main():
     plot_atlas()
     plot_anchor_map()
     plot_heatmap()
-    plot_neutral_scaling()
-    plot_neutral_cuts()
-    plot_budget_comparison()
     plot_runtime()
     plot_selection()
 

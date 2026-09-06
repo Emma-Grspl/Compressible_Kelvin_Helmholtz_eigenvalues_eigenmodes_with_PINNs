@@ -50,7 +50,7 @@ from src.scripts.gep.selection.audit_mid_joint_pinn_full_gep import (
     save_spectrum_plot,
     select_modes,
 )
-from src.scripts.training.atlas.direct_pinn.train_subsonic_joint_spectral_modal_chart import (
+from src.scripts.training.atlas.direct_pinn.train_atlas_chart_joint_ci_mode import (
     MODULES,
     call_supported,
     infer_field_family,

@@ -31,10 +31,9 @@ from src.scripts.gep.selection.solve_joint_chart_full_gep import (
 
 ROOT = Path(__file__).resolve().parents[4]
 
-RUN = (
+MODEL_ROOT = (
     ROOT
-    / "assets/pinn_subsonic/"
-    "anchor_budget_runs/N340"
+    / "models_saved/production/atlas/N340"
 )
 
 OUT = (
@@ -50,11 +49,7 @@ OLD_POINTS = (
     "paired_modal_validation_20.csv"
 )
 
-BASE_PLAN = (
-    ROOT
-    / "archive/csv/assets/pinn_subsonic/"
-    "joint_ci_mode_atlas_v2/training_plan.tsv"
-)
+ROUTING = ROOT / "configs/atlas/N340_chart_routing.csv"
 
 FIELDS = (
     "p",
@@ -80,47 +75,30 @@ def save(fig, name):
 
 
 def build_plan():
-    plan = pd.read_csv(
-        BASE_PLAN,
-        sep="\t",
-    ).copy()
+    plan = pd.read_csv(ROUTING).copy()
 
     checkpoints = []
 
     for chart in plan["chart_id"].astype(str):
-        p = (
-            RUN
-            / "joint"
+        checkpoint = (
+            MODEL_ROOT
             / chart
             / "model_state.pt"
         )
 
-        if not p.is_file():
-            p = (
-                RUN
-                / "joint"
-                / chart
-                / "model_best.pt"
-            )
-
-        if not p.is_file():
+        if not checkpoint.is_file():
             raise FileNotFoundError(
-                f"No N340 checkpoint for {chart}"
+                f"No canonical N340 checkpoint for "
+                f"{chart}: {checkpoint}"
             )
 
-        checkpoints.append(str(p))
+        checkpoints.append(str(checkpoint))
 
     plan["checkpoint"] = checkpoints
 
     plan["chart_area"] = (
-        (
-            plan["mach_max"]
-            - plan["mach_min"]
-        )
-        * (
-            plan["eta_max"]
-            - plan["eta_min"]
-        )
+        (plan["mach_max"] - plan["mach_min"])
+        * (plan["eta_max"] - plan["eta_min"])
     )
 
     return plan

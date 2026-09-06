@@ -8,7 +8,7 @@ import torch
 from src.scripts.training.atlas.direct_pinn.train_kh_subsonic_2d_pressure_pq_firstorder_mini import (
     FieldPQNet as LegacyFieldPQNet,
 )
-from src.scripts.training.atlas.direct_pinn.train_subsonic_pinn_seeded_gep_pq2d_continuous_M_alpha_etaaware import (
+from src.scripts.training.atlas.direct_pinn.train_atlas_modal_seeded_gep_etaaware import (
     FieldPQNet as EtaAwareFieldPQNet,
 )
 
