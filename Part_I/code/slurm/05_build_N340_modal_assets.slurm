@@ -23,5 +23,5 @@ export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK}"
 export OPENBLAS_NUM_THREADS="${SLURM_CPUS_PER_TASK}"
 
 python \
-  code/src/scripts/utils/build_N340_modal_assets.py \
+  code/plots/generators/build_N340_modal_assets.py \
   --device cuda

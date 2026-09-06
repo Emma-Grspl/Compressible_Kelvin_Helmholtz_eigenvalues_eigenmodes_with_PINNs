@@ -38,7 +38,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-ROOT = Path(__file__).resolve().parents[5]
+ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT / "code"))
 
@@ -60,7 +60,7 @@ from src.scripts.gep.selection.audit_mid_joint_pinn_full_gep import (
 )
 
 DEFAULT_ROUTING_CONFIG = (
-    ROOT / "configs/atlas/N340_chart_routing.csv"
+    ROOT / "code/configs/atlas/N340_chart_routing.csv"
 )
 
 MODEL_ROOT = (

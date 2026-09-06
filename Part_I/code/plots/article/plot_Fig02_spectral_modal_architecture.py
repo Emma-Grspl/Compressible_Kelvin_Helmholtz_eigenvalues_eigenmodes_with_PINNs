@@ -4,7 +4,7 @@ Output: article/assets/Fig02_spectral_modal_architecture_subsonic.png
 Purpose: Summarize the spectral-modal architecture and independent GEP selection.
 Source data: schematic generated from the documented Part I workflow.
 Scientific computation: Publishes the validated processed asset; no solve is run.
-Original generator: scripts/analysis/complementary_audits/make_fig2_architecture.py
+Original generator: code/plots/generators/make_fig2_architecture.py
 """
 
 from _publish_validated_asset import publish_validated_asset

@@ -16,7 +16,7 @@ entrypoint recorded in `article/FIGURE_MANIFEST.csv`.
 **Example command.**
 
 ```bash
-python scripts/figures/validate_article_figures.py
+python code/plots/article/validate_article_figures.py
 ```
 
 **Outputs.** An integrity report for the 17 curated PNG assets. To replot a
@@ -51,7 +51,7 @@ more expensive and should be run deliberately.
 **Purpose.** Inspect production atlas routing and evaluate a checkpoint with
 the existing atlas code.
 
-**Inputs.** A query `(Mach, eta)`, the routing table under `configs/atlas/`,
+**Inputs.** A query `(Mach, eta)`, the routing table under `code/configs/atlas/`,
 and a production checkpoint under `models_saved/production/atlas/N340/`.
 
 ```bash
@@ -102,11 +102,11 @@ entrypoint.
 **Hardware/cost.** GPU/HPC expected. Full training is not yet exposed as a
 single public production command with a compact public configuration; do not
 infer one from this guide. The traceable production summaries are in
-`configs/training/` and `configs/atlas/`.
+`code/configs/training/` and `code/configs/atlas/`.
 
 ## Configuration provenance
 
 Only configuration values directly traceable to tracked source scripts, run
-metadata, or production tables are exposed in [configs/README.md](configs/README.md).
+metadata, or production tables are exposed in [code/configs/README.md](code/configs/README.md).
 They are documentation/configuration records, not a promise that every
 historical training launcher is a supported public workflow.

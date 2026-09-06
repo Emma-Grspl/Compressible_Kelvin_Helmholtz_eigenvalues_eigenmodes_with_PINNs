@@ -8,7 +8,7 @@ import src.scripts.evaluation.evaluate_joint_pinn_global_validation as V
 
 ROOT = Path(__file__).resolve().parents[4]
 
-ROUTING = ROOT / "configs/atlas/N340_chart_routing.csv"
+ROUTING = ROOT / "code/configs/atlas/N340_chart_routing.csv"
 
 MODEL_ROOT = (
     ROOT

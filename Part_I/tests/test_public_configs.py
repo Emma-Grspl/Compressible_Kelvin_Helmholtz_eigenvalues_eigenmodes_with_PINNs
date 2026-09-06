@@ -8,7 +8,7 @@ PART_I_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_public_routing_config_is_machine_independent_and_complete() -> None:
-    route_file = PART_I_ROOT / "configs/atlas/N340_chart_routing.csv"
+    route_file = PART_I_ROOT / "code/configs/atlas/N340_chart_routing.csv"
     with route_file.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
 
@@ -21,6 +21,6 @@ def test_public_routing_config_is_machine_independent_and_complete() -> None:
 
 
 def test_classical_configs_are_present() -> None:
-    config_dir = PART_I_ROOT / "configs/classical"
+    config_dir = PART_I_ROOT / "code/configs/classical"
     assert (config_dir / "subsonic_pointwise_accuracy_resolution_coupled.yaml").is_file()
     assert (config_dir / "subsonic_pointwise_box_resolution_coupled.yaml").is_file()

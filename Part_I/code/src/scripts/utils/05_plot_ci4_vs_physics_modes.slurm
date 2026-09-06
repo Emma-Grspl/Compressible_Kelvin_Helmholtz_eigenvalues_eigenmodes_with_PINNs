@@ -78,7 +78,7 @@ if not torch.cuda.is_available():
     raise RuntimeError("Aucun GPU CUDA disponible dans le job.")
 PY
 
-python code/src/scripts/utils/plot_ci4_vs_physics_modes.py \
+python code/plots/generators/plot_ci4_vs_physics_modes.py \
     --base-dir "${WORK_COMPARE}" \
     --output-dir "${OUT}/figures/single_case_ci4_vs_physics" \
     --num-alpha 401 \

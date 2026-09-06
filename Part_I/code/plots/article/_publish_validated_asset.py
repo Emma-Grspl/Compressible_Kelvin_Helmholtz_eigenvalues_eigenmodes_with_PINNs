@@ -8,7 +8,7 @@ import shutil
 from pathlib import Path
 
 
-PART_I_ROOT = Path(__file__).resolve().parents[2]
+PART_I_ROOT = Path(__file__).resolve().parents[3]
 
 
 def publish_validated_asset(

@@ -80,7 +80,7 @@ from src.scripts.gep.selection.audit_mid_joint_pinn_full_gep import (
 DEFAULT_HISTORICAL_TRAIN_PLAN = (
     "archive/csv/archive/csv/assets/pinn_subsonic/joint_ci_mode_atlas_v2/training_plan.tsv"
 )
-DEFAULT_ROUTING_CONFIG = ROOT / "configs/atlas/N340_chart_routing.csv"
+DEFAULT_ROUTING_CONFIG = ROOT / "code/configs/atlas/N340_chart_routing.csv"
 PRODUCTION_MODEL_ROOT = ROOT / "models_saved/production/atlas/N340"
 DEFAULT_VALIDATION_ROOT = (
     "assets/pinn_subsonic/joint_ci_mode_global_validation_v1"

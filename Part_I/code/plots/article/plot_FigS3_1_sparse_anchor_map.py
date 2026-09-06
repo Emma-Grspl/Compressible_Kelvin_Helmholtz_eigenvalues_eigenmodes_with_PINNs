@@ -4,7 +4,7 @@ Output: article/assets/FigS3_1_sparse_ci_anchor_map_Mach_alpha_N340.png
 Purpose: Show the sparse scalar c_i anchors over the Mach-alpha domain.
 Source data: assets/pinn_subsonic/csv/anchor_budget_runs/N340/Table_anchors.csv
 Scientific computation: Publishes the validated processed asset; no training is run.
-Original generator: code/src/scripts/utils/build_data_assets.py
+Original generator: code/plots/generators/build_data_assets.py
 """
 
 from _publish_validated_asset import publish_validated_asset

@@ -27,21 +27,25 @@ normalized layout.
 - `code/src/scripts/gep/`: GEP selection, resolution, modal refinement, and
   benchmark entrypoints.
 - `code/src/scripts/evaluation/`: quantitative validation and audits.
-- `code/src/launch/slurm/`: retained Jean-Zay launchers.
-- `code/plots/scripts/`: scientific figure-generation modules and retained
-  historical plotting provenance.
-- `scripts/`: public analysis, paper, and publication-figure entrypoints.
-  Both parts expose their common public figure interface under
-  `scripts/figures/`; Part I uses publication wrappers there, while internal
-  scientific generator layouts remain workflow-specific. No physical plotting
-  migration is currently required; see `docs/PLOTTING_ARCHITECTURE.md`.
+- `code/slurm/`: supported N340 seam, modal-asset, and runtime benchmark
+  launchers. Historical Jean-Zay campaign launchers remain under
+  `code/src/launch/slurm/`.
+- `code/plots/article/`: public publication wrappers and figure-package
+  validation. They publish the tracked validated PNGs byte-for-byte.
+- `code/plots/generators/`: final-article data and figure-generation helpers.
+- `code/plots/scripts/`: retained historical plotting provenance and
+  compatibility wrappers.
+- `experiments/`: scientific audits and supporting experiments, organized by
+  conclusion rather than publication figure.
+- `scripts/`: retained analysis and provenance utilities not yet in the public
+  plotting interface.
 - `examples/`: small repository-relative CPU demonstrations; they do not train
   a model or run a dense GEP sweep.
 - `tests/`: lightweight integrity and classical single-point tests used by CI.
 
 ## Configurations, models, and documentation
 
-- `configs/`: curated public copies or summaries of validated classical,
+- `code/configs/`: curated public copies or summaries of validated classical,
   atlas-routing, GEP-policy, and `N340` anchor-budget configurations.
 - `models_saved/production/`: final fixed-Mach and 49-chart atlas checkpoints.
   `models_saved/CHECKPOINT_MANIFEST.csv` is the file-level size and SHA-256

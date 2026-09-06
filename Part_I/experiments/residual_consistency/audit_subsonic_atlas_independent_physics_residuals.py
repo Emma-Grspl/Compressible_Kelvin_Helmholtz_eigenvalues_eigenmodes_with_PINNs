@@ -42,7 +42,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-PART_I_ROOT = Path(__file__).resolve().parents[3]
+PART_I_ROOT = Path(__file__).resolve().parents[2]
 CODE_ROOT = PART_I_ROOT / "code"
 
 if str(CODE_ROOT) not in sys.path:

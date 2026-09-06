@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compatibility entry point for `code/src/scripts/utils/plot_ci4_vs_physics_modes.py`.
+"""Compatibility entry point for `code/plots/generators/plot_ci4_vs_physics_modes.py`.
 
 Scientific logic remains in the original script so both entry points stay aligned.
 """
@@ -10,7 +10,7 @@ import runpy
 import sys
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
-SOURCE = REPO_ROOT / "code/src/scripts/utils/plot_ci4_vs_physics_modes.py"
+SOURCE = REPO_ROOT / "code/plots/generators/plot_ci4_vs_physics_modes.py"
 
 
 def main() -> None:

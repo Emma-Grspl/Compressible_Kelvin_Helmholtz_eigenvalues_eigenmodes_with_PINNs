@@ -13,7 +13,7 @@ import sys
 
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
-SOURCE = REPO_ROOT / "code/src/scripts/gep/selection/solve_joint_gep_n_convergence.py"
+SOURCE = REPO_ROOT / "experiments/gep_resolution/solve_joint_gep_n_convergence.py"
 
 
 def main() -> None:

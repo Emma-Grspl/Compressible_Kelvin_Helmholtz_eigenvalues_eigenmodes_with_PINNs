@@ -47,7 +47,7 @@ echo
 
 srun --cpu-bind=cores \
   python \
-    code/src/scripts/utils/plot_ci4_vs_physics_modes.py \
+    code/plots/generators/plot_ci4_vs_physics_modes.py \
     --base-dir "$BASE_DIR" \
     --output-dir "$OUT_ROOT/figures/single_case_ci4_vs_physics" \
     --num-alpha 401 \

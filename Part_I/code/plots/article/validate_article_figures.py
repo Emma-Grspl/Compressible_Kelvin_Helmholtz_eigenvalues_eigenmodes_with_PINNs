@@ -9,7 +9,7 @@ from pathlib import Path
 from PIL import Image
 
 
-PART_I_ROOT = Path(__file__).resolve().parents[2]
+PART_I_ROOT = Path(__file__).resolve().parents[3]
 ARTICLE_DIR = PART_I_ROOT / "article"
 ASSET_DIR = ARTICLE_DIR / "assets"
 MANIFEST = ARTICLE_DIR / "FIGURE_MANIFEST.csv"

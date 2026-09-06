@@ -29,7 +29,7 @@ from src.scripts.gep.selection.solve_joint_chart_full_gep import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[3]
 
 MODEL_ROOT = (
     ROOT
@@ -49,7 +49,7 @@ OLD_POINTS = (
     "paired_modal_validation_20.csv"
 )
 
-ROUTING = ROOT / "configs/atlas/N340_chart_routing.csv"
+ROUTING = ROOT / "code/configs/atlas/N340_chart_routing.csv"
 
 FIELDS = (
     "p",

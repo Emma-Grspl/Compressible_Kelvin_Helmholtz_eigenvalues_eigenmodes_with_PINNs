@@ -36,15 +36,28 @@ from __future__ import annotations
 
 import argparse
 import gc
+import importlib.util
 import math
 from pathlib import Path
+import sys
 
 import numpy as np
 import pandas as pd
 import torch
 
 # Reuse the exact P1-C checkpoint loader, Sobol sampler, and complex derivative.
-import scripts.article.audit_subsonic_atlas_independent_physics_residuals as p1c
+P1C_PATH = Path(__file__).with_name(
+    "audit_subsonic_atlas_independent_physics_residuals.py"
+)
+P1C_SPEC = importlib.util.spec_from_file_location(
+    "p1c_independent_physics_residuals",
+    P1C_PATH,
+)
+if P1C_SPEC is None or P1C_SPEC.loader is None:
+    raise ImportError(f"Could not load P1-C audit module from {P1C_PATH}")
+p1c = importlib.util.module_from_spec(P1C_SPEC)
+sys.modules[P1C_SPEC.name] = p1c
+P1C_SPEC.loader.exec_module(p1c)
 
 complex_grad = p1c.complex_grad
 independent_interior_points = p1c.independent_interior_points

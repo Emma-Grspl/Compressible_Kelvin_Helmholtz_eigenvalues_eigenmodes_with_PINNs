@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[3]
 
 OUT = ROOT / "assets/pinn_subsonic/article/N340"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -23,7 +23,7 @@ ANCHORS = (
     "Table_anchors.csv"
 )
 
-PLAN = ROOT / "configs/atlas/N340_chart_routing.csv"
+PLAN = ROOT / "code/configs/atlas/N340_chart_routing.csv"
 
 RUNTIME_DIR = (
     ROOT

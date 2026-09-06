@@ -2,7 +2,7 @@
 
 ## Public interface
 
-[`../scripts/figures/`](../scripts/figures/) is the public figure-facing
+[`../code/plots/article/`](../code/plots/article/) is the public figure-facing
 interface. It publishes and validates the curated article package; it is not a
 replacement for the scientific plotting workflow.
 
@@ -22,7 +22,7 @@ figures. Their current locations preserve valid research-workflow provenance.
 
 ## Publication wrappers
 
-`scripts/figures/plot_Fig*.py` are publication wrappers. They use
+`code/plots/article/plot_Fig*.py` are publication wrappers. They use
 `_publish_validated_asset.py` to copy canonical validated PNGs into
 `article/assets/` without recomputing science. In the Part I figure manifest,
 `plot_script` refers to these wrappers.
