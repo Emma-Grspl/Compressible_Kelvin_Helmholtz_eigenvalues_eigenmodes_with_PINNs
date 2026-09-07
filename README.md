@@ -1,17 +1,17 @@
 # Compressible Kelvin–Helmholtz eigenvalues and eigenmodes with physics-informed neural networks
 
-This repository studies the **compressible Kelvin–Helmholtz instability as a
-non-self-adjoint eigenvalue problem**, with a particular focus on the role that
-physics-informed neural networks can play in **spectral branch localization,
-sparse-data reconstruction, and modal representation**.
+This repository studies the compressible Kelvin–Helmholtz instability as a
+non-self-adjoint eigenvalue problem, with a particular focus on the role that
+physics-informed neural networks can play in spectral branch localization,
+sparse-data reconstruction, and modal representation.
 
 The work is divided into two complementary studies:
 
-- **Part I — Subsonic spectral branches**
-- **Part II — Supersonic spectral branches**
+- Part I — Subsonic spectral branches
+- Part II — Supersonic spectral branches
 
 In both cases, neural predictions are evaluated against independent classical
-spectral calculations. The repository does **not** treat a low physics residual
+spectral calculations. The repository does not treat a low physics residual
 as sufficient evidence of correct branch recovery, and the neural models are
 not presented as unconditional replacements for classical eigensolvers.
 
@@ -21,29 +21,20 @@ not presented as unconditional replacements for classical eigensolvers.
 
 For a complex phase velocity
 
-\[
+$$
 c = c_r + i c_i,
-\]
+$$
 
-the pressure perturbation \(\hat p(y)\) satisfies
+the pressure perturbation $\hat p(y)$ satisfies
 
-\[
-\hat p''
--
-\frac{2U'}{U-c}\hat p'
--
-\alpha^2
-\left[
-1-M^2(U-c)^2
-\right]\hat p
-=
-0,
-\]
+$$
+\hat p'' - \frac{2U'}{(U-c)^2} \hat p' - \alpha^2 \left[1 - M^2 (U-c)^2 \right] \hat p = 0
+$$
 
-where \(M\) is the Mach number, \(\alpha\) the streamwise wavenumber, and
-\(U(y)\) the base-flow velocity profile.
+where $M$ is the Mach number, $\alpha$ the streamwise wavenumber, and
+$U(y)$ the base-flow velocity profile.
 
-Because the resulting operator is **non-self-adjoint**, spectral branch
+Because the resulting operator is non-self-adjoint, spectral branch
 identification is a central numerical difficulty. A small differential
 residual alone does not guarantee that a predicted eigenvalue belongs to the
 desired classical branch.
@@ -52,9 +43,9 @@ desired classical branch.
 
 ## Two complementary regimes
 
-| | **Part I — Subsonic** | **Part II — Supersonic** |
+| | Part I — Subsonic | Part II — Supersonic |
 |---|---|---|
-| Spectral quantity | primarily \(c_i\) | complex \((c_r,c_i)\) |
+| Spectral quantity | primarily $c_i$ | complex $(c_r,c_i)$ |
 | Classical reference | Riccati shooting | Riccati shooting |
 | Neural representation | 49-chart piecewise-local atlas | 12-chart piecewise-local atlas |
 | Sparse configuration | `N340` | `N76` |
@@ -70,16 +61,16 @@ desired classical branch.
 
 - an independent Riccati-shooting reference;
 - sparse scalar eigenvalue anchors;
-- a **49-chart piecewise-local neural atlas**;
+- a 49-chart piecewise-local neural atlas;
 - physics-informed modal constraints;
 - independent dense generalized eigenvalue analysis;
 - scalar-guided eigenpair selection;
 - routing, anchor-budget, residual, seed, near-neutral, modal, and runtime
   audits.
 
-The production atlas retains the **`N340` sparse-anchor configuration**.
+The production atlas retains the `N340` sparse-anchor configuration.
 
-The final discrete result is the **selected dense-GEP eigenpair**. The neural
+The final discrete result is the selected dense-GEP eigenpair. The neural
 model provides branch information and a differentially constrained local modal
 representation; it is not used as the final high-accuracy eigensolver.
 
@@ -95,7 +86,7 @@ representation; it is not used as the final high-accuracy eigensolver.
 
 ![Part I representative mode](Part_I/assets/complementary_audits/final_figures/Fig08_representative_mode_M05_a05_N340.png)
 
-**Documentation:**  
+Documentation:  
 [Part I README](Part_I/README.md) ·
 [Reproducibility](Part_I/REPRODUCIBILITY.md) ·
 [Project structure](Part_I/PROJECT_STRUCTURE.md) ·
@@ -121,19 +112,19 @@ The workflow combines:
 - an independent classical Riccati-shooting reference;
 - comparison with digitized Blumen data;
 - sparse complex-eigenvalue anchors;
-- a **12-chart piecewise-local neural atlas**;
+- a 12-chart piecewise-local neural atlas;
 - physics-informed modal constraints;
 - PINN-informed spectral localization;
-- final **PINN-seeded Riccati shooting**;
+- final PINN-seeded Riccati shooting;
 - classical eigenmode reconstruction;
 - branch-recovery, failure-basin, routing, multiseed, residual,
   threshold-sensitivity, and computational-cost controls.
 
-The production spectral atlas retains the **`N76` sparse-anchor
-configuration**.
+The production spectral atlas retains the `N76` sparse-anchor
+configuration.
 
 The final high-accuracy eigenvalue and eigenmode are obtained from the
-**classical Riccati-shooting solver**. The neural atlas is used to localize or
+classical Riccati-shooting solver. The neural atlas is used to localize or
 initialize the spectral search rather than to replace the final classical
 solve.
 
@@ -149,7 +140,7 @@ solve.
 
 ![Part II seeded versus generic shooting](Part_II/assets/article_sources/Fig_T401_matched_seeded_vs_generic.png)
 
-**Documentation:**  
+Documentation:  
 [Part II README](Part_II/README.md) ·
 [Reproducibility](Part_II/REPRODUCIBILITY.md) ·
 [Project structure](Part_II/PROJECT_STRUCTURE.md) ·
@@ -164,12 +155,12 @@ can fit an eigenvalue surface.
 
 The repository instead separates several distinct issues:
 
-1. **spectral branch identification**;
-2. **sparse-data reconstruction**;
-3. **differential consistency of neural modal fields**;
-4. **local versus global continuity of piecewise neural representations**;
-5. **accuracy of the final classical or discrete eigensolver**;
-6. **computational cost and robustness**.
+1. spectral branch identification;
+2. sparse-data reconstruction;
+3. differential consistency of neural modal fields;
+4. local versus global continuity of piecewise neural representations;
+5. accuracy of the final classical or discrete eigensolver;
+6. computational cost and robustness.
 
 This separation is particularly important for non-self-adjoint problems,
 where a smooth prediction or a small physics residual need not correspond to
@@ -225,8 +216,8 @@ Start from:
 
 The current publication layers contain:
 
-- **17 validated Part I figures**;
-- **25 validated Part II figures**.
+- 17 validated Part I figures;
+- 25 validated Part II figures.
 
 Their machine-readable provenance is recorded in the corresponding
 `FIGURE_MANIFEST.csv` files.
@@ -246,6 +237,6 @@ with this repository.
 
 ## License
 
-This repository is distributed under the **BSD 3-Clause License**.
+This repository is distributed under the BSD 3-Clause License.
 
 See [`LICENSE`](LICENSE) for details.
