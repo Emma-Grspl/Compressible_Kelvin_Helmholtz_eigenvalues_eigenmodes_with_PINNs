@@ -11,7 +11,7 @@ from matplotlib.colors import Normalize
 # Paths
 # =============================================================================
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[4]
 
 PHASE3 = ROOT / "results" / "threshold_sensitivity"
 

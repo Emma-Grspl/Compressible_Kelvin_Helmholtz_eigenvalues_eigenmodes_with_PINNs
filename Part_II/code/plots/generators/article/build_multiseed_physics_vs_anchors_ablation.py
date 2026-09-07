@@ -11,7 +11,7 @@ from matplotlib.lines import Line2D
 # Paths
 # =============================================================================
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[4]
 
 PHASE4 = ROOT / "results" / "multiseed_ablation"
 

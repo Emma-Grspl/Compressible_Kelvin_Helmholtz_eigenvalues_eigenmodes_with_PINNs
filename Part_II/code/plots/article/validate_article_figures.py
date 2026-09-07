@@ -10,7 +10,7 @@ from pathlib import Path
 from PIL import Image
 
 
-PART_II_ROOT = Path(__file__).resolve().parents[2]
+PART_II_ROOT = Path(__file__).resolve().parents[3]
 MANIFEST = PART_II_ROOT / "article" / "FIGURE_MANIFEST.csv"
 ASSETS = PART_II_ROOT / "article" / "assets"
 EXPECTED_COLUMNS = [

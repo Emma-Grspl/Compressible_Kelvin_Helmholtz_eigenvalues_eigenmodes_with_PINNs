@@ -11,7 +11,7 @@ from matplotlib.ticker import LogLocator, NullFormatter
 # Paths
 # =============================================================================
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[4]
 
 PHASE1_DIR = (
     ROOT

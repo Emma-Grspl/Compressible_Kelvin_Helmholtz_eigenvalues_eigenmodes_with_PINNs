@@ -46,7 +46,7 @@ from pathlib import Path
 import shutil
 
 
-PART_II_ROOT = Path(__file__).resolve().parents[2]
+PART_II_ROOT = Path(__file__).resolve().parents[3]
 MANIFEST = PART_II_ROOT / "article" / "FIGURE_MANIFEST.csv"
 ARTICLE_ASSETS = PART_II_ROOT / "article" / "assets"
 

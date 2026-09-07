@@ -10,7 +10,7 @@ from matplotlib.lines import Line2D
 # Paths
 # =============================================================================
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[4]
 
 INPUT_CSV = (
     ROOT

@@ -11,7 +11,7 @@ from matplotlib.ticker import PercentFormatter
 # Paths
 # =============================================================================
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[4]
 
 ANALYSIS_DIR = (
     ROOT

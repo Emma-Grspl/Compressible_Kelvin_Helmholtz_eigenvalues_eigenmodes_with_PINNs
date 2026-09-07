@@ -8,7 +8,7 @@ import pandas as pd
 # Paths
 # =============================================================================
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[4]
 
 PHASE1 = ROOT / "results" / "physics_residual_audit" / "independent"
 PHASE2 = ROOT / "results" / "physics_residual_audit" / "stage_comparison"
