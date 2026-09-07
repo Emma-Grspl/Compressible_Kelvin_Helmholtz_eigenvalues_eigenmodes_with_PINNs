@@ -1,4 +1,4 @@
-# Part II -- Supersonic Kelvin--Helmholtz spectral branches
+# Part II - Supersonic Kelvin-Helmholtz spectral branches
 
 ## Overview
 
