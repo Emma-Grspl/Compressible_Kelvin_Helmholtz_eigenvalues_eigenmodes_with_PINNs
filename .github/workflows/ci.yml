@@ -16,7 +16,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install CPU-only test dependencies
-        run: python -m pip install pytest numpy scipy
+        run: python -m pip install pytest numpy scipy pandas Pillow
 
       - name: Compile public Python entry points
         run: python -m compileall -q Part_I/code Part_I/experiments Part_I/tests
