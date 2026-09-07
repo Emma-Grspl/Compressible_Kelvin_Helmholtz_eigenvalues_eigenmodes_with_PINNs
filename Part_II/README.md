@@ -3,7 +3,7 @@
 ## Overview
 
 This directory contains the supersonic part of the compressible
-Kelvin--Helmholtz eigenvalue and eigenmode study. It preserves classical
+Kelvin-Helmholtz eigenvalue and eigenmode study. It preserves classical
 reference data, external Blumen comparisons, sparse complex-eigenvalue
 anchors, a piecewise-local neural spectral atlas, modal diagnostics, and
 reviewer-control audits.
