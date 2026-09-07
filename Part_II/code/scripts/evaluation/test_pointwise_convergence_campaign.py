@@ -15,7 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 POINTWISE = REPO_ROOT / "classic_supersonic/configs/convergence/pointwise"
 CASES = POINTWISE / "pointwise_cases.yaml"
 RUNNER = REPO_ROOT / "experiments/atlas_12charts/support/logs/smoke_C00_834382.out"
-PLOTTER_PATH = REPO_ROOT / "plots/scripts/pinn_supersonic/plot_pointwise_convergence.py"
+PLOTTER_PATH = REPO_ROOT / "code/plots/generators/pinn_supersonic/plot_pointwise_convergence.py"
 ERRORS_PATH = REPO_ROOT / "code/scripts/legacy/compute_classical_convergence_errors.py"
 SWEEPS = sorted(POINTWISE.glob("*_sweep.yaml"))
 

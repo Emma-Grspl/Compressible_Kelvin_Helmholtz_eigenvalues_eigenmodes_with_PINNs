@@ -30,4 +30,4 @@ provenance has been verified.
 
 Nine figures intentionally use `NO_SCRIPT_FOUND`: no verified upstream
 generator has been identified for them. This is honest provenance, not a
-missing publication asset. See [`../../docs/PLOTTING_ARCHITECTURE.md`](../../docs/PLOTTING_ARCHITECTURE.md).
+missing publication asset. See [`../../../provenance/PLOTTING_ARCHITECTURE.md`](../../../provenance/PLOTTING_ARCHITECTURE.md).

@@ -51,15 +51,9 @@ for the final classical reference.
 Part_II/
 ├── article/       # curated 25-figure publication package and manifest
 ├── assets/        # reusable classical, atlas, modal, and audit assets
-├── configs/       # canonical reusable configurations plus normalization manifest
 ├── code/          # active solver, model, physics, config, and execution code
 ├── experiments/   # active campaign workspace: run-specific inputs and outputs
-├── models_saved/  # checkpoint layout documentation; binaries remain local
-├── plots/         # preserved scientific plotting code from the source workspace
 ├── provenance/    # migration and large-file records
-├── results/       # semantically migrated complementary reviewer audits
-├── scripts/       # figure publication and reviewer-control entry points
-├── slurm/         # empty retained HPC-compatible top-level root
 ├── tests/         # lightweight checks retained from the workspace
 └── provenance/review/ # deliberately unresolved review material
 ```
@@ -101,7 +95,7 @@ reproduction. No package versions are inferred here.
 Validate the publication package without recomputing a shooting campaign:
 
 ```bash
-python scripts/figures/validate_article_figures.py
+python code/plots/article/validate_article_figures.py
 ```
 
 For available public commands and their limitations, see
@@ -125,7 +119,7 @@ Their canonical sources, hashes, source data, and publication mapping are in
 
 The original Part II checkpoint bank is intentionally omitted from public Git.
 Its expected local layout and limitations are documented in
-[models_saved/README.md](models_saved/README.md).
+[provenance/checkpoint_policy/models_saved_README.md](provenance/checkpoint_policy/models_saved_README.md).
 
 ## Citation
 

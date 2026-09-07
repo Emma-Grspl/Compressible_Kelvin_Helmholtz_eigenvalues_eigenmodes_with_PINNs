@@ -1,0 +1,27 @@
+PART II — MANIFEST CLOSURE FINAL
+========================================================================
+
+The closure uses the same direct-reference and recursive-directory expansion semantics as the baseline.
+Git-aware relocations are reflected in this closure; no scientific data was deleted.
+
+SUMMARY
+- Direct figure-manifest paths : 66
+- Direct canonical-config paths : 6
+- Expanded source files : 653
+- Missing references    : 0
+- Expanded data size    : 45.928 MB
+- Directory-valued source_data entries : 9
+
+REMAINING DIRECTORY-VALUED SOURCE_DATA
+- Main 2: assets/classic_supersonic/csv/blumen_validation — The recorded legacy source is absent, and the current directory contract remains the only schema-valid existing path.
+- Main 6: experiments/atlas_12charts — The resolved contract is no external input; the schema has no no-input representation.
+- Main 10: experiments/matched_branch_localization/results/matched_branch_localization — The resolved contract is an exact two-file set; the schema supports one path only.
+- Main 11: experiments/failure_basin/results/failure_basin — The resolved contract is an exact two-file set; the schema supports one path only.
+- Main 14: experiments/computational_cost — The resolved contract is an exact three-file set; the schema supports one path only.
+- Supplementary S5: experiments/physics_residual_audit/results — The resolved contract is an exact two-file set; the schema supports one path only.
+- Supplementary S6: experiments/multiseed_ablation/results/multiseed_ablation — The resolved contract is an exact twelve-file set; the schema supports one path only.
+- Supplementary S7a: experiments/routing_audit/results/routing_audit — The resolved contract is an exact four-file set; the schema supports one path only.
+- Supplementary S8: experiments/threshold_sensitivity/results/threshold_sensitivity — The resolved contract is an exact three-file set; the schema supports one path only.
+
+MISSING REFERENCES
+- NONE

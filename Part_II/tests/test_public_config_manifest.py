@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 PART_II_ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = PART_II_ROOT / "configs" / "CONFIG_MANIFEST.csv"
+MANIFEST = PART_II_ROOT / "code" / "configs" / "CONFIG_MANIFEST.csv"
 EXPECTED_COLUMNS = [
     "canonical_path",
     "classification",

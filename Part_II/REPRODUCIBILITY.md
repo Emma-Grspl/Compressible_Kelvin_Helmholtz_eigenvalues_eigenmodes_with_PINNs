@@ -22,7 +22,7 @@ snapshots remain under `code/configs/` pending later phases.
 and canonical sources without regenerating scientific results.
 
 ```bash
-python scripts/figures/validate_article_figures.py
+python code/plots/article/validate_article_figures.py
 ```
 
 **Inputs and outputs.** The command reads `article/FIGURE_MANIFEST.csv`,
@@ -60,7 +60,7 @@ python code/scripts/evaluation/evaluate_pinn_supersonic_fixedM_checkpoint.py --h
 **Limitation.** The Part II checkpoint bank is intentionally omitted from the
 public repository. The command can be inspected, but checkpoint-based
 evaluation requires separately obtained local binaries placed according to
-[models_saved/README.md](models_saved/README.md).
+[provenance/checkpoint_policy/models_saved_README.md](provenance/checkpoint_policy/models_saved_README.md).
 
 **Hardware/cost.** A single evaluation is ordinarily CPU/GPU dependent on the
 checkpoint and environment; no public checkpoint evaluation is guaranteed from
