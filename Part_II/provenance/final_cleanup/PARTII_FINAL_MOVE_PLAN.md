@@ -53,3 +53,7 @@
 - Main 1, 6--9, and 14 directory contracts are mismatched with their declared scripts and require explicit source-file identification.
 - Main 12--13 have `NO_SCRIPT_FOUND`; retain their source directory until a generator is recovered or the assets are declared final-only.
 - Supplementary S6 chooses the first existing shooting candidate at runtime; the contract must record the selected candidate per seed.
+
+## Contract-resolution update
+
+All 10 previously ambiguous rows are resolved in `MANIFEST_CONTRACT_RESOLUTION.csv`. No scientific data move is proposed for this phase. The Main 8 raw builder remains historical and non-runnable against the current tree; its validated canonical PNG is therefore the correct current publication contract.
